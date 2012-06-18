@@ -33,3 +33,4 @@
 *.Debug
 *.Release
 moc_*.cpp
+Makefile
