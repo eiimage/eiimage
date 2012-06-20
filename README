@@ -1,4 +1,4 @@
-EIImage
+## EIImage
 
 EIImage is an image processing application geared toward teaching and algorithm demonstrations.
 EIImage is based upon the library ImageIn for image manipulations;
@@ -10,6 +10,8 @@ Both ImageIn and the generic interface are part of the project DETIQ-T.
 DETIQ-T : http://github.com/detiq-t/detiq-t
 
 ## Copyright
+
+Copyright © 2011-2012 INSA Rennes
 
 EIImage is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
