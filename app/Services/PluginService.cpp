@@ -56,8 +56,8 @@ void PluginService::connect(GenericInterface* gi)
         (*it)->connect(gi);
     }
 	//connexion des changements d'images
-    QObject::connect(_gi->windowService(), SIGNAL(subWindowActivated(QMdiSubWindow*)), 
-                    this, SLOT(checkActionsValid(QMdiSubWindow*)));
+    QObject::connect(_gi->windowService(), SIGNAL(activeWidgetChanged(const QWidget*)), 
+                    this, SLOT(checkActionsValid(const QWidget*)));
 }
 
 Plugin* PluginService::getPlugin() {
@@ -75,8 +75,8 @@ PluginService::~PluginService() {
     }
 }
 
-void PluginService::checkActionsValid(QMdiSubWindow* activeWindow) {
-    StandardImageWindow* window = (activeWindow) ? dynamic_cast<StandardImageWindow*>(activeWindow->widget()) : NULL;
+void PluginService::checkActionsValid(const QWidget* activeWidget) {
+    const StandardImageWindow* window = dynamic_cast<const StandardImageWindow*>(activeWidget);
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         if((*it)->getOperation()->needCurrentImg()) {
             (*it)->setEnabled(window != NULL);

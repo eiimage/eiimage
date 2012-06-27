@@ -26,11 +26,11 @@
 #include "Algorithm/Dithering.h"
 #include "Converter.h"
 
-#include "../ImageEIICore/Operation.h"
-#include "../ImageEIICore/Plugin.h"
-#include "../ImageEIICore/ImgParam.h"
-#include "../ImageEIICore/IntParam.h"
-#include "../ImageEIICore/ImgOutput.h"
+#include "Operation.h"
+#include "Plugin.h"
+#include "ImgParam.h"
+#include "IntParam.h"
+#include "ImgOutput.h"
 
 using namespace std;
 using namespace imagein;

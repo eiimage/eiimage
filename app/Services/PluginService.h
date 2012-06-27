@@ -41,7 +41,7 @@ class PluginService : public QObject, public genericinterface::Service
     ~PluginService();
 
   public slots:
-    void checkActionsValid(QMdiSubWindow* activeWindow);
+    void checkActionsValid(const QWidget* activeWidget);
 
   private:  
     Plugin* _plugin;
