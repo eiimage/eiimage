@@ -35,9 +35,9 @@
 using namespace std;
 using namespace imagein;
 
-class Thresholding : public Operation {
+class Thresholding : public PlugOperation {
   public:
-    Thresholding(string name) : Operation(name) {
+    Thresholding() : PlugOperation("Thresholding") {
         this->addParam(CurrentImg(), &Thresholding::img);
         this->addParam(IntParam("Entier", 0, 255, 127), &Thresholding::threshold);
     }
@@ -53,9 +53,9 @@ class Thresholding : public Operation {
     Image img;
 };
 
-class Otsu : public Operation {
+class Otsu : public PlugOperation {
   public:
-    Otsu(string name) : Operation(name) {
+    Otsu() : PlugOperation("Otsu") {
         this->addParam(CurrentImg(), &Otsu::img);
     }
     
@@ -69,9 +69,9 @@ class Otsu : public Operation {
     Image img;
 };
 
-class Dithering : public Operation {
+class Dithering : public PlugOperation {
   public:
-    Dithering(string name) : Operation(name) {
+    Dithering() : PlugOperation("Dithering") {
         this->addParam(CurrentImg(), &Dithering::img);
     }
     
@@ -84,24 +84,14 @@ class Dithering : public Operation {
     Image img;
 };
 
-class Segmentation : public Plugin {
-  public:
-    Segmentation(string name) : Plugin(name) {
-        try {
-            Thresholding* thresholding = new Thresholding("Thresholding");
-            this->addOperation(thresholding);
-            Otsu* otsu = new Otsu("Otsu");
-            this->addOperation(otsu);
-            Dithering* dithering = new Dithering("Dithering");
-            this->addOperation(dithering);
-        }
-        catch(const char* msg) {
-            std::cerr << msg << std::endl;
-        }
-    }
-};
+extern "C" Plugin* loadPlugin() {
+    Plugin* plugin = new Plugin("Binarization");
+    plugin->addOperation(new Thresholding());
+    plugin->addOperation(new Otsu());
+    plugin->addOperation(new Dithering());
+    return plugin;
+}
 
-extern "C" Plugin* getPlugin() {
-    Plugin* segmentation = new Segmentation("Segmentation");
-    return segmentation;
+extern "C" void unloadPlugin(Plugin* plugin) {
+    delete plugin;
 }
