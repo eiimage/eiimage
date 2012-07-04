@@ -23,20 +23,17 @@
 #include <string>
 #include <vector>
 
-#include "Operation.h"
+#include "OpSet.h"
+#include "PlugOperation.h"
 
-class Plugin {
+class Plugin : public OpSet {
   public:
     Plugin(std::string name);
     std::vector<Operation*> getOperations();
-    std::string getName();
-    
-  protected:
-    void addOperation(Operation*);
+    void addOperation(PlugOperation*);
     
   private:
     std::vector<Operation*> _operations;
-    std::string _name;
 };
 
 #endif //!EIIMAGE_PLUGIN_H

@@ -37,7 +37,7 @@ class Parameter : public Input {
     T* _ptr;
     std::string _name;
     
-    friend class Operation;
+    friend class PlugOperation;
   
 };
 

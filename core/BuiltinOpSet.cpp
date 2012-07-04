@@ -17,15 +17,15 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Plugin.h"
+#include "BuiltinOpSet.h"
 
-Plugin::Plugin(std::string name) : OpSet(name) {
+BuiltinOpSet::BuiltinOpSet(std::string name) : OpSet(name) {
 }
 
-std::vector<Operation*> Plugin::getOperations() {
+std::vector<Operation*> BuiltinOpSet::getOperations() {
     return _operations;
 }
 
-void Plugin::addOperation(PlugOperation* operation) {
+void BuiltinOpSet::addOperation(Operation* operation) {
     _operations.push_back(operation);
 }

@@ -22,33 +22,29 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 
-#include "Operation.h"
+#include "PlugOperation.h"
 
 
 using namespace std;
 using namespace imagein;
 
-Operation::Operation(string name) : _name(name), _needCurrentImg(false), _currentImg(NULL) {
+PlugOperation::PlugOperation(string name) : Operation(name), _needCurrentImg(false), _currentImg(NULL) {
 }
 
-std::string Operation::getName() {
-    return _name;
-}
-
-void Operation::addInput(Input* input) {
+void PlugOperation::addInput(Input* input) {
     this->_inputs.push_back(input);
 }
 
-void Operation::addInput(const Input& input) {
+void PlugOperation::addInput(const Input& input) {
     this->_inputs.push_back(input.clone());
 }
 
-void Operation::addOutput(const Output& output) {
+void PlugOperation::addOutput(const Output& output) {
     _outputs.push_back(output.clone());
 }
 
 
-std::vector<QWidget*> Operation::operator()(const Image* currentImg) {
+std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::vector<const Image*>&) {
     vector<QWidget*> result;
     
     if(this->needCurrentImg()) {
