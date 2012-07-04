@@ -17,8 +17,7 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "PluginService.h"
-
+#include "OperationService.h"
 #include <GenericInterface.h>
 #include <ImgWidget.h>
 
@@ -66,7 +65,7 @@ void OperationService::operation() {
     }
     if(_operation->needCurrentImg() && image == NULL) return;
     
-    vector<QWidget*> result = _operation->operator()(image);
+    vector<QWidget*> result = _operation->operator()(image, vector<const Image*>());
     
     for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
         QWidget* widget = *it;

@@ -18,6 +18,7 @@
 */
 
 #include <QApplication>
+#include <QTranslator>
 
 #include <GenericInterface.h>
 
@@ -33,15 +34,28 @@ int main(int argc, char** argv)
 {
   qDebug("HW!");
   QApplication app(argc, argv);
+  app.setOrganizationName("insa");
+  app.setApplicationName("eiimage");
+
 
   Log::configure(true, false, 0);
 
-  GenericInterface m("ImageEII", Qt::RightDockWidgetArea);
+  QTranslator giTranslator;
+  giTranslator.load("genericinterface_fr");
+  app.installTranslator(&giTranslator);
 
-  m.addService(new PluginManager(&m));
-  m.addService(new EIImageService(&m));
+  GenericInterface gi("ImageEII", Qt::LeftDockWidgetArea);
 
-  m.run();
+  PluginManager* pluginManager = new PluginManager(&gi);
+  EIImageService* eiimageService = new EIImageService(&gi);
+
+  gi.addService(pluginManager);
+  gi.addService(eiimageService);
+
+  QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
+  QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
+
+  gi.run();
 
   return app.exec();
 }

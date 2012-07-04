@@ -27,7 +27,7 @@
 
 #include <QToolBar>
 
-#include "PluginService.h"
+#include "OpSetService.h"
 
 class PluginManager : public QObject, public genericinterface::Service
 {
@@ -39,15 +39,19 @@ class PluginManager : public QObject, public genericinterface::Service
     void unloadPlugin(Plugin*);
 
   public slots:
-    void loadPlugin();
+    void choosePlugin();
     void unloadAllPlugins();
 
+  signals:
+    void addPlugin(OpSet*);
+    void removePlugin(OpSet*);
+
   private:  
-    bool preloadPlugin(QString file);
+    bool loadPlugin(QString file, bool silent = true);
     genericinterface::GenericInterface* _gi;
     QAction* _loadPluginAction;
     QAction* _unloadPluginsAction;
-    std::map<std::string, PluginService*> _pluginServices;
+    std::map<std::string, Plugin*> _plugins;
     void checkActionsValid();
 };
 

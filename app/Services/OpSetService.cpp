@@ -17,7 +17,7 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "PluginService.h"
+#include "OpSetService.h"
 
 #include <GenericInterface.h>
 
@@ -30,18 +30,18 @@
 using namespace genericinterface;
 using namespace std;
 
-PluginService::PluginService(Plugin* plugin) : _plugin(plugin){
+OpSetService::OpSetService(OpSet* opSet) : _opSet(opSet){
     
 }
 
-void PluginService::display(GenericInterface* gi)
+void OpSetService::display(GenericInterface* gi)
 {
     _gi = gi;
     
-    _menu = gi->menu(_plugin->getName().c_str());
+    _menu = gi->menu(_opSet->getName().c_str());
      _menu->menuAction()->setVisible(true);
     
-    vector<Operation*> operations = _plugin->getOperations();
+    vector<Operation*> operations = _opSet->getOperations();
     for(vector<Operation*>::iterator it = operations.begin(); it < operations.end(); ++it) {
         OperationService* opService = new OperationService(*it, _menu);
         _opServices.push_back(opService);
@@ -50,7 +50,7 @@ void PluginService::display(GenericInterface* gi)
     }
 }
 
-void PluginService::connect(GenericInterface* gi)
+void OpSetService::connect(GenericInterface* gi)
 {
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         (*it)->connect(gi);
@@ -60,11 +60,7 @@ void PluginService::connect(GenericInterface* gi)
                     this, SLOT(checkActionsValid(const QWidget*)));
 }
 
-Plugin* PluginService::getPlugin() {
-    return _plugin;
-}
-
-PluginService::~PluginService() {
+OpSetService::~OpSetService() {
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         delete *it;
     }
@@ -75,7 +71,7 @@ PluginService::~PluginService() {
     }
 }
 
-void PluginService::checkActionsValid(const QWidget* activeWidget) {
+void OpSetService::checkActionsValid(const QWidget* activeWidget) {
     const StandardImageWindow* window = dynamic_cast<const StandardImageWindow*>(activeWidget);
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         if((*it)->getOperation()->needCurrentImg()) {

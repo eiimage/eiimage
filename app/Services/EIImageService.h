@@ -23,6 +23,8 @@
 #include <Service.h>
 #include <Plugin.h>
 
+#include "OpSetService.h"
+
 #include "../Widgets/OperationBar.h"
 
 class EIImageService : public QObject, public genericinterface::Service
@@ -34,10 +36,13 @@ class EIImageService : public QObject, public genericinterface::Service
     void connect(genericinterface::GenericInterface* gi);
 
   public slots:
+    void addOpSet(OpSet* opSet);
+    void removeOpSet(OpSet* opSet);
 
   private:  
     genericinterface::GenericInterface* _gi;
     OperationBar* _operationBar;
+    std::vector<OpSetService*> _opSetServices;
 };
 
 #endif

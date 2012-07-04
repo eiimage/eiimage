@@ -36,6 +36,28 @@ void EIImageService::display(GenericInterface* gi)
     gi->addDockWidget(Qt::LeftDockWidgetArea, _operationDock);
 }
 
-void EIImageService::connect(GenericInterface* gi)
+void EIImageService::connect(GenericInterface*)
 {
+}
+
+void EIImageService::addOpSet(OpSet* opSet) {
+    for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
+        if((*it)->getOpSet() == opSet) {
+            return;
+        }
+    }
+    OpSetService* opSetService = new OpSetService(opSet);
+    _opSetServices.push_back(opSetService);
+    _gi->addService(opSetService);
+}
+
+void EIImageService::removeOpSet(OpSet* opSet) {
+    for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
+        if((*it)->getOpSet() == opSet) {
+            _opSetServices.erase(it);
+            _gi->removeService(*it);
+            delete *it;
+            return;
+        }
+    }
 }

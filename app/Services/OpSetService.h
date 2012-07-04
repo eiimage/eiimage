@@ -17,8 +17,8 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PLUGINSERVICE_H
-#define PLUGINSERVICE_H
+#ifndef OPSETSERVICE_H
+#define OPSETSERVICE_H
 
 #include <Service.h>
 #include <Plugin.h>
@@ -30,21 +30,21 @@
 #include <QMenu>
 
 
-class PluginService : public QObject, public genericinterface::Service
+class OpSetService : public QObject, public genericinterface::Service
 {
   Q_OBJECT
   public:
-    PluginService(Plugin*); 
+    OpSetService(OpSet*); 
     void display(genericinterface::GenericInterface* gi);
     void connect(genericinterface::GenericInterface* gi);
-    Plugin* getPlugin();
-    ~PluginService();
+    inline OpSet* getOpSet() { return _opSet; }
+    ~OpSetService();
 
   public slots:
     void checkActionsValid(const QWidget* activeWidget);
 
   private:  
-    Plugin* _plugin;
+    OpSet* _opSet;
     genericinterface::GenericInterface* _gi;
     QMenu* _menu;
     //std::vector<QAction*> _actions;
