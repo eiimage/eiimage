@@ -44,7 +44,7 @@ class PlugOperation : public Operation {
   public:
     PlugOperation(std::string name);
   
-    std::vector<QWidget*> operator()(const imagein::Image*, const std::vector<const imagein::Image*>&);
+    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&);
     
     inline bool needCurrentImg() { return _needCurrentImg; }
     

@@ -20,7 +20,7 @@
 #ifndef EIIMAGE_OPERATION_H
 #define EIIMAGE_OPERATION_H
 
-#include <vector>
+#include <map>
 #include <string>
 
 #include "Output.h"
@@ -32,7 +32,7 @@ class Operation {
   public:
     Operation(std::string name) : _name(name) {}
   
-    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::vector<const imagein::Image*>&) = 0;
+    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&) = 0;
     inline std::string getName() { return _name; };
     
     virtual bool needCurrentImg() = 0;

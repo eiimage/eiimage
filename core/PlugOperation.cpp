@@ -44,7 +44,7 @@ void PlugOperation::addOutput(const Output& output) {
 }
 
 
-std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::vector<const Image*>&) {
+std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::map<std::string, const Image*>&) {
     vector<QWidget*> result;
     
     if(this->needCurrentImg()) {

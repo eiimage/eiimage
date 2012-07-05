@@ -29,8 +29,6 @@ class BuiltinOpSet : public OpSet {
   public:
     BuiltinOpSet(std::string name);
     std::vector<Operation*> getOperations();
-    
-  protected:
     void addOperation(Operation*);
     
   private:
