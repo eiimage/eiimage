@@ -64,8 +64,14 @@ void OperationService::operation() {
         image = curStdImgWnd->getImage();
     }
     if(_operation->needCurrentImg() && image == NULL) return;
-    
-    vector<QWidget*> result = _operation->operator()(image, vector<const Image*>());
+
+    map<string,const Image*> imgList;
+    vector<StandardImageWindow*> windows = ws->getImageWindows();
+    for(vector<StandardImageWindow*>::iterator it = windows.begin(); it < windows.end(); ++it) {
+        imgList.insert(pair<string,const Image*>((*it)->windowTitle().toStdString(), (*it)->getImage()));
+    }
+
+    vector<QWidget*> result = _operation->operator()(image, imgList);
     
     for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
         QWidget* widget = *it;
