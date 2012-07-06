@@ -31,6 +31,7 @@
 
 #include "PointOp.h"
 #include "ImgWidget.h"
+#include "ImageListBox.h"
 
 using namespace std;
 using namespace imagein;
@@ -65,16 +66,11 @@ PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     return new ImgIdent();
 }
 
-vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>& imgList) {
+vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
     vector<QWidget*> result;
     QStringList pixOperators, imgOperators;
     pixOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^" << "<<" << ">>";
     imgOperators << "" << "+" << "-" << "&" << "|" << "^";
-    QStringList imageNames;
-    for(map<string, const Image*>::const_iterator it = imgList.begin(); it != imgList.end(); ++it) {
-        imageNames << it->first.c_str();
-    }
-    
     
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(dialog->tr("Parameter"));
@@ -99,7 +95,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     QComboBox** pixOperatorBoxes = new QComboBox*[nChannel+1];
     QComboBox** imgOperatorBoxes = new QComboBox*[nChannel+1];
     QLineEdit** exprEdits = new QLineEdit*[nChannel+1];
-    QComboBox** imageBoxes = new QComboBox*[nChannel+1];
+    ImageListBox** imageBoxes = new ImageListBox*[nChannel+1];
 
     QWidget* pixelWidget = new QWidget(dialog);
     valueLayouts[0] = new QHBoxLayout();
@@ -109,8 +105,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     imgOperatorBoxes[0]->addItems(imgOperators); 
     exprEdits[0] = new QLineEdit(pixelWidget);
     exprEdits[0]->setFixedWidth(64);
-    imageBoxes[0] = new QComboBox(pixelWidget);
-    imageBoxes[0]->addItems(imageNames);
+    imageBoxes[0] = new ImageListBox(pixelWidget, image, imgList);
     valueLayouts[0]->addWidget(new QLabel("Image", pixelWidget));
     valueLayouts[0]->addWidget(pixOperatorBoxes[0]);
     valueLayouts[0]->addWidget(imgOperatorBoxes[0]);
@@ -131,8 +126,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
         imgOperatorBoxes[i]->addItems(imgOperators); 
         exprEdits[i] = new QLineEdit(colorWidget);
         exprEdits[i]->setFixedWidth(64);
-        imageBoxes[i] = new QComboBox(colorWidget);
-        imageBoxes[i]->addItems(imageNames);
+        imageBoxes[i] = new ImageListBox(colorWidget, image, imgList);
         valueLayouts[i]->addWidget(new QLabel(colorName(i-1, nChannel), colorWidget));
         valueLayouts[i]->addWidget(pixOperatorBoxes[i]);
         valueLayouts[i]->addWidget(imgOperatorBoxes[i]);
@@ -177,7 +171,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
         QString expr = exprEdits[0]->text();
         PixelOp* pixelOp = PixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
         ImageOp* imageOp = ImageOp::fromString(imgOperatorBoxes[0]->currentText());
-        const Image* imageImg = imgList.find(imageBoxes[0]->currentText().toStdString())->second;
+        const Image* imageImg = imageBoxes[0]->currentImage();
         maxWidth = min(maxWidth, imageImg->getWidth());
         maxHeight = min(maxHeight, imageImg->getHeight());
         
@@ -192,7 +186,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
             QString expr = exprEdits[i+1]->text();
             pixelOps[i] = PixelOp::fromString(pixOperatorBoxes[i+1]->currentText(), expr);
             imageOps[i] = ImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
-            imageImgs[i] = imgList.find(imageBoxes[i+1]->currentText().toStdString())->second;
+            imageImgs[i] = imageBoxes[i+1]->currentImage();
             maxWidth = min(maxWidth, imageImgs[i]->getWidth());
             maxHeight = min(maxHeight, imageImgs[i]->getHeight());
         }

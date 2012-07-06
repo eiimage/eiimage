@@ -32,7 +32,7 @@ class Operation {
   public:
     Operation(std::string name) : _name(name) {}
   
-    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&) = 0;
+    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) = 0;
     inline std::string getName() { return _name; }
     
     virtual bool needCurrentImg() = 0;

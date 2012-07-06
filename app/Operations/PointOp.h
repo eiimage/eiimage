@@ -36,7 +36,7 @@ class PointOp : public Operation {
 
     PointOp();
 
-    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&);
+    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg();
 

@@ -17,7 +17,7 @@ bool ThresholdOp::needCurrentImg() {
     return true;
 }
 
-std::vector<QWidget*> ThresholdOp::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>&) {
+std::vector<QWidget*> ThresholdOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
     vector<QWidget*> result;
     
     const GrayscaleImage* img = dynamic_cast<const GrayscaleImage*>(image);

@@ -44,7 +44,7 @@ void PlugOperation::addOutput(const Output& output) {
 }
 
 
-std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::map<std::string, const Image*>&) {
+std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::map<const Image*, std::string>&) {
     vector<QWidget*> result;
     
     if(this->needCurrentImg()) {
@@ -54,7 +54,7 @@ std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const s
     
     if(_inputs.size()>0) {
         QDialog* dialog = new QDialog();
-        dialog->setWindowTitle("Paramètres");
+        dialog->setWindowTitle("ParamÃ¨tres");
         dialog->setMinimumWidth(160);
         QVBoxLayout* layout = new QVBoxLayout();
         dialog->setLayout(layout);
