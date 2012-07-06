@@ -17,6 +17,9 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef PointOp_H
+#define PointOp_H
+
 #include <vector>
 #include <map>
 #include <limits>
@@ -27,11 +30,11 @@
 
 class QWidget;
 
-class PixelOperation : public Operation {
+class PointOp : public Operation {
 
   public:
 
-    PixelOperation();
+    PointOp();
 
     std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&);
 
@@ -146,3 +149,5 @@ class PixelOperation : public Operation {
 
 
 };
+
+#endif //!PointOp_H

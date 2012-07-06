@@ -1,5 +1,3 @@
-#include "Thresholding.h"
-
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QButtonGroup>
@@ -12,26 +10,14 @@
 #include <QGroupBox>
 #include <QFormLayout>
 
-#include "ImgWidget.h"
-
-
 #include "Widgets/ImageWidgets/GenericHistogramView.h"
 
+#include "ThresholdDialog.h"
 #include "Algorithm/Otsu.h"
-#include "Algorithm/Binarization.h"
-#include "Converter.h"
 
-using namespace std;
 using namespace imagein;
 using namespace imagein::algorithm;
 using namespace genericinterface;
-
-Thresholding::Thresholding() : Operation("Thresholding") {
-}
-
-bool Thresholding::needCurrentImg() {
-    return true;
-}
 
 void ThresholdDialog::marker1Moved(const QPointF& point) {
     _marker1->setXValue(point.x());
@@ -69,7 +55,7 @@ void ThresholdDialog::otsu() {
 }
 
 ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  : _image(image){
-    this->setWindowTitle(tr("Thresholding"));
+    this->setWindowTitle(tr("ThresholdOp"));
     this->setMinimumWidth(160);
     QVBoxLayout* layout = new QVBoxLayout();
     this->setLayout(layout);
@@ -161,33 +147,3 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     connect(otsuButton, SIGNAL(pressed()), this, SLOT(otsu()));
 }
 
-std::vector<QWidget*> Thresholding::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>&) {
-    vector<QWidget*> result;
-    
-    const GrayscaleImage* img = dynamic_cast<const GrayscaleImage*>(image);
-    bool convert = (img == NULL);
-    if(convert) {
-        img = Converter<GrayscaleImage>::convert(*image);
-    }
-
-    ThresholdDialog* dialog = new ThresholdDialog(img, convert);
-    
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-    
-    if(code!=QDialog::Accepted) {
-        return result;
-    }
-
-    Binarization_t<GrayscaleImage::depth_t>* algo;
-    if(dialog->doubleThreshold()) {
-        algo = new Binarization_t<GrayscaleImage::depth_t>(dialog->threshold1(), dialog->threshold2(), dialog->blackBand());
-    }
-    else {
-        algo = new Binarization_t<GrayscaleImage::depth_t>(dialog->threshold1());
-    }
-
-    GrayscaleImage* resImg = algo->operator()(img);
-    result.push_back(new ImgWidget(resImg, ""));
-
-    return result;
-}

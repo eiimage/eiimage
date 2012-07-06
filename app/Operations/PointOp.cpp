@@ -29,17 +29,17 @@
 #include <QCheckBox>
 #include <QGroupBox>
 
-#include "PixelOperation.h"
+#include "PointOp.h"
 #include "ImgWidget.h"
 
 using namespace std;
 using namespace imagein;
 
-PixelOperation::PixelOperation() : Operation("Pixel operations") {
+PointOp::PointOp() : Operation("Pixel operations") {
     
 }
 
-PixelOperation::PixelOp* PixelOperation::PixelOp::fromString(QString op, QString expr) {
+PointOp::PixelOp* PointOp::PixelOp::fromString(QString op, QString expr) {
     if(op=="+") return new PixAdd(expr.toInt(0,0));
     if(op=="-") return new PixAdd(-expr.toInt(0,0));
     if(op=="*") return new PixMul(expr.toDouble());
@@ -54,7 +54,7 @@ PixelOperation::PixelOp* PixelOperation::PixelOp::fromString(QString op, QString
     return new PixIdent();
 }
 
-PixelOperation::ImageOp* PixelOperation::ImageOp::fromString(QString op) {
+PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     if(op=="+") return new ImgAdd();
     if(op=="-") return new ImgSub();
     if(op=="&") return new ImgAnd();
@@ -65,7 +65,7 @@ PixelOperation::ImageOp* PixelOperation::ImageOp::fromString(QString op) {
     return new ImgIdent();
 }
 
-vector<QWidget*> PixelOperation::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>& imgList) {
+vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>& imgList) {
     vector<QWidget*> result;
     QStringList pixOperators, imgOperators;
     pixOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^" << "<<" << ">>";
@@ -231,6 +231,6 @@ vector<QWidget*> PixelOperation::operator()(const imagein::Image* image, const s
     return result;
 }
 
-bool PixelOperation::needCurrentImg() {
+bool PointOp::needCurrentImg() {
     return true;
 }

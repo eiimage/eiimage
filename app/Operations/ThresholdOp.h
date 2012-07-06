@@ -17,29 +17,40 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_OPERATION_H
-#define EIIMAGE_OPERATION_H
+#ifndef THRESHOLDOP_H
+#define THRESHOLDOP_H
 
-#include <map>
-#include <string>
+#include <QCoreApplication>
 
-#include "Output.h"
+#include <vector>
+#include <qwt_plot_marker.h>
+#include <QDialog>
+#include <QSpinBox>
+#include <QLabel>
+#include <QCheckBox>
+#include <QRadioButton>
+
+#include "Operation.h"
 #include "Image.h"
+#include "GrayscaleImage.h"
 
 class QWidget;
 
-class Operation {
+class ThresholdOp : public Operation {
+
   public:
-    Operation(std::string name) : _name(name) {}
-  
-    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&) = 0;
-    inline std::string getName() { return _name; }
     
-    virtual bool needCurrentImg() = 0;
-    
+    ThresholdOp();
+
+    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&);
+
+    bool needCurrentImg();
+
+    static inline QString tr(const char* str) { return QCoreApplication::tr(str); }
+
+
   private:
-    std::string _name;
-    imagein::Image* _currentImg;
+
 };
 
-#endif //!EIIMAGE_OPERATION_H
+#endif //!THRESHOLDOP_H

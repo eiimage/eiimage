@@ -17,6 +17,9 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef THRESHOLDDIALOG_H
+#define THRESHOLDDIALOG_H
+
 #include <QCoreApplication>
 
 #include <vector>
@@ -30,26 +33,6 @@
 #include "Operation.h"
 #include "Image.h"
 #include "GrayscaleImage.h"
-
-class QWidget;
-
-class Thresholding : public Operation {
-
-  public:
-    
-    Thresholding();
-
-    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<std::string, const imagein::Image*>&);
-
-    bool needCurrentImg();
-
-    static inline QString tr(const char* str) { return QCoreApplication::tr(str); }
-
-
-  private:
-
-};
-
 
 class ThresholdDialog : public QDialog {
   Q_OBJECT
@@ -77,3 +60,5 @@ class ThresholdDialog : public QDialog {
     QRadioButton* _blackButton;
     QCheckBox* _doubleBox;
 };
+
+#endif //!THRESHOLDDIALOG_H
