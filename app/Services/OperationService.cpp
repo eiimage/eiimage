@@ -83,13 +83,15 @@ void OperationService::operation() {
             if(_operation->needCurrentImg()) {
                 StandardImageWindow* siw = new StandardImageWindow(curStdImgWnd->getPath(), _gi, resImg);
                 title = curStdImgWnd->windowTitle();
-                title += " [";
-                title += _operation->getName().c_str();
-                 if(iwdgt->name != "") {
-                    title += ", ";
+                if(iwdgt->name != "") {
+                    title += " ";
                     title += iwdgt->name.c_str() ;
                 }
-                title += "]";
+                else {
+                    title += " [";
+                    title += _operation->getName().c_str();
+                    title += "]";
+                }
                 siw->setWindowTitle(title);
                 ws->addImage(ws->getNodeId(curStdImgWnd), siw);
             }
