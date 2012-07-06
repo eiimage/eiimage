@@ -68,11 +68,15 @@ void ThresholdDialog::otsu() {
     _spinbox1->setValue(threshold);
 }
 
-ThresholdDialog::ThresholdDialog(const GrayscaleImage* image)  : _image(image){
+ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  : _image(image){
     this->setWindowTitle(tr("Thresholding"));
     this->setMinimumWidth(160);
     QVBoxLayout* layout = new QVBoxLayout();
     this->setLayout(layout);
+
+    if(converted) {
+        layout->addWidget(new QLabel("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>"));
+    }
 
     QGroupBox* threshGroup = new QGroupBox("Threshold", this);
     QHBoxLayout* threshLayout = new QHBoxLayout(threshGroup);
@@ -122,13 +126,13 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image)  : _image(image){
     _marker1 = new QwtPlotMarker();
     _marker1->setLineStyle(QwtPlotMarker::VLine);
     _marker1->setLinePen(QPen(Qt::black));
-    _marker1->setXValue(64);
+    _marker1->setXValue(127);
     _marker1->attach(plot);
     
     _marker2 = new QwtPlotMarker();
     _marker2->setLineStyle(QwtPlotMarker::VLine);
     _marker2->setLinePen(QPen(Qt::black));
-    _marker2->setXValue(192);
+    _marker2->setXValue(255);
     _marker2->attach(plot);
     _marker2->hide();
     
@@ -160,9 +164,13 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image)  : _image(image){
 std::vector<QWidget*> Thresholding::operator()(const imagein::Image* image, const std::map<std::string, const imagein::Image*>&) {
     vector<QWidget*> result;
     
-    GrayscaleImage* img = Converter<GrayscaleImage>::convert(*image);
-    
-    ThresholdDialog* dialog = new ThresholdDialog(img);
+    const GrayscaleImage* img = dynamic_cast<const GrayscaleImage*>(image);
+    bool convert = (img == NULL);
+    if(convert) {
+        img = Converter<GrayscaleImage>::convert(*image);
+    }
+
+    ThresholdDialog* dialog = new ThresholdDialog(img, convert);
     
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     

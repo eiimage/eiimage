@@ -55,7 +55,7 @@ class ThresholdDialog : public QDialog {
   Q_OBJECT
   public:
 
-    ThresholdDialog(const imagein::GrayscaleImage*);
+    ThresholdDialog(const imagein::GrayscaleImage*, bool converted);
     inline int threshold1() { return _spinbox1->value(); }
     inline int threshold2() { return _spinbox2->value(); }
     inline bool blackBand() { return _blackButton->isChecked(); }
