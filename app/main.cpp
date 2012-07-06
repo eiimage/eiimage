@@ -40,6 +40,12 @@ int main(int argc, char** argv)
 
   Log::configure(true, false, 0);
 
+  QTranslator qtTranslator;
+  QString tr = "qt_fr_FR";
+  qtTranslator.load(tr, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
+  cout << tr.toStdString();
+  app.installTranslator(&qtTranslator);
+
   QTranslator giTranslator;
   giTranslator.load("genericinterface_fr");
   app.installTranslator(&giTranslator);
