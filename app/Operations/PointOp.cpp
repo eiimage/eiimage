@@ -73,6 +73,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     QStringList pixOperators, imgOperators;
     pixOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^" << "<<" << ">>";
     imgOperators << "" << "+" << "-" << "&" << "|" << "^";
+    QString currentImgName = QString(imgList.find(image)->second.c_str());
     
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(dialog->tr("Parameter"));
@@ -108,7 +109,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     exprEdits[0] = new QLineEdit(pixelWidget);
     exprEdits[0]->setFixedWidth(64);
     imageBoxes[0] = new ImageListBox(pixelWidget, image, imgList);
-    valueLayouts[0]->addWidget(new QLabel(dialog->tr("Image"), pixelWidget));
+    valueLayouts[0]->addWidget(new QLabel(currentImgName, pixelWidget));
     valueLayouts[0]->addWidget(pixOperatorBoxes[0]);
     valueLayouts[0]->addWidget(imgOperatorBoxes[0]);
     valueLayouts[0]->addWidget(exprEdits[0]);
@@ -129,7 +130,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
         exprEdits[i] = new QLineEdit(colorWidget);
         exprEdits[i]->setFixedWidth(64);
         imageBoxes[i] = new ImageListBox(colorWidget, image, imgList);
-        valueLayouts[i]->addWidget(new QLabel(Tools::colorName(i-1, nChannel), colorWidget));
+        valueLayouts[i]->addWidget(new QLabel(currentImgName+"::"+Tools::colorName(i-1, nChannel), colorWidget));
         valueLayouts[i]->addWidget(pixOperatorBoxes[i]);
         valueLayouts[i]->addWidget(imgOperatorBoxes[i]);
         valueLayouts[i]->addWidget(exprEdits[i]);
