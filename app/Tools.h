@@ -20,6 +20,8 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
+#include <QCoreApplication>
+
 namespace Tools {
 
     inline QString tr(const char* str) { return QCoreApplication::tr(str); }

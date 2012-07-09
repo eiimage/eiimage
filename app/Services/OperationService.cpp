@@ -96,10 +96,13 @@ void OperationService::operation() {
                 ws->addImage(ws->getNodeId(curStdImgWnd), siw);
             }
             else {
-                title = _operation->getName().c_str();
-                 if(iwdgt->name != "") {
-                    title += " [";
+                if(iwdgt->name != "") {
+                    title += " ";
                     title += iwdgt->name.c_str() ;
+                }
+                else {
+                    title += " [";
+                    title += _operation->getName().c_str();
                     title += "]";
                 }
                 StandardImageWindow* siw = new StandardImageWindow(iwdgt->name.c_str(), _gi, resImg);
