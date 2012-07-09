@@ -20,6 +20,8 @@
 #ifndef EIIMAGESERVICE_H
 #define EIIMAGESERVICE_H
 
+#include <QTextEdit>
+
 #include <Service.h>
 #include <Plugin.h>
 
@@ -38,10 +40,12 @@ class EIImageService : public QObject, public genericinterface::Service
   public slots:
     void addOpSet(OpSet* opSet);
     void removeOpSet(OpSet* opSet);
+    void outputText(QString text);
 
   private:  
     genericinterface::GenericInterface* _gi;
     OperationBar* _operationBar;
+    QTextEdit* _statusEdit;
     std::vector<OpSetService*> _opSetServices;
 };
 

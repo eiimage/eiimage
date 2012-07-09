@@ -31,9 +31,21 @@ EIImageService::EIImageService(GenericInterface* gi) {
 
 void EIImageService::display(GenericInterface* gi)
 {
-    QDockWidget* _operationDock = new QDockWidget("Opérations", gi);
-    _operationDock->setWidget(_operationBar);
-    gi->addDockWidget(Qt::LeftDockWidgetArea, _operationDock);
+//    QDockWidget* _operationDock = new QDockWidget(tr("Operations"), gi);
+//    _operationDock->setWidget(_operationBar);
+//    gi->addDockWidget(Qt::LeftDockWidgetArea, _operationDock);
+
+    _statusEdit = new QTextEdit();
+    _statusEdit->setReadOnly(true);
+    _statusEdit->setMinimumHeight(1);
+    _statusEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    _statusEdit->setReadOnly(true);
+    QDockWidget* statusDock = new QDockWidget(tr("Informations"), gi);
+    statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    statusDock->setMinimumWidth(128);
+    statusDock->setWidget(_statusEdit);
+    gi->addDockWidget(Qt::BottomDockWidgetArea, statusDock);
+    _statusEdit->hide();
 }
 
 void EIImageService::connect(GenericInterface*)
@@ -49,6 +61,7 @@ void EIImageService::addOpSet(OpSet* opSet) {
     OpSetService* opSetService = new OpSetService(opSet);
     _opSetServices.push_back(opSetService);
     _gi->addService(opSetService);
+    QObject::connect(opSetService, SIGNAL(outputText(QString)), this, SLOT(outputText(QString)));
 }
 
 void EIImageService::removeOpSet(OpSet* opSet) {
@@ -60,4 +73,11 @@ void EIImageService::removeOpSet(OpSet* opSet) {
             return;
         }
     }
+}
+
+void EIImageService::outputText(QString text) {
+    _statusEdit->append(text);
+    _statusEdit->show();
+    if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
+//    _statusEdit->setMinimumHeight(32);
 }

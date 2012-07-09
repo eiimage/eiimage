@@ -40,6 +40,9 @@ class OperationService : public QObject, public genericinterface::Service
   public slots:
     void operation();
 
+  signals:
+    void outputText(QString);
+
   private:  
     genericinterface::GenericInterface* _gi;
     Operation* _operation;

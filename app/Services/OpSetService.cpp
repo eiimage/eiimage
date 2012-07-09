@@ -54,6 +54,7 @@ void OpSetService::connect(GenericInterface* gi)
 {
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         (*it)->connect(gi);
+        QObject::connect(*it, SIGNAL(outputText(QString)), this, SIGNAL(outputText(QString)));
     }
 	//connexion des changements d'images
     QObject::connect(_gi->windowService(), SIGNAL(activeWidgetChanged(const QWidget*)), 

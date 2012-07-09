@@ -76,6 +76,7 @@ void OperationService::operation() {
     for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
         QWidget* widget = *it;
         ImgWidget* iwdgt = dynamic_cast<ImgWidget*>(widget);
+        QLabel* twdgt = dynamic_cast<QLabel*>(widget);
         if(iwdgt != NULL) {
             Image* resImg = iwdgt->img;
            
@@ -110,6 +111,9 @@ void OperationService::operation() {
                 ws->addImage(NodeId(resImg), siw);
             }
             //delete iwdgt;
+        }
+        else if(twdgt != NULL) {
+            emit outputText(twdgt->text());
         }
         else {
             ws->addWidget(ws->getNodeId(curStdImgWnd), widget);

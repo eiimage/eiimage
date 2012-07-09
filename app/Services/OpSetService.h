@@ -43,6 +43,9 @@ class OpSetService : public QObject, public genericinterface::Service
   public slots:
     void checkActionsValid(const QWidget* activeWidget);
 
+  signals:
+    void outputText(QString);
+
   private:  
     OpSet* _opSet;
     genericinterface::GenericInterface* _gi;
