@@ -40,16 +40,6 @@ class PointOp : public Operation {
 
     bool needCurrentImg();
 
-    inline static QString colorName(int i, int n) {
-        if((n==1 || n==2) && i==0) return tr("Black");
-        if((n==2 && i==1) || (n==4 && i==3)) return tr("Alpha");
-        switch(i) { case 0: return tr("Red"); case 1: return tr("Green"); case 2: return tr("Blue"); default: return tr("Color"); }
-    }
-
-
-
-    static inline QString tr(const char* str) { return QCoreApplication::tr(str); }
-
   private:
     typedef imagein::Image::depth_t depth_t;
 
