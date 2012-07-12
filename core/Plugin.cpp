@@ -22,7 +22,7 @@
 Plugin::Plugin(std::string name) : OpSet(name) {
 }
 
-std::vector<Operation*> Plugin::getOperations() {
+std::vector<GenericOperation*> Plugin::getOperations() {
     return _operations;
 }
 

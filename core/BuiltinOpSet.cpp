@@ -22,10 +22,10 @@
 BuiltinOpSet::BuiltinOpSet(std::string name) : OpSet(name) {
 }
 
-std::vector<Operation*> BuiltinOpSet::getOperations() {
+std::vector<GenericOperation*> BuiltinOpSet::getOperations() {
     return _operations;
 }
 
-void BuiltinOpSet::addOperation(Operation* operation) {
+void BuiltinOpSet::addOperation(GenericOperation* operation) {
     _operations.push_back(operation);
 }

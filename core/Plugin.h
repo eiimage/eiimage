@@ -29,11 +29,11 @@
 class Plugin : public OpSet {
   public:
     Plugin(std::string name);
-    std::vector<Operation*> getOperations();
+    std::vector<GenericOperation*> getOperations();
     void addOperation(PlugOperation*);
     
   private:
-    std::vector<Operation*> _operations;
+    std::vector<GenericOperation*> _operations;
 };
 
 #endif //!EIIMAGE_PLUGIN_H

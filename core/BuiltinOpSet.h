@@ -28,11 +28,11 @@
 class BuiltinOpSet : public OpSet {
   public:
     BuiltinOpSet(std::string name);
-    std::vector<Operation*> getOperations();
-    void addOperation(Operation*);
+    std::vector<GenericOperation*> getOperations();
+    void addOperation(GenericOperation*);
     
   private:
-    std::vector<Operation*> _operations;
+    std::vector<GenericOperation*> _operations;
 };
 
 #endif //!EIIMAGE_BUILTINOPSET_H

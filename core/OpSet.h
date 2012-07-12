@@ -28,8 +28,8 @@
 class OpSet {
   public:
     OpSet(std::string name) : _name(name) {}
-    virtual std::vector<Operation*> getOperations() = 0;
-    inline std::string getName() { return _name; };
+    virtual std::vector<GenericOperation*> getOperations() = 0;
+    inline std::string getName() { return _name; }
     
   private:
     std::string _name;

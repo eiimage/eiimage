@@ -24,8 +24,6 @@
 
 #include "Input.h"
 
-class Operation;
-
 template<typename T>
 class Parameter : public Input {
   public:

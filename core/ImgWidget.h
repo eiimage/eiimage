@@ -27,3 +27,14 @@ class ImgWidget : public QWidget {
     imagein::Image* img;
     std::string name;
 };
+
+
+class DoubleImgWidget : public QWidget {
+  public:
+    DoubleImgWidget(imagein::Image_t<double>* img_, std::string name_, bool normalize_ = false, bool logScale_ = false)
+        : img(img_), name(name_), normalize(normalize_), logScale(logScale_) {}
+    imagein::Image_t<double>* img;
+    std::string name;
+    bool normalize;
+    bool logScale;
+};
