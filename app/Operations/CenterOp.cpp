@@ -50,11 +50,11 @@ std::vector<QWidget*> CenterOp::operator()(const imagein::Image* image, const st
         {
             for(unsigned int i = 0; i < resImg->getWidth()/2; ++i) {
                 Image::depth_t value = image->getPixel(i, j, c);
-                resImg->setPixel(resImg->getWidth()/2 - i - 1, resImg->getHeight()/2 - j - 1, c, value);
+                resImg->setPixel(resImg->getWidth()/2 + i, resImg->getHeight()/2 + j, c, value);
             }
             for(unsigned int i = 0; i < resImg->getWidth()/2; ++i) {
                 Image::depth_t value = image->getPixel(image->getWidth()/2 + i, j, c);
-                resImg->setPixel(resImg->getWidth() - i - 1, resImg->getHeight()/2 - j - 1, c, value);
+                resImg->setPixel(i, resImg->getHeight()/2 + j, c, value);
             }
 
         }
@@ -63,11 +63,11 @@ std::vector<QWidget*> CenterOp::operator()(const imagein::Image* image, const st
         {
             for(unsigned int i = 0; i < resImg->getWidth()/2; ++i) {
                 Image::depth_t value = image->getPixel(i, image->getHeight()/2 + j, c);
-                resImg->setPixel(resImg->getWidth()/2 - i - 1, resImg->getHeight() - j - 1, c, value);
+                resImg->setPixel(resImg->getWidth()/2 + i, j, c, value);
             }
             for(unsigned int i = 0; i < resImg->getWidth()/2; ++i) {
                 Image::depth_t value = image->getPixel(image->getWidth()/2 + i, image->getHeight()/2 + j, c);
-                resImg->setPixel(resImg->getWidth() - i - 1, resImg->getHeight() - j - 1, c, value);
+                resImg->setPixel(i, j, c, value);
             }
         }
     }
