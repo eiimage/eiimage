@@ -19,6 +19,8 @@
 
 #include "OperationService.h"
 #include <GenericInterface.h>
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <ImgWidget.h>
 
 #include <QMessageBox>
@@ -30,7 +32,7 @@
 using namespace genericinterface;
 using namespace std;
 
-OperationService::OperationService(Operation* operation, QMenu* menu) : _operation(operation), _menu(menu) {
+OperationService::OperationService(GenericOperation* operation, QMenu* menu) : _operation(operation), _menu(menu) {
     
 }
 
@@ -53,70 +55,51 @@ void OperationService::operation() {
     WindowService* ws = _gi->windowService();
     ImageWindow* curImgWnd = ws->getCurrentImageWindow();
     
-    StandardImageWindow* curStdImgWnd = NULL;
-    if (curImgWnd != NULL)
-    {
-        curStdImgWnd = dynamic_cast<StandardImageWindow*>(curImgWnd);
-    }
+//    StandardImageWindow* curStdImgWnd = NULL;
+//    if (curImgWnd != NULL)
+//    {
+//        curStdImgWnd = dynamic_cast<StandardImageWindow*>(curImgWnd);
+//    }
     
-    const Image* image = NULL;
-    if(curStdImgWnd != NULL) {
-        image = curStdImgWnd->getImage();
-    }
-    if(_operation->needCurrentImg() && image == NULL) return;
+//    const Image* image = NULL;
+//    if(curStdImgWnd != NULL) {
+//        image = curStdImgWnd->getImage();
+//    }
+    if(_operation->needCurrentImg() && !_operation->isValidImgWnd(curImgWnd)) return;
 
-    map<const Image*, string> imgList;
-    vector<StandardImageWindow*> windows = ws->getImageWindows();
-    for(vector<StandardImageWindow*>::iterator it = windows.begin(); it < windows.end(); ++it) {
-        imgList.insert(pair<const Image*, string>((*it)->getImage(), (*it)->windowTitle().toStdString()));
+    map<const ImageWindow*, string> wndList;
+    vector<ImageWindow*> windows = ws->getImageWindows();
+    for(vector<ImageWindow*>::iterator it = windows.begin(); it < windows.end(); ++it) {
+        wndList.insert(pair<const ImageWindow*, string>(*it, (*it)->windowTitle().toStdString()));
     }
 
-    vector<QWidget*> result = _operation->operator()(image, imgList);
+    vector<QWidget*> result = _operation->operator()(curImgWnd, wndList);
     
     for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
         QWidget* widget = *it;
-        ImgWidget* iwdgt = dynamic_cast<ImgWidget*>(widget);
         QLabel* twdgt = dynamic_cast<QLabel*>(widget);
-        if(iwdgt != NULL) {
-            Image* resImg = iwdgt->img;
-           
-            QString title;
-            if(_operation->needCurrentImg()) {
-                StandardImageWindow* siw = new StandardImageWindow(curStdImgWnd->getPath(), _gi, resImg);
-                title = curStdImgWnd->windowTitle();
-                if(iwdgt->name != "") {
-                    title += " ";
-                    title += iwdgt->name.c_str() ;
-                }
-                else {
-                    title += " [";
-                    title += _operation->getName().c_str();
-                    title += "]";
-                }
-                siw->setWindowTitle(title);
-                ws->addImage(ws->getNodeId(curStdImgWnd), siw);
+        if((typeid(*widget) == typeid(ImgWidget)) || (typeid(*widget) == typeid(DoubleImgWidget))) {
+            QString title = _operation->needCurrentImg() ? (curImgWnd->windowTitle() + " - ") : "";
+            ImageWindow* siw;
+            if(typeid(*widget)==typeid(ImgWidget)) {
+                ImgWidget* w = dynamic_cast<ImgWidget*>(widget);
+                title += w->name.c_str();
+                siw = new StandardImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), _gi, w->img);
             }
             else {
-                if(iwdgt->name != "") {
-                    title += " ";
-                    title += iwdgt->name.c_str() ;
-                }
-                else {
-                    title += " [";
-                    title += _operation->getName().c_str();
-                    title += "]";
-                }
-                StandardImageWindow* siw = new StandardImageWindow(iwdgt->name.c_str(), _gi, resImg);
-                siw->setWindowTitle(title);
-                ws->addImage(NodeId(resImg), siw);
+                DoubleImgWidget* w = dynamic_cast<DoubleImgWidget*>(widget);
+                title += w->name.c_str();
+                siw = new DoubleImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), _gi, w->img, w->normalize, w->logScale);
             }
-            //delete iwdgt;
+            NodeId id = _operation->needCurrentImg() ? ws->getNodeId(curImgWnd) : NodeId(siw->getDisplayImage());
+            ws->addImage(id, siw);
+            siw->setWindowTitle(title);
         }
         else if(twdgt != NULL) {
             emit outputText(twdgt->text());
         }
         else {
-            ws->addWidget(ws->getNodeId(curStdImgWnd), widget);
+            ws->addWidget(ws->getNodeId(curImgWnd), widget);
         }
         
     }

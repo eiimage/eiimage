@@ -186,7 +186,7 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     }
     std::cout << file.toStdString() << ":  got Plugin" << std::endl;
     
-    vector<Operation*> operations = plugin->getOperations();
+    vector<GenericOperation*> operations = plugin->getOperations();
     std::cout << "Plugin " << plugin->getName() << " loaded : " <<  operations.size() << " operations "<< std::endl;
     
     //PluginService* pluginService = new PluginService(plugin);

@@ -41,8 +41,8 @@ void OpSetService::display(GenericInterface* gi)
     _menu = gi->menu(_opSet->getName().c_str());
      _menu->menuAction()->setVisible(true);
     
-    vector<Operation*> operations = _opSet->getOperations();
-    for(vector<Operation*>::iterator it = operations.begin(); it < operations.end(); ++it) {
+    vector<GenericOperation*> operations = _opSet->getOperations();
+    for(vector<GenericOperation*>::iterator it = operations.begin(); it < operations.end(); ++it) {
         OperationService* opService = new OperationService(*it, _menu);
         _opServices.push_back(opService);
         opService->display(gi);
@@ -73,10 +73,10 @@ OpSetService::~OpSetService() {
 }
 
 void OpSetService::checkActionsValid(const QWidget* activeWidget) {
-    const StandardImageWindow* window = dynamic_cast<const StandardImageWindow*>(activeWidget);
+    const ImageWindow* window = dynamic_cast<const ImageWindow*>(activeWidget);
     for(vector<OperationService*>::iterator it = _opServices.begin(); it < _opServices.end(); ++it) {
         if((*it)->getOperation()->needCurrentImg()) {
-            (*it)->setEnabled(window != NULL);
+            (*it)->setEnabled((*it)->getOperation()->isValidImgWnd(window));
         }
     }  
 }

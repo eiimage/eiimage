@@ -30,10 +30,10 @@ class OperationService : public QObject, public genericinterface::Service
 {
   Q_OBJECT
   public:
-    OperationService(Operation* operation, QMenu* menu); 
+    OperationService(GenericOperation* operation, QMenu* menu);
     void display(genericinterface::GenericInterface* gi);
     void connect(genericinterface::GenericInterface* gi);
-    inline Operation* getOperation() { return _operation; }
+    inline GenericOperation* getOperation() { return _operation; }
     ~OperationService();
     void setEnabled(bool);
 
@@ -43,11 +43,12 @@ class OperationService : public QObject, public genericinterface::Service
   signals:
     void outputText(QString);
 
-  private:  
+  protected:
     genericinterface::GenericInterface* _gi;
-    Operation* _operation;
+    GenericOperation* _operation;
     QMenu* _menu;
     QAction* _action;
+
 };
 
 #endif
