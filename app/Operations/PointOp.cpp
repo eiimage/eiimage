@@ -228,6 +228,6 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     return result;
 }
 
-bool PointOp::needCurrentImg() {
+bool PointOp::needCurrentImg() const {
     return true;
 }

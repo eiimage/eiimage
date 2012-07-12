@@ -32,7 +32,7 @@ FlipOp::FlipOp(Direction dir)
 {
 }
 
-bool FlipOp::needCurrentImg() {
+bool FlipOp::needCurrentImg() const {
     return true;
 }
 

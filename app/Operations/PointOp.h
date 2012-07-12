@@ -38,7 +38,7 @@ class PointOp : public Operation {
 
     std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
-    bool needCurrentImg();
+    bool needCurrentImg() const;
 
   private:
     typedef imagein::Image::depth_t depth_t;

@@ -34,7 +34,7 @@ RotateOp::RotateOp() : Operation("Rotation")
 {
 }
 
-bool RotateOp::needCurrentImg() {
+bool RotateOp::needCurrentImg() const {
     return true;
 }
 

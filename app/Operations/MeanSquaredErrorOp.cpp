@@ -35,7 +35,7 @@ MeanSquaredErrorOp::MeanSquaredErrorOp() : Operation(Tools::tr("Mean squared err
 {
 }
 
-bool MeanSquaredErrorOp::needCurrentImg() {
+bool MeanSquaredErrorOp::needCurrentImg() const {
     return true;
 }
 

@@ -13,7 +13,7 @@ using namespace imagein::algorithm;
 ThresholdOp::ThresholdOp() : Operation("ThresholdOp") {
 }
 
-bool ThresholdOp::needCurrentImg() {
+bool ThresholdOp::needCurrentImg() const {
     return true;
 }
 

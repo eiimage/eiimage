@@ -35,7 +35,7 @@ public:
 
     static QString tr(const char* str) { return QApplication::tr(str); }
 
-    bool needCurrentImg();
+    bool needCurrentImg() const;
 };
 
 #endif // SPLITCOLOROP_H

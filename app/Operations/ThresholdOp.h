@@ -44,7 +44,7 @@ class ThresholdOp : public Operation {
 
     std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
-    bool needCurrentImg();
+    bool needCurrentImg() const;
 
     static inline QString tr(const char* str) { return QCoreApplication::tr(str); }
 

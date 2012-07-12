@@ -30,7 +30,7 @@ public:
 
     std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
-    bool needCurrentImg();
+    bool needCurrentImg() const;
 };
 
 #endif // SIGNALTONOISEOP_H

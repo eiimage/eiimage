@@ -36,7 +36,7 @@ CenterOp::CenterOp() : Operation(tr("Center").toStdString())
 
 }
 
-bool CenterOp::needCurrentImg() {
+bool CenterOp::needCurrentImg() const {
     return true;
 }
 

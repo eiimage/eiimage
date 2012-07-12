@@ -35,7 +35,7 @@ SignalToNoiseOp::SignalToNoiseOp() : Operation(Tools::tr("Signal-to-noise ratio"
 
 }
 
-bool SignalToNoiseOp::needCurrentImg() {
+bool SignalToNoiseOp::needCurrentImg() const {
     return true;
 }
 

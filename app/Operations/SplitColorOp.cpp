@@ -26,7 +26,7 @@
 using namespace std;
 using namespace imagein;
 
-bool SplitColorOp::needCurrentImg() {
+bool SplitColorOp::needCurrentImg() const {
     return true;
 }
 

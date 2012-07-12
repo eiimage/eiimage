@@ -14,7 +14,7 @@ using namespace imagein;
 TranslateOp::TranslateOp() : Operation("Translation") {
 }
 
-bool TranslateOp::needCurrentImg() {
+bool TranslateOp::needCurrentImg() const {
     return true;
 }
 

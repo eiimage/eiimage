@@ -40,7 +40,7 @@ CombineColorOp::CombineColorOp() : Operation(Tools::tr("Combine color planes").t
 {
 }
 
-bool CombineColorOp::needCurrentImg() {
+bool CombineColorOp::needCurrentImg() const {
     return false;
 }
 
