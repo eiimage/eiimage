@@ -14,6 +14,7 @@
 
 #include "ThresholdDialog.h"
 #include "Algorithm/Otsu.h"
+#include <qwt_plot.h>
 
 using namespace imagein;
 using namespace imagein::algorithm;
