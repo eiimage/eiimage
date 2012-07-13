@@ -23,16 +23,30 @@
 #include <GenericInterface.h>
 
 #include <iostream>
+#include <QLibraryInfo>
+
+#include "BuiltinOpSet.h"
 
 #include "Services/PluginManager.h"
 #include "Services/EIImageService.h"
+
+#include "Operations/PointOp.h"
+#include "Operations/ThresholdOp.h"
+#include "Operations/TranslateOp.h"
+#include "Operations/RotateOp.h"
+#include "Operations/FlipOp.h"
+#include "Operations/CenterOp.h"
+#include "Operations/SplitColorOp.h"
+#include "Operations/CombineColorOp.h"
+#include "Operations/SignalToNoiseOp.h"
+#include "Operations/MeanSquaredErrorOp.h"
+#include "Operations/FFTOp.h"
 
 using namespace genericinterface;
 using namespace std;
 
 int main(int argc, char** argv)
 {
-  qDebug("HW!");
   QApplication app(argc, argv);
   app.setOrganizationName("insa");
   app.setApplicationName("eiimage");

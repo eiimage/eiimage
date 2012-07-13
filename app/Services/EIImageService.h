@@ -28,8 +28,9 @@
 #include "OpSetService.h"
 
 #include "../Widgets/OperationBar.h"
+#include "Services/WindowService.h"
 
-class EIImageService : public QObject, public genericinterface::Service
+class EIImageService : public genericinterface::WindowService
 {
   Q_OBJECT
   public:

@@ -40,7 +40,7 @@ class RotateOp : public Operation
 public:
     RotateOp();
 
-    std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
 };

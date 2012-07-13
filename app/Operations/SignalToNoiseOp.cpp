@@ -39,9 +39,7 @@ bool SignalToNoiseOp::needCurrentImg() const {
     return true;
 }
 
-std::vector<QWidget*> SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
-
-    vector<QWidget*> result;
+void SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(dialog->tr("Compare to..."));
@@ -62,7 +60,7 @@ std::vector<QWidget*> SignalToNoiseOp::operator()(const imagein::Image* image, c
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) {
-        return result;
+        return;
     }
 
     const Image* sndImg = imageBox->currentImage();
@@ -91,10 +89,6 @@ std::vector<QWidget*> SignalToNoiseOp::operator()(const imagein::Image* image, c
         text = text.arg(Tools::tr("+inf"));
     }
 
-    result.push_back(new QLabel(text));
-
-    return result;
-
-
+    this->outText(text.toStdString());
 }
 

@@ -17,8 +17,7 @@ bool ThresholdOp::needCurrentImg() const {
     return true;
 }
 
-std::vector<QWidget*> ThresholdOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
-    vector<QWidget*> result;
+void ThresholdOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
     
     const GrayscaleImage* img = dynamic_cast<const GrayscaleImage*>(image);
     bool convert = (img == NULL);
@@ -31,7 +30,7 @@ std::vector<QWidget*> ThresholdOp::operator()(const imagein::Image* image, const
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     
     if(code!=QDialog::Accepted) {
-        return result;
+        return;
     }
 
     Binarization_t<GrayscaleImage::depth_t>* algo;
@@ -43,7 +42,5 @@ std::vector<QWidget*> ThresholdOp::operator()(const imagein::Image* image, const
     }
 
     GrayscaleImage* resImg = algo->operator()(img);
-    result.push_back(new ImgWidget(resImg, ""));
-
-    return result;
+    this->outImage(resImg);
 }

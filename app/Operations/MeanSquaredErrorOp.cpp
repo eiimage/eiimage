@@ -39,9 +39,7 @@ bool MeanSquaredErrorOp::needCurrentImg() const {
     return true;
 }
 
-std::vector<QWidget*> MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
-
-    vector<QWidget*> result;
+void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(dialog->tr("Compare to..."));
@@ -62,7 +60,7 @@ std::vector<QWidget*> MeanSquaredErrorOp::operator()(const imagein::Image* image
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) {
-        return result;
+        return;
     }
 
     const Image* sndImg = imageBox->currentImage();
@@ -87,9 +85,6 @@ std::vector<QWidget*> MeanSquaredErrorOp::operator()(const imagein::Image* image
     text = text.arg(mse, 0, 'f', 2);
     text = text.arg(me, 0, 'f', 2);
 
-    result.push_back(new QLabel(text));
-
-    return result;
-
+    this->outText(text.toStdString());
 
 }

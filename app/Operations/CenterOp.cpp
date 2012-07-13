@@ -40,8 +40,7 @@ bool CenterOp::needCurrentImg() const {
     return true;
 }
 
-std::vector<QWidget*> CenterOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
-    vector<QWidget*> result;
+void CenterOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
 
     Image* resImg = new Image(image->getWidth()-image->getWidth()%2, image->getHeight()-image->getHeight()%2, image->getNbChannels());
 
@@ -72,8 +71,6 @@ std::vector<QWidget*> CenterOp::operator()(const imagein::Image* image, const st
         }
     }
 
-    result.push_back(new ImgWidget(resImg, QString(" - centered").toStdString()));
-
-    return result;
+    this->outImage(resImg, " - centered");
 }
 

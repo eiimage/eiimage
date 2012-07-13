@@ -22,6 +22,7 @@
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <ImgWidget.h>
+#include "EIImageService.h"
 
 #include <QMessageBox>
 #include <QLibrary>
@@ -73,36 +74,36 @@ void OperationService::operation() {
         wndList.insert(pair<const ImageWindow*, string>(*it, (*it)->windowTitle().toStdString()));
     }
 
-    vector<QWidget*> result = _operation->operator()(curImgWnd, wndList);
+    _operation->operator()(dynamic_cast<EIImageService*>(ws));
     
-    for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
-        QWidget* widget = *it;
-        QLabel* twdgt = dynamic_cast<QLabel*>(widget);
-        if((typeid(*widget) == typeid(ImgWidget)) || (typeid(*widget) == typeid(DoubleImgWidget))) {
-            QString title = _operation->needCurrentImg() ? (curImgWnd->windowTitle() + " - ") : "";
-            ImageWindow* siw;
-            if(typeid(*widget)==typeid(ImgWidget)) {
-                ImgWidget* w = dynamic_cast<ImgWidget*>(widget);
-                title += w->name.c_str();
-                siw = new StandardImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), _gi, w->img);
-            }
-            else {
-                DoubleImgWidget* w = dynamic_cast<DoubleImgWidget*>(widget);
-                title += w->name.c_str();
-                siw = new DoubleImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), _gi, w->img, w->normalize, w->logScale);
-            }
-            NodeId id = _operation->needCurrentImg() ? ws->getNodeId(curImgWnd) : NodeId(siw->getDisplayImage());
-            ws->addImage(id, siw);
-            siw->setWindowTitle(title);
-        }
-        else if(twdgt != NULL) {
-            emit outputText(twdgt->text());
-        }
-        else {
-            ws->addWidget(ws->getNodeId(curImgWnd), widget);
-        }
+//    for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
+//        QWidget* widget = *it;
+//        QLabel* twdgt = dynamic_cast<QLabel*>(widget);
+//        if((typeid(*widget) == typeid(ImgWidget)) || (typeid(*widget) == typeid(DoubleImgWidget))) {
+//            QString title = _operation->needCurrentImg() ? (curImgWnd->windowTitle() + " - ") : "";
+//            ImageWindow* siw;
+//            if(typeid(*widget)==typeid(ImgWidget)) {
+//                ImgWidget* w = dynamic_cast<ImgWidget*>(widget);
+//                title += w->name.c_str();
+//                siw = new StandardImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), w->img);
+//            }
+//            else {
+//                DoubleImgWidget* w = dynamic_cast<DoubleImgWidget*>(widget);
+//                title += w->name.c_str();
+//                siw = new DoubleImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), w->img, w->normalize, w->logScale);
+//            }
+//            NodeId id = _operation->needCurrentImg() ? ws->getNodeId(curImgWnd) : NodeId(siw->getDisplayImage());
+//            ws->addImage(id, siw);
+//            siw->setWindowTitle(title);
+//        }
+//        else if(twdgt != NULL) {
+//            emit outputText(twdgt->text());
+//        }
+//        else {
+//            ws->addWidget(ws->getNodeId(curImgWnd), widget);
+//        }
         
-    }
+//    }
     
     
 }

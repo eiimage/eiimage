@@ -34,9 +34,7 @@ SplitColorOp::SplitColorOp() : Operation(tr("Split color planes").toStdString())
 {
 }
 
-std::vector<QWidget*>SplitColorOp:: operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
-
-    vector<QWidget*> result;
+void SplitColorOp:: operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
 
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
         GrayscaleImage* resImg = new GrayscaleImage(image->getWidth(), image->getHeight());
@@ -47,10 +45,8 @@ std::vector<QWidget*>SplitColorOp:: operator()(const imagein::Image* image, cons
         }
         QString name(" - ");
         name += Tools::colorName(c, image->getNbChannels());
-        result.push_back(new ImgWidget(resImg, name.toStdString()));
+        this->outImage(resImg, name.toStdString());
     }
-
-    return result;
 
 }
 

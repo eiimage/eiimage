@@ -24,13 +24,14 @@
 using namespace genericinterface;
 using namespace std;
 
-EIImageService::EIImageService(GenericInterface* gi) {
+EIImageService::EIImageService(GenericInterface* gi) : WindowService(Qt::LeftDockWidgetArea) {
     _gi = gi;
     _operationBar = new OperationBar();
 }
 
 void EIImageService::display(GenericInterface* gi)
 {
+    WindowService::display(gi);
 //    QDockWidget* _operationDock = new QDockWidget(tr("Operations"), gi);
 //    _operationDock->setWidget(_operationBar);
 //    gi->addDockWidget(Qt::LeftDockWidgetArea, _operationDock);
@@ -48,8 +49,9 @@ void EIImageService::display(GenericInterface* gi)
     _statusEdit->hide();
 }
 
-void EIImageService::connect(GenericInterface*)
+void EIImageService::connect(GenericInterface* gi)
 {
+    WindowService::connect(gi);
 }
 
 void EIImageService::addOpSet(OpSet* opSet) {

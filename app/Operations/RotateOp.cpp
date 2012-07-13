@@ -52,8 +52,8 @@ inline Point rotatePoint(Point toRotate, double sin, double cos)
     return returnval;
 }
 
-std::vector<QWidget*> RotateOp::operator()(const Image* img, const map<const Image*, string>& imgList) {
-    vector<QWidget*> result;
+void RotateOp::operator()(const Image* img, const map<const Image*, string>& imgList) {
+
     QString imgName(imgList.find(img)->second.c_str());
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(QString(dialog->tr("Rotating %1")).arg(imgName));
@@ -85,7 +85,7 @@ std::vector<QWidget*> RotateOp::operator()(const Image* img, const map<const Ima
 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
-    if(code!=QDialog::Accepted) return result;
+    if(code!=QDialog::Accepted) return;
 
     double angle = angleSpinBox->value() * acos(0)/90;
     Image::depth_t fillValue = valueSpinBox->value();
@@ -148,7 +148,6 @@ std::vector<QWidget*> RotateOp::operator()(const Image* img, const map<const Ima
         }
     }
 
-    result.push_back(new ImgWidget(resImg, QString(" rotated %1").arg(angleSpinBox->value()).toStdString()));
-
-    return result;
+    QString name = QString("rotated %1").arg(angleSpinBox->value());
+    this->outImage(resImg, name.toStdString());
 }

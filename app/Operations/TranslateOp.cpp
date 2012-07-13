@@ -19,7 +19,7 @@ bool TranslateOp::needCurrentImg() const {
 }
 
 
-std::vector<QWidget*> TranslateOp::operator()(const Image* img, const map<const Image*, string>& imgList) {
+void TranslateOp::operator()(const Image* img, const map<const Image*, string>& imgList) {
     vector<QWidget*> result;
     QString imgName(imgList.find(img)->second.c_str());
     QDialog* dialog = new QDialog();
@@ -53,7 +53,7 @@ std::vector<QWidget*> TranslateOp::operator()(const Image* img, const map<const 
 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
-    if(code!=QDialog::Accepted) return result;
+    if(code!=QDialog::Accepted) return;
 
     int dx = xSpinBox->value();
     int dy = ySpinBox->value();
@@ -84,7 +84,7 @@ std::vector<QWidget*> TranslateOp::operator()(const Image* img, const map<const 
         }
     }
 
-    result.push_back(new ImgWidget(resImg, QString("Translated %1:%2").arg(dx).arg(dy).toStdString()));
-
-    return result;
+    QString name = QString("Translated %1:%2").arg(dx).arg(dy);
+    this->outImage(resImg, name.toStdString());
+    return;
 }

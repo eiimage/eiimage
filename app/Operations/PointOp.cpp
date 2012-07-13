@@ -68,8 +68,8 @@ PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     return new ImgIdent();
 }
 
-vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
-    vector<QWidget*> result;
+void PointOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
+
     QStringList pixOperators, imgOperators;
     pixOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^" << "<<" << ">>";
     imgOperators << "" << "+" << "-" << "&" << "|" << "^";
@@ -161,7 +161,7 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     
     if(code!=QDialog::Accepted) {
-        return result;
+        return;
     }
 
     PixelOp** pixelOps = new PixelOp*[nChannel];
@@ -223,9 +223,8 @@ vector<QWidget*> PointOp::operator()(const imagein::Image* image, const std::map
             }
         }
     }
-    result.push_back(new ImgWidget(resImg, ""));
-        
-    return result;
+
+    this->outImage(resImg);
 }
 
 bool PointOp::needCurrentImg() const {

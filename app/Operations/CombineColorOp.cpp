@@ -44,9 +44,7 @@ bool CombineColorOp::needCurrentImg() const {
     return false;
 }
 
-std::vector<QWidget*> CombineColorOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
-
-    vector<QWidget*> result;
+void CombineColorOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(dialog->tr("Parameters"));
@@ -72,7 +70,7 @@ std::vector<QWidget*> CombineColorOp::operator()(const imagein::Image*, const st
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) {
-        return result;
+        return;
     }
 
     GrayscaleImage* channels[nChannel];
@@ -93,9 +91,5 @@ std::vector<QWidget*> CombineColorOp::operator()(const imagein::Image*, const st
             }
         }
     }
-    result.push_back(new ImgWidget(resImg, Tools::tr("Reconstructed color image").toStdString()));
-
-    return result;
-
-
+    this->outImage(resImg, "Reconstructed color image");
 }

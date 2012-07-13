@@ -36,10 +36,9 @@ bool FlipOp::needCurrentImg() const {
     return true;
 }
 
-std::vector<QWidget*> FlipOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
-    vector<QWidget*> result;
+void FlipOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
 
-   Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
+    Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
 
     if(_dir == Horizontal) {
        for(unsigned int c = 0; c < resImg->getNbChannels(); ++c) {
@@ -63,8 +62,6 @@ std::vector<QWidget*> FlipOp::operator()(const imagein::Image* image, const std:
     }
     QString name = QString(tr(" -  flipped %1")).arg(_dir == Horizontal ? tr("horizontal") : tr("vertical"));
 
-    result.push_back(new ImgWidget(resImg, name.toStdString()));
-
-    return result;
+    this->outImage(resImg, name.toStdString());
 }
 
