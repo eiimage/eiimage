@@ -27,30 +27,40 @@
 #include "Image.h"
 
 class QWidget;
+class EIImageService;
 namespace genericinterface {
     class ImageWindow;
 }
 
 class GenericOperation {
   public:
-    GenericOperation(std::string name) : _name(name) {}
+    GenericOperation(std::string name) : _name(name), _ws(NULL) {}
 
     inline std::string getName() { return _name; }
 
-    virtual std::vector<QWidget*> operator()(const genericinterface::ImageWindow* currentWnd, std::map<const genericinterface::ImageWindow*, std::string>&) = 0;
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&) = 0;
+    virtual void operator()(EIImageService*);
 
     virtual bool needCurrentImg() const = 0;
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const = 0;
 
+
+
   protected:
+    void outImage(imagein::Image*, std::string title = "");
+    void outDoubleImage(imagein::Image_t<double>*, std::string title = "", bool norm=false, bool log=false);
+    void outText(std::string);
     std::string _name;
+    EIImageService* _ws;
+  private:
+    void outImgWnd(genericinterface::ImageWindow* imgWnd, std::string title);
 };
 
 class Operation : public GenericOperation {
   public:
     Operation(std::string name) : GenericOperation(name) {}
-    virtual std::vector<QWidget*> operator()(const genericinterface::ImageWindow* currentWnd, std::map<const genericinterface::ImageWindow*, std::string>&);
-    virtual std::vector<QWidget*> operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) = 0;
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
+    virtual void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) = 0;
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;
   protected:
     imagein::Image* _currentImg;
@@ -59,8 +69,8 @@ class Operation : public GenericOperation {
 class DoubleOperation : public GenericOperation {
   public:
     DoubleOperation(std::string name) : GenericOperation(name) {}
-    virtual std::vector<QWidget*> operator()(const genericinterface::ImageWindow* currentWnd, std::map<const genericinterface::ImageWindow*, std::string>&);
-    virtual std::vector<QWidget*> operator()(const imagein::Image_t<double>*, const std::map<const imagein::Image_t<double>*, std::string>&) = 0;
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
+    virtual void operator()(const imagein::Image_t<double>*, const std::map<const imagein::Image_t<double>*, std::string>&) = 0;
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;
   protected:
     imagein::Image_t<double>* _currentImg;

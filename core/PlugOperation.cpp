@@ -44,11 +44,10 @@ void PlugOperation::addOutput(const Output& output) {
 }
 
 
-std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const std::map<const Image*, std::string>&) {
-    vector<QWidget*> result;
+void PlugOperation::operator()(const Image* currentImg, const std::map<const Image*, std::string>&) {
     
     if(this->needCurrentImg()) {
-        if(currentImg==NULL) return result;
+        if(currentImg==NULL) return;
         *_currentImg = *currentImg;
     }
     
@@ -72,7 +71,7 @@ std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const s
         cout << code << endl;
         
         if(code!=QDialog::Accepted) {
-            return result;
+            return;
         }
         
         for(vector<Input*>::iterator it = _inputs.begin(); it < _inputs.end(); ++it) {
@@ -85,7 +84,6 @@ std::vector<QWidget*> PlugOperation::operator()(const Image* currentImg, const s
     this->operation();
     
     for(vector<Output*>::iterator it = _outputs.begin(); it < _outputs.end(); ++it) {
-        result.push_back((*it)->getWidget());
+//        result.push_back((*it)->getWidget());
     }
-    return result;
 }
