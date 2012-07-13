@@ -26,19 +26,34 @@
 
 #include <Image.h>
 
-class ImageListBox : public QComboBox
+template<typename D>
+class ImageListBox_t : public QComboBox
 {
-    Q_OBJECT
 public:
-    explicit ImageListBox(QWidget *parent, const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    explicit ImageListBox_t(QWidget *parent, const imagein::Image_t<D>* img, const std::map<const imagein::Image_t<D>*, std::string>& imgList)
+        : QComboBox(parent)
+    {
+        int i = 0, index = 0;
+        for(typename std::map<const imagein::Image_t<D>*, std::string>::const_iterator it = imgList.begin(); it != imgList.end(); ++it) {
+            _images.insert(std::pair<std::string, const imagein::Image_t<D>*>(it->second, it->first));
+            this->insertItem(i, QString(it->second.c_str()));
+            if(it->first == img) index = i;
+        }
+        this->setCurrentIndex(index);
+    }
 
-    const imagein::Image* currentImage();
-signals:
-    
-public slots:
-
+    const imagein::Image_t<D>* currentImage() {
+        std::string name = this->currentText().toStdString();
+        typename std::map<std::string, const imagein::Image_t<D>*>::iterator it = _images.find(name);
+        if(it != _images.end()) {
+            return _images[name];
+        }
+        return NULL;
+    }
 protected:
-    std::map<std::string, const imagein::Image*> _images;
+    std::map<std::string, const imagein::Image_t<D>*> _images;
 };
+
+typedef ImageListBox_t<imagein::Image::depth_t> ImageListBox;
 
 #endif // IMAGELISTBOX_H

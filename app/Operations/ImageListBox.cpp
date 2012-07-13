@@ -22,23 +22,3 @@
 using namespace std;
 using namespace imagein;
 
-ImageListBox::ImageListBox(QWidget *parent, const Image* img, const map<const Image*, string>& imgList) :
-    QComboBox(parent)
-{
-    int i = 0, index = 0;
-    for(map<const Image*, string>::const_iterator it = imgList.begin(); it != imgList.end(); ++it) {
-        _images.insert(pair<string, const Image*>(it->second, it->first));
-        this->insertItem(i, QString(it->second.c_str()));
-        if(it->first == img) index = i;
-    }
-    this->setCurrentIndex(index);
-}
-
-const Image* ImageListBox::currentImage() {
-    string name = this->currentText().toStdString();
-    map<string, const Image*>::iterator it = _images.find(name);
-    if(it != _images.end()) {
-        return _images[name];
-    }
-    return NULL;
-}

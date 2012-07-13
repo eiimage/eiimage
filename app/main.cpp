@@ -41,6 +41,7 @@
 #include "Operations/SignalToNoiseOp.h"
 #include "Operations/MeanSquaredErrorOp.h"
 #include "Operations/FFTOp.h"
+#include "Operations/IFFTOp.h"
 
 using namespace genericinterface;
 using namespace std;

@@ -34,7 +34,7 @@ namespace genericinterface {
 
 class GenericOperation {
   public:
-    GenericOperation(std::string name) : _name(name), _ws(NULL) {}
+    GenericOperation(std::string name) : _name(name), _ws(NULL), _curImgWnd(NULL) {}
 
     inline std::string getName() { return _name; }
 
@@ -52,6 +52,7 @@ class GenericOperation {
     void outText(std::string);
     std::string _name;
     EIImageService* _ws;
+    genericinterface::ImageWindow* _curImgWnd;
   private:
     void outImgWnd(genericinterface::ImageWindow* imgWnd, std::string title);
 };
