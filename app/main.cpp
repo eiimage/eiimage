@@ -70,7 +70,9 @@ int main(int argc, char** argv)
   EIImageService* eiimageService = new EIImageService(&gi);
 
   gi.addService(pluginManager);
-  gi.addService(eiimageService);
+//  gi.addService(eiimageService);
+  gi.changeService(GenericInterface::WINDOW_SERVICE, eiimageService);
+//  gi.addService(GenericInterface::WINDOW_SERVICE, eiimageService);
 
   QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
   QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
