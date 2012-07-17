@@ -26,11 +26,12 @@
 #include "ImgWidget.h"
 
 #include "RotateOp.h"
+#include "../Tools.h"
 
 using namespace std;
 using namespace imagein;
 
-RotateOp::RotateOp() : Operation("Rotation")
+RotateOp::RotateOp() : Operation(Tools::tr("Rotation").toStdString())
 {
 }
 

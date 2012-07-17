@@ -41,7 +41,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-PointOp::PointOp() : Operation("Pixel operations") {
+PointOp::PointOp() : GenericOperation(Tools::tr("Pixel operations").toStdString()) {
     
 }
 

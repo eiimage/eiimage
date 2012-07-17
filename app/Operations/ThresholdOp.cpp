@@ -5,12 +5,12 @@
 
 #include "ThresholdOp.h"
 #include "ThresholdDialog.h"
-
+#include "../Tools.h"
 using namespace std     ;
 using namespace imagein;
 using namespace imagein::algorithm;
 
-ThresholdOp::ThresholdOp() : Operation("ThresholdOp") {
+ThresholdOp::ThresholdOp() : Operation(Tools::tr("Thresholding").toStdString()) {
 }
 
 bool ThresholdOp::needCurrentImg() const {

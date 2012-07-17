@@ -7,11 +7,11 @@
 #include "ImgWidget.h"
 
 #include "TranslateOp.h"
-
+#include "../Tools.h"
 using namespace std;
 using namespace imagein;
 
-TranslateOp::TranslateOp() : Operation("Translation") {
+TranslateOp::TranslateOp() : Operation(Tools::tr("Translation").toStdString()) {
 }
 
 bool TranslateOp::needCurrentImg() const {

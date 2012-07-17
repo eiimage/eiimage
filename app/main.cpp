@@ -65,7 +65,11 @@ int main(int argc, char** argv)
   giTranslator.load("genericinterface_fr");
   app.installTranslator(&giTranslator);
 
-  GenericInterface gi("ImageEII", Qt::LeftDockWidgetArea);
+  QTranslator eiiTranslator;
+  eiiTranslator.load("eiimage_fr");
+  app.installTranslator(&eiiTranslator);
+
+  GenericInterface gi("eiimage", Qt::LeftDockWidgetArea);
 
   PluginManager* pluginManager = new PluginManager(&gi);
   EIImageService* eiimageService = new EIImageService(&gi);
