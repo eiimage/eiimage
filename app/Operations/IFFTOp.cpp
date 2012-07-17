@@ -70,8 +70,8 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
     unsigned int channels = min(magnitudeImg->getNbChannels(), phaseImg->getNbChannels());
 
     Image* resImg = new Image(width, height, channels);
-//    Image_t<double>* realImg = new Image_t<double>(width, height, image->getNbChannels());
-//    Image_t<double>* imagImg = new Image_t<double>(width, height, image->getNbChannels());
+//    Image_t<double>* realImg = new Image_t<double>(width, height, channels);
+//    Image_t<double>* imagImg = new Image_t<double>(width, height, channels);
 
     complex<double>** data = new complex<double>*[width];
     for(unsigned int i = 0; i < width; ++i) data[i] = new complex<double>[height];
@@ -94,14 +94,18 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
         FFT2D(data, width, height, -1);
         for(unsigned int j = 0; j < height; ++j) {
             for(unsigned int i = 0; i < width; ++i) {
-//                const double real = data[i][j].real();
-//                const double imag = data[i][j].imag();
-                Image::depth_t value = floor(data[i][j].real()+0.5);
-                value = min(255, max(0, value));
+                const double real = data[i][j].real();
+                const double imag = data[i][j].imag();
+                double value = floor(data[i][j].real()+0.5);
+                value = min(255.0, max(0.0, value));
                 resImg->setPixel(i, j, c, value);
+//                realImg->setPixel(i, j, c, real);
+//                imagImg->setPixel(i, j, c, imag);
             }
         }
     }
 
     this->outImage(resImg, "DFT-reconstructed image");
+//    this->outDoubleImage(realImg, "DFT-reconstructed image (real)");
+//    this->outDoubleImage(imagImg, "DFT-reconstructed image (imag)");
 }

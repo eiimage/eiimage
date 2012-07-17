@@ -59,6 +59,7 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
         }
 
         FFT2D(data, width, height, 1);
+
         for(unsigned int j = 0; j < height; ++j) {
             for(unsigned int i = 0; i < width; ++i) {
                 const double real = data[i][j].real();
@@ -77,8 +78,10 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
         }
     }
 
-    this->outDoubleImage(phaseImg, " - FFT (phase)", true, false);
-    this->outDoubleImage(magnitudeImg, " - FFT (magnitude)", true, true);
+    this->outDoubleImage(phaseImg, "FFT (phase)", true, false);
+    this->outDoubleImage(magnitudeImg, "FFT (magnitude)", true, true);
+//    this->outDoubleImage(realImg, "FFT (real)", true, true);
+//    this->outDoubleImage(imagImg, "FFT (imag)", true, true);
 //    result.push_back(new DoubleImgWidget(phaseImg, " - FFT : phase", true, false));
 //    result.push_back(new DoubleImgWidget(magnitudeImg, " - FFT : magnitude", true, true));
 //    result.push_back(new DoubleImgWidget(realImg, " - FFT : real", true, true));
