@@ -30,15 +30,16 @@
 
 class QWidget;
 
-class PointOp : public Operation {
+class PointOp : public GenericOperation {
 
   public:
 
     PointOp();
 
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
 
     bool needCurrentImg() const;
+    virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;
 
   private:
     typedef imagein::Image::depth_t depth_t;
@@ -58,9 +59,22 @@ class PointOp : public Operation {
         virtual intmax_t op(depth_t pixel) = 0;
         static PixelOp* fromString(QString op, QString expr);
     };
-    
+    struct DoublePixelOp {
+        DoublePixelOp(double value_ = 0) : value(value_) {}
+        virtual double operator()(double pixel) {
+            return this->op(pixel);
+        }
+        virtual double op(double pixel) = 0;
+        static DoublePixelOp* fromString(QString op, QString expr);
+        double value;
+    };
+
     struct PixIdent : PixelOp {
         intmax_t op(depth_t pixel) { return pixel; }
+    };
+
+    struct DoublePixIdent : DoublePixelOp {
+        double op(double pixel) { return pixel; }
     };
 
     template<typename T>
@@ -73,10 +87,18 @@ class PointOp : public Operation {
         PixAdd(int value_) : PixOp_t(value_) {}
         intmax_t op(depth_t pixel) { return pixel + value; }
     };
+    struct DoublePixAdd : DoublePixelOp {
+        DoublePixAdd(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return pixel + value; }
+    };
 
     struct PixMul : PixOp_t<double> {
         PixMul(double value_) : PixOp_t(value_) {}
-        intmax_t op(depth_t pixel) { return pixel * value; }
+        intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
+    };
+    struct DoublePixMul : DoublePixelOp {
+        DoublePixMul(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return pixel * value; }
     };
 
     struct PixAnd : PixOp_t<depth_t> {
@@ -111,19 +133,42 @@ class PointOp : public Operation {
         virtual intmax_t op(depth_t pixel1, depth_t pixel2) = 0;
         static ImageOp* fromString(QString op);
     };
-    
+
+    struct DoubleImageOp {
+        virtual double operator()(double pixel1, double pixel2) {
+            return this->op(pixel1, pixel2);
+        }
+        virtual double op(double pixel1, double pixel2) = 0;
+        static DoubleImageOp* fromString(QString op);
+    };
+
     struct ImgIdent : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1; } 
     };
-   
+    struct DoubleImgIdent : DoubleImageOp {
+        double op(double pix1, double pix2) { return pix1; }
+    };
+
     struct ImgAdd : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 + pix2; } 
     };
-    
+    struct DoubleImgAdd : DoubleImageOp {
+        double op(double pix1, double pix2) { return pix1 + pix2; }
+    };
+
     struct ImgSub : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 - pix2; } 
     };
-    
+    struct DoubleImgSub : DoubleImageOp {
+        double op(double pix1, double pix2) { return pix1 - pix2; }
+    };
+    struct DoubleImgMul : DoubleImageOp {
+        double op(double pix1, double pix2) { return pix1 * pix2; }
+    };
+    struct DoubleImgDiv : DoubleImageOp {
+        double op(double pix1, double pix2) { return pix1 / pix2; }
+    };
+
     struct ImgAnd : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 & pix2; } 
     };
