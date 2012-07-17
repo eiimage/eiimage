@@ -46,7 +46,7 @@ class PlugOperation : public Operation {
   
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
     
-    inline bool needCurrentImg() { return _needCurrentImg; }
+    virtual bool needCurrentImg() const { return _needCurrentImg; }
     
   protected:
     virtual void operation() = 0;
