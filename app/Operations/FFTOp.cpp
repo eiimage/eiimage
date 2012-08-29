@@ -53,7 +53,7 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
             }
         }
         for(unsigned int j = image->getHeight(); j < height; ++j) {
-            for(unsigned int i = image->getWidth(); i < height; ++i) {
+            for(unsigned int i = image->getWidth(); i < width; ++i) {
                 data[i][j] = 0;
             }
         }
