@@ -38,15 +38,15 @@ using namespace imagein;
 class Thresholding : public PlugOperation {
   public:
     Thresholding() : PlugOperation("Thresholding") {
-        this->addParam(CurrentImg(), &Thresholding::img);
-        this->addParam(IntParam("Entier", 0, 255, 127), &Thresholding::threshold);
+        addParam(CurrentImg(), &Thresholding::img);
+        addParam(IntParam("Entier", 0, 255, 127), &Thresholding::threshold);
     }
     
     void operation() {
         algorithm::Binarization_t<depth_default_t> thresholding(threshold);
         GrayscaleImage* grayImg = imagein::Converter<GrayscaleImage>::convert(img);
         GrayscaleImage* result = thresholding(grayImg);
-        this->addOutput(ImgOutput("", *result));
+        outImage(result);
     }
   private:
     int threshold;
@@ -63,7 +63,7 @@ class Otsu : public PlugOperation {
         algorithm::Otsu_t<depth_default_t> otsu;
         GrayscaleImage* grayImg = imagein::Converter<GrayscaleImage>::convert(img);
         GrayscaleImage* result = otsu(grayImg);
-        this->addOutput(ImgOutput("", *result));
+        outImage(result);
     }
   private:
     Image img;
@@ -78,7 +78,8 @@ class Dithering : public PlugOperation {
     void operation() {
         algorithm::Dithering_t<depth_default_t> dithering;
         Image* result = dithering(&img);
-        this->addOutput(ImgOutput("", *result));
+        this->outImage(result);
+        this->outText("test");
     }
   private:
     Image img;
