@@ -103,8 +103,8 @@ void StructElemViewer::draw(int x, int y)
 
       ElemView view = _views.at(i);
 
-      for(int j = 0; j < _col; j++) {
-        for(int i = 0; i < _row; i++) {
+      for(unsigned int j = 0; j < _col; j++) {
+        for(unsigned int i = 0; i < _row; i++) {
 
             QGraphicsRectItem& r = at(i, j);
 
