@@ -1,0 +1,114 @@
+/*
+ * Copyright 2011-2012 INSA Rennes
+ *
+ * This file is part of EIImage.
+ *
+ * EIImage is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EIImage is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "QuantificationDialog.h"
+#include <QDialog>
+#include <QFormLayout>
+#include <QComboBox>
+#include <QSpinBox>
+#include <QDialogButtonBox>
+#include <GrayscaleImage.h>
+#include <QGroupBox>
+#include <QRadioButton>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QFileDialog>
+
+using namespace imagein;
+QuantificationDialog::QuantificationDialog(QWidget *parent) :
+    QDialog(parent)
+{
+    setWindowTitle(QString(tr("Quantification")));
+    setMinimumWidth(180);
+    QFormLayout* layout = new QFormLayout(this);
+    setLayout(layout);
+    _sizeBox = new QSpinBox();
+    _sizeBox->setRange(2, 256);
+    _sizeBox->setValue(2);
+
+
+    _quantBox = new QComboBox();
+    _quantBox->addItem(tr("Linear with centered value"));
+    _quantBox->addItem(tr("Non linear with centered value"));
+    _quantBox->addItem(tr("Non linear with mean value"));
+    _quantBox->addItem(tr("Custom"));
+    layout->insertRow(0, tr("Quantification : "), _quantBox);
+    layout->insertRow(1, tr("Number of values : "), _sizeBox);
+
+    _editorWidget = new QWidget(this);
+    QHBoxLayout* editorLayout = new QHBoxLayout(_editorWidget);
+    _quantWidget = new QuantificationWidget(this);
+    editorLayout->addStretch();
+    editorLayout->addWidget(_quantWidget);
+    editorLayout->addStretch();
+
+    layout->insertRow(2, _editorWidget);
+    _editorWidget->setVisible(false);
+
+    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Open|QDialogButtonBox::Save, Qt::Horizontal, this);
+    layout->insertRow(3, buttonBox);
+//    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    QObject::connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(accept()));
+    QObject::connect(buttonBox->button(QDialogButtonBox::Open), SIGNAL(pressed()), this, SLOT(open()));
+    QObject::connect(buttonBox->button(QDialogButtonBox::Save), SIGNAL(pressed()), this, SLOT(save()));
+    _saveButton = buttonBox->button(QDialogButtonBox::Save);
+//    _saveButton->setEnabled(false);
+    QObject::connect(_sizeBox, SIGNAL(valueChanged(int)), _quantWidget, SLOT(setNbThreshold(int)));
+    QObject::connect(_quantBox, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
+
+}
+
+
+void QuantificationDialog::methodChanged(int method) {
+    _editorWidget->setVisible(method == 3);
+    _saveButton->setEnabled(method==3 || method == 0);
+    this->adjustSize();
+}
+Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c) {
+
+    int size = _sizeBox->value();
+    switch(_quantBox->currentIndex()) {
+        case 1: return Quantification::nonLinearQuant(size, image, c); break;
+        case 2: return Quantification::nonLinearQuantOptimized(size, image, c); break;
+        case 3: return _quantWidget->getQuantif(); break;
+        default: return Quantification::linearQuant(size); break;
+    }
+}
+
+void QuantificationDialog::open() {
+
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"), "", tr("Loi de quantification (*.loi)"));
+    Quantification q(filename.toStdString());
+    _quantWidget->setQuantif(q);
+    _sizeBox->setValue(q.size);
+    _quantBox->setCurrentIndex(3);
+}
+
+void QuantificationDialog::save() {
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save to file"), "", tr("Loi de quantification (*.loi)"));
+    switch(_quantBox->currentIndex()) {
+        case 0: Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString()); break;
+        case 3: _quantWidget->getQuantif().saveAs(filename.toStdString()); break;
+        default: return;
+    }
+}
+
