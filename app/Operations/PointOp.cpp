@@ -34,6 +34,7 @@
 #include "ImageListBox.h"
 #include "Widgets/ImageWidgets/StandardImageWindow.h"
 #include "Widgets/ImageWidgets/DoubleImageWindow.h"
+#include <Converter.h>
 
 #include "../Tools.h"
 
@@ -214,7 +215,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wn
 
     if(dblResult) {
         const DoubleImageWindow* currentDblWnd = dynamic_cast<const DoubleImageWindow*>(currentWnd);
-        const Image_t<double>* image = currentDblWnd ? currentDblWnd->getImage() : NULL;
+        const Image_t<double>* image = currentDblWnd ? Converter<Image_t<double> >::convert(*currentDblWnd->getImage()) : Converter<Image_t<double> >::convert(*currentWnd->getDisplayImage());
         unsigned int maxWidth = image->getWidth();
         unsigned int maxHeight = image->getHeight();
 
@@ -318,7 +319,14 @@ void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wn
             }
         }
 
-        this->outDoubleImage(resImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
+
+        if(currentDblWnd) {
+            this->outDoubleImage(resImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
+        }
+        else {
+            this->outDoubleImage(resImg, "", false, false);
+        }
+        delete image;
     }
     else {
         const Image* image = dynamic_cast<const StandardImageWindow*>(currentWnd)->getImage();
@@ -396,6 +404,6 @@ bool PointOp::needCurrentImg() const {
     return true;
 }
 
-bool PointOp::isValidImgWnd(const genericinterface::ImageWindow*) const {
-    return true;
+bool PointOp::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const {
+    return imgWnd != NULL;
 }
