@@ -30,6 +30,7 @@
 #include "Services/PluginManager.h"
 #include "Services/EIImageService.h"
 
+#include "Operations/TestOp.h"
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
 #include "Operations/TranslateOp.h"
@@ -42,6 +43,26 @@
 #include "Operations/MeanSquaredErrorOp.h"
 #include "Operations/FFTOp.h"
 #include "Operations/IFFTOp.h"
+#include "Operations/RandomImgOp.h"
+#include "Operations/NoiseOp.h"
+#include "Operations/BFlitOp.h"
+#include "Operations/DMMOp.h"
+#include "Operations/PseudoColorOp.h"
+#include "Operations/CroissanceOp.h"
+#include "Operations/ZeroCrossingOp.h"
+#include "Operations/HistogramOp.h"
+#include "Operations/ColorimetryOp.h"
+#include "Operations/SinusSynthesisOp.h"
+#include "Operations/ScalingOp.h"
+#include "Operations/QuantificationOp.h"
+#include "Operations/EntropyOp.h"
+#include "Operations/HuffmanOp.h"
+#include "Operations/RejectionRingOp.h"
+#include "Operations/MICDEncodingOp.h"
+
+
+#include "Services/MorphoMatService.h"
+#include "Services/FilteringService.h"
 
 using namespace genericinterface;
 using namespace std;
@@ -81,6 +102,44 @@ int main(int argc, char** argv)
 
   QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
   QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
+
+
+  BuiltinOpSet* opSet = new BuiltinOpSet("Operations");
+  opSet->addOperation(new QuantificationOp());
+  opSet->addOperation(new PointOp());
+  opSet->addOperation(new ThresholdOp());
+  opSet->addOperation(new TranslateOp());
+  opSet->addOperation(new RotateOp());
+  opSet->addOperation(new FlipOp(FlipOp::Horizontal));
+  opSet->addOperation(new FlipOp(FlipOp::Vertical));
+  opSet->addOperation(new CenterOp());
+  opSet->addOperation(new SplitColorOp());
+  opSet->addOperation(new CombineColorOp());
+  opSet->addOperation(new SignalToNoiseOp());
+  opSet->addOperation(new MeanSquaredErrorOp());
+  opSet->addOperation(new FFTOp());
+  opSet->addOperation(new IFFTOp());
+  opSet->addOperation(new RandomImgOp());
+  opSet->addOperation(new NoiseOp());
+  opSet->addOperation(new BFlitOp());
+  opSet->addOperation(new DMMOp());
+  opSet->addOperation(new TestOp());
+  opSet->addOperation(new PseudoColorOp());
+  opSet->addOperation(new CroissanceOp());
+  opSet->addOperation(new ZeroCrossingOp());
+  opSet->addOperation(new HistogramOp());
+  opSet->addOperation(new ColorimetryOp());
+  opSet->addOperation(new SinusSynthesisOp());
+  opSet->addOperation(new ScalingOp());
+  opSet->addOperation(new EntropyOp());
+  opSet->addOperation(new HuffmanOp());
+  opSet->addOperation(new RejectionRingOp());
+  opSet->addOperation(new MICDEncodingOp());
+
+  eiimageService->addOpSet(opSet);
+
+  gi.addService(new MorphoMatService);
+  gi.addService(new filtrme::FilteringService);
 
   gi.run();
 
