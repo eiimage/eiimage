@@ -97,6 +97,7 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
 void QuantificationDialog::open() {
 
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"), "", tr("Loi de quantification (*.loi)"));
+    if(filename.isEmpty()) return;
     Quantification q(filename.toStdString());
     _quantWidget->setQuantif(q);
     _sizeBox->setValue(q.size);
@@ -105,6 +106,7 @@ void QuantificationDialog::open() {
 
 void QuantificationDialog::save() {
     QString filename = QFileDialog::getSaveFileName(this, tr("Save to file"), "", tr("Loi de quantification (*.loi)"));
+    if(filename.isEmpty()) return;
     switch(_quantBox->currentIndex()) {
         case 0: Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString()); break;
         case 3: _quantWidget->getQuantif().saveAs(filename.toStdString()); break;
