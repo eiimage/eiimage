@@ -123,9 +123,11 @@ imagein::algorithm::Filter* FilterEditorItem::validFilter()
     for(int h = 0; h < _height; h++)
     {
       double i;
-      QTableWidgetItem* item = _filter->item(w, h);
-      if(!item)
+      QTableWidgetItem* item = _filter->item(h, w);
+      if(!item) {
+          cout << "item " << w << ":" << h << " not set !" << endl;
         ok = false;
+      }
       else
         i = item->text().toDouble(&ok);
         

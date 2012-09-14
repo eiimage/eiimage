@@ -119,7 +119,7 @@ void FilterChoice::initUI()
         QTableWidgetItem* item = new QTableWidgetItem("1");
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-        _filterView->setItem(i, j, item);
+        _filterView->setItem(j, i, item);
       }
     }
 
@@ -202,13 +202,13 @@ QStringList FilterChoice::initFilters() {
 //              (*f)[w][h] = QString::fromStdString(word).toInt();
                 f->setPixelAt(w, h, QString::fromStdString(word).toDouble());
 
-              if(h == f->getHeight() - 1)
+              if(w == f->getWidth() - 1)
               {
-                h = 0;
-                w++;
+                w = 0;
+                h++;
               }
               else
-                h++;
+                w++;
             }
           }
           temp.push_back(f);
@@ -368,35 +368,35 @@ void FilterChoice::updateDisplay()
   }
   _filterView->setRowCount(height);
   _filterView->setColumnCount(width);
-  for(unsigned int i = 0; i < height; i++)
+  for(unsigned int j = 0; j < height; j++)
   {
-    for(unsigned int j = 0; j < width; j++)
+    for(unsigned int i = 0; i < width; i++)
     {
       QTableWidgetItem* item = new QTableWidgetItem("");
       item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-      _filterView->setItem(i, j, item);
+        _filterView->setItem(j, i, item);
     }
   }
   
   height = 0;
   for(unsigned int i = 0; i < filters.size(); i++)
   {
-    for(unsigned int j = height; j < filters[i]->getWidth() + height; j++)
+    for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
     {
-      for(unsigned int k = 0; k < filters[i]->getHeight(); k++)
+      for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
       {
 //        int value = (*filters[i])[j - height][k];
-        double value = filters[i]->getPixelAt(j - height, k);
+        double value = filters[i]->getPixelAt(k, j);
         QTableWidgetItem* item = new QTableWidgetItem(QString::number(value));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-        _filterView->setItem(j, k, item);
+        _filterView->setItem(height + j, k, item);
         _filterView->setColumnWidth(k, _filterView->rowHeight(0));
       }
     }
     
-    height += filters[i]->getWidth();
-    for(unsigned int k = 0; k < filters[i]->getHeight(); k++)
+    height += filters[i]->getHeight();
+    for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
     {
       QTableWidgetItem* item = new QTableWidgetItem("");
       item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);

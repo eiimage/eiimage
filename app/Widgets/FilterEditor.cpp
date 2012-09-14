@@ -197,9 +197,9 @@ void FilterEditor::saveXML(vector<Filter*> filtersToSave)
     valuesNode.setAttribute("height", QString::number(height));
 
     QString s = "";
-    for(int w = 0; w < width; w++)
+    for(int h = 0; h < height; h++)
     {
-      for(int h = 0; h < height; h++)
+      for(int w = 0; w < width; w++)
       {
         s += QString::number(filterToSave->getPixelAt(w, h));
         if(w != width - 1 || h != height - 1)
