@@ -41,85 +41,9 @@ bool ColorimetryOp::needCurrentImg() const {
 
 void ColorimetryOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
 
-        ColorDialog* dialog = new ColorDialog(QApplication::activeWindow());
-        dialog->setWindowTitle(QString(qApp->translate("Operations", "Colorimetry")));
-//    QDialog* dialog = new QDialog(QApplication::activeWindow());
-//    dialog->setModal(false);
-//    dialog->setWindowTitle(QString(qApp->translate("Operations", "Colorimetry")));
-//    dialog->setMinimumWidth(180);
-//    QGridLayout* layout = new QGridLayout();
-//    dialog->setLayout(layout);
+    ColorDialog* dialog = new ColorDialog(QApplication::activeWindow());
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "Colorimetry")));
 
-//    QWidget* rvbWidget = new QWidget();
-//    QWidget* hsvWidget = new QWidget();
-//    QSpinBox* redBox = new QSpinBox();
-//    QSpinBox* greenBox = new QSpinBox();
-//    QSpinBox* blueBox = new QSpinBox();
-//    QSpinBox* hueBox = new QSpinBox();
-//    QSpinBox* saturationBox = new QSpinBox();
-//    QSpinBox* valueBox = new QSpinBox();
-//    QSlider* redSlider = new QSlider(Qt::Horizontal);
-//    QSlider* greenSlider = new QSlider(Qt::Horizontal);
-//    QSlider* blueSlider = new QSlider(Qt::Horizontal);
-//    QSlider* hueSlider = new QSlider(Qt::Horizontal);
-//    QSlider* saturationSlider = new QSlider(Qt::Horizontal);
-//    QSlider* valueSlider = new QSlider(Qt::Horizontal);
-
-//    redBox->setRange(0, 255);
-//    greenBox->setRange(0, 255);
-//    blueBox->setRange(0, 255);
-//    hueBox->setRange(0, 360);
-//    saturationBox->setRange(0, 100);
-//    valueBox->setRange(0, 100);
-//    redSlider->setRange(0, 255);
-//    greenSlider->setRange(0, 255);
-//    blueSlider->setRange(0, 255);
-//    hueSlider->setRange(0, 360);
-//    saturationSlider->setRange(0, 100);
-//    valueSlider->setRange(0, 100);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Red: ")), 0, 0);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Green: ")), 1, 0);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Blue: ")), 2, 0);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Hue: ")), 3, 0);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Saturation: ")), 4, 0);
-//    layout->addWidget(new QLabel(qApp->translate("ColorimetryOp", "Value: ")), 5, 0);
-//    layout->addWidget(redSlider, 0, 1);
-//    layout->addWidget(greenSlider, 1, 1);
-//    layout->addWidget(blueSlider, 2, 1);
-//    layout->addWidget(hueSlider, 3, 1);
-//    layout->addWidget(saturationSlider, 4, 1);
-//    layout->addWidget(valueSlider, 5, 1);
-//    layout->addWidget(redBox, 0, 2);
-//    layout->addWidget(greenBox, 1, 2);
-//    layout->addWidget(blueBox, 2, 2);
-//    layout->addWidget(hueBox, 3, 2);
-//    layout->addWidget(saturationBox, 4, 2);
-//    layout->addWidget(valueBox, 5, 2);
-
-//    QObject::connect(redBox, SIGNAL(valueChanged(int)), redSlider, SLOT(setValue(int)));
-//    QObject::connect(greenBox, SIGNAL(valueChanged(int)), greenSlider, SLOT(setValue(int)));
-//    QObject::connect(blueBox, SIGNAL(valueChanged(int)), blueSlider, SLOT(setValue(int)));
-//    QObject::connect(hueBox, SIGNAL(valueChanged(int)), hueSlider, SLOT(setValue(int)));
-//    QObject::connect(saturationBox, SIGNAL(valueChanged(int)), saturationSlider, SLOT(setValue(int)));
-//    QObject::connect(valueBox, SIGNAL(valueChanged(int)), valueSlider, SLOT(setValue(int)));
-//    QObject::connect(redSlider, SIGNAL(valueChanged(int)), redBox, SLOT(setValue(int)));
-//    QObject::connect(greenSlider, SIGNAL(valueChanged(int)), greenBox, SLOT(setValue(int)));
-//    QObject::connect(blueSlider, SIGNAL(valueChanged(int)), blueBox, SLOT(setValue(int)));
-//    QObject::connect(hueSlider, SIGNAL(valueChanged(int)), hueBox, SLOT(setValue(int)));
-//    QObject::connect(saturationSlider, SIGNAL(valueChanged(int)), saturationBox, SLOT(setValue(int)));
-//    QObject::connect(valueSlider, SIGNAL(valueChanged(int)), valueBox, SLOT(setValue(int)));
-
-////    QColorDialog::getColor();
-
-//    dialog->show();
-
-//    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
-//    layout->insertRow(6, buttonBox);
-//    QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
-//    QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
-
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-    QColor color = dialog->getColor();
     if(code!=QDialog::Accepted) return;
     Image* resImg = new Image(512, 512, 3);
     for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
