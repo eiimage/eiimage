@@ -39,10 +39,10 @@ void EIImageService::display(GenericInterface* gi)
     _statusEdit = new QTextEdit();
     _statusEdit->setReadOnly(true);
     _statusEdit->setMinimumHeight(1);
-    _statusEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    _statusEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     _statusEdit->setReadOnly(true);
     QDockWidget* statusDock = new QDockWidget(tr("Informations"), gi);
-    statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     statusDock->setMinimumWidth(128);
     statusDock->setWidget(_statusEdit);
     gi->addDockWidget(Qt::BottomDockWidgetArea, statusDock);
