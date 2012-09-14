@@ -39,20 +39,20 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-NoiseOp::NoiseOp() : GenericOperation(Tools::tr("Add noise").toStdString())
+NoiseOp::NoiseOp() : GenericOperation(qApp->translate("Operations", "Add noise").toStdString())
 {
 }
 
 void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameters"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout(dialog);
 
     QGroupBox* radioGroup = new QGroupBox("Type of noise", dialog);
-    QRadioButton* impulseButton = new QRadioButton(dialog->tr("Impulse noise"));
-    QRadioButton* gaussianButton = new QRadioButton(dialog->tr("Gaussian noise"));
+    QRadioButton* impulseButton = new QRadioButton(qApp->translate("NoiseOp", "Impulse noise"));
+    QRadioButton* gaussianButton = new QRadioButton(qApp->translate("NoiseOp", "Gaussian noise"));
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
     radioLayout->addWidget(impulseButton);
     radioLayout->addWidget(gaussianButton);
@@ -64,8 +64,8 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
     meanBox->setRange(-255.0, 255.0);
     meanBox->setValue(0.0);
     devBox->setValue(1.0);
-    QLabel* meanLabel = new QLabel("Mean : ");
-    QLabel* devLabel = new QLabel("Standard deviation : ");
+    QLabel* meanLabel = new QLabel(qApp->translate("NoiseOp", "Mean : "));
+    QLabel* devLabel = new QLabel(qApp->translate("NoiseOp", "Standard deviation : "));
     layout->insertRow(1, meanLabel, meanBox);
     layout->insertRow(2, devLabel, devBox);
 
@@ -73,7 +73,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
     percentBox->setRange(0.0, 100.0);
     percentBox->setValue(10.0);
     percentBox->setSuffix("%");
-    QLabel* percentLabel = new QLabel("Percent of image : ");
+    QLabel* percentLabel = new QLabel(qApp->translate("NoiseOp", "Percent of image : "));
     layout->insertRow(3, percentLabel, percentBox);
     percentBox->hide();
     percentLabel->hide();
@@ -87,7 +87,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
     QObject::connect(gaussianButton, SIGNAL(toggled(bool)), devLabel, SLOT(setVisible(bool)));
     QObject::connect(gaussianButton, SIGNAL(toggled(bool)), devBox, SLOT(setVisible(bool)));
 
-    QPushButton *okButton = new QPushButton(dialog->tr("Validate"), dialog);
+    QPushButton *okButton = new QPushButton(qApp->translate("Operations", "Validate"), dialog);
     okButton->setDefault(true);
     layout->addWidget(okButton);
     QObject::connect(okButton, SIGNAL(clicked()), dialog, SLOT(accept()));
@@ -115,7 +115,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
                 Image::depth_t value = random.Boolean() ? min : max;
                 image->setPixel(x, y, c, value);
             }
-            this->outImage(image, Tools::tr("impulse noise").toStdString());
+            this->outImage(image, qApp->translate("NoiseOp", "impulse noise").toStdString());
 
         }
         else if(currentWnd->isDouble()) {
@@ -131,7 +131,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
                 double value = random.Boolean() ? min : max;
                 image->setPixel(x, y, c, value);
             }
-            this->outDoubleImage(image, Tools::tr("gaussian noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
+            this->outDoubleImage(image, qApp->translate("NoiseOp", "impulse noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
 
         }
     }
@@ -149,7 +149,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
                 value = min(255.0, max( 0.0, value ) );
                 *it = static_cast<Image::depth_t>(value);
             }
-            this->outImage(image, Tools::tr("impulse noise").toStdString());
+            this->outImage(image, qApp->translate("NoiseOp", "gaussian noise").toStdString());
 
         }
         else if(currentWnd->isDouble()) {
@@ -158,7 +158,7 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
             for(Image_t<double>::iterator it = image->begin(); it < image->end(); ++it) {
                 *it += normdist.operator()(random, mean, deviation);
             }
-            this->outDoubleImage(image, Tools::tr("gaussian noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
+            this->outDoubleImage(image, qApp->translate("NoiseOp", "gaussian noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
 
         }
     }

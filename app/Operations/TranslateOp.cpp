@@ -11,7 +11,7 @@
 using namespace std;
 using namespace imagein;
 
-TranslateOp::TranslateOp() : Operation(Tools::tr("Translation").toStdString()) {
+TranslateOp::TranslateOp() : Operation(qApp->translate("Operations", "Translation").toStdString()) {
 }
 
 bool TranslateOp::needCurrentImg() const {
@@ -23,7 +23,7 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
     vector<QWidget*> result;
     QString imgName(imgList.find(img)->second.c_str());
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(QString(dialog->tr("Translating %1")).arg(imgName));
+    dialog->setWindowTitle(qApp->translate("Translation", "Translating %1").arg(imgName));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -33,7 +33,7 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
 
     QSpinBox* xSpinBox = new QSpinBox(dialog);
     QSpinBox* ySpinBox = new QSpinBox(dialog);
-    QCheckBox* expandBox = new QCheckBox("Expand image", dialog);
+    QCheckBox* expandBox = new QCheckBox(qApp->translate("TranslateOp", "Expand image"), dialog);
     QSpinBox* valueSpinBox = new QSpinBox(dialog);
 
     xSpinBox->setRange(-65536, 65535);
@@ -41,10 +41,10 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
     valueSpinBox->setRange(0, 255);
     valueSpinBox->setValue(0);
 
-    layout->insertRow(0, "X offset : ", xSpinBox);
-    layout->insertRow(1, "Y offset : ", ySpinBox);
+    layout->insertRow(0, qApp->translate("TranslateOp", "X offset : "), xSpinBox);
+    layout->insertRow(1, qApp->translate("TranslateOp", "Y offset : "), ySpinBox);
     layout->insertRow(2, expandBox);
-    layout->insertRow(3, "Fill value : ", valueSpinBox);
+    layout->insertRow(3, qApp->translate("TranslateOp", "Fill value : "), valueSpinBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(4, buttonBox);
@@ -84,7 +84,7 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
         }
     }
 
-    QString name = QString("Translated %1:%2").arg(dx).arg(dy);
+    QString name = qApp->translate("TranslateOp", "Translated %1:%2").arg(dx).arg(dy);
     this->outImage(resImg, name.toStdString());
     return;
 }

@@ -63,7 +63,7 @@ FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
 void FilterChoice::initUI()
 {
 
-    this->setWindowTitle("FilterChoice");
+    this->setWindowTitle(tr("FilterChoice"));
     QLayout* layout = new QVBoxLayout(this);
     QWidget* mainWidget = new QWidget();
     layout->addWidget(mainWidget);
@@ -73,7 +73,7 @@ void FilterChoice::initUI()
 
     /* FILTER CHOICE */
     QLabel* label = new QLabel(this);
-    label->setText("Filter:");
+    label->setText(tr("Filter:"));
     _blurChoices = new QComboBox(this);
     QStringList blurs = initFilters();
     _blurChoices->addItems(blurs);
@@ -82,14 +82,14 @@ void FilterChoice::initUI()
 
     /* POLICIES CHOICE */
     QLabel* label_2 = new QLabel(this);
-    label_2->setText("Edge policy: ");
+    label_2->setText(tr("Edge policy: "));
     _policyChoices = new QComboBox(this);
     QStringList policies = QStringList() << tr("Black") << tr("Mirror") << tr("Nearest") << tr("Spherical");
     _policyChoices->addItems(policies);
     leftLayout->addRow(label_2, _policyChoices);
 
     _labelNumber = new QLabel(this);
-    _labelNumber->setText("Number of pixels:");
+    _labelNumber->setText(tr("Number of pixels:"));
     _number = new QSpinBox(this);
     _number->setValue(3);
     _number->setMinimum(1);
@@ -128,8 +128,8 @@ void FilterChoice::initUI()
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
     buttonBox->setOrientation(Qt::Horizontal);
     buttonBox->setStandardButtons(QDialogButtonBox::Cancel);
-    QPushButton* applyButton = buttonBox->addButton(QString::fromStdString("Apply filter"), QDialogButtonBox::ApplyRole);
-    _deleteButton = buttonBox->addButton(QString::fromStdString("Delete filter"), QDialogButtonBox::ActionRole);
+    QPushButton* applyButton = buttonBox->addButton(tr("Apply filter"), QDialogButtonBox::ApplyRole);
+    _deleteButton = buttonBox->addButton(tr("Delete filter"), QDialogButtonBox::ActionRole);
     _deleteButton->setEnabled(false);
 
     QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(validate()));
@@ -279,8 +279,8 @@ void FilterChoice::cancel()
 
 void FilterChoice::deleteFilter()
 {
-  QMessageBox msgBox(QMessageBox::Warning, "Warning!", "This filter will be permanently deleted ?");
-  msgBox.setInformativeText("Do you want to continue?");
+  QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter will be permanently deleted ?"));
+  msgBox.setInformativeText(tr("Do you want to continue?"));
   msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   msgBox.setDefaultButton(QMessageBox::No);
   
@@ -331,19 +331,19 @@ void FilterChoice::updateDisplay()
       filters = Filter::uniform(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Number of Pixels:");
+      _labelNumber->setText(tr("Number of Pixels:"));
       break;
     case 1:
       filters = Filter::gaussian(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Coefficient:");
+      _labelNumber->setText(tr("Coefficient:"));
       break;
     case 2:
       filters = Filter::prewitt(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Number of Pixels:");
+      _labelNumber->setText(tr("Number of Pixels:"));
       break;
     default:
       filters = _filters[_blurChoices->currentIndex()];

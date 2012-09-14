@@ -10,7 +10,7 @@ using namespace std     ;
 using namespace imagein;
 using namespace imagein::algorithm;
 
-ThresholdOp::ThresholdOp() : Operation(Tools::tr("Thresholding").toStdString()) {
+ThresholdOp::ThresholdOp() : Operation(qApp->translate("Operations", "Thresholding").toStdString()) {
 }
 
 bool ThresholdOp::needCurrentImg() const {

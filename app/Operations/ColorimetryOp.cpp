@@ -28,8 +28,10 @@
 #include <QSlider>
 #include <QLabel>
 #include <QColorDialog>
+#include "ColorDialog.h"
+using namespace imagein;
 
-ColorimetryOp::ColorimetryOp() : Operation(Tools::tr("Colorimetry").toStdString())
+ColorimetryOp::ColorimetryOp() : Operation(qApp->translate("Operations", "Colorimetry").toStdString())
 {
 }
 

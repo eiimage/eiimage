@@ -31,7 +31,7 @@
 using namespace std;
 using namespace imagein;
 
-IFFTOp::IFFTOp() : DoubleOperation(Tools::tr("Discrete Fourier reconstruction").toStdString())
+IFFTOp::IFFTOp() : DoubleOperation(qApp->translate("Operations", "Discrete Fourier reconstruction").toStdString())
 {
 }
 
@@ -42,15 +42,15 @@ bool IFFTOp::needCurrentImg() const {
 void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein::Image_t<double>*, string>& imgList) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameters"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
     ImageListBox_t<double>* magtdImgBox = new ImageListBox_t<double>(dialog, NULL, imgList);
     ImageListBox_t<double>* phaseImgBox = new ImageListBox_t<double>(dialog, NULL, imgList);
-    layout->insertRow(0, "Magnitude : ", magtdImgBox);
-    layout->insertRow(1, "Phase : ", phaseImgBox);
+    layout->insertRow(0, qApp->translate("IFFTOp", "Magnitude : "), magtdImgBox);
+    layout->insertRow(1, qApp->translate("IFFTOp", "Phase : "), phaseImgBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(2, buttonBox);
@@ -105,7 +105,7 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
         }
     }
 
-    this->outImage(resImg, "DFT-reconstructed image");
+    this->outImage(resImg, qApp->translate("IFFTOp", "DFT-reconstructed image").toStdString());
 //    this->outDoubleImage(realImg, "DFT-reconstructed image (real)");
 //    this->outDoubleImage(imagImg, "DFT-reconstructed image (imag)");
 }

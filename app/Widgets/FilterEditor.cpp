@@ -66,10 +66,10 @@ void FilterEditor::initUI()
   QLabel *label_3;
   QLabel *label_4;
   label_3 = new QLabel();
-  label_3->setText("Name:");
+  label_3->setText(tr("Name:"));
   _name = new QLineEdit();
   label_4 = new QLabel();
-  label_4->setText("Number of filters:");
+  label_4->setText(tr("Number of filters:"));
   spinBoxNbFilters = new QSpinBox();
   spinBoxNbFilters->setValue(_nbFilters);
   spinBoxNbFilters->setMinimum(1);
@@ -102,7 +102,7 @@ void FilterEditor::initUI()
   layout->addWidget(scroll);
   this->setLayout(layout);
   this->setMinimumSize(670, 470);
-  this->setWindowTitle("FilterEditor");
+  this->setWindowTitle(tr("FilterEditor"));
 }
 
 void FilterEditor::nameChanged(QString name) {
@@ -114,7 +114,7 @@ void FilterEditor::save()
   vector<Filter*> filters;
   if(_name->text() == "")
   {
-    QMessageBox msgBox(QMessageBox::Critical, "Error!", "Your filter has to have a name to be saved.");
+    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your filter has to have a name to be saved."));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
@@ -163,8 +163,8 @@ void FilterEditor::saveXML(vector<Filter*> filtersToSave)
 	    // We know how to treat appearance and geometry
 	    if (e.attribute("name") == _name->text())
 	    {
-	      QMessageBox msgBox(QMessageBox::Warning, "Warning!", "This filter name is already use.");
-        msgBox.setInformativeText("Do you want to replace it?");
+          QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter name is already use."));
+        msgBox.setInformativeText(tr("Do you want to replace it?"));
         msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
         msgBox.setDefaultButton(QMessageBox::No);
         int ret = msgBox.exec();
@@ -237,11 +237,8 @@ vector<Filter*> FilterEditor::validFilters(bool* ok)
     else
     {
       *ok = false;
-      QMessageBox msgBox(QMessageBox::Critical, "Error!", "Every square have to be completed by int value.");
-      std::ostringstream oss;
-      oss << i;
-      std::string is = oss.str();
-      msgBox.setInformativeText(QString::fromStdString("Filter " + is + " isn't ok."));
+      QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Every square have to be completed by int value."));
+      msgBox.setInformativeText(tr("Filter %1 isn't ok.").arg(i));
       msgBox.setStandardButtons(QMessageBox::Ok);
       msgBox.setDefaultButton(QMessageBox::Ok);
       msgBox.exec();
@@ -254,8 +251,8 @@ vector<Filter*> FilterEditor::validFilters(bool* ok)
 
 void FilterEditor::cancel()
 {
-  QMessageBox msgBox(QMessageBox::Warning, "Warning!", "Unsaved changes will be lost.");
-  msgBox.setInformativeText("Do you want to continue?");
+  QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("Unsaved changes will be lost."));
+  msgBox.setInformativeText(tr("Do you want to continue?"));
   msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   msgBox.setDefaultButton(QMessageBox::No);
   int ret = msgBox.exec();

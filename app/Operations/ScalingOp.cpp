@@ -38,7 +38,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-ScalingOp::ScalingOp() : GenericOperation(Tools::tr("Scaling").toStdString())
+ScalingOp::ScalingOp() : GenericOperation(qApp->translate("Operations", "Scaling").toStdString())
 {
 }
 
@@ -53,7 +53,7 @@ bool ScalingOp::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const
 void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vector<ImageWindow*>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Scaling")));
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -66,13 +66,13 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vect
     yScaleBox->setValue(1.);
 
     QComboBox* algoBox = new QComboBox();
-    algoBox->addItem(dialog->tr("Nearest neighboor (standard)"));
-    algoBox->addItem(dialog->tr("Bi-linear"));
-    algoBox->addItem(dialog->tr("Parabolic"));
-    algoBox->addItem(dialog->tr("Spline"));
-    layout->insertRow(0, dialog->tr("Interpolation : "), algoBox);
-    layout->insertRow(1, dialog->tr("X scale factor : "), xScaleBox);
-    layout->insertRow(2, dialog->tr("Y scale factor : "), yScaleBox);
+    algoBox->addItem(qApp->translate("ScalingOp", "Nearest neighboor (standard)"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Bi-linear"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Parabolic"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Spline"));
+    layout->insertRow(0, qApp->translate("ScalingOp", "Interpolation : "), algoBox);
+    layout->insertRow(1, qApp->translate("ScalingOp", "X scale factor : "), xScaleBox);
+    layout->insertRow(2, qApp->translate("ScalingOp", "Y scale factor : "), yScaleBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -108,12 +108,12 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vect
                 resImg = scale<Image::depth_t, Spline>(image, xScaleBox->value(), yScaleBox->value());
                 break;
         }
-        outImage(resImg, "scaled");
+        outImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
     }
     else if(currentWnd->isDouble()) {
         const Image_t<double>* image = static_cast<const DoubleImageWindow*>(currentWnd)->getImage();
         Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBox->value(), yScaleBox->value());
-        outDoubleImage(resImg, "scaled");
+        outDoubleImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
     }
 }
 

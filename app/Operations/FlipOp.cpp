@@ -28,7 +28,7 @@ using namespace std;
 using namespace imagein;
 
 FlipOp::FlipOp(Direction dir)
-    : Operation(QString(tr("Flip %1")).arg(dir == Horizontal ? tr("horizontal") : tr("vertical")).toStdString()), _dir(dir)
+    : Operation(qApp->translate("Operations", "Flip %1").arg(dir == Horizontal ? qApp->translate("FlipOp", "horizontal") : qApp->translate("FlipOp", "vertical")).toStdString()), _dir(dir)
 {
 }
 
@@ -60,7 +60,7 @@ void FlipOp::operator()(const imagein::Image* image, const std::map<const imagei
            }
        }
     }
-    QString name = QString(tr(" -  flipped %1")).arg(_dir == Horizontal ? tr("horizontal") : tr("vertical"));
+    QString name = qApp->translate("FlipOp", "flipped %1").arg(_dir == Horizontal ? qApp->translate("FlipOp", "horizontal") : qApp->translate("FlipOp", "vertical"));
 
     this->outImage(resImg, name.toStdString());
 }

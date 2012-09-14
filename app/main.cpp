@@ -75,19 +75,29 @@ int main(int argc, char** argv)
 
 
   Log::configure(true, false, 0);
+  QString lang = QString("en_US");
+  if(argc > 1) {
+    lang = QString(argv[1]);
+  }
 
   QTranslator qtTranslator;
-  QString tr = "qt_fr_FR";
-  qtTranslator.load(tr, QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-  cout << tr.toStdString();
+  QString tr = "qt_";
+  tr += lang;
+  if(!qtTranslator.load(tr, QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+      cout << "Error while loading " << tr.toStdString() << endl;
+  }
   app.installTranslator(&qtTranslator);
 
   QTranslator giTranslator;
-  giTranslator.load("genericinterface_fr");
+  if(!giTranslator.load(QString("genericinterface_") + lang.mid(0, 2))) {
+      cout << "Error while loading genericinterface_en.qm" << endl;
+  }
   app.installTranslator(&giTranslator);
 
   QTranslator eiiTranslator;
-  eiiTranslator.load("eiimage_fr");
+  if(!eiiTranslator.load(QString("eiimage_") + lang.mid(0, 2))) {
+      cout << "Error while loading eiimage_en.qm" << endl;
+  }
   app.installTranslator(&eiiTranslator);
 
   GenericInterface gi("eiimage", Qt::LeftDockWidgetArea);
@@ -95,7 +105,6 @@ int main(int argc, char** argv)
   PluginManager* pluginManager = new PluginManager(&gi);
   EIImageService* eiimageService = new EIImageService(&gi);
 
-  gi.addService(pluginManager);
 //  gi.addService(eiimageService);
   gi.changeService(GenericInterface::WINDOW_SERVICE, eiimageService);
 //  gi.addService(GenericInterface::WINDOW_SERVICE, eiimageService);
@@ -103,43 +112,56 @@ int main(int argc, char** argv)
   QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
   QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
 
+  BuiltinOpSet* transforms = new BuiltinOpSet(qApp->translate("", "&Image").toStdString());
+  transforms->addOperation(new TranslateOp());
+  transforms->addOperation(new RotateOp());
+  transforms->addOperation(new CenterOp());
+  transforms->addOperation(new FlipOp(FlipOp::Horizontal));
+  transforms->addOperation(new FlipOp(FlipOp::Vertical));
+  transforms->addOperation(new SplitColorOp());
+  transforms->addOperation(new CombineColorOp());
+  transforms->addOperation(new ScalingOp());
 
-  BuiltinOpSet* opSet = new BuiltinOpSet("Operations");
-  opSet->addOperation(new QuantificationOp());
+  BuiltinOpSet* info = new BuiltinOpSet(qApp->translate("", "&Tools").toStdString());
+
+  info->addOperation(new SignalToNoiseOp());
+  info->addOperation(new MeanSquaredErrorOp());
+  info->addOperation(new EntropyOp());
+  info->addOperation(new NoiseOp());
+  info->addOperation(new RandomImgOp());
+  info->addOperation(new ColorimetryOp());
+  info->addOperation(new PseudoColorOp());
+  info->addOperation(new RejectionRingOp());
+  info->addOperation(new SinusSynthesisOp());
+
+  BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
+  encode->addOperation(new HuffmanOp());
+  encode->addOperation(new MICDEncodingOp());
+
+  BuiltinOpSet* morpho = new BuiltinOpSet("&Morpho. math.");
+  morpho->addOperation(new DMMOp());
+
+  BuiltinOpSet* opSet = new BuiltinOpSet("&Operations");
   opSet->addOperation(new PointOp());
   opSet->addOperation(new ThresholdOp());
-  opSet->addOperation(new TranslateOp());
-  opSet->addOperation(new RotateOp());
-  opSet->addOperation(new FlipOp(FlipOp::Horizontal));
-  opSet->addOperation(new FlipOp(FlipOp::Vertical));
-  opSet->addOperation(new CenterOp());
-  opSet->addOperation(new SplitColorOp());
-  opSet->addOperation(new CombineColorOp());
-  opSet->addOperation(new SignalToNoiseOp());
-  opSet->addOperation(new MeanSquaredErrorOp());
+  opSet->addOperation(new QuantificationOp());
+  opSet->addOperation(new HistogramOp());
+  opSet->addOperation(new BFlitOp());
+  opSet->addOperation(new CroissanceOp());
   opSet->addOperation(new FFTOp());
   opSet->addOperation(new IFFTOp());
-  opSet->addOperation(new RandomImgOp());
-  opSet->addOperation(new NoiseOp());
-  opSet->addOperation(new BFlitOp());
-  opSet->addOperation(new DMMOp());
-  opSet->addOperation(new TestOp());
-  opSet->addOperation(new PseudoColorOp());
-  opSet->addOperation(new CroissanceOp());
   opSet->addOperation(new ZeroCrossingOp());
-  opSet->addOperation(new HistogramOp());
-  opSet->addOperation(new ColorimetryOp());
-  opSet->addOperation(new SinusSynthesisOp());
-  opSet->addOperation(new ScalingOp());
-  opSet->addOperation(new EntropyOp());
-  opSet->addOperation(new HuffmanOp());
-  opSet->addOperation(new RejectionRingOp());
-  opSet->addOperation(new MICDEncodingOp());
 
+
+  eiimageService->addOpSet(transforms);
   eiimageService->addOpSet(opSet);
-
+  eiimageService->addOpSet(encode);
+  eiimageService->addOpSet(morpho);
   gi.addService(new MorphoMatService);
   gi.addService(new filtrme::FilteringService);
+  eiimageService->addOpSet(info);
+
+  gi.addService(pluginManager);
 
   gi.run();
 

@@ -32,7 +32,7 @@ using namespace std;
 using namespace imagein;
 
 
-CroissanceOp::CroissanceOp() : Operation(Tools::tr("Croissance").toStdString())
+CroissanceOp::CroissanceOp() : Operation(qApp->translate("Operations", "Croissance").toStdString())
 {
 }
 
@@ -43,7 +43,7 @@ bool CroissanceOp::needCurrentImg() const {
 void CroissanceOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Croissance")));
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "Croissance")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -54,16 +54,16 @@ void CroissanceOp::operator()(const imagein::Image* image, const std::map<const 
     QSpinBox* thresholdBox = new QSpinBox();
     thresholdBox->setRange(0, 255);
     QComboBox* initBox = new QComboBox();
-    initBox->addItem(dialog->tr("At origin"));
-    initBox->addItem(dialog->tr("Point of lowest luminance"));
+    initBox->addItem(qApp->translate("CroissanceOp", "At origin"));
+    initBox->addItem(qApp->translate("CroissanceOp", "Point of lowest luminance"));
     QComboBox* stopBox = new QComboBox();
-    stopBox->addItem(dialog->tr("| current - mean | < threshold"));
-    stopBox->addItem(dialog->tr("| current - initial | < threshold"));
+    stopBox->addItem(qApp->translate("CroissanceOp", "| current - mean | < threshold"));
+    stopBox->addItem(qApp->translate("CroissanceOp", "| current - initial | < threshold"));
 
 
-    layout->insertRow(0, dialog->tr("Threshold : "), thresholdBox);
-    layout->insertRow(1, dialog->tr("Initial germ : "), initBox);
-    layout->insertRow(2, dialog->tr("Stopping point : "), stopBox);
+    layout->insertRow(0, qApp->translate("CroissanceOp", "Threshold : "), thresholdBox);
+    layout->insertRow(1, qApp->translate("CroissanceOp", "Initial germ : "), initBox);
+    layout->insertRow(2, qApp->translate("CroissanceOp", "Stopping point : "), stopBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -93,9 +93,9 @@ void CroissanceOp::operator()(const imagein::Image* image, const std::map<const 
             nbRegion = cr.croissance2b(image, threshold, &lum, &color);
         }
     }
-    outImage(lum, "Luminance");
-    outImage(color, "Color");
-    outText(QString("Total number of area : %1").arg(nbRegion).toStdString());
-    outText(QString("Mean number of point per area : %1").arg((double)image->getWidth()*image->getHeight()/nbRegion).toStdString());
+    outImage(lum, qApp->translate("CroissanceOp", "Luminance").toStdString());
+    outImage(color, qApp->translate("CroissanceOp", "Color").toStdString());
+    outText(qApp->translate("CroissanceOp", "Total number of area : %1").arg(nbRegion).toStdString());
+    outText(qApp->translate("CroissanceOp", "Mean number of point per area : %1").arg((double)image->getWidth()*image->getHeight()/nbRegion).toStdString());
 }
 

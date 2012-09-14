@@ -35,7 +35,7 @@
 using namespace std;
 using namespace imagein;
 
-SinusSynthesisOp::SinusSynthesisOp() : Operation(Tools::tr("Sinus synthesis").toStdString())
+SinusSynthesisOp::SinusSynthesisOp() : Operation(qApp->translate("Operations", "Sinus synthesis").toStdString())
 {
 }
 
@@ -46,14 +46,14 @@ bool SinusSynthesisOp::needCurrentImg() const {
 void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Sinus synthesis")));
+    dialog->setWindowTitle(QString(qApp->translate("SinusSynthesisOp", "Sinus synthesis")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
     QGroupBox* radioGroup = new QGroupBox("Direction", dialog);
-    QRadioButton* linearButton = new QRadioButton(dialog->tr("Linear"));
-    QRadioButton* circularButton = new QRadioButton(dialog->tr("Circular"));
+    QRadioButton* linearButton = new QRadioButton(qApp->translate("SinusSynthesisOp", "Linear"));
+    QRadioButton* circularButton = new QRadioButton(qApp->translate("SinusSynthesisOp", "Circular"));
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
     radioLayout->addWidget(linearButton);
     radioLayout->addWidget(circularButton);
@@ -67,14 +67,14 @@ void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const im
     angleBox->setRange(0, 359);
 
     QComboBox* colorBox = new QComboBox();
-    colorBox->addItem(dialog->tr("256"));
-    colorBox->addItem(dialog->tr("2 (Black and white)"));
+    colorBox->addItem(qApp->translate("SinusSynthesisOp", "256"));
+    colorBox->addItem(qApp->translate("SinusSynthesisOp", "2 (Black and white)"));
     layout->insertRow(0, radioGroup);
-    layout->insertRow(1, dialog->tr("Image size (width=height) : "), sizeBox);
-    layout->insertRow(2, dialog->tr("Signal period (pixel) : "), periodBox);
-    QLabel* orientationLabel = new QLabel(dialog->tr("Orientation (°): "));
+    layout->insertRow(1, qApp->translate("SinusSynthesisOp", "Image size (width=height) : "), sizeBox);
+    layout->insertRow(2, qApp->translate("SinusSynthesisOp", "Signal period (pixel) : "), periodBox);
+    QLabel* orientationLabel = new QLabel(qApp->translate("SinusSynthesisOp", "Orientation (°): "));
     layout->insertRow(3, orientationLabel, angleBox);
-    layout->insertRow(4, dialog->tr("Niveaux de gris : "), colorBox);
+    layout->insertRow(4, qApp->translate("SinusSynthesisOp", "Niveaux de gris : "), colorBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(5, buttonBox);
@@ -141,7 +141,7 @@ void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const im
             }
         }
     }
-    outImage(resImg, "Sinus synthesis");
+    outImage(resImg, qApp->translate("Operations", "Sinus synthesis").toStdString());
 
 
 }

@@ -26,7 +26,7 @@
 using namespace std;
 using namespace imagein;
 
-HuffmanOp::HuffmanOp() : Operation(Tools::tr("Huffman").toStdString())
+HuffmanOp::HuffmanOp() : Operation(qApp->translate("Operations", "Huffman").toStdString())
 {
 }
 

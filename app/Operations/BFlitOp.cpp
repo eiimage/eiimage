@@ -34,7 +34,7 @@
 using namespace std;
 using namespace imagein;
 
-BFlitOp::BFlitOp() : Operation(Tools::tr("BFlit").toStdString())
+BFlitOp::BFlitOp() : Operation(qApp->translate("Operations", "BFlit").toStdString())
 {
 }
 
@@ -46,7 +46,7 @@ Image* bflit(const Image* image, unsigned int nPointSide, unsigned int nIteratio
 
 void BFlitOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameters"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout(dialog);
 
@@ -56,10 +56,10 @@ void BFlitOp::operator()(const imagein::Image* image, const std::map<const image
     nPointBox->setRange(0, nPointImg/2-1);
     nPointBox->setValue(nPointImg/4);
     nIterBox->setValue(1);
-    layout->insertRow(0, "Number of point on each side : ", nPointBox);
-    layout->insertRow(1, "Number of iteration : ", nIterBox);
+    layout->insertRow(0, qApp->translate("BFlit", "Number of point on each side : "), nPointBox);
+    layout->insertRow(1, qApp->translate("BFlit", "Number of iteration : "), nIterBox);
 
-    QPushButton *okButton = new QPushButton(dialog->tr("Validate"), dialog);
+    QPushButton *okButton = new QPushButton(qApp->translate("Operations", "Validate"), dialog);
     okButton->setDefault(true);
     layout->addWidget(okButton);
     QObject::connect(okButton, SIGNAL(clicked()), dialog, SLOT(accept()));

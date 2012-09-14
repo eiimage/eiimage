@@ -33,7 +33,7 @@ using namespace std;
 PluginManager::PluginManager(GenericInterface* gi) {
 
     _gi = gi;
-    QDir directory("Plugins");
+    QDir directory(tr("Plugins"));
     QStringList files = directory.entryList();
     std::cout << files.size() << " files in plugins' directory" << std::endl;
     for(QStringList::iterator it = files.begin(); it != files.end(); ++it) {
@@ -49,10 +49,10 @@ PluginManager::PluginManager(GenericInterface* gi) {
 void PluginManager::display(GenericInterface* gi)
 {
     
-    QMenu* menu = gi->menu("&Plugin");
+    QMenu* menu = gi->menu(tr("&Plugin"));
     
-    _loadPluginAction = menu->addAction("&Load plugin");
-    _unloadPluginsAction = menu->addAction("&Unload all plugins");
+    _loadPluginAction = menu->addAction(tr("&Load plugin"));
+    _unloadPluginsAction = menu->addAction(tr("&Unload all plugins"));
     checkActionsValid();
 }
 
@@ -75,7 +75,7 @@ void PluginManager::connect(GenericInterface* gi)
 }*/
     
 void PluginManager::choosePlugin() {
-    QString file = QFileDialog::getOpenFileName(_gi, "Open a file", QString(), "Images (*.dll *.so *.dylib)");
+    QString file = QFileDialog::getOpenFileName(_gi, tr("Load plugin"), QString(), tr("Plugin (*.dll *.so *.dylib)"));
     if(file.size()==0) return;
     std::map<std::string, Plugin*>::iterator it = _plugins.find(file.toStdString());
     if(it != _plugins.end()) {
@@ -157,7 +157,7 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     QLibrary* library = new QLibrary(file);
     if(!library->load()) {
         if(!silent) {
-            QMessageBox::critical (_gi, "Error loading plugin", library->errorString());
+            QMessageBox::critical (_gi, tr("Error loading plugin"), library->errorString());
         }
         return false;
     }
@@ -168,7 +168,7 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     
     if(ptr==0) {
         if(!silent) {
-            QMessageBox::critical (_gi, "Error loading plugin", "Could not find the plugin's entry point \"loadPlugin\"");
+            QMessageBox::critical (_gi, tr("Error loading plugin"), tr("Could not find the plugin's entry point \"loadPlugin\""));
         }
         return false;
     } 
@@ -180,7 +180,7 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     Plugin* plugin = getPlugin();
     if(plugin==NULL) {
         if(!silent) {
-            QMessageBox::critical (_gi, "Error loading plugin", "The getPlugin entry point does not return a valid Plugin");
+            QMessageBox::critical (_gi, tr("Error loading plugin"), tr("The getPlugin entry point does not return a valid Plugin"));
         }
         return false;
     }

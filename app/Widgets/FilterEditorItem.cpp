@@ -69,16 +69,16 @@ void FilterEditorItem::initUI()
   spinBoxWidth = new QSpinBox(this);
   spinBoxWidth->setGeometry(QRect(100, 167, 60, 27));
   spinBoxWidth->setValue(_width);
-  spinBoxWidth->setMinimum(2);
+  spinBoxWidth->setMinimum(1);
   spinBoxHeight = new QSpinBox(this);
   spinBoxHeight->setGeometry(QRect(100, 207, 60, 27));
   spinBoxHeight->setValue(_height);
-  spinBoxHeight->setMinimum(2);
+  spinBoxHeight->setMinimum(1);
   label = new QLabel(this);
-  label->setText("Width:");
+  label->setText(tr("Width:"));
   label->setGeometry(QRect(30, 170, 66, 17));
   label_2 = new QLabel(this);
-  label_2->setText("Height:");
+  label_2->setText(tr("Height:"));
   label_2->setGeometry(QRect(30, 210, 66, 17));
 
   this->setMinimumSize(600, 330);

@@ -28,7 +28,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-QuantificationOp::QuantificationOp() : Operation(Tools::tr("Quantification").toStdString())
+QuantificationOp::QuantificationOp() : Operation(qApp->translate("Operations", "Quantification").toStdString())
 {
 }
 
@@ -65,6 +65,6 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         }
     }
 
-    outImage(resImg, "quantified");
+    outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
 }
 

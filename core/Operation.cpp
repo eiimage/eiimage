@@ -100,7 +100,7 @@ void Operation::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& 
             imgList.insert(pair<const Image*, string>(img, imgWnd->windowTitle().toStdString()));
         }
     }
-    outText("Hello world!");
+//    outText("Hello world!");
     this->operator()(image, imgList);
 
     for(vector<const Image*>::iterator it = imgToDelete.begin(); it < imgToDelete.end(); ++it) {

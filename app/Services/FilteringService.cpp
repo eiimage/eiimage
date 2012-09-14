@@ -35,10 +35,10 @@ void FilteringService::display(GenericInterface* gi)
 
 //    _filtering = _toolBar->addAction("&Filtering");
 //    _filterEdition = _toolBar->addAction("&FilterEditor");
-    QMenu* menu = gi->menu(gi->tr("Filtering"));
-    _filtering = menu->addAction("&Apply filter");
+    QMenu* menu = gi->menu(tr("Filtering"));
+    _filtering = menu->addAction(tr("&Apply filter"));
     _filtering->setEnabled(false);
-    _filterEdition = menu->addAction("&Edit filters");
+    _filterEdition = menu->addAction(tr("&Edit filters"));
 }
 
 void FilteringService::checkActionsValid(const QWidget* activeWidget) {

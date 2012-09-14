@@ -36,7 +36,7 @@
 using namespace std;
 using namespace imagein;
 
-CombineColorOp::CombineColorOp() : Operation(Tools::tr("Combine color planes").toStdString())
+CombineColorOp::CombineColorOp() : Operation(qApp->translate("Operations", "Combine color planes").toStdString())
 {
 }
 
@@ -47,7 +47,7 @@ bool CombineColorOp::needCurrentImg() const {
 void CombineColorOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameters"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -91,5 +91,5 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
             }
         }
     }
-    this->outImage(resImg, "Reconstructed color image");
+    this->outImage(resImg, qApp->translate("CombineColorOp", "Reconstructed color image").toStdString());
 }

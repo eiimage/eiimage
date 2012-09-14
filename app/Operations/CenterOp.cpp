@@ -31,7 +31,7 @@ using namespace std;
 using namespace imagein;
 
 
-CenterOp::CenterOp() : Operation(tr("Center").toStdString())
+CenterOp::CenterOp() : Operation(qApp->translate("Operations", "Center").toStdString())
 {
 
 }
@@ -71,6 +71,6 @@ void CenterOp::operator()(const imagein::Image* image, const std::map<const imag
         }
     }
 
-    this->outImage(resImg, " - centered");
+    this->outImage(resImg, qApp->translate("CenterOp", "centered").toStdString());
 }
 

@@ -30,7 +30,7 @@
 using namespace std;
 using namespace imagein;
 
-ZeroCrossingOp::ZeroCrossingOp() : DoubleOperation(Tools::tr("Zero crossing").toStdString())
+ZeroCrossingOp::ZeroCrossingOp() : DoubleOperation(qApp->translate("Operations", "Zero crossing").toStdString())
 {
 }
 
@@ -41,7 +41,7 @@ bool ZeroCrossingOp::needCurrentImg() const {
 void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::map<const imagein::Image_t<double>*, std::string>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Zero crossing")));
+    dialog->setWindowTitle(QString(qApp->translate("ZeroCrossingOp", "Zero crossing")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -49,7 +49,7 @@ void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::
     QDoubleSpinBox* thresholdBox = new QDoubleSpinBox();
     thresholdBox->setRange(0., 65536.);
 
-    layout->insertRow(0, dialog->tr("Threshold : "), thresholdBox);
+    layout->insertRow(0, qApp->translate("ZeroCrossingOp", "Threshold : "), thresholdBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -107,6 +107,6 @@ void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::
         }
     }
 
-    outDoubleImage(result, "contours bruts");
-    outDoubleImage(result2, "contours nettoyes");
+    outDoubleImage(result, qApp->translate("ZeroCrossingOp", "contours bruts").toStdString());
+    outDoubleImage(result2, qApp->translate("ZeroCrossingOp", "contours nettoyes").toStdString());
 }

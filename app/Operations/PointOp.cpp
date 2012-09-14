@@ -42,7 +42,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-PointOp::PointOp() : GenericOperation(Tools::tr("Pixel operations").toStdString()) {
+PointOp::PointOp() : GenericOperation(qApp->translate("Operations", "Pixel operations").toStdString()) {
     
 }
 
@@ -112,21 +112,21 @@ void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wn
 
     
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameter"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QVBoxLayout* layout = new QVBoxLayout();
     dialog->setLayout(layout);
 
-    QGroupBox* radioGroup = new QGroupBox("Second operand", dialog);
-    QRadioButton* valueButton = new QRadioButton(dialog->tr("Value"));
-    QRadioButton* imageButton = new QRadioButton(dialog->tr("Image"));
+    QGroupBox* radioGroup = new QGroupBox(qApp->translate("PointOp", "Second operand"), dialog);
+    QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
+    QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
     radioLayout->addWidget(valueButton);
     radioLayout->addWidget(imageButton);
     layout->addWidget(radioGroup);
     valueButton->setChecked(true);
 
-    QCheckBox* colorBox = new QCheckBox("Explode colors", dialog);
+    QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"), dialog);
     layout->addWidget(colorBox);
 
     int nChannel = currentWnd->getDisplayImage()->getNbChannels();
@@ -190,7 +190,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wn
     
     layout->setSizeConstraint(QLayout::SetFixedSize);
     
-    QPushButton *okButton = new QPushButton(dialog->tr("Validate"), dialog);
+    QPushButton *okButton = new QPushButton(qApp->translate("Operations", "Validate"), dialog);
     okButton->setDefault(true);
     layout->addWidget(okButton);
     QObject::connect(okButton, SIGNAL(clicked()), dialog, SLOT(accept()));

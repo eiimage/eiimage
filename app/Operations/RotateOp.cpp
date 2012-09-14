@@ -31,7 +31,7 @@
 using namespace std;
 using namespace imagein;
 
-RotateOp::RotateOp() : Operation(Tools::tr("Rotation").toStdString())
+RotateOp::RotateOp() : Operation(qApp->translate("Operations", "Rotation").toStdString())
 {
 }
 
@@ -57,7 +57,7 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
 
     QString imgName(imgList.find(img)->second.c_str());
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(QString(dialog->tr("Rotating %1")).arg(imgName));
+    dialog->setWindowTitle(qApp->translate("Rotation", "Rotating %1").arg(imgName));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -66,7 +66,7 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
     layout->setSizeConstraint(QLayout::SetFixedSize);
 
     QDoubleSpinBox* angleSpinBox = new QDoubleSpinBox(dialog);
-    QCheckBox* expandBox = new QCheckBox("Expand image", dialog);
+    QCheckBox* expandBox = new QCheckBox(qApp->translate("Rotation", "Expand image"), dialog);
     QSpinBox* valueSpinBox = new QSpinBox(dialog);
 
     angleSpinBox->setRange(-180, 180);
@@ -75,9 +75,9 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
     valueSpinBox->setRange(0, 255);
     valueSpinBox->setValue(0);
 
-    layout->insertRow(0, "Rotation angle : ", angleSpinBox);
+    layout->insertRow(0, qApp->translate("Rotation", "Rotation angle : "), angleSpinBox);
     layout->insertRow(1, expandBox);
-    layout->insertRow(2, "Fill value : ", valueSpinBox);
+    layout->insertRow(2, qApp->translate("Rotation", "Fill value : "), valueSpinBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -149,6 +149,6 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
         }
     }
 
-    QString name = QString("rotated %1").arg(angleSpinBox->value());
+    QString name = qApp->translate("Rotation", "rotated %1").arg(angleSpinBox->value());
     this->outImage(resImg, name.toStdString());
 }

@@ -30,7 +30,7 @@ bool SplitColorOp::needCurrentImg() const {
     return true;
 }
 
-SplitColorOp::SplitColorOp() : Operation(tr("Split color planes").toStdString())
+SplitColorOp::SplitColorOp() : Operation(qApp->translate("Operations", "Split color planes").toStdString())
 {
 }
 
@@ -43,7 +43,7 @@ void SplitColorOp:: operator()(const imagein::Image* image, const std::map<const
                 resImg->setPixel(i, j, image->getPixel(i, j, c));
             }
         }
-        QString name(" - ");
+        QString name("");
         name += Tools::colorName(c, image->getNbChannels());
         this->outImage(resImg, name.toStdString());
     }

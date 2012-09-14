@@ -41,11 +41,11 @@ void ThresholdDialog::spinbox2Changed(int i) {
 void ThresholdDialog::doubleThreshold(bool activate) {
     if(activate) {
         _marker2->show();
-        _spin1label->setText("Threshold #1 : ");
+        _spin1label->setText(tr("Threshold #1 : "));
     }
     else {
         _marker2->hide();
-        _spin1label->setText("Threshold : ");
+        _spin1label->setText(tr("Threshold : "));
     }
 }
 
@@ -62,28 +62,28 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     this->setLayout(layout);
 
     if(converted) {
-        layout->addWidget(new QLabel("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>"));
+        layout->addWidget(new QLabel(tr("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>")));
     }
 
-    QGroupBox* threshGroup = new QGroupBox("Threshold", this);
+    QGroupBox* threshGroup = new QGroupBox(tr("Threshold"), this);
     QHBoxLayout* threshLayout = new QHBoxLayout(threshGroup);
-    _doubleBox = new QCheckBox("Double threshold");
+    _doubleBox = new QCheckBox(tr("Double threshold"));
     threshLayout->addWidget(_doubleBox);
     layout->addWidget(threshGroup);
 
     QHBoxLayout* box1layout = new QHBoxLayout();
-    _spin1label = new QLabel("Threshold : "); 
+    _spin1label = new QLabel(tr("Threshold : "));
     _spinbox1 = new QSpinBox();
     _spinbox1->setRange(0, 255);
     _spinbox1->setValue(127);
-    QPushButton* otsuButton = new QPushButton("Otsu");
+    QPushButton* otsuButton = new QPushButton(tr("Otsu"));
     box1layout->addWidget(_spin1label);
     box1layout->addWidget(_spinbox1);
     box1layout->addWidget(otsuButton);
     layout->addLayout(box1layout);
 
     QHBoxLayout* box2layout = new QHBoxLayout();
-    QLabel* spin2label = new QLabel("Threshold #2 : "); 
+    QLabel* spin2label = new QLabel(tr("Threshold #2 : "));
     spin2label->setVisible(false);
     _spinbox2 = new QSpinBox();
     _spinbox2->setRange(0, 255);
@@ -94,7 +94,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     layout->addLayout(box2layout);
     
     QHBoxLayout* radiolayout = new QHBoxLayout();
-    QLabel* radioLabel = new QLabel("Color between thresholds :");
+    QLabel* radioLabel = new QLabel(tr("Color between thresholds :"));
     QRadioButton* whiteButton = new QRadioButton(tr("White"));
     _blackButton = new QRadioButton(tr("Black"));
     radiolayout->addWidget(radioLabel);

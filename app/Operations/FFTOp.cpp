@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-FFTOp::FFTOp() : Operation(Tools::tr("Discrete Fourier transform").toStdString())
+FFTOp::FFTOp() : Operation(qApp->translate("Operations", "Discrete Fourier transform").toStdString())
 {
 }
 
@@ -78,8 +78,8 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
         }
     }
 
-    this->outDoubleImage(phaseImg, "FFT (phase)", true, false);
-    this->outDoubleImage(magnitudeImg, "FFT (magnitude)", true, true);
+    this->outDoubleImage(phaseImg, qApp->translate("FFTOp", "DFT (phase)").toStdString(), true, false);
+    this->outDoubleImage(magnitudeImg, qApp->translate("FFTOp", "DFT (magnitude)").toStdString(), true, true);
 //    this->outDoubleImage(realImg, "FFT (real)", true, true);
 //    this->outDoubleImage(imagImg, "FFT (imag)", true, true);
 //    result.push_back(new DoubleImgWidget(phaseImg, " - FFT : phase", true, false));
