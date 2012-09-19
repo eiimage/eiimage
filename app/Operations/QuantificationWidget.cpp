@@ -120,7 +120,7 @@ void QuantificationWidget::setQuantif(Quantification q) {
 }
 void QuantificationWidget::CentralWidget::setQuantif(Quantification q) {
 
-    this->_nThreshold = q.size;
+    this->_nThreshold = q.size - 1;
     for(int i = 0; i < q.size - 1; ++i) {
         _thresholdBoxes[i]->setValue(q.threshold[i]);
     }

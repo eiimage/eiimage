@@ -36,7 +36,7 @@ Quantification::Quantification(std::string filename) {
     file >> s;
     if(s.compare("Quant_Level_File") != 0) throw exception();
     file >> this->size;
-//    this->size++;
+    this->size++;
     if(this->size < 2) throw exception();
     threshold = new int[this->size - 1];
     values = new imagein::Image::depth_t[this->size];
@@ -57,7 +57,7 @@ Quantification::Quantification(std::string filename) {
 void Quantification::saveAs(std::string filename) {
     ofstream file(filename.c_str(), fstream::out);
     file << "Quant_Level_File" << endl;
-    file << this->size << endl;
+    file << (this->size - 1) << endl;
     for(int i = 0; i < size - 1; ++i) {
         double n = threshold[i];
         file << n << endl;
