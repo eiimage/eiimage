@@ -48,7 +48,7 @@ class GenericOperation {
 
   protected:
     void outImage(imagein::Image*, std::string title = "");
-    void outDoubleImage(imagein::Image_t<double>*, std::string title = "", bool norm=false, bool log=false);
+    void outDoubleImage(imagein::Image_t<double>*, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false);
     void outText(std::string);
     std::string _name;
     EIImageService* _ws;

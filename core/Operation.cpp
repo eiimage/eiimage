@@ -67,8 +67,8 @@ void GenericOperation::outImage(imagein::Image* img, string title) {
     this->outImgWnd(wnd, title);
 }
 
-void GenericOperation::outDoubleImage(imagein::Image_t<double>* img, string title, bool norm, bool log) {
-    DoubleImageWindow* wnd = new DoubleImageWindow(img, QString(), norm, log);
+void GenericOperation::outDoubleImage(imagein::Image_t<double>* img, string title, bool norm, bool log, double logScale, bool abs) {
+    DoubleImageWindow* wnd = new DoubleImageWindow(img, QString(), norm, log, logScale, abs);
     this->outImgWnd(wnd, title);
 }
 
