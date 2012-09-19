@@ -31,8 +31,9 @@ class QuantificationDialog : public QDialog
     Q_OBJECT
 public:
     enum QuantMethod {LinearQuant, NonLinearQuant, NonLinearQuantOptimized};
-    explicit QuantificationDialog(QWidget *parent = 0);
+    explicit QuantificationDialog(QWidget *parent = 0, QString imgName = QString());
     Quantification getQuantif(const imagein::Image *image, unsigned int c);
+    Quantification getQuantif();
 signals:
     
 public slots:
@@ -45,6 +46,7 @@ protected:
         QuantificationWidget* _quantWidget;
         QWidget* _editorWidget;
         QPushButton* _saveButton;
+        bool _editorOnly;
 };
 
 #endif // QUANTIFICATIONDIALOG_H
