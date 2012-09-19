@@ -35,6 +35,8 @@
 #include <QtXml/QDomElement>
 #include <QTextStream>
 
+#include <iostream>
+using namespace std;
 using namespace filtrme;
 using namespace imagein::algorithm;
 

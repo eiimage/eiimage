@@ -59,6 +59,14 @@
 #include "Operations/HuffmanOp.h"
 #include "Operations/RejectionRingOp.h"
 #include "Operations/MICDEncodingOp.h"
+#include "Operations/HadamardOp.h"
+#include "Operations/HaarOp.h"
+#include "Operations/DCTOp.h"
+#include "Operations/HoughOp.h"
+#include "Operations/InverseHoughOp.h"
+#include "Operations/PyramidOp.h"
+#include "Operations/InversePyramidOp.h"
+#include "Operations/ClassAnalysisOp.h"
 
 
 #include "Services/MorphoMatService.h"
@@ -151,6 +159,14 @@ int main(int argc, char** argv)
   opSet->addOperation(new FFTOp());
   opSet->addOperation(new IFFTOp());
   opSet->addOperation(new ZeroCrossingOp());
+  opSet->addOperation(new HadamardOp());
+  opSet->addOperation(new HaarOp());
+  opSet->addOperation(new DCTOp());
+  opSet->addOperation(new HoughOp());
+  opSet->addOperation(new InverseHoughOp());
+  opSet->addOperation(new PyramidOp());
+  opSet->addOperation(new InversePyramidOp());
+  opSet->addOperation(new ClassAnalysisOp());
 
 
   eiimageService->addOpSet(transforms);
