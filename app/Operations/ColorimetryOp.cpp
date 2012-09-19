@@ -44,6 +44,8 @@ void ColorimetryOp::operator()(const imagein::Image*, const std::map<const image
     ColorDialog* dialog = new ColorDialog(QApplication::activeWindow());
     dialog->setWindowTitle(QString(qApp->translate("Operations", "Colorimetry")));
 
+    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    QColor color = dialog->getColor();
     if(code!=QDialog::Accepted) return;
     Image* resImg = new Image(512, 512, 3);
     for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
