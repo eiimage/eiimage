@@ -4,19 +4,19 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="122"/>
+        <location filename="main.cpp" line="124"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="132"/>
+        <location filename="main.cpp" line="134"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="144"/>
+        <location filename="main.cpp" line="146"/>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
         <translation>&amp;Encoding</translation>
@@ -108,7 +108,7 @@
     <message>
         <location filename="Operations/ClassAnalysisDialog.ui" line="40"/>
         <source>Print file info</source>
-        <translation>Print file info.</translation>
+        <translation>Print file info</translation>
     </message>
     <message>
         <location filename="Operations/ClassAnalysisDialog.ui" line="48"/>
@@ -124,6 +124,81 @@
         <location filename="Operations/ClassAnalysisDialog.ui" line="83"/>
         <source>browse</source>
         <translation>browse</translation>
+    </message>
+</context>
+<context>
+    <name>ClassResult</name>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="81"/>
+        <source>
+Nombre de classes = %1 </source>
+        <oldsource>
+Nombre de classes = %1 
+</oldsource>
+        <translation>
+Number of classes = %1 </translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="85"/>
+        <source>Valeur de la classe %1 = %2</source>
+        <oldsource>Valeur de la classe %1 = %2
+</oldsource>
+        <translation>Value of class %1 = %2</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="80"/>
+        <source>Voici les rÃ©sultats du classement : 
+</source>
+        <translation>Here are the classification results : 
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="58"/>
+        <source>CritÃ¨re de zone intÃ©rieure : </source>
+        <translation>Inner zone criterion : </translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="59"/>
+        <source>CritÃ¨re de zone frontiÃ¨re : </source>
+        <translation>Border zone criterion : </translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="60"/>
+        <source>&lt;b&gt;CritÃ¨re de zones (relatifs aux zones totales) : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Areas&apos; criteria (relative to the whole zones) : &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="62"/>
+        <source>&lt;b&gt;Select the image&apos;s classes zones : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Select the image&apos;s classes zones : &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="121"/>
+        <source>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%</source>
+        <oldsource>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%
+</oldsource>
+        <translation>The correct classification rate in inner area %1 is %2%</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="124"/>
+        <source>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%</source>
+        <oldsource>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%
+</oldsource>
+        <translation>The correct classification rate in border area %1 is %2%</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="135"/>
+        <source>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%</source>
+        <oldsource>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%
+</oldsource>
+        <translation>The global correct classification rate in inner area is %1%</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="136"/>
+        <source>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%</source>
+        <oldsource>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%
+</oldsource>
+        <translation>The global correct classification rate in border area is %1%</translation>
     </message>
 </context>
 <context>
@@ -1165,6 +1240,11 @@
         <location filename="Operations/PyramidOp.cpp" line="44"/>
         <source>The image width must equal the image height.</source>
         <translation>The image width must equal the image height.</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassResultOp.cpp" line="37"/>
+        <source>Classification results</source>
+        <translation>Classification results</translation>
     </message>
 </context>
 <context>
