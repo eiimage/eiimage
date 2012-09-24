@@ -29,6 +29,7 @@
 #include "RandomImgOp.h"
 #include "../Tools.h"
 #include <RandomLib/Random.hpp>
+#include <QApplication>
 
 using namespace std;
 using namespace imagein;
@@ -38,7 +39,7 @@ RandomImgOp::RandomImgOp() : Operation(qApp->translate("Operations", "Generate r
 }
 
 void RandomImgOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
-    QDialog* dialog = new QDialog();
+    QDialog* dialog = new QDialog(qApp->activeWindow());
     dialog->setWindowTitle(qApp->translate("RandomImgOp", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout(dialog);
