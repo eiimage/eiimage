@@ -36,7 +36,7 @@ class EIImageService : public genericinterface::WindowService
 void GenericOperation::operator()(EIImageService* ws) {
     _ws = ws;
     _curImgWnd = ws->getCurrentImageWindow();
-    vector<ImageWindow*> wndList = ws->getImageWindows();
+    vector<const ImageWindow*> wndList = ws->getImageWindows();
     return this->operator ()(_curImgWnd, wndList);
 }
 
@@ -77,7 +77,7 @@ void GenericOperation::outText(std::string text) {
     _ws->outputText(QString(text.c_str()));
 }
 
-void Operation::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wndList) {
+void Operation::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
     const StandardImageWindow* curImgWnd = dynamic_cast<const StandardImageWindow*>(currentWnd);
     const Image* image = curImgWnd ? curImgWnd->getImage() : NULL;
     const Image* curImg = image;
@@ -92,7 +92,7 @@ void Operation::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& 
         }
     }
     map<const Image*, string> imgList;
-    for(vector<ImageWindow*>::iterator it = wndList.begin(); it != wndList.end(); ++it) {
+    for(vector<const ImageWindow*>::const_iterator it = wndList.begin(); it != wndList.end(); ++it) {
         const StandardImageWindow* imgWnd = dynamic_cast<const StandardImageWindow*>(*it);
         if(imgWnd) {
             const Image* img = imgWnd->getImage();
@@ -112,11 +112,11 @@ bool Operation::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const
     return (dynamic_cast<const StandardImageWindow*>(imgWnd) != NULL);
 }
 
-void DoubleOperation::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wndList) {
+void DoubleOperation::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
     const DoubleImageWindow* curImgWnd = dynamic_cast<const DoubleImageWindow*>(currentWnd);
     const Image_t<double>* image = curImgWnd ? curImgWnd->getImage() : NULL;
     map<const Image_t<double>*, string> imgList;
-    for(vector<ImageWindow*>::iterator it = wndList.begin(); it != wndList.end(); ++it) {
+    for(vector<const ImageWindow*>::const_iterator it = wndList.begin(); it != wndList.end(); ++it) {
         const DoubleImageWindow* imgWnd = dynamic_cast<const DoubleImageWindow*>(*it);
         if(imgWnd) {
             imgList.insert(pair<const Image_t<double>*, string>(imgWnd->getImage(), imgWnd->windowTitle().toStdString()));

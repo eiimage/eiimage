@@ -21,14 +21,18 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QApplication>
 
 #include "PlugOperation.h"
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
 
 
 using namespace std;
 using namespace imagein;
+using namespace genericinterface;
 
-PlugOperation::PlugOperation(string name) : Operation(name), _needCurrentImg(false), _currentImg(NULL) {
+PlugOperation::PlugOperation(string name) : GenericOperation(name), _needCurrentImg(false), _currentStdImg(NULL), _currentDblImg(NULL), _doubleCurrentImg(false) {
 }
 
 void PlugOperation::addInput(Input* input) {
@@ -43,26 +47,47 @@ void PlugOperation::addOutput(const Output& output) {
     _outputs.push_back(output.clone());
 }
 
+bool PlugOperation::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const {
+    if(!this->needCurrentImg()) {
+        return true;
+    }
+    if(_doubleCurrentImg) {
+        const DoubleImageWindow* diw = dynamic_cast<const DoubleImageWindow*>(imgWnd);
+        return diw != NULL;
+    }
+    else {
+        const StandardImageWindow* siw = dynamic_cast<const StandardImageWindow*>(imgWnd);
+        return siw != NULL;
+    }
+}
 
-void PlugOperation::operator()(const Image* currentImg, const std::map<const Image*, std::string>&) {
-    
+void PlugOperation::operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>& imgWndList) {
+
     if(this->needCurrentImg()) {
-        if(currentImg==NULL) return;
-        *_currentImg = *currentImg;
+        if(_doubleCurrentImg) {
+            const DoubleImageWindow* diw = dynamic_cast<const DoubleImageWindow*>(currentWnd);
+            if(diw ==NULL) return;
+            *_currentDblImg = *diw->getImage();
+        }
+        else {
+            const StandardImageWindow* siw = dynamic_cast<const StandardImageWindow*>(currentWnd);
+            if(siw == NULL) return;
+            *_currentStdImg = *siw->getImage();
+        }
     }
     
     if(_inputs.size()>0) {
         QDialog* dialog = new QDialog();
-        dialog->setWindowTitle("Paramètres");
+        dialog->setWindowTitle(qApp->translate("PlugOperation", "Parameters"));
         dialog->setMinimumWidth(160);
         QVBoxLayout* layout = new QVBoxLayout();
         dialog->setLayout(layout);
 
         for(vector<Input*>::iterator it = _inputs.begin(); it < _inputs.end(); ++it) {
-            (*it)->fillDialog(dialog);
+            (*it)->fillDialog(dialog, currentWnd, imgWndList);
         }
         
-        QPushButton *okButton = new QPushButton("Valider", dialog);
+        QPushButton *okButton = new QPushButton(qApp->translate("PlugOperation", "Validate"), dialog);
         okButton->setDefault(true);
         layout->addWidget(okButton);
         QObject::connect(okButton, SIGNAL(clicked()), dialog, SLOT(accept()));
@@ -79,11 +104,5 @@ void PlugOperation::operator()(const Image* currentImg, const std::map<const Ima
         } 
     }
     
-    
-    _outputs.clear();
     this->operation();
-    
-    for(vector<Output*>::iterator it = _outputs.begin(); it < _outputs.end(); ++it) {
-//        result.push_back((*it)->getWidget());
-    }
 }

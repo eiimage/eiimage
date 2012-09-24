@@ -25,15 +25,32 @@
 #include "Input.h"
 
 template<typename T>
+/**
+ * @brief Parameter is a generic partial implementation of Input
+ *
+ * This class gather common code of most of the Input implementations.
+ *
+ */
 class Parameter : public Input {
   public:
     
+/**
+ * @brief Constructor
+ *
+ * @param name Name of the input, as it will be displayed to the user
+ * @param ptr Pointer to the location in which to store the given input.
+ */
     Parameter(std::string name, T* ptr = NULL) : _ptr(ptr), _name(name) {}
+    /**
+     * @brief Copy constructor
+     *
+     * @return Parameter<T> Copy ot this instance
+     */
     virtual Parameter<T>* clone() const = 0;
   
   protected:
-    T* _ptr;
-    std::string _name;
+    T* _ptr; /**< Pointer to the location in which to store the input */
+    std::string _name; /**< Name of the input */
     
     friend class PlugOperation;
   

@@ -28,15 +28,42 @@
 
 class QSpinBox;
 class QDialog;
+/**
+ * @brief This class describes a way to get an int parameter from the user.
+ *
+ */
 class IntParam : public Parameter<int> {
   public:
+/**
+ * @brief Constructor of the input, wille be directly called inside the PlugOperation constructor.
+ *
+ * @param name Name of the input as it will be displayed to the user
+ * @param min Lower bound of the possible values
+ * @param max Upper bound of the possible values
+ * @param def Default value of the input
+ */
     IntParam(std::string name, int min, int max, int def = 0);
-    virtual void fillDialog(QDialog*);
+    /**
+     * @brief Add a QSpinBox with the specified name to the dialog.
+     *
+     * @param dialog The dialog in which to add the widgets.
+     */
+    virtual void fillDialog(QDialog* dialog, const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>& wndList);
+
+    /**
+     * @brief Get the value of the QSpinBox and store it in the location pointerd by Parameter::_ptr
+     *
+     */
     virtual void pickValue();
+    /**
+     * @brief Copy constructor
+     *
+     * @return IntParam A copy of this instance
+     */
     virtual IntParam* clone() const;
   protected:
-    int _min, _max, _def;
-    QSpinBox* _spinbox;
+    int _min, _max, _def; /**< The QSpinBox parameters */
+    QSpinBox* _spinbox; /**< The QSpinBox widget to get the value from */
 };
 
 #endif //!EIIMAGE_INTPARAM_H

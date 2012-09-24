@@ -17,15 +17,37 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
+#include <Widgets/ImageListBox.h>
+#include <QWidget>
+#include <QFormLayout>
+#include <QDialog>
 #include "ImgParam.h"
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
 
+using namespace std;
 using namespace imagein;
+using namespace genericinterface;
 
-void ImgParam::fillDialog(QDialog*) {
+void ImgParam::fillDialog(QDialog* dialog, const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
+    QString currentImgName = currentWnd->windowTitle();
+    map<const Image*,string> imgList;
+    for(vector<const ImageWindow*>::const_iterator it = wndList.begin(); it != wndList.end(); ++it) {
+        if((*it)->isStandard()) {
+            const StandardImageWindow* stdImgWnd = dynamic_cast<const StandardImageWindow*>(*it);
+            imgList.insert(pair<const Image*, string>(stdImgWnd->getImage(), stdImgWnd->windowTitle().toStdString()));
+        }
+    }
+    QWidget *widget = new QWidget();
+    QFormLayout* layout = new QFormLayout();
+    _imgListBox = new ImageListBox(widget, NULL, imgList);
+    layout->insertRow(1, QString(this->_name.c_str()) + " : ", _imgListBox);
+    widget->setLayout(layout);
+    dialog->layout()->addWidget(widget);
 }
 
 void ImgParam::pickValue() {
+    *this->_ptr = *_imgListBox->currentImage();
 }
 
 Parameter<Image>* ImgParam::clone() const {

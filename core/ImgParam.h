@@ -22,16 +22,31 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include "Image.h"
 
 #include "Parameter.h"
 
+template<typename D>
+class ImageListBox_t;
+/**
+ * @brief This class describes a way to get an Image parameter from the user
+ *
+ */
 class ImgParam : public Parameter<imagein::Image> {
   public:
-    ImgParam(std::string name, imagein::Image* ptr = NULL) : Parameter(name, ptr) {}
-    virtual void fillDialog(QDialog*);
+/**
+ * @brief Constructor, will be directly called in the PlugOperation.
+ *
+ * @param name Name of the input.
+ * @param ptr Pointer in which to store the given input.
+ */
+    ImgParam(std::string name, imagein::Image* ptr = NULL) : Parameter<imagein::Image >(name, ptr) {}
+    virtual void fillDialog(QDialog* dialog, const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>& wndList);
     virtual void pickValue();
-    virtual Parameter* clone() const;
+    virtual Parameter<imagein::Image >* clone() const;
+  protected:
+    ImageListBox_t<uint8_t>* _imgListBox;
 };
 
 #endif //!EIIMAGE_IMGPARAM_H
