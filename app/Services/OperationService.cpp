@@ -40,8 +40,13 @@ OperationService::OperationService(GenericOperation* operation, QMenu* menu) : _
 void OperationService::display(GenericInterface* gi)
 {
     _gi = gi;
-    
-    _action = _menu->addAction(_operation->getName().c_str());
+
+    if(_operation->getName().length() > 0) {
+        _action = _menu->addAction(_operation->getName().c_str());
+    }
+    else {
+        _action = _menu->addSeparator();
+    }
 }
 
 void OperationService::connect(GenericInterface* gi)
@@ -51,11 +56,11 @@ void OperationService::connect(GenericInterface* gi)
 
 
 void OperationService::operation() {
-    cout << _operation->getName() << endl;
+//    cout << _operation->getName() << endl;
     
     WindowService* ws = _gi->windowService();
     ImageWindow* curImgWnd = ws->getCurrentImageWindow();
-    
+
 //    StandardImageWindow* curStdImgWnd = NULL;
 //    if (curImgWnd != NULL)
 //    {

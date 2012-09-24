@@ -46,6 +46,10 @@
 #include <QtXml/QDomElement>
 #include <QTextStream>
 
+#include <QGroupBox>
+#include <QRadioButton>
+#include <QHBoxLayout>
+
 #include <QFormLayout>
 #include <QSpacerItem>
 #include <GenericInterface.h>
@@ -60,6 +64,10 @@ FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
   initUI();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::initUI()
 {
 
@@ -69,8 +77,10 @@ void FilterChoice::initUI()
     layout->addWidget(mainWidget);
     QHBoxLayout* mainLayout = new QHBoxLayout(mainWidget);
     QWidget* leftWidget = new QWidget();
-    QFormLayout* leftLayout = new QFormLayout(leftWidget);
+    QLayout* leftLayout = new QVBoxLayout(leftWidget);
 
+    QGroupBox* confBox = new QGroupBox(tr("Filter configuration"));
+    QFormLayout* confLayout = new QFormLayout(confBox);
     /* FILTER CHOICE */
     QLabel* label = new QLabel(this);
     label->setText(tr("Filter:"));
@@ -78,7 +88,7 @@ void FilterChoice::initUI()
     QStringList blurs = initFilters();
     _blurChoices->addItems(blurs);
     QObject::connect(_blurChoices, SIGNAL(currentIndexChanged(int)), this, SLOT(currentBlurChanged(int)));
-    leftLayout->addRow(label, _blurChoices);
+    confLayout->addRow(label, _blurChoices);
 
     /* POLICIES CHOICE */
     QLabel* label_2 = new QLabel(this);
@@ -86,14 +96,25 @@ void FilterChoice::initUI()
     _policyChoices = new QComboBox(this);
     QStringList policies = QStringList() << tr("Black") << tr("Mirror") << tr("Nearest") << tr("Spherical");
     _policyChoices->addItems(policies);
-    leftLayout->addRow(label_2, _policyChoices);
+    confLayout->addRow(label_2, _policyChoices);
 
     _labelNumber = new QLabel(this);
     _labelNumber->setText(tr("Number of pixels:"));
     _number = new QSpinBox(this);
     _number->setValue(3);
     _number->setMinimum(1);
-    leftLayout->addRow(_labelNumber, _number);
+    confLayout->addRow(_labelNumber, _number);
+
+    QGroupBox* radioBox = new QGroupBox(tr("Resulting image type"));
+    _stdResButton = new QRadioButton(tr("Standard"));
+    _dblResButton = new QRadioButton(tr("Floating point"));
+    radioBox->setLayout(new QHBoxLayout());
+    radioBox->layout()->addWidget(_stdResButton);
+    radioBox->layout()->addWidget(_dblResButton);
+
+    leftLayout->addWidget(confBox);
+    leftLayout->addWidget(radioBox);
+
 
     mainLayout->addWidget(leftWidget);
 
@@ -151,6 +172,11 @@ void FilterChoice::initUI()
 
 }
 
+/**
+ * @brief
+ *
+ * @return QStringList
+ */
 QStringList FilterChoice::initFilters() {
 
   QStringList blurs = QStringList();
@@ -223,16 +249,30 @@ QStringList FilterChoice::initFilters() {
   return blurs;
 }
 
+/**
+ * @brief
+ *
+ * @param int
+ */
 void FilterChoice::currentBlurChanged(int)
 {
   updateDisplay();
 }
 
+/**
+ * @brief
+ *
+ * @param
+ */
 void FilterChoice::dataChanged(const QString&)
 {
   updateDisplay();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::validate()
 {
   int num = _number->value();
@@ -272,11 +312,19 @@ void FilterChoice::validate()
   this->accept();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::cancel()
 {
 //  emit(cancelAction());
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::deleteFilter()
 {
   QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter will be permanently deleted ?"));
@@ -321,6 +369,10 @@ void FilterChoice::deleteFilter()
   }
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::updateDisplay()
 {
   std::vector<Filter*> filters;

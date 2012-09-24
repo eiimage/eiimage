@@ -24,6 +24,7 @@
 #include <GenericInterface.h>
 #include <Converter.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <QApplication>
 
 using namespace filtrme;
 using namespace genericinterface;
@@ -35,7 +36,7 @@ void FilteringService::display(GenericInterface* gi)
 
 //    _filtering = _toolBar->addAction("&Filtering");
 //    _filterEdition = _toolBar->addAction("&FilterEditor");
-    QMenu* menu = gi->menu(tr("Filtering"));
+    QMenu* menu = gi->menu(qApp->translate("", "Filtering"));
     _filtering = menu->addAction(tr("&Apply filter"));
     _filtering->setEnabled(false);
     _filterEdition = menu->addAction(tr("&Edit filters"));
@@ -63,6 +64,7 @@ void FilteringService::applyFiltering()
         _siw = siw;
 
         _filterChoice = new FilterChoice(_gi);
+        _filterChoice->setDoubleResult(siw->isDouble());
 //        QMdiArea* area = (QMdiArea*)_gi->centralWidget();
 //        area->addSubWindow(_filterChoice);
         QDialog::DialogCode code = static_cast<QDialog::DialogCode>(_filterChoice->exec());
@@ -70,6 +72,7 @@ void FilteringService::applyFiltering()
         if(code!=QDialog::Accepted) {
             return;
         }
+        _dblResult = _filterChoice->doubleResult();
 
         Filtering* filtering = _filterChoice->getFiltering();
         this->applyAlgorithm(filtering);
@@ -109,15 +112,22 @@ void FilteringService::applyAlgorithm(Filtering* algo)
         ImageWindow* riw;
         if(_siw->isStandard()) {
             delete image;
+        }
+        if(_dblResult) {
+            DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
+            if(diw != NULL) {
+                riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+            }
+            else {
+                riw = new DoubleImageWindow(dblResImg, _siw->getPath());
+            }
+        }
+        else {
             Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
             delete dblResImg;
             Image* resImg = Converter<Image>::makeDisplayable(*intResImg);
             delete intResImg;
             riw = new StandardImageWindow(resImg, _siw->getPath());
-        }
-        else {
-            DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
-            riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
         }
         riw->setWindowTitle(_siw->windowTitle());
         emit newImageWindowCreated(_ws->getNodeId(_siw), riw);

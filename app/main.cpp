@@ -60,13 +60,14 @@
 #include "Operations/RejectionRingOp.h"
 #include "Operations/MICDEncodingOp.h"
 #include "Operations/HadamardOp.h"
-#include "Operations/HaarOp.h"
 #include "Operations/DCTOp.h"
 #include "Operations/HoughOp.h"
 #include "Operations/InverseHoughOp.h"
 #include "Operations/PyramidOp.h"
 #include "Operations/InversePyramidOp.h"
 #include "Operations/ClassAnalysisOp.h"
+#include "Operations/ClassResultOp.h"
+#include "Operations/SeparatorOp.h"
 
 
 #include "Services/MorphoMatService.h"
