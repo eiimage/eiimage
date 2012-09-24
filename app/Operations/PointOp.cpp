@@ -30,7 +30,6 @@
 #include <QGroupBox>
 
 #include "PointOp.h"
-#include "ImgWidget.h"
 #include <Widgets/ImageListBox.h>
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>

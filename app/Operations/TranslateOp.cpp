@@ -4,8 +4,6 @@
 #include <QSpinBox>
 #include <QCheckBox>
 
-#include "ImgWidget.h"
-
 #include "TranslateOp.h"
 #include "../Tools.h"
 using namespace std;

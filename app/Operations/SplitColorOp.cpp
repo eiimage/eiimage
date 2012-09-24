@@ -18,8 +18,6 @@
 */
 #include <GrayscaleImage.h>
 
-#include "ImgWidget.h"
-
 #include "SplitColorOp.h"
 #include "../Tools.h"
 

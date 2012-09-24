@@ -43,10 +43,6 @@ void PlugOperation::addInput(const Input& input) {
     this->_inputs.push_back(input.clone());
 }
 
-void PlugOperation::addOutput(const Output& output) {
-    _outputs.push_back(output.clone());
-}
-
 bool PlugOperation::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const {
     if(!this->needCurrentImg()) {
         return true;

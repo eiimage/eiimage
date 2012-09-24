@@ -22,8 +22,6 @@
 
 #include <Operation.h>
 #include <Image.h>
-#include <ImgWidget.h>
-
 
 #include "CenterOp.h"
 

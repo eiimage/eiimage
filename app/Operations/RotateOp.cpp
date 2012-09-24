@@ -23,8 +23,6 @@
 #include <QSpinBox>
 #include <QCheckBox>
 
-#include "ImgWidget.h"
-
 #include "RotateOp.h"
 #include "../Tools.h"
 

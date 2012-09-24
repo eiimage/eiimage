@@ -21,7 +21,6 @@
 
 #include <Image.h>
 
-#include "ImgWidget.h"
 #include "FlipOp.h"
 
 using namespace std;

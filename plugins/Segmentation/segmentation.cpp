@@ -73,6 +73,7 @@ class Dithering : public PlugOperation {
   public:
     Dithering() : PlugOperation("Dithering") {
         this->addParam(CurrentImg(), &Dithering::img);
+//        this->addParam(ImgParam("Image"), &Dithering::img);
     }
     
     void operation() {

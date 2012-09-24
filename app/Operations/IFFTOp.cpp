@@ -26,7 +26,6 @@
 #include <QRadioButton>
 
 #include "IFFTOp.h"
-#include "ImgWidget.h"
 #include "../Tools.h"
 #include "../Algorithms/FFT.h"
 #include <cmath>
@@ -100,6 +99,7 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
 
         const Image_t<double>* magnitudeImg = magtdImgBox->currentImage();
         const Image_t<double>* phaseImg = phaseImgBox->currentImage();
+        if(magnitudeImg == NULL || phaseImg == NULL) return;
         unsigned int width = min(nearestUpPower2(magnitudeImg->getWidth()), nearestUpPower2(phaseImg->getWidth()));
         unsigned int height = min(nearestUpPower2(magnitudeImg->getHeight()), nearestUpPower2(phaseImg->getHeight()));
         unsigned int channels = min(magnitudeImg->getNbChannels(), phaseImg->getNbChannels());
@@ -151,6 +151,7 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
 
         const Image_t<double>* realImg = realImgBox->currentImage();
         const Image_t<double>* imagImg = imagImgBox->currentImage();
+        if(realImg == NULL || imagImg == NULL) return;
         unsigned int width = min(nearestUpPower2(realImg->getWidth()), nearestUpPower2(imagImg->getWidth()));
         unsigned int height = min(nearestUpPower2(realImg->getHeight()), nearestUpPower2(imagImg->getHeight()));
         unsigned int channels = min(realImg->getNbChannels(), imagImg->getNbChannels());

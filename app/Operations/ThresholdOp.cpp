@@ -1,5 +1,3 @@
-#include "ImgWidget.h"
-
 #include "Algorithm/Binarization.h"
 #include "Converter.h"
 
