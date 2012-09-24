@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>259</width>
+    <width>261</width>
     <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Pyramid generator</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
