@@ -27,6 +27,8 @@
 #include "CroissanceOp.h"
 #include "../Tools.h"
 #include "../Algorithms/Croissance.h"
+#include <GrayscaleImage.h>
+#include <Converter.h>
 
 using namespace std;
 using namespace imagein;
@@ -73,6 +75,9 @@ void CroissanceOp::operator()(const imagein::Image* image, const std::map<const 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) return;
+
+    GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
+
     Croissance cr;
     Image *lum, *color;
     int nbRegion;
@@ -97,5 +102,6 @@ void CroissanceOp::operator()(const imagein::Image* image, const std::map<const 
     outImage(color, qApp->translate("CroissanceOp", "Color").toStdString());
     outText(qApp->translate("CroissanceOp", "Total number of area : %1").arg(nbRegion).toStdString());
     outText(qApp->translate("CroissanceOp", "Mean number of point per area : %1").arg((double)image->getWidth()*image->getHeight()/nbRegion).toStdString());
+    delete image;
 }
 
