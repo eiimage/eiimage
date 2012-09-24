@@ -36,7 +36,8 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
 //    const uint8_t* tabim = image->begin();
 //    double* itab = new double[ image->size() ];
 //    for(unsigned int i = 0; i < image->size(); ++i) itab[i] = 0;
-    Image_t<double>* resImg = new Image_t<double>(image->getWidth()*sqrt2+0.5, 180, 1, 0.);
+    double diag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
+    Image_t<double>* resImg = new Image_t<double>(diag+0.5, 180, 1, 0.);
 
     for(unsigned int j = 0; j < image->getHeight(); j++) {
         for(unsigned int i = 0; i < image->getWidth(); i++) {
@@ -121,7 +122,8 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
 //    double rhoStep = 1.;
 
 
-    double imageDiag = image->getWidth() * sqrt(2.);
+//    double imageDiag = image->getWidth() * sqrt(2.);
+    double imageDiag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
     Image_t<double>* resImg = new Image_t<double>(1. + imageDiag / rhoStep, 180. / angleStep + 0.5, image->getNbChannels(), 0.);
 
 
