@@ -34,7 +34,9 @@ public:
     explicit ColorDialog(QWidget *parent = 0);
     ~ColorDialog();
     QColor getColor() const;
-    
+    unsigned int getWidth() const;
+    unsigned int getHeight() const;
+
 private:
     Ui::ColorDialog *ui;
 };

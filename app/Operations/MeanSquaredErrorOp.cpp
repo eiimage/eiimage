@@ -23,7 +23,7 @@
 #include <QFormLayout>
 #include <Image.h>
 
-#include "ImageListBox.h"
+#include <Widgets/ImageListBox.h>
 #include "../Tools.h"
 
 #include "MeanSquaredErrorOp.h"

@@ -28,7 +28,7 @@
 #include <Converter.h>
 
 #include <ImgWidget.h>
-#include "ImageListBox.h"
+#include <Widgets/ImageListBox.h>
 
 #include "CombineColorOp.h"
 #include "../Tools.h"

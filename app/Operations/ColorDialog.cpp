@@ -49,3 +49,11 @@ QColor ColorDialog::getColor() const {
         return QColor::fromHsv(h, s, v);
     }
 }
+
+unsigned int ColorDialog::getWidth() const {
+    return ui->widthBox->value();
+}
+
+unsigned int ColorDialog::getHeight() const {
+    return ui->heightBox->value();
+}
