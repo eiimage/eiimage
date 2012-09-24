@@ -42,7 +42,7 @@ bool CroissanceOp::needCurrentImg() const {
     return true;
 }
 
-void CroissanceOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
+void CroissanceOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
     dialog->setWindowTitle(QString(qApp->translate("Operations", "Croissance")));

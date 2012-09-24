@@ -43,7 +43,7 @@ NoiseOp::NoiseOp() : GenericOperation(qApp->translate("Operations", "Add noise")
 {
 }
 
-void NoiseOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>&) {
+void NoiseOp::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>&) {
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));

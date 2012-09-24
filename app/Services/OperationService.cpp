@@ -69,8 +69,8 @@ void OperationService::operation() {
     if(_operation->needCurrentImg() && !_operation->isValidImgWnd(curImgWnd)) return;
 
     map<const ImageWindow*, string> wndList;
-    vector<ImageWindow*> windows = ws->getImageWindows();
-    for(vector<ImageWindow*>::iterator it = windows.begin(); it < windows.end(); ++it) {
+    vector<const ImageWindow*> windows = ws->getImageWindows();
+    for(vector<const ImageWindow*>::const_iterator it = windows.begin(); it < windows.end(); ++it) {
         wndList.insert(pair<const ImageWindow*, string>(*it, (*it)->windowTitle().toStdString()));
     }
 

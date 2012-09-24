@@ -36,7 +36,7 @@ class PointOp : public GenericOperation {
 
     PointOp();
 
-    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>&);
 
     bool needCurrentImg() const;
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;

@@ -44,7 +44,7 @@ public:
         static void interpolate(typename imagein::Image_t<D>::ConstLine src, typename imagein::Image_t<double>::Line dst);
     };
 
-    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>&);
 
     bool needCurrentImg() const;
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;

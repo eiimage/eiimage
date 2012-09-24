@@ -90,7 +90,7 @@ PointOp::DoubleImageOp* PointOp::DoubleImageOp::fromString(QString op) {
     return new DoubleImgIdent();
 }
 
-void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wndList) {
+void PointOp::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
 
     QStringList pixOperators, imgOperators;
 
@@ -99,7 +99,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, vector<ImageWindow*>& wn
     QString currentImgName = currentWnd->windowTitle();
     map<const Image*,string> stdImgList;
     map<const Image_t<double>*,string> dblImgList;
-    for(vector<ImageWindow*>::iterator it = wndList.begin(); it != wndList.end(); ++it) {
+    for(vector<const ImageWindow*>::const_iterator it = wndList.begin(); it != wndList.end(); ++it) {
         if((*it)->isStandard()) {
             const StandardImageWindow* stdImgWnd = dynamic_cast<const StandardImageWindow*>(*it);
             stdImgList.insert(pair<const Image*, string>(stdImgWnd->getImage(), stdImgWnd->windowTitle().toStdString()));

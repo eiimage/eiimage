@@ -50,7 +50,7 @@ bool ScalingOp::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const
     return imgWnd != NULL;
 }
 
-void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vector<ImageWindow*>&) {
+void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, const vector<const ImageWindow*>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
     dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling")));
