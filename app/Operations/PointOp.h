@@ -84,7 +84,7 @@ class PointOp : public GenericOperation {
     };
 
     struct PixAdd : PixOp_t<int> {
-        PixAdd(int value_) : PixOp_t(value_) {}
+        PixAdd(int value_) : PixOp_t<int>(value_) {}
         intmax_t op(depth_t pixel) { return pixel + value; }
     };
     struct DoublePixAdd : DoublePixelOp {
@@ -93,7 +93,7 @@ class PointOp : public GenericOperation {
     };
 
     struct PixMul : PixOp_t<double> {
-        PixMul(double value_) : PixOp_t(value_) {}
+        PixMul(double value_) : PixOp_t<double>(value_) {}
         intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
     };
     struct DoublePixMul : DoublePixelOp {
@@ -102,27 +102,27 @@ class PointOp : public GenericOperation {
     };
 
     struct PixAnd : PixOp_t<depth_t> {
-        PixAnd(depth_t value_) : PixOp_t(value_) {}
+        PixAnd(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel & value; }
     };
 
     struct PixOr : PixOp_t<depth_t> {
-        PixOr(depth_t value_) : PixOp_t(value_) {}
+        PixOr(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel | value; }
     };
 
     struct PixXor : PixOp_t<depth_t> {
-        PixXor(depth_t value_) : PixOp_t(value_) {}
+        PixXor(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel ^ value; }
     };
 
     struct PixLshift : PixOp_t<unsigned int> {
-        PixLshift(unsigned int value_) : PixOp_t(value_) {}
+        PixLshift(unsigned int value_) : PixOp_t<unsigned int>(value_) {}
         intmax_t op(depth_t pixel) { return pixel << value; }
     };
     
     struct PixRshift : PixOp_t<unsigned int> {
-        PixRshift(unsigned int value_) : PixOp_t(value_) {}
+        PixRshift(unsigned int value_) : PixOp_t<unsigned int>(value_) {}
         intmax_t op(depth_t pixel) { return pixel >> value; }
     };
 

@@ -69,9 +69,8 @@ void EIImageService::addOpSet(OpSet* opSet) {
 void EIImageService::removeOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
-            _opSetServices.erase(it);
             _gi->removeService(*it);
-            delete *it;
+            _opSetServices.erase(it);
             return;
         }
     }
@@ -82,4 +81,10 @@ void EIImageService::outputText(QString text) {
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 //    _statusEdit->setMinimumHeight(32);
+}
+
+void EIImageService::addText(std::string s) {
+    _statusEdit->append(QString::fromStdString(s));
+    _statusEdit->show();
+    if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 }

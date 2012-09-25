@@ -26,9 +26,9 @@
 #include "Image.h"
 
 class QWidget;
-class EIImageService;
 namespace genericinterface {
     class ImageWindow;
+    class WindowService;
 }
 
 /**
@@ -68,7 +68,7 @@ class GenericOperation {
      *
      * @param ws The eiimage implementation of the genericinterface::WindowService
      */
-    virtual void operator()(EIImageService* ws);
+    virtual void operator()(genericinterface::WindowService* ws);
 
     /**
      * @brief This method should return wether this Operation need the currentWnd parameter.
@@ -131,7 +131,7 @@ class GenericOperation {
     void outText(std::string);
 
     std::string _name; /**< The name of the operation */
-    EIImageService* _ws; /**< A pointer to the eiimage window service, only valid inside the function call operator */
+    genericinterface::WindowService* _ws; /**< A pointer to the eiimage window service, only valid inside the function call operator */
     genericinterface::ImageWindow* _curImgWnd; /**< A pointer to the current image window, only valid inside the function call operator */
   private:
     /**

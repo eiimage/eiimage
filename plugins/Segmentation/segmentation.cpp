@@ -30,7 +30,6 @@
 #include "Plugin.h"
 #include "ImgParam.h"
 #include "IntParam.h"
-#include "ImgOutput.h"
 
 using namespace std;
 using namespace imagein;

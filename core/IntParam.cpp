@@ -29,7 +29,7 @@ using namespace imagein;
 using namespace std;
 using namespace genericinterface;
 
-IntParam::IntParam(std::string name, int min, int max, int def) : Parameter(name), _min(min), _max(max) {
+IntParam::IntParam(std::string name, int min, int max, int def) : Parameter<int>(name), _min(min), _max(max) {
     _def = std::min(def, _max);
     _def = std::max(def, _min);
 }

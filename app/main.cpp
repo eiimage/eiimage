@@ -30,7 +30,6 @@
 #include "Services/PluginManager.h"
 #include "Services/EIImageService.h"
 
-#include "Operations/TestOp.h"
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
 #include "Operations/TranslateOp.h"

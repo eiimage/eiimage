@@ -20,6 +20,7 @@
 #include "Operation.h"
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <Services/WindowService.h>
 
 using namespace std;
 using namespace imagein;
@@ -33,7 +34,7 @@ class EIImageService : public genericinterface::WindowService
     void outputText(QString text);
 };
 
-void GenericOperation::operator()(EIImageService* ws) {
+void GenericOperation::operator()(WindowService* ws) {
     _ws = ws;
     _curImgWnd = ws->getCurrentImageWindow();
     vector<const ImageWindow*> wndList = ws->getImageWindows();
@@ -74,7 +75,7 @@ void GenericOperation::outDoubleImage(imagein::Image_t<double>* img, string titl
 
 void GenericOperation::outText(std::string text) {
     if(_ws == NULL) return;
-    _ws->outputText(QString(text.c_str()));
+    _ws->addText(text);
 }
 
 void Operation::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {

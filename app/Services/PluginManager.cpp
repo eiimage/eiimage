@@ -128,7 +128,14 @@ void PluginManager::choosePlugin() {
 }
 void PluginManager::unloadAllPlugins() {
     for(std::map<string, Plugin*>::iterator it = _plugins.begin(); it != _plugins.end(); ++it) {
-        emit removePlugin(it->second);
+        Plugin* plugin = it->second;
+        map<Plugin*,QLibrary*>::iterator lit = _libraries.find(plugin);
+        if(lit != _libraries.end()) {
+            bool res = lit->second->unload();
+            std::cout << "Unloading " << lit->second->fileName().toStdString() << "..." << res << std::endl;
+            _libraries.erase(lit);
+        }
+        emit removePlugin(plugin);
     }
     _plugins.clear();
     checkActionsValid();
@@ -140,8 +147,14 @@ void PluginManager::unloadPlugin(Plugin* plugin) {
             //delete it->second;
             //_pluginServices.erase(it);
             ////it = _pluginServices.begin();
-            _plugins.erase(it->first);
+            map<Plugin*,QLibrary*>::iterator lit = _libraries.find(plugin);
+            if(lit != _libraries.end()) {
+                bool res = lit->second->unload();
+                std::cout << "Unloading " << lit->second->fileName().toStdString() << "..." << res << std::endl;
+                _libraries.erase(lit);
+            }
             emit removePlugin(plugin);
+            _plugins.erase(it);
             checkActionsValid();
             return;
         }
@@ -191,6 +204,7 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     
     //PluginService* pluginService = new PluginService(plugin);
     _plugins.insert(pair<string,Plugin*>(file.toStdString(), plugin));
+    _libraries.insert(pair<Plugin*,QLibrary*>(plugin, library));
     //_gi->addService(pluginService);
     emit addPlugin(plugin);
     checkActionsValid();
