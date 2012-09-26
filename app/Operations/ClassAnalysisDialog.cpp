@@ -32,8 +32,9 @@ ClassAnalysisDialog::ClassAnalysisDialog(QWidget *parent, const imagein::Image* 
     _imgZoneSelector = new ImageZoneSelector(this, new Image(*img));
     ui->setupUi(this);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    ui->verticalLayout->addWidget(_imgZoneSelector);
-    _imgZoneSelector->setVisible(false);
+    _label = new QLabel(tr("Please select the image's area to classify :"));
+    ui->formLayout->addRow(_label);
+    ui->formLayout->addRow(_imgZoneSelector);
     this->adjustSize();
     ui->buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     connect(_imgZoneSelector, SIGNAL(selectionEmptinessChanged()), this, SLOT(checkData()));
@@ -62,11 +63,11 @@ void ClassAnalysisDialog::on_fileEdit_textChanged(QString /*str*/) {
 }
 
 bool ClassAnalysisDialog::isLearningStep() const {
-    return ui->stepBox->currentIndex() == 1;
+    return ui->stepBox->currentIndex() == 0;
 }
 
 bool ClassAnalysisDialog::isClassificationStep() const {
-    return ui->stepBox->currentIndex() == 0;
+    return ui->stepBox->currentIndex() == 1;
 }
 QString ClassAnalysisDialog::getFileName() const {
     return ui->fileEdit->text();
@@ -77,7 +78,9 @@ int ClassAnalysisDialog::getWindowSize() const {
 }
 
 void ClassAnalysisDialog::on_stepBox_currentIndexChanged(int i) {
-    _imgZoneSelector->setVisible(i == 1);
+    _imgZoneSelector->setVisible(i == 0);
+    _label->setVisible(i == 0);
+    ui->formLayout->invalidate();
     ui->windowBox->setEnabled(i != 2);
     ui->windowLabel->setEnabled(i != 2);
     this->adjustSize();

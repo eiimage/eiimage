@@ -35,7 +35,7 @@
 using namespace std;
 using namespace imagein;
 
-IFFTOp::IFFTOp() : DoubleOperation(qApp->translate("Operations", "Discrete Fourier reconstruction").toStdString())
+IFFTOp::IFFTOp() : DoubleOperation(qApp->translate("Operations", "Inverse Fourier transform").toStdString())
 {
 }
 

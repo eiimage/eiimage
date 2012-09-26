@@ -34,7 +34,7 @@
 using namespace std;
 using namespace imagein;
 
-BFlitOp::BFlitOp() : Operation(qApp->translate("Operations", "BFlit").toStdString())
+BFlitOp::BFlitOp() : Operation(qApp->translate("Operations", "BFilt").toStdString())
 {
 }
 

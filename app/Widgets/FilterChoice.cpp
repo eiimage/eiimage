@@ -96,14 +96,24 @@ void FilterChoice::initUI()
     _policyChoices = new QComboBox(this);
     QStringList policies = QStringList() << tr("Black") << tr("Mirror") << tr("Nearest") << tr("Spherical");
     _policyChoices->addItems(policies);
+    _policyChoices->setCurrentIndex(2);
     confLayout->addRow(label_2, _policyChoices);
 
     _labelNumber = new QLabel(this);
-    _labelNumber->setText(tr("Number of pixels:"));
+    _labelNumber->setText(tr("Filter size:"));
     _number = new QSpinBox(this);
     _number->setValue(3);
     _number->setMinimum(1);
     confLayout->addRow(_labelNumber, _number);
+
+    _stdDevLabel = new QLabel(tr("Standard deviation : "));
+    _stdDevBox = new QDoubleSpinBox(this);
+    _stdDevBox->setValue(1.);
+    _stdDevBox->setRange(0., 256.);
+    _stdDevBox->setSingleStep(0.1);
+    confLayout->addRow(_stdDevLabel, _stdDevBox);
+    _stdDevLabel->setVisible(false);
+    _stdDevBox->setVisible(false);
 
     QGroupBox* radioBox = new QGroupBox(tr("Resulting image type"));
     _stdResButton = new QRadioButton(tr("Standard"));
@@ -119,6 +129,7 @@ void FilterChoice::initUI()
     mainLayout->addWidget(leftWidget);
 
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
+    QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
 
 
     QWidget* rightWidget = new QWidget();
@@ -183,7 +194,7 @@ QStringList FilterChoice::initFilters() {
   blurs << tr("Uniform") << tr("Gaussian") << tr("Prewitt") << tr("Roberts") << tr("Sobel") << tr("SquareLaplacien");
 
   _filters.push_back(Filter::uniform(3));
-  _filters.push_back(Filter::gaussian(1));
+  _filters.push_back(Filter::gaussian(3, 1.));
   _filters.push_back(Filter::prewitt(3));
   _filters.push_back(Filter::roberts());
   _filters.push_back(Filter::sobel());
@@ -283,7 +294,8 @@ void FilterChoice::validate()
       _filtering = new Filtering(Filtering::uniformBlur(num));
       break;
     case 1:
-      _filtering = new Filtering(Filtering::gaussianBlur(num));
+      _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
+//      _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
       break;
     case 2:
       _filtering = new Filtering(Filtering::prewitt(num));
@@ -294,20 +306,17 @@ void FilterChoice::validate()
   
   switch(_policyChoices->currentIndex())
   {
-    case 0:
-      _filtering->setPolicy(Filtering::blackPolicy);
-      break;
     case 1:
-      _filtering->setPolicy(Filtering::mirrorPolicy);
+      _filtering->setPolicy(Filtering::POLICY_MIRROR);
       break;
     case 2:
-      _filtering->setPolicy(Filtering::nearestPolicy);
+      _filtering->setPolicy(Filtering::POLICY_NEAREST);
       break;
     case 3:
-      _filtering->setPolicy(Filtering::sphericalPolicy);
+      _filtering->setPolicy(Filtering::POLICY_TOR);
       break;
     default:
-      _filtering->setPolicy(Filtering::blackPolicy);
+      _filtering->setPolicy(Filtering::POLICY_BLACK);
   }
   this->accept();
 }
@@ -383,24 +392,29 @@ void FilterChoice::updateDisplay()
       filters = Filter::uniform(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText(tr("Number of Pixels:"));
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
       break;
     case 1:
-      filters = Filter::gaussian(num);
+      filters = Filter::gaussian(num, _stdDevBox->value());
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText(tr("Coefficient:"));
+      _stdDevBox->show();
+      _stdDevLabel->show();
       break;
     case 2:
       filters = Filter::prewitt(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText(tr("Number of Pixels:"));
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
       break;
     default:
       filters = _filters[_blurChoices->currentIndex()];
       _number->hide();
       _labelNumber->hide();
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
   }
   
   if(_blurChoices->currentIndex() > 5)

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Hough reconstruction</string>
+   <string>Inverse hough transform</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-FFTOp::FFTOp() : Operation(qApp->translate("Operations", "Discrete Fourier transform").toStdString())
+FFTOp::FFTOp() : Operation(qApp->translate("Operations", "Fourier transform").toStdString())
 {
 }
 

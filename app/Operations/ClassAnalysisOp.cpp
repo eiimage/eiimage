@@ -30,7 +30,7 @@
 using namespace std;
 using namespace imagein;
 
-ClassAnalysisOp::ClassAnalysisOp() : Operation(qApp->translate("Operations", "Class analysis").toStdString())
+ClassAnalysisOp::ClassAnalysisOp() : Operation(qApp->translate("Operations", "Supervised classification").toStdString())
 {
 }
 

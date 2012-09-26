@@ -28,7 +28,7 @@
 using namespace std;
 using namespace imagein;
 
-InversePyramidOp::InversePyramidOp() : Operation(qApp->translate("Operations", "Reconstruct pyramid").toStdString())
+InversePyramidOp::InversePyramidOp() : Operation(qApp->translate("Operations", "Pyramidal reconstruction").toStdString())
 {
 }
 

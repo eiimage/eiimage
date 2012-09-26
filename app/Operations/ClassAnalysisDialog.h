@@ -51,6 +51,7 @@ private slots:
 private:
     Ui::ClassAnalysisDialog *ui;
    ImageZoneSelector* _imgZoneSelector;
+   QLabel* _label;
 };
 
 #endif // CLASSANALYSISDIALOG_H

@@ -76,6 +76,8 @@ namespace filtrme
     
     QLabel* _labelNumber;
     QSpinBox* _number;
+    QDoubleSpinBox* _stdDevBox;
+    QLabel* _stdDevLabel;
     
     QTableWidget* _filterView;
     QPushButton* _deleteButton;

@@ -170,7 +170,7 @@ int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance
 
     tabout = new Image::depth_t[size];
     tablabel = new int[size];
-    MoyCell = new int[100000];
+    MoyCell = new int[size];
 
     numregion=1 ;
     nbpregion=0 ;
@@ -296,7 +296,7 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
 
     tabout = new Image::depth_t[size];
     tablabel = new int[size];
-    MoyCell = new int[100000];
+    MoyCell = new int[size];
 
     numregion=1 ;
     nbpregion=0 ;
@@ -389,7 +389,7 @@ int Croissance::croissance2b( const Image *im, int threshhold, Image **luminance
 
     tabout = new Image::depth_t[size];
     tablabel = new int[size];
-    MoyCell = new int[100000];
+    MoyCell = new int[size];
 
     numregion=1 ;
     nbpregion=0 ;

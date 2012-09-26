@@ -10,30 +10,30 @@
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="138"/>
+        <location filename="main.cpp" line="139"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="149"/>
+        <location filename="main.cpp" line="151"/>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
         <translation>&amp;Encoding</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="156"/>
+        <location filename="main.cpp" line="159"/>
         <source>Transforms</source>
         <translation>Transforms</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="164"/>
+        <location filename="main.cpp" line="167"/>
         <source>Analysis</source>
         <translation>Analysis</translation>
     </message>
     <message>
         <location filename="Services/FilteringService.cpp" line="39"/>
-        <location filename="main.cpp" line="173"/>
+        <location filename="main.cpp" line="176"/>
         <source>Filtering</source>
         <translation>Filtering</translation>
     </message>
@@ -73,7 +73,7 @@
         <translation type="obsolete">Center</translation>
     </message>
     <message>
-        <location filename="Operations/CenterOp.cpp" line="74"/>
+        <location filename="Operations/CenterOp.cpp" line="72"/>
         <source>centered</source>
         <oldsource> - centered</oldsource>
         <translation>centered</translation>
@@ -116,12 +116,12 @@
         <translation>Step : </translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="30"/>
+        <location filename="Operations/ClassAnalysisDialog.ui" line="35"/>
         <source>Classification step</source>
         <translation>Classification step</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="35"/>
+        <location filename="Operations/ClassAnalysisDialog.ui" line="30"/>
         <source>Learning step</source>
         <translation>Learning step</translation>
     </message>
@@ -144,6 +144,11 @@
         <location filename="Operations/ClassAnalysisDialog.ui" line="83"/>
         <source>browse</source>
         <translation>browse</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassAnalysisDialog.cpp" line="35"/>
+        <source>Please select the image&apos;s area to classify :</source>
+        <translation>Please select the image&apos;s area to classify :</translation>
     </message>
 </context>
 <context>
@@ -396,7 +401,7 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Parameters</translation>
     </message>
     <message>
-        <location filename="Operations/CombineColorOp.cpp" line="94"/>
+        <location filename="Operations/CombineColorOp.cpp" line="95"/>
         <source>Reconstructed color image</source>
         <translation>Reconstructed color image</translation>
     </message>
@@ -602,6 +607,64 @@ Number of classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="17"/>
+        <source>MICD Encoding</source>
+        <translation>MICD Encoding</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="41"/>
+        <source>Predictor P(X)</source>
+        <translation>Predictor P(X)</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="47"/>
+        <source>A</source>
+        <translation>A</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="54"/>
+        <source>C</source>
+        <translation>C</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="61"/>
+        <source>(A + C) / 2</source>
+        <translation>(A + C) / 2</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="68"/>
+        <source>Modified Graham&apos;s</source>
+        <translation>Modified Graham&apos;s</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="77"/>
+        <source>Q = </source>
+        <translation>Q = </translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="120"/>
+        <source>Quantifier</source>
+        <translation>Quantifier</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="126"/>
+        <source>Quantification file :</source>
+        <translation>Quantification file :</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="146"/>
+        <source>Browse</source>
+        <translation>Browse</translation>
+    </message>
+    <message>
+        <location filename="Operations/MICDDialog_.ui" line="174"/>
+        <source>Open quantification editor</source>
+        <translation>Open quantification editor</translation>
+    </message>
+</context>
+<context>
     <name>EIImageService</name>
     <message>
         <location filename="Services/EIImageService.cpp" line="44"/>
@@ -621,18 +684,46 @@ Number of classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>FFTDialog</name>
+    <message>
+        <location filename="Operations/FFTDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation>Dialog</translation>
+    </message>
+    <message utf8="true">
+        <location filename="Operations/FFTDialog.ui" line="20"/>
+        <source>Résultat :</source>
+        <translation>Result :</translation>
+    </message>
+    <message>
+        <location filename="Operations/FFTDialog.ui" line="28"/>
+        <source>Magnitude + Phase</source>
+        <translation>Magnitude + Phase</translation>
+    </message>
+    <message>
+        <location filename="Operations/FFTDialog.ui" line="38"/>
+        <source>Real + Imaginary</source>
+        <translation>Real + Imaginary</translation>
+    </message>
+    <message>
+        <location filename="Operations/FFTDialog.ui" line="47"/>
+        <source>Centered transform</source>
+        <translation>Centered transform</translation>
+    </message>
+</context>
+<context>
     <name>FFTOp</name>
     <message>
         <source>Discrete Fourier transform</source>
         <translation type="obsolete">Discrete Fourier transform</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="81"/>
+        <location filename="Operations/FFTOp.cpp" line="96"/>
         <source>DFT (phase)</source>
         <translation>DFT (phase)</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="82"/>
+        <location filename="Operations/FFTOp.cpp" line="97"/>
         <source>DFT (magnitude)</source>
         <translation>DFT (magnitude)</translation>
     </message>
@@ -644,19 +735,19 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Flip %1</translation>
     </message>
     <message>
-        <location filename="Operations/FlipOp.cpp" line="31"/>
-        <location filename="Operations/FlipOp.cpp" line="63"/>
+        <location filename="Operations/FlipOp.cpp" line="30"/>
+        <location filename="Operations/FlipOp.cpp" line="62"/>
         <source>horizontal</source>
         <translation>horizontal</translation>
     </message>
     <message>
-        <location filename="Operations/FlipOp.cpp" line="31"/>
-        <location filename="Operations/FlipOp.cpp" line="63"/>
+        <location filename="Operations/FlipOp.cpp" line="30"/>
+        <location filename="Operations/FlipOp.cpp" line="62"/>
         <source>vertical</source>
         <translation>vertical</translation>
     </message>
     <message>
-        <location filename="Operations/FlipOp.cpp" line="63"/>
+        <location filename="Operations/FlipOp.cpp" line="62"/>
         <source>flipped %1</source>
         <translation>flipped %1</translation>
     </message>
@@ -766,17 +857,27 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Parameters</translation>
     </message>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="52"/>
+        <location filename="Operations/IFFTOp.cpp" line="66"/>
         <source>Magnitude : </source>
         <translation>Magnitude : </translation>
     </message>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="53"/>
+        <location filename="Operations/IFFTOp.cpp" line="67"/>
         <source>Phase : </source>
         <translation>Phase : </translation>
     </message>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="108"/>
+        <location filename="Operations/IFFTOp.cpp" line="72"/>
+        <source>Real part : </source>
+        <translation>Real part : </translation>
+    </message>
+    <message>
+        <location filename="Operations/IFFTOp.cpp" line="73"/>
+        <source>Imaginary part : </source>
+        <translation>Imaginary part : </translation>
+    </message>
+    <message>
+        <location filename="Operations/IFFTOp.cpp" line="199"/>
         <source>DFT-reconstructed image</source>
         <translation>DFT-reconstructed image</translation>
     </message>
@@ -789,8 +890,9 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/InverseHoughDialog.ui" line="14"/>
-        <source>Hough reconstruction</source>
-        <translation type="unfinished"></translation>
+        <source>Inverse hough transform</source>
+        <oldsource>Hough reconstruction</oldsource>
+        <translation>Inverse Hough transform</translation>
     </message>
     <message>
         <location filename="Operations/InverseHoughDialog.ui" line="22"/>
@@ -811,8 +913,9 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/InversePyramidDialog.ui" line="14"/>
-        <source>Pyramid reconstruction</source>
-        <translation>Pyramid reconstruction</translation>
+        <source>Pyramidal reconstruction</source>
+        <oldsource>Pyramid reconstruction</oldsource>
+        <translation>Pyramidal reconstruction</translation>
     </message>
     <message>
         <location filename="Operations/InversePyramidDialog.ui" line="20"/>
@@ -1036,22 +1139,23 @@ Number of classes = %1 </translation>
     <name>Operations</name>
     <message>
         <location filename="Operations/BFlitOp.cpp" line="37"/>
-        <source>BFlit</source>
-        <translation>BFlit</translation>
+        <source>BFilt</source>
+        <oldsource>BFlit</oldsource>
+        <translation>BFilt</translation>
     </message>
     <message>
         <location filename="Operations/BFlitOp.cpp" line="49"/>
-        <location filename="Operations/CombineColorOp.cpp" line="50"/>
-        <location filename="Operations/IFFTOp.cpp" line="45"/>
+        <location filename="Operations/CombineColorOp.cpp" line="49"/>
+        <location filename="Operations/IFFTOp.cpp" line="49"/>
         <location filename="Operations/NoiseOp.cpp" line="49"/>
-        <location filename="Operations/PointOp.cpp" line="115"/>
+        <location filename="Operations/PointOp.cpp" line="114"/>
         <source>Parameters</source>
         <translation>Parameters</translation>
     </message>
     <message>
         <location filename="Operations/BFlitOp.cpp" line="62"/>
         <location filename="Operations/NoiseOp.cpp" line="90"/>
-        <location filename="Operations/PointOp.cpp" line="193"/>
+        <location filename="Operations/PointOp.cpp" line="192"/>
         <location filename="Operations/RandomImgOp.cpp" line="105"/>
         <source>Validate</source>
         <translation>Validate</translation>
@@ -1061,7 +1165,7 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Colorimetry</translation>
     </message>
     <message>
-        <location filename="Operations/CombineColorOp.cpp" line="39"/>
+        <location filename="Operations/CombineColorOp.cpp" line="38"/>
         <source>Combine color planes</source>
         <translation>Combine color planes</translation>
     </message>
@@ -1088,8 +1192,9 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/FFTOp.cpp" line="28"/>
-        <source>Discrete Fourier transform</source>
-        <translation>Discrete Fourier transform</translation>
+        <source>Fourier transform</source>
+        <oldsource>Discrete Fourier transform</oldsource>
+        <translation>Fourier transform</translation>
     </message>
     <message>
         <location filename="Operations/HistogramOp.cpp" line="32"/>
@@ -1102,9 +1207,8 @@ Number of classes = %1 </translation>
         <translation>Huffman</translation>
     </message>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="34"/>
         <source>Discrete Fourier reconstruction</source>
-        <translation>Discrete Fourier reconstruction</translation>
+        <translation type="obsolete">Discrete Fourier reconstruction</translation>
     </message>
     <message>
         <location filename="Operations/MICDEncodingOp.cpp" line="32"/>
@@ -1142,7 +1246,7 @@ Number of classes = %1 </translation>
         <translation type="obsolete">gaussian noise</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="45"/>
+        <location filename="Operations/PointOp.cpp" line="44"/>
         <source>Pixel operations</source>
         <translation>Pixel operations</translation>
     </message>
@@ -1178,13 +1282,13 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Rejection ring (%1 %2 %3)</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="34"/>
+        <location filename="Operations/RotateOp.cpp" line="32"/>
         <source>Rotation</source>
         <translation>Rotation</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="41"/>
-        <location filename="Operations/ScalingOp.cpp" line="56"/>
+        <location filename="Operations/ScalingOp.cpp" line="42"/>
+        <location filename="Operations/ScalingOp.cpp" line="57"/>
         <source>Scaling</source>
         <translation>Scaling</translation>
     </message>
@@ -1204,17 +1308,16 @@ Number of classes = %1 </translation>
         <translation>Sinus synthesis</translation>
     </message>
     <message>
-        <location filename="Operations/TestOp.cpp" line="27"/>
         <source>Test</source>
-        <translation>Test</translation>
+        <translation type="obsolete">Test</translation>
     </message>
     <message>
-        <location filename="Operations/ThresholdOp.cpp" line="13"/>
+        <location filename="Operations/ThresholdOp.cpp" line="11"/>
         <source>Thresholding</source>
         <translation>Thresholding</translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="14"/>
+        <location filename="Operations/TranslateOp.cpp" line="12"/>
         <source>Translation</source>
         <translation>Translation</translation>
     </message>
@@ -1224,24 +1327,23 @@ Number of classes = %1 </translation>
         <translation>Zero crossing</translation>
     </message>
     <message>
-        <location filename="Operations/CenterOp.cpp" line="34"/>
+        <location filename="Operations/CenterOp.cpp" line="32"/>
         <source>Center</source>
         <translation>Center</translation>
     </message>
     <message>
-        <location filename="Operations/SplitColorOp.cpp" line="33"/>
+        <location filename="Operations/SplitColorOp.cpp" line="31"/>
         <source>Split color planes</source>
         <translation>Split color planes</translation>
     </message>
     <message>
-        <location filename="Operations/FlipOp.cpp" line="31"/>
+        <location filename="Operations/FlipOp.cpp" line="30"/>
         <source>Flip %1</source>
         <translation>Flip %1</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisOp.cpp" line="33"/>
         <source>Class analysis</source>
-        <translation>Class analysis</translation>
+        <translation type="obsolete">Class analysis</translation>
     </message>
     <message>
         <location filename="Operations/DCTOp.cpp" line="30"/>
@@ -1266,8 +1368,9 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/InversePyramidOp.cpp" line="31"/>
-        <source>Reconstruct pyramid</source>
-        <translation>Reconstruct pyramid</translation>
+        <source>Pyramidal reconstruction</source>
+        <oldsource>Reconstruct pyramid</oldsource>
+        <translation>Pyramidal reconstruction</translation>
     </message>
     <message>
         <location filename="Operations/InversePyramidOp.cpp" line="41"/>
@@ -1289,9 +1392,13 @@ Number of classes = %1 </translation>
         <translation>The image dimensions must be power of 2.</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="32"/>
         <source>Create pyramid</source>
-        <translation>Create pyramid</translation>
+        <translation type="obsolete">Create pyramid</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidOp.cpp" line="32"/>
+        <source>Pyramidal decomposition</source>
+        <translation>Pyramidal decomposition</translation>
     </message>
     <message>
         <location filename="Operations/PyramidOp.cpp" line="44"/>
@@ -1312,6 +1419,16 @@ Number of classes = %1 </translation>
         <location filename="Operations/ColorimetryOp.cpp" line="45"/>
         <source>RGB image generator</source>
         <translation>RGB image generator</translation>
+    </message>
+    <message>
+        <location filename="Operations/IFFTOp.cpp" line="38"/>
+        <source>Inverse Fourier transform</source>
+        <translation>Inverse Fourier transform</translation>
+    </message>
+    <message>
+        <location filename="Operations/ClassAnalysisOp.cpp" line="33"/>
+        <source>Supervised classification</source>
+        <translation>Supervised classification</translation>
     </message>
 </context>
 <context>
@@ -1347,19 +1464,19 @@ Number of classes = %1 </translation>
         <translation>Plugin (*.dll *.so *.dylib)</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="160"/>
-        <location filename="Services/PluginManager.cpp" line="171"/>
-        <location filename="Services/PluginManager.cpp" line="183"/>
+        <location filename="Services/PluginManager.cpp" line="173"/>
+        <location filename="Services/PluginManager.cpp" line="184"/>
+        <location filename="Services/PluginManager.cpp" line="196"/>
         <source>Error loading plugin</source>
         <translation>Error loading plugin</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="171"/>
+        <location filename="Services/PluginManager.cpp" line="184"/>
         <source>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</source>
         <translation>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="183"/>
+        <location filename="Services/PluginManager.cpp" line="196"/>
         <source>The getPlugin entry point does not return a valid Plugin</source>
         <translation>The getPlugin entry point does not return a valid Plugin</translation>
     </message>
@@ -1375,22 +1492,22 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Parameter</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="120"/>
+        <location filename="Operations/PointOp.cpp" line="119"/>
         <source>Second operand</source>
         <translation>Second operand</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="121"/>
+        <location filename="Operations/PointOp.cpp" line="120"/>
         <source>Value</source>
         <translation>Value</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="122"/>
+        <location filename="Operations/PointOp.cpp" line="121"/>
         <source>Image</source>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="129"/>
+        <location filename="Operations/PointOp.cpp" line="128"/>
         <source>Explode colors</source>
         <translation>Explode colors</translation>
     </message>
@@ -1414,9 +1531,13 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="14"/>
         <source>Pyramid generator</source>
-        <translation>Pyramid generator</translation>
+        <translation type="obsolete">Pyramid generator</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.ui" line="14"/>
+        <source>Pyramidal decomposition</source>
+        <translation>Pyramidal decomposition</translation>
     </message>
     <message>
         <location filename="Operations/PyramidDialog.ui" line="20"/>
@@ -1673,27 +1794,27 @@ Number of classes = %1 </translation>
 <context>
     <name>Rotation</name>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="60"/>
+        <location filename="Operations/RotateOp.cpp" line="58"/>
         <source>Rotating %1</source>
         <translation>Rotating %1</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="69"/>
+        <location filename="Operations/RotateOp.cpp" line="67"/>
         <source>Expand image</source>
         <translation>Expand image</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="78"/>
+        <location filename="Operations/RotateOp.cpp" line="76"/>
         <source>Rotation angle : </source>
         <translation>Rotation angle : </translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="80"/>
+        <location filename="Operations/RotateOp.cpp" line="78"/>
         <source>Fill value : </source>
         <translation>Fill value : </translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="152"/>
+        <location filename="Operations/RotateOp.cpp" line="150"/>
         <source>rotated %1</source>
         <translation>rotated %1</translation>
     </message>
@@ -1705,43 +1826,43 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Scaling</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="69"/>
+        <location filename="Operations/ScalingOp.cpp" line="70"/>
         <source>Nearest neighboor (standard)</source>
         <translation>Nearest neighboor (standard)</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="70"/>
+        <location filename="Operations/ScalingOp.cpp" line="71"/>
         <source>Bi-linear</source>
         <translation>Bi-linear</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="71"/>
+        <location filename="Operations/ScalingOp.cpp" line="72"/>
         <source>Parabolic</source>
         <translation>Parabolic</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="72"/>
+        <location filename="Operations/ScalingOp.cpp" line="73"/>
         <source>Spline</source>
         <translation>Spline</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="73"/>
+        <location filename="Operations/ScalingOp.cpp" line="74"/>
         <source>Interpolation : </source>
         <translation>Interpolation : </translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="74"/>
+        <location filename="Operations/ScalingOp.cpp" line="75"/>
         <source>X scale factor : </source>
         <translation>X scale factor : </translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="75"/>
+        <location filename="Operations/ScalingOp.cpp" line="76"/>
         <source>Y scale factor : </source>
         <translation>Y scale factor : </translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="111"/>
-        <location filename="Operations/ScalingOp.cpp" line="116"/>
+        <location filename="Operations/ScalingOp.cpp" line="118"/>
+        <location filename="Operations/ScalingOp.cpp" line="124"/>
         <source>scaled</source>
         <translation>scaled</translation>
     </message>
@@ -2174,27 +2295,27 @@ Number of classes = %1 </translation>
         <translation type="obsolete">Translating %1</translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="36"/>
+        <location filename="Operations/TranslateOp.cpp" line="34"/>
         <source>Expand image</source>
         <translation>Expand image</translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="44"/>
+        <location filename="Operations/TranslateOp.cpp" line="42"/>
         <source>X offset : </source>
         <translation>X offset : </translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="45"/>
+        <location filename="Operations/TranslateOp.cpp" line="43"/>
         <source>Y offset : </source>
         <translation>Y offset : </translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="47"/>
+        <location filename="Operations/TranslateOp.cpp" line="45"/>
         <source>Fill value : </source>
         <translation>Fill value : </translation>
     </message>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="87"/>
+        <location filename="Operations/TranslateOp.cpp" line="85"/>
         <source>Translated %1:%2</source>
         <translation>Translated %1:%2</translation>
     </message>
@@ -2202,7 +2323,7 @@ Number of classes = %1 </translation>
 <context>
     <name>Translation</name>
     <message>
-        <location filename="Operations/TranslateOp.cpp" line="26"/>
+        <location filename="Operations/TranslateOp.cpp" line="24"/>
         <source>Translating %1</source>
         <translation>Translating %1</translation>
     </message>
@@ -2480,90 +2601,96 @@ Number of classes = %1 </translation>
         <translation>Spherical</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="102"/>
         <source>Number of pixels:</source>
-        <translation>Number of pixels:</translation>
+        <translation type="obsolete">Number of pixels:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="108"/>
+        <location filename="Widgets/FilterChoice.cpp" line="103"/>
+        <source>Filter size:</source>
+        <translation>Filter size:</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="109"/>
+        <source>Standard deviation : </source>
+        <translation>Standard deviation : </translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="118"/>
         <source>Resulting image type</source>
         <translation>Resulting image type</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="109"/>
+        <location filename="Widgets/FilterChoice.cpp" line="119"/>
         <source>Standard</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="110"/>
+        <location filename="Widgets/FilterChoice.cpp" line="120"/>
         <source>Floating point</source>
         <translation>Floating point</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="152"/>
+        <location filename="Widgets/FilterChoice.cpp" line="163"/>
         <source>Apply filter</source>
         <translation>Apply filter</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="153"/>
+        <location filename="Widgets/FilterChoice.cpp" line="164"/>
         <source>Delete filter</source>
         <translation>Delete filter</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>Uniform</source>
         <translation>Uniform</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>Gaussian</source>
         <translation>Gaussian</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>Prewitt</source>
         <translation>Prewitt</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>Roberts</source>
         <translation>Roberts</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>Sobel</source>
         <translation>Sobel</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="183"/>
+        <location filename="Widgets/FilterChoice.cpp" line="194"/>
         <source>SquareLaplacien</source>
         <translation>SquareLaplacien</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="330"/>
+        <location filename="Widgets/FilterChoice.cpp" line="339"/>
         <source>Warning!</source>
         <translation>Warning!</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="330"/>
+        <location filename="Widgets/FilterChoice.cpp" line="339"/>
         <source>This filter will be permanently deleted ?</source>
         <translation>This filter will be permanently deleted !</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="331"/>
+        <location filename="Widgets/FilterChoice.cpp" line="340"/>
         <source>Do you want to continue?</source>
         <translation>Do you want to continue?</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="386"/>
-        <location filename="Widgets/FilterChoice.cpp" line="398"/>
         <source>Number of Pixels:</source>
-        <translation>Number of Pixels:</translation>
+        <translation type="obsolete">Number of Pixels:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="392"/>
         <source>Coefficient:</source>
-        <translation>Coefficient:</translation>
+        <translation type="obsolete">Coefficient:</translation>
     </message>
 </context>
 <context>

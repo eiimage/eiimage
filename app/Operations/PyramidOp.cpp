@@ -29,7 +29,7 @@
 using namespace std;
 using namespace imagein;
 
-PyramidOp::PyramidOp() : Operation(qApp->translate("Operations", "Create pyramid").toStdString())
+PyramidOp::PyramidOp() : Operation(qApp->translate("Operations", "Pyramidal decomposition").toStdString())
 {
 }
 

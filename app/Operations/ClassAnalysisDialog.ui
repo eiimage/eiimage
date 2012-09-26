@@ -27,12 +27,12 @@
       <widget class="QComboBox" name="stepBox">
        <item>
         <property name="text">
-         <string>Classification step</string>
+         <string>Learning step</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Learning step</string>
+         <string>Classification step</string>
         </property>
        </item>
        <item>
