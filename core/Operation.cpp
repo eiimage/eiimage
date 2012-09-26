@@ -92,6 +92,7 @@ void Operation::operator()(const ImageWindow* currentWnd, const vector<const Ima
             }
         }
     }
+
     map<const Image*, string> imgList;
     for(vector<const ImageWindow*>::const_iterator it = wndList.begin(); it != wndList.end(); ++it) {
         const StandardImageWindow* imgWnd = dynamic_cast<const StandardImageWindow*>(*it);
@@ -101,7 +102,7 @@ void Operation::operator()(const ImageWindow* currentWnd, const vector<const Ima
             imgList.insert(pair<const Image*, string>(img, imgWnd->windowTitle().toStdString()));
         }
     }
-//    outText("Hello world!");
+
     this->operator()(image, imgList);
 
     for(vector<const Image*>::iterator it = imgToDelete.begin(); it < imgToDelete.end(); ++it) {
