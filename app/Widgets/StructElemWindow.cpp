@@ -38,8 +38,8 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
 
     QVBoxLayout* layout = new QVBoxLayout();
     _toolBar = new QToolBar;
-    _openFile = _toolBar->addAction("&Open file");
-    _saveFile = _toolBar->addAction("&Save as...");
+    _openFile = _toolBar->addAction(tr("&Open file"));
+    _saveFile = _toolBar->addAction(tr("&Save as..."));
     layout->addWidget(_toolBar);
     this->setLayout(layout);
 
@@ -50,19 +50,19 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     
     QHBoxLayout* layout2 = new QHBoxLayout();
     layout->addLayout(layout2);
-    layout2->addWidget(new QLabel("Basic shapes :"));
+    layout2->addWidget(new QLabel(tr("Basic shapes :")));
     _shapeToGen = new QComboBox;
     _shapeToGen->setEditable(false);
-    _shapeToGen->insertItem(0, "Diamond");
-    _shapeToGen->insertItem(1, "Disc");
-    _shapeToGen->insertItem(2, "Empty");
+    _shapeToGen->insertItem(0, tr("Diamond"));
+    _shapeToGen->insertItem(1, tr("Disc"));
+    _shapeToGen->insertItem(2, tr("Empty"));
     layout2->addWidget(_shapeToGen);
     _shapeSize = new QSpinBox();
     _shapeSize->setRange(1,64);
     _shapeSize->setSingleStep(1);
     _shapeSize->setValue(3);
     layout2->addWidget(_shapeSize);
-    _genButton = new QPushButton("Generate");
+    _genButton = new QPushButton(tr("Generate"));
     layout2->addWidget(_genButton);
     
     _viewer = new StructElemViewer(_structElem);
@@ -73,7 +73,7 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
 
     QHBoxLayout* layout3 = new QHBoxLayout();
     layout->addLayout(layout3);
-    layout3->addWidget(new QLabel("Scale :"));
+    layout3->addWidget(new QLabel(tr("Scale :")));
     QSpinBox* spinBox = new QSpinBox();
     spinBox->setRange(1,32);
     spinBox->setSingleStep(1);
@@ -172,7 +172,7 @@ void StructElemWindow::generate() {
         }
     }
 
-    if(_shapeToGen->currentText()=="Disc") {
+    if(_shapeToGen->currentText()==tr("Disc")) {
         const float radius = (size)/2.0f;
         const float center = radius;
         for(unsigned int j = 0; j < elem.getHeight(); ++j) {
@@ -192,7 +192,7 @@ void StructElemWindow::generate() {
         }
         //rasterCircle(elem, size/2, size/2, size/2);    
     }
-    else if(_shapeToGen->currentText()=="Diamond") {
+    else if(_shapeToGen->currentText()==tr("Diamond")) {
         const float radius = (size)/2.0f;
         const float center = radius;
         for(unsigned int j = 0; j < elem.getHeight(); ++j) {
@@ -244,7 +244,7 @@ void StructElemWindow::changeStructElem(imagein::MorphoMat::StructElem* elem) {
 }
 
 void StructElemWindow::openFile() {
-    QString file = QFileDialog::getOpenFileName(this, "Open a file", QString(), "Images (*.png *.bmp *.jpg *.jpeg)");
+    QString file = QFileDialog::getOpenFileName(this, tr("Open a file"), QString(), tr("Images (*.png *.bmp *.jpg *.jpeg)"));
     if(file.size()==0) return;
     //Image image(file.toStdString());
     //Otsu algo;
@@ -265,7 +265,7 @@ void StructElemWindow::openFile() {
 }
 
 void StructElemWindow::saveFile() {
-    QString file = QFileDialog::getSaveFileName(this, "Save file", QString(), "Images (*.png *.bmp *.jpg *.jpeg)");
+    QString file = QFileDialog::getSaveFileName(this, tr("Save file"), QString(), tr("Images (*.png *.bmp *.jpg *.jpeg)"));
 
     if(file.size()==0) return;
     //GrayscaleImage img(_structElem->getWidth(), _structElem->getHeight());

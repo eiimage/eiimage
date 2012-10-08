@@ -30,7 +30,6 @@
 #include "Plugin.h"
 #include "ImgParam.h"
 #include "IntParam.h"
-#include "ImgOutput.h"
 
 using namespace std;
 using namespace imagein;
@@ -73,6 +72,7 @@ class Dithering : public PlugOperation {
   public:
     Dithering() : PlugOperation("Dithering") {
         this->addParam(CurrentImg(), &Dithering::img);
+//        this->addParam(ImgParam("Image"), &Dithering::img);
     }
     
     void operation() {

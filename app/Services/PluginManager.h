@@ -26,6 +26,7 @@
 #include <Services/AlgorithmService.h>
 
 #include <QToolBar>
+class QLibrary;
 
 #include "OpSetService.h"
 
@@ -52,6 +53,7 @@ class PluginManager : public QObject, public genericinterface::Service
     QAction* _loadPluginAction;
     QAction* _unloadPluginsAction;
     std::map<std::string, Plugin*> _plugins;
+    std::map<Plugin*, QLibrary*> _libraries;
     void checkActionsValid();
 };
 

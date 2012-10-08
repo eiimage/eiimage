@@ -46,6 +46,10 @@
 #include <QtXml/QDomElement>
 #include <QTextStream>
 
+#include <QGroupBox>
+#include <QRadioButton>
+#include <QHBoxLayout>
+
 #include <QFormLayout>
 #include <QSpacerItem>
 #include <GenericInterface.h>
@@ -60,44 +64,72 @@ FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
   initUI();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::initUI()
 {
 
-    this->setWindowTitle("FilterChoice");
+    this->setWindowTitle(tr("FilterChoice"));
     QLayout* layout = new QVBoxLayout(this);
     QWidget* mainWidget = new QWidget();
     layout->addWidget(mainWidget);
     QHBoxLayout* mainLayout = new QHBoxLayout(mainWidget);
     QWidget* leftWidget = new QWidget();
-    QFormLayout* leftLayout = new QFormLayout(leftWidget);
+    QLayout* leftLayout = new QVBoxLayout(leftWidget);
 
+    QGroupBox* confBox = new QGroupBox(tr("Filter configuration"));
+    QFormLayout* confLayout = new QFormLayout(confBox);
     /* FILTER CHOICE */
     QLabel* label = new QLabel(this);
-    label->setText("Filter:");
+    label->setText(tr("Filter:"));
     _blurChoices = new QComboBox(this);
     QStringList blurs = initFilters();
     _blurChoices->addItems(blurs);
     QObject::connect(_blurChoices, SIGNAL(currentIndexChanged(int)), this, SLOT(currentBlurChanged(int)));
-    leftLayout->addRow(label, _blurChoices);
+    confLayout->addRow(label, _blurChoices);
 
     /* POLICIES CHOICE */
     QLabel* label_2 = new QLabel(this);
-    label_2->setText("Edge policy: ");
+    label_2->setText(tr("Edge policy: "));
     _policyChoices = new QComboBox(this);
     QStringList policies = QStringList() << tr("Black") << tr("Mirror") << tr("Nearest") << tr("Spherical");
     _policyChoices->addItems(policies);
-    leftLayout->addRow(label_2, _policyChoices);
+    _policyChoices->setCurrentIndex(2);
+    confLayout->addRow(label_2, _policyChoices);
 
     _labelNumber = new QLabel(this);
-    _labelNumber->setText("Number of pixels:");
+    _labelNumber->setText(tr("Filter size:"));
     _number = new QSpinBox(this);
     _number->setValue(3);
     _number->setMinimum(1);
-    leftLayout->addRow(_labelNumber, _number);
+    confLayout->addRow(_labelNumber, _number);
+
+    _stdDevLabel = new QLabel(tr("Standard deviation : "));
+    _stdDevBox = new QDoubleSpinBox(this);
+    _stdDevBox->setValue(1.);
+    _stdDevBox->setRange(0., 256.);
+    _stdDevBox->setSingleStep(0.1);
+    confLayout->addRow(_stdDevLabel, _stdDevBox);
+    _stdDevLabel->setVisible(false);
+    _stdDevBox->setVisible(false);
+
+    QGroupBox* radioBox = new QGroupBox(tr("Resulting image type"));
+    _stdResButton = new QRadioButton(tr("Standard"));
+    _dblResButton = new QRadioButton(tr("Floating point"));
+    radioBox->setLayout(new QHBoxLayout());
+    radioBox->layout()->addWidget(_stdResButton);
+    radioBox->layout()->addWidget(_dblResButton);
+
+    leftLayout->addWidget(confBox);
+    leftLayout->addWidget(radioBox);
+
 
     mainLayout->addWidget(leftWidget);
 
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
+    QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
 
 
     QWidget* rightWidget = new QWidget();
@@ -119,7 +151,7 @@ void FilterChoice::initUI()
         QTableWidgetItem* item = new QTableWidgetItem("1");
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-        _filterView->setItem(i, j, item);
+        _filterView->setItem(j, i, item);
       }
     }
 
@@ -128,8 +160,8 @@ void FilterChoice::initUI()
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
     buttonBox->setOrientation(Qt::Horizontal);
     buttonBox->setStandardButtons(QDialogButtonBox::Cancel);
-    QPushButton* applyButton = buttonBox->addButton(QString::fromStdString("Apply filter"), QDialogButtonBox::ApplyRole);
-    _deleteButton = buttonBox->addButton(QString::fromStdString("Delete filter"), QDialogButtonBox::ActionRole);
+    QPushButton* applyButton = buttonBox->addButton(tr("Apply filter"), QDialogButtonBox::ApplyRole);
+    _deleteButton = buttonBox->addButton(tr("Delete filter"), QDialogButtonBox::ActionRole);
     _deleteButton->setEnabled(false);
 
     QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(validate()));
@@ -151,13 +183,18 @@ void FilterChoice::initUI()
 
 }
 
+/**
+ * @brief
+ *
+ * @return QStringList
+ */
 QStringList FilterChoice::initFilters() {
 
   QStringList blurs = QStringList();
   blurs << tr("Uniform") << tr("Gaussian") << tr("Prewitt") << tr("Roberts") << tr("Sobel") << tr("SquareLaplacien");
 
   _filters.push_back(Filter::uniform(3));
-  _filters.push_back(Filter::gaussian(1));
+  _filters.push_back(Filter::gaussian(3, 1.));
   _filters.push_back(Filter::prewitt(3));
   _filters.push_back(Filter::roberts());
   _filters.push_back(Filter::sobel());
@@ -202,13 +239,13 @@ QStringList FilterChoice::initFilters() {
 //              (*f)[w][h] = QString::fromStdString(word).toInt();
                 f->setPixelAt(w, h, QString::fromStdString(word).toDouble());
 
-              if(h == f->getHeight() - 1)
+              if(w == f->getWidth() - 1)
               {
-                h = 0;
-                w++;
+                w = 0;
+                h++;
               }
               else
-                h++;
+                w++;
             }
           }
           temp.push_back(f);
@@ -223,16 +260,30 @@ QStringList FilterChoice::initFilters() {
   return blurs;
 }
 
+/**
+ * @brief
+ *
+ * @param int
+ */
 void FilterChoice::currentBlurChanged(int)
 {
   updateDisplay();
 }
 
+/**
+ * @brief
+ *
+ * @param
+ */
 void FilterChoice::dataChanged(const QString&)
 {
   updateDisplay();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::validate()
 {
   int num = _number->value();
@@ -243,7 +294,8 @@ void FilterChoice::validate()
       _filtering = new Filtering(Filtering::uniformBlur(num));
       break;
     case 1:
-      _filtering = new Filtering(Filtering::gaussianBlur(num));
+      _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
+//      _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
       break;
     case 2:
       _filtering = new Filtering(Filtering::prewitt(num));
@@ -254,33 +306,38 @@ void FilterChoice::validate()
   
   switch(_policyChoices->currentIndex())
   {
-    case 0:
-      _filtering->setPolicy(Filtering::blackPolicy);
-      break;
     case 1:
-      _filtering->setPolicy(Filtering::mirrorPolicy);
+      _filtering->setPolicy(Filtering::POLICY_MIRROR);
       break;
     case 2:
-      _filtering->setPolicy(Filtering::nearestPolicy);
+      _filtering->setPolicy(Filtering::POLICY_NEAREST);
       break;
     case 3:
-      _filtering->setPolicy(Filtering::sphericalPolicy);
+      _filtering->setPolicy(Filtering::POLICY_TOR);
       break;
     default:
-      _filtering->setPolicy(Filtering::blackPolicy);
+      _filtering->setPolicy(Filtering::POLICY_BLACK);
   }
   this->accept();
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::cancel()
 {
 //  emit(cancelAction());
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::deleteFilter()
 {
-  QMessageBox msgBox(QMessageBox::Warning, "Warning!", "This filter will be permanently deleted ?");
-  msgBox.setInformativeText("Do you want to continue?");
+  QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter will be permanently deleted ?"));
+  msgBox.setInformativeText(tr("Do you want to continue?"));
   msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   msgBox.setDefaultButton(QMessageBox::No);
   
@@ -321,6 +378,10 @@ void FilterChoice::deleteFilter()
   }
 }
 
+/**
+ * @brief
+ *
+ */
 void FilterChoice::updateDisplay()
 {
   std::vector<Filter*> filters;
@@ -331,24 +392,29 @@ void FilterChoice::updateDisplay()
       filters = Filter::uniform(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Number of Pixels:");
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
       break;
     case 1:
-      filters = Filter::gaussian(num);
+      filters = Filter::gaussian(num, _stdDevBox->value());
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Coefficient:");
+      _stdDevBox->show();
+      _stdDevLabel->show();
       break;
     case 2:
       filters = Filter::prewitt(num);
       _number->show();
       _labelNumber->show();
-      _labelNumber->setText("Number of Pixels:");
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
       break;
     default:
       filters = _filters[_blurChoices->currentIndex()];
       _number->hide();
       _labelNumber->hide();
+      _stdDevBox->hide();
+      _stdDevLabel->hide();
   }
   
   if(_blurChoices->currentIndex() > 5)
@@ -368,35 +434,35 @@ void FilterChoice::updateDisplay()
   }
   _filterView->setRowCount(height);
   _filterView->setColumnCount(width);
-  for(unsigned int i = 0; i < height; i++)
+  for(unsigned int j = 0; j < height; j++)
   {
-    for(unsigned int j = 0; j < width; j++)
+    for(unsigned int i = 0; i < width; i++)
     {
       QTableWidgetItem* item = new QTableWidgetItem("");
       item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-      _filterView->setItem(i, j, item);
+        _filterView->setItem(j, i, item);
     }
   }
   
   height = 0;
   for(unsigned int i = 0; i < filters.size(); i++)
   {
-    for(unsigned int j = height; j < filters[i]->getWidth() + height; j++)
+    for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
     {
-      for(unsigned int k = 0; k < filters[i]->getHeight(); k++)
+      for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
       {
 //        int value = (*filters[i])[j - height][k];
-        double value = filters[i]->getPixelAt(j - height, k);
+        double value = filters[i]->getPixelAt(k, j);
         QTableWidgetItem* item = new QTableWidgetItem(QString::number(value));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
-        _filterView->setItem(j, k, item);
+        _filterView->setItem(height + j, k, item);
         _filterView->setColumnWidth(k, _filterView->rowHeight(0));
       }
     }
     
-    height += filters[i]->getWidth();
-    for(unsigned int k = 0; k < filters[i]->getHeight(); k++)
+    height += filters[i]->getHeight();
+    for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
     {
       QTableWidgetItem* item = new QTableWidgetItem("");
       item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);

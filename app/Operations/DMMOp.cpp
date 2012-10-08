@@ -30,7 +30,7 @@ bool DMMOp::needCurrentImg() const {
     return true;
 }
 
-DMMOp::DMMOp() : Operation(Tools::tr("DMM").toStdString()) {
+DMMOp::DMMOp() : Operation(qApp->translate("Operations", "DMM").toStdString()) {
 
 }
 
@@ -53,25 +53,25 @@ void DMMOp::operator()(const imagein::Image* image, const std::map<const imagein
         case DMMDialog::Dilatation:
         {
             Image* resImg = dilatation(image, basicElems);
-            outImage(resImg, "DMM (dilatation)");
+            outImage(resImg, qApp->translate("DMMOp", "DMM (dilatation)").toStdString());
             break;
         }
         case DMMDialog::Erosion:
         {
             Image* resImg = erosion(image, basicElems);
-            outImage(resImg, "DMM (erosion)");
+            outImage(resImg, qApp->translate("DMMOp", "DMM (erosion)").toStdString());
             break;
         }
         case DMMDialog::Opening:
         {
             Image* resImg = opening(image, basicElems);
-            outImage(resImg, "DMM (opening)");
+            outImage(resImg, qApp->translate("DMMOp", "DMM (opening)").toStdString());
             break;
         }
         case DMMDialog::Closing:
         {
             Image* resImg = closing(image, basicElems);
-            outImage(resImg, "DMM (closing)");
+            outImage(resImg, qApp->translate("DMMOp", "DMM (closing)").toStdString());
             break;
         }
         case DMMDialog::Dmm:
@@ -157,7 +157,7 @@ Image* DMMOp::erosion(const imagein::Image* image, std::vector<imagein::MorphoMa
 }
 
 Image* DMMOp::opening(const imagein::Image* image, std::vector<imagein::MorphoMat::StructElem::Dir> basicElems) {
-    outText(QString("Opening with %1 basic elements").arg(basicElems.size()).toStdString());
+//    outText(QString("Opening with %1 basic elements").arg(basicElems.size()).toStdString());
     Image* tmpImg = erosion(image, basicElems);
     Image* resImg = dilatation(tmpImg, basicElems);
     delete tmpImg;
@@ -189,7 +189,7 @@ void DMMOp::dmm(const Image* image, vector<StructElem::Dir> basicElems, vector<u
 
     }
     for(unsigned int i = 0; i < components.size(); ++i) {
-        outImage(components.at(i), QString("DMM component #%1").arg(i).toStdString());
+        outImage(components.at(i), qApp->translate("DMMOp", "DMM component #%1").arg(i).toStdString());
     }
-    outImage(resImg, "DMM error");
+    outImage(resImg, qApp->translate("DMM", "DMM error").toStdString());
 }

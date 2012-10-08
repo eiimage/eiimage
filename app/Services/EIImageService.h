@@ -42,6 +42,7 @@ class EIImageService : public genericinterface::WindowService
     void addOpSet(OpSet* opSet);
     void removeOpSet(OpSet* opSet);
     void outputText(QString text);
+    virtual void addText(std::string);
 
   private:  
     genericinterface::GenericInterface* _gi;

@@ -35,6 +35,7 @@
 #include <QPushButton>
 #include <QStringList>
 #include <Algorithm/Filtering.h>
+#include <QRadioButton>
 
 namespace filtrme
 {
@@ -50,7 +51,9 @@ namespace filtrme
   public:
     FilterChoice(QWidget *parent);
     inline imagein::algorithm::Filtering* getFiltering() { return _filtering; }
-  
+    inline bool doubleResult()  { return _dblResButton->isChecked(); }
+    inline void setDoubleResult(bool c)  { _dblResButton->setChecked(c); _stdResButton->setChecked(!c);}
+
   signals:
     void choiceValidate(imagein::algorithm::Filtering* filtering);
   
@@ -73,10 +76,14 @@ namespace filtrme
     
     QLabel* _labelNumber;
     QSpinBox* _number;
+    QDoubleSpinBox* _stdDevBox;
+    QLabel* _stdDevLabel;
     
     QTableWidget* _filterView;
     QPushButton* _deleteButton;
     imagein::algorithm::Filtering* _filtering;
+    QRadioButton* _dblResButton;
+    QRadioButton* _stdResButton;
   };
 }
 

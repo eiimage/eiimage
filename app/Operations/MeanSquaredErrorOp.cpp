@@ -23,7 +23,7 @@
 #include <QFormLayout>
 #include <Image.h>
 
-#include "ImageListBox.h"
+#include <Widgets/ImageListBox.h>
 #include "../Tools.h"
 
 #include "MeanSquaredErrorOp.h"
@@ -31,7 +31,7 @@
 using namespace std;
 using namespace imagein;
 
-MeanSquaredErrorOp::MeanSquaredErrorOp() : Operation(Tools::tr("Mean squared error").toStdString())
+MeanSquaredErrorOp::MeanSquaredErrorOp() : Operation(qApp->translate("Operations", "Mean squared error").toStdString())
 {
 }
 
@@ -42,7 +42,7 @@ bool MeanSquaredErrorOp::needCurrentImg() const {
 void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Compare to..."));
+    dialog->setWindowTitle(qApp->translate("Operations", "Compare to..."));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -50,7 +50,7 @@ void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<
     QString currentImgName = QString(imgList.find(image)->second.c_str());
 
     ImageListBox* imageBox = new ImageListBox(dialog, image, imgList);
-    layout->insertRow(0, QString("Compare %1 to : ").arg(currentImgName), imageBox);
+    layout->insertRow(0, qApp->translate("Operations", "Compare %1 to : ").arg(currentImgName), imageBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(1, buttonBox);
@@ -81,7 +81,7 @@ void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<
 
     mse = mse / static_cast<double>(maxChannel * maxWidth * maxHeight);
     me = me / static_cast<double>(maxChannel * maxWidth * maxHeight);
-    QString text = QString("Mean squarred error : %1 (mean error : %2)");
+    QString text = qApp->translate("MeanSquareErrorOp", "Mean squarred error : %1 (mean error : %2)");
     text = text.arg(mse, 0, 'f', 2);
     text = text.arg(me, 0, 'f', 2);
 

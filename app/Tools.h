@@ -21,15 +21,21 @@
 #define TOOLS_H
 
 #include <QCoreApplication>
-
+#include <QApplication>
+#include <iostream>
 namespace Tools {
 
-    inline QString tr(const char* str) { return QCoreApplication::tr(str); }
+//    inline QString tr(const char* str) {
+
+//        QString res =  qApp->translate("Operations", str);
+//        std::cout << "Translating " << str << " to " << res.toStdString() << std::endl;
+//        return res;
+//    }
 
     inline QString colorName(int i, int n) {
-        if((n==1 || n==2) && i==0) return tr("Black");
-        if((n==2 && i==1) || (n==4 && i==3)) return tr("Alpha");
-        switch(i) { case 0: return tr("Red"); case 1: return tr("Green"); case 2: return tr("Blue"); default: return tr("Color"); }
+        if((n==1 || n==2) && i==0) return qApp->translate("Color", "Black");
+        if((n==2 && i==1) || (n==4 && i==3)) return qApp->translate("Color", "Alpha");
+        switch(i) { case 0: return qApp->translate("Color", "Red"); case 1: return qApp->translate("Color", "Green"); case 2: return qApp->translate("Color", "Blue"); default: return qApp->translate("Color", "Color"); }
     }
 
 }

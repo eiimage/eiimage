@@ -39,10 +39,10 @@ void EIImageService::display(GenericInterface* gi)
     _statusEdit = new QTextEdit();
     _statusEdit->setReadOnly(true);
     _statusEdit->setMinimumHeight(1);
-    _statusEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    _statusEdit->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     _statusEdit->setReadOnly(true);
     QDockWidget* statusDock = new QDockWidget(tr("Informations"), gi);
-    statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
+    statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     statusDock->setMinimumWidth(128);
     statusDock->setWidget(_statusEdit);
     gi->addDockWidget(Qt::BottomDockWidgetArea, statusDock);
@@ -69,9 +69,8 @@ void EIImageService::addOpSet(OpSet* opSet) {
 void EIImageService::removeOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
-            _opSetServices.erase(it);
             _gi->removeService(*it);
-            delete *it;
+            _opSetServices.erase(it);
             return;
         }
     }
@@ -82,4 +81,10 @@ void EIImageService::outputText(QString text) {
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 //    _statusEdit->setMinimumHeight(32);
+}
+
+void EIImageService::addText(std::string s) {
+    _statusEdit->append(QString::fromStdString(s));
+    _statusEdit->show();
+    if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 }

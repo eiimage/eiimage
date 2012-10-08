@@ -29,7 +29,7 @@
 using namespace std;
 using namespace imagein;
 
-HistogramOp::HistogramOp() : Operation(Tools::tr("Histogram operations").toStdString())
+HistogramOp::HistogramOp() : Operation(qApp->translate("Operations", "Histogram operations").toStdString())
 {
 }
 
@@ -39,15 +39,15 @@ bool HistogramOp::needCurrentImg() const {
 
 void HistogramOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Histogram operations")));
+    dialog->setWindowTitle(QString(qApp->translate("HistogramOp", "Histogram operations")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
     QComboBox* opBox = new QComboBox();
-    opBox->addItem(dialog->tr("Equalize"));
-    opBox->addItem(dialog->tr("Normalize"));
-    layout->insertRow(0, dialog->tr("Operation : "), opBox);
+    opBox->addItem(qApp->translate("HistogramOp", "Equalize"));
+    opBox->addItem(qApp->translate("HistogramOp", "Normalize"));
+    layout->insertRow(0, qApp->translate("HistogramOp", "Operation : "), opBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -60,11 +60,11 @@ void HistogramOp::operator()(const imagein::Image* img, const std::map<const ima
 
     if(opBox->currentIndex()==0) {
         Image* resImg = equalize(img);
-        outImage(resImg, "equalized");
+        outImage(resImg, qApp->translate("HistogramOp", "equalized").toStdString());
     }
     else if(opBox->currentIndex()==1) {
         Image* resImg = normalize(img);
-        outImage(resImg, "normalized");
+        outImage(resImg, qApp->translate("HistogramOp", "normalized").toStdString());
     }
 }
 

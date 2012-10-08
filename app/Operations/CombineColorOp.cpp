@@ -27,8 +27,7 @@
 #include <GrayscaleImage.h>
 #include <Converter.h>
 
-#include <ImgWidget.h>
-#include "ImageListBox.h"
+#include <Widgets/ImageListBox.h>
 
 #include "CombineColorOp.h"
 #include "../Tools.h"
@@ -36,7 +35,7 @@
 using namespace std;
 using namespace imagein;
 
-CombineColorOp::CombineColorOp() : Operation(Tools::tr("Combine color planes").toStdString())
+CombineColorOp::CombineColorOp() : Operation(qApp->translate("Operations", "Combine color planes").toStdString())
 {
 }
 
@@ -47,16 +46,16 @@ bool CombineColorOp::needCurrentImg() const {
 void CombineColorOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Parameters"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
 
-    int nChannel = 3;
+    unsigned int nChannel = 3;
     ImageListBox** imageBoxes = new ImageListBox*[nChannel];
 
-    for(int i=0; i < nChannel; ++i) {
+    for(unsigned int i=0; i < nChannel; ++i) {
         imageBoxes[i] = new ImageListBox(dialog, NULL, imgList);
         QLabel* label = new QLabel(Tools::colorName(i, nChannel), dialog);
         layout->insertRow(i, label, imageBoxes[i]);
@@ -77,7 +76,9 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
     unsigned int maxWidth = numeric_limits<unsigned int>::max();
     unsigned int maxHeight = numeric_limits<unsigned int>::max();
     for(unsigned int c = 0; c < nChannel; ++c) {
-        channels[c] = Converter<GrayscaleImage>::convert(*imageBoxes[c]->currentImage());
+        const Image* img = imageBoxes[c]->currentImage();
+        if(img == NULL) return;
+        channels[c] = Converter<GrayscaleImage>::convert(*img);
         maxWidth = min(maxWidth, channels[c]->getWidth());
         maxHeight = min(maxHeight, channels[c]->getHeight());
     }
@@ -91,5 +92,5 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
             }
         }
     }
-    this->outImage(resImg, "Reconstructed color image");
+    this->outImage(resImg, qApp->translate("CombineColorOp", "Reconstructed color image").toStdString());
 }
