@@ -52,7 +52,7 @@ void HadamardOp::operator()(const imagein::Image* img, const std::map<const imag
     QFormLayout* layout = new QFormLayout(dialog);
     QComboBox* transformBox = new QComboBox(dialog);
     transformBox->addItems(QStringList() << "Hadamard" << "Haar" << "Cosinus (DCT)");
-    layout->insertRow(0, "Transform : ", transformBox);
+    layout->insertRow(0, qApp->translate("Hadamard", "Transform : "), transformBox);
 
     QLabel* title = new QLabel(qApp->translate("Transforms", "<b>Select the coefficients to keep : </b>"));
     title->setAlignment(Qt::AlignCenter);

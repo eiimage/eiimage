@@ -1213,7 +1213,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/MICDEncodingOp.cpp" line="32"/>
         <source>MICD Encoding</source>
-        <translation>Encodage MICD</translation>
+        <translation>Codage MICD</translation>
     </message>
     <message>
         <location filename="Operations/MeanSquaredErrorOp.cpp" line="34"/>
@@ -2246,7 +2246,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="62"/>
         <source>Clear selection</source>
-        <translation>Éffacer la sélection</translation>
+        <translation>Effacer la sélection</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="63"/>
