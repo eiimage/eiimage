@@ -87,7 +87,6 @@ int main(int argc, char** argv)
   if(argc > 1) {
     lang = QString(argv[1]);
   }
-  lang = "fr_FR";
 
   QTranslator qtTranslator;
   QString tr = "qt_";

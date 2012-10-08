@@ -64,6 +64,9 @@ void EIImageService::addOpSet(OpSet* opSet) {
     _opSetServices.push_back(opSetService);
     _gi->addService(opSetService);
     QObject::connect(opSetService, SIGNAL(outputText(QString)), this, SLOT(outputText(QString)));
+    if(_gi->running()) {
+        opSetService->checkActionsValid(this->getCurrentImageWindow());
+    }
 }
 
 void EIImageService::removeOpSet(OpSet* opSet) {
