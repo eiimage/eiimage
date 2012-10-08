@@ -33,28 +33,28 @@
 using namespace imagein;
 using namespace std;
 
-RejectionRingOp::RejectionRingOp() : Operation(Tools::tr("Rejection ring").toStdString())
+RejectionRingOp::RejectionRingOp() : Operation(qApp->translate("Operations", "Rejection ring").toStdString())
 {
 }
 
 void RejectionRingOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Rejection ring"));
+    dialog->setWindowTitle(qApp->translate("Operations", "Rejection ring"));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout(dialog);
 
     QSpinBox* widthBox = new QSpinBox(dialog);
     widthBox->setRange(0, 65536);
     widthBox->setValue(512);
-    layout->insertRow(0, "Width=Height : ", widthBox);
+    layout->insertRow(0, qApp->translate("RejectionRingOp", "Width=Height : "), widthBox);
 
     QSpinBox* radiusBox = new QSpinBox(dialog);
     radiusBox->setRange(0, 65536);
-    layout->insertRow(1, "Radius : ", radiusBox);
+    layout->insertRow(1, qApp->translate("RejectionRingOp", "Radius : "), radiusBox);
 
     QSpinBox* thickBox = new QSpinBox(dialog);
     thickBox->setRange(0, 65536);
-    layout->insertRow(2, "Thickness (beyond radius) : ", thickBox);
+    layout->insertRow(2, qApp->translate("RejectionRingOp", "Thickness (beyond radius) : "), thickBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -96,7 +96,7 @@ void RejectionRingOp::operator()(const imagein::Image*, const std::map<const ima
 
 
 
-    QString name(Tools::tr("Rejection ring (%1 %2 %3)"));
+    QString name(qApp->translate("RejectionRingOp", "Rejection ring (%1 %2 %3)"));
     name = name.arg(nb_ligne).arg(rayon).arg(epaisseur);
     outDoubleImage(result, name.toStdString(), true, false);
 }

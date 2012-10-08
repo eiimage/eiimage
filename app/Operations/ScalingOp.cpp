@@ -33,12 +33,13 @@
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QtScript/QScriptEngine>
 
 using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-ScalingOp::ScalingOp() : GenericOperation(Tools::tr("Scaling").toStdString())
+ScalingOp::ScalingOp() : GenericOperation(qApp->translate("Operations", "Scaling").toStdString())
 {
 }
 
@@ -50,29 +51,29 @@ bool ScalingOp::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const
     return imgWnd != NULL;
 }
 
-void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vector<ImageWindow*>&) {
+void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, const vector<const ImageWindow*>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(dialog->tr("Scaling")));
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
-    QDoubleSpinBox* xScaleBox = new QDoubleSpinBox();
-    QDoubleSpinBox* yScaleBox = new QDoubleSpinBox();
-    xScaleBox->setRange(0, 100);
-    yScaleBox->setRange(0, 100);
-    xScaleBox->setValue(1.);
-    yScaleBox->setValue(1.);
+    QLineEdit* xScaleBox = new QLineEdit();
+    QLineEdit* yScaleBox = new QLineEdit();
+//    xScaleBox->setRange(0, 100);
+//    yScaleBox->setRange(0, 100);
+    xScaleBox->setText("1");
+    yScaleBox->setText("1");
 
     QComboBox* algoBox = new QComboBox();
-    algoBox->addItem(dialog->tr("Nearest neighboor (standard)"));
-    algoBox->addItem(dialog->tr("Bi-linear"));
-    algoBox->addItem(dialog->tr("Parabolic"));
-    algoBox->addItem(dialog->tr("Spline"));
-    layout->insertRow(0, dialog->tr("Interpolation : "), algoBox);
-    layout->insertRow(1, dialog->tr("X scale factor : "), xScaleBox);
-    layout->insertRow(2, dialog->tr("Y scale factor : "), yScaleBox);
+    algoBox->addItem(qApp->translate("ScalingOp", "Nearest neighboor (standard)"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Bi-linear"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Parabolic"));
+    algoBox->addItem(qApp->translate("ScalingOp", "Spline"));
+    layout->insertRow(0, qApp->translate("ScalingOp", "Interpolation : "), algoBox);
+    layout->insertRow(1, qApp->translate("ScalingOp", "X scale factor : "), xScaleBox);
+    layout->insertRow(2, qApp->translate("ScalingOp", "Y scale factor : "), yScaleBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
@@ -91,29 +92,36 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, vect
         default: inter = NearestInterpolation; break;
     }
 
+    QScriptEngine scriptEngine;
+    QScriptValue xScriptValue = scriptEngine.evaluate(xScaleBox->text());
+    QScriptValue yScriptValue = scriptEngine.evaluate(yScaleBox->text());
+    double xValue = xScriptValue.toNumber();
+    double yValue = yScriptValue.toNumber();
     if(currentWnd->isStandard()) {
         const Image* image = static_cast<const StandardImageWindow*>(currentWnd)->getImage();
-        Image* resImg;
+        Image* resImg = NULL;
         switch(inter) {
             case NearestInterpolation:
-                resImg = scale<Image::depth_t, Nearest>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Nearest>(image, xValue, yValue);
                 break;
             case BilinearInterpolation:
-                resImg = scale<Image::depth_t, Bilinear>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Bilinear>(image, xValue, yValue);
                 break;
             case ParabolicInterpolation:
-                resImg = scale<Image::depth_t, Parabolic>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Parabolic>(image, xValue, yValue);
                 break;
             case SplineInterpolation:
-                resImg = scale<Image::depth_t, Spline>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Spline>(image, xValue, yValue);
                 break;
         }
-        outImage(resImg, "scaled");
+        if(resImg != NULL) {
+            outImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
+        }
     }
     else if(currentWnd->isDouble()) {
         const Image_t<double>* image = static_cast<const DoubleImageWindow*>(currentWnd)->getImage();
-        Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBox->value(), yScaleBox->value());
-        outDoubleImage(resImg, "scaled");
+        Image_t<double>* resImg = scale<double, Nearest>(image, xValue, yValue);
+        outDoubleImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
     }
 }
 

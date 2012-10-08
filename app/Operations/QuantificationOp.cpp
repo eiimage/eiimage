@@ -28,43 +28,52 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-QuantificationOp::QuantificationOp() : Operation(Tools::tr("Quantification").toStdString())
+QuantificationOp::QuantificationOp() : Operation(qApp->translate("Operations", "Quantification").toStdString())
 {
 }
 
 
 bool QuantificationOp::needCurrentImg() const {
-    return true;
+    return false;
 }
 
-void QuantificationOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
+void QuantificationOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
+    QuantificationDialog* dialog;
+    if(image != NULL) {
+        QString imgName = QString::fromStdString(imgList.find(image)->second);
+        dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
+    }
+    else {
+        dialog = new QuantificationDialog(QApplication::activeWindow());
+    }
 
-    QuantificationDialog* dialog = new QuantificationDialog(QApplication::activeWindow());
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code!=QDialog::Accepted) return;
 
-    Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
-    for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        Quantification quantification = dialog->getQuantif(image, c);
-        for(int i = 0; i < quantification.size; ++i) {
-            cout << (int)quantification.values[i] << ".";
-        }
-        cout << endl;
-        for(int i = 0; i < quantification.size-1; ++i) {
-            cout << quantification.threshold[i] << ".";
-        }
-        cout << endl;
-        Quantifier quantifier = Quantifier(quantification);
-        for(unsigned int j = 0; j < image->getHeight(); ++j) {
-            for(unsigned int i = 0; i < image->getWidth(); ++i) {
-                const Image::depth_t value = image->getPixelAt(i, j, c);
-                resImg->setPixelAt(i, j, c, quantifier.valueOf(value));
+    if(image != NULL) {
+        Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
+        for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
+            Quantification quantification = dialog->getQuantif(image, c);
+            for(int i = 0; i < quantification.size; ++i) {
+                cout << (int)quantification.values[i] << ".";
+            }
+            cout << endl;
+            for(int i = 0; i < quantification.size-1; ++i) {
+                cout << quantification.threshold[i] << ".";
+            }
+            cout << endl;
+            Quantifier quantifier = Quantifier(quantification);
+            for(unsigned int j = 0; j < image->getHeight(); ++j) {
+                for(unsigned int i = 0; i < image->getWidth(); ++i) {
+                    const Image::depth_t value = image->getPixelAt(i, j, c);
+                    resImg->setPixelAt(i, j, c, quantifier.valueOf(value));
+                }
             }
         }
+        outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
     }
 
-    outImage(resImg, "quantified");
 }
 

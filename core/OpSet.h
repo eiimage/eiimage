@@ -25,14 +25,35 @@
 
 #include "Operation.h"
 
+/**
+ * @brief Set of GenericOperation objects.
+ *
+ * An Operation set is used to represent a set of instances of differents implementations of the interface GenericOperation.
+ *
+ */
 class OpSet {
   public:
+/**
+ * @brief Constructor
+ *
+ * @param name The name of the OpSet, as it should appear to the user.
+ */
     OpSet(std::string name) : _name(name) {}
+    /**
+     * @brief Operations accessor
+     *
+     * @return std::vector<GenericOperation *> The set of operations contained in this Opset
+     */
     virtual std::vector<GenericOperation*> getOperations() = 0;
+    /**
+     * @brief Name accessor
+     *
+     * @return std::string The name of this OpSet
+     */
     inline std::string getName() { return _name; }
     
   private:
-    std::string _name;
+    std::string _name; /**< The name of this OpSet */
 };
 
 #endif //!EIIMAGE_OPSET_H

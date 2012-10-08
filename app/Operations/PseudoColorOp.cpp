@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-PseudoColorOp::PseudoColorOp() : Operation(Tools::tr("Pseudo color").toStdString())
+PseudoColorOp::PseudoColorOp() : Operation(qApp->translate("Operations", "Pseudo color").toStdString())
 {
 }
 
@@ -50,7 +50,7 @@ void PseudoColorOp::operator()(const imagein::Image* image, const std::map<const
         }
     }
     delete tmpImg;
-    outImage(resImg, "Pseudo color");
+    outImage(resImg, qApp->translate("PseudoColorOp", "Pseudo color").toStdString());
 
 }
 

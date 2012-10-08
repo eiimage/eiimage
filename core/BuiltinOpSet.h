@@ -25,14 +25,30 @@
 
 #include "OpSet.h"
 
+/**
+ * @brief A BuiltinOpSet is an implementation of OpSet containing GenericOperation
+ *
+ * This class is used inside the eiimage application to organize the built-in operations.
+ *
+ */
 class BuiltinOpSet : public OpSet {
   public:
+/**
+ * @brief Constructor
+ *
+ * @param name Name of the operation set, as it should be displayed to the user
+ */
     BuiltinOpSet(std::string name);
     std::vector<GenericOperation*> getOperations();
-    void addOperation(GenericOperation*);
+    /**
+     * @brief Add a GenericOperation to this operation set
+     *
+     * @param The operation to add.
+     */
+    void addOperation(GenericOperation* op);
     
   private:
-    std::vector<GenericOperation*> _operations;
+    std::vector<GenericOperation*> _operations; /**< List of the operations stored in this OpSet */
 };
 
 #endif //!EIIMAGE_BUILTINOPSET_H

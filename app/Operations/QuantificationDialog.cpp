@@ -33,10 +33,15 @@
 #include <QFileDialog>
 
 using namespace imagein;
-QuantificationDialog::QuantificationDialog(QWidget *parent) :
-    QDialog(parent)
+QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
+    QDialog(parent), _editorOnly(imgName.isEmpty())
 {
-    setWindowTitle(QString(tr("Quantification")));
+    if(_editorOnly) {
+       this->setWindowTitle(tr("Quantification file editor"));
+    }
+    else {
+       this->setWindowTitle(tr("Quantification of %1").arg(imgName));
+    }
     setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout(this);
     setLayout(layout);
@@ -47,8 +52,10 @@ QuantificationDialog::QuantificationDialog(QWidget *parent) :
 
     _quantBox = new QComboBox();
     _quantBox->addItem(tr("Linear with centered value"));
-    _quantBox->addItem(tr("Non linear with centered value"));
-    _quantBox->addItem(tr("Non linear with mean value"));
+    if(!_editorOnly) {
+        _quantBox->addItem(tr("Non linear with centered value"));
+        _quantBox->addItem(tr("Non linear with mean value"));
+    }
     _quantBox->addItem(tr("Custom"));
     layout->insertRow(0, tr("Quantification : "), _quantBox);
     layout->insertRow(1, tr("Number of values : "), _sizeBox);
@@ -75,17 +82,25 @@ QuantificationDialog::QuantificationDialog(QWidget *parent) :
     QObject::connect(_sizeBox, SIGNAL(valueChanged(int)), _quantWidget, SLOT(setNbThreshold(int)));
     QObject::connect(_quantBox, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
 
+    if(_editorOnly) {
+        buttonBox->button(QDialogButtonBox::Cancel)->setVisible(false);
+        buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Exit"));
+    }
+    else {
+        buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Apply"));
+    }
 }
 
 
 void QuantificationDialog::methodChanged(int method) {
-    _editorWidget->setVisible(method == 3);
-    _saveButton->setEnabled(method==3 || method == 0);
+    _editorWidget->setVisible((_editorOnly && method == 1) || (!_editorOnly && method == 3));
+    _saveButton->setEnabled(_editorOnly || method==3 || method == 0);
     this->adjustSize();
 }
 Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c) {
 
     int size = _sizeBox->value();
+    if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
         case 1: return Quantification::nonLinearQuant(size, image, c); break;
         case 2: return Quantification::nonLinearQuantOptimized(size, image, c); break;
@@ -94,21 +109,33 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
     }
 }
 
+Quantification QuantificationDialog::getQuantif() {
+    int size = _sizeBox->value();
+    if(!_editorOnly) return Quantification::linearQuant(size);
+    switch(_quantBox->currentIndex()) {
+        case 2: return _quantWidget->getQuantif(); break;
+        default: return Quantification::linearQuant(size); break;
+    }
+}
+
 void QuantificationDialog::open() {
 
     QString filename = QFileDialog::getOpenFileName(this, tr("Open a file"), "", tr("Loi de quantification (*.loi)"));
+    if(filename.isEmpty()) return;
     Quantification q(filename.toStdString());
     _quantWidget->setQuantif(q);
     _sizeBox->setValue(q.size);
-    _quantBox->setCurrentIndex(3);
+    _quantBox->setCurrentIndex(_editorOnly ? 1 : 3);
 }
 
 void QuantificationDialog::save() {
     QString filename = QFileDialog::getSaveFileName(this, tr("Save to file"), "", tr("Loi de quantification (*.loi)"));
-    switch(_quantBox->currentIndex()) {
-        case 0: Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString()); break;
-        case 3: _quantWidget->getQuantif().saveAs(filename.toStdString()); break;
-        default: return;
+    if(filename.isEmpty()) return;
+    if(_quantBox->currentIndex() == 0) {
+        Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString());
+    }
+    else if((_editorOnly && _quantBox->currentIndex()) == 1 || (!_editorWidget && _quantBox->currentIndex() == 3)) {
+        _quantWidget->getQuantif().saveAs(filename.toStdString());
     }
 }
 

@@ -26,14 +26,30 @@
 #include "OpSet.h"
 #include "PlugOperation.h"
 
+/**
+ * @brief A Plugin is an implementation of OpSet containing PlugOperation
+ *
+ * Unlike a BuiltinOpSet, a Plugin should only contain PlugOperation
+ */
 class Plugin : public OpSet {
   public:
+/**
+ * @brief Constructor
+ *
+ * @param name The name of the plugin, as it should be displayed to the user.
+ */
     Plugin(std::string name);
+
     std::vector<GenericOperation*> getOperations();
-    void addOperation(PlugOperation*);
+    /**
+     * @brief Add a PlugOperation to this Plugin.
+     *
+     * @param The operation to add.
+     */
+    void addOperation(PlugOperation* op);
     
   private:
-    std::vector<GenericOperation*> _operations;
+    std::vector<GenericOperation*> _operations; /**< List of all the operations stored in this OpSet */
 };
 
 #endif //!EIIMAGE_PLUGIN_H

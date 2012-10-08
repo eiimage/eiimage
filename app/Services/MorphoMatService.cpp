@@ -53,7 +53,7 @@ void MorphoMatService::display(GenericInterface* gi)
 //  _erosion = _toolBar->addAction("&Erosion");
 //  _dilatation = _toolBar->addAction("&Dilatation");
   
-  QMenu* menu = gi->menu(tr("&Mathematical morphology"));
+  QMenu* menu = gi->menu("&Morpho. math.");
 
   _erosion2 = menu->addAction(tr("&Erosion"));
   _dilatation2 = menu->addAction(tr("&Dilatation"));

@@ -63,6 +63,7 @@ namespace filtrme
     QStringList _texts;
 
     genericinterface::ImageWindow* _siw;
+    bool _dblResult;
   };
 }
 

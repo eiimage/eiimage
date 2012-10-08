@@ -1,9 +1,0 @@
-// $Id: e8cf4f146baf9674fb19041fe3f42231958e0200 $
-
-#define RANDOMLIB_VERSION_STRING "@RandomLib_VERSION@"
-
-// These are macros which affect the building of the library
-#cmakedefine RANDOM_SHARED_LIB 1
-#cmakedefine HAVE_SSE2 1
-#cmakedefine HAVE_ALTIVEC 1
-#cmakedefine HAVE_LONG_DOUBLE 1

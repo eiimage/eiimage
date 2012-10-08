@@ -22,7 +22,7 @@
 #include <QFormLayout>
 #include <Image.h>
 
-#include "ImageListBox.h"
+#include <Widgets/ImageListBox.h>
 #include "../Tools.h"
 
 #include "SignalToNoiseOp.h"
@@ -30,7 +30,7 @@
 using namespace std;
 using namespace imagein;
 
-SignalToNoiseOp::SignalToNoiseOp() : Operation(Tools::tr("Signal-to-noise ratio").toStdString())
+SignalToNoiseOp::SignalToNoiseOp() : Operation(qApp->translate("Operations", "Signal-to-noise ratio").toStdString())
 {
 
 }
@@ -42,7 +42,7 @@ bool SignalToNoiseOp::needCurrentImg() const {
 void SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
 
     QDialog* dialog = new QDialog();
-    dialog->setWindowTitle(dialog->tr("Compare to..."));
+    dialog->setWindowTitle(qApp->translate("Operations", "Compare to..."));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
@@ -50,7 +50,7 @@ void SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<con
     QString currentImgName = QString(imgList.find(image)->second.c_str());
 
     ImageListBox* imageBox = new ImageListBox(dialog, image, imgList);
-    layout->insertRow(0, QString("Compare %1 to : ").arg(currentImgName), imageBox);
+    layout->insertRow(0, qApp->translate("Operations", "Compare %1 to : ").arg(currentImgName), imageBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(1, buttonBox);
@@ -80,13 +80,13 @@ void SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<con
     }
 
     var = var / static_cast<double>(maxChannel * maxWidth * maxHeight);
-    QString text = QString("Signal-to-noise ratio : %1");
+    QString text = qApp->translate("SignalToNoiseOp", "Signal-to-noise ratio : %1");
     if(var != 0) {
         double snd = 10.0 * log10(255.0*255.0 / var);
         text = text.arg(snd, 0, 'f', 2) + "dB";
     }
     else {
-        text = text.arg(Tools::tr("+inf"));
+        text = text.arg("+inf");
     }
 
     this->outText(text.toStdString());

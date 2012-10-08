@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-EntropyOp::EntropyOp() : Operation(Tools::tr("Calcul d'entropie").toStdString())
+EntropyOp::EntropyOp() : Operation(qApp->translate("Operations", "Calcul d'entropie").toStdString())
 {
 }
 
@@ -42,7 +42,7 @@ void EntropyOp::operator()(const imagein::Image* image, const std::map<const ima
         }
     }
     entropy = - entropy / log(2);
-    outText(Tools::tr("Entropy of the image = %1").arg(entropy).toStdString());
+    outText(qApp->translate("Operations", "Entropy of the image = %1").arg(entropy).toStdString());
 
 }
 

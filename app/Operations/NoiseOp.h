@@ -28,7 +28,7 @@ class NoiseOp : public GenericOperation
 public:
     NoiseOp();
 
-    virtual void operator()(const genericinterface::ImageWindow* currentWnd, std::vector<genericinterface::ImageWindow*>&);
+    virtual void operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>&);
 
     virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const;
 

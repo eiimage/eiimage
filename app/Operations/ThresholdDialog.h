@@ -41,7 +41,7 @@ class ThresholdDialog : public QDialog {
     ThresholdDialog(const imagein::GrayscaleImage*, bool converted);
     inline int threshold1() { return _spinbox1->value(); }
     inline int threshold2() { return _spinbox2->value(); }
-    inline bool blackBand() { return _blackButton->isChecked(); }
+    inline bool blackBand() { return !_blackButton->isChecked(); }
     inline bool doubleThreshold() { return _doubleBox->isChecked(); }
 
   public slots:
