@@ -177,9 +177,9 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
     
     std::cout << file.toStdString() << " loaded" << std::endl;
     
-    void* ptr = library->resolve("loadPlugin");
+    QFunctionPointer ptr = library->resolve("loadPlugin");
     
-    if(ptr==0) {
+    if(ptr == 0) {
         if(!silent) {
             QMessageBox::critical (_gi, tr("Error loading plugin"), tr("Could not find the plugin's entry point \"loadPlugin\""));
         }

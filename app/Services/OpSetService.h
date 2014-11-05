@@ -21,7 +21,7 @@
 #define OPSETSERVICE_H
 
 #include <Service.h>
-#include <Plugin.h>
+//#include <Plugin.h>
 #include "OperationService.h"
 
 #include <Services/AlgorithmService.h>

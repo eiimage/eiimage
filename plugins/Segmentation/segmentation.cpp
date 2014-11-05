@@ -1,18 +1,18 @@
 /*
  * Copyright 2011-2012 INSA Rennes
- * 
+ *
  * This file is part of EIImage.
- * 
+ *
  * EIImage is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * EIImage is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -40,7 +40,7 @@ class Thresholding : public PlugOperation {
         addParam(CurrentImg(), &Thresholding::img);
         addParam(IntParam("Entier", 0, 255, 127), &Thresholding::threshold);
     }
-    
+
     void operation() {
         algorithm::Binarization_t<depth_default_t> thresholding(threshold);
         GrayscaleImage* grayImg = imagein::Converter<GrayscaleImage>::convert(img);
@@ -57,7 +57,7 @@ class Otsu : public PlugOperation {
     Otsu() : PlugOperation("Otsu") {
         this->addParam(CurrentImg(), &Otsu::img);
     }
-    
+
     void operation() {
         algorithm::Otsu_t<depth_default_t> otsu;
         GrayscaleImage* grayImg = imagein::Converter<GrayscaleImage>::convert(img);
@@ -74,7 +74,7 @@ class Dithering : public PlugOperation {
         this->addParam(CurrentImg(), &Dithering::img);
 //        this->addParam(ImgParam("Image"), &Dithering::img);
     }
-    
+
     void operation() {
         algorithm::Dithering_t<depth_default_t> dithering;
         Image* result = dithering(&img);
