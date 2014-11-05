@@ -49,7 +49,7 @@ void ClassAnalysisOp::operator()(const imagein::Image* img, const std::map<const
 
 
     if(dialog->isLearningStep()) {
-        FILE* f = fopen(dialog->getFileName().toAscii(), "wt" );
+        FILE* f = fopen(dialog->getFileName().toLatin1(), "wt" );
         if(f == NULL) {
             QMessageBox::critical(NULL, "Error", "Could not open file for write access");
             return;
@@ -67,7 +67,7 @@ void ClassAnalysisOp::operator()(const imagein::Image* img, const std::map<const
         fclose(f);
     }
     else if(dialog->isClassificationStep()) {
-        FILE* f = fopen(dialog->getFileName().toAscii(), "rt" );
+        FILE* f = fopen(dialog->getFileName().toLatin1(), "rt" );
         if(f == NULL) {
             QMessageBox::critical(NULL, "Error", "Could not open file for read access");
             return;
@@ -86,7 +86,7 @@ void ClassAnalysisOp::operator()(const imagein::Image* img, const std::map<const
         fclose(f);
     }
     else {
-        FILE* f = fopen(dialog->getFileName().toAscii(), "rt" );
+        FILE* f = fopen(dialog->getFileName().toLatin1(), "rt" );
         if(f == NULL) {
             QMessageBox::critical(NULL, "Error", "Could not open file for read access");
             return;

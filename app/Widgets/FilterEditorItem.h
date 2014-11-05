@@ -29,7 +29,7 @@
 #include <QVBoxLayout>
 #include <QString>
 #include <QList>
-#include <QtGui/QTableWidget>
+#include <QTableWidget>
 #include <QMessageBox>
 
 class QLineEdit;

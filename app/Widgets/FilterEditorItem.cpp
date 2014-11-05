@@ -20,13 +20,13 @@
 #include "FilterEditorItem.h"
 
 #include <QLineEdit>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QLabel>
-#include <QtGui/QSpinBox>
-#include <QtGui/QMdiArea>
-#include <QtGui/QPushButton>
+#include <QButtonGroup>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QSpinBox>
+#include <QMdiArea>
+#include <QPushButton>
 
 #include <QTimer>
 #include <QFile>
