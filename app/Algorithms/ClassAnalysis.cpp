@@ -237,7 +237,7 @@ void ClassAnalysis::write_to_file( GrayscaleImage *learning, const vector<Rectan
 
     fprintf( f, "MEAN_STDEV\n" );
     fprintf( f, "%d\n", learning_fen );
-    fprintf( f, "%d\n", rectangles.size() );
+    fprintf( f, "%lu\n", rectangles.size() );
     vector<Rectangle>::const_iterator iter;
     i = 0;
     for(iter=rectangles.begin();iter!=rectangles.end();++iter) {
