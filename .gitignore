@@ -34,3 +34,4 @@
 *.Release
 moc_*.cpp
 Makefile
+CMakeLists.txt.user*
