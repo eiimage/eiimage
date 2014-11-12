@@ -23,10 +23,10 @@
 #include <QCoreApplication>
 #include <QApplication>
 #include <iostream>
+
 namespace Tools {
 
 //    inline QString tr(const char* str) {
-
 //        QString res =  qApp->translate("Operations", str);
 //        std::cout << "Translating " << str << " to " << res.toStdString() << std::endl;
 //        return res;
@@ -37,7 +37,6 @@ namespace Tools {
         if((n==2 && i==1) || (n==4 && i==3)) return qApp->translate("Color", "Alpha");
         switch(i) { case 0: return qApp->translate("Color", "Red"); case 1: return qApp->translate("Color", "Green"); case 2: return qApp->translate("Color", "Blue"); default: return qApp->translate("Color", "Color"); }
     }
-
 }
 
 #endif // TOOLS_H

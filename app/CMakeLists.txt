@@ -20,8 +20,8 @@ find_package(Qwt 6.0 REQUIRED)
 include_directories(${QWT_INCLUDE_DIRS})
 
 set(eiimage_SOURCES
-	main.cpp
-	Tools.h
+     main.cpp
+     Tools.h
      Algorithms/ClassAnalysis.cpp
      Algorithms/ClassAnalysis.cpp
      Algorithms/ClassAnalysis.h
