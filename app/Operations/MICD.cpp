@@ -45,7 +45,7 @@ MICD::~MICD()
 
 }
 
-string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, Image **err_image, Image **recons_image, double Q ) {
+string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, Image **recons_image, double Q ) {
     char buffer[255];
     if( quantdef == NULL ) {
         throw "Error in MICD::execute:\nquantdef = NULL";
@@ -66,7 +66,7 @@ string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, Image
     set_levels();
     codlq(0);
     /* allocation mmoire pour l'image d'erreur de prdiction */
-    GrayscaleImage *error_prediction_image = new GrayscaleImage(nbc, nbl);
+    ImageDouble *error_prediction_image = new ImageDouble(nbc, nbl, 1);
     Image *reconstructed_image = new GrayscaleImage(*im);
     // File these images with all values of zero
     long wcounter, hcounter;
@@ -135,8 +135,6 @@ string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, Image
 
          int tempvalue;
          tempvalue = ier + 128;
-         if( tempvalue > 255 ) tempvalue = 255;
-         if( tempvalue < 0 ) tempvalue = 0;
          po = tempvalue;
          error_prediction_image->setPixelAt( j, i, po );
          tempvalue = pred + ireco;
@@ -155,7 +153,6 @@ string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, Image
             h -= (double)pi[i] * log((double)pi[i])/log((double)2.0);
         }
     }
-
 
     /* affichage des rsultats */
     sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %lf\n",h);

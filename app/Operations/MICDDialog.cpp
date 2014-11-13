@@ -55,7 +55,6 @@ Quantification* MICDDialog::getQuantification() const {
     catch(std::exception&) {
         return NULL;
     }
-
 }
 
 MICD::Prediction MICDDialog::getPrediction() const {

@@ -120,7 +120,7 @@ class GenericOperation {
      * @param logScale The logarithm scale constant to apply if the Image is displayed using log. scale (value from 8^-3 to 8^3, see genericinterface::DoubleImageWindow for more details).
      * @param abs wether to display an absolute value version of the Image (doesn't affect the data contained in the image, compatible with any other options).
      */
-    void outDoubleImage(imagein::Image_t<double>* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false);
+    void outDoubleImage(imagein::ImageDouble* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false);
 
 
     /**
