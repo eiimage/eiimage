@@ -26,7 +26,7 @@ using namespace imagein;
 Quantification::Quantification(int size_) {
     this->size = size_;
     threshold = new int[this->size - 1];
-    values = new imagein::Image::depth_t[this->size];
+    values = new int[this->size];
 }
 
 Quantification::Quantification(std::string filename) {
@@ -39,7 +39,7 @@ Quantification::Quantification(std::string filename) {
     this->size++;
     if(this->size < 2) throw exception();
     threshold = new int[this->size - 1];
-    values = new imagein::Image::depth_t[this->size];
+    values = new int[this->size];
     for(int i = 0; i < size - 1; ++i) {
         double n;
         file >> n;
@@ -68,9 +68,8 @@ void Quantification::saveAs(std::string filename) {
     }
 }
 
-
 Quantifier::Quantifier(Quantification quant) {
-    for(int i = 0; i < 256; ++i) {
+    for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
         values[i] = quant.valueOf(i);
     }
 }
@@ -80,11 +79,11 @@ Quantification Quantification::linearQuant(int size) {
     Quantification quant(size);
 
     for(int i = 0; i < size - 1; ++i) {
-        quant.threshold[i] = floor( (i + 1) * 256. / size + 0.5);
+        quant.threshold[i] = floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5);
     }
     if(size > 0) {
         quant.values[0] = floor( quant.threshold[0] / 2. + 0.5 );
-        quant.values[size - 1] = floor( (256. + quant.threshold[size - 2]) / 2. + 0.5 );
+        quant.values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant.threshold[size - 2]) / 2. + 0.5 );
     }
     for(int i = 1; i < size - 1; ++i) {
         quant.values[i] = floor( (double)(quant.threshold[i] + quant.threshold[i-1]) / 2. + 0.5 );
@@ -92,7 +91,6 @@ Quantification Quantification::linearQuant(int size) {
 
     return quant;
 }
-
 
 Quantification Quantification::nonLinearQuant(int size, const Image* image, unsigned int c) {
 
@@ -114,7 +112,7 @@ Quantification Quantification::nonLinearQuant(int size, const Image* image, unsi
 
     if(size > 0) {
         quant.values[0] = floor( quant.threshold[0] / 2. + 0.5 );
-        quant.values[size - 1] = floor( (256. + quant.threshold[size - 2]) / 2. + 0.5 );
+        quant.values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant.threshold[size - 2]) / 2. + 0.5 );
     }
     for(int i = 1; i < size - 1; ++i) {
         quant.values[i] = floor( (double)(quant.threshold[i] + quant.threshold[i-1]) / 2. + 0.5 );
@@ -142,7 +140,7 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
 
     if(size > 0) {
         quant.values[0] = floor( quant.threshold[0] / 2. + 0.5 );
-        quant.values[size - 1] = floor( (256. + quant.threshold[size - 2]) / 2. + 0.5 );
+        quant.values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant.threshold[size - 2]) / 2. + 0.5 );
     }
     for(int i = 1; i < size - 1; ++i) {
         quant.values[i] = floor( (double)(quant.threshold[i] + quant.threshold[i-1]) / 2. + 0.5 );
@@ -157,9 +155,7 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
         nb_points += histogram[j];
     }
 
-
     quant.values[0] = som_lum / nb_points + 0.5;
-
 
     for(int i = 0; i < size - 2; ++i){
         som_lum = 0;
@@ -171,10 +167,9 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
         quant.values[i+1] = som_lum / nb_points + 0.5;
     }
 
-
     som_lum = 0;
     nb_points = 0;
-    for(int j = quant.threshold[size-2]; j < 256; ++j) {
+    for(int j = quant.threshold[size-2]; j < N_MAX_THRESHOLD; ++j) {
         som_lum += histogram[j] * j;
         nb_points += histogram[j];
     }

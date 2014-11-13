@@ -26,6 +26,7 @@
 #include "Quantification.h"
 #include "QuantificationWidget.h"
 #include <QPushButton>
+
 class QuantificationDialog : public QDialog
 {
     Q_OBJECT

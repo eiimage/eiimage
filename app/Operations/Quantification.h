@@ -30,9 +30,12 @@ struct Quantification {
     static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
 
     explicit Quantification(std::string filename);
+
     void saveAs(std::string filename);
+
     explicit Quantification(int size_);
-    inline imagein::Image::depth_t valueOf(imagein::Image::depth_t value) const {
+
+    inline int valueOf(int value) const {
         for(int i = 0; i < this->size - 1; ++i) {
             if(value < this->threshold[i]) {
                 return this->values[i];
@@ -42,16 +45,16 @@ struct Quantification {
     }
     int size;
     int* threshold;
-    imagein::Image::depth_t* values;
+    int* values;
 };
 
 struct Quantifier {
     Quantifier(Quantification quant);
-    inline imagein::Image::depth_t valueOf(imagein::Image::depth_t value) {
+    inline int valueOf(imagein::Image::depth_t value) {
         return this->values[value];
     }
   private:
-    imagein::Image::depth_t values[256];
+    int values[N_MAX_THRESHOLD];
 };
 
 #endif // QUANTIFICATION_H

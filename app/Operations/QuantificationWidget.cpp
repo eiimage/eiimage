@@ -56,21 +56,21 @@ QuantificationWidget::CentralWidget::CentralWidget(QWidget *parent) :
         _thresholdBoxes[i] = new QSpinBox(this);
         _thresholdBoxes[i]->setFixedSize(64, 28);
         _thresholdBoxes[i]->move(QPoint((_firstWidth-64)/2, i * 32 + 16 + _yOffset));
-        _thresholdBoxes[i]->setRange(0, 255);
+        _thresholdBoxes[i]->setRange(-254, 255);
         if(i >= _nThreshold) _thresholdBoxes[i]->setVisible(false);
     }
     for(int i = 0; i < N_MAX_THRESHOLD + 1; ++i) {
         _valueBoxes[i] = new QSpinBox(this);
-        _valueBoxes[i]->setRange(0, 255);
         _valueBoxes[i]->setFixedSize(64, 28);
         _valueBoxes[i]->move(QPoint(_firstWidth + 32 + (_secondWidth-64)/2, i * 32 + _yOffset));
+        _valueBoxes[i]->setRange(-254, 255);
         if(i > _nThreshold) _valueBoxes[i]->setVisible(false);
     }
 //    editorLayout->addWidget(_valueBoxes[32], 32, 1);
 //    this->setFixedSize(_firstWidth + 32 + _secondWidth, _nThreshold * 32 + _yOffset + 28);
 }
 
-void QuantificationWidget::CentralWidget::paintEvent (QPaintEvent *e)
+void QuantificationWidget::CentralWidget::paintEvent(QPaintEvent *)
 {
     QPainter *painter = new QPainter (this);
     QPen pen(Qt::darkGray, 2, Qt::DashLine);
@@ -82,13 +82,13 @@ void QuantificationWidget::CentralWidget::paintEvent (QPaintEvent *e)
     }
     painter->end ();
 }
+
 QSize QuantificationWidget::sizeHint () const {
     return this->widget()->size();
 }
+
 QSize QuantificationWidget::CentralWidget::sizeHint () const {
     return QSize(_firstWidth + 32 + _secondWidth, _nThreshold * 32 + _yOffset + 28);
-
-
 }
 
 void QuantificationWidget::setNbThreshold(int n) {
@@ -102,7 +102,6 @@ void QuantificationWidget::setNbThreshold(int n) {
     this->parentWidget()->adjustSize();
     this->parentWidget()->parentWidget()->adjustSize();
 }
-
 
 void QuantificationWidget::CentralWidget::setNbThreshold(int n) {
     this->_nThreshold = min(N_MAX_THRESHOLD, n);
@@ -118,6 +117,7 @@ void QuantificationWidget::CentralWidget::setNbThreshold(int n) {
 void QuantificationWidget::setQuantif(Quantification q) {
     this->_centralWidget->setQuantif(q);
 }
+
 void QuantificationWidget::CentralWidget::setQuantif(Quantification q) {
 
     this->_nThreshold = q.size - 1;
@@ -135,8 +135,6 @@ void QuantificationWidget::CentralWidget::setQuantif(Quantification q) {
     }
     this->updateGeometry();
 }
-
-
 
 Quantification QuantificationWidget::getQuantif() const {
     return _centralWidget->getQuantif();

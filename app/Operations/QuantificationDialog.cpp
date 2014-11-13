@@ -49,7 +49,6 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     _sizeBox->setRange(2, 256);
     _sizeBox->setValue(2);
 
-
     _quantBox = new QComboBox();
     _quantBox->addItem(tr("Linear with centered value"));
     if(!_editorOnly) {
@@ -91,14 +90,13 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     }
 }
 
-
 void QuantificationDialog::methodChanged(int method) {
     _editorWidget->setVisible((_editorOnly && method == 1) || (!_editorOnly && method == 3));
     _saveButton->setEnabled(_editorOnly || method==3 || method == 0);
     this->adjustSize();
 }
-Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c) {
 
+Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c) {
     int size = _sizeBox->value();
     if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
