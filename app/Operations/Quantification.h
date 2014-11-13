@@ -22,6 +22,8 @@
 
 #include <Image.h>
 
+#define N_MAX_THRESHOLD 256
+
 struct Quantification {
     static Quantification linearQuant(int size);
     static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);

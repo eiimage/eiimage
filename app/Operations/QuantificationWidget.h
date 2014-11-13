@@ -25,7 +25,7 @@
 
 #include <QScrollArea>
 #include "Quantification.h"
-#define N_MAX_THRESHOLD 32
+
 class QuantificationWidget : public QScrollArea
 {
     Q_OBJECT
