@@ -56,12 +56,12 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
             Quantification quantification = dialog->getQuantif(image, c);
-            for(int i = 0; i < quantification.size; ++i) {
-                cout << (int)quantification.values[i] << ".";
+            for(int i = 0; i < quantification.nbValues(); ++i) {
+                cout << (int)quantification.value(i) << ".";
             }
             cout << endl;
-            for(int i = 0; i < quantification.size-1; ++i) {
-                cout << quantification.threshold[i] << ".";
+            for(int i = 0; i < quantification.nbThresholds(); ++i) {
+                cout << quantification.threshold(i) << ".";
             }
             cout << endl;
             Quantifier quantifier = Quantifier(quantification);

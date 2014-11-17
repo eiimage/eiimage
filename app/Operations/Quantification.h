@@ -33,20 +33,31 @@ public:
 
     inline int valueOf(int value) const {
         for(int i = 0; i < this->size - 1; ++i) {
-            if(value < this->threshold[i]) {
-                return this->values[i];
+            if(value < this->_threshold[i]) {
+                return this->_values[i];
             }
         }
-        return this->values[this->size - 1];
+        return this->_values[this->size - 1];
     }
+
+    inline int nbValues() {return size;}
+
+    inline int nbThresholds() {return size - 1;}
+
+    inline int value(int i) {return _values[i];}
+    inline void setValue(int i, int v) {_values[i] = v;}
+
+    inline int threshold(int i) {return _threshold[i];}
+    inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
     static Quantification linearQuant(int size);
     static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
     static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
 
+private:
     int size;
-    int* threshold;
-    int* values;
+    int* _threshold;
+    int* _values;
 };
 
 class Quantifier {

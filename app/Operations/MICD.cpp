@@ -209,19 +209,19 @@ void MICD::codec(int nlq,int ier,int *icode,int *ireco) {
 
 void MICD::set_levels() {
     // Fills in iloiqu with the specified values
-    if( quantdef->size - 1 > N_MAX_THRESHOLD || quantdef->size - 1 < 1 ) {
+    if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in MICD::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->size - 1 );
+        sprintf( buffer, "Error in MICD::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->nbThresholds() );
         throw buffer;
     }
     int counter;
-    iloiqu[0] = quantdef->size;
-    for( counter=0; counter< quantdef->size - 1; counter++ ) {
-        iloiqu[ counter * 2 + 1 ] = quantdef->threshold[ counter ];
-        iloiqu[ counter * 2 + 2 ] = quantdef->values[ counter ];
+    iloiqu[0] = quantdef->nbValues();
+    for( counter=0; counter< quantdef->nbThresholds(); counter++ ) {
+        iloiqu[ counter * 2 + 1 ] = quantdef->threshold(counter);
+        iloiqu[ counter * 2 + 2 ] = quantdef->value(counter);
     }
-    iloiqu[ (quantdef->size - 1) * 2 + 1 ] = iloiqu[ (quantdef->size - 1) * 2 - 1 ] + 1;
-    iloiqu[ (quantdef->size - 1) * 2 + 2 ] = quantdef->values[ quantdef->size - 1 ];
+    iloiqu[quantdef->nbThresholds() * 2 + 1 ] = iloiqu[quantdef->nbThresholds() * 2 - 1 ] + 1;
+    iloiqu[quantdef->nbThresholds() * 2 + 2 ] = quantdef->value(quantdef->nbThresholds());
 }
 
 string MICD::print_iloiqu() {
@@ -247,9 +247,9 @@ void MICD::setQuantification( Quantification *tquantdef ) {
     if( tquantdef == NULL ) {
         throw "Error in MICD::setQuantDef:\ntquantdef = NULL";
     }
-    if( tquantdef->size - 1 > N_MAX_THRESHOLD || tquantdef->size - 1 < 1 ) {
+    if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in MICD::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->size - 1 );
+        sprintf( buffer, "Error in MICD::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->nbThresholds() );
         throw buffer;
     }
     quantdef = tquantdef;

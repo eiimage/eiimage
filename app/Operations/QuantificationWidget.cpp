@@ -120,12 +120,12 @@ void QuantificationWidget::setQuantif(Quantification q) {
 
 void QuantificationWidget::CentralWidget::setQuantif(Quantification q) {
 
-    this->_nThreshold = q.size - 1;
-    for(int i = 0; i < q.size - 1; ++i) {
-        _thresholdBoxes[i]->setValue(q.threshold[i]);
+    this->_nThreshold = q.nbThresholds();
+    for(int i = 0; i < q.nbThresholds(); ++i) {
+        _thresholdBoxes[i]->setValue(q.threshold(i));
     }
-    for(int i = 0; i < q.size; ++i) {
-        _valueBoxes[i]->setValue(q.values[i]);
+    for(int i = 0; i < q.nbValues(); ++i) {
+        _valueBoxes[i]->setValue(q.value(i));
     }
     for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
         _thresholdBoxes[i]->setVisible(i < _nThreshold);
@@ -142,11 +142,11 @@ Quantification QuantificationWidget::getQuantif() const {
 
 Quantification QuantificationWidget::CentralWidget::getQuantif() const {
     Quantification q(_nThreshold + 1);
-    for(int i = 0; i < q.size - 1; ++i) {
-        q.threshold[i] = _thresholdBoxes[i]->value();
+    for(int i = 0; i < q.nbThresholds(); ++i) {
+        q.setThreshold(i, _thresholdBoxes[i]->value());
     }
-    for(int i = 0; i < q.size; ++i) {
-        q.values[i] = _valueBoxes[i]->value();
+    for(int i = 0; i < q.nbValues(); ++i) {
+        q.setValue(i, _valueBoxes[i]->value());
     }
     return q;
 }
