@@ -23,8 +23,8 @@
 using namespace std;
 using namespace imagein;
 
-Quantification::Quantification(int size_) {
-    this->size = size_;
+Quantification::Quantification(int size) {
+    this->size = size;
     threshold = new int[this->size - 1];
     values = new int[this->size];
 }
@@ -65,12 +65,6 @@ void Quantification::saveAs(std::string filename) {
     for(int i = 0; i < size; ++i) {
         double n = values[i];
         file << n << endl;
-    }
-}
-
-Quantifier::Quantifier(Quantification quant) {
-    for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
-        values[i] = quant.valueOf(i);
     }
 }
 
@@ -175,4 +169,10 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
     }
     quant.values[size-1] = som_lum / nb_points + 0.5;
     return quant;
+}
+
+Quantifier::Quantifier(Quantification quant) {
+    for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
+        values[i] = quant.valueOf(i);
+    }
 }
