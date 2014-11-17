@@ -211,7 +211,7 @@ void MICD::codec(int nlq,int ier,int *icode,int *ireco) {
 
 void MICD::set_levels() {
     // Fills in iloiqu with the specified values
-    if( quantdef->size - 1 > 32 || quantdef->size - 1 < 1 ) {
+    if( quantdef->size - 1 > N_MAX_THRESHOLD || quantdef->size - 1 < 1 ) {
         char buffer[255];
         sprintf( buffer, "Error in MICD::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->size - 1 );
         throw buffer;
@@ -249,7 +249,7 @@ void MICD::setQuantification( Quantification *tquantdef ) {
     if( tquantdef == NULL ) {
         throw "Error in MICD::setQuantDef:\ntquantdef = NULL";
     }
-    if( tquantdef->size - 1 > 32 || tquantdef->size - 1 < 1 ) {
+    if( tquantdef->size - 1 > N_MAX_THRESHOLD || tquantdef->size - 1 < 1 ) {
         char buffer[255];
         sprintf( buffer, "Error in MICD::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->size - 1 );
         throw buffer;
