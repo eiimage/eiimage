@@ -128,14 +128,15 @@ string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             }
 
             depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
-            ier = (int) thePixel - pred;
+            ier = thePixel - pred;
+            ier = quantdef->valueOf(ier);
 
-            codec(0,ier,&icode,&ireco);
+            codec(0, ier, &icode, &ireco);
 
             pi[ier+255]++;      /* proba associe a l'erreur de prdiction */
             nbpt++;
 
-            error_prediction_image->setPixelAt(j, i, ier + 128);
+            error_prediction_image->setPixelAt(j, i, ier);
 
             int tempvalue = pred + ireco;
             // Crop the value in [0,255]
