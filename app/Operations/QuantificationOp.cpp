@@ -64,11 +64,10 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
                 cout << quantification.threshold(i) << ".";
             }
             cout << endl;
-            Quantifier quantifier = Quantifier(quantification);
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
                     const Image::depth_t value = image->getPixelAt(i, j, c);
-                    resImg->setPixelAt(i, j, c, quantifier.valueOf(value));
+                    resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
             }
         }

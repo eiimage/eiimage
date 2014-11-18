@@ -171,8 +171,3 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
     return quant;
 }
 
-Quantifier::Quantifier(Quantification quant) {
-    for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
-        values[i] = quant.valueOf(i);
-    }
-}

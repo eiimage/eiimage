@@ -32,22 +32,22 @@ public:
     void saveAs(std::string filename);
 
     inline int valueOf(int value) const {
-        for(int i = 0; i < this->size - 1; ++i) {
-            if(value < this->_threshold[i]) {
-                return this->_values[i];
+        for(int i = 0; i < nbThresholds(); ++i) {
+            if(value < _threshold[i]) {
+                return _values[i];
             }
         }
-        return this->_values[this->size - 1];
+        return _values[nbThresholds()];
     }
 
-    inline int nbValues() {return size;}
+    inline int nbValues() const {return size;}
 
-    inline int nbThresholds() {return size - 1;}
+    inline int nbThresholds() const {return size - 1;}
 
-    inline int value(int i) {return _values[i];}
+    inline int value(int i) const {return _values[i];}
     inline void setValue(int i, int v) {_values[i] = v;}
 
-    inline int threshold(int i) {return _threshold[i];}
+    inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
     static Quantification linearQuant(int size);
@@ -58,16 +58,6 @@ private:
     int size;
     int* _threshold;
     int* _values;
-};
-
-class Quantifier {
-public:
-    Quantifier(Quantification quant);
-    inline int valueOf(imagein::Image::depth_t value) {
-        return this->values[value];
-    }
-private:
-    int values[N_MAX_THRESHOLD];
 };
 
 #endif // QUANTIFICATION_H
