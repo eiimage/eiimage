@@ -23,6 +23,6 @@ add_subdirectory(core)
 include_directories(core)
 
 # Too much compile errors, have to be fixed:
-# add_subdirectory(plugins)
+add_subdirectory(plugins)
 add_subdirectory(app)
 
