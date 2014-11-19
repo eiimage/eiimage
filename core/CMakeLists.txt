@@ -20,7 +20,7 @@ set(SRCS
 )
 add_library(eiimage_core ${SRCS})
 target_link_libraries(eiimage_core
-    GenericInterface
-    ImageIn
-    Qt5::Widgets
+	GenericInterface
+	ImageIn
+	Qt5::Widgets
 )
