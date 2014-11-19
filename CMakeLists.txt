@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 # Detiq-T is a submodule, it is built automatically before building eiimage
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/detiq-t AND IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/detiq-t)
 	add_subdirectory(lib/detiq-t)
-     include_directories(lib/detiq-t/ImageIn lib/detiq-t/GenericInterface)
+	include_directories(lib/detiq-t/ImageIn lib/detiq-t/GenericInterface)
 else()
 	message(FATAL_ERROR "The Detiq-T project should be cloned before excuting this compilation. "
 		"Please use 'git submodule init' and 'git submodule update' to automatically get the source "

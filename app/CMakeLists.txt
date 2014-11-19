@@ -17,7 +17,12 @@ endif()
 
 # Find Qwt, which must be built and installed before running this compilation
 find_package(Qwt 6.0 REQUIRED)
-include_directories(${QWT_INCLUDE_DIRS})
+if(QWT_FOUND)
+	message(STATUS "Qwt library version ${QWT_VERSION_STRING}")
+	include_directories(${QWT_INCLUDE_DIRS})
+else()
+	message(FATAL_ERROR "Cannot find Qwt library. Please add the Qwt library directory to CMAKE_PREFIX_PATH.")
+endif()
 
 set(eiimage_SOURCES
      main.cpp
