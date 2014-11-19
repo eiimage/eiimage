@@ -14,15 +14,19 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/detiq-t AND IS_DIRECTORY ${CMAKE_CURRE
 	add_subdirectory(lib/detiq-t)
 	include_directories(lib/detiq-t/ImageIn lib/detiq-t/GenericInterface)
 else()
-	message(FATAL_ERROR "The Detiq-T project should be cloned before excuting this compilation. "
+	message(FATAL_ERROR "The Detiq-T project should be cloned before executing this compilation. "
 		"Please use 'git submodule init' and 'git submodule update' to automatically get the source "
-		"for Detiq-T, and re-run CMake.")
+		"for Detiq-T (ImageIn & GenericInterface libraries), and re-run CMake.")
 endif()
+
+# Simple inclusion, more control have already been performed
+# in previous Detiq-T lookup (GenericInterface)
+find_package(Qwt 6.0)
+include_directories(${QWT_INCLUDE_DIRS})
 
 add_subdirectory(core)
 include_directories(core)
 
-# Too much compile errors, have to be fixed:
 add_subdirectory(plugins)
 add_subdirectory(app)
 
