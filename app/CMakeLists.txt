@@ -202,13 +202,13 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 
 add_executable(eiimage ${eiimage_SOURCES} ${WRAPPED_UIS} ${UIS} ${TS_FILES})
 target_link_libraries(eiimage
-	eiimage_core
+	core
 	Qt5::Core
 	Qt5::Widgets
 	Qt5::Gui
 	Qt5::Script
 	Qt5::Xml
-	 ${RandomLib_LIBRARIES}
+	${RandomLib_LIBRARIES}
 	GenericInterface
 	ImageIn
 )

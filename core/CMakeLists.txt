@@ -18,8 +18,8 @@ set(SRCS
 	PlugOperation.cpp
 	PlugOperation.h
 )
-add_library(eiimage_core ${SRCS})
-target_link_libraries(eiimage_core
+add_library(core ${SRCS})
+target_link_libraries(core
 	GenericInterface
 	ImageIn
 	Qt5::Widgets
