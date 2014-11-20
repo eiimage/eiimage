@@ -1,20 +1,4 @@
 
-# Find the Qt libraries
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5LinguistTools REQUIRED)
-find_package(Qt5Script REQUIRED)
-find_package(Qt5Xml REQUIRED)
-
-# Find RandomLib, which must be built and installed before running this compilation
-find_package(RandomLib 1.7 REQUIRED)
-if(RandomLib_FOUND)
-	include_directories(${RandomLib_INCLUDE_DIRS})
-else()
-	message(FATAL_ERROR "Unable to find Random library. Please clone, compile and install it before compiling eiimage.")
-endif()
-
 set(eiimage_SOURCES
 	main.cpp
 	Tools.h
