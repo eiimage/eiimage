@@ -193,6 +193,8 @@ set(UIS
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})
 
+qt5_add_resources(RCC_FILES "eiimage_app_res.qrc")
+
 set(TS_FILES eiimage_en.ts eiimage_fr.ts)
 # Uncommento only 1 of the 2 folowing commands, depending on your needs
 # -1- Use current translations files
@@ -200,7 +202,7 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
 # qt5_create_translation(QM_FILES ${eiimage_SOURCES} ${TS_FILES})
 
-add_executable(eiimage ${eiimage_SOURCES} ${WRAPPED_UIS} ${UIS} ${TS_FILES})
+add_executable(eiimage ${eiimage_SOURCES} ${WRAPPED_UIS} ${UIS} ${TS_FILES} ${RCC_FILES})
 target_link_libraries(eiimage
 	core
 	Qt5::Core
