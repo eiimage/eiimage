@@ -202,6 +202,12 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
 # qt5_create_translation(QM_FILES ${eiimage_SOURCES} ${TS_FILES})
 
+# Apply only on MinGW / Cygwin under Windows
+if(WIN32 AND CMAKE_COMPILER_IS_GNUCXX)
+	# Don't require libstdc++**.dll when running the program
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++")
+endif()
+
 add_executable(eiimage ${eiimage_SOURCES} ${WRAPPED_UIS} ${UIS} ${TS_FILES} ${RCC_FILES})
 target_link_libraries(eiimage
 	core
