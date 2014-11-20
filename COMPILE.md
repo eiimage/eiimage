@@ -47,14 +47,14 @@ Note: GNU/Linux users can use the package their manager, but this can be problem
 
 ### Zlib, Jpeg, Png
 #### Windows
-You can download these libraries from http://gnuwin32.sourceforge.net/. Each library is available as a 'Developer package'. Download the zip and uncompress it on your disk.
-Downloads:
+You can get these libraries from http://gnuwin32.sourceforge.net/. Download and install the 'Complete package, except sources' from:
 - http://gnuwin32.sourceforge.net/packages/zlib.htm
 - http://gnuwin32.sourceforge.net/packages/jpeg.htm
 - http://gnuwin32.sourceforge.net/packages/libpng.htm
+Later, you will have to indicate the base path for these libraries (by default C:\Program Files\GnuWin32) using CMAKE_PREFIX_PATH.
 
 #### GNU/Linux
-Developer packages from your distribution may be available. This is the easier way to install these dependencies. CMake will probably detect the paths automatically if you install from your package manager.
+Developer packages from your distribution may be available. This is the easiest way to install these dependencies. CMake will probably detect the paths automatically if you install from your package manager.
 
 ## CMake Generation
 This is the most important part. Once the generation is done, the compilation shouldn't cause any trouble.
