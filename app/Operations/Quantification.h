@@ -24,37 +24,40 @@
 
 #define N_MAX_THRESHOLD 256
 
-struct Quantification {
-    static Quantification linearQuant(int size);
-    static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
-    static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
-
+class Quantification {
+public:
+    explicit Quantification(int size);
     explicit Quantification(std::string filename);
 
     void saveAs(std::string filename);
 
-    explicit Quantification(int size_);
-
     inline int valueOf(int value) const {
-        for(int i = 0; i < this->size - 1; ++i) {
-            if(value < this->threshold[i]) {
-                return this->values[i];
+        for(int i = 0; i < nbThresholds(); ++i) {
+            if(value < _threshold[i]) {
+                return _values[i];
             }
         }
-        return this->values[this->size - 1];
+        return _values[nbThresholds()];
     }
-    int size;
-    int* threshold;
-    int* values;
-};
 
-struct Quantifier {
-    Quantifier(Quantification quant);
-    inline int valueOf(imagein::Image::depth_t value) {
-        return this->values[value];
-    }
-  private:
-    int values[N_MAX_THRESHOLD];
+    inline int nbValues() const {return size;}
+
+    inline int nbThresholds() const {return size - 1;}
+
+    inline int value(int i) const {return _values[i];}
+    inline void setValue(int i, int v) {_values[i] = v;}
+
+    inline int threshold(int i) const {return _threshold[i];}
+    inline void setThreshold(int i, int v) {_threshold[i] = v;}
+
+    static Quantification linearQuant(int size);
+    static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
+    static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
+
+private:
+    int size;
+    int* _threshold;
+    int* _values;
 };
 
 #endif // QUANTIFICATION_H

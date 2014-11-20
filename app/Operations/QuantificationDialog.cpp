@@ -122,7 +122,7 @@ void QuantificationDialog::open() {
     if(filename.isEmpty()) return;
     Quantification q(filename.toStdString());
     _quantWidget->setQuantif(q);
-    _sizeBox->setValue(q.size);
+    _sizeBox->setValue(q.nbValues());
     _quantBox->setCurrentIndex(_editorOnly ? 1 : 3);
 }
 

@@ -30,7 +30,7 @@ public:
     MICD();
     enum Prediction {PX_EQ_A, PX_EQ_B, PX_EQ_APC, PX_EQ_Q};
     virtual ~MICD();
-    std::string execute( const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::Image **err_image, imagein::Image **recons_image, double Q = 0 );
+    std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, imagein::Image **recons_image, double Q = 0 );
     void setQuantification( Quantification* tquantdef );
 private:
     std::string print_iloiqu();

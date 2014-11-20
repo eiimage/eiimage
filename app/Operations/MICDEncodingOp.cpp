@@ -43,21 +43,23 @@ void MICDEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
-    if(code!=QDialog::Accepted) return;
+    if(code != QDialog::Accepted) return;
 
     MICD micd;
     try {
         micd.setQuantification(dialog->getQuantification());
     }
     catch(const char* str) {
-        QMessageBox::critical(NULL, qApp->translate("MICD", "Error while loading quantification file"), qApp->translate("MICD", "The specified quantification file could not be opened !"));
+        QMessageBox::critical(NULL, qApp->translate("MICD", "Error while loading quantification file"),
+                              qApp->translate("MICD", "The specified quantification file could not be opened !"));
         return;
     }
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
-    Image *errorImage, *reconstructedImage;
+    Image *reconstructedImage;
+    ImageDouble *errorImage;
     string s = micd.execute(image, dialog->getPrediction(), &errorImage, &reconstructedImage, dialog->getQ());
     outText(s);
-    outImage(errorImage, qApp->translate("MICD", "Error image").toStdString());
+    outDoubleImage(errorImage, qApp->translate("MICD", "Error image").toStdString());
     outImage(reconstructedImage, qApp->translate("MICD", "Reconstructed image").toStdString());
 }
 
