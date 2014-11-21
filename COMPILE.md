@@ -35,7 +35,7 @@ You may use the developer packages from your distribution. Module needed are Cor
 ### RandomLib
 Download the RandomLib C++ library from the official website: http://randomlib.sourceforge.net/. Generates compilation environment with CMake and build the library. Default options works well.
 
-RandomLib 1.7, 1.8 and 1.9 are known to work. More recent versions should also work.
+RandomLib 1.7, 1.8 and 1.9 are known to work. More recent versions should also be ok.
 
 ### Qwt
 Download Qwt 6.0 or newer from the official website: http://sourceforge.net/projects/qwt/

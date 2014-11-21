@@ -186,10 +186,6 @@ qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
 # qt5_create_translation(QM_FILES ${eiimage_SOURCES} ${TS_FILES})
 
-foreach(__FILE ${QM_FILES})
-	file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-endforeach()
-
 # Avoid awful console on Windows
 if(WIN32)
 	set(EXTRA_FLAGS WIN32)
@@ -207,3 +203,12 @@ target_link_libraries(eiimage
 	GenericInterface
 	ImageIn
 )
+
+add_custom_command(TARGET eiimage COMMAND POST_BUILD
+	${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
+	COMMENT "Create directory ${DEPLOY_OUTPUT_DIRECTORY}/lang")
+foreach(__FILE ${QM_FILES})
+	add_custom_command(TARGET eiimage POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy ${__FILE} ${DEPLOY_OUTPUT_DIRECTORY}/lang
+		COMMENT "Copy ${__FILE} to ${DEPLOY_OUTPUT_DIRECTORY}/lang")
+endforeach()
