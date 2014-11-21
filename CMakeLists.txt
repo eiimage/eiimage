@@ -19,8 +19,8 @@ find_package(Qt5PrintSupport)
 
 # We want to generate everything in the right target folder, for easier deployment
 set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/eiimage CACHE PATH "The folder to use for deployment." FORCE)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
 
 # Find RandomLib, which must be built and installed before running this compilation
@@ -71,63 +71,41 @@ include_directories(core)
 add_subdirectory(plugins)
 add_subdirectory(app)
 
+# Deploy all needed dynamic libraries
 if(WIN32)
-	get_target_property(Qt5Core Qt5::Core LOCATION)
-	file(COPY ${Qt5Core} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Gui Qt5::Gui LOCATION)
-	file(COPY ${Qt5Gui} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Widgets Qt5::Widgets LOCATION)
-	file(COPY ${Qt5Widgets} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Xml Qt5::Xml LOCATION)
-	file(COPY ${Qt5Xml} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Script Qt5::Script LOCATION)
-	file(COPY ${Qt5Script} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Print Qt5::PrintSupport LOCATION)
-	file(COPY ${Qt5Print} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Opengl Qt5::OpenGL LOCATION)
-	file(COPY ${Qt5Opengl} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	get_target_property(Qt5Svg Qt5::Svg LOCATION)
-	file(COPY ${Qt5Svg} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-
-	get_filename_component(QT_DIR ${Qt5Core} DIRECTORY)
-	# Copy icuuc, icudt & icuin**.dll files
-	file(GLOB ICUS "${QT_DIR}/icu*.dll")
-	foreach(__FILE ${ICUS})
-		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	endforeach()
-
-	# Copy MinGW dependencies
-	file(GLOB GCCS "${QT_DIR}/*gcc_s*.dll")
-	foreach(__FILE ${GCCS})
-		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	endforeach()
-	file(GLOB GCCS "${QT_DIR}/*stdc++*.dll")
-	foreach(__FILE ${GCCS})
-		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	endforeach()
-	file(GLOB THREADS "${QT_DIR}/*winpthread*.dll")
-	foreach(__FILE ${THREADS})
-		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
-	endforeach()
-
+	# libRandom.dll
 	get_target_property(RandomLocation RandomLib IMPORTED_LOCATION_RELEASE)
 	file(COPY ${RandomLocation} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
 
+	# Qwt.dll
 	get_filename_component(QWT_LIB_DIR ${QWT_LIBRARY} DIRECTORY)
 	file(GLOB QWT_SHARED_LIBS "${QWT_LIB_DIR}/*.dll")
 	foreach(__FILE ${QWT_SHARED_LIBS})
 		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
 	endforeach()
 
+	# Jpeg and png dlls
 	get_filename_component(JPEG_LIB_DIR ${JPEG_LIBRARY} DIRECTORY)
 	file(GLOB JPEG_SHARED_LIBS "${JPEG_LIB_DIR}/../bin/*.dll")
 	foreach(__FILE ${JPEG_SHARED_LIBS})
 		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
 	endforeach()
-
 	get_filename_component(PNG_LIB_DIR ${PNG_LIBRARY} DIRECTORY)
 	file(GLOB PNG_SHARED_LIBS "${PNG_LIB_DIR}/../bin/*.dll")
 	foreach(__FILE ${PNG_SHARED_LIBS})
 		file(COPY ${__FILE} DESTINATION ${DEPLOY_OUTPUT_DIRECTORY})
 	endforeach()
+
+	# Qt and compiler dll
+	if(CMAKE_BUILD_TYPE MATCHES "Release")
+		set(DEPLOY_FLAG "--release")
+	else()
+		set(DEPLOY_FLAG "--debug")
+	endif()
+	add_custom_target(WinQtDeploy ALL
+		windeployqt ${DEPLOY_FLAG} ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
+		COMMAND windeployqt ${DEPLOY_FLAG} ${DEPLOY_OUTPUT_DIRECTORY}/eiimage.exe
+		COMMENT "Copy Qt & compiler DLL to the target directory")
+	add_dependencies(WinQtDeploy eiimage)
+
 endif()

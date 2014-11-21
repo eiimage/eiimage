@@ -204,8 +204,8 @@ target_link_libraries(eiimage
 	ImageIn
 )
 
-add_custom_command(TARGET eiimage COMMAND POST_BUILD
-	${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
+add_custom_command(TARGET eiimage POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
 	COMMENT "Create directory ${DEPLOY_OUTPUT_DIRECTORY}/lang")
 foreach(__FILE ${QM_FILES})
 	add_custom_command(TARGET eiimage POST_BUILD
