@@ -17,6 +17,12 @@ find_package(Qt5Svg)
 find_package(Qt5OpenGL)
 find_package(Qt5PrintSupport)
 
+# We want to generate everything in the right target folder, for easier deployment
+set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/eiimage CACHE PATH "The folder to use for deployment." FORCE)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
+
 # Find RandomLib, which must be built and installed before running this compilation
 find_package(RandomLib 1.7 REQUIRED)
 if(RandomLib_FOUND)
@@ -58,12 +64,6 @@ find_package(Threads REQUIRED)
 # in previous Detiq-T lookup (GenericInterface)
 find_package(Qwt 6.0)
 include_directories(${QWT_INCLUDE_DIRS})
-
-# We want to generate everything in the right target folder, for easier deployment
-set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/eiimage CACHE PATH "The folder to use for deployment." FORCE)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
 
 add_subdirectory(core)
 include_directories(core)
