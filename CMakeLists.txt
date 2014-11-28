@@ -97,10 +97,12 @@ if(WIN32)
 	endforeach()
 
 	# Qt and compiler dll
-	if(CMAKE_BUILD_TYPE MATCHES "Release")
-		set(DEPLOY_FLAG "--release")
-	else()
-		set(DEPLOY_FLAG "--debug")
+	if(Qt5Core_VERSION_STRING GREATER 5.3)
+		if(CMAKE_BUILD_TYPE MATCHES "Release")
+			set(DEPLOY_FLAG "--release")
+		else()
+			set(DEPLOY_FLAG "--debug")
+		endif()
 	endif()
 	add_custom_target(WinQtDeploy ALL
 		windeployqt ${DEPLOY_FLAG} ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
