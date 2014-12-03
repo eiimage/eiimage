@@ -106,9 +106,8 @@ if(WIN32)
 		endif()
 	endif()
 	add_custom_target(WinQtDeploy ALL
-		windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
+		windeployqt ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
 		COMMAND windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/eiimage.exe
-
 		COMMENT "Copy Qt & compiler DLL to the target directory")
 	add_dependencies(WinQtDeploy eiimage)
 endif()
