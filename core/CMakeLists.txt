@@ -18,9 +18,12 @@ set(SRCS
 	PlugOperation.cpp
 	PlugOperation.h
 )
-add_library(core ${SRCS})
+add_library(core SHARED ${SRCS} $<TARGET_OBJECTS:GenericInterface> $<TARGET_OBJECTS:ImageIn>)
 target_link_libraries(core
-	GenericInterface
-	ImageIn
 	Qt5::Widgets
+	${QWT_LIBRARY}
+	${QWT_LIBRARIES}
+	${JPEG_LIBRARY}
+	${PNG_LIBRARIES}
+	${CMAKE_THREAD_LIBS_INIT}
 )

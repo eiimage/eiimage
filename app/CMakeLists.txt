@@ -200,8 +200,6 @@ target_link_libraries(eiimage
 	Qt5::Script
 	Qt5::Xml
 	${RandomLib_LIBRARIES}
-	GenericInterface
-	ImageIn
 )
 
 add_custom_command(TARGET eiimage POST_BUILD

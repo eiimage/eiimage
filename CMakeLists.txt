@@ -18,6 +18,7 @@ find_package(Qt5OpenGL)
 find_package(Qt5PrintSupport)
 
 # We want to generate everything in the right target folder, for easier deployment
+file(MAKE_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/eiimage CACHE PATH "The folder to use for deployment." FORCE)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
@@ -97,17 +98,17 @@ if(WIN32)
 	endforeach()
 
 	# Qt and compiler dll
-	if(Qt5Core_VERSION_STRING GREATER 5.3)
-		if(CMAKE_BUILD_TYPE MATCHES "Release")
-			set(DEPLOY_FLAG "--release")
+	if(Qt5Core_VERSION_STRING VERSION_GREATER 5.3)
+		if(CMAKE_BUILD_TYPE MATCHES Release)
+			set(DEPLOY_FLAGS "--release")
 		else()
-			set(DEPLOY_FLAG "--debug")
+			set(DEPLOY_FLAGS "--debug")
 		endif()
 	endif()
 	add_custom_target(WinQtDeploy ALL
-		windeployqt ${DEPLOY_FLAG} ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
-		COMMAND windeployqt ${DEPLOY_FLAG} ${DEPLOY_OUTPUT_DIRECTORY}/eiimage.exe
+		windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
+		COMMAND windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/eiimage.exe
+
 		COMMENT "Copy Qt & compiler DLL to the target directory")
 	add_dependencies(WinQtDeploy eiimage)
-
 endif()
