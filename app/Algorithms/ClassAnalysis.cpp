@@ -22,8 +22,9 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
+#include <cstdlib>
 
-#include <GrayscaleImage.h>
+#include "GrayscaleImage.h"
 
 using namespace ClassAnalysis;
 using namespace imagein;

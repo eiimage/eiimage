@@ -20,6 +20,7 @@
 #include "Huffman.h"
 #include <cstring>
 #include <cstdio>
+#include <cmath>
 
 using namespace std;
 using namespace imagein;

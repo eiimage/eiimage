@@ -23,11 +23,11 @@
 #include <QDoubleSpinBox>
 #include <QDialogButtonBox>
 #include <QApplication>
+#include <cmath>
 
 #include "ZeroCrossingOp.h"
 #include "../Tools.h"
 
-using namespace std;
 using namespace imagein;
 
 ZeroCrossingOp::ZeroCrossingOp() : DoubleOperation(qApp->translate("Operations", "Zero crossing").toStdString())
@@ -74,7 +74,7 @@ void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::
                 for(unsigned int k = i-1; k < i+1; ++k) {
                     for(unsigned int l = j-1; l < j+1; ++l) {
                         if(img->getPixelAt(i, j, c) <= 0 && img->getPixelAt(k, l, c) > 0) {
-                            double dist = abs(img->getPixelAt(i, j, c) - img->getPixelAt(k, l, c));
+                            double dist = std::abs(img->getPixelAt(i, j, c) - img->getPixelAt(k, l, c));
                             if(dist > threshold) edge = true;
                         }
                     }

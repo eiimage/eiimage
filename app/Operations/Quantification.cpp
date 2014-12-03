@@ -19,6 +19,8 @@
 
 #include "Quantification.h"
 #include <fstream>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 using namespace imagein;

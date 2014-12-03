@@ -25,6 +25,8 @@
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
 
+#include "Image.h"
+
 using namespace std;
 using namespace imagein;
 using namespace genericinterface;

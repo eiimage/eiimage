@@ -21,6 +21,8 @@
 #include <Algorithm/Filtering.h>
 #include <cstdio>
 #include <cstring>
+#include <cstdlib>
+#include <cmath>
 using namespace std;
 using namespace imagein;
 using namespace Pyramid;

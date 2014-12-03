@@ -31,6 +31,7 @@
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <cmath>
 
 using namespace std;
 using namespace imagein;

@@ -20,6 +20,7 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFormLayout>
+#include <cmath>
 #include <Image.h>
 
 #include <Widgets/ImageListBox.h>
