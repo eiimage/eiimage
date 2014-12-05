@@ -59,7 +59,6 @@ void MICDEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     ImageDouble *errorImage;
     string s = micd.execute(image, dialog->getPrediction(), &errorImage, &reconstructedImage, dialog->getQ());
     outText(s);
-    outDoubleImage(errorImage, qApp->translate("MICD", "Error image").toStdString());
+    outDoubleImage(errorImage, qApp->translate("MICD", "Error image").toStdString(), true, true, 0.1, false);
     outImage(reconstructedImage, qApp->translate("MICD", "Reconstructed image").toStdString());
 }
-
