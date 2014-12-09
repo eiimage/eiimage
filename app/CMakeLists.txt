@@ -172,7 +172,6 @@ set(UIS
 	Operations/MICDDialog.ui
 	Operations/DCTDialog.ui
 	Operations/ColorDialog.ui
-	Operations/MICDDialog_.ui
 )
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})
