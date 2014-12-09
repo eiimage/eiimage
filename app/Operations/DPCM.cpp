@@ -49,7 +49,7 @@ DPCM::~DPCM()
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, Image **recons_image, double Q ) {
     char buffer[255];
     if( quantdef == NULL ) {
-        throw "Error in MICD::execute:\nquantdef = NULL";
+        throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
     int imgHeight,imgWidth,pred,ier,ireco,icode;
@@ -213,7 +213,7 @@ void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
     if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in MICD::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->nbThresholds() );
+        sprintf( buffer, "Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->nbThresholds() );
         throw buffer;
     }
     int counter;
@@ -247,11 +247,11 @@ string DPCM::print_iloiqu() {
 
 void DPCM::setQuantification( Quantification *tquantdef ) {
     if( tquantdef == NULL ) {
-        throw "Error in MICD::setQuantDef:\ntquantdef = NULL";
+        throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
     }
     if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in MICD::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->nbThresholds() );
+        sprintf( buffer, "Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->nbThresholds() );
         throw buffer;
     }
     quantdef = tquantdef;

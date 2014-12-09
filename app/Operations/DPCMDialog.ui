@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MICD encoding</string>
+   <string>DPCM encoding</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item alignment="Qt::AlignHCenter">
