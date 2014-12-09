@@ -22,32 +22,32 @@
 #include <QFileDialog>
 #include "QuantificationDialog.h"
 
-MICDDialog::MICDDialog(QWidget *parent) :
+DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::MICDDialog)
+    ui(new Ui::DPCMDialog)
 {
     ui->setupUi(this);
 }
 
-MICDDialog::~MICDDialog()
+DPCMDialog::~DPCMDialog()
 {
     delete ui;
 }
 
-void MICDDialog::on_quantBrowseButton_clicked()
+void DPCMDialog::on_quantBrowseButton_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open file"), "", tr("Loi de quantification (*.loi)"));
     ui->quantFileEdit->setText(filename);
 }
 
-void MICDDialog::on_quantEditorButton_clicked()
+void DPCMDialog::on_quantEditorButton_clicked()
 {
 
     QuantificationDialog* dialog = new QuantificationDialog(QApplication::activeWindow());
     dialog->exec();
 }
 
-Quantification* MICDDialog::getQuantification() const {
+Quantification* DPCMDialog::getQuantification() const {
     try {
         Quantification* quantif = new Quantification(ui->quantFileEdit->text().toStdString());
         return quantif;
@@ -57,14 +57,14 @@ Quantification* MICDDialog::getQuantification() const {
     }
 }
 
-MICD::Prediction MICDDialog::getPrediction() const {
-    if(ui->predictRadioA->isChecked()) return MICD::PX_EQ_A;
-    else if(ui->predictRadioAC->isChecked()) return MICD::PX_EQ_B;
-    else if(ui->predictRadioC->isChecked()) return MICD::PX_EQ_APC;
-    else if(ui->predictRadioGraham->isChecked()) return MICD::PX_EQ_Q;
-    else return MICD::PX_EQ_A;
+DPCM::Prediction DPCMDialog::getPrediction() const {
+    if(ui->predictRadioA->isChecked()) return DPCM::PX_EQ_A;
+    else if(ui->predictRadioAC->isChecked()) return DPCM::PX_EQ_B;
+    else if(ui->predictRadioC->isChecked()) return DPCM::PX_EQ_APC;
+    else if(ui->predictRadioGraham->isChecked()) return DPCM::PX_EQ_Q;
+    else return DPCM::PX_EQ_A;
 }
 
-double MICDDialog::getQ() const {
+double DPCMDialog::getQ() const {
     return ui->qSpinBox->value();
 }

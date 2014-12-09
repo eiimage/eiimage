@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-MICD::MICD()
+DPCM::DPCM()
 {
     long counter;
     for( counter=0; counter< 128; counter++ ) {
@@ -41,12 +41,12 @@ MICD::MICD()
     quantdef = NULL;
 }
 
-MICD::~MICD()
+DPCM::~DPCM()
 {
 
 }
 
-string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, Image **recons_image, double Q ) {
+string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, Image **recons_image, double Q ) {
     char buffer[255];
     if( quantdef == NULL ) {
         throw "Error in MICD::execute:\nquantdef = NULL";
@@ -166,7 +166,7 @@ string MICD::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     return returnval;
 }
 
-void MICD::codlq(int m) {
+void DPCM::codlq(int m) {
     int n,nar,nk,i,j;
 
     n=iloiqu[0];
@@ -185,7 +185,7 @@ void MICD::codlq(int m) {
     ktab[1][m]=iloiqu[2*i+1];
 }
 
-void MICD::codec(int nlq,int ier,int *icode,int *ireco) {
+void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
     int m,ip,iep,ierp,n,l;
     m=nlq;
     ip=ktab[0][m];
@@ -209,7 +209,7 @@ void MICD::codec(int nlq,int ier,int *icode,int *ireco) {
     }
 }
 
-void MICD::set_levels() {
+void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
     if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
         char buffer[255];
@@ -226,7 +226,7 @@ void MICD::set_levels() {
     iloiqu[quantdef->nbThresholds() * 2 + 2 ] = quantdef->value(quantdef->nbThresholds());
 }
 
-string MICD::print_iloiqu() {
+string DPCM::print_iloiqu() {
     string returnval;
     returnval = "seuils de decision --------------- niveaux de reconstruction\n";
     int counter;
@@ -245,7 +245,7 @@ string MICD::print_iloiqu() {
     return returnval;
 }
 
-void MICD::setQuantification( Quantification *tquantdef ) {
+void DPCM::setQuantification( Quantification *tquantdef ) {
     if( tquantdef == NULL ) {
         throw "Error in MICD::setQuantDef:\ntquantdef = NULL";
     }

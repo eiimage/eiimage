@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 
     BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
     encode->addOperation(new HuffmanOp());
-    encode->addOperation(new MICDEncodingOp());
+    encode->addOperation(new DPCMEncodingOp());
 
     BuiltinOpSet* morpho = new BuiltinOpSet("&Morpho. math.");
     morpho->addOperation(new DMMOp());

@@ -24,12 +24,12 @@
 #include <GrayscaleImage.h>
 #include "Quantification.h"
 
-class MICD
+class DPCM
 {
 public:
-    MICD();
+    DPCM();
     enum Prediction {PX_EQ_A, PX_EQ_B, PX_EQ_APC, PX_EQ_Q};
-    virtual ~MICD();
+    virtual ~DPCM();
     std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, imagein::Image **recons_image, double Q = 0 );
     void setQuantification( Quantification* tquantdef );
 private:

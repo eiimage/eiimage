@@ -25,18 +25,18 @@
 #include "DPCM.h"
 
 namespace Ui {
-class MICDDialog;
+class DPCMDialog;
 }
 
-class MICDDialog : public QDialog
+class DPCMDialog : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit MICDDialog(QWidget *parent = 0);
-    ~MICDDialog();
+    explicit DPCMDialog(QWidget *parent = 0);
+    ~DPCMDialog();
     Quantification* getQuantification() const;
-    MICD::Prediction getPrediction() const;
+    DPCM::Prediction getPrediction() const;
     double getQ() const;
     
 private slots:
@@ -45,7 +45,7 @@ private slots:
     void on_quantEditorButton_clicked();
 
 private:
-    Ui::MICDDialog *ui;
+    Ui::DPCMDialog *ui;
 };
 
 #endif // DPCMDIALOG_H

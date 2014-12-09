@@ -29,23 +29,23 @@
 using namespace std;
 using namespace imagein;
 
-MICDEncodingOp::MICDEncodingOp() : Operation(qApp->translate("Operations", "MICD Encoding").toStdString())
+DPCMEncodingOp::DPCMEncodingOp() : Operation(qApp->translate("Operations", "MICD Encoding").toStdString())
 {
 }
 
-bool MICDEncodingOp::needCurrentImg() const {
+bool DPCMEncodingOp::needCurrentImg() const {
     return true;
 }
 
-void MICDEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
+void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
 
-    MICDDialog* dialog = new MICDDialog(QApplication::activeWindow());
+    DPCMDialog* dialog = new DPCMDialog(QApplication::activeWindow());
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code != QDialog::Accepted) return;
 
-    MICD micd;
+    DPCM micd;
     try {
         micd.setQuantification(dialog->getQuantification());
     }

@@ -22,10 +22,10 @@
 
 #include <Operation.h>
 
-class MICDEncodingOp : public Operation
+class DPCMEncodingOp : public Operation
 {
 public:
-    MICDEncodingOp();
+    DPCMEncodingOp();
 
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
