@@ -17,29 +17,19 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MICD_H
-#define MICD_H
+#ifndef DPCMENCODINGOP_H
+#define DPCMENCODINGOP_H
 
-#include <string>
-#include <GrayscaleImage.h>
-#include "Quantification.h"
+#include <Operation.h>
 
-class MICD
+class MICDEncodingOp : public Operation
 {
 public:
-    MICD();
-    enum Prediction {PX_EQ_A, PX_EQ_B, PX_EQ_APC, PX_EQ_Q};
-    virtual ~MICD();
-    std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, imagein::Image **recons_image, double Q = 0 );
-    void setQuantification( Quantification* tquantdef );
-private:
-    std::string print_iloiqu();
-    Quantification* quantdef;
-    void codlq(int m);
-    void codec(int nlq,int ier,int *icode,int *ireco);
-    void set_levels();
-    int iloiqu[128];
-    int itcod[2048][20],itrco[2048][20],ktab[2][20];
+    MICDEncodingOp();
+
+    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+
+    bool needCurrentImg() const;
 };
 
-#endif // MICD_H
+#endif // DPCMENCODINGOP_H

@@ -57,7 +57,7 @@
 #include "Operations/EntropyOp.h"
 #include "Operations/HuffmanOp.h"
 #include "Operations/RejectionRingOp.h"
-#include "Operations/MICDEncodingOp.h"
+#include "Operations/DPCMEncodingOp.h"
 #include "Operations/HadamardOp.h"
 #include "Operations/DCTOp.h"
 #include "Operations/HoughOp.h"

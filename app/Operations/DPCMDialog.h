@@ -17,19 +17,35 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MICDENCODINGOP_H
-#define MICDENCODINGOP_H
+#ifndef DPCMDIALOG_H
+#define DPCMDIALOG_H
 
-#include <Operation.h>
+#include <QDialog>
+#include "Quantification.h"
+#include "DPCM.h"
 
-class MICDEncodingOp : public Operation
+namespace Ui {
+class MICDDialog;
+}
+
+class MICDDialog : public QDialog
 {
+    Q_OBJECT
+    
 public:
-    MICDEncodingOp();
+    explicit MICDDialog(QWidget *parent = 0);
+    ~MICDDialog();
+    Quantification* getQuantification() const;
+    MICD::Prediction getPrediction() const;
+    double getQ() const;
+    
+private slots:
+    void on_quantBrowseButton_clicked();
 
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void on_quantEditorButton_clicked();
 
-    bool needCurrentImg() const;
+private:
+    Ui::MICDDialog *ui;
 };
 
-#endif // MICDENCODINGOP_H
+#endif // DPCMDIALOG_H

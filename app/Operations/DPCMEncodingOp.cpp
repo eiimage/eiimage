@@ -17,11 +17,11 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MICDEncodingOp.h"
+#include "DPCMEncodingOp.h"
 #include "../Tools.h"
 #include <QApplication>
-#include "MICDDialog.h"
-#include "MICD.h"
+#include "DPCMDialog.h"
+#include "DPCM.h"
 #include <QMessageBox>
 #include <GrayscaleImage.h>
 #include <Converter.h>

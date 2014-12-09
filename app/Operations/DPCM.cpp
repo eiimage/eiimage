@@ -17,7 +17,7 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MICD.h"
+#include "DPCM.h"
 #include <cstring>
 #include <cstdio>
 #include <cmath>

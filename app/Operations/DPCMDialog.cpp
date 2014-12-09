@@ -17,8 +17,8 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MICDDialog.h"
-#include "ui_MICDDialog.h"
+#include "DPCMDialog.h"
+#include "ui_DPCMDialog.h"
 #include <QFileDialog>
 #include "QuantificationDialog.h"
 
