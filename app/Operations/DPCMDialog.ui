@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MICDDialog</class>
- <widget class="QDialog" name="MICDDialog">
+ <class>DPCMDialog</class>
+ <widget class="QDialog" name="DPCMDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MICD encoding</string>
+   <string>DPCM encoding</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item alignment="Qt::AlignHCenter">
@@ -210,7 +210,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>MICDDialog</receiver>
+   <receiver>DPCMDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -226,7 +226,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>MICDDialog</receiver>
+   <receiver>DPCMDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

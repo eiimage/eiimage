@@ -57,7 +57,7 @@
 #include "Operations/EntropyOp.h"
 #include "Operations/HuffmanOp.h"
 #include "Operations/RejectionRingOp.h"
-#include "Operations/MICDEncodingOp.h"
+#include "Operations/DPCMEncodingOp.h"
 #include "Operations/HadamardOp.h"
 #include "Operations/DCTOp.h"
 #include "Operations/HoughOp.h"
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 
     BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
     encode->addOperation(new HuffmanOp());
-    encode->addOperation(new MICDEncodingOp());
+    encode->addOperation(new DPCMEncodingOp());
 
     BuiltinOpSet* morpho = new BuiltinOpSet("&Morpho. math.");
     morpho->addOperation(new DMMOp());

@@ -17,11 +17,11 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "MICDEncodingOp.h"
+#include "DPCMEncodingOp.h"
 #include "../Tools.h"
 #include <QApplication>
-#include "MICDDialog.h"
-#include "MICD.h"
+#include "DPCMDialog.h"
+#include "DPCM.h"
 #include <QMessageBox>
 #include <GrayscaleImage.h>
 #include <Converter.h>
@@ -29,29 +29,29 @@
 using namespace std;
 using namespace imagein;
 
-MICDEncodingOp::MICDEncodingOp() : Operation(qApp->translate("Operations", "MICD Encoding").toStdString())
+DPCMEncodingOp::DPCMEncodingOp() : Operation(qApp->translate("Operations", "DPCM Encoding").toStdString())
 {
 }
 
-bool MICDEncodingOp::needCurrentImg() const {
+bool DPCMEncodingOp::needCurrentImg() const {
     return true;
 }
 
-void MICDEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
+void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
 
-    MICDDialog* dialog = new MICDDialog(QApplication::activeWindow());
+    DPCMDialog* dialog = new DPCMDialog(QApplication::activeWindow());
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code != QDialog::Accepted) return;
 
-    MICD micd;
+    DPCM micd;
     try {
         micd.setQuantification(dialog->getQuantification());
     }
     catch(const char* str) {
-        QMessageBox::critical(NULL, qApp->translate("MICD", "Error while loading quantification file"),
-                              qApp->translate("MICD", "The specified quantification file could not be opened !"));
+        QMessageBox::critical(NULL, qApp->translate("DPCM", "Error while loading quantification file"),
+                              qApp->translate("DPCM", "The specified quantification file could not be opened !"));
         return;
     }
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
@@ -59,6 +59,6 @@ void MICDEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     ImageDouble *errorImage;
     string s = micd.execute(image, dialog->getPrediction(), &errorImage, &reconstructedImage, dialog->getQ());
     outText(s);
-    outDoubleImage(errorImage, qApp->translate("MICD", "Error image").toStdString(), true, true, 0.1, false);
-    outImage(reconstructedImage, qApp->translate("MICD", "Reconstructed image").toStdString());
+    outDoubleImage(errorImage, qApp->translate("DPCM", "Error image").toStdString(), true, true, 0.1, false);
+    outImage(reconstructedImage, qApp->translate("DPCM", "Reconstructed image").toStdString());
 }

@@ -17,35 +17,29 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MICDDIALOG_H
-#define MICDDIALOG_H
+#ifndef DPCM_H
+#define DPCM_H
 
-#include <QDialog>
+#include <string>
+#include <GrayscaleImage.h>
 #include "Quantification.h"
-#include "MICD.h"
 
-namespace Ui {
-class MICDDialog;
-}
-
-class MICDDialog : public QDialog
+class DPCM
 {
-    Q_OBJECT
-    
 public:
-    explicit MICDDialog(QWidget *parent = 0);
-    ~MICDDialog();
-    Quantification* getQuantification() const;
-    MICD::Prediction getPrediction() const;
-    double getQ() const;
-    
-private slots:
-    void on_quantBrowseButton_clicked();
-
-    void on_quantEditorButton_clicked();
-
+    DPCM();
+    enum Prediction {PX_EQ_A, PX_EQ_B, PX_EQ_APC, PX_EQ_Q};
+    virtual ~DPCM();
+    std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, imagein::Image **recons_image, double Q = 0 );
+    void setQuantification( Quantification* tquantdef );
 private:
-    Ui::MICDDialog *ui;
+    std::string print_iloiqu();
+    Quantification* quantdef;
+    void codlq(int m);
+    void codec(int nlq,int ier,int *icode,int *ireco);
+    void set_levels();
+    int iloiqu[128];
+    int itcod[2048][20],itrco[2048][20],ktab[2][20];
 };
 
-#endif // MICDDIALOG_H
+#endif // DPCM_H

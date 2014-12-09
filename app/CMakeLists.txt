@@ -79,12 +79,12 @@ set(eiimage_SOURCES
 	Operations/InversePyramidOp.h
 	Operations/MeanSquaredErrorOp.cpp
 	Operations/MeanSquaredErrorOp.h
-	Operations/MICD.cpp
-	Operations/MICD.h
-	Operations/MICDDialog.cpp
-	Operations/MICDDialog.h
-	Operations/MICDEncodingOp.cpp
-	Operations/MICDEncodingOp.h
+	Operations/DPCM.cpp
+	Operations/DPCM.h
+	Operations/DPCMDialog.cpp
+	Operations/DPCMDialog.h
+	Operations/DPCMEncodingOp.cpp
+	Operations/DPCMEncodingOp.h
 	Operations/NoiseOp.cpp
 	Operations/NoiseOp.h
 	Operations/PointOp.cpp
@@ -169,10 +169,9 @@ set(UIS
 	Operations/ClassAnalysisDialog.ui
 	Operations/InversePyramidDialog.ui
 	Operations/PyramidDialog.ui
-	Operations/MICDDialog.ui
+	Operations/DPCMDialog.ui
 	Operations/DCTDialog.ui
 	Operations/ColorDialog.ui
-	Operations/MICDDialog_.ui
 )
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})

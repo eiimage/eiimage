@@ -17,19 +17,19 @@
  * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MICDENCODINGOP_H
-#define MICDENCODINGOP_H
+#ifndef DPCMENCODINGOP_H
+#define DPCMENCODINGOP_H
 
 #include <Operation.h>
 
-class MICDEncodingOp : public Operation
+class DPCMEncodingOp : public Operation
 {
 public:
-    MICDEncodingOp();
+    DPCMEncodingOp();
 
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
 };
 
-#endif // MICDENCODINGOP_H
+#endif // DPCMENCODINGOP_H
