@@ -19,7 +19,7 @@
 
 #include <GenericInterface.h>
 
-#include "EIImageService.h"
+#include "INSAimageService.h"
 
 using namespace genericinterface;
 using namespace std;

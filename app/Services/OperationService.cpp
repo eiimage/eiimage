@@ -21,7 +21,7 @@
 #include <GenericInterface.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
-#include "EIImageService.h"
+#include "INSAimageService.h"
 
 #include <QMessageBox>
 #include <QLibrary>

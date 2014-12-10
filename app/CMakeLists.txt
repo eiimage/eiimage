@@ -132,8 +132,8 @@ set(insaimage_SOURCES
 	Operations/TranslateOp.h
 	Operations/ZeroCrossingOp.cpp
 	Operations/ZeroCrossingOp.h
-	Services/EIImageService.cpp
-	Services/EIImageService.h
+	Services/INSAimageService.cpp
+	Services/INSAimageService.h
 	Services/FilteringService.cpp
 	Services/FilteringService.h
 	Services/MorphoMatService.cpp

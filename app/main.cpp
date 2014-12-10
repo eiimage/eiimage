@@ -28,7 +28,7 @@
 #include "BuiltinOpSet.h"
 
 #include "Services/PluginManager.h"
-#include "Services/EIImageService.h"
+#include "Services/INSAimageService.h"
 
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
