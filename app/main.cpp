@@ -89,9 +89,9 @@ int main(int argc, char** argv)
     }
 
     QTranslator qtTranslator;
-    QString tr = "qt_";
-    tr += lang;
-    if(!qtTranslator.load(tr, QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    QString tr = "qt_" + lang;
+    if(!qtTranslator.load(tr) &&
+       !qtTranslator.load(tr, QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
         cout << "Error while loading " << tr.toStdString() << endl;
     }
     app.installTranslator(&qtTranslator);
