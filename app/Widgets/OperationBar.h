@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_OPERATIONBAR_H
-#define EIIMAGE_OPERATIONBAR_H
+#ifndef INSAIMAGE_OPERATIONBAR_H
+#define INSAIMAGE_OPERATIONBAR_H
 
 #include <QTreeView>
 

@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_PARAMETER_H
-#define EIIMAGE_PARAMETER_H
+#ifndef INSAIMAGE_PARAMETER_H
+#define INSAIMAGE_PARAMETER_H
 
 #include <string>
 
@@ -56,4 +56,4 @@ class Parameter : public Input {
   
 };
 
-#endif //!EIIMAGE_PARAMETER_H
+#endif //!INSAIMAGE_PARAMETER_H

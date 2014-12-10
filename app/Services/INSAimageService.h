@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGESERVICE_H
-#define EIIMAGESERVICE_H
+#ifndef INSAIMAGESERVICE_H
+#define INSAIMAGESERVICE_H
 
 #include <QTextEdit>
 

@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_INTPARAM_H
-#define EIIMAGE_INTPARAM_H
+#ifndef INSAIMAGE_INTPARAM_H
+#define INSAIMAGE_INTPARAM_H
 
 #include <vector>
 #include <string>
@@ -66,4 +66,4 @@ class IntParam : public Parameter<int> {
     QSpinBox* _spinbox; /**< The QSpinBox widget to get the value from */
 };
 
-#endif //!EIIMAGE_INTPARAM_H
+#endif //!INSAIMAGE_INTPARAM_H

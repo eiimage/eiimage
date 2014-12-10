@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_BUILTINOPSET_H
-#define EIIMAGE_BUILTINOPSET_H
+#ifndef INSAIMAGE_BUILTINOPSET_H
+#define INSAIMAGE_BUILTINOPSET_H
 
 #include <string>
 #include <vector>
@@ -51,4 +51,4 @@ class BuiltinOpSet : public OpSet {
     std::vector<GenericOperation*> _operations; /**< List of the operations stored in this OpSet */
 };
 
-#endif //!EIIMAGE_BUILTINOPSET_H
+#endif //!INSAIMAGE_BUILTINOPSET_H

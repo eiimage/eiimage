@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_PLUGIN_H
-#define EIIMAGE_PLUGIN_H
+#ifndef INSAIMAGE_PLUGIN_H
+#define INSAIMAGE_PLUGIN_H
 
 #include <string>
 #include <vector>
@@ -52,4 +52,4 @@ class Plugin : public OpSet {
     std::vector<GenericOperation*> _operations; /**< List of all the operations stored in this OpSet */
 };
 
-#endif //!EIIMAGE_PLUGIN_H
+#endif //!INSAIMAGE_PLUGIN_H

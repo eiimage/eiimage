@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_OPERATION_H
-#define EIIMAGE_OPERATION_H
+#ifndef INSAIMAGE_OPERATION_H
+#define INSAIMAGE_OPERATION_H
 
 #include <map>
 #include <string>
@@ -227,4 +227,4 @@ class DoubleOperation : public GenericOperation {
     imagein::Image_t<double>* _currentImg; /**< The current image, only valid in the function call operator */
 };
 
-#endif //!EIIMAGE_OPERATION_H
+#endif //!INSAIMAGE_OPERATION_H

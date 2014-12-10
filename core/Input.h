@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_INPUT_H
-#define EIIMAGE_INPUT_H
+#ifndef INSAIMAGE_INPUT_H
+#define INSAIMAGE_INPUT_H
 
 #include <vector>
 #include <map>
@@ -63,4 +63,4 @@ class Input {
     virtual void pickValue() = 0;
 };
 
-#endif //!EIIMAGE_INPUT_H
+#endif //!INSAIMAGE_INPUT_H

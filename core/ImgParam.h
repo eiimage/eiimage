@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_IMGPARAM_H
-#define EIIMAGE_IMGPARAM_H
+#ifndef INSAIMAGE_IMGPARAM_H
+#define INSAIMAGE_IMGPARAM_H
 
 #include <vector>
 #include <string>
@@ -49,4 +49,4 @@ class ImgParam : public Parameter<imagein::Image> {
     ImageListBox_t<uint8_t>* _imgListBox;
 };
 
-#endif //!EIIMAGE_IMGPARAM_H
+#endif //!INSAIMAGE_IMGPARAM_H

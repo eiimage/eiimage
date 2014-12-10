@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_PLUGOPERATION_H
-#define EIIMAGE_PLUGOPERATION_H
+#ifndef INSAIMAGE_PLUGOPERATION_H
+#define INSAIMAGE_PLUGOPERATION_H
 
 #include <vector>
 #include <string>
@@ -147,4 +147,4 @@ class PlugOperation : public GenericOperation {
     bool _doubleCurrentImg; /**< Wether this operation need a double wurrent image or a standard current image. */
 };
 
-#endif //!EIIMAGE_OPERATION_H
+#endif //!INSAIMAGE_OPERATION_H

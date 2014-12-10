@@ -17,8 +17,8 @@
  * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EIIMAGE_OPSET_H
-#define EIIMAGE_OPSET_H
+#ifndef INSAIMAGE_OPSET_H
+#define INSAIMAGE_OPSET_H
 
 #include <string>
 #include <vector>
@@ -56,4 +56,4 @@ class OpSet {
     std::string _name; /**< The name of this OpSet */
 };
 
-#endif //!EIIMAGE_OPSET_H
+#endif //!INSAIMAGE_OPSET_H
