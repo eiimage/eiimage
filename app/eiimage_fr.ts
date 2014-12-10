@@ -4,36 +4,36 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="124"/>
+        <location filename="main.cpp" line="121"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="139"/>
+        <location filename="main.cpp" line="136"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="151"/>
+        <location filename="main.cpp" line="148"/>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
         <translation>&amp;Encodage</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="159"/>
+        <location filename="main.cpp" line="156"/>
         <source>Transforms</source>
         <translation>Transformées</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="167"/>
+        <location filename="main.cpp" line="164"/>
         <source>Analysis</source>
         <translation>Analyse</translation>
     </message>
     <message>
         <location filename="Services/FilteringService.cpp" line="39"/>
-        <location filename="main.cpp" line="176"/>
+        <location filename="main.cpp" line="173"/>
         <source>Filtering</source>
         <translation>Filtrage</translation>
     </message>
@@ -106,42 +106,34 @@
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="14"/>
         <source>Class analysis</source>
         <translation>Classification</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="22"/>
         <source>Step : </source>
         <translation>Étape : </translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="35"/>
         <source>Classification step</source>
         <translation>Étape de classification</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="30"/>
         <source>Learning step</source>
         <translation>Étape d&apos;apprentissage</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="40"/>
         <source>Print file info</source>
         <translation>Afficher les info. du fichier</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="48"/>
         <source>Window size : </source>
         <translation>Taille de la fenêtre : </translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="71"/>
         <source>File : </source>
         <translation>Fichier : </translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisDialog.ui" line="83"/>
         <source>browse</source>
         <translation>parcourir</translation>
     </message>
@@ -172,24 +164,29 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="80"/>
-        <source>Voici les rÃ©sultats du classement : 
+        <source>Voici les résultats du classement : 
 </source>
+        <oldsource>Voici les rÃ©sultats du classement : 
+</oldsource>
         <translation>Voici les résultats du classement : 
 </translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="58"/>
-        <source>CritÃ¨re de zone intÃ©rieure : </source>
+        <source>Critère de zone intérieure : </source>
+        <oldsource>CritÃ¨re de zone intÃ©rieure : </oldsource>
         <translation>Critère de zone intérieure : </translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="59"/>
-        <source>CritÃ¨re de zone frontiÃ¨re : </source>
+        <source>Critère de zone frontière : </source>
+        <oldsource>CritÃ¨re de zone frontiÃ¨re : </oldsource>
         <translation>Critère de zone frontière : </translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="60"/>
-        <source>&lt;b&gt;CritÃ¨re de zones (relatifs aux zones totales) : &lt;/b&gt;</source>
+        <source>&lt;b&gt;Critère de zones (relatifs aux zones totales) : &lt;/b&gt;</source>
+        <oldsource>&lt;b&gt;CritÃ¨re de zones (relatifs aux zones totales) : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Critère de zones (relatifs aux zones totales) : &lt;/b&gt;</translation>
     </message>
     <message>
@@ -199,31 +196,27 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="121"/>
-        <source>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%</source>
-        <oldsource>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%
-</oldsource>
-        <translation>Le taux de bon classement en zone intérieure %1 vaut: %2%</translation>
+        <source>Le taux de bon classement en zone intérieure %1 vaut: %2%</source>
+        <oldsource>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%</oldsource>
+        <translation>Le taux de bon classement en zone intérieure %1 vaut : %2%</translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="124"/>
-        <source>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%</source>
-        <oldsource>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%
-</oldsource>
-        <translation>Le taux de bon classement en zone frontière %1 vaut: %2%</translation>
+        <source>Le taux de bon classement en zone frontière %1 vaut: %2%</source>
+        <oldsource>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%</oldsource>
+        <translation>Le taux de bon classement en zone frontière %1 vaut : %2%</translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="135"/>
-        <source>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%</source>
-        <oldsource>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%
-</oldsource>
-        <translation>Le taux de bon classement en zone intérieure globale vaut: %1%</translation>
+        <source>Le taux de bon classement en zone intérieure globale vaut: %1%</source>
+        <oldsource>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%</oldsource>
+        <translation>Le taux de bon classement en zone intérieure globale vaut : %1%</translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="136"/>
-        <source>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%</source>
-        <oldsource>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%
-</oldsource>
-        <translation>Le taux de bon classement en zone frontière globale vaut: %1%</translation>
+        <source>Le taux de bon classement en zone frontière globale vaut: %1%</source>
+        <oldsource>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%</oldsource>
+        <translation>Le taux de bon classement en zone frontière globale vaut : %1%</translation>
     </message>
 </context>
 <context>
@@ -266,67 +259,54 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="14"/>
         <source>RGB image generator</source>
         <translation>Générateur d&apos;image RVB</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="20"/>
         <source>Image size</source>
         <translation>Taille de l&apos;image</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="26"/>
         <source>Width : </source>
         <translation>Largeur : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="40"/>
         <source>Height : </source>
         <translation>Hauteur : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="57"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="63"/>
         <source>RGB</source>
         <translation>RVB</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="73"/>
         <source>HSV</source>
         <translation>TSV</translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="86"/>
         <source>Red : </source>
         <translation>Rouge : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="100"/>
         <source>Green : </source>
         <translation>Vert : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="114"/>
         <source>Blue : </source>
         <translation>Bleu : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="147"/>
         <source>Saturation : </source>
         <translation>Saturation : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="161"/>
         <source>Value : </source>
         <translation>Valeur :  </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.ui" line="175"/>
         <source>Hue : </source>
         <translation>Teinte : </translation>
     </message>
@@ -488,37 +468,30 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="14"/>
         <source>DCT encoding</source>
         <translation>DCT avec encodage</translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="20"/>
         <source>Encoding mode &amp;&amp; associated parameters</source>
         <translation>Mode d&apos;encodage &amp;&amp; paramètres associés</translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="26"/>
         <source>Coefficients truncation</source>
         <translation>Troncature des coefficients</translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="60"/>
         <source>Truncation limit : </source>
         <translation>Limite de troncature : </translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="79"/>
         <source>Bit allocation matrice</source>
         <translation>Matrice d&apos;allocation de bits</translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="104"/>
         <source>Initial number of bits : </source>
         <translation>Nombre de bits initial : </translation>
     </message>
     <message>
-        <location filename="Operations/DCTDialog.ui" line="141"/>
         <source>Slope value : </source>
         <translation>Valeur de la pente : </translation>
     </message>
@@ -607,59 +580,84 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>DPCM</name>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="53"/>
+        <source>Error while loading quantification file</source>
+        <translation>Erreur lors du chargement du fichier de quantification</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="54"/>
+        <source>The specified quantification file could not be opened !</source>
+        <translation>Le fichier de quantification spécifié n&apos;a pas pu être ouvert !</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
+        <source>Error image</source>
+        <translation>Image d&apos;erreur</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
+        <source>Reconstructed image</source>
+        <translation>Image reconstruite</translation>
+    </message>
+</context>
+<context>
+    <name>DPCMDialog</name>
+    <message>
+        <location filename="Operations/DPCMDialog.cpp" line="39"/>
+        <source>Open file</source>
+        <translation>Ouvrir un fichier</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMDialog.cpp" line="39"/>
+        <source>Loi de quantification (*.loi)</source>
+        <translation>Loi de quantification (*.loi)</translation>
+    </message>
+</context>
+<context>
     <name>Dialog</name>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="17"/>
         <source>MICD Encoding</source>
         <translation>Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="41"/>
         <source>Predictor P(X)</source>
         <translation>Prédicteur P(X)</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="47"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="54"/>
         <source>C</source>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="61"/>
         <source>(A + C) / 2</source>
         <translation>(A + C) / 2</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="68"/>
         <source>Modified Graham&apos;s</source>
         <translation>Graham modifié</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="77"/>
         <source>Q = </source>
         <translation>Q = </translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="120"/>
         <source>Quantifier</source>
         <translation>Quantifieur</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="126"/>
         <source>Quantification file :</source>
         <translation>Fichier de quantification : </translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="146"/>
         <source>Browse</source>
         <translation>Parcourir</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog_.ui" line="174"/>
         <source>Open quantification editor</source>
         <translation>Ouvrir l&apos;éditeur de quantification</translation>
     </message>
@@ -667,7 +665,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>EIImageService</name>
     <message>
-        <location filename="Services/EIImageService.cpp" line="44"/>
         <source>Informations</source>
         <translation>Informations</translation>
     </message>
@@ -686,27 +683,22 @@ Nombre de classes = %1 </translation>
 <context>
     <name>FFTDialog</name>
     <message>
-        <location filename="Operations/FFTDialog.ui" line="14"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
-    <message utf8="true">
-        <location filename="Operations/FFTDialog.ui" line="20"/>
+    <message>
         <source>Résultat :</source>
         <translation>Résultat :</translation>
     </message>
     <message>
-        <location filename="Operations/FFTDialog.ui" line="28"/>
         <source>Magnitude + Phase</source>
         <translation>Amplitude + Phase</translation>
     </message>
     <message>
-        <location filename="Operations/FFTDialog.ui" line="38"/>
         <source>Real + Imaginary</source>
         <translation>Réel + Imaginaire</translation>
     </message>
     <message>
-        <location filename="Operations/FFTDialog.ui" line="47"/>
         <source>Centered transform</source>
         <translation>Transformée centrée</translation>
     </message>
@@ -754,6 +746,14 @@ Nombre de classes = %1 </translation>
     <message>
         <source> -  flipped %1</source>
         <translation type="obsolete"> -  symétrie %1</translation>
+    </message>
+</context>
+<context>
+    <name>Hadamard</name>
+    <message>
+        <location filename="Operations/HadamardOp.cpp" line="55"/>
+        <source>Transform : </source>
+        <translation>Transformation :</translation>
     </message>
 </context>
 <context>
@@ -809,32 +809,26 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="14"/>
         <source>Hough transform</source>
         <translation>Transformé de Hough</translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="20"/>
         <source>Method</source>
         <translation>Méthode</translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="26"/>
         <source>Method #1</source>
         <translation>Méthode n°1</translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="36"/>
         <source>Method #2</source>
         <translation>Méthode n°2</translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="57"/>
         <source>Angle step : </source>
         <translation>Pas pour les angles : </translation>
     </message>
     <message>
-        <location filename="Operations/HoughDialog.ui" line="93"/>
         <source>Distance step : </source>
         <translation>Pas pour les distances : </translation>
     </message>
@@ -883,24 +877,29 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>INSAimageService</name>
+    <message>
+        <location filename="Services/INSAimageService.cpp" line="44"/>
+        <source>Informations</source>
+        <translation>Informations</translation>
+    </message>
+</context>
+<context>
     <name>InverseHoughDialog</name>
     <message>
         <source>Dialog</source>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/InverseHoughDialog.ui" line="14"/>
         <source>Inverse hough transform</source>
         <oldsource>Hough reconstruction</oldsource>
         <translation>Transformée de Hough inverse</translation>
     </message>
     <message>
-        <location filename="Operations/InverseHoughDialog.ui" line="22"/>
         <source>Reconstructed image size : </source>
         <translation>Taille de l&apos;image reconstruite : </translation>
     </message>
     <message>
-        <location filename="Operations/InverseHoughDialog.ui" line="45"/>
         <source>Reconstruction threshold : </source>
         <translation>Seuil de reconstruction : </translation>
     </message>
@@ -912,48 +911,39 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="14"/>
         <source>Pyramidal reconstruction</source>
         <oldsource>Pyramid reconstruction</oldsource>
         <translation>Reconstruction pyramidale</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="20"/>
         <source>Filter : </source>
         <translation>Filtre : </translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="28"/>
         <source>triangular</source>
         <translation>triangulaire</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="33"/>
         <source>gaussian</source>
         <translation>gaussien</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="38"/>
         <source>trimodal</source>
         <translation>trimodal</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="43"/>
         <source>rectangular</source>
         <translation>rectangulaire</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="48"/>
         <source>qmf</source>
         <translation>qmf</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="69"/>
         <source>Number of steps in the pyramid : </source>
         <translation>Nombre d&apos;étages dans la pyramide : </translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidDialog.ui" line="102"/>
         <source>Step to reconstruct :</source>
         <translation>Étage à reconstruire : </translation>
     </message>
@@ -965,22 +955,18 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/MICDEncodingOp.cpp" line="53"/>
         <source>Error while loading quantification file</source>
         <translation>Erreur lors du chargement du fichier de quantification</translation>
     </message>
     <message>
-        <location filename="Operations/MICDEncodingOp.cpp" line="53"/>
         <source>The specified quantification file could not be opened !</source>
         <translation>Le fichier de quantification spécifié n&apos;a pas pu être ouvert !</translation>
     </message>
     <message>
-        <location filename="Operations/MICDEncodingOp.cpp" line="60"/>
         <source>Error image</source>
         <translation>Image d&apos;erreur</translation>
     </message>
     <message>
-        <location filename="Operations/MICDEncodingOp.cpp" line="61"/>
         <source>Reconstructed image</source>
         <translation>Image reconstruite</translation>
     </message>
@@ -992,67 +978,50 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Dialog</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="14"/>
         <source>MICD encoding</source>
         <translation>Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="35"/>
         <source>Predictor P(X)</source>
         <translation>Prédicteur P(X)</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="41"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="51"/>
         <source>C</source>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="58"/>
         <source>( A + C ) / 2</source>
         <translation>( A + C ) / 2</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="65"/>
         <source>Modified Graham&apos;s</source>
         <translation>Graham modifié</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="74"/>
-        <source>Q = </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="Operations/MICDDialog.ui" line="115"/>
         <source>Quantifier</source>
         <translation>Quantifieur</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="121"/>
         <source>Quantification file :</source>
         <translation>Fichier de quantification : </translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="141"/>
         <source>Browse</source>
         <translation>Parcourir</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.ui" line="169"/>
         <source>Open quantification editor</source>
         <translation>Ouvrir l&apos;éditeur de quantification</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.cpp" line="39"/>
         <source>Open file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
-        <location filename="Operations/MICDDialog.cpp" line="39"/>
         <source>Loi de quantification (*.loi)</source>
         <translation>Loi de quantification (*.loi)</translation>
     </message>
@@ -1144,19 +1113,19 @@ Nombre de classes = %1 </translation>
         <translation>BFilt</translation>
     </message>
     <message>
-        <location filename="Operations/BFlitOp.cpp" line="49"/>
-        <location filename="Operations/CombineColorOp.cpp" line="49"/>
-        <location filename="Operations/IFFTOp.cpp" line="49"/>
-        <location filename="Operations/NoiseOp.cpp" line="49"/>
         <location filename="Operations/PointOp.cpp" line="114"/>
+        <location filename="Operations/NoiseOp.cpp" line="49"/>
+        <location filename="Operations/IFFTOp.cpp" line="49"/>
+        <location filename="Operations/CombineColorOp.cpp" line="49"/>
+        <location filename="Operations/BFlitOp.cpp" line="49"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="Operations/BFlitOp.cpp" line="62"/>
-        <location filename="Operations/NoiseOp.cpp" line="90"/>
-        <location filename="Operations/PointOp.cpp" line="192"/>
         <location filename="Operations/RandomImgOp.cpp" line="105"/>
+        <location filename="Operations/PointOp.cpp" line="192"/>
+        <location filename="Operations/NoiseOp.cpp" line="90"/>
+        <location filename="Operations/BFlitOp.cpp" line="62"/>
         <source>Validate</source>
         <translation>Valider</translation>
     </message>
@@ -1181,12 +1150,12 @@ Nombre de classes = %1 </translation>
         <translation>DMM</translation>
     </message>
     <message>
-        <location filename="Operations/EntropyOp.cpp" line="28"/>
+        <location filename="Operations/EntropyOp.cpp" line="30"/>
         <source>Calcul d&apos;entropie</source>
         <translation>Calcul d&apos;entropie</translation>
     </message>
     <message>
-        <location filename="Operations/EntropyOp.cpp" line="45"/>
+        <location filename="Operations/EntropyOp.cpp" line="47"/>
         <source>Entropy of the image = %1</source>
         <translation>Entropie de l&apos;image = %1</translation>
     </message>
@@ -1211,7 +1180,6 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Reconstruction de Fourrier discrète</translation>
     </message>
     <message>
-        <location filename="Operations/MICDEncodingOp.cpp" line="32"/>
         <source>MICD Encoding</source>
         <translation>Codage MICD</translation>
     </message>
@@ -1221,14 +1189,14 @@ Nombre de classes = %1 </translation>
         <translation>Erreur quadratique moyenne</translation>
     </message>
     <message>
+        <location filename="Operations/SignalToNoiseOp.cpp" line="46"/>
         <location filename="Operations/MeanSquaredErrorOp.cpp" line="45"/>
-        <location filename="Operations/SignalToNoiseOp.cpp" line="45"/>
         <source>Compare to...</source>
         <translation>Comparer à...</translation>
     </message>
     <message>
+        <location filename="Operations/SignalToNoiseOp.cpp" line="54"/>
         <location filename="Operations/MeanSquaredErrorOp.cpp" line="53"/>
-        <location filename="Operations/SignalToNoiseOp.cpp" line="53"/>
         <source>Compare %1 to : </source>
         <translation>Comparer %1 à : </translation>
     </message>
@@ -1282,7 +1250,7 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Anneau de réjection (%1 %2 %3)</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="32"/>
+        <location filename="Operations/RotateOp.cpp" line="34"/>
         <source>Rotation</source>
         <translation>Rotation</translation>
     </message>
@@ -1293,7 +1261,7 @@ Nombre de classes = %1 </translation>
         <translation>Echantillonage</translation>
     </message>
     <message>
-        <location filename="Operations/SignalToNoiseOp.cpp" line="33"/>
+        <location filename="Operations/SignalToNoiseOp.cpp" line="34"/>
         <source>Signal-to-noise ratio</source>
         <translation>Rapport signal-bruit</translation>
     </message>
@@ -1302,8 +1270,8 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">infini</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="38"/>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="144"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="39"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="145"/>
         <source>Sinus synthesis</source>
         <translation>Synthèse image sinus</translation>
     </message>
@@ -1348,7 +1316,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/DCTOp.cpp" line="30"/>
         <source>Discrete cosinus transform</source>
-        <translation>DCT 16x16 avec réduction des coef.</translation>
+        <translation>DCT 16x16 avec réduction des coefficients</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="39"/>
@@ -1373,10 +1341,10 @@ Nombre de classes = %1 </translation>
         <translation>Reconstruction pyramidale</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidOp.cpp" line="41"/>
-        <location filename="Operations/InversePyramidOp.cpp" line="46"/>
         <location filename="Operations/PyramidOp.cpp" line="43"/>
         <location filename="Operations/PyramidOp.cpp" line="48"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="41"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="46"/>
         <source>The operation can&apos;t be applied on this image</source>
         <translation>L&apos;opération ne peut pas être appliquée sur cette image</translation>
     </message>
@@ -1386,8 +1354,8 @@ Nombre de classes = %1 </translation>
         <translation>La largeur de l&apos;image doit être deux fois la hauteur de l&apos;image.</translation>
     </message>
     <message>
-        <location filename="Operations/InversePyramidOp.cpp" line="47"/>
         <location filename="Operations/PyramidOp.cpp" line="49"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="47"/>
         <source>The image dimensions must be power of 2.</source>
         <translation>Les dimensions de l&apos;images doivent être puissances de 2.</translation>
     </message>
@@ -1429,6 +1397,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/ClassAnalysisOp.cpp" line="33"/>
         <source>Supervised classification</source>
         <translation>Classification supervisée</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="32"/>
+        <source>DPCM Encoding</source>
+        <translation>Encodage MICD</translation>
     </message>
 </context>
 <context>
@@ -1535,58 +1508,46 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Pyramide - génération</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="14"/>
         <source>Pyramidal decomposition</source>
         <translation>Décomposition pyramidale</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="20"/>
         <source>Type of pyramid</source>
         <translation>Type de pyramide</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="26"/>
-        <location filename="Operations/PyramidDialog.ui" line="61"/>
         <source>gaussian</source>
         <translation>gaussien</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="36"/>
         <source>laplacian</source>
         <translation>laplacien</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="48"/>
         <source>Filter : </source>
         <translation>Filtre : </translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="56"/>
         <source>triangular</source>
         <translation>triangulaire</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="66"/>
         <source>trimodal</source>
         <translation>trimodal</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="71"/>
         <source>rectangular</source>
         <translation>rectangulaire</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="76"/>
         <source>qmf</source>
         <translation>qmf</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="84"/>
         <source>Number of steps : </source>
         <translation>Nombre d&apos;étage : </translation>
     </message>
     <message>
-        <location filename="Operations/PyramidDialog.ui" line="105"/>
         <source>Create only one step :</source>
         <translation>Créer unique l&apos;étage : </translation>
     </message>
@@ -1608,58 +1569,58 @@ Nombre de classes = %1 </translation>
         <translation>Quantification de %1</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="54"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="53"/>
         <source>Linear with centered value</source>
         <translation>Linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="56"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="55"/>
         <source>Non linear with centered value</source>
         <translation>Non linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="57"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="56"/>
         <source>Non linear with mean value</source>
         <translation>Non linéaire à valeurs moyennes</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="59"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="58"/>
         <source>Custom</source>
         <translation>Personnalisée</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="60"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="59"/>
         <source>Quantification : </source>
         <translation>Quantification : </translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="61"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="60"/>
         <source>Number of values : </source>
         <translation>Nombre de valeurs : </translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="87"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="86"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="90"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="89"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="123"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="121"/>
         <source>Open a file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="123"/>
-        <location filename="Operations/QuantificationDialog.cpp" line="132"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="121"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="130"/>
         <source>Loi de quantification (*.loi)</source>
         <translation>Loi de quantification (*.loi)</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="132"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="130"/>
         <source>Save to file</source>
         <translation>Enregistrer dans un fichier</translation>
     </message>
@@ -1671,7 +1632,7 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">Quantification</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="75"/>
+        <location filename="Operations/QuantificationOp.cpp" line="74"/>
         <source>quantified</source>
         <translation>quantifiée</translation>
     </message>
@@ -1794,27 +1755,27 @@ Nombre de classes = %1 </translation>
 <context>
     <name>Rotation</name>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="58"/>
+        <location filename="Operations/RotateOp.cpp" line="60"/>
         <source>Rotating %1</source>
         <translation>Rotation %1</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="67"/>
+        <location filename="Operations/RotateOp.cpp" line="69"/>
         <source>Expand image</source>
         <translation>Agrandir l&apos;image</translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="76"/>
+        <location filename="Operations/RotateOp.cpp" line="78"/>
         <source>Rotation angle : </source>
         <translation>Angle de rotation : </translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="78"/>
+        <location filename="Operations/RotateOp.cpp" line="80"/>
         <source>Fill value : </source>
         <translation>Valeur de remplissage : </translation>
     </message>
     <message>
-        <location filename="Operations/RotateOp.cpp" line="150"/>
+        <location filename="Operations/RotateOp.cpp" line="152"/>
         <source>rotated %1</source>
         <translation>rotation-%1</translation>
     </message>
@@ -1882,7 +1843,7 @@ Nombre de classes = %1 </translation>
         <translation type="obsolete">infini</translation>
     </message>
     <message>
-        <location filename="Operations/SignalToNoiseOp.cpp" line="83"/>
+        <location filename="Operations/SignalToNoiseOp.cpp" line="84"/>
         <source>Signal-to-noise ratio : %1</source>
         <translation>Rapport signal-bruit : %1</translation>
     </message>
@@ -1890,47 +1851,51 @@ Nombre de classes = %1 </translation>
 <context>
     <name>SinusSynthesisOp</name>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="49"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="50"/>
         <source>Sinus synthesis</source>
         <translation>Synthèse sinus</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="55"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="56"/>
         <source>Linear</source>
         <translation>Linéaire</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="56"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="57"/>
         <source>Circular</source>
         <translation>Circulaire</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="70"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="71"/>
         <source>256</source>
         <translation>256</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="71"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="72"/>
         <source>2 (Black and white)</source>
         <translation>2 (Noir et blanc)</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="73"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="74"/>
         <source>Image size (width=height) : </source>
         <translation>Taille de l&apos;image (hauteur=largeur) : </translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="74"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="75"/>
         <source>Signal period (pixel) : </source>
         <translation>Période du signal (pixel) : </translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="75"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="76"/>
+        <source>Orientation (°): </source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Orientation (Â°): </source>
         <translation>Orientation (°): </translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="77"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="78"/>
         <source>Niveaux de gris : </source>
         <translation>Niveaux de gris : </translation>
     </message>
