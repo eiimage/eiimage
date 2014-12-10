@@ -81,9 +81,9 @@ int main(int argc, char** argv)
     app.setOrganizationName("INSA");
     app.setApplicationName("INSAimage");
 
-
     Log::configure(true, false, 0);
-    QString lang = QLocale::system().name();
+
+    QString lang = QLocale::system().name().split('_').first();
     if(argc > 1) {
         lang = QString(argv[1]);
     }
@@ -96,14 +96,15 @@ int main(int argc, char** argv)
     }
     app.installTranslator(&qtTranslator);
 
+
     QTranslator giTranslator;
-    if(!giTranslator.load(QString("genericinterface_") + lang.mid(0, 2), "lang")) {
+    if(!giTranslator.load(QString("genericinterface_") + lang, "lang")) {
         cout << "Error while loading genericinterface_en.qm" << endl;
     }
     app.installTranslator(&giTranslator);
 
     QTranslator eiiTranslator;
-    if(!eiiTranslator.load(QString("insaimage_") + lang.mid(0, 2), "lang")) {
+    if(!eiiTranslator.load(QString("insaimage_") + lang, "lang")) {
         cout << "Error while loading insaimage_en.qm" << endl;
     }
     app.installTranslator(&eiiTranslator);
