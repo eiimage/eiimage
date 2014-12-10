@@ -38,7 +38,7 @@ namespace genericinterface {
  * For implementing an operation working with standard 8bit unsigned integer Image (ie Image_t<uint8_t> or simply Image), see the Operation class.\n
  * For implementing an operation working with double-precision floating point Image (ie Image_t<double>), see the DoubleOperation class.\n
  * This class is a generic class and should not be directly used except for creating a generic operation (ie an operation working on different type of Image).\n
- * For an exemple of a true generic operation class, see the PointOp implementation in eiimage source code.
+ * For an exemple of a true generic operation class, see the PointOp implementation in insaimage source code.
  */
 class GenericOperation {
   public:
@@ -66,7 +66,7 @@ class GenericOperation {
     /**
      * @brief The function call operator which is called by the application, it is the entry point of this operation and it calls the pure virtual function call operator.
      *
-     * @param ws The eiimage implementation of the genericinterface::WindowService
+     * @param ws The insaimage implementation of the genericinterface::WindowService
      */
     virtual void operator()(genericinterface::WindowService* ws);
 
@@ -131,7 +131,7 @@ class GenericOperation {
     void outText(std::string);
 
     std::string _name; /**< The name of the operation */
-    genericinterface::WindowService* _ws; /**< A pointer to the eiimage window service, only valid inside the function call operator */
+    genericinterface::WindowService* _ws; /**< A pointer to the window service, only valid inside the function call operator */
     genericinterface::ImageWindow* _curImgWnd; /**< A pointer to the current image window, only valid inside the function call operator */
   private:
     /**

@@ -28,7 +28,7 @@
 /**
  * @brief A BuiltinOpSet is an implementation of OpSet containing GenericOperation
  *
- * This class is used inside the eiimage application to organize the built-in operations.
+ * This class is used inside the insaimage application to organize the built-in operations.
  *
  */
 class BuiltinOpSet : public OpSet {

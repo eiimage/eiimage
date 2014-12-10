@@ -78,8 +78,8 @@ using namespace std;
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    app.setOrganizationName("insa");
-    app.setApplicationName("eiimage");
+    app.setOrganizationName("INSA");
+    app.setApplicationName("INSAimage");
 
 
     Log::configure(true, false, 0);
@@ -108,7 +108,7 @@ int main(int argc, char** argv)
     }
     app.installTranslator(&eiiTranslator);
 
-    GenericInterface gi("eiimage", Qt::LeftDockWidgetArea);
+    GenericInterface gi("INSAImage", Qt::LeftDockWidgetArea);
 
     PluginManager* pluginManager = new PluginManager(&gi);
     INSAimageService* insaimageService = new INSAimageService(&gi);
