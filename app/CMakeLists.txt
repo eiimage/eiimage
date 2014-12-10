@@ -176,9 +176,9 @@ set(UIS
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})
 
-qt5_add_resources(RCC_FILES "eiimage_app_res.qrc")
+qt5_add_resources(RCC_FILES "insaimage_app_res.qrc")
 
-set(TS_FILES eiimage_en.ts eiimage_fr.ts)
+set(TS_FILES insaimage_en.ts insaimage_fr.ts)
 # Uncomment only 1 of the 2 folowing commands, depending on your needs
 # -1- Use current translations files
 qt5_add_translation(QM_FILES ${TS_FILES})

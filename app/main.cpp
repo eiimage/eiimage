@@ -103,8 +103,8 @@ int main(int argc, char** argv)
     app.installTranslator(&giTranslator);
 
     QTranslator eiiTranslator;
-    if(!eiiTranslator.load(QString("eiimage_") + lang.mid(0, 2))) {
-        cout << "Error while loading eiimage_en.qm" << endl;
+    if(!eiiTranslator.load(QString("insaimage_") + lang.mid(0, 2))) {
+        cout << "Error while loading insaimage_en.qm" << endl;
     }
     app.installTranslator(&eiiTranslator);
 
