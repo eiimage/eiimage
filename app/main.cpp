@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 
 
     Log::configure(true, false, 0);
-    QString lang = QString("en_US");
+    QString lang = QLocale::system().name();
     if(argc > 1) {
         lang = QString(argv[1]);
     }
@@ -97,13 +97,13 @@ int main(int argc, char** argv)
     app.installTranslator(&qtTranslator);
 
     QTranslator giTranslator;
-    if(!giTranslator.load(QString("genericinterface_") + lang.mid(0, 2))) {
+    if(!giTranslator.load(QString("genericinterface_") + lang.mid(0, 2), "lang")) {
         cout << "Error while loading genericinterface_en.qm" << endl;
     }
     app.installTranslator(&giTranslator);
 
     QTranslator eiiTranslator;
-    if(!eiiTranslator.load(QString("insaimage_") + lang.mid(0, 2))) {
+    if(!eiiTranslator.load(QString("insaimage_") + lang.mid(0, 2), "lang")) {
         cout << "Error while loading insaimage_en.qm" << endl;
     }
     app.installTranslator(&eiiTranslator);
