@@ -1,4 +1,4 @@
-project(EIImage)
+project(INSAimage)
 cmake_minimum_required(VERSION 2.8.11)
 
 # Find includes in corresponding build directories
@@ -19,7 +19,7 @@ find_package(Qt5PrintSupport)
 
 # We want to generate everything in the right target folder, for easier deployment
 file(MAKE_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
-set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/eiimage CACHE PATH "The folder to use for deployment." FORCE)
+set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/insaimage CACHE PATH "The folder to use for deployment." FORCE)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
@@ -29,13 +29,13 @@ find_package(RandomLib 1.7 REQUIRED)
 if(RandomLib_FOUND)
 	include_directories(${RandomLib_INCLUDE_DIRS})
 else()
-	message(FATAL_ERROR "Unable to find Random library. Please clone, compile and install it before compiling eiimage.")
+	message(FATAL_ERROR "Unable to find Random library. Please clone, compile and install it before compiling insaimage.")
 endif()
 
 # Add CMake modules path
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-# Detiq-T is a submodule, it is built automatically before building eiimage
+# Detiq-T is a submodule, it is built automatically before building insaimage
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/lib/detiq-t AND IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib/detiq-t)
 	add_subdirectory(lib/detiq-t)
 	include_directories(lib/detiq-t/ImageIn lib/detiq-t/GenericInterface)
@@ -107,7 +107,7 @@ if(WIN32)
 	endif()
 	add_custom_target(WinQtDeploy ALL
 		windeployqt ${DEPLOY_OUTPUT_DIRECTORY}/qwt.dll
-		COMMAND windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/eiimage.exe
+		COMMAND windeployqt ${DEPLOY_FLAGS} ${DEPLOY_OUTPUT_DIRECTORY}/insaimage.exe
 		COMMENT "Copy Qt & compiler DLL to the target directory")
-	add_dependencies(WinQtDeploy eiimage)
+	add_dependencies(WinQtDeploy insaimage)
 endif()

@@ -1,5 +1,5 @@
-#ifndef EIIMAGE_CROISSANCE_H
-#define EIIMAGE_CROISSANCE_H
+#ifndef INSAIMAGE_CROISSANCE_H
+#define INSAIMAGE_CROISSANCE_H
 
 #include <Image.h>
 #include <vector>

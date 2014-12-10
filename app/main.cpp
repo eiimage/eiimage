@@ -1,20 +1,20 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of EIImage.
+ * This file is part of INSAimage.
  * 
- * EIImage is free software: you can redistribute it and/or modify
+ * INSAimage is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * EIImage is distributed in the hope that it will be useful,
+ * INSAimage is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with EIImage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
@@ -28,7 +28,7 @@
 #include "BuiltinOpSet.h"
 
 #include "Services/PluginManager.h"
-#include "Services/EIImageService.h"
+#include "Services/INSAimageService.h"
 
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
@@ -78,8 +78,8 @@ using namespace std;
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    app.setOrganizationName("insa");
-    app.setApplicationName("eiimage");
+    app.setOrganizationName("INSA");
+    app.setApplicationName("INSAimage");
 
 
     Log::configure(true, false, 0);
@@ -103,22 +103,20 @@ int main(int argc, char** argv)
     app.installTranslator(&giTranslator);
 
     QTranslator eiiTranslator;
-    if(!eiiTranslator.load(QString("eiimage_") + lang.mid(0, 2))) {
-        cout << "Error while loading eiimage_en.qm" << endl;
+    if(!eiiTranslator.load(QString("insaimage_") + lang.mid(0, 2))) {
+        cout << "Error while loading insaimage_en.qm" << endl;
     }
     app.installTranslator(&eiiTranslator);
 
-    GenericInterface gi("eiimage", Qt::LeftDockWidgetArea);
+    GenericInterface gi("INSAImage", Qt::LeftDockWidgetArea);
 
     PluginManager* pluginManager = new PluginManager(&gi);
-    EIImageService* eiimageService = new EIImageService(&gi);
+    INSAimageService* insaimageService = new INSAimageService(&gi);
 
-    //  gi.addService(eiimageService);
-    gi.changeService(GenericInterface::WINDOW_SERVICE, eiimageService);
-    //  gi.addService(GenericInterface::WINDOW_SERVICE, eiimageService);
+    gi.changeService(GenericInterface::WINDOW_SERVICE, insaimageService);
 
-    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
-    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), insaimageService, SLOT(addOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), insaimageService, SLOT(removeOpSet(OpSet*)));
 
     BuiltinOpSet* image = new BuiltinOpSet(qApp->translate("", "&Image").toStdString());
     image->addOperation(new PointOp());
@@ -175,15 +173,15 @@ int main(int argc, char** argv)
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
 
-    eiimageService->addOpSet(image);
-    eiimageService->addOpSet(encode);
-    eiimageService->addOpSet(morpho);
-    eiimageService->addOpSet(analyse);
-    eiimageService->addOpSet(transfo);
+    insaimageService->addOpSet(image);
+    insaimageService->addOpSet(encode);
+    insaimageService->addOpSet(morpho);
+    insaimageService->addOpSet(analyse);
+    insaimageService->addOpSet(transfo);
     gi.addService(new MorphoMatService);
     gi.addService(new filtrme::FilteringService);
-    eiimageService->addOpSet(filter);
-    eiimageService->addOpSet(tools);
+    insaimageService->addOpSet(filter);
+    insaimageService->addOpSet(tools);
 
     gi.addService(pluginManager);
 
