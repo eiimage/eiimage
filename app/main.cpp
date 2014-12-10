@@ -83,7 +83,9 @@ int main(int argc, char** argv)
 
     Log::configure(true, false, 0);
 
-    QString lang = QLocale::system().name().split('_').first();
+    QSettings settings;
+    QString lang = settings.value(QSETTINGS_LANGUAGE_PREFERENCE,
+                                  QLocale::system().name().split('_').first()).toString();
     if(argc > 1) {
         lang = QString(argv[1]);
     }
