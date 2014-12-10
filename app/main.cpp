@@ -111,14 +111,12 @@ int main(int argc, char** argv)
     GenericInterface gi("eiimage", Qt::LeftDockWidgetArea);
 
     PluginManager* pluginManager = new PluginManager(&gi);
-    EIImageService* eiimageService = new EIImageService(&gi);
+    INSAimageService* insaimageService = new INSAimageService(&gi);
 
-    //  gi.addService(eiimageService);
-    gi.changeService(GenericInterface::WINDOW_SERVICE, eiimageService);
-    //  gi.addService(GenericInterface::WINDOW_SERVICE, eiimageService);
+    gi.changeService(GenericInterface::WINDOW_SERVICE, insaimageService);
 
-    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), eiimageService, SLOT(addOpSet(OpSet*)));
-    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), eiimageService, SLOT(removeOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), insaimageService, SLOT(addOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), insaimageService, SLOT(removeOpSet(OpSet*)));
 
     BuiltinOpSet* image = new BuiltinOpSet(qApp->translate("", "&Image").toStdString());
     image->addOperation(new PointOp());
@@ -175,15 +173,15 @@ int main(int argc, char** argv)
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
 
-    eiimageService->addOpSet(image);
-    eiimageService->addOpSet(encode);
-    eiimageService->addOpSet(morpho);
-    eiimageService->addOpSet(analyse);
-    eiimageService->addOpSet(transfo);
+    insaimageService->addOpSet(image);
+    insaimageService->addOpSet(encode);
+    insaimageService->addOpSet(morpho);
+    insaimageService->addOpSet(analyse);
+    insaimageService->addOpSet(transfo);
     gi.addService(new MorphoMatService);
     gi.addService(new filtrme::FilteringService);
-    eiimageService->addOpSet(filter);
-    eiimageService->addOpSet(tools);
+    insaimageService->addOpSet(filter);
+    insaimageService->addOpSet(tools);
 
     gi.addService(pluginManager);
 

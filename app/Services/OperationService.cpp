@@ -78,7 +78,7 @@ void OperationService::operation() {
         wndList.insert(pair<const ImageWindow*, string>(*it, (*it)->windowTitle().toStdString()));
     }
 
-    _operation->operator()(dynamic_cast<EIImageService*>(ws));
+    _operation->operator()(dynamic_cast<INSAimageService*>(ws));
     
 //    for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
 //        QWidget* widget = *it;

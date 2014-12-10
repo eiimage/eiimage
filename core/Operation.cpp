@@ -28,7 +28,7 @@ using namespace genericinterface;
 #include "Services/WindowService.h"
 #include "Services/Node.h"
 
-class EIImageService : public genericinterface::WindowService
+class INSAimageService : public genericinterface::WindowService
 {
     public:
     void outputText(QString text);

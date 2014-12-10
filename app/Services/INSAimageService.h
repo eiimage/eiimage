@@ -30,11 +30,11 @@
 #include "../Widgets/OperationBar.h"
 #include "Services/WindowService.h"
 
-class EIImageService : public genericinterface::WindowService
+class INSAimageService : public genericinterface::WindowService
 {
   Q_OBJECT
   public:
-    EIImageService(genericinterface::GenericInterface* gi); 
+    INSAimageService(genericinterface::GenericInterface* gi);
     void display(genericinterface::GenericInterface* gi);
     void connect(genericinterface::GenericInterface* gi);
 

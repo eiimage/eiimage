@@ -24,12 +24,12 @@
 using namespace genericinterface;
 using namespace std;
 
-EIImageService::EIImageService(GenericInterface* gi) : WindowService(Qt::LeftDockWidgetArea) {
+INSAimageService::INSAimageService(GenericInterface* gi) : WindowService(Qt::LeftDockWidgetArea) {
     _gi = gi;
     _operationBar = new OperationBar();
 }
 
-void EIImageService::display(GenericInterface* gi)
+void INSAimageService::display(GenericInterface* gi)
 {
     WindowService::display(gi);
 //    QDockWidget* _operationDock = new QDockWidget(tr("Operations"), gi);
@@ -49,12 +49,12 @@ void EIImageService::display(GenericInterface* gi)
     _statusEdit->hide();
 }
 
-void EIImageService::connect(GenericInterface* gi)
+void INSAimageService::connect(GenericInterface* gi)
 {
     WindowService::connect(gi);
 }
 
-void EIImageService::addOpSet(OpSet* opSet) {
+void INSAimageService::addOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
             return;
@@ -69,7 +69,7 @@ void EIImageService::addOpSet(OpSet* opSet) {
     }
 }
 
-void EIImageService::removeOpSet(OpSet* opSet) {
+void INSAimageService::removeOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
             _gi->removeService(*it);
@@ -79,14 +79,14 @@ void EIImageService::removeOpSet(OpSet* opSet) {
     }
 }
 
-void EIImageService::outputText(QString text) {
+void INSAimageService::outputText(QString text) {
     _statusEdit->append(text);
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 //    _statusEdit->setMinimumHeight(32);
 }
 
-void EIImageService::addText(std::string s) {
+void INSAimageService::addText(std::string s) {
     _statusEdit->append(QString::fromStdString(s));
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
