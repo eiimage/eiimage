@@ -33,47 +33,52 @@ using namespace std;
 PluginManager::PluginManager(GenericInterface* gi) {
 
     _gi = gi;
-    QDir directory(tr("Plugins"));
+}
+
+void PluginManager::display(GenericInterface* gi)
+{
+
+    QMenu* menu = gi->menu(tr("&Plugin"));
+
+    _loadPluginAction = menu->addAction(tr("&Load plugin"));
+    _unloadPluginsAction = menu->addAction(tr("&Unload all plugins"));
+
+    // TODO: perform this task in a better and most logical place. For now,
+    // it works because 'addPlugin()' signal will be connected when it is emmited
+    // in loadPlugin(), so it will really display its menu in the GenericInterface
+    QDir directory("plugins");
     QStringList files = directory.entryList();
     std::cout << files.size() << " files in plugins' directory" << std::endl;
     for(QStringList::iterator it = files.begin(); it != files.end(); ++it) {
         if(QLibrary::isLibrary(*it)) {
             std::cout << "library found : " << it->toStdString() << std::endl;
-            loadPlugin((directory.path() + "/") + *it);
+            loadPlugin(directory.path() + QDir::separator() + *it);
         }
     }
 
-    
-}
-
-void PluginManager::display(GenericInterface* gi)
-{
-    
-    QMenu* menu = gi->menu(tr("&Plugin"));
-    
-    _loadPluginAction = menu->addAction(tr("&Load plugin"));
-    _unloadPluginsAction = menu->addAction(tr("&Unload all plugins"));
     checkActionsValid();
 }
 
 void PluginManager::connect(GenericInterface* gi)
 {
-
     QObject::connect(_loadPluginAction, SIGNAL(triggered()), this, SLOT(choosePlugin()));
     QObject::connect(_unloadPluginsAction, SIGNAL(triggered()), this, SLOT(unloadAllPlugins()));
+
+    QObject::connect(this, SIGNAL(addPlugin(OpSet*)), this, SLOT(checkActionsValid()));
+    QObject::connect(this, SIGNAL(removePlugin(OpSet*)), this, SLOT(checkActionsValid()));
 }
 
 /*void PluginManager::checkActionsValid(QMdiSubWindow* activeWindow) {
 
-	StandardImageWindow* window = (activeWindow) ? dynamic_cast<StandardImageWindow*>(activeWindow->widget()) : NULL;
-	if(window) {
+    StandardImageWindow* window = (activeWindow) ? dynamic_cast<StandardImageWindow*>(activeWindow->widget()) : NULL;
+    if(window) {
       _erosion->setEnabled(true);
     }
     else {
       _erosion->setEnabled(false);
     }
 }*/
-    
+
 void PluginManager::choosePlugin() {
     QString file = QFileDialog::getOpenFileName(_gi, tr("Load plugin"), QString(), tr("Plugin (*.dll *.so *.dylib)"));
     if(file.size()==0) return;
@@ -81,12 +86,12 @@ void PluginManager::choosePlugin() {
     if(it != _plugins.end()) {
         unloadPlugin(it->second);
         /*QMessageBox::information (_gi, "Library already loaded", "The library you are trying to load has already been loaded.");*/
-        
+
         //return;
     }
 
     loadPlugin(file, false);
-    
+
     //QLibrary* library = new QLibrary(file);
     //if(!library->load()) {
         //QMessageBox::critical (_gi, "Error loading plugin", library->errorString());
@@ -95,15 +100,15 @@ void PluginManager::choosePlugin() {
     //else {
         ////QMessageBox::information (_gi, "Library loaded", "The plugin's library has been loaded successfully");
     //}
-    
+
     //void* ptr = library->resolve("getPlugin");
-    
+
     //if(ptr==0) {
         //QMessageBox::critical (_gi, "Error loading plugin", "Could not find the plugin's entry point \"getPlugin\"");
         //return;
-    //} 
+    //}
     //ostringstream oss;
-    
+
     //typedef Plugin* (*entryPoint)();
     //entryPoint getPlugin = reinterpret_cast<entryPoint>(ptr);
     //Plugin* plugin = getPlugin();
@@ -111,10 +116,10 @@ void PluginManager::choosePlugin() {
         //QMessageBox::critical (_gi, "Error loading plugin", "The getPlugin entry point does not return a valid Plugin");
         //return;
     //}
-    
+
     //vector<Operation*> operations = plugin->getOperations();
-    
-    
+
+
     ////oss << "Found " << operations.size() << " operations in the plugin !";
     //_plugins.insert(pair<string,Plugin*>(file.toStdString(), plugin));
     //emit addPlugin(plugin);
@@ -123,7 +128,7 @@ void PluginManager::choosePlugin() {
     ////_pluginServices.insert(pair<string,PluginService*>(file.toStdString(), pluginService));
     ////_gi->addNewService(pluginService);
     ////checkActionsValid();
-     
+
     //std::cout << "Plugin " << plugin->getName() << " loaded : " <<  operations.size() << " operations "<< std::endl;
 }
 void PluginManager::unloadAllPlugins() {
@@ -153,16 +158,16 @@ void PluginManager::unloadPlugin(Plugin* plugin) {
                 std::cout << "Unloading " << lit->second->fileName().toStdString() << "..." << res << std::endl;
                 _libraries.erase(lit);
             }
-            emit removePlugin(plugin);
             _plugins.erase(it);
-            checkActionsValid();
+            emit removePlugin(plugin);
             return;
         }
     }
 }
 
 void PluginManager::checkActionsValid() {
-    _unloadPluginsAction->setEnabled(_plugins.size()>0);
+    if(_unloadPluginsAction)
+        _unloadPluginsAction->setEnabled(_plugins.size() > 0);
 }
 
 bool PluginManager::loadPlugin(QString file, bool silent) {
@@ -174,20 +179,20 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
         }
         return false;
     }
-    
+
     std::cout << file.toStdString() << " loaded" << std::endl;
-    
+
     QFunctionPointer ptr = library->resolve("loadPlugin");
-    
+
     if(ptr == 0) {
         if(!silent) {
             QMessageBox::critical (_gi, tr("Error loading plugin"), tr("Could not find the plugin's entry point \"loadPlugin\""));
         }
         return false;
-    } 
-    
+    }
+
     std::cout << file.toStdString() << ":  entry point found" << std::endl;
-    
+
     typedef Plugin* (*entryPoint)();
     entryPoint getPlugin = reinterpret_cast<entryPoint>(ptr);
     Plugin* plugin = getPlugin();
@@ -198,15 +203,14 @@ bool PluginManager::loadPlugin(QString file, bool silent) {
         return false;
     }
     std::cout << file.toStdString() << ":  got Plugin" << std::endl;
-    
+
     vector<GenericOperation*> operations = plugin->getOperations();
     std::cout << "Plugin " << plugin->getName() << " loaded : " <<  operations.size() << " operations "<< std::endl;
-    
+
     //PluginService* pluginService = new PluginService(plugin);
     _plugins.insert(pair<string,Plugin*>(file.toStdString(), plugin));
     _libraries.insert(pair<Plugin*,QLibrary*>(plugin, library));
     //_gi->addService(pluginService);
     emit addPlugin(plugin);
-    checkActionsValid();
     return true;
 }
