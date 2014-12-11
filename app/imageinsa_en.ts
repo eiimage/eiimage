@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.0" language="en_US">
 <context>
     <name></name>
     <message>
@@ -769,9 +769,9 @@ Number of classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>INSAimageService</name>
+    <name>ImageINSAService</name>
     <message>
-        <location filename="Services/INSAimageService.cpp" line="44"/>
+        <location filename="Services/ImageINSAService.cpp" line="44"/>
         <source>Informations</source>
         <translation>Informations</translation>
     </message>
@@ -1155,49 +1155,44 @@ Number of classes = %1 </translation>
 <context>
     <name>PluginManager</name>
     <message>
-        <location filename="Services/PluginManager.cpp" line="36"/>
-        <source>Plugins</source>
-        <translation>Plugins</translation>
-    </message>
-    <message>
-        <location filename="Services/PluginManager.cpp" line="52"/>
+        <location filename="Services/PluginManager.cpp" line="41"/>
         <source>&amp;Plugin</source>
         <translation>&amp;Plugin</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="54"/>
+        <location filename="Services/PluginManager.cpp" line="43"/>
         <source>&amp;Load plugin</source>
         <translation>&amp;Load plugin</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="55"/>
+        <location filename="Services/PluginManager.cpp" line="44"/>
         <source>&amp;Unload all plugins</source>
         <translation>&amp;Unload all plugins</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="78"/>
+        <location filename="Services/PluginManager.cpp" line="83"/>
         <source>Load plugin</source>
         <translation>Load plugin</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="78"/>
+        <location filename="Services/PluginManager.cpp" line="83"/>
         <source>Plugin (*.dll *.so *.dylib)</source>
         <translation>Plugin (*.dll *.so *.dylib)</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="173"/>
-        <location filename="Services/PluginManager.cpp" line="184"/>
-        <location filename="Services/PluginManager.cpp" line="196"/>
+        <location filename="Services/PluginManager.cpp" line="178"/>
+        <location filename="Services/PluginManager.cpp" line="189"/>
+        <location filename="Services/PluginManager.cpp" line="201"/>
         <source>Error loading plugin</source>
         <translation>Error loading plugin</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="184"/>
+        <location filename="Services/PluginManager.cpp" line="189"/>
         <source>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</source>
         <translation>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</translation>
     </message>
     <message>
-        <location filename="Services/PluginManager.cpp" line="196"/>
+        <location filename="Services/PluginManager.cpp" line="201"/>
         <source>The getPlugin entry point does not return a valid Plugin</source>
         <translation>The getPlugin entry point does not return a valid Plugin</translation>
     </message>

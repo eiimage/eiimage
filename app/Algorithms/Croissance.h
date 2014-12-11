@@ -1,5 +1,5 @@
-#ifndef INSAIMAGE_CROISSANCE_H
-#define INSAIMAGE_CROISSANCE_H
+#ifndef IMAGEINSA_CROISSANCE_H
+#define IMAGEINSA_CROISSANCE_H
 
 #include <Image.h>
 #include <vector>

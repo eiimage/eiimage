@@ -1,10 +1,10 @@
-# INSAimage compilation process
+# ImageINSA compilation process
 
-This file contains useful information to help you in INSAimage compilation.
+This file contains useful information to help you in ImageINSA compilation.
 
 ## Introduction
 
-INSAimage is an open source program under the GPL v3 license. Please read the file 'GPL' in this repository for more information.
+ImageINSA is an open source program under the GPL v3 license. Please read the file 'GPL' in this repository for more information.
 
 This software can be compiled under GNU/Linux and Windows, and should be under Mac OS (but this has not been tested yet).
 
@@ -22,7 +22,7 @@ If you just cloned this repository, please ensure the detiq-t library submodule 
 You will need to run this command (without `--init`) each time you want to update the submodule to the last revision
 
 ## Libraries
-INSAimage is compiled against some dependencies, you have to check all these dependencies have been installed on your environment.
+ImageINSA is compiled against some dependencies, you have to check all these dependencies have been installed on your environment.
 
 ### Qt 5
 #### Windows
@@ -38,7 +38,7 @@ RandomLib 1.7, 1.8 and 1.9 are known to work. Newer versions should also be ok.
 
 ### Qwt
 Download Qwt 6.0 or newer from the official website: http://sourceforge.net/projects/qwt/
-The library must be compiled against Qt, please ensure you use the same version than the one you will use to compile INSAimage. The most easier way to comile Qwt is to load the project file (qwt.pro) in Qt Creator, configure the project, run the compilation.
+The library must be compiled against Qt, please ensure you use the same version than the one you will use to compile ImageINSA. The most easier way to comile Qwt is to load the project file (qwt.pro) in Qt Creator, configure the project, run the compilation.
 
 Compilation and installation are documented on the official website: http://qwt.sourceforge.net/qwtinstall.html.
 
@@ -66,7 +66,7 @@ In general, it is a good idea to generate build environment in an empty folder s
 ### Windows users
 Depending on the compiler you want to use, you may need to run `cmake` or `cmake-gui` from a command line terminal with compilation environment variables pre-defined. For example, to help CMake finding MSVC compiler, you may have to run cmake in a 'Visual Studio Command Prompt'. This can be found in the Start menu. Compiling with MinGW can be achieved by running cmake from 'MinGW shell'.
 
-The CMake scripts shipped with INSAimage try to locate automatically all libraries and tools needed to compile it. But in some case, this is impossible because there is no common standard path were all libraries should be installed. To help CMake find needed libraries, you can set some variables when running cmake:
+The CMake scripts shipped with ImageINSA try to locate automatically all libraries and tools needed to compile it. But in some case, this is impossible because there is no common standard path were all libraries should be installed. To help CMake find needed libraries, you can set some variables when running cmake:
 
 - CMAKE_PREFIX_PATH will be used by CMake to serach for libraries needed. You can put local paths were some dependencies are stored. Use the separator of your OS (';' for Windows). Example: `-DCMAKE_PREFIX_PATH="C:/Program Files/GnuWin32";D:/libs/RandomLib-1.10-build`
 - \<libname\>_DIR can be used to help CMake finding a specific library

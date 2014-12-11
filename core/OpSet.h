@@ -1,24 +1,24 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSAIMAGE_OPSET_H
-#define INSAIMAGE_OPSET_H
+#ifndef IMAGEINSA_OPSET_H
+#define IMAGEINSA_OPSET_H
 
 #include <string>
 #include <vector>
@@ -56,4 +56,4 @@ class OpSet {
     std::string _name; /**< The name of this OpSet */
 };
 
-#endif //!INSAIMAGE_OPSET_H
+#endif //!IMAGEINSA_OPSET_H

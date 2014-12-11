@@ -1,35 +1,35 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <GenericInterface.h>
 
-#include "INSAimageService.h"
+#include "ImageINSAService.h"
 
 using namespace genericinterface;
 using namespace std;
 
-INSAimageService::INSAimageService(GenericInterface* gi) : WindowService(Qt::LeftDockWidgetArea) {
+ImageINSAService::ImageINSAService(GenericInterface* gi) : WindowService(Qt::LeftDockWidgetArea) {
     _gi = gi;
     _operationBar = new OperationBar();
 }
 
-void INSAimageService::display(GenericInterface* gi)
+void ImageINSAService::display(GenericInterface* gi)
 {
     WindowService::display(gi);
 //    QDockWidget* _operationDock = new QDockWidget(tr("Operations"), gi);
@@ -49,12 +49,12 @@ void INSAimageService::display(GenericInterface* gi)
     _statusEdit->hide();
 }
 
-void INSAimageService::connect(GenericInterface* gi)
+void ImageINSAService::connect(GenericInterface* gi)
 {
     WindowService::connect(gi);
 }
 
-void INSAimageService::addOpSet(OpSet* opSet) {
+void ImageINSAService::addOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
             return;
@@ -69,7 +69,7 @@ void INSAimageService::addOpSet(OpSet* opSet) {
     }
 }
 
-void INSAimageService::removeOpSet(OpSet* opSet) {
+void ImageINSAService::removeOpSet(OpSet* opSet) {
     for(vector<OpSetService*>::iterator it = _opSetServices.begin(); it != _opSetServices.end(); ++it) {
         if((*it)->getOpSet() == opSet) {
             _gi->removeService(*it);
@@ -79,14 +79,14 @@ void INSAimageService::removeOpSet(OpSet* opSet) {
     }
 }
 
-void INSAimageService::outputText(QString text) {
+void ImageINSAService::outputText(QString text) {
     _statusEdit->append(text);
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
 //    _statusEdit->setMinimumHeight(32);
 }
 
-void INSAimageService::addText(std::string s) {
+void ImageINSAService::addText(std::string s) {
     _statusEdit->append(QString::fromStdString(s));
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);

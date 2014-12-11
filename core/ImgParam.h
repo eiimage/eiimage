@@ -1,24 +1,24 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSAIMAGE_IMGPARAM_H
-#define INSAIMAGE_IMGPARAM_H
+#ifndef IMAGEINSA_IMGPARAM_H
+#define IMAGEINSA_IMGPARAM_H
 
 #include <vector>
 #include <string>
@@ -49,4 +49,4 @@ class ImgParam : public Parameter<imagein::Image> {
     ImageListBox_t<uint8_t>* _imgListBox;
 };
 
-#endif //!INSAIMAGE_IMGPARAM_H
+#endif //!IMAGEINSA_IMGPARAM_H

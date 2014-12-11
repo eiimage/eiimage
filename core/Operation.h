@@ -1,24 +1,24 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSAIMAGE_OPERATION_H
-#define INSAIMAGE_OPERATION_H
+#ifndef IMAGEINSA_OPERATION_H
+#define IMAGEINSA_OPERATION_H
 
 #include <map>
 #include <string>
@@ -38,7 +38,7 @@ namespace genericinterface {
  * For implementing an operation working with standard 8bit unsigned integer Image (ie Image_t<uint8_t> or simply Image), see the Operation class.\n
  * For implementing an operation working with double-precision floating point Image (ie Image_t<double>), see the DoubleOperation class.\n
  * This class is a generic class and should not be directly used except for creating a generic operation (ie an operation working on different type of Image).\n
- * For an exemple of a true generic operation class, see the PointOp implementation in insaimage source code.
+ * For an exemple of a true generic operation class, see the PointOp implementation in imageinsa source code.
  */
 class GenericOperation {
   public:
@@ -66,7 +66,7 @@ class GenericOperation {
     /**
      * @brief The function call operator which is called by the application, it is the entry point of this operation and it calls the pure virtual function call operator.
      *
-     * @param ws The insaimage implementation of the genericinterface::WindowService
+     * @param ws The imageinsa implementation of the genericinterface::WindowService
      */
     virtual void operator()(genericinterface::WindowService* ws);
 
@@ -227,4 +227,4 @@ class DoubleOperation : public GenericOperation {
     imagein::Image_t<double>* _currentImg; /**< The current image, only valid in the function call operator */
 };
 
-#endif //!INSAIMAGE_OPERATION_H
+#endif //!IMAGEINSA_OPERATION_H

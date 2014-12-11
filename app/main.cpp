@@ -1,20 +1,20 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <QApplication>
@@ -28,7 +28,7 @@
 #include "BuiltinOpSet.h"
 
 #include "Services/PluginManager.h"
-#include "Services/INSAimageService.h"
+#include "Services/ImageINSAService.h"
 
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
     app.setOrganizationName("INSA");
-    app.setApplicationName("INSAimage");
+    app.setApplicationName("ImageINSA");
 
     Log::configure(true, false, 0);
 
@@ -105,21 +105,21 @@ int main(int argc, char** argv)
     }
     app.installTranslator(&giTranslator);
 
-    QTranslator eiiTranslator;
-    if(!eiiTranslator.load(QString("insaimage_") + lang, "lang")) {
-        cout << "Error while loading insaimage_en.qm" << endl;
+    QTranslator mainTranslator;
+    if(!mainTranslator.load(QString("imageinsa_") + lang, "lang")) {
+        cout << "Error while loading imageinsa_en.qm" << endl;
     }
-    app.installTranslator(&eiiTranslator);
+    app.installTranslator(&mainTranslator);
 
-    GenericInterface gi("INSAImage", Qt::LeftDockWidgetArea);
+    GenericInterface gi("ImageINSA", Qt::LeftDockWidgetArea);
 
     PluginManager* pluginManager = new PluginManager(&gi);
-    INSAimageService* insaimageService = new INSAimageService(&gi);
+    ImageINSAService* mainService = new ImageINSAService(&gi);
 
-    gi.changeService(GenericInterface::WINDOW_SERVICE, insaimageService);
+    gi.changeService(GenericInterface::WINDOW_SERVICE, mainService);
 
-    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), insaimageService, SLOT(addOpSet(OpSet*)));
-    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), insaimageService, SLOT(removeOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(addPlugin(OpSet*)), mainService, SLOT(addOpSet(OpSet*)));
+    QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), mainService, SLOT(removeOpSet(OpSet*)));
 
     BuiltinOpSet* image = new BuiltinOpSet(qApp->translate("", "&Image").toStdString());
     image->addOperation(new PointOp());
@@ -176,15 +176,15 @@ int main(int argc, char** argv)
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
 
-    insaimageService->addOpSet(image);
-    insaimageService->addOpSet(encode);
-    insaimageService->addOpSet(morpho);
-    insaimageService->addOpSet(analyse);
-    insaimageService->addOpSet(transfo);
+    mainService->addOpSet(image);
+    mainService->addOpSet(encode);
+    mainService->addOpSet(morpho);
+    mainService->addOpSet(analyse);
+    mainService->addOpSet(transfo);
     gi.addService(new MorphoMatService);
     gi.addService(new filtrme::FilteringService);
-    insaimageService->addOpSet(filter);
-    insaimageService->addOpSet(tools);
+    mainService->addOpSet(filter);
+    mainService->addOpSet(tools);
 
     gi.addService(pluginManager);
 

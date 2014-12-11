@@ -1,24 +1,24 @@
 /*
  * Copyright 2011-2012 INSA Rennes
  * 
- * This file is part of INSAimage.
+ * This file is part of ImageINSA.
  * 
- * INSAimage is free software: you can redistribute it and/or modify
+ * ImageINSA is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * INSAimage is distributed in the hope that it will be useful,
+ * ImageINSA is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with INSAimage.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSAIMAGE_BUILTINOPSET_H
-#define INSAIMAGE_BUILTINOPSET_H
+#ifndef IMAGEINSA_BUILTINOPSET_H
+#define IMAGEINSA_BUILTINOPSET_H
 
 #include <string>
 #include <vector>
@@ -28,7 +28,7 @@
 /**
  * @brief A BuiltinOpSet is an implementation of OpSet containing GenericOperation
  *
- * This class is used inside the insaimage application to organize the built-in operations.
+ * This class is used inside the imageinsa application to organize the built-in operations.
  *
  */
 class BuiltinOpSet : public OpSet {
@@ -51,4 +51,4 @@ class BuiltinOpSet : public OpSet {
     std::vector<GenericOperation*> _operations; /**< List of the operations stored in this OpSet */
 };
 
-#endif //!INSAIMAGE_BUILTINOPSET_H
+#endif //!IMAGEINSA_BUILTINOPSET_H

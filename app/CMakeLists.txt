@@ -1,5 +1,5 @@
 
-set(insaimage_SOURCES
+set(imageinsa_SOURCES
 	main.cpp
 	Tools.h
 	Algorithms/ClassAnalysis.cpp
@@ -132,8 +132,8 @@ set(insaimage_SOURCES
 	Operations/TranslateOp.h
 	Operations/ZeroCrossingOp.cpp
 	Operations/ZeroCrossingOp.h
-	Services/INSAimageService.cpp
-	Services/INSAimageService.h
+	Services/ImageINSAService.cpp
+	Services/ImageINSAService.h
 	Services/FilteringService.cpp
 	Services/FilteringService.h
 	Services/MorphoMatService.cpp
@@ -176,16 +176,16 @@ set(UIS
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})
 
-qt5_add_resources(RCC_FILES "insaimage_app_res.qrc")
+qt5_add_resources(RCC_FILES "imageinsa_app_res.qrc")
 
-set(TS_FILES insaimage_en.ts insaimage_fr.ts)
+set(TS_FILES imageinsa_en.ts imageinsa_fr.ts)
 # Uncomment only 1 of the 2 folowing commands, depending on your needs
 # -1- Use current translations files
 qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
-#qt5_create_translation(QM_FILES ${insaimage_SOURCES} ${UIS} ${TS_FILES})
+#qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES})
 # -3- Update translations files with changes from c++ sources AND drop useless translations
-#qt5_create_translation(QM_FILES ${insaimage_SOURCES} ${UIS} ${TS_FILES} OPTIONS -no-obsolete)
+#qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES} OPTIONS -no-obsolete)
 
 
 # Avoid awful console on Windows
@@ -193,8 +193,8 @@ if(WIN32)
 	set(EXTRA_FLAGS WIN32)
 endif()
 
-add_executable(insaimage ${EXTRA_FLAGS} ${insaimage_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
-target_link_libraries(insaimage
+add_executable(imageinsa ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
+target_link_libraries(imageinsa
 	core
 	Qt5::Core
 	Qt5::Widgets
@@ -204,11 +204,11 @@ target_link_libraries(insaimage
 	${RandomLib_LIBRARIES}
 )
 
-add_custom_command(TARGET insaimage POST_BUILD
+add_custom_command(TARGET imageinsa POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
 	COMMENT "Create directory ${DEPLOY_OUTPUT_DIRECTORY}/lang")
 foreach(__FILE ${QM_FILES})
-	add_custom_command(TARGET insaimage POST_BUILD
+	add_custom_command(TARGET imageinsa POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E copy ${__FILE} ${DEPLOY_OUTPUT_DIRECTORY}/lang
 		COMMENT "Copy ${__FILE} to ${DEPLOY_OUTPUT_DIRECTORY}/lang")
 endforeach()
