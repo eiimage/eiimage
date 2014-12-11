@@ -183,7 +183,10 @@ set(TS_FILES insaimage_en.ts insaimage_fr.ts)
 # -1- Use current translations files
 qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
-# qt5_create_translation(QM_FILES ${insaimage_SOURCES} ${TS_FILES})
+#qt5_create_translation(QM_FILES ${insaimage_SOURCES} ${UIS} ${TS_FILES})
+# -3- Update translations files with changes from c++ sources AND drop useless translations
+#qt5_create_translation(QM_FILES ${insaimage_SOURCES} ${UIS} ${TS_FILES} OPTIONS -no-obsolete)
+
 
 # Avoid awful console on Windows
 if(WIN32)

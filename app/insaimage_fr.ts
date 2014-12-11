@@ -52,26 +52,7 @@
     </message>
 </context>
 <context>
-    <name>BFlitOp</name>
-    <message>
-        <source>BFlit</source>
-        <translation type="obsolete">BFlit</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
-    <message>
-        <source>Validate</source>
-        <translation type="obsolete">Valider</translation>
-    </message>
-</context>
-<context>
     <name>CenterOp</name>
-    <message>
-        <source>Center</source>
-        <translation type="obsolete">Centrer</translation>
-    </message>
     <message>
         <location filename="Operations/CenterOp.cpp" line="72"/>
         <source>centered</source>
@@ -101,10 +82,6 @@
 </context>
 <context>
     <name>ClassAnalysisDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
     <message>
         <location filename="Operations/ClassAnalysisDialog.ui" line="14"/>
         <source>Class analysis</source>
@@ -263,10 +240,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>ColorDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <location filename="Operations/ColorDialog.ui" line="14"/>
         <source>RGB image generator</source>
         <translation>Générateur d&apos;image RVB</translation>
@@ -333,74 +306,7 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>ColorimetryOp</name>
-    <message>
-        <source>Colorimetry</source>
-        <translation type="obsolete">Colorimétrie</translation>
-    </message>
-    <message>
-        <source>Zero crossing</source>
-        <translation type="obsolete">Passage par zero</translation>
-    </message>
-    <message>
-        <source>Red : </source>
-        <translation type="obsolete">Rouge : </translation>
-    </message>
-    <message>
-        <source>Green : </source>
-        <translation type="obsolete">Vert : </translation>
-    </message>
-    <message>
-        <source>Blue : </source>
-        <translation type="obsolete">Bleu : </translation>
-    </message>
-    <message>
-        <source>Hue : </source>
-        <translation type="obsolete">Teinte : </translation>
-    </message>
-    <message>
-        <source>Saturation : </source>
-        <translation type="obsolete">Saturation : </translation>
-    </message>
-    <message>
-        <source>Value : </source>
-        <translation type="obsolete">Valeur :  </translation>
-    </message>
-    <message>
-        <source>Red: </source>
-        <translation type="obsolete">Rouge : </translation>
-    </message>
-    <message>
-        <source>Green: </source>
-        <translation type="obsolete">Vert : </translation>
-    </message>
-    <message>
-        <source>Blue: </source>
-        <translation type="obsolete">Bleu : </translation>
-    </message>
-    <message>
-        <source>Hue: </source>
-        <translation type="obsolete">Teinte : </translation>
-    </message>
-    <message>
-        <source>Saturation: </source>
-        <translation type="obsolete">Saturation : </translation>
-    </message>
-    <message>
-        <source>Value: </source>
-        <translation type="obsolete">Valeur : </translation>
-    </message>
-</context>
-<context>
     <name>CombineColorOp</name>
-    <message>
-        <source>Combine color planes</source>
-        <translation type="obsolete">Combiner les plans de couleurs</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
     <message>
         <location filename="Operations/CombineColorOp.cpp" line="95"/>
         <source>Reconstructed color image</source>
@@ -409,10 +315,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>CroissanceOp</name>
-    <message>
-        <source>Croissance</source>
-        <translation type="obsolete">Croissance</translation>
-    </message>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="59"/>
         <source>At origin</source>
@@ -484,10 +386,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>DCTDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
     <message>
         <location filename="Operations/DCTDialog.ui" line="14"/>
         <source>DCT encoding</source>
@@ -577,10 +475,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>DMMOp</name>
-    <message>
-        <source>DMM</source>
-        <translation type="obsolete">DMM</translation>
-    </message>
     <message>
         <location filename="Operations/DMMOp.cpp" line="56"/>
         <source>DMM (dilatation)</source>
@@ -699,71 +593,6 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>Dialog</name>
-    <message>
-        <source>MICD Encoding</source>
-        <translation type="vanished">Encodage MICD</translation>
-    </message>
-    <message>
-        <source>Predictor P(X)</source>
-        <translation type="vanished">Prédicteur P(X)</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="vanished">A</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>(A + C) / 2</source>
-        <translation type="vanished">(A + C) / 2</translation>
-    </message>
-    <message>
-        <source>Modified Graham&apos;s</source>
-        <translation type="vanished">Graham modifié</translation>
-    </message>
-    <message>
-        <source>Q = </source>
-        <translation type="vanished">Q = </translation>
-    </message>
-    <message>
-        <source>Quantifier</source>
-        <translation type="vanished">Quantifieur</translation>
-    </message>
-    <message>
-        <source>Quantification file :</source>
-        <translation type="vanished">Fichier de quantification : </translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Parcourir</translation>
-    </message>
-    <message>
-        <source>Open quantification editor</source>
-        <translation type="vanished">Ouvrir l&apos;éditeur de quantification</translation>
-    </message>
-</context>
-<context>
-    <name>EIImageService</name>
-    <message>
-        <source>Informations</source>
-        <translation type="vanished">Informations</translation>
-    </message>
-</context>
-<context>
-    <name>EntropyOp</name>
-    <message>
-        <source>Calcul d&apos;entropie</source>
-        <translation type="obsolete">Calcul d&apos;entropie</translation>
-    </message>
-    <message>
-        <source>Entropy of the image = %1</source>
-        <translation type="obsolete">Entropie de l&apos;image = %1</translation>
-    </message>
-</context>
-<context>
     <name>FFTDialog</name>
     <message>
         <location filename="Operations/FFTDialog.ui" line="14"/>
@@ -794,10 +623,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>FFTOp</name>
     <message>
-        <source>Discrete Fourier transform</source>
-        <translation type="obsolete">Transformée de Fourrier discrète</translation>
-    </message>
-    <message>
         <location filename="Operations/FFTOp.cpp" line="96"/>
         <source>DFT (phase)</source>
         <translation>DFT (phase)</translation>
@@ -810,10 +635,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>FlipOp</name>
-    <message>
-        <source>Flip %1</source>
-        <translation type="obsolete">Symétrie %1</translation>
-    </message>
     <message>
         <location filename="Operations/FlipOp.cpp" line="30"/>
         <location filename="Operations/FlipOp.cpp" line="62"/>
@@ -830,10 +651,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/FlipOp.cpp" line="62"/>
         <source>flipped %1</source>
         <translation>symétrie %1</translation>
-    </message>
-    <message>
-        <source> -  flipped %1</source>
-        <translation type="obsolete"> -  symétrie %1</translation>
     </message>
 </context>
 <context>
@@ -893,10 +710,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>HoughDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <location filename="Operations/HoughDialog.ui" line="14"/>
         <source>Hough transform</source>
         <translation>Transformé de Hough</translation>
@@ -928,22 +741,7 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>HuffmanOp</name>
-    <message>
-        <source>Huffman</source>
-        <translation type="obsolete">Huffman</translation>
-    </message>
-</context>
-<context>
     <name>IFFTOp</name>
-    <message>
-        <source>Discrete Fourier reconstruction</source>
-        <translation type="obsolete">Reconstruction de Fourrier discrète</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
     <message>
         <location filename="Operations/IFFTOp.cpp" line="66"/>
         <source>Magnitude : </source>
@@ -981,10 +779,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>InverseHoughDialog</name>
     <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
         <location filename="Operations/InverseHoughDialog.ui" line="14"/>
         <source>Inverse hough transform</source>
         <oldsource>Hough reconstruction</oldsource>
@@ -1003,10 +797,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>InversePyramidDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
     <message>
         <location filename="Operations/InversePyramidDialog.ui" line="14"/>
         <source>Pyramidal reconstruction</source>
@@ -1055,91 +845,6 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>MICD</name>
-    <message>
-        <source>MICD Encoding</source>
-        <translation type="obsolete">Encodage MICD</translation>
-    </message>
-    <message>
-        <source>Error while loading quantification file</source>
-        <translation type="vanished">Erreur lors du chargement du fichier de quantification</translation>
-    </message>
-    <message>
-        <source>The specified quantification file could not be opened !</source>
-        <translation type="vanished">Le fichier de quantification spécifié n&apos;a pas pu être ouvert !</translation>
-    </message>
-    <message>
-        <source>Error image</source>
-        <translation type="vanished">Image d&apos;erreur</translation>
-    </message>
-    <message>
-        <source>Reconstructed image</source>
-        <translation type="vanished">Image reconstruite</translation>
-    </message>
-</context>
-<context>
-    <name>MICDDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
-        <source>MICD encoding</source>
-        <translation type="vanished">Encodage MICD</translation>
-    </message>
-    <message>
-        <source>Predictor P(X)</source>
-        <translation type="vanished">Prédicteur P(X)</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="vanished">A</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="vanished">C</translation>
-    </message>
-    <message>
-        <source>( A + C ) / 2</source>
-        <translation type="vanished">( A + C ) / 2</translation>
-    </message>
-    <message>
-        <source>Modified Graham&apos;s</source>
-        <translation type="vanished">Graham modifié</translation>
-    </message>
-    <message>
-        <source>Quantifier</source>
-        <translation type="vanished">Quantifieur</translation>
-    </message>
-    <message>
-        <source>Quantification file :</source>
-        <translation type="vanished">Fichier de quantification : </translation>
-    </message>
-    <message>
-        <source>Browse</source>
-        <translation type="vanished">Parcourir</translation>
-    </message>
-    <message>
-        <source>Open quantification editor</source>
-        <translation type="vanished">Ouvrir l&apos;éditeur de quantification</translation>
-    </message>
-    <message>
-        <source>Open file</source>
-        <translation type="vanished">Ouvrir un fichier</translation>
-    </message>
-    <message>
-        <source>Loi de quantification (*.loi)</source>
-        <translation type="vanished">Loi de quantification (*.loi)</translation>
-    </message>
-</context>
-<context>
-    <name>MICDEncodingOp</name>
-    <message>
-        <source>MICD Encoding</source>
-        <translation type="obsolete">Encodage MICD</translation>
-    </message>
-</context>
-<context>
     <name>MeanSquareErrorOp</name>
     <message>
         <location filename="Operations/MeanSquaredErrorOp.cpp" line="84"/>
@@ -1148,26 +853,7 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>MeanSquaredErrorOp</name>
-    <message>
-        <source>Mean squared error</source>
-        <translation type="obsolete">Erreur quadratique moyenne</translation>
-    </message>
-    <message>
-        <source>Compare to...</source>
-        <translation type="obsolete">Comparer à...</translation>
-    </message>
-</context>
-<context>
     <name>NoiseOp</name>
-    <message>
-        <source>Add noise</source>
-        <translation type="obsolete">Ajouter du bruit</translation>
-    </message>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
     <message>
         <location filename="Operations/NoiseOp.cpp" line="54"/>
         <source>Impulse noise</source>
@@ -1192,10 +878,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/NoiseOp.cpp" line="76"/>
         <source>Percent of image : </source>
         <translation>Pourcentage de l&apos;image : </translation>
-    </message>
-    <message>
-        <source>Validate</source>
-        <translation type="obsolete">Valider</translation>
     </message>
     <message>
         <location filename="Operations/NoiseOp.cpp" line="118"/>
@@ -1234,10 +916,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/BFlitOp.cpp" line="62"/>
         <source>Validate</source>
         <translation>Valider</translation>
-    </message>
-    <message>
-        <source>Colorimetry</source>
-        <translation type="obsolete">Colorimétrie</translation>
     </message>
     <message>
         <location filename="Operations/CombineColorOp.cpp" line="38"/>
@@ -1282,14 +960,6 @@ Nombre de classes = %1 </translation>
         <translation>Huffman</translation>
     </message>
     <message>
-        <source>Discrete Fourier reconstruction</source>
-        <translation type="obsolete">Reconstruction de Fourrier discrète</translation>
-    </message>
-    <message>
-        <source>MICD Encoding</source>
-        <translation type="vanished">Codage MICD</translation>
-    </message>
-    <message>
         <location filename="Operations/MeanSquaredErrorOp.cpp" line="34"/>
         <source>Mean squared error</source>
         <translation>Erreur quadratique moyenne</translation>
@@ -1310,14 +980,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/NoiseOp.cpp" line="42"/>
         <source>Add noise</source>
         <translation>Ajouter du bruit</translation>
-    </message>
-    <message>
-        <source>impulse noise</source>
-        <translation type="obsolete">bruit impulsionnel</translation>
-    </message>
-    <message>
-        <source>gaussian noise</source>
-        <translation type="obsolete">bruit gaussien</translation>
     </message>
     <message>
         <location filename="Operations/PointOp.cpp" line="44"/>
@@ -1352,10 +1014,6 @@ Nombre de classes = %1 </translation>
         <translation>Anneau de réjection</translation>
     </message>
     <message>
-        <source>Rejection ring (%1 %2 %3)</source>
-        <translation type="obsolete">Anneau de réjection (%1 %2 %3)</translation>
-    </message>
-    <message>
         <location filename="Operations/RotateOp.cpp" line="34"/>
         <source>Rotation</source>
         <translation>Rotation</translation>
@@ -1372,18 +1030,10 @@ Nombre de classes = %1 </translation>
         <translation>Rapport signal-bruit</translation>
     </message>
     <message>
-        <source>+inf</source>
-        <translation type="obsolete">infini</translation>
-    </message>
-    <message>
         <location filename="Operations/SinusSynthesisOp.cpp" line="39"/>
         <location filename="Operations/SinusSynthesisOp.cpp" line="145"/>
         <source>Sinus synthesis</source>
         <translation>Synthèse image sinus</translation>
-    </message>
-    <message>
-        <source>Test</source>
-        <translation type="obsolete">Test</translation>
     </message>
     <message>
         <location filename="Operations/ThresholdOp.cpp" line="11"/>
@@ -1414,10 +1064,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/FlipOp.cpp" line="30"/>
         <source>Flip %1</source>
         <translation>Symétrie %1</translation>
-    </message>
-    <message>
-        <source>Class analysis</source>
-        <translation type="obsolete">Classification</translation>
     </message>
     <message>
         <location filename="Operations/DCTOp.cpp" line="30"/>
@@ -1464,10 +1110,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/InversePyramidOp.cpp" line="47"/>
         <source>The image dimensions must be power of 2.</source>
         <translation>Les dimensions de l&apos;images doivent être puissances de 2.</translation>
-    </message>
-    <message>
-        <source>Create pyramid</source>
-        <translation type="obsolete">Construire une pyramide</translation>
     </message>
     <message>
         <location filename="Operations/PyramidOp.cpp" line="32"/>
@@ -1563,14 +1205,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>PointOp</name>
     <message>
-        <source>Pixel operations</source>
-        <translation type="obsolete">Opération sur les pixels</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
-    <message>
         <location filename="Operations/PointOp.cpp" line="119"/>
         <source>Second operand</source>
         <translation>Second opérande</translation>
@@ -1590,10 +1224,6 @@ Nombre de classes = %1 </translation>
         <source>Explode colors</source>
         <translation>Eclater les couleurs</translation>
     </message>
-    <message>
-        <source>Validate</source>
-        <translation type="obsolete">Valider</translation>
-    </message>
 </context>
 <context>
     <name>PseudoColorOp</name>
@@ -1605,14 +1235,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>PyramidDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">Dialog</translation>
-    </message>
-    <message>
-        <source>Pyramid generator</source>
-        <translation type="obsolete">Pyramide - génération</translation>
-    </message>
     <message>
         <location filename="Operations/PyramidDialog.ui" line="14"/>
         <source>Pyramidal decomposition</source>
@@ -1672,10 +1294,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>QuantificationDialog</name>
-    <message>
-        <source>Quantification</source>
-        <translation type="obsolete">Quantification</translation>
-    </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="40"/>
         <source>Quantification file editor</source>
@@ -1746,10 +1364,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>QuantificationOp</name>
     <message>
-        <source>Quantification</source>
-        <translation type="obsolete">Quantification</translation>
-    </message>
-    <message>
         <location filename="Operations/QuantificationOp.cpp" line="74"/>
         <source>quantified</source>
         <translation>quantifiée</translation>
@@ -1772,10 +1386,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>RandomImgOp</name>
-    <message>
-        <source>Generate random image</source>
-        <translation type="obsolete">Générer une image aléatoire</translation>
-    </message>
     <message>
         <location filename="Operations/RandomImgOp.cpp" line="43"/>
         <source>Parameters</source>
@@ -1823,21 +1433,9 @@ Nombre de classes = %1 </translation>
         <source> to </source>
         <translation> à </translation>
     </message>
-    <message>
-        <source>Validate</source>
-        <translation type="obsolete">Valider</translation>
-    </message>
-    <message>
-        <source>Random image</source>
-        <translation type="obsolete">Image aléatoire</translation>
-    </message>
 </context>
 <context>
     <name>RejectionRingOp</name>
-    <message>
-        <source>Rejection ring</source>
-        <translation type="obsolete">Anneau de réjection</translation>
-    </message>
     <message>
         <location filename="Operations/RejectionRingOp.cpp" line="49"/>
         <source>Width=Height : </source>
@@ -1857,17 +1455,6 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/RejectionRingOp.cpp" line="99"/>
         <source>Rejection ring (%1 %2 %3)</source>
         <translation>Anneau de réjection (%1 %2 %3)</translation>
-    </message>
-</context>
-<context>
-    <name>RotateOp</name>
-    <message>
-        <source>Rotation</source>
-        <translation type="obsolete">Rotation</translation>
-    </message>
-    <message>
-        <source>Rotating %1</source>
-        <translation type="obsolete">Rotation %1</translation>
     </message>
 </context>
 <context>
@@ -1900,10 +1487,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>ScalingOp</name>
-    <message>
-        <source>Scaling</source>
-        <translation type="obsolete">Echantillonage</translation>
-    </message>
     <message>
         <location filename="Operations/ScalingOp.cpp" line="70"/>
         <source>Nearest neighboor (standard)</source>
@@ -1948,18 +1531,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>SignalToNoiseOp</name>
-    <message>
-        <source>Signal-to-noise ratio</source>
-        <translation type="obsolete">Rapport signal-bruit</translation>
-    </message>
-    <message>
-        <source>Compare to...</source>
-        <translation type="obsolete">Comparer à...</translation>
-    </message>
-    <message>
-        <source>+inf</source>
-        <translation type="obsolete">infini</translation>
-    </message>
     <message>
         <location filename="Operations/SignalToNoiseOp.cpp" line="84"/>
         <source>Signal-to-noise ratio : %1</source>
@@ -2009,20 +1580,9 @@ Nombre de classes = %1 </translation>
         <translation></translation>
     </message>
     <message>
-        <source>Orientation (Â°): </source>
-        <translation type="vanished">Orientation (°): </translation>
-    </message>
-    <message>
         <location filename="Operations/SinusSynthesisOp.cpp" line="78"/>
         <source>Niveaux de gris : </source>
         <translation>Niveaux de gris : </translation>
-    </message>
-</context>
-<context>
-    <name>SplitColorOp</name>
-    <message>
-        <source>Split color planes</source>
-        <translation type="obsolete">Séparer les plans de couleurs </translation>
     </message>
 </context>
 <context>
@@ -2084,13 +1644,6 @@ Nombre de classes = %1 </translation>
         <location filename="Widgets/StructElemWindow.cpp" line="268"/>
         <source>Save file</source>
         <translation>Enregistrer sous</translation>
-    </message>
-</context>
-<context>
-    <name>TestOp</name>
-    <message>
-        <source>Test</source>
-        <translation type="obsolete">Test</translation>
     </message>
 </context>
 <context>
@@ -2158,168 +1711,6 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>ThresholdOp</name>
-    <message>
-        <source>Thresholding</source>
-        <translation type="obsolete">Seuillage</translation>
-    </message>
-</context>
-<context>
-    <name>Tools</name>
-    <message>
-        <source>Combine color planes</source>
-        <translation type="obsolete">Combiner les plans de couleurs</translation>
-    </message>
-    <message>
-        <source>Discrete Fourier transform</source>
-        <translation type="obsolete">Transformée de Fourrier discrète</translation>
-    </message>
-    <message>
-        <source>Discrete Fourier reconstruction</source>
-        <translation type="obsolete">Reconstruction de Fourrier discrète</translation>
-    </message>
-    <message>
-        <source>Mean squared error</source>
-        <translation type="obsolete">Erreur quadratique moyenne</translation>
-    </message>
-    <message>
-        <source>Signal-to-noise ratio</source>
-        <translation type="obsolete">Rapport signal-bruit</translation>
-    </message>
-    <message>
-        <source>+inf</source>
-        <translation type="obsolete">infini</translation>
-    </message>
-    <message>
-        <source>Black</source>
-        <translation type="obsolete">Noir</translation>
-    </message>
-    <message>
-        <source>Alpha</source>
-        <translation type="obsolete">Alpha</translation>
-    </message>
-    <message>
-        <source>Red</source>
-        <translation type="obsolete">Rouge</translation>
-    </message>
-    <message>
-        <source>Green</source>
-        <translation type="obsolete">Vert</translation>
-    </message>
-    <message>
-        <source>Blue</source>
-        <translation type="obsolete">Bleu</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="obsolete">Couleur</translation>
-    </message>
-    <message>
-        <source>BFlit</source>
-        <translation type="obsolete">BFlit</translation>
-    </message>
-    <message>
-        <source>Colorimetry</source>
-        <translation type="obsolete">Colorimétrie</translation>
-    </message>
-    <message>
-        <source>Croissance</source>
-        <translation type="obsolete">Croissance</translation>
-    </message>
-    <message>
-        <source>DMM</source>
-        <translation type="obsolete">DMM</translation>
-    </message>
-    <message>
-        <source>Calcul d&apos;entropie</source>
-        <translation type="obsolete">Calcul d&apos;entropie</translation>
-    </message>
-    <message>
-        <source>Entropy of the image = %1</source>
-        <translation type="obsolete">Entropie de l&apos;image = %1</translation>
-    </message>
-    <message>
-        <source>Histogram operations</source>
-        <translation type="obsolete">Opération sur-histogramme</translation>
-    </message>
-    <message>
-        <source>Huffman</source>
-        <translation type="obsolete">Huffman</translation>
-    </message>
-    <message>
-        <source>MICD Encoding</source>
-        <translation type="obsolete">Encodage MICD</translation>
-    </message>
-    <message>
-        <source>Add noise</source>
-        <translation type="obsolete">Ajouter du bruit</translation>
-    </message>
-    <message>
-        <source>impulse noise</source>
-        <translation type="obsolete">bruit impulsionnel</translation>
-    </message>
-    <message>
-        <source>gaussian noise</source>
-        <translation type="obsolete">bruit gaussien</translation>
-    </message>
-    <message>
-        <source>Pixel operations</source>
-        <translation type="obsolete">Opération sur les pixels</translation>
-    </message>
-    <message>
-        <source>Pseudo color</source>
-        <translation type="obsolete">Pseudo-couleur</translation>
-    </message>
-    <message>
-        <source>Quantification</source>
-        <translation type="obsolete">Quantification</translation>
-    </message>
-    <message>
-        <source>Generate random image</source>
-        <translation type="obsolete">Générer une image aléatoire</translation>
-    </message>
-    <message>
-        <source>Random image</source>
-        <translation type="obsolete">Image aléatoire</translation>
-    </message>
-    <message>
-        <source>Rejection ring</source>
-        <translation type="obsolete">Anneau de réjection</translation>
-    </message>
-    <message>
-        <source>Rejection ring (%1 %2 %3)</source>
-        <translation type="obsolete">Anneau de réjection (%1 %2 %3)</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="obsolete">Rotation</translation>
-    </message>
-    <message>
-        <source>Scaling</source>
-        <translation type="obsolete">Echantillonage</translation>
-    </message>
-    <message>
-        <source>Sinus synthesis</source>
-        <translation type="obsolete">Synthèse d&apos;image sinus</translation>
-    </message>
-    <message>
-        <source>Test</source>
-        <translation type="obsolete">Test</translation>
-    </message>
-    <message>
-        <source>Thresholding</source>
-        <translation type="obsolete">Seuillage</translation>
-    </message>
-    <message>
-        <source>Translation</source>
-        <translation type="obsolete">Translation</translation>
-    </message>
-    <message>
-        <source>Zero crossing</source>
-        <translation type="obsolete">Passages par zéro</translation>
-    </message>
-</context>
-<context>
     <name>Transforms</name>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="57"/>
@@ -2369,14 +1760,6 @@ Nombre de classes = %1 </translation>
 </context>
 <context>
     <name>TranslateOp</name>
-    <message>
-        <source>Translation</source>
-        <translation type="obsolete">Translation</translation>
-    </message>
-    <message>
-        <source>Translating %1</source>
-        <translation type="obsolete">Translation de %1</translation>
-    </message>
     <message>
         <location filename="Operations/TranslateOp.cpp" line="34"/>
         <source>Expand image</source>
@@ -2435,201 +1818,6 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>dialog</name>
-    <message>
-        <source>Parameters</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
-    <message>
-        <source>Validate</source>
-        <translation type="obsolete">Valider</translation>
-    </message>
-    <message>
-        <source>Red : </source>
-        <translation type="obsolete">Rouge : </translation>
-    </message>
-    <message>
-        <source>Green : </source>
-        <translation type="obsolete">Vert : </translation>
-    </message>
-    <message>
-        <source>Blue : </source>
-        <translation type="obsolete">Bleu : </translation>
-    </message>
-    <message>
-        <source>Hue : </source>
-        <translation type="obsolete">Teinte : </translation>
-    </message>
-    <message>
-        <source>Saturation : </source>
-        <translation type="obsolete">Saturation : </translation>
-    </message>
-    <message>
-        <source>Value : </source>
-        <translation type="obsolete">Valeur :  </translation>
-    </message>
-    <message>
-        <source>Croissance</source>
-        <translation type="obsolete">Croissance</translation>
-    </message>
-    <message>
-        <source>At origin</source>
-        <translation type="obsolete">A l&apos;origine</translation>
-    </message>
-    <message>
-        <source>Point of lowest luminance</source>
-        <translation type="obsolete">Point de luminance minimale</translation>
-    </message>
-    <message>
-        <source>| current - mean | &lt; threshold</source>
-        <translation type="obsolete">| actuel - moyenne | &lt; seuil</translation>
-    </message>
-    <message>
-        <source>| current - initial | &lt; threshold</source>
-        <translation type="obsolete">| actuel - initial | &lt; seuil</translation>
-    </message>
-    <message>
-        <source>Threshold : </source>
-        <translation type="obsolete">Seuil : </translation>
-    </message>
-    <message>
-        <source>Initial germ : </source>
-        <translation type="obsolete">Germe initial : </translation>
-    </message>
-    <message>
-        <source>Stopping point : </source>
-        <translation type="obsolete">Point d&apos;arrêt : </translation>
-    </message>
-    <message>
-        <source>Equalize</source>
-        <translation type="obsolete">Egaliser</translation>
-    </message>
-    <message>
-        <source>Normalize</source>
-        <translation type="obsolete">Normaliser</translation>
-    </message>
-    <message>
-        <source>Operation : </source>
-        <translation type="obsolete">Opération : </translation>
-    </message>
-    <message>
-        <source>Compare to...</source>
-        <translation type="obsolete">Comparer à...</translation>
-    </message>
-    <message>
-        <source>Impulse noise</source>
-        <translation type="obsolete">Bruit impulsionnel</translation>
-    </message>
-    <message>
-        <source>Gaussian noise</source>
-        <translation type="obsolete">Bruit gaussien</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Paramètres</translation>
-    </message>
-    <message>
-        <source>Second operand</source>
-        <translation type="obsolete">Second opérande</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="obsolete">Valeur</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Image</translation>
-    </message>
-    <message>
-        <source>Explode colors</source>
-        <translation type="obsolete">Eclater les couleurs</translation>
-    </message>
-    <message>
-        <source>8-bit integer</source>
-        <translation type="obsolete">Entier 8 bit</translation>
-    </message>
-    <message>
-        <source>Floating point</source>
-        <translation type="obsolete">Nombre flottant</translation>
-    </message>
-    <message>
-        <source>Rejection ring</source>
-        <translation type="obsolete">Anneau de réjection</translation>
-    </message>
-    <message>
-        <source>Rotating %1</source>
-        <translation type="obsolete">Rotation %1</translation>
-    </message>
-    <message>
-        <source>Scaling</source>
-        <translation type="obsolete">Echantillonage</translation>
-    </message>
-    <message>
-        <source>Nearest neighboor (standard)</source>
-        <translation type="obsolete">Standard (plus proche voisin)</translation>
-    </message>
-    <message>
-        <source>Bi-linear</source>
-        <translation type="obsolete">Bilinéaire</translation>
-    </message>
-    <message>
-        <source>Parabolic</source>
-        <translation type="obsolete">Parabolique</translation>
-    </message>
-    <message>
-        <source>Spline</source>
-        <translation type="obsolete">Spline</translation>
-    </message>
-    <message>
-        <source>Interpolation : </source>
-        <translation type="obsolete">Interpolation : </translation>
-    </message>
-    <message>
-        <source>X scale factor : </source>
-        <translation type="obsolete">Facteur d&apos;échelle en X : </translation>
-    </message>
-    <message>
-        <source>Y scale factor : </source>
-        <translation type="obsolete">Facteur d&apos;echelle en Y : </translation>
-    </message>
-    <message>
-        <source>Linear</source>
-        <translation type="obsolete">Linéaire</translation>
-    </message>
-    <message>
-        <source>Circular</source>
-        <translation type="obsolete">Circulaire</translation>
-    </message>
-    <message>
-        <source>256</source>
-        <translation type="obsolete">256</translation>
-    </message>
-    <message>
-        <source>2 (Black and white)</source>
-        <translation type="obsolete">2 (Noir et blanc)</translation>
-    </message>
-    <message>
-        <source>Image size (width=height) : </source>
-        <translation type="obsolete">Taille de l&apos;image (hauteur=largeur) : </translation>
-    </message>
-    <message>
-        <source>Signal period (pixel) : </source>
-        <translation type="obsolete">Période du signal (pixel) : </translation>
-    </message>
-    <message>
-        <source>Orientation (Â°): </source>
-        <translation type="obsolete">Orientation (°): </translation>
-    </message>
-    <message>
-        <source>Niveaux de gris : </source>
-        <translation type="obsolete">Niveaux de gris : </translation>
-    </message>
-    <message>
-        <source>Translating %1</source>
-        <translation type="obsolete">Translation de %1</translation>
-    </message>
-</context>
-<context>
     <name>filtrme::FilterChoice</name>
     <message>
         <location filename="Widgets/FilterChoice.cpp" line="74"/>
@@ -2670,10 +1858,6 @@ Nombre de classes = %1 </translation>
         <location filename="Widgets/FilterChoice.cpp" line="97"/>
         <source>Spherical</source>
         <translation>Sphérique</translation>
-    </message>
-    <message>
-        <source>Number of pixels:</source>
-        <translation type="obsolete">Nombre de pixels :</translation>
     </message>
     <message>
         <location filename="Widgets/FilterChoice.cpp" line="103"/>
@@ -2754,14 +1938,6 @@ Nombre de classes = %1 </translation>
         <location filename="Widgets/FilterChoice.cpp" line="340"/>
         <source>Do you want to continue?</source>
         <translation>Voulez-vous continuer ?</translation>
-    </message>
-    <message>
-        <source>Number of Pixels:</source>
-        <translation type="obsolete">Nombre de pixels :</translation>
-    </message>
-    <message>
-        <source>Coefficient:</source>
-        <translation type="obsolete">Coefficient :</translation>
     </message>
 </context>
 <context>
@@ -2845,10 +2021,6 @@ Nombre de classes = %1 </translation>
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <source>Filtering</source>
-        <translation type="obsolete">Filtrage</translation>
-    </message>
-    <message>
         <location filename="Services/FilteringService.cpp" line="40"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Appliquer un filtre</translation>
@@ -2860,18 +2032,7 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
-    <name>genericinterface::GenericInterface</name>
-    <message>
-        <source>Filtering</source>
-        <translation type="obsolete">Filtrage</translation>
-    </message>
-</context>
-<context>
     <name>genericinterface::MorphoMatService</name>
-    <message>
-        <source>&amp;Mathematical morphology</source>
-        <translation type="obsolete">&amp;Morphologie mathématique</translation>
-    </message>
     <message>
         <location filename="Services/MorphoMatService.cpp" line="58"/>
         <source>&amp;Erosion</source>
@@ -2911,13 +2072,6 @@ Nombre de classes = %1 </translation>
         <location filename="Services/MorphoMatService.cpp" line="66"/>
         <source>&amp;Structuring element</source>
         <translation>Elément &amp;structurant</translation>
-    </message>
-</context>
-<context>
-    <name>gi</name>
-    <message>
-        <source>Filtering</source>
-        <translation type="obsolete">Filtrage</translation>
     </message>
 </context>
 </TS>
