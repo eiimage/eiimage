@@ -288,6 +288,12 @@ void ClassAnalysis::NormalizeRectangle( Rectangle &rect ) {
     rect.w = right - left;
 }
 
+void checkFscanfResult(int resultCode) {
+    if(resultCode == EOF) {
+        std::cerr << "ClassAnalysis: errors when reading a file." << std::endl;
+    }
+}
+
 Image *ClassAnalysis::classify_from_file( GrayscaleImage *to_classify, FILE *f, int classify_fen, Image_t<double> **returnval_mean, Image_t<double> **returnval_stdev ) {
     if(!( to_classify != NULL )) {
         throw "Error in ClassAnalysis::classify_from_file:\nto_classify = NULL";
@@ -311,10 +317,13 @@ Image *ClassAnalysis::classify_from_file( GrayscaleImage *to_classify, FILE *f, 
     nbl = to_classify->getHeight();
     nbc = to_classify->getWidth();
 
-    fscanf( f, "%s", buffer );
+    int r = fscanf( f, "%s", buffer );
+    checkFscanfResult(r);
     if( strcmp( buffer, "MEAN_STDEV" ) == 0 ) {
-      fscanf( f, "%d", &num_classes ); // Old learning window size
-        fscanf( f, "%d", &num_classes );
+      r = fscanf( f, "%d", &num_classes ); // Old learning window size
+      checkFscanfResult(r);
+        r = fscanf( f, "%d", &num_classes );
+        checkFscanfResult(r);
         if( num_classes <= 0 ) {
           // Invalid number of classes
             return NULL;
@@ -325,10 +334,14 @@ Image *ClassAnalysis::classify_from_file( GrayscaleImage *to_classify, FILE *f, 
             moy2 = new double[ num_classes ];
             var2 = new double[ num_classes ];
             for( counter=0; counter< num_classes; counter++ ) {
-              fscanf( f, "%lf", &moy1[counter] );
-                fscanf( f, "%lf", &var1[counter] );
-                fscanf( f, "%lf", &moy2[counter] );
-                fscanf( f, "%lf", &var2[counter] );
+              r = fscanf( f, "%lf", &moy1[counter] );
+              checkFscanfResult(r);
+                r = fscanf( f, "%lf", &var1[counter] );
+                checkFscanfResult(r);
+                r = fscanf( f, "%lf", &moy2[counter] );
+                checkFscanfResult(r);
+                r = fscanf( f, "%lf", &var2[counter] );
+                checkFscanfResult(r);
             }
         }
     }
@@ -372,12 +385,15 @@ string ClassAnalysis::print_file_info( FILE *f ) {
     char buffer[255];
     double moy1, moy2, var1, var2;
     int counter;
-    fscanf( f, "%s", buffer );
+    int r = fscanf( f, "%s", buffer );
+    checkFscanfResult(r);
     if( strcmp( buffer, "MEAN_STDEV" ) == 0 ) {
-      fscanf( f, "%d", &wsize ); // Old learning window size
+      r = fscanf( f, "%d", &wsize ); // Old learning window size
+      checkFscanfResult(r);
         sprintf( buffer, "Learning Window Size: %d\n", wsize );
         returnval = returnval + buffer;
-        fscanf( f, "%d", &num_classes );
+        r = fscanf( f, "%d", &num_classes );
+        checkFscanfResult(r);
         sprintf( buffer, "Number of Classes: %d\n", num_classes );
         returnval = returnval + buffer;
 
@@ -387,10 +403,14 @@ string ClassAnalysis::print_file_info( FILE *f ) {
         }
         else {
             for( counter=0; counter< num_classes; counter++ ) {
-              fscanf( f, "%lf", &moy1 );
-                fscanf( f, "%lf", &var1 );
-                fscanf( f, "%lf", &moy2 );
-                fscanf( f, "%lf", &var2 );
+              r = fscanf( f, "%lf", &moy1 );
+              checkFscanfResult(r);
+                r = fscanf( f, "%lf", &var1 );
+                checkFscanfResult(r);
+                r = fscanf( f, "%lf", &moy2 );
+                checkFscanfResult(r);
+                r = fscanf( f, "%lf", &var2 );
+                checkFscanfResult(r);
               sprintf( buffer, "---- Class %d:\n", (counter+1) );
                 returnval = returnval + buffer;
                 sprintf( buffer, "     Mean of means: %f\n", moy1 );
