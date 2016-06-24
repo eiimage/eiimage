@@ -1,10 +1,17 @@
 project(ImageINSA)
 cmake_minimum_required(VERSION 2.8.11)
 
+set(CMAKE_BUILD_TYPE "Release")
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
+
+#Modif Pazat : repertoire contenant les fichiers de configuration .cmake pour QT5. !!! Modifier le chemin pour qu'il dépende des variables d'environnement !!!
+#set (CMAKE_PREFIX_PATH "C:\\Qt\\Qt5.6.1\\5.6\\msvc2015_64\\lib\\cmake\\")
+
+#Modif Pazat : repertoire contenant les fichiers de configuration .cmake pour QT5.
+set (CMAKE_PREFIX_PATH "C:\\Qt\\Qt5.6.1\\5.6\\mingw49_32\\lib\\cmake")
 
 # Find the Qt libraries
 find_package(Qt5Core REQUIRED)
@@ -23,6 +30,8 @@ set(DEPLOY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ImageINSA CACHE PATH "Th
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DEPLOY_OUTPUT_DIRECTORY})
+
+set (CMAKE_PREFIX_PATH "C:\\RandomLib-mingw32")
 
 # Find RandomLib, which must be built and installed before running this compilation
 find_package(RandomLib 1.7 REQUIRED)
@@ -45,6 +54,10 @@ else()
 		"for Detiq-T (ImageIn & GenericInterface libraries), and re-run CMake.")
 endif()
 
+set (CMAKE_MODULE_PATH "C:\\Program Files\\CMake\\share\\cmake-3.6\\Modules\\")
+set (CMAKE_PREFIX_PATH "C:\\Program Files (x86)\\GnuWin32\\")
+
+
 find_package(JPEG)
 if(JPEG_FOUND)
 	include_directories(${JPEG_INCLUDE_DIR})
@@ -63,8 +76,14 @@ find_package(Threads REQUIRED)
 
 # Simple inclusion, more control have already been performed
 # in previous Detiq-T lookup (GenericInterface)
-find_package(Qwt 6.0)
-include_directories(${QWT_INCLUDE_DIRS})
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+set(CMAKE_PREFIX_PATH "C:\\Qwt-6.1.2\\")
+set(QWT_LIBRARY "C:\\Qwt-6.1.2\\lib\\qwt.dll")
+set(QWT_INCLUDE_DIR "C:\\Qwt-6.1.2\\include")
+
+find_package(Qwt 6.0 REQUIRED)
+	include_directories(${QWT_INCLUDE_DIRS})
+
 
 add_subdirectory(core)
 include_directories(core)
