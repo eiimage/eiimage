@@ -97,7 +97,7 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                             y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : -pid2;
 //                            j2 = (y2 / pi + 0.5) * image->getHeight() + 0.5;
 //                            j2 = (y2 * 2. + pi)*100.  + 0.5;
-                            j2 = (y2 / pi) * 180. + 90. + 0.5;
+                            y2 == pid2 ? j2 = 179 : j2 = (y2 / pi) * 180. + 90. + 0.5;
 //                            j2 = (x1 != x0) ? 125.5 + atan((y1-y0)/(x1-x0))*124./pid2 : 250;
 
 //                            itab[j2*width+i2]++;

@@ -7,13 +7,15 @@
 class Croissance  
 {
   public:
+
+	  // élément de la pile de candidats
 	struct croi_stackitem {
-        int i, j;
-		int seuil;
-		int numregion;
-		float somlum;
-        int nbpregion;
-		int lum;
+        int i, j; // coordonnées du pixel candidat
+		int seuil; // seuil (donné par l'utilisateur au début de l'opération) -> pourquoi est il dans la structure et pas comme attribut de la classe croissance ?
+		int numregion; // numéro de la region
+		float somlum; // luminance cumulée des pixels contenus dans la région pour laquelle le pixel est candidat
+        int nbpregion; // nombre de pixels dans la région pour laquelle le pixel est candidat
+		int lum; // luminance du pixel candidat
 	};
 
 	Croissance();
@@ -31,14 +33,14 @@ protected:
     void pushItem(int i, int j, int seuil, int numregion, float somlum, int nbpregion, int lum);
     void find_min(int *tabmin);
 
-    const imagein::Image::depth_t *tabin;
-    imagein::Image::depth_t *tabout;
-    int *tablabel ;
-    long nbc,nbl,size ;
+    const imagein::Image::depth_t *tabin; // tableau de valeurs de l'image d'entrée (luminance) [0 ; size[
+    imagein::Image::depth_t *tabout; // tableau de valeurs pour l'image de sortie (luminance) [0 ; size[
+    int *tablabel ; // tableau des numéros de régions pour chaque pixel de l'image [0 ; size[
+    long nbc,nbl,size ; // nombre de lignes, colonnes, et taille de l'image d'entrée (et donc de sortie)
     int *tab_min_ij;
     float coefr,coefv,coefb;
-    std::vector<croi_stackitem> croi_stack;
-    int *MoyCell, NbPointCell;
+    std::vector<croi_stackitem> croi_stack; // pile contenant les pixels candidats a une région
+    int *MoyCell, NbPointCell; // tableau des valeurs moyenne des pixels par régions [0 ; numregion[, nombre de pixels dans une région (?)
 public:
 };
 
