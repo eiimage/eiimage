@@ -1,10 +1,10 @@
 
 find_package(Qt5Widgets REQUIRED)
 
- set(CMAKE_PREFIX_PATH "C:\\Qwt-6.1.2\\")
+ set(CMAKE_PREFIX_PATH "C:\\Qt\\Qwt-6.1.2\\")
  #set(QWT_LIBRARY "C:\\Qwt-6.1.2\\lib\\qwt.dll")
-set(QWT_LIBRARY C:/Qwt-6.1.2/lib/qwt.dll)
- set(QWT_INCLUDE_DIR "C:\\Qwt-6.1.2\\include")
+set(QWT_LIBRARY C:/Qt/Qwt-6.1.2/lib/qwt.dll)
+ set(QWT_INCLUDE_DIR "C:\\Qt\\Qwt-6.1.2\\include")
 
 find_package(Qwt 6.0 REQUIRED)
 if(QWT_FOUND)
