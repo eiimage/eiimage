@@ -20,8 +20,8 @@ class Croissance
 
 	Croissance();
 	virtual ~Croissance();
-    int croissance1a( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn );
-    int croissance1b( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn );
+    int croissance1a( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn ); // At origin, | current - mean | < threshold
+    int croissance1b( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn ); //
     int croissance2a( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn );
     int croissance2b( const imagein::Image *im, int threshhold, imagein::Image **luminance, imagein::Image **colorRgn );
 

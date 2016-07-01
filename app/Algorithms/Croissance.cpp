@@ -24,7 +24,7 @@ Croissance::~Croissance()
 
 int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance, Image **colorRgn ) {
 
-    Random random;
+   // Random random;
     NbPointCell=0;
 
     int seuil;
@@ -41,11 +41,11 @@ int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance
 //    BasicImageFun bif;
     tabin = im->begin();
 
-    tabout = new Image::depth_t[size]; // tableau de valeurs pour l'image de sortie (luminance) [0 ; size[
-    tablabel = new int[size]; // tableau des numéros de régions pour chaque pixel de l'image [0 ; size[
-    MoyCell = new int[size]; // tableau des valeurs moyenne des pixels par régions [0 ; numregion[
+    tabout = new Image::depth_t[size*sizeof(Image::depth_t)]; // tableau de valeurs pour l'image de sortie (luminance) [0 ; size[
+    tablabel = new int[size*sizeof(int)]; // tableau des numéros de régions pour chaque pixel de l'image [0 ; size[
+    MoyCell = new int[size*sizeof(int)]; // tableau des valeurs moyenne des pixels par régions [0 ; numregion[
 		
-	// initialisation de tablabel a zero (nécessaire ?)
+//	 initialisation de tablabel a zero (nécessaire ?)
 	for (int i = 0; i < size; i++) {
 		tablabel[i] = 0;
 	}
@@ -61,21 +61,20 @@ int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance
             if(tablabel[i*nbc+j] == 0) // si le pixel courant n'appartient pas a une region
             {
 				// On cree une nouvelle region
-                //numregion++;
+                numregion++;
                 MoyCell[numregion] = 0;
                 pushItem(i,j,seuil,numregion,somlum,nbpregion,lum);//on ajoute le pixel dans la pile des candidats (ce sera la seed)
                 while( !croi_stack.empty() ) {
                     parcours_parcelle1A(); //ajoute les pixels qui valident le critère dans la région, et les pixels voisins dans la pile des candidats
                 } // while : on sort de cette boucle quand la région est complète (pile de candidats vide)
+				//numregion++;
                 MoyCell[numregion] = MoyCell[numregion]/NbPointCell; // calcul de la luminance moyenne des pixels dans la région
             } // if : fin de la création de la région liée au pixel courant
-			numregion++;
 			// on réinitialise les paramètres pour la création de la prochaine région
             NbPointCell = 0;
             somlum=0;
             nbpregion=0;
 			// on ne réinitialise pas lum ? (entier passé en paramètre pour la création d'un stackitem)
-
         }// for : parcours de l'image d'entrée
 	
 	// remplissage de tabout
@@ -109,9 +108,9 @@ int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance
 
 
     tabin = NULL;
-    delete tabout;
-    delete tablabel;
-    delete MoyCell;
+    delete[] tabout;
+    delete[] tablabel;
+    delete[] MoyCell;
     tabout = NULL;
     tablabel = NULL;
     MoyCell = NULL;
@@ -156,7 +155,7 @@ void Croissance::parcours_parcelle1A()
         if(i>0) pushItem(i-1,j,seuil,numregion,somlum,nbpregion,lum);
     }
 	// si le pixel dépilé est candidat
-    else if(fabs((double)(tabin[i*nbc+j]-somlum/nbpregion)) < (double)(seuil) && tablabel[i*nbc+j]==0)
+    else if(fabs((double)(tabin[i*nbc+j]-somlum/nbpregion)) < (double)(seuil) && tablabel[i*nbc+j]==0) // | current - mean | < threshold && pixel n'appartient pas a une région
     {
 		// on ajoute le pixel a la region (s'ils existent)
         tablabel[i*nbc+j] = numregion;
@@ -249,7 +248,7 @@ int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance
     tabin = NULL;
     delete tabout;
     delete tablabel;
-    delete MoyCell;
+   // delete MoyCell;
     tabout = NULL;
     tablabel = NULL;
     MoyCell = NULL;
