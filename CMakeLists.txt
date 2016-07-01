@@ -1,7 +1,7 @@
 project(ImageINSA)
 cmake_minimum_required(VERSION 2.8.11)
 
-set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_BUILD_TYPE "Debug")
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
@@ -77,9 +77,9 @@ find_package(Threads REQUIRED)
 # Simple inclusion, more control have already been performed
 # in previous Detiq-T lookup (GenericInterface)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-set(CMAKE_PREFIX_PATH "C:\\Qwt-6.1.2\\")
-set(QWT_LIBRARY "C:\\Qwt-6.1.2\\lib\\qwt.dll")
-set(QWT_INCLUDE_DIR "C:\\Qwt-6.1.2\\include")
+set(CMAKE_PREFIX_PATH "C:\\Qt\\Qwt-6.1.2\\")
+set(QWT_LIBRARY "C:\\Qt\\Qwt-6.1.2\\lib\\qwt.dll")
+set(QWT_INCLUDE_DIR "C:\\Qt\\Qwt-6.1.2\\include")
 
 find_package(Qwt 6.0 REQUIRED)
 	include_directories(${QWT_INCLUDE_DIRS})
