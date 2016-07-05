@@ -33,6 +33,8 @@ set(imageinsa_SOURCES
 	Operations/ColorimetryOp.h
 	Operations/CombineColorOp.cpp
 	Operations/CombineColorOp.h
+	Operations/CombineHsvOp.cpp
+	Operations/CombineHsvOp.h
 	Operations/CroissanceOp.cpp
 	Operations/CroissanceOp.h
 	Operations/DCTDialog.cpp
@@ -120,6 +122,8 @@ set(imageinsa_SOURCES
 	Operations/SinusSynthesisOp.h
 	Operations/SplitColorOp.cpp
 	Operations/SplitColorOp.h
+	Operations/SplitHsvOp.cpp
+	Operations/SplitHsvOp.h
 	Operations/ThresholdDialog.cpp
 	Operations/ThresholdDialog.cpp
 	Operations/ThresholdDialog.h

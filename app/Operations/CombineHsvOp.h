@@ -17,19 +17,19 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COMBINECOLOR_H
-#define COMBINECOLOR_H
+#ifndef COMBINEHSVOP_H
+#define COMBINEHSVOP_H
 
 #include "Operation.h"
 
-class CombineColorOp : public Operation
+class CombineHSVOp : public Operation
 {
 public:
-    CombineColorOp();
+    CombineHSVOp();
 
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
 };
 
-#endif // COMBINECOLOR_H
+#endif // COMBINEHSVOP_H
