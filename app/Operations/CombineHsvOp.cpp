@@ -35,7 +35,7 @@
 using namespace std;
 using namespace imagein;
 
-CombineHSVOp::CombineHSVOp() : Operation(qApp->translate("Operations", "Combine hsv planes").toStdString())
+CombineHSVOp::CombineHSVOp() : DoubleOperation(qApp->translate("Operations", "Combine HSV planes").toStdString())
 {
 }
 
@@ -43,7 +43,7 @@ bool CombineHSVOp::needCurrentImg() const {
     return false;
 }
 
-void CombineHSVOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
+void CombineHSVOp::operator()(const imagein::Image_t<double>*, const map<const imagein::Image_t<double>*, string>& imgList) {
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
@@ -51,18 +51,17 @@ void CombineHSVOp::operator()(const imagein::Image*, const std::map<const imagei
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
+    ImageListBox_t<double>** imageBoxes = new ImageListBox_t<double>*[3*sizeof(ImageListBox_t<double>*)];
 
-    ImageListBox** imageBoxes = new ImageListBox*[3*sizeof(ImageListBox*)];
-
-        imageBoxes[0] = new ImageListBox(dialog, NULL, imgList);
+        imageBoxes[0] = new ImageListBox_t<double>(dialog, NULL, imgList);
         QLabel* label = new QLabel("Hue", dialog);
         layout->insertRow(0, label, imageBoxes[0]);
 
-        imageBoxes[1] = new ImageListBox(dialog, NULL, imgList);
+        imageBoxes[1] = new ImageListBox_t<double>(dialog, NULL, imgList);
         QLabel* label1 = new QLabel("Saturation", dialog);
         layout->insertRow(1, label1, imageBoxes[1]);
 
-        imageBoxes[2] = new ImageListBox(dialog, NULL, imgList);
+        imageBoxes[2] = new ImageListBox_t<double>(dialog, NULL, imgList);
         QLabel* label2 = new QLabel("Value", dialog);
         layout->insertRow(2, label2, imageBoxes[2]);
 
@@ -83,10 +82,14 @@ void CombineHSVOp::operator()(const imagein::Image*, const std::map<const imagei
     int height = imageBoxes[0]->currentImage()->getHeight();
 
     Image* resImg = new Image(width, height, 3);
+    const Image_t<double>* H = imageBoxes[0]->currentImage();
+    const Image_t<double>* S = imageBoxes[1]->currentImage();
+    const Image_t<double>* V = imageBoxes[2]->currentImage();
+
 
     for(int i=0;i<width;i++){
         for(int j=0;j<height;j++){
-            color.setHsv(imageBoxes[0]->currentImage()->getPixel(i,j,0),imageBoxes[1]->currentImage()->getPixel(i,j,0) ,imageBoxes[2]->currentImage()->getPixel(i,j,0) );
+            color.setHsv(H->getPixel(i,j,0),S->getPixel(i,j,0) ,V->getPixel(i,j,0) );
             resImg->setPixel(i,j,0,color.red());
             resImg->setPixel(i,j,1,color.green());
             resImg->setPixel(i,j,2,color.blue());
@@ -94,25 +97,6 @@ void CombineHSVOp::operator()(const imagein::Image*, const std::map<const imagei
         }
     }
 
-//    GrayscaleImage* channels[3];
-//    unsigned int maxWidth = numeric_limits<unsigned int>::max();
-//    unsigned int maxHeight = numeric_limits<unsigned int>::max();
-//    for(unsigned int c = 0; c < nChannel; ++c) {
-//        const Image* img = imageBoxes[c]->currentImage();
-//        if(img == NULL) return;
-//        channels[c] = Converter<GrayscaleImage>::convert(*img);
-//        maxWidth = min(maxWidth, channels[c]->getWidth());
-//        maxHeight = min(maxHeight, channels[c]->getHeight());
-//    }
 
-//    Image* resImg = new Image(512, 512, 3);
-
-//    for(unsigned int c = 0; c < nChannel; ++c) {
-//        for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
-//            for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
-//                resImg->setPixel(i, j, c, channels[c]->getPixel(i, j));
-//            }
-//        }
-//    }
     this->outImage(resImg, qApp->translate("CombineHsvOp", "Reconstructed  image").toStdString());
 }

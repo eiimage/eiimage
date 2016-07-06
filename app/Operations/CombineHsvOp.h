@@ -22,12 +22,12 @@
 
 #include "Operation.h"
 
-class CombineHSVOp : public Operation
+class CombineHSVOp : public DoubleOperation
 {
 public:
     CombineHSVOp();
 
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void operator()(const imagein::Image_t<double>*, const std::map<const imagein::Image_t<double>*, std::string>&);
 
     bool needCurrentImg() const;
 };
