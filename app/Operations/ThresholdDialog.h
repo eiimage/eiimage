@@ -30,6 +30,8 @@
 #include <QCheckBox>
 #include <QRadioButton>
 
+#include "../../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ImageWidget.h"
+
 #include "Operation.h"
 #include "Image.h"
 #include "GrayscaleImage.h"
@@ -51,6 +53,8 @@ class ThresholdDialog : public QDialog {
     void spinbox2Changed(int);
     void doubleThreshold(bool);
     void otsu();
+    void updatePreview();
+    void showPreview(bool);
 
   private:
     QwtPlotMarker *_marker1, *_marker2;
@@ -58,7 +62,8 @@ class ThresholdDialog : public QDialog {
     QLabel* _spin1label;
     const imagein::GrayscaleImage* _image;
     QRadioButton* _blackButton;
-    QCheckBox* _doubleBox;
+    QCheckBox *_doubleBox, *_previewBox;
+    ImageWidget* _preview;
 };
 
 #endif //!THRESHOLDDIALOG_H
