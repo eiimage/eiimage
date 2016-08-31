@@ -45,6 +45,7 @@ void ImageINSAService::display(GenericInterface* gi)
     statusDock->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
     statusDock->setMinimumWidth(128);
     statusDock->setWidget(_statusEdit);
+    statusDock->setFeatures(0x00);
     gi->addDockWidget(Qt::BottomDockWidgetArea, statusDock);
     _statusEdit->hide();
 }

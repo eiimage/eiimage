@@ -157,14 +157,23 @@ class PointOp : public GenericOperation {
     };
 
     struct ImgSub : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 - pix2; } 
+        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 - pix2; }
     };
     struct DoubleImgSub : DoubleImageOp {
         double op(double pix1, double pix2) { return pix1 - pix2; }
     };
+
+    struct ImgMul : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 * pix2; }
+    };
     struct DoubleImgMul : DoubleImageOp {
         double op(double pix1, double pix2) { return pix1 * pix2; }
     };
+
+    struct ImgDiv : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { if(pix2 != 0) {return pix1/pix2*255;} else {return 255;}}
+    };
+
     struct DoubleImgDiv : DoubleImageOp {
         double op(double pix1, double pix2) { return pix1 / pix2; }
     };

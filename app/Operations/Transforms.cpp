@@ -49,27 +49,19 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                 for(unsigned int i1 = i+1; i1 < image->getWidth(); i1++) {
                     if(image->getPixelAt(i1, j1) == 255) {
                         const double x0 = i;
-                        const double y0 = j;
+                        const double y0 = image->getHeight() -j;
                         const double x1 = i1;
-                        const double y1 = j1;
+                        const double y1 = image->getHeight()-j1;
                         const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                         const double l1 = fabs((double)(x0*y1 - x1*y0));
                         const double x2 = l1/l0;
                         double y2;
                         const int i2 = x2 + 0.5;
                         int j2;
-//                        if(x1-x0 != 0) {
-//                            y2 = atan((y1-y0)/(x1-x0));
-//                            j2 = 125 + (int)(y2*124./pid2 + 0.5);
-                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : -pid2;
-                            j2 = (y2 / pi) * 180. + 90. + 0.5;
-//                            j2 = (x1 != x0) ? 125.5 + atan((y1-y0)/(x1-x0))*124./pid2 : 250;
-//                        }
-//                        else {
-//                            j2 = 250;
-//                        }
 
-//                        itab[j2*width+i2]++;
+                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;
+                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;
+
                         resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
                     }
                 }
@@ -78,29 +70,19 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                     for(unsigned int i1 = 0; i1 < image->getWidth(); i1++) {
                         if(image->getPixelAt(i1, j1) == 255) {
                             const double x0 = i;
-                            const double y0 = j;
+                            const double y0 = image->getHeight()-j;//-j
                             const double x1 = i1;
-                            const double y1 = j1;
+                            const double y1 = image->getHeight()-j1;//-j1
                             const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                             const double l1 = fabs((double)(x0*y1 - x1*y0));
-                            const double x2 = l1/l0;
-                            double y2;
-                            const int i2 = x2 + 0.5;
-                            int j2;
-//                            if(x1-x0 != 0) {
-//                                y2 = atan((double)(y1-y0)/(x1-x0));
-//                                j2 = 125 + (int)(y2*124./pid2 + 0.5);
-//                            }
-//                            else {
-//                                j2 = 250;
-//                            }
-                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : -pid2;
-//                            j2 = (y2 / pi + 0.5) * image->getHeight() + 0.5;
-//                            j2 = (y2 * 2. + pi)*100.  + 0.5;
-                            y2 == pid2 ? j2 = 179 : j2 = (y2 / pi) * 180. + 90. + 0.5;
-//                            j2 = (x1 != x0) ? 125.5 + atan((y1-y0)/(x1-x0))*124./pid2 : 250;
+                            const double x2 = l1/l0; //Rho reel
+                            double y2;//theta radian (enconce tp)
+                            const int i2 = x2 + 0.5; //rho arrondi entier
+                            int j2;// theta degre [0 :180[
 
-//                            itab[j2*width+i2]++;
+                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;//pid2 dans les deux cas (?)
+                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;//conversion en entier + modulo 180
+
                             resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
                         }
                     }

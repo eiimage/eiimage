@@ -69,6 +69,7 @@
 #include "Operations/ClassAnalysisOp.h"
 #include "Operations/ClassResultOp.h"
 #include "Operations/SeparatorOp.h"
+#include "Operations/MedianOp.h"
 
 
 #include "Services/MorphoMatService.h"
@@ -179,6 +180,7 @@ int main(int argc, char** argv)
 
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
+    filter->addOperation(new MedianOp());
 
     mainService->addOpSet(image);
     mainService->addOpSet(encode);

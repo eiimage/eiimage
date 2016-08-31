@@ -81,6 +81,10 @@ set(imageinsa_SOURCES
 	Operations/InversePyramidOp.h
 	Operations/MeanSquaredErrorOp.cpp
 	Operations/MeanSquaredErrorOp.h
+	Operations/MedianDialog.cpp
+	Operations/MedianDialog.h
+        Operations/MedianOp.cpp
+        Operations/MedianOp.h
 	Operations/DPCM.cpp
 	Operations/DPCM.h
 	Operations/DPCMDialog.cpp
@@ -160,6 +164,8 @@ set(imageinsa_SOURCES
 	Widgets/ImageZoneSelector.h
 	Widgets/OperationBar.cpp
 	Widgets/OperationBar.h
+        Widgets/Preview.cpp
+        Widgets/Preview.h
 	Widgets/StructElemViewer.cpp
 	Widgets/StructElemViewer.h
 	Widgets/StructElemWindow.cpp
@@ -176,6 +182,7 @@ set(UIS
 	Operations/DPCMDialog.ui
 	Operations/DCTDialog.ui
 	Operations/ColorDialog.ui
+        Operations/MedianDialog.ui
 )
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})

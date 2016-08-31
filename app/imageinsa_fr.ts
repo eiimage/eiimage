@@ -314,6 +314,14 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>CombineHsvOp</name>
+    <message>
+        <location filename="Operations/CombineHsvOp.cpp" line="101"/>
+        <source>Reconstructed image</source>
+        <translation>Image reconstituée</translation>
+    </message>
+</context>
+<context>
     <name>CroissanceOp</name>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="59"/>
@@ -905,6 +913,7 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/NoiseOp.cpp" line="49"/>
         <location filename="Operations/IFFTOp.cpp" line="49"/>
         <location filename="Operations/CombineColorOp.cpp" line="49"/>
+        <location filename="Operations/CombineHsvOp.cpp" line="49"/>
         <location filename="Operations/BFlitOp.cpp" line="49"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
@@ -921,6 +930,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/CombineColorOp.cpp" line="38"/>
         <source>Combine color planes</source>
         <translation>Combiner les plans de couleurs</translation>
+    </message>
+    <message>
+        <location filename="Operations/CombineHsvOp.cpp" line="38"/>
+        <source>Combine HSV planes</source>
+        <translation>Combiner les plans TSV</translation>
     </message>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="37"/>
@@ -1059,6 +1073,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/SplitColorOp.cpp" line="31"/>
         <source>Split color planes</source>
         <translation>Séparer les plans de couleurs </translation>
+    </message>
+    <message>
+        <location filename="Operations/SplitHsvOp.cpp" line="33"/>
+        <source>Split HSV planes</source>
+        <translation>Séparer les plans TSV </translation>
     </message>
     <message>
         <location filename="Operations/FlipOp.cpp" line="30"/>
