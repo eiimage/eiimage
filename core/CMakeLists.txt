@@ -1,18 +1,6 @@
 
 find_package(Qt5Widgets REQUIRED)
 
- set(CMAKE_PREFIX_PATH "C:\\Qt\\Qwt-6.1.2\\")
- #set(QWT_LIBRARY "C:\\Qwt-6.1.2\\lib\\qwt.dll")
-set(QWT_LIBRARY C:/Qt/Qwt-6.1.2/lib/qwt.dll)
- set(QWT_INCLUDE_DIR "C:\\Qt\\Qwt-6.1.2\\include")
-
-find_package(Qwt 6.0 REQUIRED)
-if(QWT_FOUND)
-	include_directories(${QWT_INCLUDE_DIRS})
-else()
-	message(FATAL_ERROR "Cannot find Qwt library. Please add the Qwt library directory to CMAKE_PREFIX_PATH.")
-endif()
-
 set(SRCS
 	BuiltinOpSet.cpp
 	BuiltinOpSet.h
