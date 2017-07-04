@@ -527,6 +527,16 @@ Nombre de classes = %1 </translation>
         <translation>Image d&apos;erreur</translation>
     </message>
     <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
+        <source>Quantized error image</source>
+        <translation>Image d&apos;erreur quantifiée</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
+        <source>Prediction image</source>
+        <translation>Image de prédiction</translation>
+    </message>
+    <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
         <source>Reconstructed image</source>
         <translation>Image reconstruite</translation>
@@ -1690,8 +1700,8 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="70"/>
-        <source>Double threshold</source>
-        <translation>Double seuil</translation>
+        <source>Double threshold (right clic to move the second threshold)</source>
+        <translation>Double seuil (clic droit pour déplacer le deuxième seuil)</translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="79"/>

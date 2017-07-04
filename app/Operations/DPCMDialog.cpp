@@ -59,8 +59,8 @@ Quantification* DPCMDialog::getQuantification() const {
 
 DPCM::Prediction DPCMDialog::getPrediction() const {
     if(ui->predictRadioA->isChecked()) return DPCM::PX_EQ_A;
-    else if(ui->predictRadioAC->isChecked()) return DPCM::PX_EQ_B;
-    else if(ui->predictRadioC->isChecked()) return DPCM::PX_EQ_APC;
+    else if(ui->predictRadioAC->isChecked()) return DPCM::PX_EQ_APC;
+    else if(ui->predictRadioC->isChecked()) return DPCM::PX_EQ_B;
     else if(ui->predictRadioGraham->isChecked()) return DPCM::PX_EQ_Q;
     else return DPCM::PX_EQ_A;
 }

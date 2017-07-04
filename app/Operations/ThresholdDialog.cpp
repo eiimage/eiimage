@@ -101,7 +101,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     }
     QGroupBox* threshGroup = new QGroupBox(tr("Threshold"), this);
     QHBoxLayout* threshLayout = new QHBoxLayout(threshGroup);
-    _doubleBox = new QCheckBox(tr("Double threshold"));
+    _doubleBox = new QCheckBox(tr("Double threshold (right clic to move the second threshold)"));
     threshLayout->addWidget(_doubleBox);
     Vboxlayout->addWidget(threshGroup);
 
