@@ -6,6 +6,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+set (CMAKE_C_FLAGS "--std=gnu++11 ${CMAKE_C_FLAGS}")
+set (CMAKE_CXX_FLAGS "--std=gnu++11 ${CMAKE_CXX_FLAGS}")
+
 # Find the Qt libraries
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
