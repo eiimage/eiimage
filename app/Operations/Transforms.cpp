@@ -106,7 +106,7 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
 
 //    double imageDiag = image->getWidth() * sqrt(2.);
     double imageDiag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
-    Image_t<double>* resImg = new Image_t<double>(1. + imageDiag / rhoStep, 180. / angleStep + 0.5, image->getNbChannels(), 0.);
+    Image_t<double>* resImg = new Image_t<double>(1. + imageDiag / rhoStep, (180.+90) / angleStep + 0.5, image->getNbChannels(), 0.);
 
 
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
@@ -118,12 +118,12 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
                 if(image->getPixelAt(i, j, c) == 255)
                 {
                     //TODO : parcourir entre -180 et 90
-                    for(double te=0; te < 180; te += angleStep) // on parcourt la matrice
+                    for(double te=-90; te < 180; te += angleStep) // on parcourt la matrice
                     {
-                        //const double coste = cos(te * pi / 180.);
-                        const double coste = 1;
-                        //double sinte = sin(te * pi / 180.);
-                        double sinte=1 ;
+                        const double coste = cos(te * pi / 180.);
+
+                        double sinte = sin(te * pi / 180.);
+
 
     //                    for(double ro = 0; ro < imageDiag; ro += rhoStep)
     //                    {
@@ -133,14 +133,14 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
     //                            resImg->pixelAt(ro / rhoStep, te / angleStep)++;
     //                        }
     //                    }
-                        const double rho = i * coste + j * sinte;
+                        const double rho = i * coste + j * sinte; //(image->getHeight()-j)
 //                        const double start = max(0., delta);
 //                        const double end = min(imageDiag, delta + rhoStep);
 
 //                        for(double ro = start; ro < end; ro += rhoStep)
                         if(rho >= 0. && rho < imageDiag)
                         {
-                            resImg->pixelAt(rho / rhoStep + 0.5, te / angleStep + 0.5, c)++;
+                            resImg->pixelAt(rho / rhoStep + 0.5, (te+90) / angleStep + 0.5, c)++;
                         }
                     }
                 }
