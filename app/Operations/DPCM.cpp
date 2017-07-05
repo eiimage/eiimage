@@ -47,15 +47,16 @@ DPCM::~DPCM()
 }
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **new_err_image, Image **recons_image, Image **pred_image, double Q ) {
-    char buffer[255];
+    char buffer[255], buffer2[255];
     if( quantdef == NULL ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
-    int imgHeight,imgWidth,pred,ier,ireco,icode;
+    int imgHeight,imgWidth,pred,ier,ierq,ireco,icode;
 
-    float pi[512],nbpt = 0;
+    float pi[512],piq[512],nbpt = 0;
     double h = 0.;
+    double hq = 0.;
 
     imgHeight = im->getHeight();
     imgWidth = im->getWidth();
@@ -80,7 +81,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
     /* mise a 0 du tableau des probas servant pour le calcul de
     l'entropie de l'erreur de prdiction */
-    for(int i=0 ; i<512 ; i++) pi[i]= 0.;
+    for(int i=0 ; i<512 ; i++) {pi[i]= 0.; piq[i]=0;}
 
     /* codage de l'image */
     for(int i=1; i<imgHeight ; i++)
@@ -140,36 +141,48 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
             prediction_image->setPixelAt(j,i,pred);
             depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
+            //erreur de prediction
             ier = thePixel - pred;
             new_error_prediction_image->setPixelAt(j, i, ier);
-            ier = quantdef->valueOf(ier);
+                  /* proba associe a l'erreur de prediction */
 
-            codec(0, ier, &icode, &ireco);
+            //quantification erreur de prediction
+            ierq = quantdef->valueOf(ier);
 
-            pi[ier+255]++;      /* proba associe a l'erreur de prdiction */
+            codec(0, ierq, &icode, &ireco);//(QB) action ? on suppose codage/decodage sans perte : ireco = ierq
+
+            pi[ier+255]++;
+            piq[ierq+255]++;      /* proba associe a l'erreur de prediction */
             nbpt++;
 
-            //TODO : changer le nom de l'image en quantized_error_prediction_image (done)
-            quantized_error_prediction_image->setPixelAt(j, i, ier);
+            quantized_error_prediction_image->setPixelAt(j, i, ierq);
 
+            // valeur reconstruite
             int tempvalue = pred + ireco;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
         }
     }
 
-    /* calcul de l'entropie de l'image d'erreur de prediction */
+    /* calcul de l'entropie de l'image d'erreur de prediction quantifiee */
     for(int i=0 ; i < 512 ; i++)
     {
         if(pi[i] != 0) {
             pi[i] /= nbpt;
             h -= (double)pi[i] * log((double)pi[i])/log((double)2.0);
         }
+        if(piq[i] != 0) {
+            piq[i] /= nbpt;
+            hq -= (double)piq[i] * log((double)piq[i])/log((double)2.0);
+        }
     }
 
     /* affichage des rsultats */
     sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %lf\n",h);
+    sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n",hq);
     returnval = returnval + buffer;
+    returnval = returnval + "\n";
+    returnval = returnval + buffer2;
     returnval = returnval + "\n";
     returnval = returnval + print_iloiqu();
 

@@ -117,11 +117,13 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
             {
                 if(image->getPixelAt(i, j, c) == 255)
                 {
-
+                    //TODO : parcourir entre -180 et 90
                     for(double te=0; te < 180; te += angleStep) // on parcourt la matrice
                     {
-                        const double coste = cos(te * pi / 180.);
-                        double sinte = sin(te * pi / 180.);
+                        //const double coste = cos(te * pi / 180.);
+                        const double coste = 1;
+                        //double sinte = sin(te * pi / 180.);
+                        double sinte=1 ;
 
     //                    for(double ro = 0; ro < imageDiag; ro += rhoStep)
     //                    {
