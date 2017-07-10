@@ -21,6 +21,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 using namespace imagein;
@@ -63,6 +64,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
     int nbpt;
     long wcounter, hcounter;
     char buffer[255];
+    char c[255];
     std::string returnval;
     Image::depth_t p;
     int i;
@@ -72,7 +74,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
     for( hcounter=0; hcounter< im->getHeight(); hcounter++ ) {
         for( wcounter=0; wcounter< im->getWidth(); wcounter++ ) {
             p = im->getPixel( wcounter, hcounter );
-            if( p != 0 ) {
+            if( p >= 0 ) {
                 nbpt++;
             }
         }
@@ -85,9 +87,11 @@ string Huffman::execute( const GrayscaleImage *im ) {
 
     for(i=0 ; i<nbeff ; i++)
     {
-        sprintf(buffer, "%s",chain+i*nbeff);
+        sprintf(c, "%s", chain+i*nbeff);
+        reverse (c,c+strlen(c));
+        sprintf(buffer, "%s",c);
         returnval = returnval + buffer;
-        sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i),*(Pi+i));
+        sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i)-1,*(Pi+i));
         returnval = returnval + buffer;
     }
     sprintf(buffer, "\n debit(huffman) = %.4f\n",nbbit);
@@ -118,7 +122,7 @@ string Huffman::prob_Pi(const GrayscaleImage *im, int nbpt )
     for( hcounter=0; hcounter< im->getHeight(); hcounter++ ) {
         for( wcounter=0; wcounter< im->getWidth(); wcounter++ ) {
             pixel = im->getPixel( wcounter, hcounter );
-            if((pixel < min) && (pixel != 0))
+            if((pixel < min) && (pixel >= 0))
                 min = pixel;
             if(pixel > max)
                 max = pixel;
@@ -145,7 +149,7 @@ string Huffman::prob_Pi(const GrayscaleImage *im, int nbpt )
     for( hcounter=0; hcounter< im->getHeight(); hcounter++ ) {
         for( wcounter=0; wcounter< im->getWidth(); wcounter++ ) {
             pixel = im->getPixel( wcounter, hcounter );
-            if( pixel != 0 ) {
+            if( pixel >= 0 ) {
                 ind = pixel;
                 p[ind-min]++;
             }
@@ -156,6 +160,7 @@ string Huffman::prob_Pi(const GrayscaleImage *im, int nbpt )
     /**********************************
      *  nbeff : nb effectif
      *  de luminace utile --> Pi != 0
+     *
      *  soit : la lum 'i' existe
      *
      **********************************/
@@ -264,6 +269,7 @@ void Huffman::codhuffman(void)
             }
         }
         nbbit = nbbit + (double)(*(ilon+i))*(*(Pi+i));
+
     }
     delete icod;
 }

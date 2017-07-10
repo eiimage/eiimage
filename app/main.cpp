@@ -37,7 +37,9 @@
 #include "Operations/FlipOp.h"
 #include "Operations/CenterOp.h"
 #include "Operations/SplitColorOp.h"
+#include "Operations/SplitHsvOp.h"
 #include "Operations/CombineColorOp.h"
+#include "Operations/CombineHsvOp.h"
 #include "Operations/SignalToNoiseOp.h"
 #include "Operations/MeanSquaredErrorOp.h"
 #include "Operations/FFTOp.h"
@@ -67,6 +69,7 @@
 #include "Operations/ClassAnalysisOp.h"
 #include "Operations/ClassResultOp.h"
 #include "Operations/SeparatorOp.h"
+#include "Operations/MedianOp.h"
 
 
 #include "Services/MorphoMatService.h"
@@ -130,7 +133,9 @@ int main(int argc, char** argv)
     image->addOperation(new FlipOp(FlipOp::Vertical));
     image->addOperation(new SeparatorOp());
     image->addOperation(new SplitColorOp());
+    image->addOperation(new SplitHsvOp());
     image->addOperation(new CombineColorOp());
+    image->addOperation(new CombineHSVOp());
     image->addOperation(new ScalingOp());
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
@@ -175,6 +180,7 @@ int main(int argc, char** argv)
 
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
+    filter->addOperation(new MedianOp());
 
     mainService->addOpSet(image);
     mainService->addOpSet(encode);

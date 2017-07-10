@@ -314,6 +314,14 @@ Nombre de classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>CombineHsvOp</name>
+    <message>
+        <location filename="Operations/CombineHsvOp.cpp" line="101"/>
+        <source>Reconstructed image</source>
+        <translation>Image reconstituée</translation>
+    </message>
+</context>
+<context>
     <name>CroissanceOp</name>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="59"/>
@@ -517,6 +525,16 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
         <source>Error image</source>
         <translation>Image d&apos;erreur</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
+        <source>Quantized error image</source>
+        <translation>Image d&apos;erreur quantifiée</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
+        <source>Prediction image</source>
+        <translation>Image de prédiction</translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
@@ -905,6 +923,7 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/NoiseOp.cpp" line="49"/>
         <location filename="Operations/IFFTOp.cpp" line="49"/>
         <location filename="Operations/CombineColorOp.cpp" line="49"/>
+        <location filename="Operations/CombineHsvOp.cpp" line="49"/>
         <location filename="Operations/BFlitOp.cpp" line="49"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
@@ -921,6 +940,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/CombineColorOp.cpp" line="38"/>
         <source>Combine color planes</source>
         <translation>Combiner les plans de couleurs</translation>
+    </message>
+    <message>
+        <location filename="Operations/CombineHsvOp.cpp" line="38"/>
+        <source>Combine HSV planes</source>
+        <translation>Combiner les plans TSV</translation>
     </message>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="37"/>
@@ -1059,6 +1083,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/SplitColorOp.cpp" line="31"/>
         <source>Split color planes</source>
         <translation>Séparer les plans de couleurs </translation>
+    </message>
+    <message>
+        <location filename="Operations/SplitHsvOp.cpp" line="33"/>
+        <source>Split HSV planes</source>
+        <translation>Séparer les plans TSV </translation>
     </message>
     <message>
         <location filename="Operations/FlipOp.cpp" line="30"/>
@@ -1671,8 +1700,8 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="70"/>
-        <source>Double threshold</source>
-        <translation>Double seuil</translation>
+        <source>Double threshold (right clic to move the second threshold)</source>
+        <translation>Double seuil (clic droit pour déplacer le deuxième seuil)</translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="79"/>

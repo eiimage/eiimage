@@ -18,3 +18,5 @@ target_link_libraries(segmentationTest core)
 add_library(entropy SHARED Entropy/Entropy.cpp)
 target_link_libraries(entropy core)
 
+add_library(median SHARED Median/Median.cpp)
+target_link_libraries(median core)

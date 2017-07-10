@@ -56,6 +56,8 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
         _quantBox->addItem(tr("Non linear with mean value"));
     }
     _quantBox->addItem(tr("Custom"));
+    _quantBox->addItem(tr("LloydMax"));
+
     layout->insertRow(0, tr("Quantification : "), _quantBox);
     layout->insertRow(1, tr("Number of values : "), _sizeBox);
 
@@ -103,6 +105,8 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
         case 1: return Quantification::nonLinearQuant(size, image, c); break;
         case 2: return Quantification::nonLinearQuantOptimized(size, image, c); break;
         case 3: return _quantWidget->getQuantif(); break;
+        case 4: return Quantification::lloydMaxQuant(size, image, c); break;
+
         default: return Quantification::linearQuant(size); break;
     }
 }

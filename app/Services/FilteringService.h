@@ -28,7 +28,9 @@
 #include "Widgets/FilterEditor.h"
 
 #include <QStringList>
+#ifdef __linux__
 #include <pthread.h>
+#endif
 
 namespace filtrme
 {

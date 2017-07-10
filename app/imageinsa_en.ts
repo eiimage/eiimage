@@ -314,6 +314,14 @@ Number of classes = %1 </translation>
     </message>
 </context>
 <context>
+    <name>CombineHsvOp</name>
+    <message>
+        <location filename="Operations/CombineHsvOp.cpp" line="101"/>
+        <source>Reconstructed color image</source>
+        <translation>Reconstructed image</translation>
+    </message>
+</context>
+<context>
     <name>CroissanceOp</name>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="59"/>
@@ -905,6 +913,7 @@ Number of classes = %1 </translation>
         <location filename="Operations/NoiseOp.cpp" line="49"/>
         <location filename="Operations/IFFTOp.cpp" line="49"/>
         <location filename="Operations/CombineColorOp.cpp" line="49"/>
+        <location filename="Operations/CombineHsvOp.cpp" line="49"/>
         <location filename="Operations/BFlitOp.cpp" line="49"/>
         <source>Parameters</source>
         <translation>Parameters</translation>
@@ -921,6 +930,11 @@ Number of classes = %1 </translation>
         <location filename="Operations/CombineColorOp.cpp" line="38"/>
         <source>Combine color planes</source>
         <translation>Combine color planes</translation>
+    </message>
+    <message>
+        <location filename="Operations/CombineHsv.cpp" line="38"/>
+        <source>Combine HSV planes</source>
+        <translation>Combine HSV planes</translation>
     </message>
     <message>
         <location filename="Operations/CroissanceOp.cpp" line="37"/>

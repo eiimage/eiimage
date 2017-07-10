@@ -56,9 +56,13 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     }
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image *reconstructedImage;
+    Image *predictionImage;
+    ImageDouble *quant_errorImage;
     ImageDouble *errorImage;
-    string s = micd.execute(image, dialog->getPrediction(), &errorImage, &reconstructedImage, dialog->getQ());
+    string s = micd.execute(image, dialog->getPrediction(), &quant_errorImage, &errorImage,&reconstructedImage, &predictionImage,dialog->getQ());
     outText(s);
     outDoubleImage(errorImage, qApp->translate("DPCM", "Error image").toStdString(), true, true, 0.1, false);
+    outDoubleImage(quant_errorImage, qApp->translate("DPCM", "Quantized error image").toStdString(), true, true, 0.1, false);
+    outImage(predictionImage, qApp->translate("DPCM", "Prediction image").toStdString());
     outImage(reconstructedImage, qApp->translate("DPCM", "Reconstructed image").toStdString());
 }

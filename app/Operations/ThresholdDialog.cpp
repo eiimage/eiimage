@@ -16,6 +16,8 @@
 #include "Algorithm/Otsu.h"
 #include <qwt_plot.h>
 
+#include "../../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ThumbnailView.h"
+
 using namespace imagein;
 using namespace imagein::algorithm;
 using namespace genericinterface;
@@ -32,10 +34,13 @@ void ThresholdDialog::marker2Moved(const QPointF& point) {
 
 void ThresholdDialog::spinbox1Changed(int i) {
     _marker1->setXValue(i);
+     updatePreview();
+
 }
 
 void ThresholdDialog::spinbox2Changed(int i) {
     _marker2->setXValue(i);
+    updatePreview();
 }
 
 void ThresholdDialog::doubleThreshold(bool activate) {
@@ -53,23 +58,52 @@ void ThresholdDialog::otsu() {
     int threshold = Otsu_t<GrayscaleImage::depth_t>::computeThreshold(_image);
     _marker1->setXValue(threshold);
     _spinbox1->setValue(threshold);
+
+}
+
+void ThresholdDialog::updatePreview(){
+
+    if(_previewBox->isChecked()){
+        Binarization_t<GrayscaleImage::depth_t>* algo;
+        if(doubleThreshold()) {
+            algo = new Binarization_t<GrayscaleImage::depth_t>(_spinbox1->value(), _spinbox2->value(), !_blackButton->isChecked());
+        }
+        else {
+            algo = new Binarization_t<GrayscaleImage::depth_t>(_spinbox1->value());
+        }
+
+        _preview->setImage(algo->operator()(_image));
+        _preview->repaint();
+    }
+
+
+ }
+
+void ThresholdDialog::showPreview(bool activated){
+    if(activated){
+      //  updatePreview();
+    }else{
+        _preview->setImage(_image);
+        _preview->repaint();
+    }
 }
 
 ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  : _image(image){
     this->setWindowTitle(tr("ThresholdOp"));
     this->setMinimumWidth(160);
-    QVBoxLayout* layout = new QVBoxLayout();
+
+    QGridLayout * layout = new QGridLayout();
     this->setLayout(layout);
 
+    QVBoxLayout* Vboxlayout = new QVBoxLayout();
     if(converted) {
-        layout->addWidget(new QLabel(tr("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>")));
+        Vboxlayout->addWidget(new QLabel(tr("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>")));
     }
-
     QGroupBox* threshGroup = new QGroupBox(tr("Threshold"), this);
     QHBoxLayout* threshLayout = new QHBoxLayout(threshGroup);
-    _doubleBox = new QCheckBox(tr("Double threshold"));
+    _doubleBox = new QCheckBox(tr("Double threshold (right clic to move the second threshold)"));
     threshLayout->addWidget(_doubleBox);
-    layout->addWidget(threshGroup);
+    Vboxlayout->addWidget(threshGroup);
 
     QHBoxLayout* box1layout = new QHBoxLayout();
     _spin1label = new QLabel(tr("Threshold : "));
@@ -80,7 +114,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     box1layout->addWidget(_spin1label);
     box1layout->addWidget(_spinbox1);
     box1layout->addWidget(otsuButton);
-    layout->addLayout(box1layout);
+    Vboxlayout->addLayout(box1layout);
 
     QHBoxLayout* box2layout = new QHBoxLayout();
     QLabel* spin2label = new QLabel(tr("Threshold #2 : "));
@@ -91,7 +125,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     _spinbox2->setVisible(false);
     box2layout->addWidget(spin2label);
     box2layout->addWidget(_spinbox2);
-    layout->addLayout(box2layout);
+    Vboxlayout->addLayout(box2layout);
     
     QHBoxLayout* radiolayout = new QHBoxLayout();
     QLabel* radioLabel = new QLabel(tr("Color between thresholds :"));
@@ -101,7 +135,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     radiolayout->addWidget(whiteButton);
     radiolayout->addWidget(_blackButton);
     whiteButton->setChecked(true);
-    layout->addLayout(radiolayout);
+    Vboxlayout->addLayout(radiolayout);
     radioLabel->setVisible(false);
     whiteButton->setVisible(false);
     _blackButton->setVisible(false);
@@ -109,6 +143,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     Rectangle rect(0, 0, image->getWidth(), image->getHeight());
     GenericHistogramView* histo = new GenericHistogramView(image, rect);
     QwtPlot* plot = histo->getGraphicalHistogram();
+
 
     _marker1 = new QwtPlotMarker();
     _marker1->setLineStyle(QwtPlotMarker::VLine);
@@ -122,20 +157,34 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     _marker2->setXValue(255);
     _marker2->attach(plot);
     _marker2->hide();
-    
-    layout->addWidget(plot);
-    
-    layout->setSizeConstraint(QLayout::SetFixedSize);
+
+    _preview = new ImageWidget(this, _image);
+    _preview->setFixedSize(256*_preview->pixmap().width()/_preview->pixmap().height(), 256);
+    layout->setColumnMinimumWidth(0,256);
+    layout->addWidget(_preview,0,0,0,0,Qt::AlignTop);
+    Vboxlayout->addWidget(plot);
+    layout->setRowMinimumHeight(0,256);
+    layout->setColumnMinimumWidth(1,20);
+    layout->addLayout(Vboxlayout,0,2,0,2,Qt::AlignLeft);
+    _previewBox = new QCheckBox(tr("Aperçu"));
+    _previewBox->setChecked(true);
+    updatePreview();
+    layout->addWidget(_previewBox,1,0,1,0,Qt::AlignTop);
+
+
+    //layout->setSizeConstraint(QLayout::SetFixedSize);
     
     QPushButton *okButton = new QPushButton(tr("Validate"), this);
     okButton->setDefault(true);
-    layout->addWidget(okButton);
+    Vboxlayout->addWidget(okButton);
+
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
     connect(histo, SIGNAL(leftMoved(const QPointF&)), this, SLOT(marker1Moved(const QPointF&)));
     connect(histo, SIGNAL(rightMoved(const QPointF&)), this, SLOT(marker2Moved(const QPointF&)));
 
     connect(_spinbox1, SIGNAL(valueChanged(int)), this, SLOT(spinbox1Changed(int)));
     connect(_spinbox2, SIGNAL(valueChanged(int)), this, SLOT(spinbox2Changed(int)));
+
 
     connect(_doubleBox, SIGNAL(toggled(bool)), _spinbox2, SLOT(setVisible(bool)));
     connect(_doubleBox, SIGNAL(toggled(bool)), spin2label, SLOT(setVisible(bool)));
@@ -144,7 +193,16 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     connect(_doubleBox, SIGNAL(toggled(bool)), _blackButton, SLOT(setVisible(bool)));
     connect(_doubleBox, SIGNAL(toggled(bool)), otsuButton, SLOT(setHidden(bool)));
     connect(_doubleBox, SIGNAL(toggled(bool)), this, SLOT(doubleThreshold(bool)));
+    connect(_previewBox, SIGNAL(toggled(bool)), this, SLOT(showPreview(bool)));
+    connect(_previewBox, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
 
     connect(otsuButton, SIGNAL(pressed()), this, SLOT(otsu()));
+
+    connect(_doubleBox, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
+    connect(_blackButton, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
+//    connect (this, SIGNAL(spinbox1Changed(int)), this, SLOT(updatePreview(bool)));
+//    connect (this, SIGNAL(spinbox2Changed(int)), this, SLOT(updatePreview(bool)));
+
+
 }
 

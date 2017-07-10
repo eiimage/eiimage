@@ -92,5 +92,5 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
             }
         }
     }
-    this->outImage(resImg, qApp->translate("CombineColorOp", "Reconstructed color image").toStdString());
+    this->outImage(resImg, qApp->translate("CombineColorOp", "Reconstructed Color image").toStdString());
 }

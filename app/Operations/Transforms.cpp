@@ -49,27 +49,19 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                 for(unsigned int i1 = i+1; i1 < image->getWidth(); i1++) {
                     if(image->getPixelAt(i1, j1) == 255) {
                         const double x0 = i;
-                        const double y0 = j;
+                        const double y0 = image->getHeight() -j;
                         const double x1 = i1;
-                        const double y1 = j1;
+                        const double y1 = image->getHeight()-j1;
                         const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                         const double l1 = fabs((double)(x0*y1 - x1*y0));
                         const double x2 = l1/l0;
                         double y2;
                         const int i2 = x2 + 0.5;
                         int j2;
-//                        if(x1-x0 != 0) {
-//                            y2 = atan((y1-y0)/(x1-x0));
-//                            j2 = 125 + (int)(y2*124./pid2 + 0.5);
-                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : -pid2;
-                            j2 = (y2 / pi) * 180. + 90. + 0.5;
-//                            j2 = (x1 != x0) ? 125.5 + atan((y1-y0)/(x1-x0))*124./pid2 : 250;
-//                        }
-//                        else {
-//                            j2 = 250;
-//                        }
 
-//                        itab[j2*width+i2]++;
+                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;
+                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;
+
                         resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
                     }
                 }
@@ -78,29 +70,19 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                     for(unsigned int i1 = 0; i1 < image->getWidth(); i1++) {
                         if(image->getPixelAt(i1, j1) == 255) {
                             const double x0 = i;
-                            const double y0 = j;
+                            const double y0 = image->getHeight()-j;//-j
                             const double x1 = i1;
-                            const double y1 = j1;
+                            const double y1 = image->getHeight()-j1;//-j1
                             const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                             const double l1 = fabs((double)(x0*y1 - x1*y0));
-                            const double x2 = l1/l0;
-                            double y2;
-                            const int i2 = x2 + 0.5;
-                            int j2;
-//                            if(x1-x0 != 0) {
-//                                y2 = atan((double)(y1-y0)/(x1-x0));
-//                                j2 = 125 + (int)(y2*124./pid2 + 0.5);
-//                            }
-//                            else {
-//                                j2 = 250;
-//                            }
-                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : -pid2;
-//                            j2 = (y2 / pi + 0.5) * image->getHeight() + 0.5;
-//                            j2 = (y2 * 2. + pi)*100.  + 0.5;
-                            j2 = (y2 / pi) * 180. + 90. + 0.5;
-//                            j2 = (x1 != x0) ? 125.5 + atan((y1-y0)/(x1-x0))*124./pid2 : 250;
+                            const double x2 = l1/l0; //Rho reel
+                            double y2;//theta radian (enconce tp)
+                            const int i2 = x2 + 0.5; //rho arrondi entier
+                            int j2;// theta degre [0 :180[
 
-//                            itab[j2*width+i2]++;
+                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;//pid2 dans les deux cas (?)
+                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;//conversion en entier + modulo 180
+
                             resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
                         }
                     }
@@ -124,7 +106,7 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
 
 //    double imageDiag = image->getWidth() * sqrt(2.);
     double imageDiag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
-    Image_t<double>* resImg = new Image_t<double>(1. + imageDiag / rhoStep, 180. / angleStep + 0.5, image->getNbChannels(), 0.);
+    Image_t<double>* resImg = new Image_t<double>(1. + imageDiag / rhoStep, (180.+90) / angleStep + 0.5, image->getNbChannels(), 0.);
 
 
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
@@ -135,11 +117,13 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
             {
                 if(image->getPixelAt(i, j, c) == 255)
                 {
-
-                    for(double te=0; te < 180; te += angleStep) // on parcourt la matrice
+                    //TODO : parcourir entre -180 et 90
+                    for(double te=-90; te < 180; te += angleStep) // on parcourt la matrice
                     {
                         const double coste = cos(te * pi / 180.);
+
                         double sinte = sin(te * pi / 180.);
+
 
     //                    for(double ro = 0; ro < imageDiag; ro += rhoStep)
     //                    {
@@ -149,14 +133,14 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
     //                            resImg->pixelAt(ro / rhoStep, te / angleStep)++;
     //                        }
     //                    }
-                        const double rho = i * coste + j * sinte;
+                        const double rho = i * coste + j * sinte; //(image->getHeight()-j)
 //                        const double start = max(0., delta);
 //                        const double end = min(imageDiag, delta + rhoStep);
 
 //                        for(double ro = start; ro < end; ro += rhoStep)
                         if(rho >= 0. && rho < imageDiag)
                         {
-                            resImg->pixelAt(rho / rhoStep + 0.5, te / angleStep + 0.5, c)++;
+                            resImg->pixelAt(rho / rhoStep + 0.5, (te+90) / angleStep + 0.5, c)++;
                         }
                     }
                 }

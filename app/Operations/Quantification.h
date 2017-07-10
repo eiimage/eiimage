@@ -53,6 +53,7 @@ public:
     static Quantification linearQuant(int size);
     static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
     static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
+    static Quantification lloydMaxQuant(int size, const imagein::Image* image, unsigned int c);
 
 private:
     int size;

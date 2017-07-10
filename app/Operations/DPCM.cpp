@@ -46,16 +46,17 @@ DPCM::~DPCM()
 
 }
 
-string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **err_image, Image **recons_image, double Q ) {
-    char buffer[255];
+string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **new_err_image, Image **recons_image, Image **pred_image, double Q ) {
+    char buffer[255], buffer2[255];
     if( quantdef == NULL ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
-    int imgHeight,imgWidth,pred,ier,ireco,icode;
+    int imgHeight,imgWidth,pred,ier,ierq,ireco,icode;
 
-    float pi[512],nbpt = 0;
+    float pi[512],piq[512],nbpt = 0;
     double h = 0.;
+    double hq = 0.;
 
     imgHeight = im->getHeight();
     imgWidth = im->getWidth();
@@ -65,19 +66,22 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     codlq(0);
 
     /* allocation mmoire pour l'image d'erreur de prdiction */
-    ImageDouble *error_prediction_image = new ImageDouble(imgWidth, imgHeight, 1);
+    ImageDouble *quantized_error_prediction_image = new ImageDouble(imgWidth, imgHeight, 1);
+    ImageDouble *new_error_prediction_image = new ImageDouble(imgWidth, imgHeight, 1);
     Image *reconstructed_image = new GrayscaleImage(*im);
+    Image *prediction_image = new GrayscaleImage(*im);
 
-    // Init the error image with 0 values
+    // Init the error images with 0 values
     for(int i=0; i < imgHeight; i++) {
         for(int j=0; j< imgWidth; j++) {
-            error_prediction_image->setPixelAt(j, i, 0);
+            quantized_error_prediction_image->setPixelAt(j, i, 0);
+            new_error_prediction_image->setPixelAt(j, i, 0);
         }
     }
 
     /* mise a 0 du tableau des probas servant pour le calcul de
     l'entropie de l'erreur de prdiction */
-    for(int i=0 ; i<512 ; i++) pi[i]= 0.;
+    for(int i=0 ; i<512 ; i++) {pi[i]= 0.; piq[i]=0;}
 
     /* codage de l'image */
     for(int i=1; i<imgHeight ; i++)
@@ -109,9 +113,15 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                     else
                             P(X) = C
                 */
-                A = im->getPixelAt(j-1, i);
+               /* A = im->getPixelAt(j-1, i);
                 B = im->getPixelAt(j-1, i-1);
                 C = im->getPixelAt(j,   i-1);
+                */
+
+                //correction QB
+                A = reconstructed_image->getPixelAt(j-1, i);
+                B = reconstructed_image->getPixelAt(j-1, i-1);
+                C = reconstructed_image->getPixelAt(j,   i-1);
 
                 if( ((fabs(B-C) - Q) <= fabs(B-A)) &&
                         (fabs(B-A) <= (fabs(B-C) + Q)) ) {
@@ -128,41 +138,59 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 break;
             }
 
+
+            prediction_image->setPixelAt(j,i,pred);
             depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
+            //erreur de prediction
             ier = thePixel - pred;
-            ier = quantdef->valueOf(ier);
+            new_error_prediction_image->setPixelAt(j, i, ier);
+                  /* proba associe a l'erreur de prediction */
 
-            codec(0, ier, &icode, &ireco);
+            //quantification erreur de prediction
+            ierq = quantdef->valueOf(ier);
 
-            pi[ier+255]++;      /* proba associe a l'erreur de prdiction */
+            codec(0, ierq, &icode, &ireco);//(QB) action ? on suppose codage/decodage sans perte : ireco = ierq
+
+            pi[ier+255]++;
+            piq[ierq+255]++;      /* proba associe a l'erreur de prediction */
             nbpt++;
 
-            error_prediction_image->setPixelAt(j, i, ier);
+            quantized_error_prediction_image->setPixelAt(j, i, ierq);
 
+            // valeur reconstruite
             int tempvalue = pred + ireco;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
         }
     }
 
-    /* calcul de l'entropie de l'image d'erreur de prediction */
+    /* calcul de l'entropie de l'image d'erreur de prediction quantifiee */
     for(int i=0 ; i < 512 ; i++)
     {
         if(pi[i] != 0) {
             pi[i] /= nbpt;
             h -= (double)pi[i] * log((double)pi[i])/log((double)2.0);
         }
+        if(piq[i] != 0) {
+            piq[i] /= nbpt;
+            hq -= (double)piq[i] * log((double)piq[i])/log((double)2.0);
+        }
     }
 
     /* affichage des rsultats */
     sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %lf\n",h);
+    sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n",hq);
     returnval = returnval + buffer;
+    returnval = returnval + "\n";
+    returnval = returnval + buffer2;
     returnval = returnval + "\n";
     returnval = returnval + print_iloiqu();
 
     /* libration de la mmoire alloue */
-    *err_image = error_prediction_image;
+    *quant_err_image = quantized_error_prediction_image;
+    *new_err_image = new_error_prediction_image;
     *recons_image = reconstructed_image;
+    *pred_image = prediction_image;
     return returnval;
 }
 

@@ -17,19 +17,24 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COMBINECOLOR_H
-#define COMBINECOLOR_H
+#ifndef SPLITHSVOP_H
+#define SPLITHSVOP_H
 
-#include "Operation.h"
+#include <QApplication>
 
-class CombineColorOp : public Operation
+#include <Operation.h>
+#include <Image.h>
+
+
+
+class SplitHsvOp : public Operation
 {
 public:
-    CombineColorOp();
+    SplitHsvOp();
 
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
 };
 
-#endif // COMBINECOLOR_H
+#endif // SPLITHSVOP_H

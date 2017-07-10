@@ -73,6 +73,8 @@ PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     if(op=="+") return new ImgAdd();
     if(op=="-") return new ImgSub();
     if(op=="&") return new ImgAnd();
+    if(op=="*") return new ImgMul();
+    if(op=="/") return new ImgDiv();
     if(op=="|") return new ImgOr();
     if(op=="^") return new ImgXor();
     if(op=="") return new ImgIdent();

@@ -173,3 +173,55 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const Image* im
     return quant;
 }
 
+Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsigned int c) {
+
+//    Quantification quant(size);
+
+//    for(int i = 0; i < size - 1; ++i) {
+//        quant._threshold[i] = floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5);
+//    }
+//    if(size > 0) {
+//        quant._values[0] = floor( quant._threshold[0] / 2. + 0.5 );
+//        quant._values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant._threshold[size - 2]) / 2. + 0.5 );
+//    }
+//    for(int i = 1; i < size - 1; ++i) {
+//        quant._values[i] = floor( (double)(quant._threshold[i] + quant._threshold[i-1]) / 2. + 0.5 );
+//    }
+
+//    return quant;
+
+
+    Histogram histogram = image->getHistogram(c);
+    int som_lum = 0;
+    int nb_points = 0;
+    int cpt = 6;
+
+    // initialisation : repartion lineaire des niveaux de quantification
+    Quantification quant = linearQuant(size);
+
+    while(cpt > 0){
+
+        // calcul des nouveaux seuils de quantification
+        for (int i=0; i<size-2;i++){
+            quant._threshold[i] = (quant._values[i]+quant._values[i+1])/2;
+        }//for (parcours du tableau de seuils)
+
+        // calcul des nouveaux niveaux de quantification
+
+        //calcul pdf
+
+        for (int j=0; j<size-1;j++){
+            for(int i= ((quant._threshold)[j]); i <= ((quant._threshold)[j+1]); i++){
+                som_lum += histogram[i]*i;
+                nb_points += histogram[i];
+            }
+
+        quant._values[j]= (int) quant._values[j]*(som_lum/nb_points) / (som_lum/nb_points);
+        }//for (parcours du tableau de valeurs)
+
+        cpt--;
+
+    }//while
+
+    return quant;
+}
