@@ -48,6 +48,7 @@ void HoughOp::operator()(const imagein::Image* img, const std::map<const imagein
         delete image;
     }
     else {
+        angleStep = dialog->getAngleStep();
         resImg = Transforms::hough2(img, dialog->getAngleStep(), dialog->getDistanceStep());
     }
     outDoubleImage(resImg, qApp->translate("Hough", "Hough transform").toStdString(), true, true);

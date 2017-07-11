@@ -30,60 +30,82 @@ const double pi = 3.1415926535897932384626433832795;
 const double pid2 = 1.57079632679489661923132169163975144209858469968755291;
 const double sqrt2 = 1.414213562373095048801688724209698078569671875376948;
 
-Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
+Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {   //TODO : inverser i et j i (ligne) et j (colonne)
 //    int height = image->getHeight();
 //    int width = image->getWidth();
 //    const uint8_t* tabim = image->begin();
 //    double* itab = new double[ image->size() ];
 //    for(unsigned int i = 0; i < image->size(); ++i) itab[i] = 0;
     double diag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
-    Image_t<double>* resImg = new Image_t<double>(diag+0.5, 180, 1, 0.);
+    Image_t<double>* resImg = new Image_t<double>(diag+0.5, 90+180, 1, 0.);
 
-    for(unsigned int j = 0; j < image->getHeight(); j++) {
-        for(unsigned int i = 0; i < image->getWidth(); i++) {
+    for(unsigned int i = 0; i < image->getHeight(); i++) {
+        for(unsigned int j = 0; j < image->getWidth(); j++) {
 
-            if(image->getPixelAt(i, j) == 255) {
+            if(image->getPixelAt(j, i) == 255) {
 
-                int j1 = j;
+                int i1 = i;
 
-                for(unsigned int i1 = i+1; i1 < image->getWidth(); i1++) {
-                    if(image->getPixelAt(i1, j1) == 255) {
-                        const double x0 = i;
-                        const double y0 = image->getHeight() -j;
-                        const double x1 = i1;
-                        const double y1 = image->getHeight()-j1;
+                for(unsigned int j1 = j+1; j1 < image->getWidth(); j1++) {
+                    if(image->getPixelAt(j1, i1) == 255) {
+                        const double x0 = j;
+                        const double y0 = image->getHeight() -i;
+                        const double x1 = j1;
+                        const double y1 = image->getHeight()-i1;
                         const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                         const double l1 = fabs((double)(x0*y1 - x1*y0));
                         const double x2 = l1/l0;
                         double y2;
-                        const int i2 = x2 + 0.5;
-                        int j2;
+                        const int j2 = x2 + 0.5;
+                        int i2;
 
-                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;
-                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;
+                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) + pid2 : y1 > y0 ? pi : pid2;
+                            i2 = (int)(180-((y2 / pi) * 180. +180 + 0.5)) +1;
+                            //i2 = (int) (y2*(pi/180));
+                            //Coordonées du point a colorier dans l'espace de Hough
+                            //Espace de Hough :
+                            //Origine en bas a gauche
+                            //Rho horizontal vers la droite de 0 a imageDiag
+                            //Theta vertical vers le haut de -90 a 180
+                            int jDisplayRho = round(j2);
+                            int iDisplayTheta = round(i2+180);
 
-                        resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
+
+                            resImg->setPixelAt(jDisplayRho, iDisplayTheta, resImg->getPixelAt(jDisplayRho, iDisplayTheta) + 1.);
+
+                        //resImg->setPixelAt(j2, i2, resImg->getPixelAt(j2, i2) + 1.);
                     }
                 }
 
-                for(unsigned int j1 = j+1; j1 < image->getHeight(); j1++) {
-                    for(unsigned int i1 = 0; i1 < image->getWidth(); i1++) {
-                        if(image->getPixelAt(i1, j1) == 255) {
-                            const double x0 = i;
-                            const double y0 = image->getHeight()-j;//-j
-                            const double x1 = i1;
-                            const double y1 = image->getHeight()-j1;//-j1
+                for(unsigned int i1 = i+1; i1 < image->getHeight(); i1++) {
+                    for(unsigned int j1 = 0; j1 < image->getWidth(); j1++) {
+                        if(image->getPixelAt(j1, i1) == 255) {
+                            const double x0 = j;
+                            const double y0 = image->getHeight()-i;//-i
+                            const double x1 = j1;
+                            const double y1 = image->getHeight()-i1;//-i1
                             const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
                             const double l1 = fabs((double)(x0*y1 - x1*y0));
                             const double x2 = l1/l0; //Rho reel
                             double y2;//theta radian (enconce tp)
-                            const int i2 = x2 + 0.5; //rho arrondi entier
-                            int j2;// theta degre [0 :180[
+                            const int j2 = x2 + 0.5; //rho arrondi entier
+                            int i2;// theta degre [0 :180[
 
-                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0)) : y1 > y0 ? pid2 : pid2;//pid2 dans les deux cas (?)
-                            j2 = (int)(180-((y2 / pi) * 180. + 90. + 0.5)) % 180 +1;//conversion en entier + modulo 180
+                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0))+ pid2 : y1 > y0 ? pi : pid2;//pid2 dans les deux cas (?)
+                            i2 = (int)(180-((y2 / pi) * 180. +180 + 0.5)) +1;//conversion en entier + modulo 180
+                            //i2 = (int) ((y2/pi)*180);
+                            //Coordonées du point a colorier dans l'espace de Hough
+                            //Espace de Hough :
+                            //Origine en bas a gauche
+                            //Rho horizontal vers la droite de 0 a imageDiag
+                            //Theta vertical vers le haut de -90 a 180
+                            int jDisplayRho = round(j2);
+                            int iDisplayTheta = round(i2+180);
 
-                            resImg->setPixelAt(i2, j2, resImg->getPixelAt(i2, j2) + 1.);
+
+                            resImg->setPixelAt(jDisplayRho, iDisplayTheta, resImg->getPixelAt(jDisplayRho, iDisplayTheta) + 1.);
+
+                            //resImg->setPixelAt(j2, i2, resImg->getPixelAt(j2, i2) + 1.);
                         }
                     }
                 }
@@ -111,36 +133,36 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
 
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
 
-        for(unsigned int j = 0; j < image->getHeight(); ++j) // on parcourt l'image
+        for(unsigned int i = 0; i < image->getHeight(); ++i) // on parcourt l'image
         {
-            for(unsigned int i = 0; i < image->getWidth(); ++i)
+            for(unsigned int j = 0; j < image->getWidth(); ++j)
             {
                 if(image->getPixelAt(i, j, c) == 255)
                 {
-                    //TODO : parcourir entre -180 et 90
+                    //Changement de repere : origine en bas  a gauche de l'image, x horizontal vers la droite et y vertical vers le haut
+                    int x = j;
+                    int y = image->getHeight()-i;
+                    //Parcours de tous les angles possibles dans l'image
                     for(double te=-90; te < 180; te += angleStep) // on parcourt la matrice
                     {
                         const double coste = cos(te * pi / 180.);
-
                         double sinte = sin(te * pi / 180.);
 
+                        //Calcul de rho pour l'angle courant
+                        const double rho = x * coste + y * sinte;
 
-    //                    for(double ro = 0; ro < imageDiag; ro += rhoStep)
-    //                    {
-    //                        // on incrmente la matrice pour l'intervalle de ro correspondant au teta
-    //                        if( (ro <= (i*coste+j*sinte) ) && ( (i*coste+j*sinte) < (ro+rhoStep) ) )
-    //                        {
-    //                            resImg->pixelAt(ro / rhoStep, te / angleStep)++;
-    //                        }
-    //                    }
-                        const double rho = i * coste + j * sinte; //(image->getHeight()-j)
-//                        const double start = max(0., delta);
-//                        const double end = min(imageDiag, delta + rhoStep);
-
-//                        for(double ro = start; ro < end; ro += rhoStep)
                         if(rho >= 0. && rho < imageDiag)
                         {
-                            resImg->pixelAt(rho / rhoStep + 0.5, (te+90) / angleStep + 0.5, c)++;
+                           // resImg->pixelAt(rho / rhoStep + 0.5, (resImg->getHeight()-(te+90)) / angleStep + 0.5, c)++;
+                            //Coordonées du point a colorier dans l'espace de Hough
+                            //Espace de Hough :
+                            //Origine en bas a gauche
+                            //Rho horizontal vers la droite de 0 a imageDiag
+                            //Theta vertical vers le haut de -90 a 180
+                            int jDisplayRho = round(rho / rhoStep);
+                            int iDisplayTheta = round((te+90) / angleStep);
+
+                            resImg->pixelAt(jDisplayRho, iDisplayTheta, c)++;
                         }
                     }
                 }
@@ -220,12 +242,14 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
 
 //        sprintf( tampon,"\nNombre de droites traces=%d",cmpt);
 //        strcat( buffer, tampon);
+    //On applique une mise à l'echelle de l'image pour mettre la valeur max a 255
     std::cout << resImg->max() << std::endl;
     Image* resStdImg = new Image(resImg->getWidth(), resImg->getHeight(), resImg->getNbChannels());
     Image_t<uint32_t>::iterator it = resImg->begin();
     Image::iterator jt = resStdImg->begin();
     double max = resImg->max();
     while(it != resImg->end()) {
+        // tester avec 255 et sans le +0.5
         *jt = *it * 256. / max + 0.5;
         ++it;
         ++jt;

@@ -30,6 +30,12 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    double getAngleStep(){return angleStep;}
+
+private:
+
+    double angleStep;
 };
 
 #endif // HOUGHOP_H
