@@ -523,13 +523,18 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
-        <source>Error image</source>
-        <translation>Image d&apos;erreur</translation>
+        <source>Prediction error image</source>
+        <translation>Image d&apos;erreur de prédiction</translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
-        <source>Quantized error image</source>
-        <translation>Image d&apos;erreur quantifiée</translation>
+        <source>Quantized prediction error image</source>
+        <translation>Image d&apos;erreur de prédiction quantifiée</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
+        <source>Coding error image</source>
+        <translation>Image d&apos;erreur de codage</translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="63"/>
@@ -1247,6 +1252,11 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/PointOp.cpp" line="128"/>
         <source>Explode colors</source>
         <translation>Eclater les couleurs</translation>
+    </message>
+    <message>
+        <location filename="Operations/PointOp.cpp" line="128"/>
+        <source>Double Result</source>
+        <translation>Résultat Double</translation>
     </message>
 </context>
 <context>

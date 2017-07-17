@@ -130,6 +130,17 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"), dialog);
     layout->addWidget(colorBox);
 
+
+    //Ajout d'une checkbox permettant d'avoir le résultat en format Double
+    QCheckBox* DoubleRes = new QCheckBox(qApp->translate("PointOp", "Double Result"), dialog);
+    //Si l'image est une image double le bouton est obligatoirement coché
+    if(currentWnd->isDouble()){
+        DoubleRes->setChecked(true);
+        DoubleRes->setEnabled(false);
+    }
+    layout->addWidget(DoubleRes);
+
+
     int nChannel = currentWnd->getDisplayImage()->getNbChannels();
 
     QHBoxLayout** valueLayouts = new QHBoxLayout*[nChannel+1];
@@ -202,7 +213,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         return;
     }
 
-    bool dblResult = currentWnd->isDouble();
+    bool dblResult = currentWnd->isDouble() || DoubleRes->isChecked();
     if(!valueButton->isChecked()) {
         if(!colorBox->isChecked()) {
             dblResult = dblResult || (imageBoxes[0]->currentType() == MixImageListBox::DBLIMG);
