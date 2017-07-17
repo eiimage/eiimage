@@ -151,33 +151,33 @@ void FilterEditor::saveXML(vector<Filter*> filtersToSave)
   }
   else
   {
-    file.open(QIODevice::ReadOnly);
-	  doc.setContent(&file);
-	  file.close();
-    
-    QDomElement root = doc.documentElement();
-    QDomNode child = root.firstChild();
-	  while(!child.isNull())
-	  {
-      QDomElement e = child.toElement();
-	    // We know how to treat appearance and geometry
-	    if (e.attribute("name") == _name->text())
-	    {
-          QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter name is already use."));
-        msgBox.setInformativeText(tr("Do you want to replace it?"));
-        msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
-        msgBox.setDefaultButton(QMessageBox::No);
-        int ret = msgBox.exec();
-        if(ret == QMessageBox::Yes)
+        file.open(QIODevice::ReadOnly);
+        doc.setContent(&file);
+        file.close();
+
+        QDomElement root = doc.documentElement();
+        QDomNode child = root.firstChild();
+        while(!child.isNull())
         {
-          oldFilter = e;
-          replace = true;
+            QDomElement e = child.toElement();
+            // We know how to treat appearance and geometry
+            if (e.attribute("name") == _name->text())
+            {
+                QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter name is already use."));
+                msgBox.setInformativeText(tr("Do you want to replace it?"));
+                msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
+                msgBox.setDefaultButton(QMessageBox::No);
+                int ret = msgBox.exec();
+                if(ret == QMessageBox::Yes)
+                {
+                    oldFilter = e;
+                    replace = true;
+                }
+                else
+                    return;
+            }
+            child = child.nextSibling();
         }
-        else
-          return;
-      }
-      child = child.nextSibling();
-	  }
   }
 
   // root node

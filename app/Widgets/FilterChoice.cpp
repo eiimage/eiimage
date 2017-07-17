@@ -116,8 +116,8 @@ void FilterChoice::initUI()
     _stdDevBox->setVisible(false);
 
     QGroupBox* radioBox = new QGroupBox(tr("Resulting image type"));
-    _stdResButton = new QRadioButton(tr("Standard"));
-    _dblResButton = new QRadioButton(tr("Floating point"));
+    _stdResButton = new QRadioButton(tr("UChar"));
+    _dblResButton = new QRadioButton(tr("Double"));
     radioBox->setLayout(new QHBoxLayout());
     radioBox->layout()->addWidget(_stdResButton);
     radioBox->layout()->addWidget(_dblResButton);
