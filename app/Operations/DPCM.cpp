@@ -46,13 +46,19 @@ DPCM::~DPCM()
 
 }
 
-string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **new_err_image, Image **recons_image, Image **pred_image, double Q ) {
+string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
     char buffer[255], buffer2[255];
     if( quantdef == NULL ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
-    int imgHeight,imgWidth,pred,ier,ierq,ireco,icode;
+    int imgHeight,imgWidth;
+    int pred;
+    int pred_err;   // prediction error
+    int quant_pred_err;  // quantized prediction error
+    int reco; // reconstructed value
+    int code; // code
+    int coding_err; // erreur de codage
 
     float pi[512],piq[512],nbpt = 0;
     double h = 0.;
@@ -66,16 +72,17 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     codlq(0);
 
     /* allocation mmoire pour l'image d'erreur de prdiction */
-    ImageDouble *quantized_error_prediction_image = new ImageDouble(imgWidth, imgHeight, 1);
-    ImageDouble *new_error_prediction_image = new ImageDouble(imgWidth, imgHeight, 1);
+    ImageDouble *quantized_predction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer quantized_predction_error_image
+    ImageDouble *predction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer predction_error_image
+    ImageDouble *coding_error_image = new ImageDouble(imgWidth, imgHeight, 1);
     Image *reconstructed_image = new GrayscaleImage(*im);
     Image *prediction_image = new GrayscaleImage(*im);
 
     // Init the error images with 0 values
     for(int i=0; i < imgHeight; i++) {
         for(int j=0; j< imgWidth; j++) {
-            quantized_error_prediction_image->setPixelAt(j, i, 0);
-            new_error_prediction_image->setPixelAt(j, i, 0);
+            quantized_predction_error_image->setPixelAt(j, i, 0);
+            predction_error_image->setPixelAt(j, i, 0);
         }
     }
 
@@ -138,29 +145,39 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 break;
             }
 
-
+            //image de prediction pour affichage
             prediction_image->setPixelAt(j,i,pred);
             depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
             //erreur de prediction
-            ier = thePixel - pred;
-            new_error_prediction_image->setPixelAt(j, i, ier);
+            pred_err = thePixel - pred;
+            predction_error_image->setPixelAt(j, i, pred_err);
                   /* proba associe a l'erreur de prediction */
 
+            depth_default_t pixImg = im->getPixelAt(j, i);
+
             //quantification erreur de prediction
-            ierq = quantdef->valueOf(ier);
+            quant_pred_err = quantdef->valueOf(pred_err);
 
-            codec(0, ierq, &icode, &ireco);//(QB) action ? on suppose codage/decodage sans perte : ireco = ierq
+            codec(0, quant_pred_err, &code, &reco);//action ? on suppose codage/decodage sans perte : reco = quant_pred_err
 
-            pi[ier+255]++;
-            piq[ierq+255]++;      /* proba associe a l'erreur de prediction */
+            pi[pred_err+255]++;
+            piq[quant_pred_err+255]++;      /* proba associe a l'erreur de prediction */
             nbpt++;
 
-            quantized_error_prediction_image->setPixelAt(j, i, ierq);
+            quantized_predction_error_image->setPixelAt(j, i, quant_pred_err);
 
             // valeur reconstruite
-            int tempvalue = pred + ireco;
+
+            int tempvalue = pred + reco;
+            //int tempvalue = pred + quant_pred_err;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
+            depth_default_t reconstructedPix = reconstructed_image->getPixelAt(j, i);
+            //calcul de l'erreur de codage
+            coding_err = pixImg - reconstructedPix;
+            //construction de l'image d'erreur de codage
+            coding_error_image->setPixelAt(j,i,(coding_err));
+
         }
     }
 
@@ -187,10 +204,11 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     returnval = returnval + print_iloiqu();
 
     /* libration de la mmoire alloue */
-    *quant_err_image = quantized_error_prediction_image;
-    *new_err_image = new_error_prediction_image;
+    *quant_err_image = quantized_predction_error_image;
+    *err_image = predction_error_image;
     *recons_image = reconstructed_image;
     *pred_image = prediction_image;
+    *coding_err_image = coding_error_image;
     return returnval;
 }
 
