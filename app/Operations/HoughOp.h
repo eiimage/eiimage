@@ -32,10 +32,12 @@ public:
     bool needCurrentImg() const;
 
     double getAngleStep(){return angleStep;}
+    double getDistanceStep(){return distanceStep;}
 
 private:
 
     double angleStep;
+    double distanceStep;
 };
 
 #endif // HOUGHOP_H
