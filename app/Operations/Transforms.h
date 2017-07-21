@@ -28,7 +28,7 @@ namespace Transforms
 {
     imagein::Image_t<double> *hough( const imagein::GrayscaleImage *im ); // This function works
     imagein::Image_t<double> *hough2( const imagein::Image *im , double angleStep, double rhoStep); // This function works
-    std::string hough2_inverse(const imagein::Image_t<double> *image, imagein::Image **resImg, unsigned int size, unsigned int threshold);
+    std::string hough2_inverse(const imagein::Image_t<double> *image, imagein::Image **resImg, unsigned int width, unsigned int height, unsigned int threshold);
     std::string Hadamard( const imagein::Image *im, imagein::Image_t<double> **result, imagein::Image **result_inverse, imagein::GrayscaleImage_t<bool> *selection = NULL);
     std::string Haar( const imagein::Image *im, imagein::Image_t<double> **result, imagein::Image **result_inverse, imagein::GrayscaleImage_t<bool> *selection = NULL );
     std::string cosinus( const imagein::Image *image, imagein::Image_t<double> **resImg, imagein::Image **invImg, imagein::GrayscaleImage_t<bool> *selection = NULL  );

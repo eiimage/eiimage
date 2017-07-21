@@ -181,9 +181,9 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
 
     return resImg;
 }
-string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgptr, unsigned int size, unsigned int threshold) {
+string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgptr, unsigned int width, unsigned int height, unsigned int threshold) {
 
-    Image_t<uint32_t>* resImg = new Image_t<uint32_t>(size, size, image->getNbChannels(), uint32_t(0));
+    Image_t<uint32_t>* resImg = new Image_t<uint32_t>(width, height, image->getNbChannels(), uint32_t(0));
 
 //    int param = 5000 + 20 * image->getWidth() * image->getHeight();
 
@@ -203,15 +203,15 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
 
     int cmpt = 0;
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        for(unsigned int j = 0; j < image->getHeight(); ++j) {
-            for(unsigned int i = 0; i < image->getWidth(); ++i) {
+        for(unsigned int i = 0; i < image->getHeight(); ++i) {
+            for(unsigned int j = 0; j < image->getWidth(); ++j) {
 
-                int n = image->getPixelAt(i, j, c);
+                int n = image->getPixelAt(j, i, c);
                 if(n >= threshold)
                 {
                     cmpt++;
-                    double angle = angleStep * j / 180. * pi;
-                    double rho = rhoStep * i;
+                    double angle = angleStep * i / 180. * pi;
+                    double rho = rhoStep * j;
                     double sinte = sin(angle);
                     double coste = cos(angle);
 
@@ -219,19 +219,19 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
     //                strcat( buffer, tampon);
 
                     //Construction de la droite d'quation
-                    for(unsigned int jj = 0; jj < size; ++jj) {
+                    for(unsigned int jj = 0; jj < width; ++jj) {
 
     //                    int kk = rho * (cos(angle) + tan(angle) * sin(angle)) - tan(angle)*jj;
                         int kk = (rho - sinte * jj) / coste;
-                        if( kk > 0 && kk < size) {
-                            resImg->pixelAt(kk, jj, c) += n;
+                        if( kk > 0 && kk < height) {
+                            resImg->pixelAt(jj, kk, c) += n;
                         }
                     }
-                    for(unsigned int ii = 0; ii < size; ++ii) {
+                    for(unsigned int ii = 0; ii < height; ++ii) {
     //                    int kk = ( rho * (cos(angle) + tan(angle) * sin(angle)) -ii ) / tan(angle);
                         int kk = (rho - coste * ii) / sinte;
-                        if( kk>0 && kk < size) {
-                            resImg->pixelAt(ii, kk, c) += n;
+                        if( kk>0 && kk < width) {
+                            resImg->pixelAt(kk, ii, c) += n;
                         }
                      }
 

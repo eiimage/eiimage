@@ -32,8 +32,12 @@ InverseHoughDialog::~InverseHoughDialog()
     delete ui;
 }
 
-int InverseHoughDialog::getSize() const {
-    return ui->sizeBox->value();
+int InverseHoughDialog::getWidth() const {
+    return ui->widthBox->value();
+}
+
+int InverseHoughDialog::getHeight() const {
+    return ui->heightBox->value();
 }
 
 int InverseHoughDialog::getThreshodl() const {

@@ -40,6 +40,6 @@ void InverseHoughOp::operator()(const imagein::Image_t<double>* img, const std::
 
     if(code!=QDialog::Accepted) return;
     Image* resImg2;
-    Transforms::hough2_inverse(img, &resImg2, dialog->getSize(), dialog->getThreshodl());
+    Transforms::hough2_inverse(img, &resImg2, dialog->getWidth(), dialog->getHeight(), dialog->getThreshodl());
     outImage(resImg2, qApp->translate("Hough", "Hough inverse transform").toStdString());
 }

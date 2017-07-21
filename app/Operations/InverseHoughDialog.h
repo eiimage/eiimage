@@ -33,7 +33,8 @@ class InverseHoughDialog : public QDialog
 public:
     explicit InverseHoughDialog(QWidget *parent = 0);
     ~InverseHoughDialog();
-    int getSize() const;
+    int getWidth() const;
+    int getHeight() const;
     int getThreshodl() const;
     
 private:
