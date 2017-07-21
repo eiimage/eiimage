@@ -45,6 +45,8 @@ set(imageinsa_SOURCES
 	Operations/DMMDialog.h
 	Operations/DMMOp.cpp
 	Operations/DMMOp.h
+	Operations/DoubleEntropyOp.cpp
+	Operations/DoubleEntropyOp.h
 	Operations/EntropyOp.cpp
 	Operations/EntropyOp.h
 	Operations/FFTDialog.cpp

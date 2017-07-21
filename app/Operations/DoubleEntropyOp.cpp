@@ -19,7 +19,7 @@
 
 #include <cmath>
 
-#include "EntropyOp.h"
+#include "DoubleEntropyOp.h"
 
 #include "../Tools.h"
 #include <Image.h>
@@ -32,11 +32,11 @@
 using namespace std;
 using namespace imagein;
 
-EntropyOp::EntropyOp() : Operation(qApp->translate("Operations", "Calcul d'entropie (image standard)").toStdString())
+DoubleEntropyOp::DoubleEntropyOp() : DoubleOperation(qApp->translate("Operations", "Calcul d'entropie (image double)").toStdString())
 {
 }
 
-void EntropyOp::operator()(const Image* image, const std::map<const imagein::Image*, std::string>&) {
+void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<const imagein::Image_t<double>*, std::string>&) {
 
     double entropy = 0.;
 
@@ -54,6 +54,6 @@ void EntropyOp::operator()(const Image* image, const std::map<const imagein::Ima
     outText(qApp->translate("Operations", "Entropy of the image = %1").arg(entropy).toStdString());
 }
 
-bool EntropyOp::needCurrentImg() const {
+bool DoubleEntropyOp::needCurrentImg() const {
     return true;
 }

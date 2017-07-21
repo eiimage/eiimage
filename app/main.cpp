@@ -56,6 +56,7 @@
 #include "Operations/SinusSynthesisOp.h"
 #include "Operations/ScalingOp.h"
 #include "Operations/QuantificationOp.h"
+#include "Operations/DoubleEntropyOp.h"
 #include "Operations/EntropyOp.h"
 #include "Operations/HuffmanOp.h"
 #include "Operations/RejectionRingOp.h"
@@ -145,6 +146,7 @@ int main(int argc, char** argv)
 
     tools->addOperation(new SignalToNoiseOp());
     tools->addOperation(new MeanSquaredErrorOp());
+    tools->addOperation(new DoubleEntropyOp());
     tools->addOperation(new EntropyOp());
     tools->addOperation(new NoiseOp());
     tools->addOperation(new SeparatorOp());

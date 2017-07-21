@@ -963,9 +963,19 @@ Number of classes = %1 </translation>
         <translation>DMM</translation>
     </message>
     <message>
+        <location filename="Operations/DoubleEntropyOp.cpp" line="30"/>
+        <source>Calcul d&apos;entropie (image double)</source>
+        <translation>Entropy calculation (double image)</translation>
+    </message>
+    <message>
+        <location filename="Operations/DoubleEntropyOp.cpp" line="47"/>
+        <source>Entropy of the image = %1</source>
+        <translation>Entropy of the image = %1</translation>
+    </message>
+    <message>
         <location filename="Operations/EntropyOp.cpp" line="30"/>
-        <source>Calcul d&apos;entropie</source>
-        <translation>Entropy calculation</translation>
+        <source>Calcul d&apos;entropie (image standard)</source>
+        <translation>Entropy calculation (standard image)</translation>
     </message>
     <message>
         <location filename="Operations/EntropyOp.cpp" line="47"/>
