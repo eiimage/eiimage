@@ -57,3 +57,6 @@ void EntropyOp::operator()(const Image* image, const std::map<const imagein::Ima
 bool EntropyOp::needCurrentImg() const {
     return true;
 }
+
+EntropyOp::~EntropyOp() {
+}
