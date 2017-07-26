@@ -119,7 +119,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
             }
             else {
-                riw = new DoubleImageWindow(dblResImg, _siw->getPath());
+                riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
             }
         }
         else {
