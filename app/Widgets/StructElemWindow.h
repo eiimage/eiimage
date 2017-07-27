@@ -75,6 +75,7 @@ class StructElemWindow : public QDialog
     QPushButton* _genButton; 
     QComboBox* _shapeToGen;
     QSpinBox* _shapeSize;
+    QSpinBox* _scale;
 
 };
 

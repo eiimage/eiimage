@@ -74,12 +74,12 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     QHBoxLayout* layout3 = new QHBoxLayout();
     layout->addLayout(layout3);
     layout3->addWidget(new QLabel(tr("Scale :")));
-    QSpinBox* spinBox = new QSpinBox();
-    spinBox->setRange(1,32);
-    spinBox->setSingleStep(1);
-    spinBox->setSuffix("");
-    spinBox->setValue(_structElem->getScale());
-    layout3->addWidget(spinBox);
+    _scale = new QSpinBox();
+    _scale->setRange(1,32);
+    _scale->setSingleStep(1);
+    _scale->setSuffix("");
+    _scale->setValue(_structElem->getScale());
+    layout3->addWidget(_scale);
     
 //    QPushButton* button = new QPushButton("OK");
 //    layout->addWidget(button);
@@ -91,7 +91,7 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
 //    QObject::connect(button, SIGNAL(clicked(bool)), this, SLOT(ok()));
     QObject::connect(_openFile, SIGNAL(triggered()), this, SLOT(openFile()));
     QObject::connect(_saveFile, SIGNAL(triggered()), this, SLOT(saveFile()));
-    QObject::connect(spinBox, SIGNAL(valueChanged(int)), this, SLOT(resize(int)));
+    QObject::connect(_scale, SIGNAL(valueChanged(int)), this, SLOT(resize(int)));
     QObject::connect(_genButton, SIGNAL(clicked(bool)), this, SLOT(generate()));
 }
 
@@ -163,6 +163,7 @@ void closing(GrayscaleImage_t<bool>& img) {
 
 void StructElemWindow::generate() {
     unsigned int size = _shapeSize->value();
+    _scale->setValue(1);
     GrayscaleImage_t<bool> elem(size, size);
     //if(size%2==0) --size;
 
@@ -231,6 +232,7 @@ void StructElemWindow::resize(int size) {
 
     //StructElem<depth_default_t>* structElem = new StructElem<depth_default_t>(elem, elem.getWidth()/2, elem.getHeight()/2);
     _structElem->setScale(std::abs(size));
+
     changeStructElem(_structElem);
 }
 
@@ -261,7 +263,7 @@ void StructElemWindow::openFile() {
     StructElem* structElem = new StructElem(file.toStdString());
     changeStructElem(structElem);
     _realSize = *structElem;
-    
+    _scale->setValue(1);
 }
 
 void StructElemWindow::saveFile() {

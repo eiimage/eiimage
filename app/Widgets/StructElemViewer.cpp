@@ -37,7 +37,7 @@ StructElemViewer::StructElemViewer(MorphoMat::StructElem* elem, bool editable)
 
 void StructElemViewer::allocRects() {
     this->clear();
-    _row = _col = 0;
+//    _row = _col = 0;
     for(vector<ElemView>::iterator it = _views.begin(); it < _views.end(); ++it) {
         _row = max((it->x + it->elem->getWidth()), _row);
         _col = max((it->y + it->elem->getHeight()), _col);
@@ -134,6 +134,9 @@ void StructElemViewer::draw(int x, int y)
 //              QColor color = view.elem->getPixel(px, py) ? low : high;
               if(view.elem->getPixel(px, py)) {
                   r.setBrush(QBrush(low, Qt::SolidPattern));
+              }
+              else if(!view.elem->getPixel(px,py)){
+                  r.setBrush(QBrush(high, Qt::SolidPattern));
               }
           }
         }
