@@ -11,7 +11,8 @@ This software can be compiled under GNU/Linux and Windows, and should be under M
 ## Tools
 Before starting the compilation, please verify that you have all needed tools and the correct versions:
 
-- CMake version 2.8.11 minimum
+- CMake version 2.8.11 minimum  
+  *NB: Do not change the default installation directory of CMake*
 - A C++ compiler (gcc, mingw)
 
 ## Source code
@@ -26,7 +27,9 @@ ImageINSA is compiled against some dependencies, you have to check all these dep
 
 ### Qt 5
 #### Windows
-You should install Qt5 from the opensource package available on Qt website (http://www.qt.io/download-open-source/ or http://qt-project.org/downloads)
+You should install Qt5 from the opensource package available on Qt website (http://www.qt.io/download-open-source/ or http://qt-project.org/downloads)  
+
+*NB: Do not change the default installation directory*
 
 #### GNU/Linux
 You may use the developer packages from your distribution. Module needed are Core, Widgets, Gui and LinguistTools. If you have problems, installing Qt5 from the officiel package can be an alternative. See Windows links above.
@@ -36,11 +39,31 @@ Download the RandomLib C++ library from the official website: http://randomlib.s
 
 RandomLib 1.7, 1.8 and 1.9 are known to work. Newer versions should also be ok.
 
+**Install RandomLib on Windows:**
+
+Open Qt terminal :
+
+	cd {path}\RandomLib-1.10 //({path} is where you extracted the downloaded RandomLib zip file)  
+	mkdir build  
+	cd build  
+	cmake -G "MinGW Makefiles" ..  
+	mingw32-make  
+	mingw32-make install
+
 ### Qwt
 Download Qwt 6.0 or newer from the official website: http://sourceforge.net/projects/qwt/
 The library must be compiled against Qt, please ensure you use the same version than the one you will use to compile ImageINSA. The most easier way to comile Qwt is to load the project file (qwt.pro) in Qt Creator, configure the project, run the compilation.
 
 Compilation and installation are documented on the official website: http://qwt.sourceforge.net/qwtinstall.html.
+
+**Install Qwt on Windows:**
+
+Open Qt terminal :
+
+	cd {path}\qwt-6.1.3 //({path} is where you extracted the downloaded qwt zip file)
+	qmake qwt.pro
+	mingw32-make
+	mingw32-make install
 
 Note: GNU/Linux users can install the package provided by their distribution, if it exists, but this can be problematic if the library binary has been compiled with an incompatble verion of Qt. In that specific case, the library have to be compiled manually.
 
@@ -72,9 +95,27 @@ The CMake scripts shipped with ImageINSA try to locate automatically all librari
 - \<libname\>_DIR can be used to help CMake finding a specific library
 - \<libname\>_INCLUDE_DIR can be used to help Cmake finding headers for a specific library
 
+**Example of CMake generation procedure on Windows :**
+
+Open Qt terminal :
+
+	cd {path}\eiimage //(where you cloned eiimage repository)
+	mkdir build
+	cd build
+	cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Program Files/GnuWin32";C:\Qwt-6.1.3 ..
+If cmake command does not work, run `set PATH=%PATH%;C:\Qt\5.9.1\mingw53_32\bin` before it.
+
 ### GNU/Linux users
 It should be easier to configure compilation for Linux users, since most of the tools are already available from the $PATH environment variable.
 If you had to compile manually a dependency, don't forget to run `make install` after the compilation. By default, the command installs libraries and headers under the `/usr/local` prefix, which is usually already in the $PATH.
 
 ## Compilation
 If the previous steps have been done correctly, compilation shouldn't cause any trouble.
+
+### Windows users
+
+Open Qt terminal :
+
+	cd {path}\eiimage //({path} is where you cloned eiimage repository)
+	cd build
+	mingw32-make -j4
