@@ -33,11 +33,13 @@ public:
 
     double getAngleStep(){return angleStep;}
     double getDistanceStep(){return distanceStep;}
+    bool hough1(){return method1;}
 
 private:
 
     double angleStep;
     double distanceStep;
+    bool method1;
 };
 
 #endif // HOUGHOP_H

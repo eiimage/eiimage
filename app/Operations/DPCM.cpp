@@ -60,7 +60,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     int code; // code
     int coding_err; // erreur de codage
 
-    float pi[512],piq[512],nbpt = 0;
+    double pi[512],piq[512],nbpt = 0;
     double h = 0.;
     double hq = 0.;
 
@@ -72,7 +72,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     codlq(0);
 
     /* allocation mmoire pour l'image d'erreur de prdiction */
-    ImageDouble *quantized_predction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer quantized_predction_error_image
+    ImageDouble *quantized_prediction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer quantized_prediction_error_image
     ImageDouble *predction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer predction_error_image
     ImageDouble *coding_error_image = new ImageDouble(imgWidth, imgHeight, 1);
     Image *reconstructed_image = new GrayscaleImage(*im);
@@ -81,7 +81,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     // Init the error images with 0 values
     for(int i=0; i < imgHeight; i++) {
         for(int j=0; j< imgWidth; j++) {
-            quantized_predction_error_image->setPixelAt(j, i, 0);
+            quantized_prediction_error_image->setPixelAt(j, i, 0);
             predction_error_image->setPixelAt(j, i, 0);
         }
     }
@@ -151,25 +151,26 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             //erreur de prediction
             pred_err = thePixel - pred;
             predction_error_image->setPixelAt(j, i, pred_err);
-                  /* proba associe a l'erreur de prediction */
 
             depth_default_t pixImg = im->getPixelAt(j, i);
 
+            //code obsolete
+            //codec(0, quant_pred_err, &code, &reco);//action : voir code Vero 1988 calcul : reco = quant_pred_err (erreur de prediction quantifiee)
+            //int tempvalue = pred + reco;
+
             //quantification erreur de prediction
             quant_pred_err = quantdef->valueOf(pred_err);
+            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
-            codec(0, quant_pred_err, &code, &reco);//action ? on suppose codage/decodage sans perte : reco = quant_pred_err
-
+            //mise a jour proba pour calcul entropie
             pi[pred_err+255]++;
             piq[quant_pred_err+255]++;      /* proba associe a l'erreur de prediction */
             nbpt++;
 
-            quantized_predction_error_image->setPixelAt(j, i, quant_pred_err);
+            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
             // valeur reconstruite
-
-            int tempvalue = pred + reco;
-            //int tempvalue = pred + quant_pred_err;
+            int tempvalue = pred + quant_pred_err;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
             depth_default_t reconstructedPix = reconstructed_image->getPixelAt(j, i);
@@ -182,6 +183,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     }
 
     /* calcul de l'entropie de l'image d'erreur de prediction quantifiee */
+    nbpt = imgHeight*imgWidth;
     for(int i=0 ; i < 512 ; i++)
     {
         if(pi[i] != 0) {
@@ -194,6 +196,8 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
         }
     }
 
+    //reprendre le code de DoubleEntropyOp pour voir si on obtient le même résultat
+
     /* affichage des rsultats */
     sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %lf\n",h);
     sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n",hq);
@@ -204,7 +208,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     returnval = returnval + print_iloiqu();
 
     /* libration de la mmoire alloue */
-    *quant_err_image = quantized_predction_error_image;
+    *quant_err_image = quantized_prediction_error_image;
     *err_image = predction_error_image;
     *recons_image = reconstructed_image;
     *pred_image = prediction_image;

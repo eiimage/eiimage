@@ -35,6 +35,7 @@ public:
     ~InverseHoughDialog();
     int getWidth() const;
     int getHeight() const;
+//    int getSize() const;
     int getThreshodl() const;
     
 private:

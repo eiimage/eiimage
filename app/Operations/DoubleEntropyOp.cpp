@@ -42,7 +42,7 @@ void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<co
     int min = image->min();
     int max = image->max();
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        Histogram histo = image->getHistogram(c);
+        Histogram histo = image->getHistogramForEntropy(c, 511);
 //      for(int i = -255; i < 256 ; ++i) {
         for(int i = min; i<= max; i++){
             if(histo[i] > 0) {
@@ -53,7 +53,7 @@ void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<co
     }
 
     entropy = - entropy / log(2);
-    outText(qApp->translate("Operations", "Entropy of the image = %1").arg(entropy).toStdString());
+    outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1").arg(entropy).toStdString());
 
 }
 

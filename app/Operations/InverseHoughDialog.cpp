@@ -40,6 +40,10 @@ int InverseHoughDialog::getHeight() const {
     return ui->heightBox->value();
 }
 
+//int InverseHoughDialog::getSize() const {
+//    return ui->sizeBox->value();
+//}
+
 int InverseHoughDialog::getThreshodl() const {
     return ui->thresholdBox->value();
 }

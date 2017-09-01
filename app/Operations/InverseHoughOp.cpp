@@ -25,7 +25,7 @@
 using namespace std;
 using namespace imagein;
 
-InverseHoughOp::InverseHoughOp() : DoubleOperation(qApp->translate("Operations", "Houghman inverse transform").toStdString())
+InverseHoughOp::InverseHoughOp() : DoubleOperation(qApp->translate("Operations", "Inverse Hough transform").toStdString())
 {
 }
 
@@ -41,5 +41,6 @@ void InverseHoughOp::operator()(const imagein::Image_t<double>* img, const std::
     if(code!=QDialog::Accepted) return;
     Image* resImg2;
     Transforms::hough2_inverse(img, &resImg2, dialog->getWidth(), dialog->getHeight(), dialog->getThreshodl());
+    //Transforms::hough2_inverse(img, &resImg2, dialog->getSize(), dialog->getThreshodl());
     outImage(resImg2, qApp->translate("Hough", "Hough inverse transform").toStdString());
 }

@@ -43,6 +43,7 @@ void HoughOp::operator()(const imagein::Image* img, const std::map<const imagein
 
     if(code!=QDialog::Accepted) return;
     if(dialog->isMethod1()) {
+        method1 = true;
         GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
         resImg = Transforms::hough(image);
         delete image;

@@ -73,7 +73,11 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
     DoubleImageWindow* wnd = new DoubleImageWindow(img, QString(), norm, log, logScale, abs);
     if(HoughOp* v = dynamic_cast<HoughOp*>(this)) {
        // teste si l'operation effectuee est une transformee de Hough
-       wnd->isHough(v->getAngleStep(), v->getDistanceStep());
+       if (v->hough1()){
+           wnd->isHough(1, 1);
+       }else{
+           wnd->isHough(v->getAngleStep(), v->getDistanceStep());
+       }
        //isHough=true ce qui change les coordonnées des pixels de l'image pour correspondre au domaine de Hough
     }
     this->outImgWnd(wnd, title);

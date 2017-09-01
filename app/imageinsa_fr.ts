@@ -969,13 +969,13 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/DoubleEntropyOp.cpp" line="47"/>
-        <source>Entropy of the image = %1</source>
-        <translation>Entropie de l&apos;image = %1</translation>
+        <source>Entropy of the image (sum of channels entropy) = %1</source>
+        <translation>Entropie de l&apos;image (somme des entropies des canaux) = %1</translation>
     </message>
     <message>
         <location filename="Operations/EntropyOp.cpp" line="30"/>
-        <source>Calcul d&apos;entropie (image standard)</source>
-        <translation>Calcul d&apos;entropie (image standard)</translation>
+        <source>Entropy of the image (sum of channels entropy) = %1</source>
+        <translation>Entropie de l&apos;image (somme des entropies des canaux) = %1</translation>
     </message>
     <message>
         <location filename="Operations/EntropyOp.cpp" line="47"/>
@@ -1127,7 +1127,7 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/InverseHoughOp.cpp" line="28"/>
-        <source>Houghman inverse transform</source>
+        <source>Inverse Hough transform</source>
         <translation>Transformée de Hough inverse</translation>
     </message>
     <message>

@@ -546,6 +546,21 @@ Number of classes = %1 </translation>
         <source>Reconstructed image</source>
         <translation>Reconstructed image</translation>
     </message>
+    <message>
+        <location filename="Operations/DPCM.cpp"/>
+        <source>\nL'entropie de l'image d'erreur de prediction vaut : %lf\n</source>
+        <translation>The entropy of the predicion error image is :</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCM.cpp"/>
+        <source>\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n</source>
+        <translation>The entropy of the quantized predicion error image is :</translation>
+    </message>
+    <message>
+        <location filename="Operations/DPCM.cpp"/>
+        <source>seuils de decision --------------- niveaux de reconstruction\n</source>
+        <translation>decision thresholds --------- reconstruction levels\n</translation>
+    </message>    
 </context>
 <context>
     <name>DPCMDialog</name>
@@ -1122,8 +1137,8 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/InverseHoughOp.cpp" line="28"/>
-        <source>Houghman inverse transform</source>
-        <translation>Houghman inverse transform</translation>
+        <source>Inverse Hough transform</source>
+        <translation>Inverse Hough transform</translation>
     </message>
     <message>
         <location filename="Operations/InversePyramidOp.cpp" line="31"/>
