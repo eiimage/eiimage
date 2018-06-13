@@ -137,6 +137,7 @@ int main(int argc, char** argv)
     image->addOperation(new SplitHsvOp());
     image->addOperation(new CombineColorOp());
     image->addOperation(new CombineHSVOp());
+    image->addOperation(new SeparatorOp());
     image->addOperation(new ScalingOp());
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
