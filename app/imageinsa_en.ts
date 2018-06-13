@@ -514,12 +514,12 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="53"/>
         <source>Error while loading quantification file</source>
-        <translation>Error while loading quantification file</translation>
+        <translation>Error while loading quantization file</translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="54"/>
         <source>The specified quantification file could not be opened !</source>
-        <translation>The specified quantification file could not be opened!</translation>
+        <translation>The specified quantization file could not be opened!</translation>
     </message>
     <message>
         <location filename="Operations/DPCMEncodingOp.cpp" line="62"/>
@@ -548,19 +548,19 @@ Number of classes = %1 </translation>
     </message>
     <message>
         <location filename="Operations/DPCM.cpp"/>
-        <source>\nL'entropie de l'image d'erreur de prediction vaut : %lf\n</source>
-        <translation>The entropy of the predicion error image is :</translation>
+        <source>\nL&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %lf\n</source>
+        <translation>The entropy of the prediciton error image is :%lf\n</translation>
     </message>
     <message>
         <location filename="Operations/DPCM.cpp"/>
-        <source>\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n</source>
-        <translation>The entropy of the quantized predicion error image is :</translation>
+        <source>\nL&apos;entropie de l&apos;image d&apos;erreur de prediction quantifiee vaut : %lf\n</source>
+        <translation>The entropy of the quantized prediction error image is :%lf\n</translation>
     </message>
     <message>
         <location filename="Operations/DPCM.cpp"/>
         <source>seuils de decision --------------- niveaux de reconstruction\n</source>
         <translation>decision thresholds --------- reconstruction levels\n</translation>
-    </message>    
+    </message>
 </context>
 <context>
     <name>DPCMDialog</name>
@@ -572,7 +572,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/DPCMDialog.cpp" line="39"/>
         <source>Loi de quantification (*.loi)</source>
-        <translation>Quantification file (*.loi)</translation>
+        <translation>Quantization file (*.loi)</translation>
     </message>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="14"/>
@@ -612,12 +612,12 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="115"/>
         <source>Quantifier</source>
-        <translation>Quantifier</translation>
+        <translation>Quantizer</translation>
     </message>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="121"/>
         <source>Quantification file :</source>
-        <translation>Quantification file :</translation>
+        <translation>Quantization file :</translation>
     </message>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="141"/>
@@ -627,7 +627,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="169"/>
         <source>Open quantification editor</source>
-        <translation>Open quantification editor</translation>
+        <translation>Open quantization editor</translation>
     </message>
 </context>
 <context>
@@ -993,11 +993,6 @@ Number of classes = %1 </translation>
         <translation>Entropy calculation (standard image)</translation>
     </message>
     <message>
-        <location filename="Operations/EntropyOp.cpp" line="47"/>
-        <source>Entropy of the image = %1</source>
-        <translation>Entropy of the image = %1</translation>
-    </message>
-    <message>
         <location filename="Operations/FFTOp.cpp" line="28"/>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
@@ -1048,7 +1043,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/QuantificationOp.cpp" line="31"/>
         <source>Quantification</source>
-        <translation>Quantification</translation>
+        <translation>Quantization</translation>
     </message>
     <message>
         <location filename="Operations/RandomImgOp.cpp" line="37"/>
@@ -1351,12 +1346,12 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="40"/>
         <source>Quantification file editor</source>
-        <translation>Quantification file editor</translation>
+        <translation>Quantization file editor</translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="43"/>
         <source>Quantification of %1</source>
-        <translation>Quantification of %1</translation>
+        <translation>Quantization of %1</translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="53"/>
@@ -1381,7 +1376,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="59"/>
         <source>Quantification : </source>
-        <translation>Quantification : </translation>
+        <translation>Quantization : </translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="60"/>
@@ -1407,7 +1402,7 @@ Number of classes = %1 </translation>
         <location filename="Operations/QuantificationDialog.cpp" line="121"/>
         <location filename="Operations/QuantificationDialog.cpp" line="130"/>
         <source>Loi de quantification (*.loi)</source>
-        <translation>Quantification file (*.loi)</translation>
+        <translation>Quantization file (*.loi)</translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="130"/>
