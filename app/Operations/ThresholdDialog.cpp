@@ -160,7 +160,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
 
     _preview = new ImageWidget(this, _image);
     _preview->setFixedSize(256*_preview->pixmap().width()/_preview->pixmap().height(), 256);
-    layout->setColumnMinimumWidth(0,256);
+    layout->setColumnMinimumWidth(0,256*_preview->pixmap().width()/_preview->pixmap().height());
     layout->addWidget(_preview,0,0,0,0,Qt::AlignTop);
     Vboxlayout->addWidget(plot);
     layout->setRowMinimumHeight(0,256);
@@ -172,7 +172,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     layout->addWidget(_previewBox,1,0,1,0,Qt::AlignTop);
 
 
-    //layout->setSizeConstraint(QLayout::SetFixedSize);
+    layout->setSizeConstraint(QLayout::SetMinimumSize);
     
     QPushButton *okButton = new QPushButton(tr("Validate"), this);
     okButton->setDefault(true);
