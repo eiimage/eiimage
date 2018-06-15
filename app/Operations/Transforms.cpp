@@ -460,7 +460,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *
 *----------------------------------------------------------------------*/
 
-    for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
+    for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
       for(unsigned int i=0 ; i < tmpImg->getWidth() ; i += idt) {
           for(unsigned int j=0 ; j < tmpImg->getHeight() ; j += idt) {
 
@@ -470,7 +470,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 
               for(int k = 0; k < idt; ++k) {
 
-                  for(int l = 0; l < idt; ++l) {
+                  for(int l = 0; l < idt; l++) {
                       for(int m=0 ; m<idt ; m++) {
                           if( i+k < tmpImg->getWidth() &&  j+m < tmpImg->getHeight())
                             res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+k, j+m, c);
@@ -484,7 +484,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
                   }
               }
 
-              for(int k = 0; k < idt; ++k) {
+              for(int k = 0; k < idt; k++) {
 
                   for(int l=0 ; l<idt ; l++) {
                       for(int m=0 ; m<idt ; m++) {
@@ -510,9 +510,9 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *----------------------------------------------------------------------*/
 
   if(selection != NULL) {
-    for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
-      for(unsigned int j = 0; j < tmpImg->getHeight(); ++j) {
-          for(unsigned int i = 0; i < tmpImg->getWidth(); ++i) {
+    for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
+      for(unsigned int j = 0; j < tmpImg->getHeight(); j++) {
+          for(unsigned int i = 0; i < tmpImg->getWidth(); i++) {
               if(!selection->getPixelAt(i % 8, j % 8)) {
                   tmpImg->setPixelAt(i, j, c, 0.);
               }
@@ -534,7 +534,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *
 *----------------------------------------------------------------------*/
 
-for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
+for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
   for(unsigned int i=0 ; i< tmpImg->getWidth() ; i+=idt) {
      for(unsigned int j=0 ; j<tmpImg->getHeight(); j+=idt)
      {
