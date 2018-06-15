@@ -472,12 +472,14 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 
                   for(int l = 0; l < idt; ++l) {
                       for(int m=0 ; m<idt ; m++) {
-                          res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+k, j+m, c);
+                          if( i+k < tmpImg->getWidth() &&  j+m < tmpImg->getHeight())
+                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+k, j+m, c);
                       }
                   }
 
                   for(int l=0 ; l<idt ; l++) {
-                      tmpImg->setPixelAt(i+k, j+l, c, res[l]);
+                      if( i+k < tmpImg->getWidth() &&  j+l < tmpImg->getHeight())
+                        tmpImg->setPixelAt(i+k, j+l, c, res[l]);
                       res[l] = 0.;
                   }
               }
@@ -486,12 +488,14 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 
                   for(int l=0 ; l<idt ; l++) {
                       for(int m=0 ; m<idt ; m++) {
-                          res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+m, j+k, c);
+                          if( i+m < tmpImg->getWidth() &&  j+k < tmpImg->getHeight())
+                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+m, j+k, c);
                       }
                   }
 
                   for(int l=0 ; l<idt ; l++) {
-                      tmpImg->setPixelAt(i+l, j+k, c, +res[l]);
+                      if( i+l < tmpImg->getWidth() &&  j+k < tmpImg->getHeight())
+                        tmpImg->setPixelAt(i+l, j+k, c, +res[l]);
                       res[l] = 0.;
                   }
               }
@@ -541,12 +545,14 @@ for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
         {
           for(int l=0 ; l<idt ; l++)
              for(int m=0 ; m<idt ; m++)
-                res[l] += rmat[m * idt + l] * tmpImg->getPixelAt(i+m, j+k, c);
+                if( i+m < tmpImg->getWidth() &&  j+k < tmpImg->getHeight())
+                    res[l] += rmat[m * idt + l] * tmpImg->getPixelAt(i+m, j+k, c);
 
           for(int l=0 ; l<idt ; l++)
-          {
-             tmpImg->setPixelAt(i+l, j+k, c, res[l]);
-             res[l] = 0.;
+          { 
+            if( i+l < tmpImg->getWidth() &&  j+k < tmpImg->getHeight())
+                tmpImg->setPixelAt(i+l, j+k, c, res[l]);
+            res[l] = 0.;
           }
         }
 
@@ -554,12 +560,14 @@ for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
         {
           for(int l=0 ; l<idt ; l++)
              for(int m=0 ; m<idt ; m++)
+                if( i+k < tmpImg->getWidth() &&  j+m < tmpImg->getHeight())
                 res[l] += rmat[m * idt + l] * tmpImg->getPixelAt(i+k, j+m, c);
 
           for(int l=0 ; l<idt ; l++)
           {
-             tmpImg->setPixelAt(i+k, j+l, c, res[l]);
-             res[l] = 0.;
+            if(i+k < tmpImg->getWidth() &&  j+l < tmpImg->getHeight())
+                tmpImg->setPixelAt(i+k, j+l, c, res[l]);
+            res[l] = 0.;
           }
         }
      }
