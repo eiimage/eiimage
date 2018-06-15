@@ -531,8 +531,8 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *----------------------------------------------------------------------*/
 
 for(unsigned int c = 0; c < tmpImg->getNbChannels(); ++c) {
-  for(unsigned int i=0 ; i< tmpImg->getHeight() ; i+=idt) {
-     for(unsigned int j=0 ; j<tmpImg->getWidth(); j+=idt)
+  for(unsigned int i=0 ; i< tmpImg->getWidth() ; i+=idt) {
+     for(unsigned int j=0 ; j<tmpImg->getHeight(); j+=idt)
      {
         for(int k=0 ; k<idt ; k++)
           res[k] = 0.;
