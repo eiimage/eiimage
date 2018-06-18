@@ -40,8 +40,8 @@ Pyramid::Filtre PyramidDialog::getFilter(std::string &to_print) const {
         case 1: notFoundError = !filters.getFromName("gaussien", filter); 
                 to_print = "Decomposition pyramidale avec filtre gaussien : \n";
                 break;
-        case 2: notFoundError = !filters.getFromName("trimodale", filter); 
-                to_print = "Decomposition pyramidale avec filtre trimodale : \n";
+        case 2: notFoundError = !filters.getFromName("trimodal", filter); 
+                to_print = "Decomposition pyramidale avec filtre trimodal : \n";
                 break;
         case 3: notFoundError = !filters.getFromName("rectangulaire", filter); 
                 to_print = "Decomposition pyramidale avec filtre rectangulaire : \n";

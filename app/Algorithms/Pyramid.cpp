@@ -42,7 +42,7 @@ Pyramid::Filtre gauss = {
 };
 
 Pyramid::Filtre trimod = {
-    "trimodale",
+    "trimodal",
     {0.6, 0.25, -0.05, 0.0, 0.0, 0.0 ,0.0, 0.0, 0.0, 0.0},
     4,
 };
