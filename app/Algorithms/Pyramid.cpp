@@ -59,9 +59,13 @@ Pyramid::Filtre qmf = {
     1024,
 };
 
+const Filtre all_filters[] = {triang, gauss, trimod, rect, qmf};
 
 Pyramid::Filters::Filters()
-{
+{   
+   /* num_filters = 5;
+    filters = all_filters;
+    */
     num_filters=(int)sizeof(tp6_filter_file_data)/sizeof(Filtre);
     filters = reinterpret_cast<const Filtre*>(tp6_filter_file_data);
 }
@@ -70,6 +74,7 @@ Pyramid::Filters::~Filters()
 {
     if( filters != NULL ) {
 //        delete[] filters;
+          filters = NULL;
     }
 }
 
@@ -95,6 +100,9 @@ bool Filters::getFromName( const char *name, Filtre &to_fill ) {
                 copy_filter( filters[counter], to_fill );
             }
         }
+    }
+    if(!found){
+        getDefault(to_fill);
     }
     return found;
 }

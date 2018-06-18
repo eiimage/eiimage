@@ -22,6 +22,8 @@
 
 #include <QDialog>
 #include "../Algorithms/Pyramid.h"
+#include <cstring>
+#include <cstdlib>
 
 namespace Ui {
 class PyramidDialog;
@@ -34,7 +36,7 @@ class PyramidDialog : public QDialog
 public:
     explicit PyramidDialog(QWidget *parent = 0);
     ~PyramidDialog();
-    Pyramid::Filtre getFilter() const;
+    Pyramid::Filtre getFilter(std::string &to_print) const;
     int getNbStep();
     bool isGaussian() const;
     bool onlyOneStep() const;
