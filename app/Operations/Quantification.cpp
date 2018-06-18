@@ -70,6 +70,20 @@ void Quantification::saveAs(std::string filename) {
     }
 }
 
+int Quantification::valueOf(int value) const {
+        for(int i = 0; i < nbThresholds(); ++i) {
+            if(value < _threshold[i]) {
+                return _values[i];
+            }
+        }
+        return _values[nbThresholds()];
+    }
+
+
+
+
+
+
 Quantification Quantification::linearQuant(int size) {
 
     Quantification quant(size);
@@ -210,13 +224,13 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
 
         //calcul pdf
 
-        for (int j=0; j<size-1;j++){
+        for (int j=0; j<size-2;j++){
             for(int i= ((quant._threshold)[j]); i <= ((quant._threshold)[j+1]); i++){
                 som_lum += histogram[i]*i;
                 nb_points += histogram[i];
             }
 
-        quant._values[j]= (int) quant._values[j]*(som_lum/nb_points) / (som_lum/nb_points);
+            quant._values[j]= (int) quant._values[j]*(som_lum/nb_points) / (som_lum/nb_points);
         }//for (parcours du tableau de valeurs)
 
         cpt--;

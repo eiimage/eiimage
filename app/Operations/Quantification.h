@@ -31,14 +31,7 @@ public:
 
     void saveAs(std::string filename);
 
-    inline int valueOf(int value) const {
-        for(int i = 0; i < nbThresholds(); ++i) {
-            if(value < _threshold[i]) {
-                return _values[i];
-            }
-        }
-        return _values[nbThresholds()];
-    }
+    int valueOf(int value) const ;
 
     inline int nbValues() const {return size;}
 
