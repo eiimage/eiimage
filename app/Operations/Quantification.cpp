@@ -208,7 +208,7 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
     Histogram histogram = image->getHistogram(c);
     int som_lum = 0;
     int nb_points = 0;
-    int cpt = 6;
+    int cpt = 12;
 
     // initialisation : repartion lineaire des niveaux de quantification
     Quantification quant = linearQuant(size);
@@ -230,7 +230,10 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
                 nb_points += histogram[i];
             }
 
-            quant._values[j]= (int) quant._values[j]*(som_lum/nb_points) / (som_lum/nb_points);
+            quant._values[j]= (int) (som_lum/nb_points);
+
+            //weird equation : 
+            // quant._values[j]= (int) quant._values[j]*(som_lum/nb_points) / (som_lum/nb_points);
         }//for (parcours du tableau de valeurs)
 
         cpt--;

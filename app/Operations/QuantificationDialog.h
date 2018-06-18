@@ -33,7 +33,7 @@ class QuantificationDialog : public QDialog
 public:
     enum QuantMethod {LinearQuant, NonLinearQuant, NonLinearQuantOptimized};
     explicit QuantificationDialog(QWidget *parent = 0, QString imgName = QString());
-    Quantification getQuantif(const imagein::Image *image, unsigned int c);
+    Quantification getQuantif(const imagein::Image *image, unsigned int c, std::string &);
     Quantification getQuantif();
 signals:
     

@@ -37,10 +37,58 @@ bool QuantificationOp::needCurrentImg() const {
     return false;
 }
 
+string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * quant){
+    char buffer[30];
+    string output_msg;
+    int val;    
+    sprintf(buffer, "\nCanal %d : \n", c);
+    output_msg += buffer;
+
+    output_msg += "             Valeurs :  ";
+
+    for(int i = 0; i < quant->nbValues(); ++i) {
+        
+        val =(int)quant->value(i);
+        if(i != 0) output_msg += " |  ";
+                
+        sprintf(buffer, "%d ", val);
+        output_msg += buffer;
+        if(val < 10) output_msg += " ";
+        if(val < 100 ) output_msg += " ";
+
+
+    }
+    output_msg += "\n";
+    output_msg += "             Seuils    :       ";
+            
+    for(int i = 0; i < quant->nbThresholds(); ++i) {
+        val =(int)quant->threshold(i);
+
+        if(i != 0) output_msg += " |  ";
+                
+        sprintf(buffer, "%d ", val);
+        output_msg += buffer;
+                
+        if(val < 10) output_msg += " ";
+        if(i+1<quant->nbThresholds()) {
+             if((val < 100 )&& ((int)quant->threshold(i+1) < 100))   output_msg += " ";
+        }
+    }
+
+    output_msg += "\n";
+
+    return output_msg;
+}
+
+
 void QuantificationOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
+    string quantType;
+    string output_msg ="" ;
+
     QuantificationDialog* dialog;
     if(image != NULL) {
         QString imgName = QString::fromStdString(imgList.find(image)->second);
+        
         dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
     }
     else {
@@ -53,24 +101,28 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
     if(code!=QDialog::Accepted) return;
 
     if(image != NULL) {
+        
         Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-            Quantification quantification = dialog->getQuantif(image, c);
-            for(int i = 0; i < quantification.nbValues(); ++i) {
-                cout << (int)quantification.value(i) << ".";
-            }
-            cout << endl;
-            for(int i = 0; i < quantification.nbThresholds(); ++i) {
-                cout << quantification.threshold(i) << ".";
-            }
-            cout << endl;
+            
+            
+            Quantification quantification = dialog->getQuantif(image, c, quantType);
+            
+            //Generate the text to print in the information window
+            output_msg += quantificationOpLog(c, &quantification);
+
+
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
+                    
                     const Image::depth_t value = image->getPixelAt(i, j, c);
                     resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
             }
         }
+        
+        outText(quantType);
+        outText(output_msg);
         outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
     }
 

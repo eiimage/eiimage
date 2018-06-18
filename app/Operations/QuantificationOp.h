@@ -29,6 +29,8 @@ public:
 
     QuantificationOp();
 
+    std::string quantificationOpLog(unsigned int channel, Quantification * quant);
+
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
