@@ -618,7 +618,7 @@ string Pyramid::entropie_p(const uint8_t *pyra,int etage_f,int nbc,int nbl)
         j=j+taille_c*taille_l;
         taille_c=taille_c/2;
         taille_l=taille_l/2;
-        sprintf(buffer, "L'entropie de l'tage %d est %1f\n",i,h);
+        sprintf(buffer, "L'entropie de l'etage %d est %1f\n",i,h);
         returnval = returnval + buffer;
     }
    return returnval;
