@@ -52,8 +52,8 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
 
     QGroupBox* groupBox = new QGroupBox(dialog);
     QHBoxLayout* groupLayout = new QHBoxLayout(groupBox);
-    QRadioButton* magButton = new QRadioButton("Magnitude/Phase");
-    QRadioButton* realButton = new QRadioButton("Real/Imaginary");
+    QRadioButton* magButton = new QRadioButton(qApp->translate("IFFTOp","Magnitude/Phase"));
+    QRadioButton* realButton = new QRadioButton(qApp->translate("IFFTOp", "Real/Imaginary"));
     groupLayout->addWidget(magButton);
     groupLayout->addWidget(realButton);
     layout->addWidget(groupBox);
@@ -76,7 +76,7 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
     layout->addWidget(realWidget);
     realWidget->setVisible(false);
 
-    QCheckBox* centerBox = new QCheckBox("Source is centered");
+    QCheckBox* centerBox = new QCheckBox(qApp->translate("IFFTOp", "Source is centered"));
     centerBox->setChecked(true);
     layout->addWidget(centerBox);
 
