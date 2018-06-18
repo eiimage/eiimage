@@ -30,7 +30,7 @@ namespace Pyramid
         return ( ( n > 0 ) && ( (n & (n - 1) ) == 0) );
     }
 
-    typedef struct Filtre {
+    struct Filtre {
                 char nom_f[30];
                 float coeff_f[10];
           int taille_f;
