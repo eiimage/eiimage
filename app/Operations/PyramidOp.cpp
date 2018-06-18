@@ -58,7 +58,7 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image* resImg = NULL;
     string s;
-    Pyramid::filtre filtre = dialog->getFilter();
+    Pyramid::Filtre filtre = dialog->getFilter();
     try {
         if(dialog->onlyOneStep()) {
             if(dialog->isGaussian()) {

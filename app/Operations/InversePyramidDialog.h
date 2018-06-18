@@ -34,7 +34,7 @@ class InversePyramidDialog : public QDialog
 public:
     explicit InversePyramidDialog(QWidget *parent = 0);
     ~InversePyramidDialog();
-    Pyramid::filtre getFilter() const;
+    Pyramid::Filtre getFilter() const;
     int getNbStep() const;
     int getStep() const;
 

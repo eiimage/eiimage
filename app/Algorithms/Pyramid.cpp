@@ -29,10 +29,18 @@ using namespace Pyramid;
 
 const uint8_t tp6_filter_file_data[] = {0x74, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x75, 0x6c, 0x61, 0x69, 0x72, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x80, 0x3e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x67, 0x61, 0x75, 0x73, 0x73, 0x69, 0x65, 0x6e, 0x00, 0x00, 0xf8, 0x45, 0x26, 0x00, 0xf8, 0x45, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xcd, 0xcc, 0xcc, 0x3e, 0x00, 0x00, 0x80, 0x3e, 0xcd, 0xcc, 0x4c, 0x3d, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x74, 0x72, 0x69, 0x6d, 0x6f, 0x64, 0x61, 0x6c, 0x00, 0x00, 0x00, 0x45, 0x26, 0x00, 0xf8, 0x45, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x9a, 0x99, 0x19, 0x3f, 0x00, 0x00, 0x80, 0x3e, 0xcd, 0xcc, 0x4c, 0xbd, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x72, 0x65, 0x63, 0x74, 0x61, 0x6e, 0x67, 0x75, 0x6c, 0x61, 0x69, 0x72, 0x65, 0x00, 0x00, 0x00, 0xf8, 0x45, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xae, 0x47, 0xe1, 0x3d, 0xae, 0x47, 0xe1, 0x3d, 0xae, 0x47, 0xe1, 0x3d, 0xae, 0x47, 0xe1, 0x3d, 0xae, 0x47, 0xe1, 0x3d, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x71, 0x6d, 0x66, 0x00, 0x58, 0xec, 0x00, 0x00, 0xf8, 0x45, 0x26, 0x00, 0x00, 0x00, 0xf8, 0x45, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x51, 0x88, 0x10, 0x3f, 0x16, 0xde, 0x95, 0x3e, 0x9c, 0xf9, 0x55, 0xbd, 0xae, 0xf0, 0x2e, 0xbd, 0x2f, 0x6e, 0xa3, 0x3c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00};
 
+/*Pyramid::Filtre triang = {
+    "triangulaire",
+    {0.0, 5.78564e-39, -5.6938e-39, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.58732e-43},
+    0,
+};
+*/
+
+
 Pyramid::Filters::Filters()
 {
-    num_filters=(int)sizeof(tp6_filter_file_data)/sizeof(filtre);
-    filters = reinterpret_cast<const filtre*>(tp6_filter_file_data);
+    num_filters=(int)sizeof(tp6_filter_file_data)/sizeof(Filtre);
+    filters = reinterpret_cast<const Filtre*>(tp6_filter_file_data);
 }
 
 Pyramid::Filters::~Filters()
@@ -42,7 +50,7 @@ Pyramid::Filters::~Filters()
     }
 }
 
-bool Pyramid::Filters::getFromPos( int pos, filtre &to_fill ) {
+bool Pyramid::Filters::getFromPos( int pos, Filtre &to_fill ) {
     bool found = false;
     if( pos >= 0 && pos < num_filters ) {
         found = true;
@@ -51,7 +59,7 @@ bool Pyramid::Filters::getFromPos( int pos, filtre &to_fill ) {
     return found;
 }
 
-bool Filters::getFromName( const char *name, filtre &to_fill ) {
+bool Filters::getFromName( const char *name, Filtre &to_fill ) {
     bool found = false;
     if( strcmp( name, "default - gaussien" ) == 0 ) {
       found = true;
@@ -72,7 +80,7 @@ int Filters::size() {
   return num_filters;
 }
 
-void Filters::copy_filter(const filtre &source, filtre &dest ) {
+void Filters::copy_filter(const Filtre &source, Filtre &dest ) {
     int counter;
     for( counter=0; counter< 30; counter++ ) {
       dest.nom_f[counter] = source.nom_f[counter];
@@ -83,7 +91,7 @@ void Filters::copy_filter(const filtre &source, filtre &dest ) {
     dest.taille_f = source.taille_f;
 }
 
-void Filters::getDefault( filtre &to_fill ) {
+void Filters::getDefault( Filtre &to_fill ) {
   strcpy( to_fill.nom_f, "default - gaussien" );
     to_fill.taille_f =  (float)2;
     to_fill.coeff_f[0] =  (float)0.4;
@@ -94,7 +102,7 @@ void Filters::getDefault( filtre &to_fill ) {
 /*---------------------------------------------------------------------------
     Cration de l'tage suivant de la pyramide Gaussienne
 ---------------------------------------------------------------------------*/
-void Pyramid::etage_suiv_g(const uint8_t *srcTab, uint8_t *dstTab, int srcWidth, int srcHeight, filtre &utile)
+void Pyramid::etage_suiv_g(const uint8_t *srcTab, uint8_t *dstTab, int srcWidth, int srcHeight, Filtre &utile)
 {
     cout << "etage_suiv_g " << srcWidth << " " << srcHeight << " " << endl;
     cout << "src = " << (uintptr_t)srcTab << " dst = " << (uintptr_t)dstTab << endl;
@@ -122,7 +130,7 @@ void Pyramid::etage_suiv_g(const uint8_t *srcTab, uint8_t *dstTab, int srcWidth,
 /*---------------------------------------------------------------------------
     Cration d'une pyramide Gaussienne jusqu'au nime tage
 ---------------------------------------------------------------------------*/
-void Pyramid::pyram_g_n(uint8_t *rep, int nStage, long nbc, long nbl, const uint8_t *itab, filtre &utile)
+void Pyramid::pyram_g_n(uint8_t *rep, int nStage, long nbc, long nbl, const uint8_t *itab, Filtre &utile)
 {
     cout << "pyram_g_n " << nStage << " " << nbc << " " << nbl << endl;
     int taille_c=nbc;
@@ -146,7 +154,7 @@ void Pyramid::pyram_g_n(uint8_t *rep, int nStage, long nbc, long nbl, const uint
 /*---------------------------------------------------------------------------
     Creation d'une pyramide Laplacienne jusqu'au nime tage
 ---------------------------------------------------------------------------*/
-void Pyramid::pyram_l_n (uint8_t *rep,int n, long nbc, long nbl, const uint8_t *itab, filtre &utile)
+void Pyramid::pyram_l_n (uint8_t *rep,int n, long nbc, long nbl, const uint8_t *itab, Filtre &utile)
 {
     int i;
     int j=0;
@@ -190,7 +198,7 @@ void Pyramid::pyram_l_n (uint8_t *rep,int n, long nbc, long nbl, const uint8_t *
     Cration d'une pyramide Gaussienne avec entre en conversationnel
     des diffrentes proprits de cette pyramide
 ---------------------------------------------------------------------------*/
-Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, filtre &utile, string &to_print)
+Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, Filtre &utile, string &to_print)
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -224,7 +232,7 @@ Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, filtre &utile, st
 /*---------------------------------------------------------------------------
     Cration d'un tage de la  pyramide Gaussienne
 ---------------------------------------------------------------------------*/
-Image *Pyramid::n_pyram_g(const Image *im, int etage_f, filtre &utile )
+Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile )
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -270,7 +278,7 @@ Image *Pyramid::n_pyram_g(const Image *im, int etage_f, filtre &utile )
     Cration d'une pyramide Laplacienne avec entre en conversationnel
     des diffrentes proprits de cette pyramide
 ---------------------------------------------------------------------------*/
-Image *Pyramid::pyram_l (const Image *im, int etage_f, filtre &utile, string &to_print)
+Image *Pyramid::pyram_l (const Image *im, int etage_f, Filtre &utile, string &to_print)
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -302,7 +310,7 @@ Image *Pyramid::pyram_l (const Image *im, int etage_f, filtre &utile, string &to
 /*---------------------------------------------------------------------------
     Cration d'un tage de la  pyramide Laplacienne
 ---------------------------------------------------------------------------*/
-Image *Pyramid::n_pyram_l(const Image *im, int etage_f, filtre &utile)
+Image *Pyramid::n_pyram_l(const Image *im, int etage_f, Filtre &utile)
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -351,7 +359,7 @@ Image *Pyramid::n_pyram_l(const Image *im, int etage_f, filtre &utile)
 /*---------------------------------------------------------------------------
     Filtrage d'un point de l'image suivant une ligne
 ---------------------------------------------------------------------------*/
-uint8_t Pyramid::filt_point_1d_lg(const uint8_t *tab,int cl, int x, int y, filtre &utile)
+uint8_t Pyramid::filt_point_1d_lg(const uint8_t *tab,int cl, int x, int y, Filtre &utile)
 {
     float partiel=0.;
     int i;
@@ -396,7 +404,7 @@ uint8_t Pyramid::filt_point_1d_lg(const uint8_t *tab,int cl, int x, int y, filtr
 /*---------------------------------------------------------------------------
     Filtrage d'un point de l'image suivant une colonne
 ---------------------------------------------------------------------------*/
-uint8_t Pyramid::filt_point_1d_cl(const uint8_t *tab,int lg,int cl, int x, int y, filtre &utile)
+uint8_t Pyramid::filt_point_1d_cl(const uint8_t *tab,int lg,int cl, int x, int y, Filtre &utile)
 {
     float partiel=0.;
     int i;
@@ -439,7 +447,7 @@ uint8_t Pyramid::filt_point_1d_cl(const uint8_t *tab,int lg,int cl, int x, int y
 /*---------------------------------------------------------------------------
     Filtrage d'une ligne
 ---------------------------------------------------------------------------*/
-void Pyramid::filt_ligne(uint8_t *ligne,int taille_c, filtre &utile)
+void Pyramid::filt_ligne(uint8_t *ligne,int taille_c, Filtre &utile)
 {
     int i;
     uint8_t *intermed;
@@ -457,7 +465,7 @@ void Pyramid::filt_ligne(uint8_t *ligne,int taille_c, filtre &utile)
 /*---------------------------------------------------------------------------
     Filtrage d'une image suivant les colonnes
 ---------------------------------------------------------------------------*/
-void Pyramid::filt_tab_cl(uint8_t *tab,int taille_c,int taille_l, filtre &utile)
+void Pyramid::filt_tab_cl(uint8_t *tab,int taille_c,int taille_l, Filtre &utile)
 {
     int i,j;
     uint8_t *intermed;
@@ -482,7 +490,7 @@ void Pyramid::filt_tab_cl(uint8_t *tab,int taille_c,int taille_l, filtre &utile)
 /*---------------------------------------------------------------------------
     Agrandissement d'une image (avec filtrage)
 ---------------------------------------------------------------------------*/
-void Pyramid::agrandir(uint8_t *petit,uint8_t *grand,int taille_c,int taille_l, filtre &utile)
+void Pyramid::agrandir(uint8_t *petit,uint8_t *grand,int taille_c,int taille_l, Filtre &utile)
 {
     int i,j;
     uint8_t *intermed;
@@ -512,7 +520,7 @@ void Pyramid::agrandir(uint8_t *petit,uint8_t *grand,int taille_c,int taille_l, 
 }
 
 /*---------------------------------------------------------------------------
-    Rarangement de la pyramide
+    Rearangement de la pyramide
 ---------------------------------------------------------------------------*/
 
 void Pyramid::reconstruction(uint8_t *pyra,int n, long nbc, long nbl)
@@ -625,7 +633,7 @@ string Pyramid::entropie_p(const uint8_t *pyra,int etage_f,int nbc,int nbl)
 }
 
 
-Image *Pyramid::rebuild_interface( const Image *pyramid, int etage_f, int pyramid_to, filtre &utile ) {
+Image *Pyramid::rebuild_interface( const Image *pyramid, int etage_f, int pyramid_to, Filtre &utile ) {
     // rebuilds from an image that was saved
     // etage_f = stage that the original image was built to
     char buffer[255];

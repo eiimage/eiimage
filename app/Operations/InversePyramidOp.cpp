@@ -56,7 +56,7 @@ void InversePyramidOp::operator()(const imagein::Image* img, const std::map<cons
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image* resImg = NULL;
     string s;
-    Pyramid::filtre filter = dialog->getFilter();
+    Pyramid::Filtre filter = dialog->getFilter();
     try {
         resImg = Pyramid::rebuild_interface(image, dialog->getNbStep(), dialog->getStep(), filter);
     }

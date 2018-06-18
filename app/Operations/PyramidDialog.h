@@ -34,7 +34,7 @@ class PyramidDialog : public QDialog
 public:
     explicit PyramidDialog(QWidget *parent = 0);
     ~PyramidDialog();
-    Pyramid::filtre getFilter() const;
+    Pyramid::Filtre getFilter() const;
     int getNbStep();
     bool isGaussian() const;
     bool onlyOneStep() const;

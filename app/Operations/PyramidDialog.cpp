@@ -32,9 +32,9 @@ PyramidDialog::~PyramidDialog()
     delete ui;
 }
 
-Pyramid::filtre PyramidDialog::getFilter() const {
+Pyramid::Filtre PyramidDialog::getFilter() const {
     Pyramid::Filters filters;
-    Pyramid::filtre filter;
+    Pyramid::Filtre filter;
     switch(ui->filterBox->currentIndex()) {
         case 1: filters.getFromName("gaussien", filter); break;
         case 2: filters.getFromName("trimodal", filter); break;
