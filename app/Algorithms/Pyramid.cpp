@@ -31,43 +31,43 @@ const uint8_t tp6_filter_file_data[] = {0x74, 0x72, 0x69, 0x61, 0x6e, 0x67, 0x75
 
 Pyramid::Filtre triang = {
     "triangulaire",
-    {0.0, 5.78564e-39, -5.6938e-39, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-    256,
+    {0.5, 0.25, 0.0, 0.0, 0.0, 0.0 ,0.0, 0.0, 0.0, 0.0},
+    1,
 };
 
 Pyramid::Filtre gauss = {
     "gaussien",
-    {7.3826e-41, -4.98074e+07, -5.76763e-39,  4.95452e+07, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-    256,
+    {0.4, 0.25, 0.05, 0.0, 0.0, 0.0 , 0.0, 0.0, 0.0, 0.0},
+    2, 
 };
 
 Pyramid::Filtre trimod = {
     "trimodale",
-    {5.54592e-41, 9.87447e-24, -5.76763e-39, 9.90904e+07, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-    512,
+    {0.6, 0.25, -0.05, 0.0, 0.0, 0.0 ,0.0, 0.0, 0.0, 0.0},
+    4,
 };
 
 Pyramid::Filtre rect = {
     "rectangulaire",
-    {6.25189e-41, -2.18687e+20, -2.18687e+20, -2.18687e+20, -2.18687e+20, -2.17902e+20, 0.0, 0.0, 0.0, 0.0 },
-    1024,
+    {0.11, 0.11, 0.11, 0.11, 0.11, 0.0, 0.0, 0.0 ,0.0, 0.0},
+    4,
 };
 
 Pyramid::Filtre qmf = {
     "qmf",
-    {2.92479e-41, 3.76857e-29, -3.8494e-26, 2.60699e+13, 8.60315e-11, -1.01915e-17, 0.0, 0.0, 0.0, 0.0},
-    1024,
+    {0.56458, 0.29271, -0.05224, -0.04271, 0.01995, 0.0, 0.0, 0.0 ,0.0, 0.0},
+    4,
 };
 
 const Filtre all_filters[] = {triang, gauss, trimod, rect, qmf};
 
 Pyramid::Filters::Filters()
 {   
-   /* num_filters = 5;
+    num_filters = 5;
     filters = all_filters;
-    */
+    /*
     num_filters=(int)sizeof(tp6_filter_file_data)/sizeof(Filtre);
-    filters = reinterpret_cast<const Filtre*>(tp6_filter_file_data);
+    filters = reinterpret_cast<const Filtre*>(tp6_filter_file_data);*/
 }
 
 Pyramid::Filters::~Filters()

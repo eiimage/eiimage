@@ -37,14 +37,24 @@ Pyramid::Filtre PyramidDialog::getFilter(std::string &to_print) const {
     Pyramid::Filtre filter;
     bool notFoundError = false;
     switch(ui->filterBox->currentIndex()) {
-        case 1: notFoundError = !filters.getFromName("gaussien", filter); break;
-        case 2: notFoundError = !filters.getFromName("trimodal", filter); break;
-        case 3: notFoundError = !filters.getFromName("rectangulaire", filter); break;
-        case 4: notFoundError = !filters.getFromName("qmf", filter); break;
-        default: notFoundError = !filters.getFromName("triangulaire", filter); break;
+        case 1: notFoundError = !filters.getFromName("gaussien", filter); 
+                to_print = "Decomposition pyramidale avec filtre gaussien : \n";
+                break;
+        case 2: notFoundError = !filters.getFromName("trimodale", filter); 
+                to_print = "Decomposition pyramidale avec filtre trimodale : \n";
+                break;
+        case 3: notFoundError = !filters.getFromName("rectangulaire", filter); 
+                to_print = "Decomposition pyramidale avec filtre rectangulaire : \n";
+                break;
+        case 4: notFoundError = !filters.getFromName("qmf", filter); 
+                to_print = "Decomposition pyramidale avec filtre qmf : \n";
+                break;
+        default: notFoundError = !filters.getFromName("triangulaire", filter); 
+                to_print = "Decomposition pyramidale avec filtre triangulaire : \n";
+                break;
     }
     if(notFoundError){
-        to_print = "Filtre non trouvé. Décomposition avec filtre gaussien par défaut. \n\n";
+        to_print = "Filtre non trouvé. Décomposition avec filtre gaussien par défaut. \n";
     }
     return filter;
 }
