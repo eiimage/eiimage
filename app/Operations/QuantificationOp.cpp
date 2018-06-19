@@ -70,9 +70,7 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
         output_msg += buffer;
                 
         if(val < 10) output_msg += " ";
-        if(i+1<quant->nbThresholds()) {
-             if((val < 100 )&& ((int)quant->threshold(i+1) < 100))   output_msg += " ";
-        }
+        if(val < 100 ) output_msg += " ";
     }
 
     output_msg += "\n";
