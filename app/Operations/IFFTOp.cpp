@@ -47,7 +47,7 @@ void IFFTOp::operator()(const imagein::Image_t<double>*, const map<const imagein
 
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
-    dialog->setMinimumWidth(180);
+    dialog->setMinimumWidth(460);
     QVBoxLayout* layout = new QVBoxLayout(dialog);
 
     QGroupBox* groupBox = new QGroupBox(dialog);

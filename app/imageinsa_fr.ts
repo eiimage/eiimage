@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name></name>
     <message>
@@ -788,7 +788,7 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <source>Combine color planes</source>
-        <translation>Combiner les plans de couleurs</translation>
+        <translation>Combiner les plans RVB</translation>
     </message>
     <message>
         <source>Combine HSV planes</source>
@@ -901,7 +901,7 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <source>Split color planes</source>
-        <translation>Séparer les plans de couleurs </translation>
+        <translation>Séparer les plans RVB</translation>
     </message>
     <message>
         <source>Split HSV planes</source>
