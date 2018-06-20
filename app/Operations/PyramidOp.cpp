@@ -60,37 +60,21 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     string s;
     string e;
     Pyramid::Filtre filtre = dialog->getFilter(e);
-
-    QString titleType;
-    QString titleFilter;
-
-    if(e=="Decomposition pyramidale avec filtre gaussien : \n")titleFilter = QString(qApp->translate("Operations", "Gaussian filter"));
-    else if(e=="Decomposition pyramidale avec filtre trimodal : \n")titleFilter = QString(qApp->translate("Operations", "Trimodal filter"));
-    else if(e=="Decomposition pyramidale avec filtre rectangulaire : \n")titleFilter = QString(qApp->translate("Operations", "Rectangular filter"));
-    else if(e=="Decomposition pyramidale avec filtre qmf : \n")titleFilter = QString(qApp->translate("Operations", "QMF filter"));
-    else if(e=="Decomposition pyramidale avec filtre triangulaire : \n") titleFilter = QString(qApp->translate("Operations", "Triangular filter"));
-    else { titleFilter = QString(qApp->translate("Operations", "Gaussian filter"));}
-
-
     try {
         if(dialog->onlyOneStep()) {
             if(dialog->isGaussian()) {
                 resImg = Pyramid::n_pyram_g(image, dialog->onlyStep(), filtre);
-                titleType = QString(qApp->translate("Operations","Gaussian pyramidal decomposition"));
             }
             else {
                 resImg = Pyramid::n_pyram_l(image, dialog->onlyStep(), filtre);
-                titleType = QString(qApp->translate("Operations","Laplacian pyramidal decomposition"));
             }
         }
         else {
             if(dialog->isGaussian()) {
                 resImg = Pyramid::pyram_g(image, dialog->getNbStep(), filtre, s);
-                titleType = QString(qApp->translate("Operations","Gaussian pyramidal decomposition"));
             }
             else {
                 resImg = Pyramid::pyram_l(image, dialog->getNbStep(), filtre, s);
-                titleType = QString(qApp->translate("Operations","Laplacian pyramidal decomposition"));
             }
         }
     }
@@ -98,8 +82,7 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
         QMessageBox::critical(NULL, "Error", QString(e));
         return;
     }
-
-    outImage(resImg, titleType.toStdString() + " - " + titleFilter.toStdString());
+    outImage(resImg, "Pyramid");
     outText(e);
     outText(s);
 }
