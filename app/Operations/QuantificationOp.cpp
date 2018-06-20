@@ -218,7 +218,6 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         else{
             imgName = QString("");
         }
-        outText(output_msg);
         outImage(resImg, imgName.toStdString() + windowName.toStdString());
     }
 
