@@ -186,7 +186,6 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
             if(checkOptiQuant)
                 optiQuant += checkOptimumQuantizier(image, &quantification, c);
         }
-<<<<<<< HEAD
 
         
         
@@ -198,7 +197,6 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         }
 
         outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
-=======
         QString windowName;
         QString imgName;
 
@@ -222,7 +220,6 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         }
         outText(output_msg);
         outImage(resImg, imgName.toStdString() + windowName.toStdString());
->>>>>>> 8acf3bb2135a5aa20dbb8cc017975222214c760b
     }
 
 }
