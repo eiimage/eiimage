@@ -226,9 +226,8 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
             diff[i] = abs(diff[i] - quant._threshold[i]);
         }
         
-       
+        
         //calcul de la condition d'arret (moyenne des écarts < 1 )
-       
         for(int i = 0; i<size-1 ; i++){
             diff_mean += diff[i];
         }
