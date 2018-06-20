@@ -98,24 +98,26 @@ void QuantificationDialog::methodChanged(int method) {
     this->adjustSize();
 }
 
-Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c, std::string &to_print) {
+Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c, std::string &to_print, bool * checkOptiQuant) {
+    *checkOptiQuant = false;
     int size = _sizeBox->value();
     if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
         case 1: 
-                to_print = "Quantification non lineaire a valeur centrees :";
+                to_print = "Quantification non lineaire a valeurs centrees :";
                 return Quantification::nonLinearQuant(size, image, c); 
                 break;
         case 2: 
-                to_print = "Quantification non lineaire a moyennes : ";
+                to_print = "Quantification non lineaire a valeurs moyennes : ";
                 return Quantification::nonLinearQuantOptimized(size, image, c); 
                 break;
         case 3: 
-                to_print = "Quantification personnalisée :";
+                to_print = "Quantification personnalisee :";
                 return _quantWidget->getQuantif(); 
                 break;
         case 4: 
                 to_print = "Quantification LloydMax :";
+                *checkOptiQuant = true;
                 return Quantification::lloydMaxQuant(size, image, c);
                 break;
 
