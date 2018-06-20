@@ -196,7 +196,7 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
             outText("Respect des conditions du quantifieur optimal : ");
             outText(optiQuant);
         }
-       // outText(optiQuant);
+
         outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
 =======
         QString windowName;
