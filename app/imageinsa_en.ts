@@ -6,40 +6,40 @@
     <message>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
-        <translation type="vanished">&amp;Image</translation>
+        <translation>&amp;Image</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
-        <translation type="vanished">&amp;Tools</translation>
+        <translation>&amp;Tools</translation>
     </message>
     <message>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
-        <translation type="vanished">&amp;Encoding</translation>
+        <translation>&amp;Encoding</translation>
     </message>
     <message>
         <source>Transforms</source>
-        <translation type="vanished">Transforms</translation>
+        <translation>Transforms</translation>
     </message>
     <message>
         <source>Analysis</source>
-        <translation type="vanished">Analysis</translation>
+        <translation>Analysis</translation>
     </message>
     <message>
         <source>Filtering</source>
-        <translation type="vanished">Filtering</translation>
+        <translation>Filtering</translation>
     </message>
 </context>
 <context>
     <name>BFlit</name>
     <message>
         <source>Number of point on each side : </source>
-        <translation type="vanished">Number of points on each side : </translation>
+        <translation>Number of points on each side : </translation>
     </message>
     <message>
         <source>Number of iteration : </source>
-        <translation type="vanished">Number of iteration : </translation>
+        <translation>Number of iteration : </translation>
     </message>
 </context>
 <context>
@@ -47,61 +47,61 @@
     <message>
         <source>centered</source>
         <oldsource> - centered</oldsource>
-        <translation type="vanished">centered</translation>
+        <translation>centered</translation>
     </message>
 </context>
 <context>
     <name>ClassAnalysis</name>
     <message>
         <source>mean</source>
-        <translation type="vanished">mean</translation>
+        <translation>mean</translation>
     </message>
     <message>
         <source>standard deviation</source>
-        <translation type="vanished">standard deviation</translation>
+        <translation>standard deviation</translation>
     </message>
     <message>
         <source>classified</source>
-        <translation type="vanished">classified</translation>
+        <translation>classified</translation>
     </message>
 </context>
 <context>
     <name>ClassAnalysisDialog</name>
     <message>
         <source>Class analysis</source>
-        <translation type="vanished">Class analysis</translation>
+        <translation>Class analysis</translation>
     </message>
     <message>
         <source>Step : </source>
-        <translation type="vanished">Step : </translation>
+        <translation>Step : </translation>
     </message>
     <message>
         <source>Classification step</source>
-        <translation type="vanished">Classification step</translation>
+        <translation>Classification step</translation>
     </message>
     <message>
         <source>Learning step</source>
-        <translation type="vanished">Learning step</translation>
+        <translation>Learning step</translation>
     </message>
     <message>
         <source>Print file info</source>
-        <translation type="vanished">Print file info</translation>
+        <translation>Print file info</translation>
     </message>
     <message>
         <source>Window size : </source>
-        <translation type="vanished">Window size : </translation>
+        <translation>Window size : </translation>
     </message>
     <message>
         <source>File : </source>
-        <translation type="vanished">File : </translation>
+        <translation>File : </translation>
     </message>
     <message>
         <source>browse</source>
-        <translation type="vanished">browse</translation>
+        <translation>browse</translation>
     </message>
     <message>
         <source>Please select the image&apos;s area to classify :</source>
-        <translation type="vanished">Please select the image&apos;s area to classify :</translation>
+        <translation>Please select the image&apos;s area to classify :</translation>
     </message>
 </context>
 <context>
@@ -112,568 +112,576 @@ Nombre de classes = %1 </source>
         <oldsource>
 Nombre de classes = %1 
 </oldsource>
-        <translation type="vanished">
+        <translation>
 Number of classes = %1 </translation>
     </message>
     <message>
         <source>Valeur de la classe %1 = %2</source>
         <oldsource>Valeur de la classe %1 = %2
 </oldsource>
-        <translation type="vanished">Value of class %1 = %2</translation>
+        <translation>Value of class %1 = %2</translation>
     </message>
     <message>
         <source>Voici les résultats du classement : 
 </source>
         <oldsource>Voici les rÃ©sultats du classement : 
 </oldsource>
-        <translation type="vanished">Here are the classification results: 
+        <translation>Here are the classification results: 
 </translation>
     </message>
     <message>
         <source>Critère de zone intérieure : </source>
         <oldsource>CritÃ¨re de zone intÃ©rieure : </oldsource>
-        <translation type="vanished">Inner zone criterion: </translation>
+        <translation>Inner zone criterion: </translation>
     </message>
     <message>
         <source>Critère de zone frontière : </source>
         <oldsource>CritÃ¨re de zone frontiÃ¨re : </oldsource>
-        <translation type="vanished">Border zone criterion : </translation>
+        <translation>Border zone criterion : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Critère de zones (relatifs aux zones totales) : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;CritÃ¨re de zones (relatifs aux zones totales) : &lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Areas&apos; criteria (relative to the whole zones) : &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Areas&apos; criteria (relative to the whole zones) : &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Select the image&apos;s classes zones : &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Select the image&apos;s classes zones : &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Select the image&apos;s classes zones : &lt;/b&gt;</translation>
     </message>
     <message>
         <source>Le taux de bon classement en zone intérieure %1 vaut: %2%</source>
         <oldsource>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%</oldsource>
-        <translation type="vanished">The correct classification rate in inner area %1 is %2%</translation>
+        <translation>The correct classification rate in inner area %1 is %2%</translation>
     </message>
     <message>
         <source>Le taux de bon classement en zone frontière %1 vaut: %2%</source>
         <oldsource>Le taux de bon classement en zone frontiÃ¨re %1 vaut: %2%</oldsource>
-        <translation type="vanished">The correct classification rate in border area %1 is %2%</translation>
+        <translation>The correct classification rate in border area %1 is %2%</translation>
     </message>
     <message>
         <source>Le taux de bon classement en zone intérieure globale vaut: %1%</source>
         <oldsource>Le taux de bon classement en zone intÃ©rieure globale vaut: %1%</oldsource>
-        <translation type="vanished">The global correct classification rate in inner area is %1%</translation>
+        <translation>The global correct classification rate in inner area is %1%</translation>
     </message>
     <message>
         <source>Le taux de bon classement en zone frontière globale vaut: %1%</source>
         <oldsource>Le taux de bon classement en zone frontiÃ¨re globale vaut: %1%</oldsource>
-        <translation type="vanished">The global correct classification rate in border area is %1%</translation>
+        <translation>The global correct classification rate in border area is %1%</translation>
     </message>
 </context>
 <context>
     <name>Color</name>
     <message>
         <source>Black</source>
-        <translation type="vanished">Black</translation>
+        <translation>Black</translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation type="vanished">Alpha</translation>
+        <translation>Alpha</translation>
     </message>
     <message>
         <source>Red</source>
-        <translation type="vanished">Red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <source>Green</source>
-        <translation type="vanished">Green</translation>
+        <translation>Green</translation>
     </message>
     <message>
         <source>Blue</source>
-        <translation type="vanished">Blue</translation>
+        <translation>Blue</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">Color</translation>
+        <translation>Color</translation>
     </message>
 </context>
 <context>
     <name>ColorDialog</name>
     <message>
         <source>RGB image generator</source>
-        <translation type="vanished">RGB image generator</translation>
+        <translation>RGB image generator</translation>
     </message>
     <message>
         <source>Image size</source>
-        <translation type="vanished">Image size</translation>
+        <translation>Image size</translation>
     </message>
     <message>
         <source>Width : </source>
-        <translation type="vanished">Width : </translation>
+        <translation>Width : </translation>
     </message>
     <message>
         <source>Height : </source>
-        <translation type="vanished">Height : </translation>
+        <translation>Height : </translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="vanished">Mode</translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <source>RGB</source>
-        <translation type="vanished">RGB</translation>
+        <translation>RGB</translation>
     </message>
     <message>
         <source>HSV</source>
-        <translation type="vanished">HSV</translation>
+        <translation>HSV</translation>
     </message>
     <message>
         <source>Red : </source>
-        <translation type="vanished">Red : </translation>
+        <translation>Red : </translation>
     </message>
     <message>
         <source>Green : </source>
-        <translation type="vanished">Green : </translation>
+        <translation>Green : </translation>
     </message>
     <message>
         <source>Blue : </source>
-        <translation type="vanished">Blue : </translation>
+        <translation>Blue : </translation>
     </message>
     <message>
         <source>Saturation : </source>
-        <translation type="vanished">Saturation : </translation>
+        <translation>Saturation : </translation>
     </message>
     <message>
         <source>Value : </source>
-        <translation type="vanished">Value : </translation>
+        <translation>Value : </translation>
     </message>
     <message>
         <source>Hue : </source>
-        <translation type="vanished">Hue : </translation>
+        <translation>Hue : </translation>
     </message>
 </context>
 <context>
     <name>CombineColorOp</name>
     <message>
         <source>Reconstructed color image</source>
-        <translation type="vanished">Reconstructed color image</translation>
+        <translation>Reconstructed color image</translation>
     </message>
 </context>
 <context>
     <name>CombineHsvOp</name>
     <message>
         <source>Reconstructed color image</source>
-        <translation type="vanished">Reconstructed image</translation>
+        <translation>Reconstructed image</translation>
     </message>
 </context>
 <context>
     <name>CroissanceOp</name>
     <message>
         <source>At origin</source>
-        <translation type="vanished">At origin</translation>
+        <translation>At origin</translation>
     </message>
     <message>
         <source>Point of lowest luminance</source>
-        <translation type="vanished">Point of lowest luminance</translation>
+        <translation>Point of lowest luminance</translation>
     </message>
     <message>
         <source>| current - mean | &lt; threshold</source>
-        <translation type="vanished">| current - mean | &lt; threshold</translation>
+        <translation>| current - mean | &lt; threshold</translation>
     </message>
     <message>
         <source>| current - initial | &lt; threshold</source>
-        <translation type="vanished">| current - initial | &lt; threshold</translation>
+        <translation>| current - initial | &lt; threshold</translation>
     </message>
     <message>
         <source>Threshold : </source>
-        <translation type="vanished">Threshold : </translation>
+        <translation>Threshold : </translation>
     </message>
     <message>
         <source>Initial germ : </source>
-        <translation type="vanished">Initial germ : </translation>
+        <translation>Initial germ : </translation>
     </message>
     <message>
         <source>Stopping point : </source>
-        <translation type="vanished">Stopping point : </translation>
+        <translation>Stopping point : </translation>
     </message>
     <message>
         <source>Luminance</source>
-        <translation type="vanished">Luminance</translation>
+        <translation>Luminance</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation type="vanished">Color</translation>
+        <translation>Color</translation>
     </message>
     <message>
         <source>Total number of area : %1</source>
-        <translation type="vanished">Total number of area : %1</translation>
+        <translation>Total number of area : %1</translation>
     </message>
     <message>
         <source>Mean number of point per area : %1</source>
-        <translation type="vanished">Mean number of point per area : %1</translation>
+        <translation>Mean number of point per area : %1</translation>
     </message>
 </context>
 <context>
     <name>DCT</name>
     <message>
         <source>DCT</source>
-        <translation type="vanished">DCT</translation>
+        <translation>DCT</translation>
     </message>
     <message>
         <source>inverse DCT</source>
-        <translation type="vanished">inverse DCT</translation>
+        <translation>inverse DCT</translation>
     </message>
 </context>
 <context>
     <name>DCTDialog</name>
     <message>
         <source>DCT encoding</source>
-        <translation type="vanished">DCT with encoding</translation>
+        <translation>DCT with encoding</translation>
     </message>
     <message>
         <source>Encoding mode &amp;&amp; associated parameters</source>
-        <translation type="vanished">Encoding mode &amp;&amp; associated parameters</translation>
+        <translation>Encoding mode &amp;&amp; associated parameters</translation>
     </message>
     <message>
         <source>Coefficients truncation</source>
-        <translation type="vanished">Coefficients truncation</translation>
+        <translation>Coefficients truncation</translation>
     </message>
     <message>
         <source>Truncation limit : </source>
-        <translation type="vanished">Truncation limit : </translation>
+        <translation>Truncation limit : </translation>
     </message>
     <message>
         <source>Bit allocation matrice</source>
-        <translation type="vanished">Bit allocation matrice</translation>
+        <translation>Bit allocation matrice</translation>
     </message>
     <message>
         <source>Initial number of bits : </source>
-        <translation type="vanished">Initial number of bits : </translation>
+        <translation>Initial number of bits : </translation>
     </message>
     <message>
         <source>Slope value : </source>
-        <translation type="vanished">Slope value : </translation>
+        <translation>Slope value : </translation>
     </message>
 </context>
 <context>
     <name>DMM</name>
     <message>
         <source>DMM error</source>
-        <translation type="vanished">DMM (error)</translation>
+        <translation>DMM (error)</translation>
     </message>
 </context>
 <context>
     <name>DMMDialog</name>
     <message>
         <source>Erosion</source>
-        <translation type="vanished">Erosion</translation>
+        <translation>Erosion</translation>
     </message>
     <message>
         <source>Dilatation</source>
-        <translation type="vanished">Dilatation</translation>
+        <translation>Dilatation</translation>
     </message>
     <message>
         <source>Opening</source>
-        <translation type="vanished">Opening</translation>
+        <translation>Opening</translation>
     </message>
     <message>
         <source>Closing</source>
-        <translation type="vanished">Closing</translation>
+        <translation>Closing</translation>
     </message>
     <message>
         <source>DMM</source>
-        <translation type="vanished">DMM</translation>
+        <translation>DMM</translation>
     </message>
     <message>
         <source>Structuring element</source>
-        <translation type="vanished">Structuring element</translation>
+        <translation>Structuring element</translation>
     </message>
     <message>
         <source>Validate</source>
-        <translation type="vanished">Validate</translation>
+        <translation>Validate</translation>
     </message>
 </context>
 <context>
     <name>DMMOp</name>
     <message>
         <source>DMM (dilatation)</source>
-        <translation type="vanished">DMM (dilatation)</translation>
+        <translation>DMM (dilatation)</translation>
     </message>
     <message>
         <source>DMM (erosion)</source>
-        <translation type="vanished">DMM (erosion)</translation>
+        <translation>DMM (erosion)</translation>
     </message>
     <message>
         <source>DMM (opening)</source>
-        <translation type="vanished">DMM (opening)</translation>
+        <translation>DMM (opening)</translation>
     </message>
     <message>
         <source>DMM (closing)</source>
-        <translation type="vanished">DMM (closing)</translation>
+        <translation>DMM (closing)</translation>
     </message>
     <message>
         <source>DMM component #%1</source>
-        <translation type="vanished">DMM (component #%1)</translation>
+        <translation>DMM (component #%1)</translation>
     </message>
 </context>
 <context>
     <name>DPCM</name>
     <message>
         <source>Error while loading quantification file</source>
-        <translation type="vanished">Error while loading quantization file</translation>
+        <translation>Error while loading quantization file</translation>
     </message>
     <message>
         <source>The specified quantification file could not be opened !</source>
-        <translation type="vanished">The specified quantization file could not be opened!</translation>
+        <translation>The specified quantization file could not be opened!</translation>
     </message>
     <message>
         <source>Prediction error image</source>
-        <translation type="vanished">Prediction error image</translation>
+        <translation>Prediction error image</translation>
     </message>
     <message>
         <source>Quantized prediction error image</source>
-        <translation type="vanished">Quantized prediction error image</translation>
+        <translation>Quantized prediction error image</translation>
     </message>
     <message>
         <source>Coding error image</source>
-        <translation type="vanished">Coding error image</translation>
+        <translation>Coding error image</translation>
     </message>
     <message>
         <source>Prediction image</source>
-        <translation type="vanished">Prediction image</translation>
+        <translation>Prediction image</translation>
     </message>
     <message>
         <source>Reconstructed image</source>
-        <translation type="vanished">Reconstructed image</translation>
+        <translation>Reconstructed image</translation>
     </message>
     <message>
         <source>\nL&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %lf\n</source>
-        <translation type="vanished">The entropy of the prediciton error image is :%lf\n</translation>
+        <translation>The entropy of the prediciton error image is :%lf\n</translation>
     </message>
     <message>
         <source>\nL&apos;entropie de l&apos;image d&apos;erreur de prediction quantifiee vaut : %lf\n</source>
-        <translation type="vanished">The entropy of the quantized prediction error image is :%lf\n</translation>
+        <translation>The entropy of the quantized prediction error image is :%lf\n</translation>
     </message>
     <message>
         <source>seuils de decision --------------- niveaux de reconstruction\n</source>
-        <translation type="vanished">decision thresholds --------- reconstruction levels\n</translation>
+        <translation>decision thresholds --------- reconstruction levels\n</translation>
     </message>
 </context>
 <context>
     <name>DPCMDialog</name>
     <message>
         <source>Open file</source>
-        <translation type="vanished">Open file</translation>
+        <translation>Open file</translation>
     </message>
     <message>
         <source>Loi de quantification (*.loi)</source>
-        <translation type="vanished">Quantization file (*.loi)</translation>
+        <translation>Quantization file (*.loi)</translation>
     </message>
     <message>
         <source>DPCM encoding</source>
-        <translation type="vanished">DPCM Encoding</translation>
+        <translation>DPCM Encoding</translation>
     </message>
     <message>
         <source>Predictor P(X)</source>
-        <translation type="vanished">Predictor P(X)</translation>
+        <translation>Predictor P(X)</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="vanished">A</translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">C</translation>
+        <translation>C</translation>
     </message>
     <message>
         <source>( A + C ) / 2</source>
-        <translation type="vanished">( A + C ) / 2</translation>
+        <translation>( A + C ) / 2</translation>
     </message>
     <message>
         <source>Modified Graham&apos;s</source>
-        <translation type="vanished">Modified Graham&apos;s</translation>
+        <translation>Modified Graham&apos;s</translation>
     </message>
     <message>
         <source>Q = </source>
-        <translation type="vanished">Q = </translation>
+        <translation>Q = </translation>
     </message>
     <message>
         <source>Quantifier</source>
-        <translation type="vanished">Quantizer</translation>
+        <translation>Quantizer</translation>
     </message>
     <message>
         <source>Quantification file :</source>
-        <translation type="vanished">Quantization file :</translation>
+        <translation>Quantization file :</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="vanished">Browse</translation>
+        <translation>Browse</translation>
     </message>
     <message>
         <source>Open quantification editor</source>
-        <translation type="vanished">Open quantization editor</translation>
+        <translation>Open quantization editor</translation>
     </message>
 </context>
 <context>
     <name>FFTDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="vanished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>Résultat :</source>
-        <translation type="vanished">Result :</translation>
+        <translation>Result :</translation>
     </message>
     <message>
         <source>Magnitude + Phase</source>
-        <translation type="vanished">Magnitude + Phase</translation>
+        <translation>Magnitude + Phase</translation>
     </message>
     <message>
         <source>Real + Imaginary</source>
-        <translation type="vanished">Real + Imaginary</translation>
+        <translation>Real + Imaginary</translation>
     </message>
     <message>
         <source>Centered transform</source>
-        <translation type="vanished">Centered transform</translation>
+        <translation>Centered transform</translation>
     </message>
 </context>
 <context>
     <name>FFTOp</name>
     <message>
         <source>DFT (phase)</source>
-        <translation type="vanished">DFT (phase)</translation>
+        <translation>DFT (phase)</translation>
     </message>
     <message>
         <source>DFT (magnitude)</source>
-        <translation type="vanished">DFT (magnitude)</translation>
+        <translation>DFT (magnitude)</translation>
     </message>
 </context>
 <context>
     <name>FlipOp</name>
     <message>
         <source>horizontal</source>
-        <translation type="vanished">horizontal</translation>
+        <translation>horizontal</translation>
     </message>
     <message>
         <source>vertical</source>
-        <translation type="vanished">vertical</translation>
+        <translation>vertical</translation>
     </message>
     <message>
         <source>flipped %1</source>
-        <translation type="vanished">flipped %1</translation>
+        <translation>flipped %1</translation>
     </message>
 </context>
 <context>
     <name>Hadamard</name>
     <message>
         <source>Transform : </source>
-        <translation type="vanished">Transform:</translation>
+        <translation>Transform:</translation>
     </message>
 </context>
 <context>
     <name>HistogramOp</name>
     <message>
         <source>Histogram operations</source>
-        <translation type="vanished">Histogram operations</translation>
+        <translation>Histogram operations</translation>
     </message>
     <message>
         <source>Equalize</source>
-        <translation type="vanished">Equalize</translation>
+        <translation>Equalize</translation>
     </message>
     <message>
         <source>Normalize</source>
-        <translation type="vanished">Normalize</translation>
+        <translation>Normalize</translation>
     </message>
     <message>
         <source>Operation : </source>
-        <translation type="vanished">Operation : </translation>
+        <translation>Operation : </translation>
     </message>
     <message>
         <source>equalized</source>
-        <translation type="vanished">equalized</translation>
+        <translation>equalized</translation>
     </message>
     <message>
         <source>normalized</source>
-        <translation type="vanished">normalized</translation>
+        <translation>normalized</translation>
     </message>
 </context>
 <context>
     <name>Hough</name>
     <message>
         <source>Hough transform</source>
-        <translation type="vanished">Hough transform</translation>
+        <translation>Hough transform</translation>
     </message>
     <message>
         <source>Hough inverse transform</source>
-        <translation type="vanished">Hough inverse transform</translation>
+        <translation>Hough inverse transform</translation>
     </message>
 </context>
 <context>
     <name>HoughDialog</name>
     <message>
         <source>Hough transform</source>
-        <translation type="vanished">Hough transform</translation>
+        <translation>Hough transform</translation>
     </message>
     <message>
         <source>Method</source>
-        <translation type="vanished">Method</translation>
+        <translation>Method</translation>
     </message>
     <message>
         <source>Method #1</source>
-        <translation type="vanished">Method #1</translation>
+        <translation>Method #1</translation>
     </message>
     <message>
         <source>Method #2</source>
-        <translation type="vanished">Method #2</translation>
+        <translation>Method #2</translation>
     </message>
     <message>
         <source>Angle step : </source>
-        <translation type="vanished">Angle step : </translation>
+        <translation>Angle step : </translation>
     </message>
     <message>
         <source>Distance step : </source>
-        <translation type="vanished">Distance step : </translation>
+        <translation>Distance step : </translation>
     </message>
 </context>
 <context>
     <name>IFFTOp</name>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="55"/>
         <source>Magnitude/Phase</source>
-        <translation type="vanished">Magnitude/Phase</translation>
+        <translation>Magnitude/Phase</translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="56"/>
         <source>Real/Imaginary</source>
-        <translation type="vanished">Real/Imaginary</translation>
+        <translation>Real/Imaginary</translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="66"/>
         <source>Magnitude : </source>
-        <translation type="vanished">Magnitude : </translation>
+        <translation>Magnitude : </translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="67"/>
         <source>Phase : </source>
-        <translation type="vanished">Phase : </translation>
+        <translation>Phase : </translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="72"/>
         <source>Real part : </source>
-        <translation type="vanished">Real part : </translation>
+        <translation>Real part : </translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="73"/>
         <source>Imaginary part : </source>
-        <translation type="vanished">Imaginary part : </translation>
+        <translation>Imaginary part : </translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="79"/>
         <source>Source is centered</source>
-        <translation type="vanished">Source is centered</translation>
+        <translation>Source is centered</translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="199"/>
         <source>DFT-reconstructed image</source>
-        <translation type="vanished">DFT-reconstructed image</translation>
+        <translation>DFT-reconstructed image</translation>
     </message>
 </context>
 <context>
     <name>ImageINSAService</name>
     <message>
         <source>Informations</source>
-        <translation type="vanished">Informations</translation>
+        <translation>Informations</translation>
     </message>
 </context>
 <context>
@@ -681,15 +689,15 @@ Number of classes = %1 </translation>
     <message>
         <source>Inverse hough transform</source>
         <oldsource>Hough reconstruction</oldsource>
-        <translation type="vanished">Inverse Hough transform</translation>
+        <translation>Inverse Hough transform</translation>
     </message>
     <message>
         <source>Reconstructed image size : </source>
-        <translation type="vanished">Reconstructed image size : </translation>
+        <translation>Reconstructed image size : </translation>
     </message>
     <message>
         <source>Reconstruction threshold : </source>
-        <translation type="vanished">Reconstruction threshold : </translation>
+        <translation>Reconstruction threshold : </translation>
     </message>
 </context>
 <context>
@@ -697,77 +705,77 @@ Number of classes = %1 </translation>
     <message>
         <source>Pyramidal reconstruction</source>
         <oldsource>Pyramid reconstruction</oldsource>
-        <translation type="vanished">Pyramidal reconstruction</translation>
+        <translation>Pyramidal reconstruction</translation>
     </message>
     <message>
         <source>Filter : </source>
-        <translation type="vanished">Filter : </translation>
+        <translation>Filter : </translation>
     </message>
     <message>
         <source>triangular</source>
-        <translation type="vanished">triangular</translation>
+        <translation>triangular</translation>
     </message>
     <message>
         <source>gaussian</source>
-        <translation type="vanished">gaussian</translation>
+        <translation>gaussian</translation>
     </message>
     <message>
         <source>trimodal</source>
-        <translation type="vanished">trimodal</translation>
+        <translation>trimodal</translation>
     </message>
     <message>
         <source>rectangular</source>
-        <translation type="vanished">rectangular</translation>
+        <translation>rectangular</translation>
     </message>
     <message>
         <source>qmf</source>
-        <translation type="vanished">qmf</translation>
+        <translation>qmf</translation>
     </message>
     <message>
         <source>Number of steps in the pyramid : </source>
-        <translation type="vanished">Number of steps in the pyramid : </translation>
+        <translation>Number of steps in the pyramid : </translation>
     </message>
     <message>
         <source>Step to reconstruct :</source>
-        <translation type="vanished">Step to reconstruct :</translation>
+        <translation>Step to reconstruct :</translation>
     </message>
 </context>
 <context>
     <name>MeanSquareErrorOp</name>
     <message>
         <source>Mean squarred error : %1 (mean error : %2)</source>
-        <translation type="vanished">Mean squarred error : %1 (mean error : %2)</translation>
+        <translation>Mean squarred error : %1 (mean error : %2)</translation>
     </message>
 </context>
 <context>
     <name>NoiseOp</name>
     <message>
         <source>Impulse noise</source>
-        <translation type="vanished">Impulse noise</translation>
+        <translation>Impulse noise</translation>
     </message>
     <message>
         <source>Gaussian noise</source>
-        <translation type="vanished">Gaussian noise</translation>
+        <translation>Gaussian noise</translation>
     </message>
     <message>
         <source>Mean : </source>
-        <translation type="vanished">Mean : </translation>
+        <translation>Mean : </translation>
     </message>
     <message>
         <source>Standard deviation : </source>
-        <translation type="vanished">Standard deviation : </translation>
+        <translation>Standard deviation : </translation>
     </message>
     <message>
         <source>Percent of image : </source>
-        <translation type="vanished">Percent of image : </translation>
+        <translation>Percent of image : </translation>
     </message>
     <message>
         <source>impulse noise</source>
-        <translation type="vanished">impulse noise</translation>
+        <translation>impulse noise</translation>
     </message>
     <message>
         <source>gaussian noise</source>
-        <translation type="vanished">gaussian noise</translation>
+        <translation>gaussian noise</translation>
     </message>
 </context>
 <context>
@@ -775,406 +783,381 @@ Number of classes = %1 </translation>
     <message>
         <source>BFilt</source>
         <oldsource>BFlit</oldsource>
-        <translation type="vanished">BFilt</translation>
+        <translation>BFilt</translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="49"/>
         <source>Parameters</source>
-        <translation type="vanished">Parameters</translation>
+        <translation>Parameters</translation>
     </message>
     <message>
         <source>Magnitude/Phase</source>
-        <translation type="vanished">Magnitude/Phase</translation>
+        <translation>Magnitude/Phase</translation>
     </message>
     <message>
         <source>Validate</source>
-        <translation type="vanished">Validate</translation>
+        <translation>Validate</translation>
     </message>
     <message>
         <source>Combine color planes</source>
-        <translation type="vanished">Combine RGB planes</translation>
+        <translation>Combine RGB planes</translation>
     </message>
     <message>
         <source>Combine HSV planes</source>
-        <translation type="vanished">Combine HSV planes</translation>
+        <translation>Combine HSV planes</translation>
     </message>
     <message>
         <source>Croissance</source>
-        <translation type="vanished">Croissance</translation>
+        <translation>Croissance</translation>
     </message>
     <message>
         <source>DMM</source>
-        <translation type="vanished">DMM</translation>
+        <translation>DMM</translation>
     </message>
     <message>
         <source>Calcul d&apos;entropie (image double)</source>
-        <translation type="vanished">Entropy calculation (double image)</translation>
+        <translation>Entropy calculation (double image)</translation>
     </message>
     <message>
         <source>Entropy of the image = %1</source>
-        <translation type="vanished">Entropy of the image = %1</translation>
+        <translation>Entropy of the image = %1</translation>
     </message>
     <message>
         <source>Calcul d&apos;entropie (image standard)</source>
-        <translation type="vanished">Entropy calculation (standard image)</translation>
+        <translation>Entropy calculation (standard image)</translation>
     </message>
     <message>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
-        <translation type="vanished">Fourier transform</translation>
+        <translation>Fourier transform</translation>
     </message>
     <message>
         <source>Histogram operations</source>
-        <translation type="vanished">Histogram operations</translation>
+        <translation>Histogram operations</translation>
     </message>
     <message>
         <source>Huffman</source>
-        <translation type="vanished">Huffman</translation>
+        <translation>Huffman</translation>
     </message>
     <message>
         <source>Mean squared error</source>
-        <translation type="vanished">Mean squared error</translation>
+        <translation>Mean squared error</translation>
     </message>
     <message>
         <source>Compare to...</source>
-        <translation type="vanished">Compare to...</translation>
+        <translation>Compare to...</translation>
     </message>
     <message>
         <source>Compare %1 to : </source>
-        <translation type="vanished">Compare %1 to : </translation>
+        <translation>Compare %1 to : </translation>
     </message>
     <message>
         <source>Add noise</source>
-        <translation type="vanished">Add noise</translation>
+        <translation>Add noise</translation>
     </message>
     <message>
         <source>Pixel operations</source>
-        <translation type="vanished">Pixel operations</translation>
+        <translation>Pixel operations</translation>
     </message>
     <message>
         <source>Pseudo color</source>
-        <translation type="vanished">Pseudo color</translation>
+        <translation>Pseudo color</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="31"/>
         <source>Quantification</source>
         <translation>Quantization</translation>
     </message>
     <message>
         <source>Generate random image</source>
-        <translation type="vanished">Generate random image</translation>
+        <translation>Generate random image</translation>
     </message>
     <message>
         <source>Random image</source>
-        <translation type="vanished">Random image</translation>
+        <translation>Random image</translation>
     </message>
     <message>
         <source>Rejection ring</source>
-        <translation type="vanished">Rejection ring</translation>
+        <translation>Rejection ring</translation>
     </message>
     <message>
         <source>Rotation</source>
-        <translation type="vanished">Rotation</translation>
+        <translation>Rotation</translation>
     </message>
     <message>
         <source>Scaling</source>
-        <translation type="vanished">Scaling</translation>
+        <translation>Scaling</translation>
     </message>
     <message>
         <source>Signal-to-noise ratio</source>
-        <translation type="vanished">Signal-to-noise ratio</translation>
+        <translation>Signal-to-noise ratio</translation>
     </message>
     <message>
         <source>Sinus synthesis</source>
-        <translation type="vanished">Sinus synthesis</translation>
+        <translation>Sinus synthesis</translation>
     </message>
     <message>
         <source>Thresholding</source>
-        <translation type="vanished">Thresholding</translation>
+        <translation>Thresholding</translation>
     </message>
     <message>
         <source>Translation</source>
-        <translation type="vanished">Translation</translation>
+        <translation>Translation</translation>
     </message>
     <message>
         <source>Zero crossing</source>
-        <translation type="vanished">Zero crossing</translation>
+        <translation>Zero crossing</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation type="vanished">Center</translation>
+        <translation>Center</translation>
     </message>
     <message>
         <source>Split color planes</source>
-        <translation type="vanished">Split RGB planes</translation>
+        <translation>Split RGB planes</translation>
     </message>
     <message>
         <source>Flip %1</source>
-        <translation type="vanished">Flip %1</translation>
+        <translation>Flip %1</translation>
     </message>
     <message>
         <source>Discrete cosinus transform</source>
-        <translation type="vanished">DCT 16x16 with coef. reduction</translation>
+        <translation>DCT 16x16 with coef. reduction</translation>
     </message>
     <message>
         <source>8x8 transforms</source>
-        <translation type="vanished">8x8 transforms (Haar, Hadamard, DCT)</translation>
+        <translation>8x8 transforms (Haar, Hadamard, DCT)</translation>
     </message>
     <message>
         <source>Hough transform</source>
-        <translation type="vanished">Hough transform</translation>
+        <translation>Hough transform</translation>
     </message>
     <message>
         <source>Inverse Hough transform</source>
-        <translation type="vanished">Inverse Hough transform</translation>
+        <translation>Inverse Hough transform</translation>
     </message>
     <message>
         <source>Pyramidal reconstruction</source>
         <oldsource>Reconstruct pyramid</oldsource>
-        <translation type="vanished">Pyramidal reconstruction</translation>
+        <translation>Pyramidal reconstruction</translation>
     </message>
     <message>
         <source>The operation can&apos;t be applied on this image</source>
-        <translation type="vanished">The operation can&apos;t be applied on this image</translation>
+        <translation>The operation can&apos;t be applied on this image</translation>
     </message>
     <message>
         <source>The image width must be twice the image height.</source>
-        <translation type="vanished">The image width must be twice the image height.</translation>
+        <translation>The image width must be twice the image height.</translation>
     </message>
     <message>
         <source>The image dimensions must be power of 2.</source>
-        <translation type="vanished">The image dimensions must be power of 2.</translation>
+        <translation>The image dimensions must be power of 2.</translation>
     </message>
     <message>
         <source>Pyramidal decomposition</source>
-        <translation type="vanished">Pyramidal decomposition</translation>
+        <translation>Pyramidal decomposition</translation>
     </message>
     <message>
         <source>The image width must equal the image height.</source>
-        <translation type="vanished">The image width must equal the image height.</translation>
+        <translation>The image width must equal the image height.</translation>
     </message>
     <message>
         <source>Classification results</source>
-        <translation type="vanished">Classification results</translation>
+        <translation>Classification results</translation>
     </message>
     <message>
         <source>Generate RGB image</source>
-        <translation type="vanished">Generate RGB image</translation>
+        <translation>Generate RGB image</translation>
     </message>
     <message>
         <source>RGB image generator</source>
-        <translation type="vanished">RGB image generator</translation>
+        <translation>RGB image generator</translation>
     </message>
     <message>
+        <location filename="Operations/IFFTOp.cpp" line="38"/>
         <source>Inverse Fourier transform</source>
-        <translation type="vanished">Inverse Fourier transform</translation>
+        <translation>Inverse Fourier transform</translation>
     </message>
     <message>
         <source>Supervised classification</source>
-        <translation type="vanished">Supervised classification</translation>
+        <translation>Supervised classification</translation>
     </message>
     <message>
         <source>DPCM Encoding</source>
-        <translation type="vanished">DPCM Encoding</translation>
+        <translation>DPCM Encoding</translation>
     </message>
 </context>
 <context>
     <name>PluginManager</name>
     <message>
         <source>&amp;Plugin</source>
-        <translation type="vanished">&amp;Plugin</translation>
+        <translation>&amp;Plugin</translation>
     </message>
     <message>
         <source>&amp;Load plugin</source>
-        <translation type="vanished">&amp;Load plugin</translation>
+        <translation>&amp;Load plugin</translation>
     </message>
     <message>
         <source>&amp;Unload all plugins</source>
-        <translation type="vanished">&amp;Unload all plugins</translation>
+        <translation>&amp;Unload all plugins</translation>
     </message>
     <message>
         <source>Load plugin</source>
-        <translation type="vanished">Load plugin</translation>
+        <translation>Load plugin</translation>
     </message>
     <message>
         <source>Plugin (*.dll *.so *.dylib)</source>
-        <translation type="vanished">Plugin (*.dll *.so *.dylib)</translation>
+        <translation>Plugin (*.dll *.so *.dylib)</translation>
     </message>
     <message>
         <source>Error loading plugin</source>
-        <translation type="vanished">Error loading plugin</translation>
+        <translation>Error loading plugin</translation>
     </message>
     <message>
         <source>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</source>
-        <translation type="vanished">Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</translation>
+        <translation>Could not find the plugin&apos;s entry point &quot;loadPlugin&quot;</translation>
     </message>
     <message>
         <source>The getPlugin entry point does not return a valid Plugin</source>
-        <translation type="vanished">The getPlugin entry point does not return a valid Plugin</translation>
+        <translation>The getPlugin entry point does not return a valid Plugin</translation>
     </message>
 </context>
 <context>
     <name>PointOp</name>
     <message>
         <source>Second operand</source>
-        <translation type="vanished">Second operand</translation>
+        <translation>Second operand</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="vanished">Value</translation>
+        <translation>Value</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="vanished">Image</translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Explode colors</source>
-        <translation type="vanished">Explode colors</translation>
+        <translation>Explode colors</translation>
     </message>
     <message>
         <source>Double Result</source>
-        <translation type="vanished">Double Result</translation>
+        <translation>Double Result</translation>
     </message>
 </context>
 <context>
     <name>PseudoColorOp</name>
     <message>
         <source>Pseudo color</source>
-        <translation type="vanished">Pseudo color</translation>
+        <translation>Pseudo color</translation>
     </message>
 </context>
 <context>
     <name>PyramidDialog</name>
     <message>
         <source>Pyramidal decomposition</source>
-        <translation type="vanished">Pyramidal decomposition</translation>
+        <translation>Pyramidal decomposition</translation>
     </message>
     <message>
         <source>Type of pyramid</source>
-        <translation type="vanished">Type of pyramid</translation>
+        <translation>Type of pyramid</translation>
     </message>
     <message>
         <source>gaussian</source>
-        <translation type="vanished">gaussian</translation>
+        <translation>gaussian</translation>
     </message>
     <message>
         <source>laplacian</source>
-        <translation type="vanished">laplacian</translation>
+        <translation>laplacian</translation>
     </message>
     <message>
         <source>Filter : </source>
-        <translation type="vanished">Filter : </translation>
+        <translation>Filter : </translation>
     </message>
     <message>
         <source>triangular</source>
-        <translation type="vanished">triangular</translation>
+        <translation>triangular</translation>
     </message>
     <message>
         <source>trimodal</source>
-        <translation type="vanished">trimodal</translation>
+        <translation>trimodal</translation>
     </message>
     <message>
         <source>rectangular</source>
-        <translation type="vanished">rectangular</translation>
+        <translation>rectangular</translation>
     </message>
     <message>
         <source>qmf</source>
-        <translation type="vanished">qmf</translation>
+        <translation>qmf</translation>
     </message>
     <message>
         <source>Number of steps : </source>
-        <translation type="vanished">Number of steps : </translation>
+        <translation>Number of steps : </translation>
     </message>
     <message>
         <source>Create only one step :</source>
-        <translation type="vanished">Create only one step :</translation>
+        <translation>Create only one step :</translation>
     </message>
 </context>
 <context>
     <name>QuantificationDialog</name>
     <message>
         <source>Quantification file editor</source>
-        <translation type="vanished">Quantization file editor</translation>
+        <translation>Quantization file editor</translation>
     </message>
     <message>
         <source>Quantification of %1</source>
-        <translation type="vanished">Quantization of %1</translation>
+        <translation>Quantization of %1</translation>
     </message>
     <message>
         <source>Linear with centered value</source>
-        <translation type="vanished">Linear with centered value</translation>
+        <translation>Linear with centered value</translation>
     </message>
     <message>
         <source>Non linear with centered value</source>
-        <translation type="vanished">Non linear with centered value</translation>
+        <translation>Non linear with centered value</translation>
     </message>
     <message>
         <source>Non linear with mean value</source>
-        <translation type="vanished">Non linear with mean value</translation>
+        <translation>Non linear with mean value</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="vanished">Custom</translation>
+        <translation>Custom</translation>
     </message>
     <message>
         <source>Quantification : </source>
-        <translation type="vanished">Quantization : </translation>
+        <translation>Quantization : </translation>
     </message>
     <message>
         <source>Number of values : </source>
-        <translation type="vanished">Number of values : </translation>
+        <translation>Number of values : </translation>
     </message>
     <message>
         <source>Exit</source>
-        <translation type="vanished">Exit</translation>
+        <translation>Exit</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Apply</translation>
+        <translation>Apply</translation>
     </message>
     <message>
         <source>Open a file</source>
-        <translation type="vanished">Open a file</translation>
+        <translation>Open a file</translation>
     </message>
     <message>
         <source>Loi de quantification (*.loi)</source>
-        <translation type="vanished">Quantization file (*.loi)</translation>
+        <translation>Quantization file (*.loi)</translation>
     </message>
     <message>
         <source>Save to file</source>
-        <translation type="vanished">Save to file</translation>
+        <translation>Save to file</translation>
     </message>
 </context>
 <context>
     <name>QuantificationOp</name>
     <message>
         <source>quantified</source>
-        <translation type="vanished">quantified</translation>
-    </message>
-    <message>
-        <location filename="Operations/QuantificationOp.cpp" line="125"/>
-        <source>Quantification non lineaire a valeur centree</source>
-        <translation>Non linear quantization with centered values</translation>
-    </message>
-    <message>
-        <location filename="Operations/QuantificationOp.cpp" line="127"/>
-        <source>Quantification non lineaire a moyennes</source>
-        <translation>Non linear quantiziation with mean values</translation>
-    </message>
-    <message>
-        <location filename="Operations/QuantificationOp.cpp" line="129"/>
-        <source>Quantification personnalisee</source>
-        <translation>Custom quantization</translation>
-    </message>
-    <message>
-        <location filename="Operations/QuantificationOp.cpp" line="131"/>
-        <source>Quantification LloydMax</source>
-        <translation>LloydMax quantization</translation>
-    </message>
-    <message>
-        <location filename="Operations/QuantificationOp.cpp" line="133"/>
-        <source>Quantification lineaire a valeurs centrees</source>
-        <oldsource>Quantification non lineaire a valeurs centrees</oldsource>
-        <translation>Linear quantization with centered values</translation>
+        <translation>quantified</translation>
     </message>
 </context>
 <context>
@@ -1182,563 +1165,563 @@ Number of classes = %1 </translation>
     <message>
         <source>Thresholds
 (low to high)</source>
-        <translation type="vanished">Thresholds
+        <translation>Thresholds
 (low to high)</translation>
     </message>
     <message>
         <source>Values</source>
-        <translation type="vanished">Values</translation>
+        <translation>Values</translation>
     </message>
 </context>
 <context>
     <name>RandomImgOp</name>
     <message>
         <source>Parameters</source>
-        <translation type="vanished">Parameters</translation>
+        <translation>Parameters</translation>
     </message>
     <message>
         <source>Image type</source>
-        <translation type="vanished">Image type</translation>
+        <translation>Image type</translation>
     </message>
     <message>
         <source>8-bit integer</source>
-        <translation type="vanished">8-bit integer</translation>
+        <translation>8-bit integer</translation>
     </message>
     <message>
         <source>Floating point</source>
-        <translation type="vanished">Floating point</translation>
+        <translation>Floating point</translation>
     </message>
     <message>
         <source>Width : </source>
-        <translation type="vanished">Width : </translation>
+        <translation>Width : </translation>
     </message>
     <message>
         <source>Height : </source>
-        <translation type="vanished">Height : </translation>
+        <translation>Height : </translation>
     </message>
     <message>
         <source>Number of channels : </source>
-        <translation type="vanished">Number of channels : </translation>
+        <translation>Number of channels : </translation>
     </message>
     <message>
         <source>Range : </source>
-        <translation type="vanished">Range of values: </translation>
+        <translation>Range of values: </translation>
     </message>
     <message>
         <source> to </source>
-        <translation type="vanished"> to </translation>
+        <translation> to </translation>
     </message>
 </context>
 <context>
     <name>RejectionRingOp</name>
     <message>
         <source>Width=Height : </source>
-        <translation type="vanished">Width=Height : </translation>
+        <translation>Width=Height : </translation>
     </message>
     <message>
         <source>Radius : </source>
-        <translation type="vanished">Radius : </translation>
+        <translation>Radius : </translation>
     </message>
     <message>
         <source>Thickness (beyond radius) : </source>
-        <translation type="vanished">Thickness (beyond radius) : </translation>
+        <translation>Thickness (beyond radius) : </translation>
     </message>
     <message>
         <source>Rejection ring (%1 %2 %3)</source>
-        <translation type="vanished">Rejection ring (%1 %2 %3)</translation>
+        <translation>Rejection ring (%1 %2 %3)</translation>
     </message>
 </context>
 <context>
     <name>Rotation</name>
     <message>
         <source>Rotating %1</source>
-        <translation type="vanished">Rotating %1</translation>
+        <translation>Rotating %1</translation>
     </message>
     <message>
         <source>Expand image</source>
-        <translation type="vanished">Expand image</translation>
+        <translation>Expand image</translation>
     </message>
     <message>
         <source>Rotation angle : </source>
-        <translation type="vanished">Rotation angle : </translation>
+        <translation>Rotation angle : </translation>
     </message>
     <message>
         <source>Fill value : </source>
-        <translation type="vanished">Fill value : </translation>
+        <translation>Fill value : </translation>
     </message>
     <message>
         <source>rotated %1</source>
-        <translation type="vanished">rotated %1</translation>
+        <translation>rotated %1</translation>
     </message>
 </context>
 <context>
     <name>ScalingOp</name>
     <message>
         <source>Nearest neighboor (standard)</source>
-        <translation type="vanished">Nearest neighboor (standard)</translation>
+        <translation>Nearest neighboor (standard)</translation>
     </message>
     <message>
         <source>Bi-linear</source>
-        <translation type="vanished">Bi-linear</translation>
+        <translation>Bi-linear</translation>
     </message>
     <message>
         <source>Parabolic</source>
-        <translation type="vanished">Parabolic</translation>
+        <translation>Parabolic</translation>
     </message>
     <message>
         <source>Spline</source>
-        <translation type="vanished">Spline</translation>
+        <translation>Spline</translation>
     </message>
     <message>
         <source>Interpolation : </source>
-        <translation type="vanished">Interpolation : </translation>
+        <translation>Interpolation : </translation>
     </message>
     <message>
         <source>X scale factor : </source>
-        <translation type="vanished">X scale factor : </translation>
+        <translation>X scale factor : </translation>
     </message>
     <message>
         <source>Y scale factor : </source>
-        <translation type="vanished">Y scale factor : </translation>
+        <translation>Y scale factor : </translation>
     </message>
     <message>
         <source>scaled</source>
-        <translation type="vanished">scaled</translation>
+        <translation>scaled</translation>
     </message>
 </context>
 <context>
     <name>SignalToNoiseOp</name>
     <message>
         <source>Signal-to-noise ratio : %1</source>
-        <translation type="vanished">Signal-to-noise ratio : %1</translation>
+        <translation>Signal-to-noise ratio : %1</translation>
     </message>
 </context>
 <context>
     <name>SinusSynthesisOp</name>
     <message>
         <source>Sinus synthesis</source>
-        <translation type="vanished">Sinus synthesis</translation>
+        <translation>Sinus synthesis</translation>
     </message>
     <message>
         <source>Linear</source>
-        <translation type="vanished">Linear</translation>
+        <translation>Linear</translation>
     </message>
     <message>
         <source>Circular</source>
-        <translation type="vanished">Circular</translation>
+        <translation>Circular</translation>
     </message>
     <message>
         <source>256</source>
-        <translation type="vanished">256</translation>
+        <translation>256</translation>
     </message>
     <message>
         <source>2 (Black and white)</source>
-        <translation type="vanished">2 (Black and white)</translation>
+        <translation>2 (Black and white)</translation>
     </message>
     <message>
         <source>Image size (width=height) : </source>
-        <translation type="vanished">Image size (width=height) : </translation>
+        <translation>Image size (width=height) : </translation>
     </message>
     <message>
         <source>Signal period (pixel) : </source>
-        <translation type="vanished">Signal period (pixel) : </translation>
+        <translation>Signal period (pixel) : </translation>
     </message>
     <message>
         <source>Niveaux de gris : </source>
-        <translation type="vanished">Grayscale levels : </translation>
+        <translation>Grayscale levels : </translation>
     </message>
 </context>
 <context>
     <name>StructElemWindow</name>
     <message>
         <source>&amp;Open file</source>
-        <translation type="vanished">&amp;Open file</translation>
+        <translation>&amp;Open file</translation>
     </message>
     <message>
         <source>&amp;Save as...</source>
-        <translation type="vanished">&amp;Save as...</translation>
+        <translation>&amp;Save as...</translation>
     </message>
     <message>
         <source>Basic shapes :</source>
-        <translation type="vanished">Basic shapes :</translation>
+        <translation>Basic shapes :</translation>
     </message>
     <message>
         <source>Diamond</source>
-        <translation type="vanished">Diamond</translation>
+        <translation>Diamond</translation>
     </message>
     <message>
         <source>Disc</source>
-        <translation type="vanished">Disc</translation>
+        <translation>Disc</translation>
     </message>
     <message>
         <source>Empty</source>
-        <translation type="vanished">Empty</translation>
+        <translation>Empty</translation>
     </message>
     <message>
         <source>Generate</source>
-        <translation type="vanished">Generate</translation>
+        <translation>Generate</translation>
     </message>
     <message>
         <source>Scale :</source>
-        <translation type="vanished">Scale :</translation>
+        <translation>Scale :</translation>
     </message>
     <message>
         <source>Open a file</source>
-        <translation type="vanished">Open a file</translation>
+        <translation>Open a file</translation>
     </message>
     <message>
         <source>Images (*.png *.bmp *.jpg *.jpeg)</source>
-        <translation type="vanished">Images (*.png *.bmp *.jpg *.jpeg)</translation>
+        <translation>Images (*.png *.bmp *.jpg *.jpeg)</translation>
     </message>
     <message>
         <source>Save file</source>
-        <translation type="vanished">Save file</translation>
+        <translation>Save file</translation>
     </message>
 </context>
 <context>
     <name>ThresholdDialog</name>
     <message>
         <source>Threshold #1 : </source>
-        <translation type="vanished">Threshold #1 : </translation>
+        <translation>Threshold #1 : </translation>
     </message>
     <message>
         <source>Threshold : </source>
-        <translation type="vanished">Threshold : </translation>
+        <translation>Threshold : </translation>
     </message>
     <message>
         <source>ThresholdOp</source>
-        <translation type="vanished">Thresholding</translation>
+        <translation>Thresholding</translation>
     </message>
     <message>
         <source>&lt;font color=red&gt;&lt;i&gt;Information : The input image has been converted to grayscale.&lt;/i&gt;&lt;/font&gt;</source>
-        <translation type="vanished">&lt;font color=red&gt;&lt;i&gt;Information : The input image has been converted to grayscale.&lt;/i&gt;&lt;/font&gt;</translation>
+        <translation>&lt;font color=red&gt;&lt;i&gt;Information : The input image has been converted to grayscale.&lt;/i&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>Threshold</source>
-        <translation type="vanished">Threshold</translation>
+        <translation>Threshold</translation>
     </message>
     <message>
         <source>Double threshold</source>
-        <translation type="vanished">Double threshold</translation>
+        <translation>Double threshold</translation>
     </message>
     <message>
         <source>Otsu</source>
-        <translation type="vanished">Otsu</translation>
+        <translation>Otsu</translation>
     </message>
     <message>
         <source>Threshold #2 : </source>
-        <translation type="vanished">Threshold #2 : </translation>
+        <translation>Threshold #2 : </translation>
     </message>
     <message>
         <source>Color between thresholds :</source>
-        <translation type="vanished">Color between thresholds :</translation>
+        <translation>Color between thresholds :</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="vanished">White</translation>
+        <translation>White</translation>
     </message>
     <message>
         <source>Black</source>
-        <translation type="vanished">Black</translation>
+        <translation>Black</translation>
     </message>
     <message>
         <source>Validate</source>
-        <translation type="vanished">Validate</translation>
+        <translation>Validate</translation>
     </message>
 </context>
 <context>
     <name>Transforms</name>
     <message>
         <source>&lt;b&gt;Select the coefficients to keep : &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Select the coefficients to keep : &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Select the coefficients to keep : &lt;/b&gt;</translation>
     </message>
     <message>
         <source>Clear selection</source>
-        <translation type="vanished">Clear selection</translation>
+        <translation>Clear selection</translation>
     </message>
     <message>
         <source>Invert selection</source>
-        <translation type="vanished">Invert selection</translation>
+        <translation>Invert selection</translation>
     </message>
     <message>
         <source>Hadamard transform</source>
-        <translation type="vanished">Hadamard transform</translation>
+        <translation>Hadamard transform</translation>
     </message>
     <message>
         <source>Hadamard reconstruction</source>
-        <translation type="vanished">Hadamard reconstruction</translation>
+        <translation>Hadamard reconstruction</translation>
     </message>
     <message>
         <source>Haar transform</source>
-        <translation type="vanished">Haar transform</translation>
+        <translation>Haar transform</translation>
     </message>
     <message>
         <source>Haar reconstruction</source>
-        <translation type="vanished">Haar reconstruction</translation>
+        <translation>Haar reconstruction</translation>
     </message>
     <message>
         <source>cosinus transform</source>
-        <translation type="vanished">cosinus transform</translation>
+        <translation>cosinus transform</translation>
     </message>
     <message>
         <source>cosinus reconstruction</source>
-        <translation type="vanished">cosinus reconstruction</translation>
+        <translation>cosinus reconstruction</translation>
     </message>
 </context>
 <context>
     <name>TranslateOp</name>
     <message>
         <source>Expand image</source>
-        <translation type="vanished">Expand image</translation>
+        <translation>Expand image</translation>
     </message>
     <message>
         <source>X offset : </source>
-        <translation type="vanished">X offset : </translation>
+        <translation>X offset : </translation>
     </message>
     <message>
         <source>Y offset : </source>
-        <translation type="vanished">Y offset : </translation>
+        <translation>Y offset : </translation>
     </message>
     <message>
         <source>Fill value : </source>
-        <translation type="vanished">Fill value : </translation>
+        <translation>Fill value : </translation>
     </message>
     <message>
         <source>Translated %1:%2</source>
-        <translation type="vanished">Translated %1:%2</translation>
+        <translation>Translated %1:%2</translation>
     </message>
 </context>
 <context>
     <name>Translation</name>
     <message>
         <source>Translating %1</source>
-        <translation type="vanished">Translating %1</translation>
+        <translation>Translating %1</translation>
     </message>
 </context>
 <context>
     <name>ZeroCrossingOp</name>
     <message>
         <source>Zero crossing</source>
-        <translation type="vanished">Zero crossing</translation>
+        <translation>Zero crossing</translation>
     </message>
     <message>
         <source>Threshold : </source>
-        <translation type="vanished">Threshold : </translation>
+        <translation>Threshold : </translation>
     </message>
     <message>
         <source>contours bruts</source>
-        <translation type="vanished">Raw edges</translation>
+        <translation>Raw edges</translation>
     </message>
     <message>
         <source>contours nettoyes</source>
-        <translation type="vanished">Cleaned edges</translation>
+        <translation>Cleaned edges</translation>
     </message>
 </context>
 <context>
     <name>filtrme::FilterChoice</name>
     <message>
         <source>FilterChoice</source>
-        <translation type="vanished">Filter choice</translation>
+        <translation>Filter choice</translation>
     </message>
     <message>
         <source>Filter configuration</source>
-        <translation type="vanished">Filter configuration</translation>
+        <translation>Filter configuration</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="vanished">Filter:</translation>
+        <translation>Filter:</translation>
     </message>
     <message>
         <source>Edge policy: </source>
-        <translation type="vanished">Edge policy: </translation>
+        <translation>Edge policy: </translation>
     </message>
     <message>
         <source>Black</source>
-        <translation type="vanished">Black</translation>
+        <translation>Black</translation>
     </message>
     <message>
         <source>Mirror</source>
-        <translation type="vanished">Mirror</translation>
+        <translation>Mirror</translation>
     </message>
     <message>
         <source>Nearest</source>
-        <translation type="vanished">Nearest</translation>
+        <translation>Nearest</translation>
     </message>
     <message>
         <source>Spherical</source>
-        <translation type="vanished">Spherical</translation>
+        <translation>Spherical</translation>
     </message>
     <message>
         <source>Filter size:</source>
-        <translation type="vanished">Filter size:</translation>
+        <translation>Filter size:</translation>
     </message>
     <message>
         <source>Standard deviation : </source>
-        <translation type="vanished">Standard deviation : </translation>
+        <translation>Standard deviation : </translation>
     </message>
     <message>
         <source>Resulting image type</source>
-        <translation type="vanished">Resulting image type</translation>
+        <translation>Resulting image type</translation>
     </message>
     <message>
         <source>Standard</source>
-        <translation type="vanished">Standard</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Floating point</source>
-        <translation type="vanished">Floating point</translation>
+        <translation>Floating point</translation>
     </message>
     <message>
         <source>Apply filter</source>
-        <translation type="vanished">Apply filter</translation>
+        <translation>Apply filter</translation>
     </message>
     <message>
         <source>Delete filter</source>
-        <translation type="vanished">Delete filter</translation>
+        <translation>Delete filter</translation>
     </message>
     <message>
         <source>Uniform</source>
-        <translation type="vanished">Uniform</translation>
+        <translation>Uniform</translation>
     </message>
     <message>
         <source>Gaussian</source>
-        <translation type="vanished">Gaussian</translation>
+        <translation>Gaussian</translation>
     </message>
     <message>
         <source>Prewitt</source>
-        <translation type="vanished">Prewitt</translation>
+        <translation>Prewitt</translation>
     </message>
     <message>
         <source>Roberts</source>
-        <translation type="vanished">Roberts</translation>
+        <translation>Roberts</translation>
     </message>
     <message>
         <source>Sobel</source>
-        <translation type="vanished">Sobel</translation>
+        <translation>Sobel</translation>
     </message>
     <message>
         <source>SquareLaplacien</source>
-        <translation type="vanished">SquareLaplacien</translation>
+        <translation>SquareLaplacien</translation>
     </message>
     <message>
         <source>Warning!</source>
-        <translation type="vanished">Warning!</translation>
+        <translation>Warning!</translation>
     </message>
     <message>
         <source>This filter will be permanently deleted ?</source>
-        <translation type="vanished">This filter will be permanently deleted !</translation>
+        <translation>This filter will be permanently deleted !</translation>
     </message>
     <message>
         <source>Do you want to continue?</source>
-        <translation type="vanished">Do you want to continue?</translation>
+        <translation>Do you want to continue?</translation>
     </message>
 </context>
 <context>
     <name>filtrme::FilterEditor</name>
     <message>
         <source>Name:</source>
-        <translation type="vanished">Name:</translation>
+        <translation>Name:</translation>
     </message>
     <message>
         <source>Number of filters:</source>
-        <translation type="vanished">Number of filters:</translation>
+        <translation>Number of filters:</translation>
     </message>
     <message>
         <source>FilterEditor</source>
-        <translation type="vanished">Filter editor</translation>
+        <translation>Filter editor</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation type="vanished">Error!</translation>
+        <translation>Error!</translation>
     </message>
     <message>
         <source>Your filter has to have a name to be saved.</source>
-        <translation type="vanished">Your filter has to have a name to be saved.</translation>
+        <translation>Your filter has to have a name to be saved.</translation>
     </message>
     <message>
         <source>Warning!</source>
-        <translation type="vanished">Warning!</translation>
+        <translation>Warning!</translation>
     </message>
     <message>
         <source>This filter name is already use.</source>
-        <translation type="vanished">This filter name is already use.</translation>
+        <translation>This filter name is already use.</translation>
     </message>
     <message>
         <source>Do you want to replace it?</source>
-        <translation type="vanished">Do you want to replace it?</translation>
+        <translation>Do you want to replace it?</translation>
     </message>
     <message>
         <source>Every square have to be completed by int value.</source>
-        <translation type="vanished">Every square have to be completed by int value.</translation>
+        <translation>Every square have to be completed by int value.</translation>
     </message>
     <message>
         <source>Filter %1 isn&apos;t ok.</source>
-        <translation type="vanished">Filter %1 isn&apos;t ok.</translation>
+        <translation>Filter %1 isn&apos;t ok.</translation>
     </message>
     <message>
         <source>Unsaved changes will be lost.</source>
-        <translation type="vanished">Unsaved changes will be lost.</translation>
+        <translation>Unsaved changes will be lost.</translation>
     </message>
     <message>
         <source>Do you want to continue?</source>
-        <translation type="vanished">Do you want to continue?</translation>
+        <translation>Do you want to continue?</translation>
     </message>
 </context>
 <context>
     <name>filtrme::FilterEditorItem</name>
     <message>
         <source>Width:</source>
-        <translation type="vanished">Width:</translation>
+        <translation>Width:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="vanished">Height:</translation>
+        <translation>Height:</translation>
     </message>
 </context>
 <context>
     <name>filtrme::FilteringService</name>
     <message>
         <source>&amp;Apply filter</source>
-        <translation type="vanished">&amp;Apply filter</translation>
+        <translation>&amp;Apply filter</translation>
     </message>
     <message>
         <source>&amp;Edit filters</source>
-        <translation type="vanished">&amp;Edit filters</translation>
+        <translation>&amp;Edit filters</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::MorphoMatService</name>
     <message>
         <source>&amp;Erosion</source>
-        <translation type="vanished">&amp;Erosion</translation>
+        <translation>&amp;Erosion</translation>
     </message>
     <message>
         <source>&amp;Dilatation</source>
-        <translation type="vanished">&amp;Dilatation</translation>
+        <translation>&amp;Dilatation</translation>
     </message>
     <message>
         <source>&amp;Opening</source>
-        <translation type="vanished">&amp;Opening</translation>
+        <translation>&amp;Opening</translation>
     </message>
     <message>
         <source>&amp;Closing</source>
-        <translation type="vanished">&amp;Closing</translation>
+        <translation>&amp;Closing</translation>
     </message>
     <message>
         <source>&amp;Gradient</source>
-        <translation type="vanished">&amp;Gradient</translation>
+        <translation>&amp;Gradient</translation>
     </message>
     <message>
         <source>&amp;White top hat</source>
-        <translation type="vanished">&amp;White top hat</translation>
+        <translation>&amp;White top hat</translation>
     </message>
     <message>
         <source>&amp;Black top hat</source>
-        <translation type="vanished">&amp;Black top hat</translation>
+        <translation>&amp;Black top hat</translation>
     </message>
     <message>
         <source>&amp;Structuring element</source>
-        <translation type="vanished">&amp;Structuring element</translation>
+        <translation>&amp;Structuring element</translation>
     </message>
 </context>
 </TS>
