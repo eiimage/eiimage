@@ -115,7 +115,12 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
                 break;
         }
         if(resImg != NULL) {
-            outImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
+            QString interpolationType;
+            if(inter==1) interpolationType = QString(qApp->translate("ScalingOp","Bilinear Interpolation"));
+            else if(inter==2) interpolationType = QString(qApp->translate("ScalingOp","Parabolic Interpolation"));
+            else if(inter==3) interpolationType = QString(qApp->translate("ScalingOp","Spline Interpolation"));
+            else interpolationType = QString(qApp->translate("ScalingOp","Nearest Interpolation"));
+            outImage(resImg,qApp->translate("ScalingOp","Scaled").toStdString() + " - " + interpolationType.toStdString());
         }
     }
     else if(currentWnd->isDouble()) {
