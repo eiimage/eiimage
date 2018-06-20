@@ -66,7 +66,7 @@ Pyramid::Filters::Filters()
     num_filters = 5;
     filters = all_filters;
     
-    /* Old fix might work on windows if everything else fail 
+    /*Old fix might work on windows if everything else fail 
     num_filters=(int)sizeof(tp6_filter_file_data)/sizeof(Filtre);
     filters = reinterpret_cast<const Filtre*>(tp6_filter_file_data);*/
 }
