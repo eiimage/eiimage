@@ -1352,41 +1352,44 @@ Canal %d :
         <translation>La largeur de l&apos;image doit être égale à sa hauteur.</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="66"/>
-        <source>Gaussian filter</source>
-        <translation>Filtre gaussien</translation>
-    </message>
-    <message>
-        <location filename="Operations/PyramidOp.cpp" line="67"/>
-        <source>Trimodal filter</source>
-        <translation>Filtre trimodal</translation>
-    </message>
-    <message>
-        <location filename="Operations/PyramidOp.cpp" line="68"/>
-        <source>Rectangular filter</source>
-        <translation>Filtre rectangulaire</translation>
-    </message>
-    <message>
         <location filename="Operations/PyramidOp.cpp" line="69"/>
+        <location filename="Operations/PyramidOp.cpp" line="79"/>
+        <source>Gaussian</source>
+        <translation>Gaussien</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidOp.cpp" line="73"/>
+        <location filename="Operations/PyramidOp.cpp" line="83"/>
+        <source>Laplacian</source>
+        <translation>Laplacien</translation>
+    </message>
+    <message>
+        <source>Gaussian filter</source>
+        <translation type="vanished">Filtre gaussien</translation>
+    </message>
+    <message>
+        <source>Trimodal filter</source>
+        <translation type="vanished">Filtre trimodal</translation>
+    </message>
+    <message>
+        <source>Rectangular filter</source>
+        <translation type="vanished">Filtre rectangulaire</translation>
+    </message>
+    <message>
         <source>QMF filter</source>
-        <translation>QMF Filter</translation>
+        <translation type="vanished">QMF Filter</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="70"/>
         <source>Triangular filter</source>
-        <translation>Filtre triangulaire</translation>
+        <translation type="vanished">Filtre triangulaire</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="76"/>
-        <location filename="Operations/PyramidOp.cpp" line="86"/>
         <source>Gaussian pyramidal decomposition</source>
-        <translation>Décomposition pyramidale gaussienne</translation>
+        <translation type="vanished">Décomposition pyramidale gaussienne</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="80"/>
-        <location filename="Operations/PyramidOp.cpp" line="90"/>
         <source>Laplacian pyramidal decomposition</source>
-        <translation>Décomposition pyamidale laplacienne</translation>
+        <translation type="vanished">Décomposition pyamidale laplacienne</translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="37"/>
@@ -1417,6 +1420,21 @@ Canal %d :
         <location filename="Operations/DPCMEncodingOp.cpp" line="32"/>
         <source>DPCM Encoding</source>
         <translation>Encodage MICD</translation>
+    </message>
+    <message>
+        <location filename="Operations/Huffman.cpp" line="98"/>
+        <source>
+ debit(huffman) = %.4f
+</source>
+        <translation>
+ Débit(Huffman) = %.4f</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/Pyramid.cpp" line="662"/>
+        <source>L&apos;entropie de l&apos;etage %d est %1f
+</source>
+        <translation>L&apos;entropie de l&apos;étage %d est %1f
+</translation>
     </message>
     <message>
         <location filename="Operations/EntropyOp.cpp" line="35"/>
@@ -1594,6 +1612,48 @@ Canal %d :
         <source>Create only one step :</source>
         <translation>Créer unique l&apos;étage : </translation>
     </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="41"/>
+        <source>Decomposition pyramidale avec filtre gaussien :
+</source>
+        <translation>Décomposition pyramidale avec filtre gaussien :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="44"/>
+        <source>Decomposition pyramidale avec filtre trimodal :
+</source>
+        <translation>Décomposition pyramidale avec filtre trimodal :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="47"/>
+        <source>Decomposition pyramidale avec filtre rectangulaire :
+</source>
+        <translation>Décomposition pyramidale avec filtre rectangulaire :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="50"/>
+        <source>Decomposition pyramidale avec filtre qmf :
+</source>
+        <translation>Décomposition pyramidale avec filtre QMF :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="53"/>
+        <source>Decomposition pyramidale avec filtre triangulaire :
+</source>
+        <translation>Décomposition pyramidale avec filtre rectangulaire :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="57"/>
+        <source>Filtre non trouvé. Décomposition avec filtre gaussien par défaut. 
+</source>
+        <translation>Filtre non trouvé. Décomposition avec filtre gaussien par défaut. 
+</translation>
+    </message>
 </context>
 <context>
     <name>QuantificationDialog</name>
@@ -1630,7 +1690,7 @@ Canal %d :
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="59"/>
         <source>LloydMax</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="61"/>

@@ -38,23 +38,23 @@ Pyramid::Filtre PyramidDialog::getFilter(std::string &to_print) const {
     bool notFoundError = false;
     switch(ui->filterBox->currentIndex()) {
         case 1: notFoundError = !filters.getFromName("gaussien", filter); 
-                to_print = "Decomposition pyramidale avec filtre gaussien : \n";
+                to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre gaussien :\n")).toStdString();
                 break;
         case 2: notFoundError = !filters.getFromName("trimodal", filter); 
-                to_print = "Decomposition pyramidale avec filtre trimodal : \n";
+                to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre trimodal :\n")).toStdString();
                 break;
         case 3: notFoundError = !filters.getFromName("rectangulaire", filter); 
-                to_print = "Decomposition pyramidale avec filtre rectangulaire : \n";
+                to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre rectangulaire :\n")).toStdString();
                 break;
         case 4: notFoundError = !filters.getFromName("qmf", filter); 
-                to_print = "Decomposition pyramidale avec filtre qmf : \n";
+                to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre qmf :\n")).toStdString();
                 break;
         default: notFoundError = !filters.getFromName("triangulaire", filter); 
-                to_print = "Decomposition pyramidale avec filtre triangulaire : \n";
+                to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre triangulaire :\n")).toStdString();
                 break;
     }
     if(notFoundError){
-        to_print = "Filtre non trouvé. Décomposition avec filtre gaussien par défaut. \n";
+        to_print = QString(qApp->translate("PyramidDialog","Filtre non trouvé. Décomposition avec filtre gaussien par défaut. \n")).toStdString();
     }
     return filter;
 }

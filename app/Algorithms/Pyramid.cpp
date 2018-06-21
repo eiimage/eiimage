@@ -18,6 +18,7 @@
 */
 
 #include "Pyramid.h"
+#include "../Tools.h"
 #include <Algorithm/Filtering.h>
 #include <cstdio>
 #include <cstring>
@@ -658,7 +659,7 @@ string Pyramid::entropie_p(const uint8_t *pyra,int etage_f,int nbc,int nbl)
         j=j+taille_c*taille_l;
         taille_c=taille_c/2;
         taille_l=taille_l/2;
-        sprintf(buffer, "L'entropie de l'etage %d est %1f\n",i,h);
+        sprintf(buffer, QString(qApp->translate("Operations","L'entropie de l'etage %d est %1f\n")).toUtf8(),i,h);
         returnval = returnval + buffer;
     }
    return returnval;

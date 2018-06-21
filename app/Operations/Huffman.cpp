@@ -18,6 +18,7 @@
 */
 
 #include "Huffman.h"
+#include "../Tools.h"
 #include <cstring>
 #include <cstdio>
 #include <cmath>
@@ -94,7 +95,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
         sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i)-1,*(Pi+i));
         returnval = returnval + buffer;
     }
-    sprintf(buffer, "\n debit(huffman) = %.4f\n",nbbit);
+    sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f\n")).toUtf8(),nbbit);
     returnval = returnval + buffer;
 
     return returnval;
