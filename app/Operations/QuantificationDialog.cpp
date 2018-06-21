@@ -104,25 +104,25 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
     if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
         case 1: 
-                to_print = "Quantification non lineaire a valeurs centrees :";
+                to_print = QString(tr("Quantification non lineaire a valeurs centrees :")).toStdString();
                 return Quantification::nonLinearQuant(size, image, c); 
                 break;
         case 2: 
-                to_print = "Quantification non lineaire a valeurs moyennes : ";
+                to_print = QString(tr("Quantification non lineaire a valeurs moyennes :")).toStdString();
                 return Quantification::nonLinearQuantOptimized(size, image, c); 
                 break;
         case 3: 
-                to_print = "Quantification personnalisee :";
+                to_print = QString(tr("Quantification personnalisee :")).toStdString();
                 return _quantWidget->getQuantif(); 
                 break;
         case 4: 
-                to_print = "Quantification LloydMax :";
+                to_print = QString(tr("Quantification LloydMax :")).toStdString();
                 *checkOptiQuant = true;
                 return Quantification::lloydMaxQuant(size, image, c);
                 break;
 
         default: 
-                to_print = "Quantification lineaire a valeurs centrees :";
+                to_print = QString(tr("Quantification lineaire a valeurs centrees :")).toStdString();
                 return Quantification::linearQuant(size); 
                 break;
     }

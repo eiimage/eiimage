@@ -1191,6 +1191,37 @@ Nombre de classes = %1 </translation>
         <translation>Quantification</translation>
     </message>
     <message>
+        <location filename="Operations/QuantificationOp.cpp" line="44"/>
+        <source>
+Canal%d : 
+</source>
+        <translation>
+Canal %d : 
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="49"/>
+        <source>             Valeurs :  </source>
+        <translation>             Valeurs :  </translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="64"/>
+        <source>             Seuils    :       </source>
+        <translation>             Seuils    :       </translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="140"/>
+        <source>Canal : %d           Centroïd : %.2f %          Plus proche voisin : %.2f %
+</source>
+        <translation>Canal : %d           Centroïd : %.2f %          Plus proche voisin : %.2f %
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="199"/>
+        <source>Respect des proprietes du quantificateur optimal : </source>
+        <translation>Respect des propriétés du quantificateur optimal : </translation>
+    </message>
+    <message>
         <location filename="Operations/RandomImgOp.cpp" line="37"/>
         <source>Generate random image</source>
         <translation>Générer une image aléatoire</translation>
@@ -1599,7 +1630,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="59"/>
         <source>LloydMax</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="61"/>
@@ -1620,6 +1651,33 @@ Nombre de classes = %1 </translation>
         <location filename="Operations/QuantificationDialog.cpp" line="91"/>
         <source>Apply</source>
         <translation>Appliquer</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="107"/>
+        <source>Quantification non lineaire a valeurs centrees :</source>
+        <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
+        <translation>Quantification non linéaire à valeurs centrées :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="111"/>
+        <source>Quantification non lineaire a valeurs moyennes :</source>
+        <oldsource>Quantification non lineaire a valeurs moyennes : </oldsource>
+        <translation>Quantification non linéaire à valeurs moyennes :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="115"/>
+        <source>Quantification personnalisee :</source>
+        <translation>Quantification personnalisée :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="119"/>
+        <source>Quantification LloydMax :</source>
+        <translation>Quantification LloydMax :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="125"/>
+        <source>Quantification lineaire a valeurs centrees :</source>
+        <translation>Quantification linéaire à valeurs centrées :</translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="142"/>
@@ -1645,29 +1703,24 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">quantifiée</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="203"/>
         <source>Quantification non lineaire a valeur centree</source>
-        <translation>Quantification non-linéaire à valeurs centrées</translation>
+        <translation type="vanished">Quantification non-linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="205"/>
         <source>Quantification non lineaire a moyennes</source>
-        <translation>Quantification non linéaire à valeurs moyennes</translation>
+        <translation type="vanished">Quantification non linéaire à valeurs moyennes</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="207"/>
         <source>Quantification personnalisee</source>
-        <translation>Quantification personnalisée</translation>
+        <translation type="vanished">Quantification personnalisée</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="209"/>
         <source>Quantification LloydMax</source>
-        <translation>Quantification LloydMax</translation>
+        <translation type="vanished">Quantification LloydMax</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="210"/>
         <source>Quantification lineaire a valeurs centrees</source>
-        <translation>Quantification linéaire à valeurs centrées</translation>
+        <translation type="vanished">Quantification linéaire à valeurs centrées</translation>
     </message>
 </context>
 <context>
