@@ -117,7 +117,7 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
                 break;
         case 4: 
                 to_print = "Quantification LloydMax :";
-                *checkOptiQuant = true;
+                //*checkOptiQuant = true;
                 return Quantification::lloydMaxQuant(size, image, c);
                 break;
 
