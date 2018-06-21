@@ -97,7 +97,8 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
             som_lum += hist[i]*i;          
             nb_points += hist[i];
         }
-        baricenter = som_lum/nb_points;
+        if(nb_points != 0) baricenter = som_lum/nb_points;
+        else baricenter =  ( quant->threshold(j) + quant->threshold(j-1) )/2;
 
         centroid += abs( baricenter - quant->value(j) ) /( quant->threshold(j) - quant->threshold(j-1) ) * 100;
     }
@@ -110,7 +111,8 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
                 som_lum += hist[i]*i;          
                 nb_points += hist[i];
         }
-        baricenter = som_lum/nb_points;
+        if(nb_points != 0) baricenter = som_lum/nb_points;
+        else baricenter =  (quant->threshold(0))/2;;
         centroid = abs( baricenter - quant->value(0) ) /( quant->threshold(0) ) * 100;
         
         som_lum = 0;
@@ -119,10 +121,10 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
                 som_lum += hist[i]*i;          
                 nb_points += hist[i];
             }
-        baricenter = som_lum/nb_points;
+        if(nb_points != 0) baricenter = som_lum/nb_points;
+        else baricenter =  255 - quant->threshold(0)/2;    
         centroid += abs( baricenter - quant->value(1) ) / ( 255 - quant->threshold(0) ) * 100;
     }
-
     for(int i = 0; i<quant->nbThresholds(); i++){
         
         valueCenter = ( quant->value(i) + quant->value(i+1) ) / 2 ; 
@@ -192,7 +194,7 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         outText(quantType);
         outText(output_msg);
         if(checkOptiQuant){
-            outText("Respect des conditions du quantifieur optimal : ");
+            outText("Respect des proprietes du quantificateur optimal : ");
             outText(optiQuant);
         }
 
