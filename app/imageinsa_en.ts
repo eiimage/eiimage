@@ -1208,6 +1208,37 @@ Number of classes = %1 </translation>
         <translation>Quantization</translation>
     </message>
     <message>
+        <location filename="Operations/QuantificationOp.cpp" line="44"/>
+        <source>
+Canal%d : 
+</source>
+        <translation>
+Channel %d : 
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="49"/>
+        <source>             Valeurs :  </source>
+        <translation>             Values  :      </translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="64"/>
+        <source>             Seuils    :       </source>
+        <translation>             Thresholds :    </translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="140"/>
+        <source>Canal : %d           Centroïd : %.2f %          Plus proche voisin : %.2f %
+</source>
+        <translation>Channel : %d           Centroid : %.2f %          Nearest neighbor : %.2f %
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationOp.cpp" line="199"/>
+        <source>Respect des proprietes du quantificateur optimal : </source>
+        <translation>Respect of the optimal quantizer properties : </translation>
+    </message>
+    <message>
         <location filename="Operations/RandomImgOp.cpp" line="37"/>
         <source>Generate random image</source>
         <translation>Generate random image</translation>
@@ -1333,41 +1364,44 @@ Number of classes = %1 </translation>
         <translation>The image width must equal the image height.</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="66"/>
-        <source>Gaussian filter</source>
-        <translation>Gaussian filter</translation>
-    </message>
-    <message>
-        <location filename="Operations/PyramidOp.cpp" line="67"/>
-        <source>Trimodal filter</source>
-        <translation>Trimodal filter</translation>
-    </message>
-    <message>
-        <location filename="Operations/PyramidOp.cpp" line="68"/>
-        <source>Rectangular filter</source>
-        <translation>Rectangular filter</translation>
-    </message>
-    <message>
         <location filename="Operations/PyramidOp.cpp" line="69"/>
+        <location filename="Operations/PyramidOp.cpp" line="79"/>
+        <source>Gaussian</source>
+        <translation>Gaussian</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidOp.cpp" line="73"/>
+        <location filename="Operations/PyramidOp.cpp" line="83"/>
+        <source>Laplacian</source>
+        <translation>Laplacian</translation>
+    </message>
+    <message>
+        <source>Gaussian filter</source>
+        <translation type="vanished">Gaussian filter</translation>
+    </message>
+    <message>
+        <source>Trimodal filter</source>
+        <translation type="vanished">Trimodal filter</translation>
+    </message>
+    <message>
+        <source>Rectangular filter</source>
+        <translation type="vanished">Rectangular filter</translation>
+    </message>
+    <message>
         <source>QMF filter</source>
-        <translation>QMF filter</translation>
+        <translation type="vanished">QMF filter</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="70"/>
         <source>Triangular filter</source>
-        <translation>Triangular filter</translation>
+        <translation type="vanished">Triangular filter</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="76"/>
-        <location filename="Operations/PyramidOp.cpp" line="86"/>
         <source>Gaussian pyramidal decomposition</source>
-        <translation>Gaussian pyramidal decomposition</translation>
+        <translation type="vanished">Gaussian pyramidal decomposition</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="80"/>
-        <location filename="Operations/PyramidOp.cpp" line="90"/>
         <source>Laplacian pyramidal decomposition</source>
-        <translation>Laplacian pyramidal decomposition</translation>
+        <translation type="vanished">Laplacian pyramidal decomposition</translation>
     </message>
     <message>
         <location filename="Operations/ClassResultOp.cpp" line="37"/>
@@ -1398,6 +1432,21 @@ Number of classes = %1 </translation>
         <location filename="Operations/DPCMEncodingOp.cpp" line="32"/>
         <source>DPCM Encoding</source>
         <translation>DPCM Encoding</translation>
+    </message>
+    <message>
+        <location filename="Operations/Huffman.cpp" line="98"/>
+        <source>
+ debit(huffman) = %.4f
+</source>
+        <translation>
+ Flow(Huffman) = %.4f</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/Pyramid.cpp" line="662"/>
+        <source>L&apos;entropie de l&apos;etage %d est %1f
+</source>
+        <translation>The stage %d entropy is %1f
+</translation>
     </message>
     <message>
         <location filename="Operations/MedianOp.cpp" line="12"/>
@@ -1575,6 +1624,48 @@ Number of classes = %1 </translation>
         <source>Create only one step :</source>
         <translation>Create only one step :</translation>
     </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="41"/>
+        <source>Decomposition pyramidale avec filtre gaussien :
+</source>
+        <translation>Pyramidal decomposition with gaussian filter :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="44"/>
+        <source>Decomposition pyramidale avec filtre trimodal :
+</source>
+        <translation>Pyramidal decomposition with trimodal filter :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="47"/>
+        <source>Decomposition pyramidale avec filtre rectangulaire :
+</source>
+        <translation>Pyramidal decomposition with rectangular filter :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="50"/>
+        <source>Decomposition pyramidale avec filtre qmf :
+</source>
+        <translation>Pyramidal decomposition with QMF filter :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="53"/>
+        <source>Decomposition pyramidale avec filtre triangulaire :
+</source>
+        <translation>Pyramidal decomposition with triangular filter :
+</translation>
+    </message>
+    <message>
+        <location filename="Operations/PyramidDialog.cpp" line="57"/>
+        <source>Filtre non trouvé. Décomposition avec filtre gaussien par défaut. 
+</source>
+        <translation>Filter not found. Default decomposition with gaussian filter.
+</translation>
+    </message>
 </context>
 <context>
     <name>QuantificationDialog</name>
@@ -1634,6 +1725,33 @@ Number of classes = %1 </translation>
         <translation>Apply</translation>
     </message>
     <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="107"/>
+        <source>Quantification non lineaire a valeurs centrees :</source>
+        <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
+        <translation>Non-linear quantization with centered values :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="111"/>
+        <source>Quantification non lineaire a valeurs moyennes :</source>
+        <oldsource>Quantification non lineaire a valeurs moyennes : </oldsource>
+        <translation>Non-linear quantization with mean values :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="115"/>
+        <source>Quantification personnalisee :</source>
+        <translation>Custom quantization :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="119"/>
+        <source>Quantification LloydMax :</source>
+        <translation>LloydMax quantization :</translation>
+    </message>
+    <message>
+        <location filename="Operations/QuantificationDialog.cpp" line="125"/>
+        <source>Quantification lineaire a valeurs centrees :</source>
+        <translation>Linear quantization with centered values :</translation>
+    </message>
+    <message>
         <location filename="Operations/QuantificationDialog.cpp" line="142"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
@@ -1657,29 +1775,24 @@ Number of classes = %1 </translation>
         <translation type="vanished">quantified</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="203"/>
         <source>Quantification non lineaire a valeur centree</source>
-        <translation>Non linear quantization with centered values</translation>
+        <translation type="vanished">Non linear quantization with centered values</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="205"/>
         <source>Quantification non lineaire a moyennes</source>
-        <translation>Non linear quantization with mean values</translation>
+        <translation type="vanished">Non linear quantization with mean values</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="207"/>
         <source>Quantification personnalisee</source>
-        <translation>Custom quantization</translation>
+        <translation type="vanished">Custom quantization</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="209"/>
         <source>Quantification LloydMax</source>
-        <translation>LloydMax quantization</translation>
+        <translation type="vanished">LloydMax quantization</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="210"/>
         <source>Quantification lineaire a valeurs centrees</source>
-        <translation>Linear quantization with centered values</translation>
+        <translation type="vanished">Linear quantization with centered values</translation>
     </message>
 </context>
 <context>

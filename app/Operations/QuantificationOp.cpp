@@ -41,10 +41,12 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
     char buffer[30];
     string output_msg;
     int val;    
-    sprintf(buffer, "\nCanal %d : \n", c);
+    QString bob(qApp->translate("Operations", "\nCanal%d : \n"));
+
+    sprintf(buffer, bob.toUtf8(), c);
     output_msg += buffer;
 
-    output_msg += "             Valeurs :  ";
+    output_msg += QString(qApp->translate("Operations","             Valeurs :  ")).toStdString();
 
     for(int i = 0; i < quant->nbValues(); ++i) {
         
@@ -59,7 +61,7 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
 
     }
     output_msg += "\n";
-    output_msg += "             Seuils    :       ";
+    output_msg += QString(qApp->translate("Operations","             Seuils    :       ")).toStdString();
             
     for(int i = 0; i < quant->nbThresholds(); ++i) {
         val =(int)quant->threshold(i);
@@ -135,7 +137,7 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
     if( quant->nbValues() == 2) centroid = centroid / 2;
     else centroid = centroid / ( quant->nbThresholds() - 1 );
 
-    sprintf(buffer, "Canal : %d           Centroïd : %.2f %          Plus proche voisin : %.2f %\n", c, (100-centroid), (100-neighbor));
+    sprintf(buffer, QString(qApp->translate("Operations","Canal : %d           Centroïd : %.2f %          Plus proche voisin : %.2f %\n")).toUtf8(), c, (100-centroid), (100-neighbor));
 
     return buffer;
 }
@@ -194,22 +196,11 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         outText(quantType);
         outText(output_msg);
         if(checkOptiQuant){
-            outText("Respect des proprietes du quantificateur optimal : ");
+            outText(QString(qApp->translate("Operations","Respect des proprietes du quantificateur optimal : ")).toStdString());
             outText(optiQuant);
         }
 
-        QString windowName;
         QString imgName;
-
-        if(quantType=="Quantification non lineaire a valeurs centrees :")
-            windowName = QString(qApp->translate("QuantificationOp","Quantification non lineaire a valeur centree"));
-        else if(quantType=="Quantification non lineaire a valeurs moyennes : ")
-            windowName = QString(qApp->translate("QuantificationOp","Quantification non lineaire a moyennes"));
-        else if(quantType=="Quantification personnalisee :")
-            windowName = QString(qApp->translate("QuantificationOp","Quantification personnalisee"));
-        else if(quantType=="Quantification LloydMax :")
-            windowName = QString(qApp->translate("QuantificationOp","Quantification LloydMax"));
-        else windowName = QString(qApp->translate("QuantificationOp","Quantification lineaire a valeurs centrees"));
 
 
         if(image!=NULL){
@@ -219,7 +210,9 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         else{
             imgName = QString("");
         }
-        outImage(resImg, imgName.toStdString() + windowName.toStdString());
+
+
+        outImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
     }
 
 }
