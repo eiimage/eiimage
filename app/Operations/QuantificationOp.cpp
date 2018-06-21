@@ -196,20 +196,19 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
             outText(optiQuant);
         }
 
-        outImage(resImg, qApp->translate("QuantificationOp", "quantified").toStdString());
         QString windowName;
         QString imgName;
 
-        if(quantType=="Quantification non lineaire a valeur centrees :")
+        if(quantType=="Quantification non lineaire a valeurs centrees :")
             windowName = QString(qApp->translate("QuantificationOp","Quantification non lineaire a valeur centree"));
-        else if(quantType=="Quantification non lineaire a moyennes : ")
+        else if(quantType=="Quantification non lineaire a valeurs moyennes : ")
             windowName = QString(qApp->translate("QuantificationOp","Quantification non lineaire a moyennes"));
-        else if(quantType=="Quantification personnalisée :")
+        else if(quantType=="Quantification personnalisee :")
             windowName = QString(qApp->translate("QuantificationOp","Quantification personnalisee"));
         else if(quantType=="Quantification LloydMax :")
             windowName = QString(qApp->translate("QuantificationOp","Quantification LloydMax"));
-        else if(quantType=="Quantification lineaire a valeurs centrees :")
-            windowName = QString(qApp->translate("QuantificationOp","Quantification lineaire a valeurs centrees"));
+        else windowName = QString(qApp->translate("QuantificationOp","Quantification lineaire a valeurs centrees"));
+
 
         if(image!=NULL){
             imgName = QString::fromStdString(imgList.find(image)->second);
