@@ -432,8 +432,30 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *     OUVERTURE ET LECTURE DU FICHIER IMAGE ORIGINE
 *     ALLOCATION MEMOIRE POUR LES TABLEAUX IMAGES
 *
-*----------------------------------------------------------------------*/
-    Image_t<double>* tmpImg = Converter<Image_t<double> >::convert(*im);
+*----------------------------------------------------------------------*/  
+    Image_t<double>* tmpImg;
+    if(im->getWidth() % 8 != 0 || im->getHeight() % 8!= 0){
+        int addcol = 0;
+        int addlign = 0;
+        if(im->getWidth()  % 8 != 0 )
+            addcol = 8 - ( im->getWidth() % 8 );
+        if(im->getHeight()  % 8 != 0 )
+            addlign = 8 - ( im->getHeight() % 8 );
+        
+        tmpImg = new Image_t<double>(im->getWidth() + addcol, im->getHeight() + addlign, im->getNbChannels());
+        for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
+            for(unsigned int i = 0; i < tmpImg->getWidth() ; i++) {
+                for(unsigned int j = 0; j < tmpImg->getHeight() ; j++) {
+                    
+                    tmpImg->setPixel(i, j, c, (double) im->getPixel(min(i, im->getWidth()-1 ), min(j, im->getHeight()-1), c));
+                
+                }
+            }
+        }
+    }
+    else {
+       tmpImg = Converter<Image_t<double> >::convert(*im);
+    }
 
 /*---------------------------------------------------------------------
 *
@@ -472,8 +494,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 
                   for(int l = 0; l < idt; l++) {
                       for(int m=0 ; m<idt ; m++) {
-                          if( i+k < tmpImg->getWidth() &&  j+m < tmpImg->getHeight())
-                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+k, j+m, c);
+                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(min(i+k, tmpImg->getWidth()-1 ), min(j+m, tmpImg->getHeight()-1),  c);
                       }
                   }
 
@@ -488,8 +509,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 
                   for(int l=0 ; l<idt ; l++) {
                       for(int m=0 ; m<idt ; m++) {
-                          if( i+m < tmpImg->getWidth() &&  j+k < tmpImg->getHeight())
-                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(i+m, j+k, c);
+                            res[l] += rmat[l * idt + m] * tmpImg->getPixelAt(min(i+m, tmpImg->getWidth()-1 ), min(j+k, tmpImg->getHeight()-1), c);
                       }
                   }
 
