@@ -19,6 +19,7 @@
 
 #include <cstdio>
 #include "DCT.h"
+#include "../Tools.h"
 #include <Converter.h>
 
 using namespace std;
@@ -187,7 +188,7 @@ string tronc(Image_t<double>*img, int limit)
         }
     }
     debit = debit * 8. / 256.;
-    sprintf(buffer, "\nLe debit vaut : %5.2f\n\n", debit);
+    sprintf(buffer, QString(qApp->translate("Operations", "\nLe debit vaut : %5.2f\n\n")).toUtf8(), debit);
     return buffer;
 }
 
@@ -205,7 +206,7 @@ string reduce(Image_t<double>* img, int nBitInit, double slope)
     double debit = 0;
 
     char buffer[100];
-    string cs = "\n---------Matrice d'allocation de bits---------\n\n";
+    string cs = QString(qApp->translate("Operations","\n---------Matrice d'allocation de bits---------\n\n")).toStdString();
 
     for(unsigned int i = 0; i <16; ++i) {
         for(unsigned int j = 0; j <16; ++j) {
@@ -227,7 +228,7 @@ string reduce(Image_t<double>* img, int nBitInit, double slope)
         cs = cs + "\n";
     }
     debit /= (16 * 16);
-    sprintf(buffer, "\nLe debit vaut : %5.2f\n\n",debit);
+    sprintf(buffer, QString(qApp->translate("Operations","\nLe debit vaut : %5.2f\n\n")).toUtf8(),debit);
     cs = cs + buffer;
 
 

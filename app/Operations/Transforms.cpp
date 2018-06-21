@@ -17,6 +17,7 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "../Tools.h"
 #include "Transforms.h"
 #include <GrayscaleImage.h>
 #include <cstring>
@@ -464,7 +465,7 @@ string hadamard_haar_88( const Image *im, Image_t<double> **resImg, Image **invI
 *---------------------------------------------------------------------*/
 
     char buffer[100];
-    returnval = "\n\nmatrice de transformation utilisee : \n";
+    returnval = QString(qApp->translate("Operations","\n\nmatrice de transformation utilisee : \n")).toStdString();
 
     for(int i=0 ; i<idt ; i++)
     {

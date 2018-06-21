@@ -1449,6 +1449,38 @@ Channel %d :
 </translation>
     </message>
     <message>
+        <location filename="Operations/Transforms.cpp" line="468"/>
+        <source>
+
+matrice de transformation utilisee : 
+</source>
+        <translation>
+
+Used transformation matrix : 
+</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/DCT.cpp" line="191"/>
+        <location filename="Algorithms/DCT.cpp" line="231"/>
+        <source>
+Le debit vaut : %5.2f
+
+</source>
+        <translation>The flow is : %5.2f
+</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/DCT.cpp" line="209"/>
+        <source>
+---------Matrice d&apos;allocation de bits---------
+
+</source>
+        <translation>
+---------Bits allocation matrix---------
+
+</translation>
+    </message>
+    <message>
         <location filename="Operations/MedianOp.cpp" line="12"/>
         <location filename="Operations/MedianOp.cpp" line="36"/>
         <source>Median Filter</source>

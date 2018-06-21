@@ -1437,6 +1437,39 @@ Canal %d :
 </translation>
     </message>
     <message>
+        <location filename="Operations/Transforms.cpp" line="468"/>
+        <source>
+
+matrice de transformation utilisee : 
+</source>
+        <translation>
+
+Matrice de transformation utilisée : 
+</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/DCT.cpp" line="191"/>
+        <location filename="Algorithms/DCT.cpp" line="231"/>
+        <source>
+Le debit vaut : %5.2f
+
+</source>
+        <translation>
+Le débit vaut : %5.2f
+</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/DCT.cpp" line="209"/>
+        <source>
+---------Matrice d&apos;allocation de bits---------
+
+</source>
+        <translation>
+---------Matrice d&apos;allocation de bits---------
+
+</translation>
+    </message>
+    <message>
         <location filename="Operations/EntropyOp.cpp" line="35"/>
         <source>Calcul d&apos;entropie (image standard)</source>
         <translation type="unfinished"></translation>
