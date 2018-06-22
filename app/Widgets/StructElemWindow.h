@@ -60,10 +60,9 @@ class StructElemWindow : public QDialog
 
   private:
     QWidget* _widget;
-    QToolBar* _toolBar;
-    QAction* _openFile;
+    QPushButton* _openFileButton;
+    QPushButton* _saveFileButton;
     QAction* _ok;
-    QAction* _saveFile;
     genericinterface::HistogramWindow* _histo;
     QLabel* _labelThreshold;
     imagein::MorphoMat::StructElem* _structElem;

@@ -32,19 +32,18 @@ using namespace imagein::MorphoMat;
 StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _structElem(elem), _serviceStructElem(elem), _tbButton(tbButton)
 {
     _realSize = *elem;
-    
-//    _widget = new QWidget;
-//    this->setWidget(_widget);
 
     QVBoxLayout* layout = new QVBoxLayout();
-    _toolBar = new QToolBar;
-    _openFile = _toolBar->addAction(tr("&Open file"));
-    _saveFile = _toolBar->addAction(tr("&Save as..."));
-    layout->addWidget(_toolBar);
+    QHBoxLayout* hlayout = new QHBoxLayout();
+    _openFileButton = new QPushButton(tr("&Open file"));
+    _saveFileButton = new QPushButton(tr("&Save as..."));
+    hlayout->addWidget(_openFileButton);
+    hlayout->addWidget(_saveFileButton);
+    layout->addLayout(hlayout);
     this->setLayout(layout);
 
-    
-    
+    std::cout << "checked :" << _openFileButton->isChecked() << "\n";
+    std::cout << "checked2 : " << _saveFileButton->isChecked() << "\n";
     QFormLayout* formLayout = new QFormLayout();
     layout->addLayout(formLayout);
     
@@ -88,9 +87,8 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(ok()));
     QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-//    QObject::connect(button, SIGNAL(clicked(bool)), this, SLOT(ok()));
-    QObject::connect(_openFile, SIGNAL(triggered()), this, SLOT(openFile()));
-    QObject::connect(_saveFile, SIGNAL(triggered()), this, SLOT(saveFile()));
+    QObject::connect(_openFileButton, SIGNAL(clicked(bool)), this, SLOT(openFile()));
+    QObject::connect(_saveFileButton, SIGNAL(clicked(bool)), this, SLOT(saveFile()));
     QObject::connect(_scale, SIGNAL(valueChanged(int)), this, SLOT(resize(int)));
     QObject::connect(_genButton, SIGNAL(clicked(bool)), this, SLOT(generate()));
 }
