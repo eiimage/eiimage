@@ -203,8 +203,21 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
 
     
     while(cpt > 0 && diff_mean >=1 ){
-        // calcul des nouveaux niveaux de quantification
-
+        // calcul des nouveaux seuils de quantification
+        for (int i=0; i<size-1;i++){
+            diff[i] = quant._threshold[i];
+            
+            //centrage des seuils de décision entre chaque niveaux de quantification
+            quant._threshold[i] = (quant._values[i]+quant._values[i+1])/2;
+            
+            diff[i] = abs(diff[i] - quant._threshold[i]);
+        }
+        
+        
+        
+        
+        // Calcul des nouveaux niveaux de quantification
+        // Premier niveau baricentre entre 0 et le premier seuil
         som_lum = 0;
         nb_points = 0; 
         for(int j = 0; j < quant._threshold[0]; j++){
@@ -227,7 +240,9 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
             if(nb_points > 0) quant._values[j]= (int) (som_lum/nb_points);
             else quant._values[j] = (quant._threshold[j]+quant._threshold[j+1])/2;
         }
-
+        
+        
+        // Dernier niveau baricentre entre le max et le dernier seuil
         som_lum = 0;
         nb_points = 0; 
         for(int j = quant._threshold[size-2]; j < N_MAX_THRESHOLD; j++) {
@@ -238,16 +253,12 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
         if(nb_points > 0) quant._values[size -1] = (som_lum/nb_points);
         else quant._values[size-1] = (quant._threshold[size-2] +  N_MAX_THRESHOLD)/2 ;
         
-        // calcul des nouveaux seuils de quantification
-        for (int i=0; i<size-1;i++){
-            diff[i] = quant._threshold[i];
-            
-            //centrage des seuils de décision entre chaque niveaux de quantification
-            quant._threshold[i] = (quant._values[i]+quant._values[i+1])/2;
-            
-            diff[i] = abs(diff[i] - quant._threshold[i]);
-        }
-        
+
+
+
+
+
+
         
         //calcul de la condition d'arret (moyenne des écarts < 1 )
         for(int i = 0; i<size-1 ; i++){
