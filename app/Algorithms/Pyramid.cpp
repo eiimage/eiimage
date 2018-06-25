@@ -126,7 +126,7 @@ void Filters::copy_filter(const Filtre &source, Filtre &dest ) {
 
 void Filters::getDefault( Filtre &to_fill ) {
   strcpy( to_fill.nom_f, "default - gaussien" );
-    to_fill.taille_f =  (float)2;
+    to_fill.taille_f =  2;
     to_fill.coeff_f[0] =  (float)0.4;
     to_fill.coeff_f[1] =  (float)0.25;
     to_fill.coeff_f[2] =  (float)0.05;
