@@ -61,8 +61,7 @@ namespace Pyramid
     * \Class Filters
     * \Brief A class used for pyramid operation
     *   
-    * This class regroup all the operation needed for pyramid operation
-    * This also contain all the filters possible in a tab 
+    * This class regroup all all the filters possible in a tab 
     */
     class Filters
     {
@@ -166,7 +165,7 @@ namespace Pyramid
      * @param utile filter to use
      * @return imagein::Image* the image of the new pyramid
      */
-    imagein::Image *n_pyram_g(const imagein::Image *im, int etage_f, Filtre &utile );
+    imagein::Image *n_pyram_g(const imagein::Image *im, int etage_f, Filtre &utile, std::string &to_print);
     
     /**
      * @brief Create a Laplacian pyramid and return an image of it
@@ -187,7 +186,7 @@ namespace Pyramid
      * @param utile filter to use
      * @return imagein::Image* the image of the new pyramid
      */
-    imagein::Image *n_pyram_l(const imagein::Image *im, int etage_f, Filtre &utile);
+    imagein::Image *n_pyram_l(const imagein::Image *im, int etage_f, Filtre &utile, std::string &to_print);
     
     /**
      * @brief Proccess the value by applying filter on lign
@@ -279,6 +278,19 @@ namespace Pyramid
      * @return std::string the printable entropy 
      */
     std::string entropie_p(const uint8_t *pyra,int etage_f, int nbc, int nbl);
+
+     /**
+     * @brief Return a directly printable string of the entropy for only one level
+     * 
+     * @param pyra data to proccess entropy 
+     * @param etage_f the level of entropy 
+     * @param nbc number of column
+     * @param nbl number of lign
+     * @return std::string the printable entropy 
+     */
+    std::string n_entropie_p(const uint8_t *pyra, int etage_f,int nbc,int nbl);
+
+
     /**
      * @brief Return the image reconstructed from a pyramide
      * 

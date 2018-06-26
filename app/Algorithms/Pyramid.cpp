@@ -257,7 +257,7 @@ Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, Filtre &utile, st
     if( etage_f < 1 ) etage_f = 1;
 
     pyram_g_n(rep, etage_f, nbc, nbl, itab, utile);
-    to_print = entropie_p(rep, etage_f, nbc, nbl);
+    to_print = entropie_p(rep, etage_f, nbc, nbl);   
     reconstruction(rep, etage_f, nbc, nbl);
 
     return resImg;
@@ -265,7 +265,7 @@ Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, Filtre &utile, st
 /*---------------------------------------------------------------------------
     Cration d'un tage de la  pyramide Gaussienne
 ---------------------------------------------------------------------------*/
-Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile )
+Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile, std::string &to_print)
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -305,6 +305,7 @@ Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile )
         rep[i] = tab[i+k];
     }
     delete[] tab;
+    to_print = n_entropie_p(rep, etage_f, nbc, nbl);
     return resImg;
 }
 /*---------------------------------------------------------------------------
@@ -334,7 +335,7 @@ Image *Pyramid::pyram_l (const Image *im, int etage_f, Filtre &utile, string &to
     if( etage_f < 1 ) etage_f = 1;
 
     pyram_l_n(rep,etage_f,nbc,nbl,itab,utile);
-    to_print = entropie_p(rep,etage_f,nbc,nbl);
+    to_print = entropie_p(rep, etage_f, nbc, nbl);
     reconstruction(rep,etage_f,nbc,nbl);
 
     return resImg;
@@ -343,7 +344,7 @@ Image *Pyramid::pyram_l (const Image *im, int etage_f, Filtre &utile, string &to
 /*---------------------------------------------------------------------------
     Cration d'un tage de la  pyramide Laplacienne
 ---------------------------------------------------------------------------*/
-Image *Pyramid::n_pyram_l(const Image *im, int etage_f, Filtre &utile)
+Image *Pyramid::n_pyram_l(const Image *im, int etage_f, Filtre &utile, std::string &to_print)
 {
     if(!( im != NULL )) {
         throw "Error in Pyramid::pyram_g:\nim = NULL";
@@ -383,6 +384,7 @@ Image *Pyramid::n_pyram_l(const Image *im, int etage_f, Filtre &utile)
     {
         rep[i] = tab[i+k];
     }
+    to_print = n_entropie_p(rep, etage_f, nbc, nbl);
     delete[] tab;
     return resImg;
 }
@@ -665,6 +667,24 @@ string Pyramid::entropie_p(const uint8_t *pyra,int etage_f,int nbc,int nbl)
    return returnval;
 }
 
+string Pyramid::n_entropie_p(const uint8_t *pyra,int etage_f,int nbc,int nbl)
+{
+    int i;
+    float h;
+    int taille_c=nbc;
+    int taille_l=nbl;
+    for(i=0;i<etage_f;i++)
+    {
+        taille_c=taille_c/2;
+        taille_l=taille_l/2;
+    }
+    char buffer[255];
+    string returnval;
+    h=entropie2(pyra,taille_c,taille_l);
+    sprintf(buffer, QString(qApp->translate("Operations","L'entropie de l'etage %d est %1f\n")).toUtf8(),i,h);
+    returnval = returnval + buffer;
+    return returnval;
+}
 
 Image *Pyramid::rebuild_interface( const Image *pyramid, int etage_f, int pyramid_to, Filtre &utile ) {
     // rebuilds from an image that was saved
