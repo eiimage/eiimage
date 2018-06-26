@@ -36,6 +36,7 @@
 #include <QStringList>
 #include <Algorithm/Filtering.h>
 #include <QRadioButton>
+#include <QTextEdit>
 
 namespace filtrme
 {
@@ -63,8 +64,11 @@ namespace filtrme
     void validate();
     void cancel();
     void deleteFilter();
+    void showCustom(bool);
+    void updateBlur(bool);
 
   private:
+    bool _a = true;
     void initUI();
     void updateDisplay();
     QStringList initFilters();
@@ -73,6 +77,14 @@ namespace filtrme
     
     QComboBox* _blurChoices;
     QComboBox* _policyChoices;
+
+    QLabel* _label;
+    QTextEdit* _filterPath;
+    QPushButton* _filterPathSelect;
+    QLabel* _labelCustom;
+    QRadioButton* _stdButton;
+    QRadioButton* _customButton;
+    QHBoxLayout* _pathLayout;
     
     QLabel* _labelNumber;
     QSpinBox* _number;
