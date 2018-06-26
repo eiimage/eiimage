@@ -82,26 +82,38 @@ void CroissanceOp::operator()(const imagein::Image* img, const std::map<const im
     Image *lum, *color;
     int nbRegion;
     int threshold = thresholdBox->value();
+    
+    //init at origin 
     if(initBox->currentIndex() == 0) {
         if(stopBox->currentIndex() == 0) {
+            //| current - mean | < threshold
             nbRegion = cr.croissance1a(image, threshold, &lum, &color);
         }
         else if(stopBox->currentIndex() == 1) {
+            //| current - initial | < threshold
             nbRegion = cr.croissance1b(image, threshold, &lum, &color);
         }
     }
+    //init at point of lowest luminance 
     else if (initBox->currentIndex() == 1) {
         if(stopBox->currentIndex() == 0) {
+            //| current - mean | < threshold
             nbRegion = cr.croissance2a(image, threshold, &lum, &color);
         }
         else if(stopBox->currentIndex() == 1) {
+            //| current - initial | < threshold
             nbRegion = cr.croissance2b(image, threshold, &lum, &color);
         }
     }
+
+
+    //Output
     outImage(lum, qApp->translate("CroissanceOp", "Luminance").toStdString());
     outImage(color, qApp->translate("CroissanceOp", "Color").toStdString());
     outText(qApp->translate("CroissanceOp", "Total number of area : %1").arg(nbRegion).toStdString());
     outText(qApp->translate("CroissanceOp", "Mean number of point per area : %1").arg((double)image->getWidth()*image->getHeight()/nbRegion).toStdString());
+    
+    
     delete image;
 }
 

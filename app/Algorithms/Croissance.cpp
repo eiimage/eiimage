@@ -22,7 +22,7 @@ Croissance::~Croissance()
 {
 }
 
-int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance, Image **colorRgn ) {
+int Croissance::croissance1a( const Image *im, int threshold, Image **luminance, Image **colorRgn ) {
 
    // Random random;
     NbPointCell=0;
@@ -33,7 +33,7 @@ int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance
     int lum = 0;
     float somlum;
   
-    seuil = threshhold;
+    seuil = threshold;
     nbc = im->getWidth(); // nombre de colonnes de l'image d'entrée
     nbl = im->getHeight(); // nombre de lignes de l'image d'entrée
     size = nbc * nbl; // taille de l'image
@@ -80,7 +80,7 @@ int Croissance::croissance1a( const Image *im, int threshhold, Image **luminance
 	// remplissage de tabout
 	for (int i = 0; i < size; i++)
 		// chaque pixel de l'image de sortie prend la valeur de la valeur moyenne des pixels de la région à laquelle il appartient
-		 tablabel[i] < size ? tabout[i] = MoyCell[tablabel[i]] : tabout[i] = 0;
+		 (tablabel[i] < size) && (tablabel[i] >= 0 ) ? tabout[i] = MoyCell[tablabel[i]] : tabout[i] = 0;
 	//	tabout[i] = MoyCell[tablabel[i]];
 
 	// Construction de l'image de sortie en luminance (en utilisant les valeurs de tabout)
@@ -172,7 +172,7 @@ void Croissance::parcours_parcelle1A()
   }
 }
 
-int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance, Image **colorRgn  ) {
+int Croissance::croissance1b( const Image *im, int threshold, Image **luminance, Image **colorRgn  ) {
     Random random;
     NbPointCell=0;
 
@@ -182,7 +182,7 @@ int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance
     int lum = 0;
     float somlum;
 
-    seuil = threshhold;
+    seuil = threshold;
     nbc = im->getWidth();
     nbl = im->getHeight();
     size = nbc * nbl;
@@ -193,10 +193,16 @@ int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance
     tabout = new Image::depth_t[size];
     tablabel = new int[size];
     MoyCell = new int[size];
+    
+    for (int i = 0; i< size; i++){
+        tablabel[i] = 0;
+        MoyCell[i] = 0;
+    } 
 
     numregion=1 ;
     nbpregion=0 ;
     somlum=0;
+
 
     for(int i=0 ; i<nbl ; i++)
         for(int j=0 ; j<nbc ; j++)
@@ -218,7 +224,7 @@ int Croissance::croissance1b( const Image *im, int threshhold, Image **luminance
         }
 
     for(int i=0 ; i<size ; i++)
-        tabout[i] = MoyCell[tablabel[i]];
+        (tablabel[i] < size )&& (tablabel[i] >= 0 ) ? tabout[i] = MoyCell[tablabel[i]] : tabout[i] = 0;
 
 
 
@@ -298,7 +304,7 @@ void Croissance::parcours_parcelle1B() {
   }
 }
 
-int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance, Image **colorRgn  ) {
+int Croissance::croissance2a( const Image *im, int threshold, Image **luminance, Image **colorRgn  ) {
     Random random;
     NbPointCell=0;
 
@@ -308,7 +314,7 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
     int lum = 0;
     float somlum;
 
-    seuil = threshhold;
+    seuil = threshold;
     nbc = im->getWidth();
     nbl = im->getHeight();
     size = nbc * nbl;
@@ -320,12 +326,18 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
     tablabel = new int[size];
     MoyCell = new int[size];
 
-    numregion=1 ;
+    numregion=0 ;
     nbpregion=0 ;
     somlum=0;
     int min_i, min_j ,*tab_min_ij;
     tab_min_ij = new int[2*size];
     find_min(tab_min_ij) ;
+
+    for (int i = 0; i< size; i++){
+        tablabel[i] = 0;
+        MoyCell[i] = 0;
+    }
+
 
 
     int i = 0 ;
@@ -333,7 +345,6 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
     {
         min_i = tab_min_ij[i];
         min_j = tab_min_ij[i+1];
-
         if(tablabel[min_i*nbc+min_j] == 0)
         {
             numregion++;
@@ -350,10 +361,13 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
         i +=2 ;
     }while(i < 2*size);
 
-    for(int i=0 ; i<size ; i++)
-        tabout[i] = MoyCell[tablabel[i]];
-
+    //Ligne qui plante : 
+    for(int i=0 ; i<size ; i++){
+        (tablabel[i] < size ) && ( tablabel[i] >= 0 ) ? tabout[i] = MoyCell[tablabel[i]] : tabout[i] = 0;
+    }
     *luminance = new GrayscaleImage(nbc, nbl, tabout);
+
+    
 
     RgbImage* ic = new RgbImage(nbc, nbl);
     for(int j=0 ; j<nbl ; j++) {
@@ -391,7 +405,7 @@ int Croissance::croissance2a( const Image *im, int threshhold, Image **luminance
 
 }
 
-int Croissance::croissance2b( const Image *im, int threshhold, Image **luminance, Image **colorRgn  ) {
+int Croissance::croissance2b( const Image *im, int threshold, Image **luminance, Image **colorRgn  ) {
     Random random;
     NbPointCell=0;
 
@@ -401,7 +415,7 @@ int Croissance::croissance2b( const Image *im, int threshhold, Image **luminance
     int lum = 0;
     float somlum;
 
-    seuil = threshhold;
+    seuil = threshold;
     nbc = im->getWidth();
     nbl = im->getHeight();
     size = nbc * nbl;
@@ -413,14 +427,17 @@ int Croissance::croissance2b( const Image *im, int threshhold, Image **luminance
     tablabel = new int[size];
     MoyCell = new int[size];
 
+    for (int i = 0; i< size; i++){
+         tablabel[i] = 0;
+         MoyCell[i] = 0;
+    }
+
     numregion=1 ;
     nbpregion=0 ;
     somlum=0;
     int min_i, min_j ,*tab_min_ij;
     tab_min_ij = new int[2*size];
     find_min(tab_min_ij) ;
-
-
     int i = 0 ;
     do
     {
@@ -444,7 +461,7 @@ int Croissance::croissance2b( const Image *im, int threshhold, Image **luminance
     }while(i < 2*size);
 
     for(int i=0 ; i<size ; i++)
-        tabout[i] = MoyCell[tablabel[i]];
+        (tablabel[i] < size ) && ( tablabel[i] >= 0 ) ? tabout[i] = MoyCell[tablabel[i]] : tabout[i] = 0;
 
     *luminance = new GrayscaleImage(nbc, nbl, tabout);
 
