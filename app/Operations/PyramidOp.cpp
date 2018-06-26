@@ -65,11 +65,11 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     try {
         if(dialog->onlyOneStep()) {
             if(dialog->isGaussian()) {
-                resImg = Pyramid::n_pyram_g(image, dialog->onlyStep(), filtre);
+                resImg = Pyramid::n_pyram_g(image, dialog->onlyStep(), filtre, s);
                 titleFilter = QString(qApp->translate("Operations","Gaussian"));
             }
             else {
-                resImg = Pyramid::n_pyram_l(image, dialog->onlyStep(), filtre);
+                resImg = Pyramid::n_pyram_l(image, dialog->onlyStep(), filtre, s);
                 titleFilter = QString(qApp->translate("Operations","Laplacian"));
             }
         }
