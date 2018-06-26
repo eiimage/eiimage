@@ -39,6 +39,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QTableView>
+#include <QTextEdit>
 
 #include <QFile>
 #include <QDomDocument>
@@ -79,18 +80,58 @@ void FilterChoice::initUI()
     QWidget* leftWidget = new QWidget();
     QLayout* leftLayout = new QVBoxLayout(leftWidget);
 
+
+    QGroupBox* stdOrCustomBox = new QGroupBox(tr("Select custom or standard filter"));
+    _stdButton = new QRadioButton(tr("Standard filter"));
+    _customButton = new QRadioButton(tr("Custom filter"));
+    QHBoxLayout* hbox = new QHBoxLayout();
+
+    _stdButton->setChecked(true);
+
+    hbox->addWidget(_stdButton);
+    hbox->addWidget(_customButton);
+    stdOrCustomBox->setLayout(hbox);
+
     QGroupBox* confBox = new QGroupBox(tr("Filter configuration"));
     QFormLayout* confLayout = new QFormLayout(confBox);
+
+    /* CUSTOM FILTER */
+
+    //gère l'appel du custom filter
+    //TODO
+
+    _labelCustom = new QLabel(this);
+    _labelCustom->setText(tr("Path to custom filter:"));
+    _filterPath = new QTextEdit("/");
+    _filterPath->setMaximumWidth(200);
+    _filterPath->setReadOnly(true);
+    _filterPathSelect = new QPushButton("...");
+    _filterPathSelect->setFixedWidth(40);
+    _filterPath->setMaximumHeight(25);
+    _pathLayout = new QHBoxLayout();
+    _pathLayout->addWidget(_filterPath);
+    _pathLayout->addWidget(_filterPathSelect);
+    _labelCustom->setVisible(false);
+    _filterPath->setVisible(false);
+    _filterPathSelect->setVisible(false);
+    confLayout->addRow(_labelCustom, _pathLayout);
+
     /* FILTER CHOICE */
-    QLabel* label = new QLabel(this);
-    label->setText(tr("Filter:"));
-    _blurChoices = new QComboBox(this);
-    QStringList blurs = initFilters();
-    _blurChoices->addItems(blurs);
+
+    _label = new QLabel(this);
+    _label->setText(tr("Filter:"));
+    if(_a){
+        _blurChoices = new QComboBox(this);
+        QStringList blurs = initFilters();
+        _blurChoices->addItems(blurs);
+        _a=false;
+    }
+    QObject::connect(_customButton, SIGNAL(toggled(bool)), this, SLOT(updateBlur(bool)));
     QObject::connect(_blurChoices, SIGNAL(currentIndexChanged(int)), this, SLOT(currentBlurChanged(int)));
-    confLayout->addRow(label, _blurChoices);
+    confLayout->addRow(_label, _blurChoices);
 
     /* POLICIES CHOICE */
+
     QLabel* label_2 = new QLabel(this);
     label_2->setText(tr("Edge policy: "));
     _policyChoices = new QComboBox(this);
@@ -122,12 +163,14 @@ void FilterChoice::initUI()
     radioBox->layout()->addWidget(_stdResButton);
     radioBox->layout()->addWidget(_dblResButton);
 
+    leftLayout->addWidget(stdOrCustomBox);
     leftLayout->addWidget(confBox);
     leftLayout->addWidget(radioBox);
 
 
     mainLayout->addWidget(leftWidget);
 
+    QObject::connect(_customButton, SIGNAL(toggled(bool)), this, SLOT(showCustom(bool)));
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
 
@@ -168,16 +211,6 @@ void FilterChoice::initUI()
     QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     QObject::connect(_deleteButton, SIGNAL(clicked()), this, SLOT(deleteFilter()));
 
-//    QLayoutItem* spaceItem = new QSpacerItem(512, 512);
-//    leftLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
-//    leftLayout->setItem(2, QFormLayout::SpanningRole, spaceItem);
-//    QWidget* spacerWidget = new QWidget();
-//    spacerWidget->setFixedSize(32, 32);
-//    spacerWidget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-//    leftWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
-//    leftLayout->addRow(spacerWidget);
-//    leftLayout->addRow(buttonBox);
-
     mainLayout->addWidget(rightWidget);
     layout->addWidget(buttonBox);
 
@@ -189,79 +222,141 @@ void FilterChoice::initUI()
  * @return QStringList
  */
 QStringList FilterChoice::initFilters() {
-
   QStringList blurs = QStringList();
-  blurs << tr("Uniform") << tr("Gaussian") << tr("Prewitt") << tr("Roberts") << tr("Sobel") << tr("SquareLaplacien");
+  std::cout << "------\n";
+  std::cout << "IN INITFILTER\n";
+  std::cout << "is custom button checked ?" << _customButton->isChecked() << "\n";
 
-  _filters.push_back(Filter::uniform(3));
-  _filters.push_back(Filter::gaussian(3, 1.));
-  _filters.push_back(Filter::prewitt(3));
-  _filters.push_back(Filter::roberts());
-  _filters.push_back(Filter::sobel());
-  _filters.push_back(Filter::squareLaplacien());
-
-  //Personal filters
-  QFile file("filters.xml");
-  if(file.exists())
-  {
-    QDomDocument doc("");
-    file.open(QIODevice::ReadOnly);
-      doc.setContent(&file);
-      file.close();
-
-    QDomElement root = doc.documentElement();
-    QDomNode child = root.firstChild();
-      while(!child.isNull())
+  if(!_customButton->isChecked()){
+      std::cout << "not checked\n";
+      blurs << tr("Uniform") << tr("Gaussian") << tr("Prewitt") << tr("Roberts") << tr("Sobel") << tr("SquareLaplacien");
+      _filters.push_back(Filter::uniform(3));
+      _filters.push_back(Filter::gaussian(3, 1.));
+      _filters.push_back(Filter::prewitt(3));
+      _filters.push_back(Filter::roberts());
+      _filters.push_back(Filter::sobel());
+      _filters.push_back(Filter::squareLaplacien());
+      std::cout << "filters size : " << _filters.size() << "\n";
+  }
+  else{
+      std::cout << "definitely checked\n";
+      //Personal filters
+      QFile file("filters.xml");
+      if(file.exists())
       {
-      QDomElement e = child.toElement();
-        // We know how to treat appearance and geometry
-      blurs.push_back(e.attribute("name"));
+        QDomDocument doc("");
+        file.open(QIODevice::ReadOnly);
+          doc.setContent(&file);
+          file.close();
 
-      int nbFilters = e.attribute("nbFilters").toInt();
-
-      std::vector<Filter*> temp;
-      QDomNode grandChild = e.firstChild();
-      for(int i = 0; i < nbFilters && !grandChild.isNull(); i++)
-      {
-        QDomElement grandChildElement = grandChild.toElement();
-        if(!grandChildElement.isNull())
-        {
-          Filter* f = new Filter(grandChildElement.attribute("width").toInt(), grandChildElement.attribute("height").toInt());
-          // We know how to treat color
-          if (grandChildElement.tagName() == "values")
+        QDomElement root = doc.documentElement();
+        QDomNode child = root.firstChild();
+          while(!child.isNull())
           {
-            std::string str = grandChildElement.text().toStdString();
-            std::string word;
-            std::stringstream stream(str);
-            unsigned int w = 0, h = 0;
-            while(getline(stream, word, ' '))
+          QDomElement e = child.toElement();
+            // We know how to treat appearance and geometry
+          blurs.push_back(e.attribute("name"));
+
+          int nbFilters = e.attribute("nbFilters").toInt();
+
+          std::vector<Filter*> temp;
+          QDomNode grandChild = e.firstChild();
+          for(int i = 0; i < nbFilters && !grandChild.isNull(); i++)
+          {
+            QDomElement grandChildElement = grandChild.toElement();
+            if(!grandChildElement.isNull())
             {
-//              (*f)[w][h] = QString::fromStdString(word).toInt();
-                f->setPixelAt(w, h, QString::fromStdString(word).toDouble());
-
-              if(w == f->getWidth() - 1)
+              Filter* f = new Filter(grandChildElement.attribute("width").toInt(), grandChildElement.attribute("height").toInt());
+              // We know how to treat color
+              if (grandChildElement.tagName() == "values")
               {
-                w = 0;
-                h++;
-              }
-              else
-                w++;
-            }
-          }
-          temp.push_back(f);
-        }
-        grandChild = grandChild.nextSibling();
-      }
-      _filters.push_back(temp);
+                std::string str = grandChildElement.text().toStdString();
+                std::string word;
+                std::stringstream stream(str);
+                unsigned int w = 0, h = 0;
+                while(getline(stream, word, ' '))
+                {
+                    f->setPixelAt(w, h, QString::fromStdString(word).toDouble());
 
-      child = child.nextSibling();
+                  if(w == f->getWidth() - 1)
+                  {
+                    w = 0;
+                    h++;
+                  }
+                  else
+                    w++;
+                }
+              }
+              temp.push_back(f);
+            }
+            grandChild = grandChild.nextSibling();
+          }
+          _filters.push_back(temp);
+
+          child = child.nextSibling();
+          }
       }
   }
   return blurs;
 }
+/**
+ * @brief FilterChoice::updateBlur
+ * @param z
+ */
+void FilterChoice::updateBlur(bool){
+    std::cout << "#########\n";
+    std::cout << "IN UPDATE BLUR \n";
+    std::cout << "filters size:" << _filters.size() << "\n";
+    _filters.clear();
+    std::cout << "filters size after clearance:" << _filters.size() << "\n";
+    std::cout << "blur choices count:" << _blurChoices->count() <<"\n";
+ /*   while(_blurChoices->count()!=0){
+        std::cout << "inwhile\n";
+        _blurChoices->removeItem((_blurChoices->count()));
+        std::cout << "blur choice count:" << _blurChoices->count() << "\n";
+        std::cout << "outwhile\n";
+
+
+}*/
+  /*  if(_blurChoices->count()!=0){
+       _blurChoices = new QComboBox(this);
+   }*/
+    if(_blurChoices->count()!=0){
+        _blurChoices->clear();
+    }
+    QStringList blurs = initFilters();
+    _blurChoices->addItems(blurs);
+    std::cout << "filters size when exiting updateblur:" << _filters.size() << "\n";
+    std::cout << "current index : " << _blurChoices->currentIndex() << "\n";
+    std::cout << "OUT UPDATE BLUR \n";
+    std::cout << "#-#-#-#-#\n";
+}
+
+/**
+ * @brief FilterChoice::showCustom()
+ *
+ * @param a selects whether or not the custom filter are enabled
+ */
+void FilterChoice::showCustom(bool a){
+    std::cout << "in showcustom\n";
+    if(a){
+        _labelCustom->setVisible(true);
+        _filterPath->setVisible(true);
+        _filterPathSelect->setVisible(true);
+    }
+
+    else{
+        _labelCustom->setVisible(false);
+        _filterPath->setVisible(false);
+        _filterPathSelect->setVisible(false);
+    }
+    std::cout << "out showcustom \n";
+    _a=false;
+}
 
 /**
  * @brief
+ *
  *
  * @param int
  */
@@ -295,7 +390,6 @@ void FilterChoice::validate()
       break;
     case 1:
       _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
-//      _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
       break;
     case 2:
       _filtering = new Filtering(Filtering::prewitt(num));
@@ -384,43 +478,66 @@ void FilterChoice::deleteFilter()
  */
 void FilterChoice::updateDisplay()
 {
-  std::vector<Filter*> filters;
-  int num = _number->value();
-  switch(_blurChoices->currentIndex())
-  {
-    case 0:
-      filters = Filter::uniform(num);
-      _number->show();
-      _labelNumber->show();
-      _stdDevBox->hide();
-      _stdDevLabel->hide();
-      break;
-    case 1:
-      filters = Filter::gaussian(num, _stdDevBox->value());
-      _number->show();
-      _labelNumber->show();
-      _stdDevBox->show();
-      _stdDevLabel->show();
-      break;
-    case 2:
-      filters = Filter::prewitt(num);
-      _number->show();
-      _labelNumber->show();
-      _stdDevBox->hide();
-      _stdDevLabel->hide();
-      break;
-    default:
-      filters = _filters[_blurChoices->currentIndex()];
-      _number->hide();
-      _labelNumber->hide();
-      _stdDevBox->hide();
-      _stdDevLabel->hide();
-  }
-  
-  if(_blurChoices->currentIndex() > 5)
-    _deleteButton->setEnabled(true);
-  else
-    _deleteButton->setEnabled(false);
+      std::cout << "we are in the switch\n";
+      std::vector<Filter*> filters;
+      _deleteButton->setEnabled(false);
+      int num = _number->value();
+      if(_blurChoices->currentIndex()!=-1){
+          if(!_customButton->isChecked()){
+                switch(_blurChoices->currentIndex())
+                {
+                    case 0:
+                        std::cout << "past case0\n";
+                        filters = Filter::uniform(num);
+                        _number->show();
+                        _labelNumber->show();
+                        _stdDevBox->hide();
+                        _stdDevLabel->hide();
+                break;
+                    case 1:
+                        std::cout << "past case1\n";
+                        filters = Filter::gaussian(num, _stdDevBox->value());
+                        _number->show();
+                        _labelNumber->show();
+                        _stdDevBox->show();
+                        _stdDevLabel->show();
+                break;
+                    case 2:
+                        std::cout << "past case2\n";
+                        filters = Filter::prewitt(num);
+                        _number->show();
+                        _labelNumber->show();
+                        _stdDevBox->hide();
+                        _stdDevLabel->hide();
+                break;
+                    default:
+                        std::cout << "past default\n";
+                        std::cout << filters.size();
+                        std::cout << _filters.size();
+                        filters = _filters[_blurChoices->currentIndex()];
+                        _number->hide();
+                        _labelNumber->hide();
+                        _stdDevBox->hide();
+                        _stdDevLabel->hide();
+                        std::cout << "outt default\n";
+                }
+            }else{
+              filters = _filters[_blurChoices->currentIndex()];
+              _number->hide();
+              _labelNumber->hide();
+              _stdDevBox->hide();
+              _stdDevLabel->hide();
+          }
+        }else{
+            _number->hide();
+            _labelNumber->hide();
+            _stdDevBox->hide();
+            _stdDevLabel->hide();
+        }
+
+    if(_customButton->isChecked()){
+        _deleteButton->setEnabled(true);
+    }
   
   unsigned int height(0), width(0);
   
@@ -451,7 +568,6 @@ void FilterChoice::updateDisplay()
     {
       for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
       {
-//        int value = (*filters[i])[j - height][k];
         double value = filters[i]->getPixelAt(k, j);
         QTableWidgetItem* item = new QTableWidgetItem(QString::number(value));
         item->setTextAlignment(Qt::AlignHCenter);
