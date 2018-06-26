@@ -81,7 +81,7 @@ namespace filtrme
     QComboBox* _policyChoices;
 
     QLabel* _label;
-    QTextEdit* _filterPath;
+    QLineEdit* _filterPath;
     QPushButton* _filterPathSelect;
     QLabel* _labelCustom;
     QRadioButton* _stdButton;

@@ -39,7 +39,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QTableView>
-#include <QTextEdit>
+#include <QLineEdit>
 
 #include <QFile>
 #include <QDomDocument>
@@ -98,13 +98,9 @@ void FilterChoice::initUI()
 
     _labelCustom = new QLabel(this);
     _labelCustom->setText(tr("Path to custom filter:"));
-    _filterPath = new QTextEdit("/");
-  //  _filterPath->setMaximumWidth(200);
+    _filterPath = new QLineEdit("/");
     _filterPath->setReadOnly(true);
-  //  _filterPath->setMaximumHeight(25);
 
-    _filterPath->setLineWrapMode(QTextEdit::FixedColumnWidth);
-    _filterPath->setLineWrapColumnOrWidth(190);
     _filterPathSelect = new QPushButton("...");
     _filterPathSelect->setFixedWidth(40);
     _pathLayout = new QHBoxLayout();
@@ -173,7 +169,6 @@ void FilterChoice::initUI()
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_filterPathSelect, SIGNAL(clicked()), this, SLOT(openFile()));
-    QObject::connect(_filterPath, SIGNAL(textChanged()), this, SLOT(updatePath()));
 
 
     QWidget* rightWidget = new QWidget();
@@ -224,12 +219,8 @@ void FilterChoice::initUI()
  */
 QStringList FilterChoice::initFilters() {
   QStringList blurs = QStringList();
-  std::cout << "------\n";
-  std::cout << "IN INITFILTER\n";
-  std::cout << "is custom button checked ?" << _customButton->isChecked() << "\n";
 
   if(!_customButton->isChecked()){
-      std::cout << "not checked\n";
       blurs << tr("Uniform") << tr("Gaussian") << tr("Prewitt") << tr("Roberts") << tr("Sobel") << tr("SquareLaplacien");
       _filters.push_back(Filter::uniform(3));
       _filters.push_back(Filter::gaussian(3, 1.));
@@ -237,7 +228,6 @@ QStringList FilterChoice::initFilters() {
       _filters.push_back(Filter::roberts());
       _filters.push_back(Filter::sobel());
       _filters.push_back(Filter::squareLaplacien());
-      std::cout << "filters size : " << _filters.size() << "\n";
   }
   else{
       //Personal filters
@@ -304,21 +294,12 @@ QStringList FilterChoice::initFilters() {
  * @param z
  */
 void FilterChoice::updateBlur(bool){
-    std::cout << "#########\n";
-    std::cout << "IN UPDATE BLUR \n";
-    std::cout << "filters size:" << _filters.size() << "\n";
     _filters.clear();
-    std::cout << "filters size after clearance:" << _filters.size() << "\n";
-    std::cout << "blur choices count:" << _blurChoices->count() <<"\n";
     if(_blurChoices->count()!=0){
         _blurChoices->clear();
     }
     QStringList blurs = initFilters();
     _blurChoices->addItems(blurs);
-    std::cout << "filters size when exiting updateblur:" << _filters.size() << "\n";
-    std::cout << "current index : " << _blurChoices->currentIndex() << "\n";
-    std::cout << "OUT UPDATE BLUR \n";
-    std::cout << "#-#-#-#-#\n";
 }
 
 /**
@@ -327,7 +308,6 @@ void FilterChoice::updateBlur(bool){
  * @param a selects whether or not the custom filter are enabled
  */
 void FilterChoice::showCustom(bool a){
-    std::cout << "in showcustom\n";
     if(a){
         _labelCustom->setVisible(true);
         _filterPath->setVisible(true);
@@ -339,7 +319,6 @@ void FilterChoice::showCustom(bool a){
         _filterPath->setVisible(false);
         _filterPathSelect->setVisible(false);
     }
-    std::cout << "out showcustom \n";
     _a=false;
 }
 
@@ -371,37 +350,45 @@ void FilterChoice::dataChanged(const QString&)
 void FilterChoice::validate()
 {
   int num = _number->value();
-  
-  switch(_blurChoices->currentIndex())
-  {
-    case 0:
-      _filtering = new Filtering(Filtering::uniformBlur(num));
-      break;
-    case 1:
-      _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
-      break;
-    case 2:
-      _filtering = new Filtering(Filtering::prewitt(num));
-      break;
-    default:
-      _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
+
+  if(_blurChoices->currentIndex()==-1){
+      QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Filter application is impossible."));
+      msgBox.setInformativeText(tr("Filter selection is empty, please select a filter."));
+      msgBox.setStandardButtons(QMessageBox::Ok);
+      msgBox.setDefaultButton(QMessageBox::Ok);
+      msgBox.exec();
+  }else{
+      switch(_blurChoices->currentIndex())
+      {
+        case 0:
+          _filtering = new Filtering(Filtering::uniformBlur(num));
+          break;
+        case 1:
+          _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
+          break;
+        case 2:
+          _filtering = new Filtering(Filtering::prewitt(num));
+          break;
+        default:
+          _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
+      }
+
+      switch(_policyChoices->currentIndex())
+      {
+        case 1:
+          _filtering->setPolicy(Filtering::POLICY_MIRROR);
+          break;
+        case 2:
+          _filtering->setPolicy(Filtering::POLICY_NEAREST);
+          break;
+        case 3:
+          _filtering->setPolicy(Filtering::POLICY_TOR);
+          break;
+        default:
+          _filtering->setPolicy(Filtering::POLICY_BLACK);
+      }
+      this->accept();
   }
-  
-  switch(_policyChoices->currentIndex())
-  {
-    case 1:
-      _filtering->setPolicy(Filtering::POLICY_MIRROR);
-      break;
-    case 2:
-      _filtering->setPolicy(Filtering::POLICY_NEAREST);
-      break;
-    case 3:
-      _filtering->setPolicy(Filtering::POLICY_TOR);
-      break;
-    default:
-      _filtering->setPolicy(Filtering::POLICY_BLACK);
-  }
-  this->accept();
 }
 
 /**
@@ -467,7 +454,6 @@ void FilterChoice::deleteFilter()
  */
 void FilterChoice::updateDisplay()
 {
-      std::cout << "we are in the switch\n";
       std::vector<Filter*> filters;
       _deleteButton->setEnabled(false);
       int num = _number->value();
@@ -476,7 +462,6 @@ void FilterChoice::updateDisplay()
                 switch(_blurChoices->currentIndex())
                 {
                     case 0:
-                        std::cout << "past case0\n";
                         filters = Filter::uniform(num);
                         _number->show();
                         _labelNumber->show();
@@ -484,7 +469,6 @@ void FilterChoice::updateDisplay()
                         _stdDevLabel->hide();
                 break;
                     case 1:
-                        std::cout << "past case1\n";
                         filters = Filter::gaussian(num, _stdDevBox->value());
                         _number->show();
                         _labelNumber->show();
@@ -492,7 +476,6 @@ void FilterChoice::updateDisplay()
                         _stdDevLabel->show();
                 break;
                     case 2:
-                        std::cout << "past case2\n";
                         filters = Filter::prewitt(num);
                         _number->show();
                         _labelNumber->show();
@@ -500,15 +483,11 @@ void FilterChoice::updateDisplay()
                         _stdDevLabel->hide();
                 break;
                     default:
-                        std::cout << "past default\n";
-                        std::cout << filters.size();
-                        std::cout << _filters.size();
                         filters = _filters[_blurChoices->currentIndex()];
                         _number->hide();
                         _labelNumber->hide();
                         _stdDevBox->hide();
                         _stdDevLabel->hide();
-                        std::cout << "outt default\n";
                 }
             }else{
               filters = _filters[_blurChoices->currentIndex()];
@@ -585,9 +564,10 @@ void FilterChoice::openFile() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open a file"), QString(), tr("XML Documents (*.xml)"));
     if(file.size()==0) return;
     _filterPath->setText(file);
+    updatePath();
 }
 
 void FilterChoice::updatePath(){
-    _path = _filterPath->toPlainText();
+    _path = _filterPath->text();
     updateBlur(true);
 }
