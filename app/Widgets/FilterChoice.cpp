@@ -215,7 +215,7 @@ void FilterChoice::initUI()
 /**
  * @brief
  *
- * @return QStringList
+ * Put the filters in the selection filter spinner, and updates the _filters
  */
 QStringList FilterChoice::initFilters() {
   QStringList blurs = QStringList();
@@ -305,7 +305,7 @@ void FilterChoice::updateBlur(bool){
 /**
  * @brief FilterChoice::showCustom()
  *
- * @param a selects whether or not the custom filter are enabled
+ * @param a selects whether or not the custom filters are enabled
  */
 void FilterChoice::showCustom(bool a){
     if(a){
@@ -345,6 +345,9 @@ void FilterChoice::dataChanged(const QString&)
 
 /**
  * @brief
+ *
+ * Validate the application of the filter.
+ * If no filter selected, returns a critical window
  *
  */
 void FilterChoice::validate()
@@ -394,6 +397,8 @@ void FilterChoice::validate()
 /**
  * @brief
  *
+ * ???
+ *
  */
 void FilterChoice::cancel()
 {
@@ -403,6 +408,7 @@ void FilterChoice::cancel()
 /**
  * @brief
  *
+ *  Deletes a filter in the selected XML file
  */
 void FilterChoice::deleteFilter()
 {
@@ -451,6 +457,7 @@ void FilterChoice::deleteFilter()
 /**
  * @brief
  *
+ *  Updates the options the user has depending on then filter used
  */
 void FilterChoice::updateDisplay()
 {
@@ -560,6 +567,11 @@ void FilterChoice::updateDisplay()
   _filterView->resizeRowsToContents();
 }
 
+/**
+ * @brief FilterChoice::openFile
+ *
+ * Allows to open the filter XML file anywhere on the computer
+ */
 void FilterChoice::openFile() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open a file"), QString(), tr("XML Documents (*.xml)"));
     if(file.size()==0) return;
@@ -567,6 +579,11 @@ void FilterChoice::openFile() {
     updatePath();
 }
 
+/**
+ * @brief FilterChoice::updatePath
+ *
+ * Updates the path display to the user's filter, and updates the spinner displaying all the choices in the given XML file
+ */
 void FilterChoice::updatePath(){
     _path = _filterPath->text();
     updateBlur(true);
