@@ -84,30 +84,29 @@ void FilterChoice::initUI()
     QGroupBox* stdOrCustomBox = new QGroupBox(tr("Select custom or standard filter"));
     _stdButton = new QRadioButton(tr("Standard filter"));
     _customButton = new QRadioButton(tr("Custom filter"));
-    QHBoxLayout* hbox = new QHBoxLayout();
+    QHBoxLayout* hbox = new QHBoxLayout(stdOrCustomBox);
 
     _stdButton->setChecked(true);
 
     hbox->addWidget(_stdButton);
     hbox->addWidget(_customButton);
-    stdOrCustomBox->setLayout(hbox);
 
     QGroupBox* confBox = new QGroupBox(tr("Filter configuration"));
     QFormLayout* confLayout = new QFormLayout(confBox);
 
     /* CUSTOM FILTER */
 
-    //gère l'appel du custom filter
-    //TODO
-
     _labelCustom = new QLabel(this);
     _labelCustom->setText(tr("Path to custom filter:"));
     _filterPath = new QTextEdit("/");
-    _filterPath->setMaximumWidth(200);
+  //  _filterPath->setMaximumWidth(200);
     _filterPath->setReadOnly(true);
+  //  _filterPath->setMaximumHeight(25);
+
+    _filterPath->setLineWrapMode(QTextEdit::FixedColumnWidth);
+    _filterPath->setLineWrapColumnOrWidth(190);
     _filterPathSelect = new QPushButton("...");
     _filterPathSelect->setFixedWidth(40);
-    _filterPath->setMaximumHeight(25);
     _pathLayout = new QHBoxLayout();
     _pathLayout->addWidget(_filterPath);
     _pathLayout->addWidget(_filterPathSelect);
@@ -173,6 +172,8 @@ void FilterChoice::initUI()
     QObject::connect(_customButton, SIGNAL(toggled(bool)), this, SLOT(showCustom(bool)));
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
+    QObject::connect(_filterPathSelect, SIGNAL(clicked()), this, SLOT(openFile()));
+    QObject::connect(_filterPath, SIGNAL(textChanged()), this, SLOT(updatePath()));
 
 
     QWidget* rightWidget = new QWidget();
@@ -239,9 +240,8 @@ QStringList FilterChoice::initFilters() {
       std::cout << "filters size : " << _filters.size() << "\n";
   }
   else{
-      std::cout << "definitely checked\n";
       //Personal filters
-      QFile file("filters.xml");
+      QFile file(_path.toUtf8());
       if(file.exists())
       {
         QDomDocument doc("");
@@ -310,17 +310,6 @@ void FilterChoice::updateBlur(bool){
     _filters.clear();
     std::cout << "filters size after clearance:" << _filters.size() << "\n";
     std::cout << "blur choices count:" << _blurChoices->count() <<"\n";
- /*   while(_blurChoices->count()!=0){
-        std::cout << "inwhile\n";
-        _blurChoices->removeItem((_blurChoices->count()));
-        std::cout << "blur choice count:" << _blurChoices->count() << "\n";
-        std::cout << "outwhile\n";
-
-
-}*/
-  /*  if(_blurChoices->count()!=0){
-       _blurChoices = new QComboBox(this);
-   }*/
     if(_blurChoices->count()!=0){
         _blurChoices->clear();
     }
@@ -590,4 +579,15 @@ void FilterChoice::updateDisplay()
   
   _filterView->resizeColumnsToContents();
   _filterView->resizeRowsToContents();
+}
+
+void FilterChoice::openFile() {
+    QString file = QFileDialog::getOpenFileName(this, tr("Open a file"), QString(), tr("XML Documents (*.xml)"));
+    if(file.size()==0) return;
+    _filterPath->setText(file);
+}
+
+void FilterChoice::updatePath(){
+    _path = _filterPath->toPlainText();
+    updateBlur(true);
 }

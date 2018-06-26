@@ -66,6 +66,8 @@ namespace filtrme
     void deleteFilter();
     void showCustom(bool);
     void updateBlur(bool);
+    void openFile();
+    void updatePath();
 
   private:
     bool _a = true;
@@ -85,6 +87,7 @@ namespace filtrme
     QRadioButton* _stdButton;
     QRadioButton* _customButton;
     QHBoxLayout* _pathLayout;
+    QString _path;
     
     QLabel* _labelNumber;
     QSpinBox* _number;
