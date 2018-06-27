@@ -25,6 +25,7 @@
 #include <Converter.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
 #include <QApplication>
+#include <Operation.h>
 
 using namespace filtrme;
 using namespace genericinterface;
@@ -73,6 +74,8 @@ void FilteringService::applyFiltering()
             return;
         }
         _dblResult = _filterChoice->doubleResult();
+        _scaling = true; //_filterChoice->scalingResult();
+        _offset = true; //_filterChoice->offsetResult();
 
         Filtering* filtering = _filterChoice->getFiltering();
         this->applyAlgorithm(filtering);
@@ -108,11 +111,13 @@ void FilteringService::applyAlgorithm(Filtering* algo)
            DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
            image = diw->getImage();
         }
+        
         Image_t<double>* dblResImg = (*algo)(image);
         ImageWindow* riw;
         if(_siw->isStandard()) {
             delete image;
         }
+        
         if(_dblResult) {
             DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
             if(diw != NULL) {
@@ -123,10 +128,25 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             }
         }
         else {
+            std::string outputMessage = "";
+            Image* resImg;
             Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
+            if(_scaling && _offset ){
+
+                resImg  =  Converter<Image>::ConvertScaleAndOffset(*intResImg, &outputMessage);
+            }
+            else if(_scaling){
+                resImg  =  Converter<Image>::ConvertAndScale(*intResImg, &outputMessage);
+            }
+            else if(_offset){
+                resImg = Converter<Image>::ConvertAndOffset(*intResImg, &outputMessage);
+            }
+            else{
+                resImg = Converter<Image>::convertAndRound(*dblResImg);
+                outputMessage = "Pas de conversion appliquee [min : 0, max : 255]";
+
+            }
             delete dblResImg;
-            Image* resImg = Converter<Image>::makeDisplayable(*intResImg);
-            delete intResImg;
             riw = new StandardImageWindow(resImg, _siw->getPath());
         }
         riw->setWindowTitle(_siw->windowTitle());
