@@ -66,6 +66,8 @@ namespace filtrme
 
     genericinterface::ImageWindow* _siw;
     bool _dblResult;
+    bool _scaling;
+    bool _offset;
   };
 }
 
