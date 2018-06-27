@@ -53,12 +53,15 @@ namespace filtrme
     void cancel();
     void nbFiltersChanged(const int);
     void nameChanged(QString);
+    void saveFile();
     
   private:
     void initUI();
     void saveXML(std::vector<imagein::algorithm::Filter*> filter);
     std::vector<imagein::algorithm::Filter*> validFilters(bool* ok);
 
+    QPushButton* _buttonPath;
+    QLineEdit* _linePath;
     QVBoxLayout* _filterLayout;
     QLineEdit* _name;
     int _nbFilters;

@@ -40,6 +40,7 @@
 #include <QSpinBox>
 #include <QTableView>
 #include <QLineEdit>
+#include <QCheckBox>
 
 #include <QFile>
 #include <QDomDocument>
@@ -158,9 +159,22 @@ void FilterChoice::initUI()
     radioBox->layout()->addWidget(_stdResButton);
     radioBox->layout()->addWidget(_dblResButton);
 
+    QGroupBox* checkbox = new QGroupBox(tr("Options"));
+    QHBoxLayout* optLayout = new QHBoxLayout();
+    _offsetButton = new QCheckBox(tr("Offset"));
+    _scalingButton = new QCheckBox(tr("Scaling"));
+    _offsetButton->setChecked(true);
+    _scalingButton->setChecked(true);
+    _offsetButton->setAutoExclusive(false);
+    _scalingButton->setAutoExclusive(false);
+    optLayout->addWidget(_offsetButton);
+    optLayout->addWidget(_scalingButton);
+    checkbox->setLayout(optLayout);
+
     leftLayout->addWidget(stdOrCustomBox);
     leftLayout->addWidget(confBox);
     leftLayout->addWidget(radioBox);
+    leftLayout->addWidget(checkbox);
 
 
     mainLayout->addWidget(leftWidget);
@@ -169,6 +183,7 @@ void FilterChoice::initUI()
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_filterPathSelect, SIGNAL(clicked()), this, SLOT(openFile()));
+    QObject::connect(_stdResButton, SIGNAL(toggled(bool)), this, SLOT(updateOptions(bool)));
 
 
     QWidget* rightWidget = new QWidget();
@@ -420,8 +435,13 @@ void FilterChoice::deleteFilter()
   if(msgBox.exec() == QMessageBox::Yes)
   {
     QString name = _blurChoices->itemText(_blurChoices->currentIndex());
-    _blurChoices->setCurrentIndex(_blurChoices->currentIndex() - 1);
-    _blurChoices->removeItem(_blurChoices->currentIndex() + 1);
+    if(_blurChoices->currentIndex()==0){
+        _blurChoices->setCurrentIndex(_blurChoices->currentIndex());
+        _blurChoices->removeItem(_blurChoices->currentIndex());
+    }else{
+        _blurChoices->setCurrentIndex(_blurChoices->currentIndex()-1);
+        _blurChoices->removeItem(_blurChoices->currentIndex()+1);
+    }
     QFile file("filters.xml");
     if(file.exists())
     {
@@ -587,4 +607,18 @@ void FilterChoice::openFile() {
 void FilterChoice::updatePath(){
     _path = _filterPath->text();
     updateBlur(true);
+}
+
+void FilterChoice::updateOptions(bool a){
+    if(a){
+        _offsetButton->setChecked(true);
+        _scalingButton->setChecked(true);
+        _offsetButton->setEnabled(true);
+        _scalingButton->setEnabled(true);
+    }else{
+        _offsetButton->setChecked(true);
+        _scalingButton->setChecked(true);
+        _offsetButton->setEnabled(false);
+        _scalingButton->setEnabled(false);
+    }
 }
