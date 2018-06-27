@@ -169,7 +169,13 @@ void FilterEditor::save()
     return;
   }
   //condition regex sur le format du fichier .xml
-  // if(...
+  if(!regex_match(_linePath->text().toStdString(),regex("(.*).xml$"))){
+    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your file needs .xml format."));
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    msgBox.exec();
+    return;
+  }
 
 
   bool ok;

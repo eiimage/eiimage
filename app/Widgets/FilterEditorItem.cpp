@@ -96,23 +96,35 @@ void FilterEditorItem::initUI()
 
 void FilterEditorItem::widthChanged(const int width)
 {
-  if(_width < width)
-    emit(insertColumn(width-_width));
-  else
-    emit(removeColumn(_width-width));
-    
-  _width = width;
+  if(_width < width){
+      while(_width!=width){
+          emit(insertColumn(width-_width));
+          _width++;
+      }
+  }
+  else{
+      while(_width!=width){
+          emit(removeColumn(_width-width));
+          _width--;
+      }
+   }
   _filter->resizeColumnsToContents();
 }
 
 void FilterEditorItem::heightChanged(const int height)
 {
-  if(_height < height)
-    emit(insertRow(height-_height));
-  else
-    emit(removeRow(_height-height));
-  
-  _height = height;
+    if(_height < height){
+        while(_height!=height){
+            emit(insertRow(height-_height));
+            _height++;
+        }
+    }
+    else{
+        while(_height!=height){
+            emit(removeRow(_height-height));
+            _height--;
+        }
+     }
   _filter->resizeRowsToContents();
 }
 
