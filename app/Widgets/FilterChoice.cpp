@@ -420,8 +420,13 @@ void FilterChoice::deleteFilter()
   if(msgBox.exec() == QMessageBox::Yes)
   {
     QString name = _blurChoices->itemText(_blurChoices->currentIndex());
-    _blurChoices->setCurrentIndex(_blurChoices->currentIndex() - 1);
-    _blurChoices->removeItem(_blurChoices->currentIndex() + 1);
+    if(_blurChoices->currentIndex()==0){
+        _blurChoices->setCurrentIndex(_blurChoices->currentIndex());
+        _blurChoices->removeItem(_blurChoices->currentIndex());
+    }else{
+        _blurChoices->setCurrentIndex(_blurChoices->currentIndex()-1);
+        _blurChoices->removeItem(_blurChoices->currentIndex()+1);
+    }
     QFile file("filters.xml");
     if(file.exists())
     {
