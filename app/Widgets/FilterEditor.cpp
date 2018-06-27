@@ -31,6 +31,7 @@
 #include <QSpinBox>
 #include <QMdiArea>
 #include <QPushButton>
+#include <QFont>
 
 #include <QTimer>
 #include <QFile>
@@ -38,18 +39,27 @@
 #include <QtXml/QDomImplementation>
 #include <QtXml/QDomElement>
 #include <QTextStream>
+#include <QFileDialog>
+#include <regex>
 
 using namespace filtrme;
 using namespace imagein::algorithm;
 using namespace std;
 
+/**
+ * @brief FilterEditor::FilterEditor
+ *
+ * Constructor
+ */
 FilterEditor::FilterEditor()
 {
   _nbFilters = 1;
   initUI();
 }
 
-
+/**
+ * @brief FilterEditor::initUI
+ */
 void FilterEditor::initUI()
 { 
   _filterLayout = new QVBoxLayout();
@@ -59,6 +69,20 @@ void FilterEditor::initUI()
   QVBoxLayout* layout = new QVBoxLayout();
   QScrollArea* scroll = new QScrollArea();
   
+  QWidget* widgetPath = new QWidget();
+  QHBoxLayout* hLayoutPath = new QHBoxLayout(widgetPath);
+  _buttonPath = new QPushButton("...");
+  _buttonPath->setFixedWidth(50);
+  QLabel* labelPath = new QLabel(tr("Filter file:"));
+  QLabel* labelPath2 = new QLabel(tr("Select a filter file:"));
+  _linePath = new QLineEdit(tr("No XML file selected!"));
+  _linePath->setReadOnly(true);
+  hLayoutPath->addWidget(labelPath);
+  hLayoutPath->addWidget(_linePath);
+  hLayoutPath->addWidget(labelPath2);
+  hLayoutPath->addWidget(_buttonPath);
+  _filterLayout->addWidget(widgetPath);
+
   QHBoxLayout* hLayout = new QHBoxLayout();
   QWidget* widget = new QWidget();
   widget->setLayout(hLayout);
@@ -66,7 +90,7 @@ void FilterEditor::initUI()
   QLabel *label_3;
   QLabel *label_4;
   label_3 = new QLabel();
-  label_3->setText(tr("Name:"));
+  label_3->setText(tr("Name of your filter:"));
   _name = new QLineEdit();
   label_4 = new QLabel();
   label_4->setText(tr("Number of filters:"));
@@ -86,40 +110,68 @@ void FilterEditor::initUI()
   buttonBox = new QDialogButtonBox();
   buttonBox->setOrientation(Qt::Horizontal);
   buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Save);
-//  QPushButton* applyButton = buttonBox->addButton(QString::fromStdString("Apply"), QDialogButtonBox::ApplyRole);
-  _filterLayout->addWidget(buttonBox);
+  QLabel* labelInfo = new QLabel(tr("You need to select a file and a name for your filter to save it"));
+  QFont* fontInfo = new QFont(labelInfo->font());
+  fontInfo->setItalic(true);
+  labelInfo->setFont(*fontInfo);
 
-  QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(save()));
-  QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(cancel()));
-//  QObject::connect(applyButton, SIGNAL(clicked()), this, SLOT(apply()));
-  QObject::connect(spinBoxNbFilters, SIGNAL(valueChanged(int)), this, SLOT(nbFiltersChanged(int)));
   _saveButton = buttonBox->button(QDialogButtonBox::Save);
   _saveButton->setEnabled(false);
-  QObject::connect(_name, SIGNAL(textEdited(QString)), this, SLOT(nameChanged(QString)));
+
+  QHBoxLayout* hLayoutInfo = new QHBoxLayout();
+  hLayoutInfo->addWidget(labelInfo);
+  hLayoutInfo->addWidget(buttonBox);
 
   scroll->setWidget(widgetPrinc);
   scroll->setWidgetResizable(true);
   layout->addWidget(scroll);
+  layout->addLayout(hLayoutInfo);
   this->setLayout(layout);
   this->setMinimumSize(670, 470);
   this->setWindowTitle(tr("FilterEditor"));
+
+  QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(save()));
+  QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(cancel()));
+  QObject::connect(spinBoxNbFilters, SIGNAL(valueChanged(int)), this, SLOT(nbFiltersChanged(int)));
+  QObject::connect(_name, SIGNAL(textEdited(QString)), this, SLOT(nameChanged(QString)));
+  QObject::connect(_buttonPath, SIGNAL(clicked()), this, SLOT(saveFile()));
 }
 
+/**
+ * @brief FilterEditor::saveFile
+ */
+void FilterEditor::saveFile() {
+    QString file = QFileDialog::getSaveFileName(this, tr("Chose a file filter"), QString(), tr("XML Files (*.xml)"));
+    if(file.size()==0) return;
+    _linePath->setText(file.toUtf8());
+}
+
+/**
+ * @brief FilterEditor::nameChanged
+ * @param name
+ */
 void FilterEditor::nameChanged(QString name) {
     _saveButton->setEnabled(!name.isEmpty());
 }
 
+/**
+ * @brief FilterEditor::save
+ */
 void FilterEditor::save()
 {
   vector<Filter*> filters;
   if(_name->text() == "")
   {
-    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your filter has to have a name to be saved."));
+    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your filter needs a name to be saved."));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
     return;
   }
+  //condition regex sur le format du fichier .xml
+  // if(...
+
+
   bool ok;
   filters = validFilters(&ok);
   if(ok) {
@@ -128,9 +180,13 @@ void FilterEditor::save()
   }
 }
 
+/**
+ * @brief FilterEditor::saveXML
+ * @param filtersToSave
+ */
 void FilterEditor::saveXML(vector<Filter*> filtersToSave)
 {
-  QFile file("filters.xml");
+  QFile file(_linePath->text());
   // document
   QDomImplementation impl = QDomDocument().implementation();
   // document with document type
@@ -163,8 +219,8 @@ void FilterEditor::saveXML(vector<Filter*> filtersToSave)
             // We know how to treat appearance and geometry
             if (e.attribute("name") == _name->text())
             {
-                QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter name is already use."));
-                msgBox.setInformativeText(tr("Do you want to replace it?"));
+                QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("This filter name is already used."));
+                msgBox.setInformativeText(tr("Do you want to overwrite it?"));
                 msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
                 msgBox.setDefaultButton(QMessageBox::No);
                 int ret = msgBox.exec();
@@ -222,23 +278,31 @@ void FilterEditor::saveXML(vector<Filter*> filtersToSave)
   }
 }
 
+/**
+ * @brief FilterEditor::validFilters
+ * @param ok
+ * @return
+ */
 vector<Filter*> FilterEditor::validFilters(bool* ok)
 {
   vector<Filter*> filters;
   
   *ok = true;
   
-  for(int i = 1; i <= _nbFilters; i++)
+  for(int i = 2; i <= 1+_nbFilters; i++)
   {
     FilterEditorItem* item = (FilterEditorItem*)_filterLayout->itemAt(i)->widget();
+    cout << "type d'item :" << _filterLayout->itemAt(i) << " \n";
     Filter* f = item->validFilter();
+    cout << "out validFilter\n";
+    cout << "val de f : " << f << "\n";
     if(f != NULL)
       filters.push_back(f);
     else
     {
       *ok = false;
-      QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Every square have to be completed by int value."));
-      msgBox.setInformativeText(tr("Filter %1 isn't ok.").arg(i));
+      QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Every square has to be filled with an integer."));
+      msgBox.setInformativeText(tr("Filter %1 is not a valid filter.").arg(i-1));
       msgBox.setStandardButtons(QMessageBox::Ok);
       msgBox.setDefaultButton(QMessageBox::Ok);
       msgBox.exec();
@@ -249,6 +313,11 @@ vector<Filter*> FilterEditor::validFilters(bool* ok)
   return filters;
 }
 
+/**
+ * @brief FilterEditor::cancel
+ *
+ * Manages popup window that comes when you press cancel.
+ */
 void FilterEditor::cancel()
 {
   QMessageBox msgBox(QMessageBox::Warning, tr("Warning!"), tr("Unsaved changes will be lost."));
@@ -257,20 +326,30 @@ void FilterEditor::cancel()
   msgBox.setDefaultButton(QMessageBox::No);
   int ret = msgBox.exec();
   if(ret == QMessageBox::Yes)
-//    QTimer::singleShot(200, this, SLOT(quit()));
       this->reject();
 }
 
+
+/**
+ * @brief FilterEditor::nbFiltersChanged
+ * @param nb
+ */
 void FilterEditor::nbFiltersChanged(const int nb)
 {
   if(_nbFilters < nb)
   {
-    FilterEditorItem* item = new FilterEditorItem();
-    _filterLayout->insertWidget(_nbFilters + 1, item);
+      while(_nbFilters!= nb){
+         _nbFilters++;
+        FilterEditorItem* item = new FilterEditorItem();
+        _filterLayout->insertWidget(_nbFilters, item);
+      }
   }
   else if(_nbFilters > nb)
   {
-    _filterLayout->removeItem(_filterLayout->itemAt(_nbFilters));
+      while(_nbFilters != nb){
+            _filterLayout->removeItem(_filterLayout->itemAt(_nbFilters));
+            _nbFilters--;
+      }
   }
   _nbFilters = nb;
 }
