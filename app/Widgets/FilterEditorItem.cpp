@@ -40,6 +40,9 @@ using namespace std;
 using namespace filtrme;
 using namespace imagein::algorithm;
 
+/**
+ * @brief FilterEditorItem::FilterEditorItem
+ */
 FilterEditorItem::FilterEditorItem()
 {
   _width = 3;
@@ -47,7 +50,9 @@ FilterEditorItem::FilterEditorItem()
   initUI();
 }
 
-
+/**
+ * @brief FilterEditorItem::initUI
+ */
 void FilterEditorItem::initUI()
 {
   QSpinBox *spinBoxWidth;
@@ -94,8 +99,13 @@ void FilterEditorItem::initUI()
 
 }
 
+/**
+ * @brief FilterEditorItem::widthChanged
+ * @param width
+ */
 void FilterEditorItem::widthChanged(const int width)
 {
+    cout << "diff de width: " << width << " | " << _width << "\n";
   if(_width < width){
       while(_width!=width){
           emit(insertColumn(width-_width));
@@ -128,6 +138,10 @@ void FilterEditorItem::heightChanged(const int height)
   _filter->resizeRowsToContents();
 }
 
+/**
+ * @brief FilterEditorItem::validFilter
+ * @return
+ */
 imagein::algorithm::Filter* FilterEditorItem::validFilter()
 {
   Filter* filter = new Filter(_width, _height);

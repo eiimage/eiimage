@@ -298,10 +298,7 @@ vector<Filter*> FilterEditor::validFilters(bool* ok)
   for(int i = 2; i <= 1+_nbFilters; i++)
   {
     FilterEditorItem* item = (FilterEditorItem*)_filterLayout->itemAt(i)->widget();
-    cout << "type d'item :" << _filterLayout->itemAt(i) << " \n";
     Filter* f = item->validFilter();
-    cout << "out validFilter\n";
-    cout << "val de f : " << f << "\n";
     if(f != NULL)
       filters.push_back(f);
     else

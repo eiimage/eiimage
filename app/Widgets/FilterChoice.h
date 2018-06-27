@@ -37,6 +37,7 @@
 #include <Algorithm/Filtering.h>
 #include <QRadioButton>
 #include <QTextEdit>
+#include <QCheckBox>
 
 namespace filtrme
 {
@@ -53,6 +54,8 @@ namespace filtrme
     FilterChoice(QWidget *parent);
     inline imagein::algorithm::Filtering* getFiltering() { return _filtering; }
     inline bool doubleResult()  { return _dblResButton->isChecked(); }
+    inline bool scalingResult() { return _scalingButton->isChecked(); }
+    inline bool offsetResult() { return _offsetButton->isChecked(); }
     inline void setDoubleResult(bool c)  { _dblResButton->setChecked(c); _stdResButton->setChecked(!c);}
 
   signals:
@@ -68,6 +71,7 @@ namespace filtrme
     void updateBlur(bool);
     void openFile();
     void updatePath();
+    void updateOptions(bool);
 
   private:
     bool _a = true;
@@ -88,6 +92,8 @@ namespace filtrme
     QRadioButton* _customButton;
     QHBoxLayout* _pathLayout;
     QString _path;
+    QCheckBox* _offsetButton;
+    QCheckBox* _scalingButton;
     
     QLabel* _labelNumber;
     QSpinBox* _number;
