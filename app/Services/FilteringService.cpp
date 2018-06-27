@@ -74,8 +74,8 @@ void FilteringService::applyFiltering()
             return;
         }
         _dblResult = _filterChoice->doubleResult();
-        _scaling = true; //_filterChoice->scalingResult();
-        _offset = true; //_filterChoice->offsetResult();
+        _scaling = _filterChoice->scalingResult();
+        _offset = _filterChoice->offsetResult();
 
         Filtering* filtering = _filterChoice->getFiltering();
         this->applyAlgorithm(filtering);
@@ -143,11 +143,12 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             }
             else{
                 resImg = Converter<Image>::convertAndRound(*dblResImg);
-                outputMessage = "Pas de conversion appliquee [min : 0, max : 255]";
+                outputMessage = "Pas de conversion [min : 0, max : 255]";
 
             }
             delete dblResImg;
             riw = new StandardImageWindow(resImg, _siw->getPath());
+            std::cout << outputMessage << std::endl;
         }
         riw->setWindowTitle(_siw->windowTitle());
         emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
