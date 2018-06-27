@@ -609,6 +609,10 @@ void FilterChoice::updatePath(){
     updateBlur(true);
 }
 
+/**
+ * @brief FilterChoice::updateOptions
+ * @param a
+ */
 void FilterChoice::updateOptions(bool a){
     if(a){
         _offsetButton->setChecked(true);

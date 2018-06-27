@@ -53,6 +53,7 @@ namespace filtrme
   public:
     FilterChoice(QWidget *parent);
     inline imagein::algorithm::Filtering* getFiltering() { return _filtering; }
+    inline QString getFilterName(){ return _blurChoices->currentText();}
     inline bool doubleResult()  { return _dblResButton->isChecked(); }
     inline bool scalingResult() { return _scalingButton->isChecked(); }
     inline bool offsetResult() { return _offsetButton->isChecked(); }

@@ -105,16 +105,15 @@ void FilterEditorItem::initUI()
  */
 void FilterEditorItem::widthChanged(const int width)
 {
-    cout << "diff de width: " << width << " | " << _width << "\n";
   if(_width < width){
       while(_width!=width){
-          emit(insertColumn(width-_width));
+          emit(insertColumn(_width-1));
           _width++;
       }
   }
   else{
       while(_width!=width){
-          emit(removeColumn(_width-width));
+          emit(removeColumn(_width-1));
           _width--;
       }
    }
@@ -125,13 +124,13 @@ void FilterEditorItem::heightChanged(const int height)
 {
     if(_height < height){
         while(_height!=height){
-            emit(insertRow(height-_height));
+            emit(insertRow(_height - 1));
             _height++;
         }
     }
     else{
         while(_height!=height){
-            emit(removeRow(_height-height));
+            emit(removeRow(_height- 1));
             _height--;
         }
      }

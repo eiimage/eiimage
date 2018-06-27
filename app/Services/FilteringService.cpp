@@ -33,9 +33,6 @@ using namespace imagein::algorithm;
 void FilteringService::display(GenericInterface* gi)
 {
     AlgorithmService::display(gi);
-
-//    _filtering = _toolBar->addAction("&Filtering");
-//    _filterEdition = _toolBar->addAction("&FilterEditor");
     QMenu* menu = gi->menu(qApp->translate("", "Filtering"));
     _filtering = menu->addAction(tr("&Apply filter"));
     _filtering->setEnabled(false);
@@ -50,7 +47,6 @@ void FilteringService::checkActionsValid(const QWidget* activeWidget) {
 void FilteringService::connect(GenericInterface* gi)
 {
     AlgorithmService::connect(gi);
-
     QObject::connect(_filtering, SIGNAL(triggered()), this, SLOT(applyFiltering()));
     QObject::connect(_filterEdition, SIGNAL(triggered()), this, SLOT(edition()));
     QObject::connect(gi->windowService(), SIGNAL(activeWidgetChanged(const QWidget*)), this, SLOT(checkActionsValid(const QWidget*)));
@@ -65,8 +61,6 @@ void FilteringService::applyFiltering()
 
         _filterChoice = new FilterChoice(_gi);
         _filterChoice->setDoubleResult(siw->isDouble());
-//        QMdiArea* area = (QMdiArea*)_gi->centralWidget();
-//        area->addSubWindow(_filterChoice);
         QDialog::DialogCode code = static_cast<QDialog::DialogCode>(_filterChoice->exec());
 
         if(code!=QDialog::Accepted) {
@@ -84,17 +78,10 @@ void FilteringService::edition()
 {  
     _filterEditor = new FilterEditor();
     _filterEditor->exec();
-    //QMdiArea* area = (QMdiArea*)_gi->centralWidget();
-    //area->addSubWindow(_filterEditor);
-//    StandardImageWindow* siw = dynamic_cast<StandardImageWindow*>(_ws->getCurrentImageWindow());
-//    _ws->addWidget(_ws->getNodeId(siw), _filterEditor);
-    //_filterEditor->show();
-
 }
 
 void FilteringService::applyAlgorithm(Filtering* algo)
 {
-    //StandardImageWindow* siw = dynamic_cast<StandardImageWindow*>(_ws->getCurrentImageWindow());
     if (_siw != NULL)
     {
         const Image_t<double>* image;
@@ -129,7 +116,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             delete intResImg;
             riw = new StandardImageWindow(resImg, _siw->getPath());
         }
-        riw->setWindowTitle(_siw->windowTitle());
+        riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName());
         emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
     }
 }
