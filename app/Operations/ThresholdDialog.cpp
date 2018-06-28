@@ -71,8 +71,10 @@ void ThresholdDialog::updatePreview(){
         else {
             algo = new Binarization_t<GrayscaleImage::depth_t>(_spinbox1->value());
         }
-
-        _preview->setImage(algo->operator()(_image));
+        _previewImage = algo->operator()(_image);
+        _preview->setImage(_previewImage);
+        delete algo;
+        delete _previewImage;
         _preview->repaint();
     }
 
