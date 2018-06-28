@@ -120,13 +120,13 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
             if(_scaling && _offset ){
 
-                resImg  =  Converter<Image>::ConvertScaleAndOffset(*intResImg, &outputMessage);
+                resImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
             }
             else if(_scaling){
-                resImg  =  Converter<Image>::ConvertAndScale(*intResImg, &outputMessage);
+                resImg  =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
             }
             else if(_offset){
-                resImg = Converter<Image>::ConvertAndOffset(*intResImg, &outputMessage);
+                resImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
             }
             else{
                 resImg = Converter<Image>::convertAndRound(*dblResImg);
