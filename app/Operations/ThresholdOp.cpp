@@ -40,5 +40,6 @@ void ThresholdOp::operator()(const imagein::Image* image, const std::map<const i
     }
 
     GrayscaleImage* resImg = algo->operator()(img);
+    delete algo;
     this->outImage(resImg);
 }

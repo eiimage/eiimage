@@ -64,6 +64,7 @@ class ThresholdDialog : public QDialog {
     QRadioButton* _blackButton;
     QCheckBox *_doubleBox, *_previewBox;
     ImageWidget* _preview;
+    imagein::GrayscaleImage* _previewImage;
 };
 
 #endif //!THRESHOLDDIALOG_H
