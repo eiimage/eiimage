@@ -124,13 +124,11 @@ set(imageinsa_SOURCES
 	Operations/SignalToNoiseOp.cpp
 	Operations/SignalToNoiseOp.h
 	Operations/SinusSynthesisOp.cpp
-	Operations/SinusSynthesisOp.cpp
 	Operations/SinusSynthesisOp.h
 	Operations/SplitColorOp.cpp
 	Operations/SplitColorOp.h
 	Operations/SplitHsvOp.cpp
 	Operations/SplitHsvOp.h
-	Operations/ThresholdDialog.cpp
 	Operations/ThresholdDialog.cpp
 	Operations/ThresholdDialog.h
 	Operations/ThresholdOp.cpp
@@ -140,6 +138,10 @@ set(imageinsa_SOURCES
 	Operations/Transforms.h
 	Operations/TranslateOp.cpp
 	Operations/TranslateOp.h
+	Operations/UCharConvertOp.cpp
+	Operations/UCharConvertOp.h
+	Operations/ucharconvertdialog.cpp
+	Operations/ucharconvertdialog.h
 	Operations/ZeroCrossingOp.cpp
 	Operations/ZeroCrossingOp.h
 	Services/ImageINSAService.cpp
@@ -185,6 +187,7 @@ set(UIS
 	Operations/DCTDialog.ui
 	Operations/ColorDialog.ui
         Operations/MedianDialog.ui
+	Operations/ucharconvertdialog.ui
 )
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})

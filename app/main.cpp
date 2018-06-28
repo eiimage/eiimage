@@ -71,6 +71,7 @@
 #include "Operations/ClassResultOp.h"
 #include "Operations/SeparatorOp.h"
 #include "Operations/MedianOp.h"
+#include "Operations/UCharConvertOp.h"
 
 
 #include "Services/MorphoMatService.h"
@@ -142,6 +143,8 @@ int main(int argc, char** argv)
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
     image->addOperation(new HistogramOp());
+    image->addOperation(new SeparatorOp());
+    image->addOperation(new UCharConvertOp());
 
     BuiltinOpSet* tools = new BuiltinOpSet(qApp->translate("", "&Tools").toStdString());
 

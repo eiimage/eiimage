@@ -55,21 +55,8 @@ void OperationService::connect(GenericInterface* gi)
 
 
 void OperationService::operation() {
-//    cout << _operation->getName() << endl;
-    
     WindowService* ws = _gi->windowService();
     ImageWindow* curImgWnd = ws->getCurrentImageWindow();
-
-//    StandardImageWindow* curStdImgWnd = NULL;
-//    if (curImgWnd != NULL)
-//    {
-//        curStdImgWnd = dynamic_cast<StandardImageWindow*>(curImgWnd);
-//    }
-    
-//    const Image* image = NULL;
-//    if(curStdImgWnd != NULL) {
-//        image = curStdImgWnd->getImage();
-//    }
     if(_operation->needCurrentImg() && !_operation->isValidImgWnd(curImgWnd)) return;
 
     map<const ImageWindow*, string> wndList;
@@ -79,36 +66,6 @@ void OperationService::operation() {
     }
 
     _operation->operator()(dynamic_cast<ImageINSAService*>(ws));
-    
-//    for(vector<QWidget*>::iterator it = result.begin(); it < result.end(); ++it) {
-//        QWidget* widget = *it;
-//        QLabel* twdgt = dynamic_cast<QLabel*>(widget);
-//        if((typeid(*widget) == typeid(ImgWidget)) || (typeid(*widget) == typeid(DoubleImgWidget))) {
-//            QString title = _operation->needCurrentImg() ? (curImgWnd->windowTitle() + " - ") : "";
-//            ImageWindow* siw;
-//            if(typeid(*widget)==typeid(ImgWidget)) {
-//                ImgWidget* w = dynamic_cast<ImgWidget*>(widget);
-//                title += w->name.c_str();
-//                siw = new StandardImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), w->img);
-//            }
-//            else {
-//                DoubleImgWidget* w = dynamic_cast<DoubleImgWidget*>(widget);
-//                title += w->name.c_str();
-//                siw = new DoubleImageWindow(_operation->needCurrentImg() ? curImgWnd->getPath() : w->name.c_str(), w->img, w->normalize, w->logScale);
-//            }
-//            NodeId id = _operation->needCurrentImg() ? ws->getNodeId(curImgWnd) : NodeId(siw->getDisplayImage());
-//            ws->addImage(id, siw);
-//            siw->setWindowTitle(title);
-//        }
-//        else if(twdgt != NULL) {
-//            emit outputText(twdgt->text());
-//        }
-//        else {
-//            ws->addWidget(ws->getNodeId(curImgWnd), widget);
-//        }
-        
-//    }
-    
     
 }
 
