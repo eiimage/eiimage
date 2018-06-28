@@ -22,6 +22,7 @@
 
 #include "SplitHsvOp.h"
 #include "../Tools.h"
+#include <QMessageBox>
 
 using namespace std;
 using namespace imagein;
@@ -35,6 +36,12 @@ SplitHsvOp::SplitHsvOp() : Operation(qApp->translate("Operations", "Split HSV pl
 }
 
 void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
+
+    if(image->getNbChannels()==1){
+        QMessageBox::warning(NULL, qApp->translate("Operations", "The operation cannot be applied on this image"),
+                             qApp->translate("Operations", "The image is not in color."));
+        return;
+    }
 
         int width = image->getWidth();
         int height = image->getHeight();
