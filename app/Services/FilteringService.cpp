@@ -135,7 +135,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             }
             delete dblResImg;
             riw = new StandardImageWindow(resImg, _siw->getPath());
-            std::cout << outputMessage << std::endl;
+            _ws->addText(outputMessage);
         }
         riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName());
         emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
