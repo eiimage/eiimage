@@ -469,7 +469,7 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <source>Reconstructed color image</source>
-        <translation type="unfinished">Image couleur reconstituée</translation>
+        <translation>Image couleur reconstituée</translation>
     </message>
 </context>
 <context>
@@ -2095,7 +2095,7 @@ Le débit vaut : %5.2f
         <location/>
         <location line="+0"/>
         <source>Create only one step :</source>
-        <translation>Créer unique l&apos;étage : </translation>
+        <translation>Créer un étage unique: </translation>
     </message>
     <message>
         <location filename="Operations/PyramidDialog.cpp" line="+41"/>
