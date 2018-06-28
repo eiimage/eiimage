@@ -160,9 +160,9 @@ void FilterEditor::nameChanged(QString name) {
 void FilterEditor::save()
 {
   vector<Filter*> filters;
-  if(_name->text() == "")
+  if(!regex_match(_name->text().toStdString(),regex("[!-~]+")) || _name->text()=="")
   {
-    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your filter needs a name to be saved."));
+    QMessageBox msgBox(QMessageBox::Critical, tr("Error!"), tr("Your filter needs a valid name to be saved (no whitespace)."));
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.setDefaultButton(QMessageBox::Ok);
     msgBox.exec();
