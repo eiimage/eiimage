@@ -33,7 +33,7 @@
     </message>
     <message>
         <location filename="main.cpp" line="184"/>
-        <location filename="Services/FilteringService.cpp" line="39"/>
+        <location filename="Services/FilteringService.cpp" line="37"/>
         <source>Filtering</source>
         <translation>Filtering</translation>
     </message>
@@ -43,27 +43,27 @@
     <message>
         <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="27"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>About</translation>
     </message>
     <message>
         <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="31"/>
         <source>This software has been developed at Insa.</source>
-        <translation type="unfinished"></translation>
+        <translation>This software has been developped at INSA Rennes.</translation>
     </message>
     <message>
         <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="35"/>
         <source>Main authors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Main authors:</translation>
     </message>
     <message>
         <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="45"/>
         <source>Contributors:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contributors:</translation>
     </message>
     <message>
         <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="49"/>
         <source>Compiled on %1 at %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Compiled on %1 at %2</translation>
     </message>
 </context>
 <context>
@@ -363,7 +363,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/CombineColorOp.cpp" line="95"/>
         <source>Reconstructed Color image</source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstructed color image</translation>
     </message>
 </context>
 <context>
@@ -375,7 +375,7 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/CombineHsvOp.cpp" line="101"/>
         <source>Reconstructed  image</source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstructed image</translation>
     </message>
 </context>
 <context>
@@ -416,22 +416,22 @@ Number of classes = %1 </translation>
         <translation>Stopping point : </translation>
     </message>
     <message>
-        <location filename="Operations/CroissanceOp.cpp" line="101"/>
+        <location filename="Operations/CroissanceOp.cpp" line="111"/>
         <source>Luminance</source>
         <translation>Luminance</translation>
     </message>
     <message>
-        <location filename="Operations/CroissanceOp.cpp" line="102"/>
+        <location filename="Operations/CroissanceOp.cpp" line="112"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="Operations/CroissanceOp.cpp" line="103"/>
+        <location filename="Operations/CroissanceOp.cpp" line="113"/>
         <source>Total number of area : %1</source>
         <translation>Total number of area : %1</translation>
     </message>
     <message>
-        <location filename="Operations/CroissanceOp.cpp" line="104"/>
+        <location filename="Operations/CroissanceOp.cpp" line="114"/>
         <source>Mean number of point per area : %1</source>
         <translation>Mean number of point per area : %1</translation>
     </message>
@@ -925,13 +925,13 @@ Number of classes = %1 </translation>
         <location filename="Operations/InverseHoughDialog.ui" line="22"/>
         <location filename="../build/app/ui_InverseHoughDialog.h" line="106"/>
         <source>Reconstructed image height : </source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstructed image height : </translation>
     </message>
     <message>
         <location filename="Operations/InverseHoughDialog.ui" line="59"/>
         <location filename="../build/app/ui_InverseHoughDialog.h" line="108"/>
         <source>Reconstructed image width : </source>
-        <translation type="unfinished"></translation>
+        <translation>Reconstructed image width : </translation>
     </message>
     <message>
         <source>Reconstructed image size : </source>
@@ -1016,31 +1016,31 @@ Number of classes = %1 </translation>
         <location filename="Operations/MedianDialog.ui" line="14"/>
         <location filename="../build/app/ui_MedianDialog.h" line="79"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="Operations/MedianDialog.ui" line="26"/>
         <location filename="../build/app/ui_MedianDialog.h" line="80"/>
         <source>Forme</source>
-        <translation type="unfinished"></translation>
+        <translation>Shape</translation>
     </message>
     <message>
         <location filename="Operations/MedianDialog.ui" line="38"/>
         <location filename="../build/app/ui_MedianDialog.h" line="81"/>
         <source>Croix</source>
-        <translation type="unfinished"></translation>
+        <translation>Cross</translation>
     </message>
     <message>
         <location filename="Operations/MedianDialog.ui" line="54"/>
         <location filename="../build/app/ui_MedianDialog.h" line="82"/>
         <source>Carré</source>
-        <translation type="unfinished"></translation>
+        <translation>Square</translation>
     </message>
     <message>
         <location filename="Operations/MedianDialog.ui" line="96"/>
         <location filename="../build/app/ui_MedianDialog.h" line="83"/>
         <source>Taille</source>
-        <translation type="unfinished"></translation>
+        <translation>Size</translation>
     </message>
 </context>
 <context>
@@ -1143,7 +1143,7 @@ Number of classes = %1 </translation>
         <location filename="Operations/DoubleEntropyOp.cpp" line="56"/>
         <location filename="Operations/EntropyOp.cpp" line="54"/>
         <source>Entropy of the image (sum of channels entropy) = %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Entropy of the image (sum of channels entropy) = %1</translation>
     </message>
     <message>
         <source>Entropy of the image = %1</source>
@@ -1442,7 +1442,8 @@ Channel %d :
  Flow(Huffman) = %.4f</translation>
     </message>
     <message>
-        <location filename="Algorithms/Pyramid.cpp" line="662"/>
+        <location filename="Algorithms/Pyramid.cpp" line="664"/>
+        <location filename="Algorithms/Pyramid.cpp" line="684"/>
         <source>L&apos;entropie de l&apos;etage %d est %1f
 </source>
         <translation>The stage %d entropy is %1f
@@ -1484,12 +1485,12 @@ Le debit vaut : %5.2f
         <location filename="Operations/MedianOp.cpp" line="12"/>
         <location filename="Operations/MedianOp.cpp" line="36"/>
         <source>Median Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Median Filter</translation>
     </message>
     <message>
         <location filename="Operations/SplitHsvOp.cpp" line="33"/>
         <source>Split HSV planes</source>
-        <translation type="unfinished"></translation>
+        <translation>Split HSV planes</translation>
     </message>
 </context>
 <context>
@@ -1497,12 +1498,12 @@ Le debit vaut : %5.2f
     <message>
         <location filename="../core/PlugOperation.cpp" line="77"/>
         <source>Parameters</source>
-        <translation type="unfinished">Parameters</translation>
+        <translation>Parameters</translation>
     </message>
     <message>
         <location filename="../core/PlugOperation.cpp" line="86"/>
         <source>Validate</source>
-        <translation type="unfinished">Validate</translation>
+        <translation>Validate</translation>
     </message>
 </context>
 <context>
@@ -1734,7 +1735,7 @@ Le debit vaut : %5.2f
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="59"/>
         <source>LloydMax</source>
-        <translation type="unfinished"></translation>
+        <translation>LloydMax</translation>
     </message>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="61"/>
@@ -2059,7 +2060,7 @@ Le debit vaut : %5.2f
     <message>
         <location filename="Operations/SinusSynthesisOp.cpp" line="76"/>
         <source>Orientation (°): </source>
-        <translation type="unfinished"></translation>
+        <translation>Orientation (°): </translation>
     </message>
     <message>
         <location filename="Operations/SinusSynthesisOp.cpp" line="78"/>
@@ -2070,60 +2071,60 @@ Le debit vaut : %5.2f
 <context>
     <name>StructElemWindow</name>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="41"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="38"/>
         <source>&amp;Open file</source>
         <translation>&amp;Open file</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="42"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="39"/>
         <source>&amp;Save as...</source>
         <translation>&amp;Save as...</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="53"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="52"/>
         <source>Basic shapes :</source>
         <translation>Basic shapes :</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="56"/>
-        <location filename="Widgets/StructElemWindow.cpp" line="196"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="55"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="194"/>
         <source>Diamond</source>
         <translation>Diamond</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="57"/>
-        <location filename="Widgets/StructElemWindow.cpp" line="176"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="56"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="174"/>
         <source>Disc</source>
         <translation>Disc</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="58"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="57"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="65"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="64"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="76"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="75"/>
         <source>Scale :</source>
         <translation>Scale :</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="249"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="247"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="249"/>
-        <location filename="Widgets/StructElemWindow.cpp" line="270"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="247"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="268"/>
         <source>Images (*.png *.bmp *.jpg *.jpeg)</source>
         <translation>Images (*.png *.bmp *.jpg *.jpeg)</translation>
     </message>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="270"/>
+        <location filename="Widgets/StructElemWindow.cpp" line="268"/>
         <source>Save file</source>
         <translation>Save file</translation>
     </message>
@@ -2163,7 +2164,7 @@ Le debit vaut : %5.2f
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="104"/>
         <source>Double threshold (right clic to move the second threshold)</source>
-        <translation type="unfinished"></translation>
+        <translation>Double threshold (right clic to move the second threshold)</translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="113"/>
@@ -2193,7 +2194,7 @@ Le debit vaut : %5.2f
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="169"/>
         <source>Aperçu</source>
-        <translation type="unfinished"></translation>
+        <translation>Preview</translation>
     </message>
     <message>
         <location filename="Operations/ThresholdDialog.cpp" line="177"/>
@@ -2311,69 +2312,109 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilterChoice</name>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="74"/>
+        <location filename="Widgets/FilterChoice.cpp" line="76"/>
         <source>FilterChoice</source>
         <translation>Filter choice</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="82"/>
+        <location filename="Widgets/FilterChoice.cpp" line="85"/>
+        <source>Select custom or standard filter</source>
+        <translation>Select custom or standard filter</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="87"/>
+        <source>Custom filter</source>
+        <translation>Custom filter</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="95"/>
         <source>Filter configuration</source>
         <translation>Filter configuration</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="86"/>
+        <location filename="Widgets/FilterChoice.cpp" line="101"/>
+        <source>Path to custom filter:</source>
+        <translation>Path to custom filter:</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="118"/>
         <source>Filter:</source>
         <translation>Filter:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="95"/>
+        <location filename="Widgets/FilterChoice.cpp" line="132"/>
         <source>Edge policy: </source>
         <translation>Edge policy: </translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="97"/>
+        <location filename="Widgets/FilterChoice.cpp" line="134"/>
         <source>Black</source>
         <translation>Black</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="97"/>
+        <location filename="Widgets/FilterChoice.cpp" line="134"/>
         <source>Mirror</source>
         <translation>Mirror</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="97"/>
+        <location filename="Widgets/FilterChoice.cpp" line="134"/>
         <source>Nearest</source>
         <translation>Nearest</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="97"/>
+        <location filename="Widgets/FilterChoice.cpp" line="134"/>
         <source>Spherical</source>
         <translation>Spherical</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="103"/>
+        <location filename="Widgets/FilterChoice.cpp" line="140"/>
         <source>Filter size:</source>
         <translation>Filter size:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="109"/>
+        <location filename="Widgets/FilterChoice.cpp" line="146"/>
         <source>Standard deviation : </source>
         <translation>Standard deviation : </translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="118"/>
+        <location filename="Widgets/FilterChoice.cpp" line="155"/>
         <source>Resulting image type</source>
         <translation>Resulting image type</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="119"/>
+        <location filename="Widgets/FilterChoice.cpp" line="156"/>
         <source>UChar</source>
-        <translation type="unfinished"></translation>
+        <translation>UChar</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="120"/>
+        <location filename="Widgets/FilterChoice.cpp" line="157"/>
         <source>Double</source>
-        <translation type="unfinished"></translation>
+        <translation>Double</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="162"/>
+        <source>Options</source>
+        <translation>Options</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="164"/>
+        <source>Offset</source>
+        <translation>Offset</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="165"/>
+        <source>Scaling</source>
+        <translation>Scaling</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="596"/>
+        <source>Open a file</source>
+        <translation>Open a file</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="596"/>
+        <source>XML Documents (*.xml)</source>
+        <translation>XML Documents (*.xml)</translation>
     </message>
     <message>
         <source>Standard</source>
@@ -2384,57 +2425,72 @@ Le debit vaut : %5.2f
         <translation type="vanished">Floating point</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="163"/>
+        <location filename="Widgets/FilterChoice.cpp" line="217"/>
         <source>Apply filter</source>
         <translation>Apply filter</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="164"/>
+        <location filename="Widgets/FilterChoice.cpp" line="218"/>
         <source>Delete filter</source>
         <translation>Delete filter</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>Uniform</source>
         <translation>Uniform</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>Gaussian</source>
         <translation>Gaussian</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>Prewitt</source>
         <translation>Prewitt</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>Roberts</source>
         <translation>Roberts</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>Sobel</source>
         <translation>Sobel</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="194"/>
+        <location filename="Widgets/FilterChoice.cpp" line="239"/>
         <source>SquareLaplacien</source>
         <translation>SquareLaplacien</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="339"/>
+        <location filename="Widgets/FilterChoice.cpp" line="373"/>
+        <source>Error!</source>
+        <translation>Error!</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="373"/>
+        <source>Filter application is impossible.</source>
+        <translation>Filre could not be applied.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="374"/>
+        <source>Filter selection is empty, please select a filter.</source>
+        <translation>There&apos;s no filter selected, please select a filter.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterChoice.cpp" line="430"/>
         <source>Warning!</source>
         <translation>Warning!</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="339"/>
+        <location filename="Widgets/FilterChoice.cpp" line="430"/>
         <source>This filter will be permanently deleted ?</source>
         <translation>This filter will be permanently deleted !</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterChoice.cpp" line="340"/>
+        <location filename="Widgets/FilterChoice.cpp" line="431"/>
         <source>Do you want to continue?</source>
         <translation>Do you want to continue?</translation>
     </message>
@@ -2442,64 +2498,124 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilterEditor</name>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="69"/>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="vanished">Name:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="72"/>
+        <location filename="Widgets/FilterEditor.cpp" line="76"/>
+        <source>Filter file:</source>
+        <translation>Filter file:</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="77"/>
+        <source>Select a filter file:</source>
+        <translation>Select a filter file:</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="78"/>
+        <source>No XML file selected!</source>
+        <translation>No XML file selected!</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="93"/>
+        <source>Name of your filter:</source>
+        <translation>Name of your filter:</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="96"/>
         <source>Number of filters:</source>
         <translation>Number of filters:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="105"/>
+        <location filename="Widgets/FilterEditor.cpp" line="113"/>
+        <source>You need to select a file and a name for your filter to save it</source>
+        <translation>You need to select a file and a name for your filter to save it</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="131"/>
         <source>FilterEditor</source>
         <translation>Filter editor</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="117"/>
-        <location filename="Widgets/FilterEditor.cpp" line="240"/>
+        <location filename="Widgets/FilterEditor.cpp" line="144"/>
+        <source>Chose a file filter</source>
+        <translation>Chose a filter file</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="144"/>
+        <source>XML Files (*.xml)</source>
+        <translation>XML Files (*.xml)</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="165"/>
+        <location filename="Widgets/FilterEditor.cpp" line="173"/>
+        <location filename="Widgets/FilterEditor.cpp" line="307"/>
         <source>Error!</source>
         <translation>Error!</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="117"/>
-        <source>Your filter has to have a name to be saved.</source>
-        <translation>Your filter has to have a name to be saved.</translation>
+        <location filename="Widgets/FilterEditor.cpp" line="165"/>
+        <source>Your filter needs a name to be saved.</source>
+        <translation>Your filter needs a name to be saved.</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="166"/>
-        <location filename="Widgets/FilterEditor.cpp" line="254"/>
+        <location filename="Widgets/FilterEditor.cpp" line="173"/>
+        <source>Your file needs .xml format.</source>
+        <translation>Your file needs .xml format.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="228"/>
+        <source>This filter name is already used.</source>
+        <translation>This filter name is already used.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="229"/>
+        <source>Do you want to overwrite it?</source>
+        <translation>Do you want to modify it?</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="307"/>
+        <source>Every square has to be filled with an integer.</source>
+        <translation>Every square has to be filled with an integer.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="308"/>
+        <source>Filter %1 is not a valid filter.</source>
+        <translation>Filter %1 is not a valid filter.</translation>
+    </message>
+    <message>
+        <source>Your filter has to have a name to be saved.</source>
+        <translation type="vanished">Your filter has to have a name to be saved.</translation>
+    </message>
+    <message>
+        <location filename="Widgets/FilterEditor.cpp" line="228"/>
+        <location filename="Widgets/FilterEditor.cpp" line="326"/>
         <source>Warning!</source>
         <translation>Warning!</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="166"/>
         <source>This filter name is already use.</source>
-        <translation>This filter name is already use.</translation>
+        <translation type="vanished">This filter name is already use.</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="167"/>
         <source>Do you want to replace it?</source>
-        <translation>Do you want to replace it?</translation>
+        <translation type="vanished">Do you want to replace it?</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="240"/>
         <source>Every square have to be completed by int value.</source>
-        <translation>Every square have to be completed by int value.</translation>
+        <translation type="vanished">Every square have to be completed by int value.</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="241"/>
         <source>Filter %1 isn&apos;t ok.</source>
-        <translation>Filter %1 isn&apos;t ok.</translation>
+        <translation type="vanished">Filter %1 isn&apos;t ok.</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="254"/>
+        <location filename="Widgets/FilterEditor.cpp" line="326"/>
         <source>Unsaved changes will be lost.</source>
         <translation>Unsaved changes will be lost.</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditor.cpp" line="255"/>
+        <location filename="Widgets/FilterEditor.cpp" line="327"/>
         <source>Do you want to continue?</source>
         <translation>Do you want to continue?</translation>
     </message>
@@ -2507,12 +2623,12 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilterEditorItem</name>
     <message>
-        <location filename="Widgets/FilterEditorItem.cpp" line="80"/>
+        <location filename="Widgets/FilterEditorItem.cpp" line="85"/>
         <source>Width:</source>
         <translation>Width:</translation>
     </message>
     <message>
-        <location filename="Widgets/FilterEditorItem.cpp" line="83"/>
+        <location filename="Widgets/FilterEditorItem.cpp" line="88"/>
         <source>Height:</source>
         <translation>Height:</translation>
     </message>
@@ -2520,12 +2636,12 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="40"/>
+        <location filename="Services/FilteringService.cpp" line="38"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Apply filter</translation>
     </message>
     <message>
-        <location filename="Services/FilteringService.cpp" line="42"/>
+        <location filename="Services/FilteringService.cpp" line="40"/>
         <source>&amp;Edit filters</source>
         <translation>&amp;Edit filters</translation>
     </message>
