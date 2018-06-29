@@ -263,9 +263,10 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
 //    sprintf( buffer, "Valeur Max de la matrice d'entre=%d",(int)(max+0.1));
 
 
-    double angleStep = 271. / image->getHeight(); //les angles varient de -90 à +180 = intervalle de longueur 271 degre
-    double imageDiag = resImg->getWidth() * sqrt(2.);
-    double rhoStep = imageDiag / image->getWidth();
+    double angleStep = 270. / image->getHeight(); //les angles varient de -90 à +180 = intervalle de longueur 271 degre
+    //double imageDiag = resImg->getWidth() * sqrt(2.);
+    double imageDiag = sqrt(width*width + height*height);
+    double rhoStep = imageDiag / (image->getWidth() - 1 );
 
     //Algorithme de traitement
 
