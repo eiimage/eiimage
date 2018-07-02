@@ -6,45 +6,45 @@
     <message>
         <location filename="main.cpp" line="+128"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="+17"/>
         <location/>
-        <location line="+0"/>
+        <location line="+3"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+10"/>
         <location/>
-        <location line="+0"/>
+        <location line="+3"/>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
         <translation>&amp;Encodage</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+5"/>
         <location/>
-        <location line="+0"/>
+        <location line="+3"/>
         <source>Transforms</source>
         <translation>Transformées</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+5"/>
         <location/>
-        <location line="+0"/>
+        <location line="+3"/>
         <source>Analysis</source>
         <translation>Analyse</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+6"/>
         <location/>
-        <location line="+0"/>
+        <location line="+3"/>
         <location filename="Services/FilteringService.cpp" line="+37"/>
         <source>Filtering</source>
         <translation>Filtrage</translation>
@@ -1590,7 +1590,7 @@ Canal %d :
         <location line="+0"/>
         <location line="+15"/>
         <source>Scaling</source>
-        <translation>Echantillonage</translation>
+        <translation>Echantillonnage</translation>
     </message>
     <message>
         <location filename="Operations/SignalToNoiseOp.cpp" line="-20"/>
@@ -1645,7 +1645,7 @@ Canal %d :
     <message>
         <location filename="Operations/SplitHsvOp.cpp" line="+33"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Split HSV planes</source>
         <translation>Séparer les plans TSV </translation>
     </message>
@@ -1841,7 +1841,7 @@ Canal %d :
     <message>
         <location filename="Operations/Transforms.cpp" line="+468"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>
 
 matrice de transformation utilisee : 
@@ -1891,6 +1891,82 @@ Le débit vaut : %5.2f
         <location line="+24"/>
         <source>Median Filter</source>
         <translation>Filtre médian</translation>
+    </message>
+    <message>
+        <location filename="Operations/SplitHsvOp.cpp" line="+7"/>
+        <source>The operation cannot be applied on this image</source>
+        <translation>L&apos;opération ne peut pas être appliquée sur cette image</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>The image is not in color.</source>
+        <translation>L&apos;image n&apos;est pas en couleur.</translation>
+    </message>
+    <message>
+        <location filename="Operations/UCharConvertDialog.cpp" line="+19"/>
+        <source>Convert to UChar</source>
+        <translation>Convertir en UChar</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Crop</source>
+        <translation>Rogner</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Normalize</source>
+        <translation>Normaliser</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Add Offset</source>
+        <translation>Ajouter un décalage</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Scale</source>
+        <translation>Echantillonner</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Add offset and scale</source>
+        <translation>Décaler et échantillonner</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Operation</source>
+        <translation>Opération</translation>
+    </message>
+    <message>
+        <location filename="Operations/UCharConvertOp.cpp" line="+40"/>
+        <source>UChar converter</source>
+        <translation>Convertir en UChar</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <location line="+35"/>
+        <source>Cropped</source>
+        <translation>Rognée</translation>
+    </message>
+    <message>
+        <location line="-27"/>
+        <source>Normalized</source>
+        <translation>Normalisée</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Offset</source>
+        <translation>Décalage</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Offset and scaled</source>
+        <translation>Décalage et échantillonnée</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Scaled</source>
+        <translation>Echantillonnée</translation>
     </message>
 </context>
 <context>
@@ -2012,7 +2088,7 @@ Le débit vaut : %5.2f
     <message>
         <location filename="Operations/PseudoColorOp.cpp" line="+25"/>
         <location/>
-        <location line="+0"/>
+        <location line="+11"/>
         <source>Pseudo color</source>
         <translation>Pseudo-couleur</translation>
     </message>
@@ -2740,84 +2816,84 @@ Le débit vaut : %5.2f
         <location line="+4"/>
         <location/>
         <location line="+0"/>
-        <location line="+56"/>
+        <location line="+58"/>
         <source>Threshold : </source>
         <translation>Seuil : </translation>
     </message>
     <message>
-        <location line="-17"/>
+        <location line="-19"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>ThresholdOp</source>
         <translation>Seuillage</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+6"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>&lt;font color=red&gt;&lt;i&gt;Information : The input image has been converted to grayscale.&lt;/i&gt;&lt;/font&gt;</source>
         <translation>&lt;font color=red&gt;&lt;i&gt;Information : L&apos;image d&apos;entrée a été convertie en niveaux de gris.&lt;/i&gt;&lt;/font&gt;</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location/>
         <location line="+0"/>
+        <location/>
+        <location line="+2"/>
         <source>Threshold</source>
         <translation>Seuil</translation>
     </message>
     <message>
-        <location line="+2"/>
-        <location/>
         <location line="+0"/>
+        <location/>
+        <location line="+2"/>
         <source>Double threshold (right clic to move the second threshold)</source>
         <translation>Double seuil (clic droit pour déplacer le deuxième seuil)</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+7"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Otsu</source>
         <translation>Otsu</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+5"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Threshold #2 : </source>
         <translation>Seuil n°2 : </translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+9"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Color between thresholds :</source>
         <translation>Couleur entre les seuils :</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-1"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>White</source>
         <translation>Blanc</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-1"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Black</source>
         <translation>Noir</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+34"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Aperçu</source>
         <translation>Aperçu</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+6"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Validate</source>
         <translation>Valider</translation>
     </message>
@@ -3097,7 +3173,7 @@ Le débit vaut : %5.2f
         <location/>
         <location line="+0"/>
         <source>Offset</source>
-        <translation>Décallage</translation>
+        <translation>Décalage</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -3228,6 +3304,8 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="-345"/>
+        <location/>
+        <location line="+0"/>
         <source>Standard filter</source>
         <translation>Filtre standard</translation>
     </message>
@@ -3395,6 +3473,8 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="-162"/>
+        <location/>
+        <location line="+0"/>
         <source>Your filter needs a valid name to be saved (no whitespace).</source>
         <translation>Votre filtre requiert un nom valide pour être enregistré (pas d&apos;espace).</translation>
     </message>

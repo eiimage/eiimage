@@ -74,7 +74,6 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             break;
 
         case 2 :
-            std::cout << "offset : " << dialog->getOffset() << " \n";
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             offset = dialog->getOffset();
             resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);
@@ -96,14 +95,12 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             windowName = qApp->translate("Operations","Scaled").toStdString();
             break;
 
-        default: 
-            std::cout << "Default conversion" << std::endl;
+        default:
             resImg = Converter<Image>::convertAndRound(*from);
             windowName = qApp->translate("Operations","Cropped").toStdString();
             break;
     }
 
-    //si erreur lors du chargement alors non de fenêtre vide
     outImage(resImg, windowName);
 }
 

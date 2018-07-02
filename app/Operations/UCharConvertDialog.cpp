@@ -10,6 +10,7 @@
 #include <QComboBox>
 #include <QStringList>
 #include <QString>
+#include "../Tools.h"
 
 
 UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
@@ -20,8 +21,8 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
 
     QFormLayout* layout = new QFormLayout(this);
 
-    QStringList text = (QStringList() << "crop" << "normalize" << "Add Offset" << "Scale" << "Add offset and scale");
-    QLabel* label1 = new QLabel("Operation");
+    QStringList text = (QStringList() << qApp->translate("Operations","Crop") << qApp->translate("Operations","Normalize") << qApp->translate("Operations","Add Offset") << qApp->translate("Operations","Scale") << qApp->translate("Operations","Add offset and scale"));
+    QLabel* label1 = new QLabel(qApp->translate("Operations","Operation"));
     _comboBox = new QComboBox();
     _comboBox->addItems(text);
 
@@ -48,7 +49,6 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
 
 
 void UCharConvertDialog::enableOffset(int n){
-    std::cout << "which case it is ? -> " << n << "\n";
     if(n==2){
         _spinBox->setEnabled(true);
         _label2->setEnabled(true);
