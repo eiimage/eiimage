@@ -57,11 +57,13 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
     Image_t<int> * tempIntImg;
     int offset;
     Image_t<double>* normIm; 
+    std::string windowName;
 
     switch(dialog->getCombo())
     {
         case 0 :
             resImg = Converter<Image>::convertAndRound(*from);
+            windowName = qApp->translate("Operations","Cropped").toStdString();
             break;
                 
         case 1 :
@@ -69,6 +71,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             normIm->normalize(0, 255);
             resImg = Converter<Image>::convert(*normIm);
             delete normIm;
+            windowName = qApp->translate("Operations","Normalized").toStdString();
             break;
 
         case 2 :
@@ -77,27 +80,32 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             offset = dialog->getOffset();
             resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);  
             delete tempIntImg;
+            windowName = qApp->translate("Operations","Offset").toStdString();
             break;
 
         case 4 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             resImg = Converter<Image>::convertScaleAndOffset(*tempIntImg, &LogMessage);
             delete tempIntImg;
+            windowName = qApp->translate("Operations","Offset and scaled").toStdString();
             break; 
 
         case 3 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             resImg = Converter<Image>::convertAndScale(*tempIntImg, &LogMessage);
             delete tempIntImg;
+            windowName = qApp->translate("Operations","Scaled").toStdString();
             break;
 
         default: 
             std::cout << "Default conversion" << std::endl;
             resImg = Converter<Image>::convertAndRound(*from);
+            windowName = qApp->translate("Operations","Cropped").toStdString();
             break;
     }
-    
-    outImage(resImg, "Title");
+
+    //si erreur lors du chargement alors non de fenêtre vide
+    outImage(resImg, windowName);
 }
 
 

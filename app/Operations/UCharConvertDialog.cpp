@@ -9,6 +9,7 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include <QStringList>
+#include <QString>
 
 
 UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
@@ -73,4 +74,8 @@ int UCharConvertDialog::getCombo(){
 
 int UCharConvertDialog::getOffset(){
     return _spinBox->value();
+}
+
+QString UCharConvertDialog::getText(){
+    return _comboBox->currentText();
 }
