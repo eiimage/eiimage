@@ -5,6 +5,7 @@
 #include <QSpinBox>
 #include <QLabel>
 #include <QComboBox>
+#include <QString>
 
 namespace Ui {
 class UCharConvertDialog;
@@ -18,6 +19,7 @@ public:
     explicit UCharConvertDialog(QWidget *parent = 0);
     int getCombo();
     int getOffset();
+    QString getText();
 
 
 public slots:
