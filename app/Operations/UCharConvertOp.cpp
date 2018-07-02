@@ -23,9 +23,17 @@
 #include <QApplication>
 #include <QObject>
 #include "Operation.h"
-#include "ucharconvertdialog.h"
+#include "UCharConvertDialog.h"
 #include "Image.h"
 #include <Converter.h>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
+#include <QFormLayout>
+#include <QLabel>
+#include <QSpinBox>
+#include <QComboBox>
+#include <QStringList>
 
 using namespace imagein;
 
@@ -38,46 +46,45 @@ bool UCharConvertOp::needCurrentImg() const{
 }
 
 void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std::map<const imagein::Image_t<double>*, std::string>&){
+
     UCharConvertDialog* dialog = new UCharConvertDialog(QApplication::activeWindow());
+
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-
     if(code!=QDialog::Accepted) return;
-
-
-
-
 
     Image * resImg;
     std::string LogMessage = "";
     Image_t<int> * tempIntImg;
     int offset;
-    switch(conversionTYPE)
+
+    switch(dialog->getCombo())
     {
-        case CROP : 
+        case 0 :
             resImg = Converter<Image>::convertAndRound(*from);
             break;
                 
-        case NORMALIZE :
+        case 1 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             tempIntImg->normalize();
             resImg = Converter<Image>::convert(*tempIntImg);
             delete tempIntImg;
             break;
 
-        case OFFSET : 
+        case 2 :
+            std::cout << "offset : " << dialog->getOffset() << " \n";
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
-            offset = 130; //getOffset()
+            offset = dialog->getOffset();
             resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);
             delete tempIntImg;
             break;
 
-        case OFFSETNSCALE :
+        case 4 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             resImg = Converter<Image>::convertScaleAndOffset(*tempIntImg, &LogMessage);
             delete tempIntImg;
             break; 
 
-        case SCALE : 
+        case 3 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             resImg = Converter<Image>::convertAndScale(*tempIntImg, &LogMessage);
             delete tempIntImg;
@@ -91,3 +98,5 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
     
     outImage(resImg, "Title");
 }
+
+

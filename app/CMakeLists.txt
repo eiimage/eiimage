@@ -140,8 +140,8 @@ set(imageinsa_SOURCES
 	Operations/TranslateOp.h
 	Operations/UCharConvertOp.cpp
 	Operations/UCharConvertOp.h
-	Operations/ucharconvertdialog.cpp
-	Operations/ucharconvertdialog.h
+	Operations/UCharConvertDialog.cpp
+	Operations/UCharConvertDialog.h
 	Operations/ZeroCrossingOp.cpp
 	Operations/ZeroCrossingOp.h
 	Services/ImageINSAService.cpp
@@ -187,7 +187,6 @@ set(UIS
 	Operations/DCTDialog.ui
 	Operations/ColorDialog.ui
         Operations/MedianDialog.ui
-	Operations/ucharconvertdialog.ui
 )
 
 qt5_wrap_ui(WRAPPED_UIS ${UIS})

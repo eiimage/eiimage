@@ -2,6 +2,9 @@
 #define UCHARCONVERTDIALOG_H
 
 #include <QDialog>
+#include <QSpinBox>
+#include <QLabel>
+#include <QComboBox>
 
 namespace Ui {
 class UCharConvertDialog;
@@ -13,10 +16,18 @@ class UCharConvertDialog : public QDialog
 
 public:
     explicit UCharConvertDialog(QWidget *parent = 0);
-    ~UCharConvertDialog();
+    int getCombo();
+    int getOffset();
 
-private:
-    Ui::UCharConvertDialog *ui;
+
+public slots:
+    void enableOffset(int);
+
+protected:
+    QLabel* _label2;
+    QSpinBox* _spinBox;
+    QComboBox* _comboBox;
+
 };
 
 #endif // UCHARCONVERTDIALOG_H
