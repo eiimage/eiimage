@@ -56,6 +56,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
     std::string LogMessage = "";
     Image_t<int> * tempIntImg;
     int offset;
+    Image_t<double>* normIm; 
 
     switch(dialog->getCombo())
     {
@@ -64,17 +65,17 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             break;
                 
         case 1 :
-            tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
-            tempIntImg->normalize();
-            resImg = Converter<Image>::convert(*tempIntImg);
-            delete tempIntImg;
+            normIm = new Image_t<double>(*from);
+            normIm->normalize(0, 255);
+            resImg = Converter<Image>::convert(*normIm);
+            delete normIm;
             break;
 
         case 2 :
             std::cout << "offset : " << dialog->getOffset() << " \n";
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             offset = dialog->getOffset();
-            resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);
+            resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);  
             delete tempIntImg;
             break;
 
