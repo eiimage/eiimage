@@ -17,6 +17,7 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "PseudoColorDialog.h"
 #include <Operation.h>
 #include <Image.h>
 

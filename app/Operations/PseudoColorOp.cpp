@@ -18,6 +18,7 @@
 */
 
 #include "PseudoColorOp.h"
+#include "PseudoColorDialog.h"
 #include "../Tools.h"
 #include <Converter.h>
 #include <QColor>
@@ -38,10 +39,16 @@ static int getLinearHue(int value, int nhue){
 }
 
 void PseudoColorOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
+
+    PseudoColorDialog* dialog = new PseudoColorDialog(QApplication::activeWindow());
+    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    if(code!=QDialog::Accepted) return;
+
+
     GrayscaleImage* tmpImg = Converter<GrayscaleImage>::convert(*image);
     Image* resImg = new Image(tmpImg->getWidth(), tmpImg->getHeight(), 3);
 
-    int nhue = 255; // changer cette valeur en fonction de la fenêtre de dialog
+    int nhue = dialog->getHue(); // changer cette valeur en fonction de la fenêtre de dialog
 
     int (*getHue)(int a, int b);
 
