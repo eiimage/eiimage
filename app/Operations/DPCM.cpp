@@ -86,10 +86,6 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
         }
     }
 
-    /* mise a 0 du tableau des probas servant pour le calcul de
-    l'entropie de l'erreur de prdiction */
-    for(int i=0 ; i<512 ; i++) {pi[i]= 0.; piq[i]=0;}
-
     /* codage de l'image */
     for(int i=1; i<imgHeight ; i++)
     {
@@ -162,10 +158,6 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             quant_pred_err = quantdef->valueOf(pred_err);
             quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
-            //mise a jour proba pour calcul entropie
-            pi[pred_err+255]++;
-            piq[quant_pred_err+255]++;      /* proba associe a l'erreur de prediction */
-            nbpt++;
 
             quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
@@ -182,25 +174,15 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
         }
     }
 
-    /* calcul de l'entropie de l'image d'erreur de prediction quantifiee */
-    nbpt = imgHeight*imgWidth;
-    for(int i=0 ; i < 512 ; i++)
-    {
-        if(pi[i] != 0) {
-            pi[i] /= nbpt;
-            h -= (double)pi[i] * log((double)pi[i])/log((double)2.0);
-        }
-        if(piq[i] != 0) {
-            piq[i] /= nbpt;
-            hq -= (double)piq[i] * log((double)piq[i])/log((double)2.0);
-        }
-    }
+    
+    double pred_err_entrop = predction_error_image->getEntropy();
+    sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %f\n", pred_err_entrop);
 
-    //reprendre le code de DoubleEntropyOp pour voir si on obtient le même résultat
 
-    /* affichage des rsultats */
-    sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %lf\n",h);
-    sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %lf\n",hq);
+    double quant_pred_err_entrop = quantized_prediction_error_image->getEntropy();
+    sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n", quant_pred_err_entrop);
+
+
     returnval = returnval + buffer;
     returnval = returnval + "\n";
     returnval = returnval + buffer2;

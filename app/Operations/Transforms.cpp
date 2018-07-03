@@ -33,12 +33,9 @@ const double pid2 = 1.57079632679489661923132169163975144209858469968755291;
 const double sqrt2 = 1.414213562373095048801688724209698078569671875376948;
 
 Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {   //TODO : inverser i et j i (ligne) et j (colonne)
-//    int height = image->getHeight();
-//    int width = image->getWidth();
-//    const uint8_t* tabim = image->begin();
-//    double* itab = new double[ image->size() ];
-//    for(unsigned int i = 0; i < image->size(); ++i) itab[i] = 0;
+
     double diag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
+    
     Image_t<double>* resImg = new Image_t<double>(diag+0.5, 90+180, 1, 0.);
 
     for(unsigned int i = 0; i < image->getHeight(); i++) {
@@ -263,8 +260,7 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
 //    sprintf( buffer, "Valeur Max de la matrice d'entre=%d",(int)(max+0.1));
 
 
-    double angleStep = 270. / image->getHeight(); //les angles varient de -90 à +180 = intervalle de longueur 271 degre
-    //double imageDiag = resImg->getWidth() * sqrt(2.);
+    double angleStep = 270. / image->getHeight(); //les angles varient de -90 à +180 = intervalle de longueur 270 degre
     double imageDiag = sqrt(width*width + height*height);
     double rhoStep = imageDiag / (image->getWidth() - 1 );
 
@@ -329,6 +325,7 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
     }
 
     *resImgptr = resStdImg;
+    delete resImg;
     return "";
 }
 

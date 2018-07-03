@@ -38,19 +38,7 @@ EntropyOp::EntropyOp() : Operation(qApp->translate("Operations", "Calcul d'entro
 
 void EntropyOp::operator()(const Image* image, const std::map<const imagein::Image*, std::string>&) {
 
-    double entropy = 0.;
-
-    for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        Histogram histo = image->getHistogram(c);
-        for(int i = 0; i < 256; ++i) {
-            if(histo[i] > 0) {
-                double p = (double)histo[i] / image->getWidth() /image->getHeight();
-                entropy +=  p * log(p);
-            }
-        }
-    }
-
-    entropy = - entropy / log(2);
+    double entropy = image->getEntropy();
     outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1").arg(entropy).toStdString());
 }
 

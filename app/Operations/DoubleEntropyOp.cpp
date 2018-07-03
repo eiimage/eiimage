@@ -38,21 +38,7 @@ DoubleEntropyOp::DoubleEntropyOp() : DoubleOperation(qApp->translate("Operations
 
 void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<const imagein::Image_t<double>*, std::string>&) {
 
-    double entropy = 0.;
-    int min = image->min();
-    int max = image->max();
-    for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        Histogram histo = image->getHistogramForEntropy(c, 511);
-//      for(int i = -255; i < 256 ; ++i) {
-        for(int i = min; i<= max; i++){
-            if(histo[i] > 0) {
-                double p = (double)histo[i] / image->getWidth() /image->getHeight();
-                entropy +=  p * log(p);
-            }
-        }
-    }
-
-    entropy = - entropy / log(2);
+    double entropy = image->getEntropy();
     outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1").arg(entropy).toStdString());
 
 }

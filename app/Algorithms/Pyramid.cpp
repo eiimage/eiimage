@@ -612,35 +612,10 @@ int Pyramid::etage_max(const Image *im)
 ----------------------------------------------------------------------*/
 float Pyramid::entropie2(const uint8_t *tab,int taille_c,int taille_l)
 {
-    int i,j;
-    float pi[256],h=0;
-    int size;
-
-    size=taille_c*taille_l;
-
-/**********************************************************************/
-/*                    module de traitement                            */
-/**********************************************************************/
-
-/* initialisation  0 du tableau pi contenant l'histogramme */
-    for(i=0 ; i<256 ; i++)
-      pi[i] = 0;
-
-/* calcul de l'histogramme de l'image */
-    for(i=0 ; i<taille_l ; i++)
-      for(j=0 ; j<taille_c ; j++)
-         pi[*(tab+ i*taille_c +j)]++;
-
-/* calcul de l'entropie de l'image */
-    for(i=0 ; i<256 ; i++)
-    {
-      if(pi[i] != 0)
-      {
-         pi[i] /= size;
-         h -= (double)pi[i] * log((double)pi[i])/log((double)2.0);
-      }
-    }
-    return(h);
+    Image * tmp = new Image(taille_c, taille_l, 1, tab);
+    float entropy = tmp->getEntropy();
+    delete tmp;
+    return entropy;
 }
 
 /*----------------------------------------------------------------------
