@@ -97,6 +97,8 @@ set(imageinsa_SOURCES
 	Operations/NoiseOp.h
 	Operations/PointOp.cpp
 	Operations/PointOp.h
+	Operations/PseudoColorDialog.cpp
+	Operations/PseudoColorDialog.h
 	Operations/PseudoColorOp.cpp
 	Operations/PseudoColorOp.h
 	Operations/PyramidDialog.cpp
