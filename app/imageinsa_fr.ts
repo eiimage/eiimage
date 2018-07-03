@@ -1164,14 +1164,14 @@ Nombre de classes = %1 </translation>
     <message>
         <location line="+8"/>
         <location/>
-        <location line="+0"/>
+        <location line="+7"/>
         <source>Reconstructed image height : </source>
         <translation>Hauteur de l&apos;image reconstituée : </translation>
     </message>
     <message>
-        <location line="+37"/>
+        <location line="+30"/>
         <location/>
-        <location line="+0"/>
+        <location line="-37"/>
         <source>Reconstructed image width : </source>
         <translation>Largeur de l&apos;image reconstituée : </translation>
     </message>
@@ -1180,9 +1180,9 @@ Nombre de classes = %1 </translation>
         <translation>Taille de l&apos;image reconstruite : </translation>
     </message>
     <message>
-        <location line="-14"/>
+        <location line="+23"/>
         <location/>
-        <location line="+0"/>
+        <location line="-9"/>
         <source>Reconstruction threshold : </source>
         <translation>Seuil de reconstruction : </translation>
     </message>
@@ -1502,7 +1502,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/PseudoColorOp.cpp" line="+28"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Pseudo color</source>
         <translation>Pseudo-couleur</translation>
     </message>
@@ -1894,79 +1894,119 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location filename="Operations/SplitHsvOp.cpp" line="+7"/>
+        <location/>
+        <location line="+0"/>
         <source>The operation cannot be applied on this image</source>
         <translation>L&apos;opération ne peut pas être appliquée sur cette image</translation>
     </message>
     <message>
         <location line="+1"/>
+        <location/>
+        <location line="+0"/>
         <source>The image is not in color.</source>
         <translation>L&apos;image n&apos;est pas en couleur.</translation>
     </message>
     <message>
         <location filename="Operations/UCharConvertDialog.cpp" line="+19"/>
+        <location/>
+        <location line="+19"/>
         <source>Convert to UChar</source>
         <translation>Convertir en UChar</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="-14"/>
+        <location/>
+        <location line="+19"/>
         <source>Crop</source>
         <translation>Rogner</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-19"/>
+        <location/>
+        <location line="+19"/>
         <source>Normalize</source>
         <translation>Normaliser</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-19"/>
+        <location/>
+        <location line="+19"/>
         <source>Add Offset</source>
         <translation>Ajouter un décalage</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-19"/>
+        <location/>
+        <location line="+19"/>
         <source>Scale</source>
         <translation>Echantillonner</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-19"/>
+        <location/>
+        <location line="+19"/>
         <source>Add offset and scale</source>
         <translation>Décaler et échantillonner</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-18"/>
+        <location/>
+        <location line="+19"/>
         <source>Operation</source>
         <translation>Opération</translation>
     </message>
     <message>
         <location filename="Operations/UCharConvertOp.cpp" line="+40"/>
+        <location/>
+        <location line="+0"/>
         <source>UChar converter</source>
         <translation>Convertir en UChar</translation>
     </message>
     <message>
         <location line="+25"/>
+        <location/>
+        <location line="+1"/>
         <location line="+35"/>
         <source>Cropped</source>
         <translation>Rognée</translation>
     </message>
     <message>
-        <location line="-27"/>
+        <location line="-28"/>
+        <location/>
+        <location line="+1"/>
         <source>Normalized</source>
         <translation>Normalisée</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
+        <location/>
+        <location line="+1"/>
         <source>Offset</source>
         <translation>Décalage</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
+        <location/>
+        <location line="+1"/>
         <source>Offset and scaled</source>
         <translation>Décalage et échantillonnée</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
+        <location/>
+        <location line="+1"/>
         <source>Scaled</source>
         <translation>Echantillonnée</translation>
+    </message>
+    <message>
+        <location filename="Operations/PseudoColorDialog.cpp" line="+36"/>
+        <source>Pseudocolor</source>
+        <translation>Pseudocouleur</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Hue</source>
+        <translation>Teinte</translation>
     </message>
 </context>
 <context>
@@ -2086,9 +2126,9 @@ Le débit vaut : %5.2f
 <context>
     <name>PseudoColorOp</name>
     <message>
-        <location filename="Operations/PseudoColorOp.cpp" line="+25"/>
+        <location filename="Operations/PseudoColorOp.cpp" line="+24"/>
         <location/>
-        <location line="+11"/>
+        <location line="+18"/>
         <source>Pseudo color</source>
         <translation>Pseudo-couleur</translation>
     </message>
@@ -3554,7 +3594,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="+3"/>
         <source>Crop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rogner</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -4163,7 +4203,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="+39"/>
         <source>Crop</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rogner</translation>
     </message>
     <message>
         <location line="+1"/>
