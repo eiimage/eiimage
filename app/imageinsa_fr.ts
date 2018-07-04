@@ -936,7 +936,7 @@ Nombre de classes = %1 </translation>
         <location/>
         <location line="+0"/>
         <source>DFT (magnitude)</source>
-        <translation>DFT (magnitude)</translation>
+        <translation>DFT (amplitude)</translation>
     </message>
 </context>
 <context>
