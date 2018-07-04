@@ -1431,8 +1431,8 @@ Number of classes = %1 </translation>
     <message>
         <location line="+21"/>
         <location/>
-        <location line="+0"/>
-        <location filename="Operations/EntropyOp.cpp" line="+54"/>
+        <location line="-14"/>
+        <location filename="Operations/EntropyOp.cpp" line="+42"/>
         <source>Entropy of the image (sum of channels entropy) = %1</source>
         <translation>Entropy of the image (sum of channels entropy) = %1</translation>
     </message>
@@ -1441,7 +1441,7 @@ Number of classes = %1 </translation>
         <translation>Entropy of the image = %1</translation>
     </message>
     <message>
-        <location filename="Operations/EntropyOp.cpp" line="-19"/>
+        <location filename="Operations/EntropyOp.cpp" line="-7"/>
         <location/>
         <location line="+0"/>
         <source>Calcul d&apos;entropie (image standard)</source>
@@ -1831,7 +1831,7 @@ Channel %d :
     <message>
         <location filename="Algorithms/Pyramid.cpp" line="+664"/>
         <location/>
-        <location line="+0"/>
+        <location line="-25"/>
         <location line="+20"/>
         <source>L&apos;entropie de l&apos;etage %d est %1f
 </source>
@@ -1841,7 +1841,7 @@ Channel %d :
     <message>
         <location filename="Operations/Transforms.cpp" line="+468"/>
         <location/>
-        <location line="+1"/>
+        <location line="-2"/>
         <source>
 
 matrice de transformation utilisee : 
@@ -1965,12 +1965,12 @@ Le debit vaut : %5.2f
         <location line="+25"/>
         <location/>
         <location line="+1"/>
-        <location line="+35"/>
+        <location line="+38"/>
         <source>Cropped</source>
         <translation>Cropped</translation>
     </message>
     <message>
-        <location line="-28"/>
+        <location line="-31"/>
         <location/>
         <location line="+1"/>
         <source>Normalized</source>
@@ -1986,26 +1986,34 @@ Le debit vaut : %5.2f
     <message>
         <location line="+6"/>
         <location/>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Offset and scaled</source>
         <translation>Offset and scaled</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+5"/>
         <location/>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Scaled</source>
         <translation>Scaled</translation>
     </message>
     <message>
         <location filename="Operations/PseudoColorDialog.cpp" line="+36"/>
+        <location/>
+        <location line="+0"/>
         <source>Pseudocolor</source>
         <translation>Pseudocolor</translation>
     </message>
     <message>
         <location line="+6"/>
+        <location/>
         <source>Hue</source>
         <translation>Hue</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Number of colors</source>
+        <translation>Number of colors</translation>
     </message>
 </context>
 <context>
@@ -3592,6 +3600,7 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+3"/>
+        <location/>
         <source>Crop</source>
         <translation type="unfinished">Crop</translation>
     </message>
@@ -4201,6 +4210,7 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+39"/>
+        <location/>
         <source>Crop</source>
         <translation type="unfinished">Crop</translation>
     </message>
