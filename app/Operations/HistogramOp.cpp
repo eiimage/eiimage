@@ -25,6 +25,7 @@
 #include <QDoubleSpinBox>
 #include <QDialogButtonBox>
 #include <QApplication>
+#include <Histogram.h>
 
 using namespace std;
 using namespace imagein;
@@ -73,22 +74,16 @@ Image* HistogramOp::equalize( const Image *img ) {
     Image* resImg = new Image(img->getWidth(), img->getHeight(), img->getNbChannels());
 
     for(unsigned int c = 0; c < img->getNbChannels(); ++c) {
-        Histogram hist_data = img->getHistogram(c);
-        double hist_sum[256];
-        long sum = 0;
-        for(int counter=0; counter< 256; counter++ ) {
-            sum = sum + hist_data[counter];
-            hist_sum[counter] = sum;
-        }
-        double area = img->getWidth() * img->getHeight();
-        double Dm = 256; // number of levels in output image
+        
+        CumulatedHistogram hist_sum  = CumulatedHistogram(*img, c);
+        double Dm = 255; // number of levels in output image
         for(unsigned int j = 0; j < img->getHeight(); ++j) {
             for(unsigned int i = 0; i < img->getWidth(); ++i) {
                 double K = img->getPixel(i, j, c);
-                K = Dm / area * hist_sum[(int)K];
+                K = Dm * hist_sum[(int)K];
                 if( K < 0 ) K = 0;
                 if( K > 255 ) K = 255;
-                resImg->setPixel(i, j, c, K);
+                resImg->setPixel(i, j, c,  K);
             }
         }
     }
