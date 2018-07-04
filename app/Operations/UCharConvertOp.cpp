@@ -80,6 +80,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             resImg = Converter<Image>::convertAndOffset(*tempIntImg, &LogMessage, offset);  
             delete tempIntImg;
             windowName = qApp->translate("Operations","Offset").toStdString();
+            outText(LogMessage);
             break;
 
         case 4 :
@@ -87,6 +88,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             resImg = Converter<Image>::convertScaleAndOffset(*tempIntImg, &LogMessage);
             delete tempIntImg;
             windowName = qApp->translate("Operations","Offset and scaled").toStdString();
+            outText(LogMessage);
             break; 
 
         case 3 :
@@ -94,6 +96,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             resImg = Converter<Image>::convertAndScale(*tempIntImg, &LogMessage);
             delete tempIntImg;
             windowName = qApp->translate("Operations","Scaled").toStdString();
+            outText(LogMessage);
             break;
 
         default:
@@ -103,6 +106,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
     }
 
     outImage(resImg, windowName);
+
 }
 
 
