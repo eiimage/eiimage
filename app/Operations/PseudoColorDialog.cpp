@@ -39,7 +39,7 @@ PseudoColorDialog::PseudoColorDialog(QWidget *parent) :
     QFormLayout* layout = new QFormLayout(this);
 
     QHBoxLayout* hLayout = new QHBoxLayout();
-    QLabel* label = new QLabel(qApp->translate("Operations","Hue"));
+    QLabel* label = new QLabel(qApp->translate("Operations","Number of colors"));
     label->setLayout(hLayout);
     _spinBox = new QSpinBox();
     _spinBox->setMinimum(0);
