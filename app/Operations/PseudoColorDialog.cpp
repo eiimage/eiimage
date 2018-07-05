@@ -43,7 +43,7 @@ PseudoColorDialog::PseudoColorDialog(QWidget *parent) :
     label->setLayout(hLayout);
     _spinBox = new QSpinBox();
     _spinBox->setMinimum(0);
-    _spinBox->setMaximum(255);
+    _spinBox->setMaximum(300);
     _spinBox->setValue(255);
     _spinBox->setLayout(hLayout);
 
