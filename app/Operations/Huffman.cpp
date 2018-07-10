@@ -85,14 +85,13 @@ string Huffman::execute( const GrayscaleImage *im ) {
     returnval = returnval + buffer;
 
     codhuffman();
-
     for(i=0 ; i<nbeff ; i++)
     {
         sprintf(c, "%s", chain+i*nbeff);
         reverse (c,c+strlen(c));
         sprintf(buffer, "%s",c);
         returnval = returnval + buffer;
-        sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i)-1,*(Pi+i));
+        sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i),*(Pi+i));
         returnval = returnval + buffer;
     }
     sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f\n")).toUtf8(),nbbit);
@@ -138,6 +137,7 @@ string Huffman::prob_Pi(const GrayscaleImage *im, int nbpt )
     returnval = returnval + buffer;
 
 
+
     Pi = new double[max-min+1];
     indicePi = new short[max-min+1];
 
@@ -172,7 +172,7 @@ string Huffman::prob_Pi(const GrayscaleImage *im, int nbpt )
         {
             *(Pi+nbeff)=(double)p[ind]/(double)nbpt;
             H = - (*(Pi+nbeff)) * log(*(Pi+nbeff))/log((double)2.0)+H;
-            *(indicePi+nbeff) = (short)(ind+1);
+            *(indicePi+nbeff) = (short)(ind+min);
             nbeff++;
         }
     }
