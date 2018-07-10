@@ -39,8 +39,8 @@ DoubleEntropyOp::DoubleEntropyOp() : DoubleOperation(qApp->translate("Operations
 void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<const imagein::Image_t<double>*, std::string>&) {
 
     double entropy = image->getEntropy();
-    outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1").arg(entropy).toStdString());
-
+    outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1\n").arg(entropy).toStdString());
+    outText(qApp->translate("Pas d'échantillonnage choisi : 1\n"));
 }
 
 bool DoubleEntropyOp::needCurrentImg() const {
