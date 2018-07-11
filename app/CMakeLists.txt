@@ -220,17 +220,18 @@ target_link_libraries(imageinsa
 	Qt5::Xml
 	${RandomLib_LIBRARIES}
 )
-
-add_library(libimageinsa STATIC ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
-target_link_libraries(libimageinsa
-	core
-	Qt5::Core
-	Qt5::Widgets
-	Qt5::Gui
-	Qt5::Script
-	Qt5::Xml
-	${RandomLib_LIBRARIES}
-)
+if(!WIN32)
+  add_library(libimageinsa STATIC ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
+  target_link_libraries(libimageinsa
+    core
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::Gui
+    Qt5::Script
+    Qt5::Xml
+    ${RandomLib_LIBRARIES}
+  )
+endif()
 
 add_custom_command(TARGET imageinsa POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
