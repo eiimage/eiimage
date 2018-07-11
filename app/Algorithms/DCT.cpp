@@ -21,6 +21,7 @@
 #include "DCT.h"
 #include "../Tools.h"
 #include <Converter.h>
+#include <iostream>
 
 using namespace std;
 using namespace imagein;
@@ -43,25 +44,29 @@ std::string dct16x16(const imagein::Image *img, imagein::Image_t<double> **resIm
 *     OUVERTURE ET LECTURE DU FICHIER IMAGE ORIGINE
 *
 *----------------------------------------------------------------------*/
-//    tab1 = im;
-    Image_t<double>* tmpImg = Converter<Image_t<double> >::convert(*img);
-//    tabim= new float[size];
-//    choix = v->choice;
-    //printf("\n\nMode de codage  ? :\n");
-  //printf("   - par troncature des coefficients  (rep=1)\n");
-  //printf("   - par matrice d'allocation de bits (rep=2)\n");
-  //printf("Votre choix ? :");
-  //scanf("%d",&choix);
-
-  //PIXEL *p = tab1->get_image_data();
-
-//    for(i=0 ; i<nbl ; i++) {
-//        for(j=0 ; j<nbc ; j++) {
-//          pixel = tab1->GetPixel( j, i );
-//          *(tabim+i*nbc+j) = (float)pixel.red;
-//        }
-//    }
-
+    Image_t<double>* tmpImg;
+    if(img->getWidth() % 16 != 0 || img->getHeight() % 16!= 0){
+        int addcol = 0;
+        int addlign = 0;
+        if(img->getWidth()  % 16 != 0 )
+            addcol = 16 - ( img->getWidth() % 16 );
+        if(img->getHeight()  % 16 != 0 )
+            addlign = 16 - ( img->getHeight() % 16 );
+        
+        tmpImg = new Image_t<double>(img->getWidth() + addcol, img->getHeight() + addlign, img->getNbChannels());
+        for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
+            for(unsigned int i = 0; i < tmpImg->getWidth() ; i++) {
+                for(unsigned int j = 0; j < tmpImg->getHeight() ; j++) {
+                    
+                    tmpImg->setPixel(i, j, c, (double) img->getPixel(min(i, img->getWidth()-1 ), min(j, img->getHeight()-1), c));
+                
+                }
+            }
+        }
+    }
+    else {
+       tmpImg = Converter<Image_t<double> >::convert(*img);
+    }
 /*----------------------------------------------------------------------
 *
 *     CALCUL DES COEFFICIENTS DE LA MATRICE DE TRANSFORMATION
@@ -69,20 +74,17 @@ std::string dct16x16(const imagein::Image *img, imagein::Image_t<double> **resIm
 *----------------------------------------------------------------------*/
     double coef[16];
     cosi(coef);
-
 /*----------------------------------------------------------------------
 *
 *     TRANSFORMATION
 *
 *----------------------------------------------------------------------*/
     dct(tmpImg, coef);
-
 /*----------------------------------------------------------------------
 *
 *     CODAGE
 *
 *----------------------------------------------------------------------*/
-//  printf("\ncodage ...\n");
     if(truncMode) {
         returnval = tronc(tmpImg, truncLimit);
     }
@@ -95,33 +97,6 @@ std::string dct16x16(const imagein::Image *img, imagein::Image_t<double> **resIm
 *     STOCKAGE DE L'IMAGE TRANSFORMEE DANS UN FICHIER
 *
 *----------------------------------------------------------------------*/
-//  max = 0.;
-//  for(i=0 ; i<nbl ; i++)
-//     for(j=0 ; j<nbc ; j++)
-//    {
-//        a = (float)log(fabs((double)(*(tabim+i*nbc+j))) + 1.);
-//      if(a > max) max = a;
-//    }
-
-//    //q = (*result)->get_image_data();
-//    for(i=0 ; i<nbl ; i++)
-//     for(j=0 ; j<nbc ; j++)
-//    {
-//         if( (i%idt)==0 && (j%idt)==0 ) {
-//           pixel.red = (byte)max;
-//             pixel.green = (byte)max;
-//             pixel.blue = (byte)max;
-//             pixel.alpha = 0;
-//             (*result)->SetPixel( j, i, pixel );
-//         }
-//         else {
-//           pixel.red = (byte)(log(fabs((double)(*(tabim+i*nbc+j))) + 1.)*255/max + 0.5);
-//       pixel.green = pixel.red;
-//             pixel.blue = pixel.red;
-//             pixel.alpha = 0;
-//             (*result)->SetPixel( j, i, pixel );
-//         }
-//     }
     *resImg = new Image_t<double>(*tmpImg);
 
 /*----------------------------------------------------------------------
@@ -136,22 +111,8 @@ std::string dct16x16(const imagein::Image *img, imagein::Image_t<double> **resIm
 *     STOCKAGE DE L'IMAGE RESULTAT DANS UN FICHIER
 *
 *----------------------------------------------------------------------*/
-
-//    for(i=0 ; i<nbl ; i++)
-//      for(j=0 ; j<nbc ; j++)
-//      {
-//         value = (short)(*(tabim+i*nbc+j) + 0.5);
-//         if (value > 255) value = 255;
-//         if (value < 0) value = 0;
-//         pixel.red = (byte)value;
-//         pixel.green = (byte)value;
-//         pixel.blue = (byte)value;
-//         pixel.alpha = 0;
-//         (*result_inverse)->SetPixel( j, i, pixel );
-//      }
-
     *invImg = Converter<Image>::convertAndRound(*tmpImg);
-
+    delete tmpImg;
     return returnval;
 }
 
