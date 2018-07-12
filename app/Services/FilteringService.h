@@ -24,8 +24,8 @@
 
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 
-#include "Widgets/FilterChoice.h"
-#include "Widgets/FilterEditor.h"
+#include "../Widgets/FilterChoice.h"
+#include "../Widgets/FilterEditor.h"
 
 #include <QStringList>
 #ifdef __linux__

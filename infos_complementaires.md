@@ -4,7 +4,7 @@
 
 *ImageINSA* se compose de 4 modules de compilation:
  1. *ImageIn*, librairie de traitement d'images
- 2. *GenericInterface*, interface graphitque pour manipuler les images
+ 2. *GenericInterface*, interface graphique pour manipuler les images
  3. *core*, librairie principale fournissant le coeur de métier de *ImageINSA*
  4. *ImageINSA*, executable final
 

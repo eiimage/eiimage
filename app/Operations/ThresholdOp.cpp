@@ -16,7 +16,6 @@ bool ThresholdOp::needCurrentImg() const {
 }
 
 void ThresholdOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
-    
     const GrayscaleImage* img = dynamic_cast<const GrayscaleImage*>(image);
     bool convert = (img == NULL);
     if(convert) {
