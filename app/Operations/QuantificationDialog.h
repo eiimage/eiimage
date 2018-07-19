@@ -35,8 +35,10 @@ public:
     explicit QuantificationDialog(QWidget *parent = 0, QString imgName = QString());
     Quantification getQuantif(const imagein::Image *image, unsigned int c, std::string &, bool * checkOptiQuant);
     Quantification getQuantif();
+    void setValues(int);
+    void setQuantif(int);
 signals:
-    
+
 public slots:
     void methodChanged(int);
     void open();

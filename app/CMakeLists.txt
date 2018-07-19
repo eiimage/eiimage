@@ -134,7 +134,6 @@ set(imageinsa_SOURCES
 	Operations/ThresholdDialog.cpp
 	Operations/ThresholdDialog.h
 	Operations/ThresholdOp.cpp
-	Operations/ThresholdOp.cpp
 	Operations/ThresholdOp.h
 	Operations/Transforms.cpp
 	Operations/Transforms.h
@@ -220,7 +219,6 @@ target_link_libraries(imageinsa
 	Qt5::Xml
 	${RandomLib_LIBRARIES}
 )
-if(!WIN32)
   add_library(libimageinsa STATIC ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
   target_link_libraries(libimageinsa
     core
@@ -231,8 +229,6 @@ if(!WIN32)
     Qt5::Xml
     ${RandomLib_LIBRARIES}
   )
-endif()
-
 add_custom_command(TARGET imageinsa POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E make_directory ${DEPLOY_OUTPUT_DIRECTORY}/lang
 	COMMENT "Create directory ${DEPLOY_OUTPUT_DIRECTORY}/lang")

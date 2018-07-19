@@ -20,8 +20,6 @@
 #include "QuantificationOp.h"
 #include "../Tools.h"
 #include <Converter.h>
-#include "QuantificationDialog.h"
-
 #include <QApplication>
 
 using namespace std;
@@ -30,6 +28,7 @@ using namespace genericinterface;
 
 QuantificationOp::QuantificationOp() : Operation(qApp->translate("Operations", "Quantification").toStdString())
 {
+  _test=false, _quantif=0, _values=2;
 }
 
 
@@ -40,7 +39,7 @@ bool QuantificationOp::needCurrentImg() const {
 string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * quant){
     char buffer[30];
     string output_msg;
-    int val;    
+    int val;
     QString bob(qApp->translate("Operations", "\nCanal%d : \n"));
 
     sprintf(buffer, bob.toUtf8(), c);
@@ -49,10 +48,10 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
     output_msg += QString(qApp->translate("Operations","             Valeurs :  ")).toStdString();
 
     for(int i = 0; i < quant->nbValues(); ++i) {
-        
+
         val =(int)quant->value(i);
         if(i != 0) output_msg += " |  ";
-                
+
         sprintf(buffer, "%d ", val);
         output_msg += buffer;
         if(val < 10) output_msg += " ";
@@ -62,15 +61,15 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
     }
     output_msg += "\n";
     output_msg += QString(qApp->translate("Operations","             Seuils    :       ")).toStdString();
-            
+
     for(int i = 0; i < quant->nbThresholds(); ++i) {
         val =(int)quant->threshold(i);
 
         if(i != 0) output_msg += " |  ";
-                
+
         sprintf(buffer, "%d ", val);
         output_msg += buffer;
-                
+
         if(val < 10) output_msg += " ";
         if(val < 100 ) output_msg += " ";
     }
@@ -81,22 +80,22 @@ string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * qu
 }
 
 string checkOptimumQuantizier(const imagein::Image* image, Quantification * quant, unsigned int c){
-    
+
     float baricenter;
-    float valueCenter; 
+    float valueCenter;
     float centroid = 0.0;
     float neighbor = 0.0;
     int som_lum = 0;
     int nb_points = 0;
     char buffer[100];
-    
+
     Histogram hist = image->getHistogram(c);
     for (int j=1; j<quant->nbThresholds();j++){
         som_lum = 0;
         nb_points = 0;
-        //Calcul des baricentres entre deux seuils  
+        //Calcul des baricentres entre deux seuils
         for(int i= quant->threshold(j-1); i <= quant->threshold(j); i++){
-            som_lum += hist[i]*i;          
+            som_lum += hist[i]*i;
             nb_points += hist[i];
         }
         if(nb_points != 0) baricenter = som_lum/nb_points;
@@ -105,34 +104,34 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
         centroid += abs( baricenter - quant->value(j) ) /( quant->threshold(j) - quant->threshold(j-1) ) * 100;
     }
 
-    //cas spécial 
+    //cas spécial
     if( quant->nbValues() == 2){
         som_lum = 0;
         nb_points = 0;
         for(int i= 0; i <= quant->threshold(0); i++){
-                som_lum += hist[i]*i;          
+                som_lum += hist[i]*i;
                 nb_points += hist[i];
         }
         if(nb_points != 0) baricenter = som_lum/nb_points;
         else baricenter =  (quant->threshold(0))/2;;
         centroid = abs( baricenter - quant->value(0) ) /( quant->threshold(0) ) * 100;
-        
+
         som_lum = 0;
         nb_points = 0;
         for(int i= quant->threshold(0); i <= 255 ; i++){
-                som_lum += hist[i]*i;          
+                som_lum += hist[i]*i;
                 nb_points += hist[i];
             }
         if(nb_points != 0) baricenter = som_lum/nb_points;
-        else baricenter =  255 - quant->threshold(0)/2;    
+        else baricenter =  255 - quant->threshold(0)/2;
         centroid += abs( baricenter - quant->value(1) ) / ( 255 - quant->threshold(0) ) * 100;
     }
     for(int i = 0; i<quant->nbThresholds(); i++){
-        
-        valueCenter = ( quant->value(i) + quant->value(i+1) ) / 2 ; 
+
+        valueCenter = ( quant->value(i) + quant->value(i+1) ) / 2 ;
         neighbor += abs( valueCenter - quant->threshold(i) ) / ( quant->value(i) - quant->value(i+1) ) * 100;
     }
-    
+
     neighbor = neighbor / quant->nbThresholds();
     if( quant->nbValues() == 2) centroid = centroid / 2;
     else centroid = centroid / ( quant->nbThresholds() - 1 );
@@ -151,38 +150,42 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
     string output_msg = "";
     string optiQuant;
 
-    bool checkOptiQuant; 
+    bool checkOptiQuant;
 
     QuantificationDialog* dialog;
+
     if(image != NULL) {
         QString imgName = QString::fromStdString(imgList.find(image)->second);
-        
         dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
     }
     else {
         dialog = new QuantificationDialog(QApplication::activeWindow());
     }
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    if(_test){
+      dialog->setQuantif(_quantif);
+      dialog->setValues(_values);
+    }else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
 
-
-    if(code!=QDialog::Accepted) return;
 
     if(image != NULL) {
-        
+
         Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-            
-            
+
+
             Quantification quantification = dialog->getQuantif(image, c, quantType, &checkOptiQuant);
-            
+
             //Generate the text to print in the information window
             output_msg += quantificationOpLog(c, &quantification);
 
 
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
-                    
+
                     const Image::depth_t value = image->getPixelAt(i, j, c);
                     resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
@@ -191,8 +194,8 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
                 optiQuant += checkOptimumQuantizier(image, &quantification, c);
         }
 
-        
-        
+
+
         outText(quantType);
         outText(output_msg);
         if(checkOptiQuant){
@@ -217,3 +220,14 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
 
 }
 
+void QuantificationOp::setTest(bool a){
+  _test=a;
+}
+
+void QuantificationOp::setQuantif(int a){
+  _quantif=a;
+}
+
+void QuantificationOp::setValues(int a ){
+  _values = a;
+}

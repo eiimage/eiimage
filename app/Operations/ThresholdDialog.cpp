@@ -35,7 +35,6 @@ void ThresholdDialog::marker2Moved(const QPointF& point) {
 void ThresholdDialog::spinbox1Changed(int i) {
     _marker1->setXValue(i);
      updatePreview();
-
 }
 
 void ThresholdDialog::spinbox2Changed(int i) {
@@ -54,11 +53,18 @@ void ThresholdDialog::doubleThreshold(bool activate) {
     }
 }
 
+void ThresholdDialog::setSpinBox1(int a){
+  _spinbox1->setValue(a);
+}
+
+void ThresholdDialog::setSpinBox2(int a){
+  _spinbox2->setValue(a);
+}
+
 void ThresholdDialog::otsu() {
     int threshold = Otsu_t<GrayscaleImage::depth_t>::computeThreshold(_image);
     _marker1->setXValue(threshold);
     _spinbox1->setValue(threshold);
-
 }
 
 void ThresholdDialog::updatePreview(){
@@ -128,7 +134,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     box2layout->addWidget(spin2label);
     box2layout->addWidget(_spinbox2);
     Vboxlayout->addLayout(box2layout);
-    
+
     QHBoxLayout* radiolayout = new QHBoxLayout();
     QLabel* radioLabel = new QLabel(tr("Color between thresholds :"));
     QRadioButton* whiteButton = new QRadioButton(tr("White"));
@@ -152,7 +158,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
     _marker1->setLinePen(QPen(Qt::black));
     _marker1->setXValue(127);
     _marker1->attach(plot);
-    
+
     _marker2 = new QwtPlotMarker();
     _marker2->setLineStyle(QwtPlotMarker::VLine);
     _marker2->setLinePen(QPen(Qt::black));
@@ -175,7 +181,7 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
 
 
     layout->setSizeConstraint(QLayout::SetMinimumSize);
-    
+
     QPushButton *okButton = new QPushButton(tr("Validate"), this);
     okButton->setDefault(true);
     Vboxlayout->addWidget(okButton);
@@ -207,4 +213,3 @@ ThresholdDialog::ThresholdDialog(const GrayscaleImage* image, bool converted)  :
 
 
 }
-
