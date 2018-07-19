@@ -33,6 +33,7 @@ using namespace imagein;
 
 RotateOp::RotateOp() : Operation(qApp->translate("Operations", "Rotation").toStdString())
 {
+  _test=false, _angle=0.00;
 }
 
 bool RotateOp::needCurrentImg() const {
@@ -84,9 +85,13 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-
-    if(code!=QDialog::Accepted) return;
+    if(_test){
+      angleSpinBox->setValue(_angle);
+    }
+    else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
 
     double angle = angleSpinBox->value() * acos(0)/90;
     Image::depth_t fillValue = valueSpinBox->value();
@@ -151,4 +156,12 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
 
     QString name = qApp->translate("Rotation", "rotated %1").arg(angleSpinBox->value());
     this->outImage(resImg, name.toStdString());
+}
+
+void RotateOp::setTest(bool a){
+  _test =a;
+}
+
+void RotateOp::setAngle(double a){
+  _angle=a;
 }

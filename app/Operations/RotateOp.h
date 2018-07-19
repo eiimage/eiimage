@@ -43,6 +43,14 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    void setTest(bool);
+
+    void setAngle(double);
+
+private:
+    bool _test;
+    double _angle;
 };
 
 #endif // ROTATEOP_H
