@@ -42,86 +42,15 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {   //TODO : in
         for(unsigned int j = 0; j < image->getWidth(); j++) {
 
             if(image->getPixelAt(j, i) == 255) {
-
-                int i1 = i;
-
-                for(unsigned int j1 = j+1; j1 < image->getWidth(); j1++) {
-
-                    if(image->getPixelAt(j1, i1) == 255) {
-
-                        //passage dans le repere x horieontal, y vertical et origine en bas à gauche
-                        const double x0 = j;
-                        const double y0 = image->getHeight() -i;
-                        const double x1 = j1;
-                        const double y1 = image->getHeight()-i1;
-
-                        //calcul de la droite passant par les deux points
-                        const double l0 = sqrt((double)((y0-y1)*(y0-y1) + (x0-x1)*(x0-x1)));
-                        const double l1 = fabs((double)(x0*y1 - x1*y0));
-                        const double rho = l1/l0;
-                        double y2;
-                        const int j2 = rho + 0.5;
-                        double theta;
-                        double thetadeg;
-                        if(x0==x1){
-                            theta = 0;
-                            //Log::info("x0==x1");
-
-                        }else{
-                            //Log::info("x0!=x1");
-                            theta = atan((y1-y0) / (x1-x0))+ pid2;
-
-                            //cas ou theta entre 0 et -pi/2
-                            //Calcul de l'ordonnee a l'origine
-                            int ordorig = y0 - x0 * ((y1-y0) / (x1-x0));
-
-                            //Log::info("theta = "+std::to_string(theta)+"atan = "+std::to_string(atan((y1-y0) / (x1-x0))+pid2)+ " ; ordorig = "+std::to_string(ordorig));
-                            if(ordorig < 0 && ((y1-y0) / (x1-x0)) > 0) theta = theta - pi;
-
-                        }
-                        //Passage de radian a degre
-                        thetadeg = theta*(180/pi);
-                        //Coordonées du point a colorier dans l'espace de Hough
-                        //Espace de Hough :
-                        //Origine en bas a gauche
-                        //Rho horizontal vers la droite de 0 a imageDiag
-                        //Theta vertical vers le haut de -90 a 180
-                        int rhoStep = 1;
-                        int angleStep = 1;
-                        int jDisplayRho = round(rho / rhoStep);
-                        int iDisplayTheta = round((180-thetadeg) / angleStep);
-                        //Log::info("x0 = "+std::to_string(x0)+ "; x1 = "+std::to_string(x1)+" ; y0 = "+std::to_string(y0)+" ; y1 = "+std::to_string(y1)+" ; Rho = "+std::to_string(rho)+" ; Theta = "+std::to_string(thetadeg)+" ; ThetaDisplay = "+std::to_string(iDisplayTheta));
-
-
-
-//                            y2 = x1 != x0 ? atan((y1-y0) / (x1-x0))+ pid2 : y1 > y0 ? pi : pid2;//pid2 dans les deux cas (?)
-//                            theta = (int)(180-((y2 / pi) * 180. +180 + 0.5)) +1;//conversion en entier + modulo 180
-                        //theta = (int) ((y2/pi)*180);
-
-
-
-
-//                            y2 = (x1 != x0) ? atan((y1-y0) / (x1-x0)) + pid2 : y1 > y0 ? pi : pid2;
-//                            theta = (int)(180-((y2 / pi) * 180. +180 + 0.5)) +1;
-//                            //theta = (int) (y2*(pi/180));
-//                            //Coordonées du point a colorier dans l'espace de Hough
-//                            //Espace de Hough :
-//                            //Origine en bas a gauche
-//                            //Rho horizontal vers la droite de 0 a imageDiag
-//                            //Theta vertical vers le haut de -90 a 180
-//                            int jDisplayRho = round(j2);
-//                            int iDisplayTheta = round(theta+180);
-
-
-                        resImg->pixelAt(jDisplayRho, iDisplayTheta, 0)++;
-//                            resImg->setPixelAt(jDisplayRho, iDisplayTheta, resImg->getPixelAt(jDisplayRho, iDisplayTheta) + 1.);
-
-                        //resImg->setPixelAt(j2, theta, resImg->getPixelAt(j2, theta) + 1.);
-                    }
-                }
-
-                for(unsigned int i1 = i+1; i1 < image->getHeight(); i1++) {
+                bool firstlign = true;
+                for(unsigned int i1 = i; i1 < image->getHeight(); i1++) {
                     for(unsigned int j1 = 0; j1 < image->getWidth(); j1++) {
+                        
+                        if(firstlign){
+                            firstlign = false;
+                            j1 = j+1;
+                        }
+
                         if(image->getPixelAt(j1, i1) == 255) {
                             const double x0 = j;
                             const double y0 = image->getHeight()-i;//-i
