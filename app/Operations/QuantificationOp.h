@@ -22,6 +22,7 @@
 
 #include <Operation.h>
 #include "Quantification.h"
+#include "QuantificationDialog.h"
 class QuantificationOp : public Operation
 {
 public:
@@ -34,6 +35,17 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    void setTest(bool);
+
+    void setQuantif(int);
+
+    void setValues(int);
+
+private:
+    bool _test;
+    int _quantif;
+    int _values;
 };
 
 #endif // QUANTIFICATIONOP_H
