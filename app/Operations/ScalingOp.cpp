@@ -34,6 +34,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QtScript/QScriptEngine>
+#include <QDoubleSpinBox>
 
 using namespace std;
 using namespace imagein;
@@ -41,6 +42,7 @@ using namespace genericinterface;
 
 ScalingOp::ScalingOp() : GenericOperation(qApp->translate("Operations", "Scaling").toStdString())
 {
+  _test=false, _interp=0, _xfactor=1., _yfactor=1.;
 }
 
 bool ScalingOp::needCurrentImg() const {
@@ -59,12 +61,11 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);
 
-    QLineEdit* xScaleBox = new QLineEdit();
-    QLineEdit* yScaleBox = new QLineEdit();
-//    xScaleBox->setRange(0, 100);
-//    yScaleBox->setRange(0, 100);
-    xScaleBox->setText("1");
-    yScaleBox->setText("1");
+    QDoubleSpinBox* xScaleBox = new QDoubleSpinBox();
+    QDoubleSpinBox* yScaleBox = new QDoubleSpinBox();
+
+    xScaleBox->setValue(1.0);
+    yScaleBox->setValue(1.0);
 
     QComboBox* algoBox = new QComboBox();
     algoBox->addItem(qApp->translate("ScalingOp", "Nearest neighboor (standard)"));
@@ -80,9 +81,16 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-
-    if(code!=QDialog::Accepted) return;
+    if(_test){
+      xScaleBox->setValue(_xfactor);
+      yScaleBox->setValue(_yfactor);
+      algoBox->setCurrentIndex(_interp);
+            QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    }
+    else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
 
     Interpolation inter;
     switch(algoBox->currentIndex()) {
@@ -92,26 +100,21 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
         default: inter = NearestInterpolation; break;
     }
 
-    QScriptEngine scriptEngine;
-    QScriptValue xScriptValue = scriptEngine.evaluate(xScaleBox->text());
-    QScriptValue yScriptValue = scriptEngine.evaluate(yScaleBox->text());
-    double xValue = xScriptValue.toNumber();
-    double yValue = yScriptValue.toNumber();
     if(currentWnd->isStandard()) {
         const Image* image = static_cast<const StandardImageWindow*>(currentWnd)->getImage();
         Image* resImg = NULL;
         switch(inter) {
             case NearestInterpolation:
-                resImg = scale<Image::depth_t, Nearest>(image, xValue, yValue);
+                resImg = scale<Image::depth_t, Nearest>(image, xScaleBox->value(), yScaleBox->value());
                 break;
             case BilinearInterpolation:
-                resImg = scale<Image::depth_t, Bilinear>(image, xValue, yValue);
+                resImg = scale<Image::depth_t, Bilinear>(image, xScaleBox->value(), yScaleBox->value());
                 break;
             case ParabolicInterpolation:
-                resImg = scale<Image::depth_t, Parabolic>(image, xValue, yValue);
+                resImg = scale<Image::depth_t, Parabolic>(image, xScaleBox->value(), yScaleBox->value());
                 break;
             case SplineInterpolation:
-                resImg = scale<Image::depth_t, Spline>(image, xValue, yValue);
+                resImg = scale<Image::depth_t, Spline>(image, xScaleBox->value(), yScaleBox->value());
                 break;
         }
         if(resImg != NULL) {
@@ -125,7 +128,7 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
     }
     else if(currentWnd->isDouble()) {
         const Image_t<double>* image = static_cast<const DoubleImageWindow*>(currentWnd)->getImage();
-        Image_t<double>* resImg = scale<double, Nearest>(image, xValue, yValue);
+        Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBox->value(), yScaleBox->value());
         outDoubleImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
     }
 }
@@ -195,27 +198,6 @@ Image_t<D> *ScalingOp::scale(const Image_t<D> *image, double xScale, double ySca
    delete tmpImg;
    delete tmpImg2;
    return resImg;
-
-//   for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-//       for(unsigned int j = 0; j < image->getHeight(); ++j) {
-//           for(unsigned int i = 0; i < image->getWidth(); ++i) {
-//               unsigned int x = i * xScale;
-//               unsigned int y = j * yScale;
-////                resImg->setPixelAt(x, y, c, image->getPixelAt(i, j, c));
-//                unsigned int dx = floor( (i+1) * xScale) - floor( i * xScale );
-//                unsigned int dy = floor( (j+1) * yScale) - floor( j * yScale );
-//                bilinearInterpolation(image, resImg, i, j, c, x, y, dx, dy);
-////                for(unsigned int k = 0; k < dx; ++k) {
-////                    for(unsigned int l = 0; l < dy; ++l) {
-////                        resImg->setPixelAt(x + k, y + l, c, image->getPixelAt(i, j, c));
-////                    }
-////                }
-//           }
-//       }
-//   }
-
-//   return resImg;
-
 }
 
 template<typename D>
@@ -310,4 +292,20 @@ void ScalingOp::Spline<D>::interpolate(typename Image_t<D>::ConstLine src, typen
         double c = 10. * f0 + 4. * (fp1 + fm1) - (fp2 +fm2);
         dst[j] = c / 16.;
     }
+}
+
+void ScalingOp::setTest(bool a){
+  _test = a;
+}
+
+void ScalingOp::setInterpolation(int a){
+  _interp = a;
+}
+
+void ScalingOp::setXFactor(double a){
+  _xfactor = a;
+}
+
+void ScalingOp::setYFactor(double a){
+  _yfactor = a;
 }

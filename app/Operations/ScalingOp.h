@@ -53,8 +53,22 @@ public:
     template<typename D, template<typename> class I>
     static imagein::Image_t<D>* scale(const imagein::Image_t<D>* image, double xScale, double yScale);
 
+    void setTest(bool);
+
+    void setInterpolation(int);
+
+    void setXFactor(double);
+
+    void setYFactor(double);
+
 //    template<typename D>
 //    static void linearFill(imagein::Image_t<D>
+private:
+    bool _test;
+    int _interp;
+    double _xfactor;
+    double _yfactor;
+
 };
 
 #endif // SCALINGOP_H
