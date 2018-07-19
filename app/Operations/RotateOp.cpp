@@ -45,11 +45,11 @@ struct Point {
     Point(int x_=0, int y_=0) : x(x_), y(y_) {}
 };
 
-inline Point rotatePoint(Point toRotate, double sin, double cos)
+inline Point rotatePoint(Point toRotate, Point rotatePoint, double sin, double cos)
 {
     Point returnval;
-    returnval.x = ((double)toRotate.x) * cos + ((double)toRotate.y) * sin;
-    returnval.y = ((double)toRotate.y) * cos - ((double)toRotate.x) * sin;
+    returnval.x = ((double) (toRotate.x - rotatePoint.x)) * cos + ((double) (toRotate.y - rotatePoint.y)) * sin  + rotatePoint.x;
+    returnval.y = ((double) (toRotate.y - rotatePoint.y)) * cos - ((double) (toRotate.x - rotatePoint.x))* sin + rotatePoint.y;
     return returnval;
 }
 
@@ -107,13 +107,13 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
 
     // Calculate the size of the new bitmap
     Point rotation_point;
-    rotation_point.x = 0;
-    rotation_point.y = 0;
+    rotation_point.x = img->getWidth()/2;
+    rotation_point.y = img->getHeight()/2;
 
-    Point p1 = rotatePoint(Point(0,0), sin_angle, cos_angle);
-    Point p2 = rotatePoint(Point(img->getWidth()-1,0), sin_angle, cos_angle);
-    Point p3 = rotatePoint(Point(0,img->getHeight()-1), sin_angle, cos_angle);
-    Point p4 = rotatePoint(Point(img->getWidth()-1,img->getHeight()-1), sin_angle, cos_angle);
+    Point p1 = rotatePoint(Point(0,0), rotation_point, sin_angle, cos_angle);
+    Point p2 = rotatePoint(Point(img->getWidth()-1,0), rotation_point,  sin_angle, cos_angle);
+    Point p3 = rotatePoint(Point(0,img->getHeight()-1), rotation_point, sin_angle, cos_angle);
+    Point p4 = rotatePoint(Point(img->getWidth()-1,img->getHeight()-1), rotation_point, sin_angle, cos_angle);
 
     int min_x = min(min(p1.x,p2.x),min(p3.x,p4.x));
     int max_x = max(max(p1.x,p2.x),max(p3.x,p4.x));
@@ -128,23 +128,15 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
     Image *resImg = new Image(nWidth, nHeight, img->getNbChannels(), fillValue);
 
     Point source_point;
-    for(unsigned int c = 0; c < resImg->getNbChannels(); ++c) {
-        for(unsigned int hcounter=0;hcounter<nHeight;hcounter++)  {
-            for(unsigned int wcounter=0;wcounter<nWidth;wcounter++)  {
-
-                source_point.x = wcounter + min_x;
-                source_point.y = hcounter + min_y;
-                source_point = rotatePoint(source_point,sin_neg_ang,cos_neg_ang);
-                source_point.x = source_point.x + rotation_point.x;
-                source_point.y = source_point.y + rotation_point.y;
-
-                if(     (source_point.x>=0)
-                        &&(source_point.x<Width)
-                        &&(source_point.y>=0)
-                        &&(source_point.y<Height)) {
-                    resImg->setPixel(wcounter,hcounter,c, img->getPixel(source_point.x,source_point.y, c));
+    for(unsigned int c = 0; c < resImg->getNbChannels(); ++c){
+        for(unsigned int i = 0; i<resImg->getWidth(); i++){
+            for(unsigned int j = 0; j<resImg->getHeight(); j++){
+            
+                source_point = rotatePoint(Point(i,j), rotation_point, sin_neg_ang, cos_neg_ang );
+                try {
+                    resImg->setPixel(i,j, c,img->getPixel(source_point.x,source_point.y,c));
                 }
-
+	            catch(std::out_of_range){}
             }
         }
     }

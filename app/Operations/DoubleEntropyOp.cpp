@@ -40,7 +40,7 @@ void DoubleEntropyOp::operator()(const Image_t<double>* image, const std::map<co
 
     double entropy = image->getEntropy();
     outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1\n").arg(entropy).toStdString());
-    outText(qApp->translate("Pas d'échantillonnage choisi : 1\n"));
+    outText(qApp->translate("Operations", "Pas d'échantillonnage choisi : 1\n").toStdString());
 }
 
 bool DoubleEntropyOp::needCurrentImg() const {
