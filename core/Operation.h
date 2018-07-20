@@ -96,7 +96,6 @@ virtual bool needCurrentImg() const = 0;
 virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const = 0;
 
 
-
 protected:
 
 
@@ -136,6 +135,7 @@ void outText(std::string);
 std::string _name;     /**< The name of the operation */
 genericinterface::WindowService* _ws;     /**< A pointer to the window service, only valid inside the function call operator */
 genericinterface::ImageWindow* _curImgWnd;     /**< A pointer to the current image window, only valid inside the function call operator */
+
 private:
 /**
  * @brief Private method used to output an ImageWindow, this method is called inside outImage and outDoubleImage.

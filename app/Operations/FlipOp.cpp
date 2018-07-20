@@ -63,4 +63,3 @@ void FlipOp::operator()(const imagein::Image* image, const std::map<const imagei
 
     this->outImage(resImg, name.toStdString());
 }
-
