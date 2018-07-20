@@ -10,6 +10,7 @@ using namespace std;
 using namespace imagein;
 
 TranslateOp::TranslateOp() : Operation(qApp->translate("Operations", "Translation").toStdString()) {
+  _test=false, _xval=0, _yval=0;
 }
 
 bool TranslateOp::needCurrentImg() const {
@@ -49,9 +50,13 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-
-    if(code!=QDialog::Accepted) return;
+    if(_test){
+      xSpinBox->setValue(_xval);
+      ySpinBox->setValue(_yval);
+    }else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
 
     int dx = xSpinBox->value();
     int dy = ySpinBox->value();
@@ -85,4 +90,16 @@ void TranslateOp::operator()(const Image* img, const map<const Image*, string>& 
     QString name = qApp->translate("TranslateOp", "Translated %1:%2").arg(dx).arg(dy);
     this->outImage(resImg, name.toStdString());
     return;
+}
+
+void TranslateOp::setTest(bool a){
+  _test=a;
+}
+
+void TranslateOp::setXVal(int a){
+  _xval=a;
+}
+
+void TranslateOp::setYVal(int a){
+  _yval=a;
 }
