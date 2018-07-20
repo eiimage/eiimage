@@ -33,7 +33,7 @@ const double pi = 3.1415926535897932384626433832795;
 const double pid2 = 1.57079632679489661923132169163975144209858469968755291;
 const double sqrt2 = 1.414213562373095048801688724209698078569671875376948;
 
-Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {   //TODO : inverser i et j i (ligne) et j (colonne)
+Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {   
 
     double diag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
     
@@ -187,7 +187,6 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
     
     //Algorithme de traitement
 
-    int cmpt = 0;
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
         for(unsigned int i = 0; i < image->getHeight(); ++i) {
             for(unsigned int j = 0; j < image->getWidth(); ++j) {
@@ -195,13 +194,12 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
                 int n = image->getPixelAt(j, i, c);
                 if(n >= threshold)
                 {
-                    cmpt++;
                     double angle = pi * (j * angleStep - 90) / 180 ; 
                     double rho = rhoStep * i - imageDiag;
                     double sinte = sin(angle);
                     double coste = cos(angle);
 
-                    //Construction de la droite d'quation rho = x*coste + y*sinte
+                    //Construction de la droite d'equation rho = x*coste + y*sinte
                     for(unsigned int jj = 0; jj < height; ++jj) {
                         double x = jj;
                         double y = (rho - x*coste)/sinte;
@@ -223,9 +221,6 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
             }
         }
     }
-
-//        sprintf( tampon,"\nNombre de droites traces=%d",cmpt);
-//        strcat( buffer, tampon);
 
     //On applique une mise à l'echelle de l'image pour mettre la valeur max a 255
     std::cout << resImg->max() << std::endl;
