@@ -43,6 +43,7 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
         for(unsigned int j = 0; j < image->getWidth(); j++) {
 
             if(image->getPixelAt(j, i) == 255) {
+                
                 bool firstlign = true;
                 for(unsigned int i1 = i; i1 < image->getHeight(); i1++) {
                     for(unsigned int j1 = 0; j1 < image->getWidth(); j1++) {
@@ -91,14 +92,12 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
                             //Origine au centre
                             //Rho vertical vers la droite de -imageDiag a imageDiag
                             //Theta horizontale vers le haut de -90 à 90
-                            int rhoStep = 1;
-                            int angleStep = 1;
                             if(thetadeg > 90){
                                 thetadeg = thetadeg - 180;
                                 rho = -rho;
                             }
-                            int jDisplayRho = round(( rho + diag )/ rhoStep) ;
-                            int iDisplayTheta = round((thetadeg + 90 ) / angleStep);
+                            int jDisplayRho = rho + diag;
+                            int iDisplayTheta = thetadeg + 90;
                             
 
                             resImg->pixelAt(iDisplayTheta, jDisplayRho, 0)++;
@@ -131,7 +130,7 @@ Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double
                     int x = i;
                     int y = j;
                     //Parcours de tous les angles possibles dans l'image
-                    for(double te=-90; te <= 180; te += angleStep) // on parcourt la matrice
+                    for(double te=-90; te <180; te += angleStep) // on parcourt la matrice
                     {
                         const double coste = cos(te * pi / 180.);
                         double sinte = sin(te * pi / 180.);
