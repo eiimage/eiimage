@@ -49,8 +49,8 @@ struct Point {
 inline Point rotatePoint(Point toRotate, Point rotatePoint, double sin, double cos)
 {
     Point returnval;
-    returnval.x = ((double) (toRotate.x - rotatePoint.x)) * cos + ((double) (toRotate.y - rotatePoint.y)) * sin  + rotatePoint.x;
-    returnval.y = ((double) (toRotate.y - rotatePoint.y)) * cos - ((double) (toRotate.x - rotatePoint.x))* sin + rotatePoint.y;
+    returnval.x = ((double) (toRotate.x - rotatePoint.x)) * cos + ((double) (toRotate.y - rotatePoint.y)) * sin  + rotatePoint.x + 0.5;
+    returnval.y = ((double) (toRotate.y - rotatePoint.y)) * cos - ((double) (toRotate.x - rotatePoint.x))* sin + rotatePoint.y + 0.5;
     return returnval;
 }
 
@@ -119,16 +119,18 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
     Point p2 = rotatePoint(Point(img->getWidth()-1,0), rotation_point,  sin_angle, cos_angle);
     Point p3 = rotatePoint(Point(0,img->getHeight()-1), rotation_point, sin_angle, cos_angle);
     Point p4 = rotatePoint(Point(img->getWidth()-1,img->getHeight()-1), rotation_point, sin_angle, cos_angle);
-
-    int min_x = min(min(p1.x,p2.x),min(p3.x,p4.x));
-    int max_x = max(max(p1.x,p2.x),max(p3.x,p4.x));
-    int min_y = min(min(p1.y,p2.y),min(p3.y,p4.y));
-    int max_y = max(max(p1.y,p2.y),max(p3.y,p4.y));
-
+    
+    int min_x = 0;
+    int min_y = 0;
     if(expandBox->isChecked()) {
+        min_x = min(min(p1.x,p2.x),min(p3.x,p4.x));
+        int max_x = max(max(p1.x,p2.x),max(p3.x,p4.x));
+        min_y = min(min(p1.y,p2.y),min(p3.y,p4.y));
+        int max_y = max(max(p1.y,p2.y),max(p3.y,p4.y));
         nWidth = abs(max_x-min_x)+1;
         nHeight= abs(max_y-min_y)+1;
     }
+
 
     Image *resImg = new Image(nWidth, nHeight, img->getNbChannels(), fillValue);
 
@@ -137,7 +139,7 @@ void RotateOp::operator()(const Image* img, const map<const Image*, string>& img
         for(unsigned int i = 0; i<resImg->getWidth(); i++){
             for(unsigned int j = 0; j<resImg->getHeight(); j++){
             
-                source_point = rotatePoint(Point(i,j), rotation_point, sin_neg_ang, cos_neg_ang );
+                source_point = rotatePoint(Point(i+min_x,j+min_y), rotation_point, sin_neg_ang, cos_neg_ang );
                 try {
                     resImg->setPixel(i,j, c,img->getPixel(source_point.x,source_point.y,c));
                 }
