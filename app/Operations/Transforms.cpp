@@ -116,7 +116,7 @@ Image_t<double>* Transforms::hough(const GrayscaleImage *image ) {
 Image_t<double>* Transforms::hough2(const Image *image, double angleStep, double rhoStep) {
 
     double imageDiag = sqrt(image->getWidth()*image->getWidth() + image->getHeight()*image->getHeight());
-    Image_t<double>* resImg = new Image_t<double>( 181 / angleStep, (1. + imageDiag * 2) / rhoStep, image->getNbChannels(), 0.);
+    Image_t<double>* resImg = new Image_t<double>( 180 / angleStep + 1 , ( imageDiag * 2) / rhoStep + 1, image->getNbChannels(), 0.);
 
 
     for(unsigned int c = 0; c < image->getNbChannels(); c++) {
@@ -183,7 +183,7 @@ string Transforms::hough2_inverse(const Image_t<double> *image, Image** resImgpt
 
     double angleStep = 180. / (image->getWidth() - 1) ; 
     double imageDiag = sqrt(width*width + height*height);
-    double rhoStep = imageDiag / ( (image->getHeight() - 1 ) /2 );
+    double rhoStep = imageDiag * 2 / (image->getHeight() - 1);
     
     //Algorithme de traitement
 
