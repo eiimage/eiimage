@@ -376,20 +376,24 @@ void FilterChoice::validate()
       msgBox.setDefaultButton(QMessageBox::Ok);
       msgBox.exec();
   }else{
-      switch(_blurChoices->currentIndex())
-      {
-        case 0:
-          _filtering = new Filtering(Filtering::uniformBlur(num));
-          break;
-        case 1:
-          _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
-          break;
-        case 2:
-          _filtering = new Filtering(Filtering::prewitt(num));
-          break;
-        default:
-          _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
+      if(!_customButton->isChecked()){
+          switch(_blurChoices->currentIndex())
+          {
+            case 0:
+              _filtering = new Filtering(Filtering::uniformBlur(num));
+              break;
+            case 1:
+              _filtering = new Filtering(Filtering::gaussianBlur(num, _stdDevBox->value()));
+              break;
+            case 2:
+              _filtering = new Filtering(Filtering::prewitt(num));
+              break;
+            default:
+              _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
+          }
       }
+      else
+          _filtering = new Filtering(_filters[_blurChoices->currentIndex()]);
 
       switch(_policyChoices->currentIndex())
       {
@@ -435,14 +439,9 @@ void FilterChoice::deleteFilter()
   if(msgBox.exec() == QMessageBox::Yes)
   {
     QString name = _blurChoices->itemText(_blurChoices->currentIndex());
-    if(_blurChoices->currentIndex()==0){
-        _blurChoices->setCurrentIndex(_blurChoices->currentIndex());
-        _blurChoices->removeItem(_blurChoices->currentIndex());
-    }else{
-        _blurChoices->setCurrentIndex(_blurChoices->currentIndex()-1);
-        _blurChoices->removeItem(_blurChoices->currentIndex()+1);
-    }
-    QFile file("filters.xml");
+    _blurChoices->removeItem(_blurChoices->currentIndex());
+    _blurChoices->setCurrentIndex(0);
+    QFile file(_path.toUtf8());
     if(file.exists())
     {
       QDomDocument doc("");
@@ -472,6 +471,7 @@ void FilterChoice::deleteFilter()
       }
     }
   }
+  this->updateBlur(true);
 }
 
 /**
