@@ -152,6 +152,16 @@ void FilterChoice::initUI()
     _stdDevLabel->setVisible(false);
     _stdDevBox->setVisible(false);
 
+    QCheckBox* checkBox_2 = new QCheckBox(tr("Normalisation des coefficients"));
+    QHBoxLayout* hboxlayout = new QHBoxLayout();
+    _spinbox = new QDoubleSpinBox();
+    _spinbox->setValue(0);
+    _spinbox->setEnabled(false);
+    _label_3 = new QLabel(tr("Facteur de normalisation :"));
+    confLayout->addRow(checkBox_2);
+    confLayout->addRow(_label_3, _spinbox);
+
+
     QGroupBox* radioBox = new QGroupBox(tr("Resulting image type"));
     _stdResButton = new QRadioButton(tr("UChar"));
     _dblResButton = new QRadioButton(tr("Double"));
@@ -179,12 +189,13 @@ void FilterChoice::initUI()
 
     mainLayout->addWidget(leftWidget);
 
+    QObject::connect(checkBox_2, SIGNAL(toggled(bool)), this, SLOT(showNormalisationOpt(bool)));
     QObject::connect(_customButton, SIGNAL(toggled(bool)), this, SLOT(showCustom(bool)));
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_filterPathSelect, SIGNAL(clicked()), this, SLOT(openFile()));
     QObject::connect(_stdResButton, SIGNAL(toggled(bool)), this, SLOT(updateOptions(bool)));
-
+    QObject::connect(_spinbox, SIGNAL(valueChanged(double)), this, SLOT(displayNormalisation(double)));
 
     QWidget* rightWidget = new QWidget();
     QVBoxLayout* rightLayout = new QVBoxLayout(rightWidget);
@@ -346,6 +357,8 @@ void FilterChoice::showCustom(bool a){
 void FilterChoice::currentBlurChanged(int)
 {
   updateDisplay();
+  if(_spinbox->isEnabled())
+    updateNormValue();
 }
 
 /**
@@ -557,6 +570,7 @@ void FilterChoice::updateDisplay()
   }
   
   height = 0;
+  char buffer[20];
   for(unsigned int i = 0; i < filters.size(); i++)
   {
     for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
@@ -564,7 +578,12 @@ void FilterChoice::updateDisplay()
       for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
       {
         double value = filters[i]->getPixelAt(k, j);
-        QTableWidgetItem* item = new QTableWidgetItem(QString::number(value));
+        QTableWidgetItem* item;
+        if(_spinbox->isEnabled()){
+            sprintf(buffer, "%g/%g", value, _spinbox->value());
+            item = new QTableWidgetItem(QString(buffer));
+        }else
+            item = new QTableWidgetItem(QString::number(value));
         item->setTextAlignment(Qt::AlignHCenter);
         item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
         _filterView->setItem(height + j, k, item);
@@ -625,4 +644,22 @@ void FilterChoice::updateOptions(bool a){
         _offsetButton->setEnabled(false);
         _scalingButton->setEnabled(false);
     }
+}
+
+void FilterChoice::showNormalisationOpt(bool a){
+    _spinbox->setEnabled(a);
+    _label_3->setEnabled(a);
+    if(a){
+        this->updateNormValue();
+    }else{
+        _spinbox->setValue(0);
+    }
+}
+
+void FilterChoice::displayNormalisation(double){
+    this->updateDisplay();
+}
+
+void FilterChoice::updateNormValue(){
+    _spinbox->setValue(/* met ta maudite valeur ici*/4);
 }

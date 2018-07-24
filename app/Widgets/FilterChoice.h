@@ -73,6 +73,9 @@ namespace filtrme
     void openFile();
     void updatePath();
     void updateOptions(bool);
+    void showNormalisationOpt(bool);
+    void displayNormalisation(double);
+    void updateNormValue();
 
   private:
     bool _a = true;
@@ -106,6 +109,9 @@ namespace filtrme
     imagein::algorithm::Filtering* _filtering;
     QRadioButton* _dblResButton;
     QRadioButton* _stdResButton;
+
+    QDoubleSpinBox* _spinbox;
+    QLabel* _label_3;
   };
 }
 
