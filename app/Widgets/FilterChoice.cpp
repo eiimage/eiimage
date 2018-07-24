@@ -56,10 +56,13 @@
 #include <QSpacerItem>
 #include <GenericInterface.h>
 
+#include <algorithm> 
+
 using namespace filtrme;
 using namespace genericinterface;
 using namespace imagein;
 using namespace algorithm;
+using namespace std;
 
 FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
 {
@@ -152,13 +155,15 @@ void FilterChoice::initUI()
     _stdDevLabel->setVisible(false);
     _stdDevBox->setVisible(false);
 
-    QCheckBox* checkBox_2 = new QCheckBox(tr("Normalisation des coefficients"));
+   _checkbox_2 = new QCheckBox(tr("Normalisation des coefficients"));
     QHBoxLayout* hboxlayout = new QHBoxLayout();
     _spinbox = new QDoubleSpinBox();
     _spinbox->setValue(0);
     _spinbox->setEnabled(false);
+    _spinbox->setMaximum(10000);
+    //_spinbox->setMinimum(0);
     _label_3 = new QLabel(tr("Facteur de normalisation :"));
-    confLayout->addRow(checkBox_2);
+    confLayout->addRow(_checkbox_2);
     confLayout->addRow(_label_3, _spinbox);
 
 
@@ -189,7 +194,7 @@ void FilterChoice::initUI()
 
     mainLayout->addWidget(leftWidget);
 
-    QObject::connect(checkBox_2, SIGNAL(toggled(bool)), this, SLOT(showNormalisationOpt(bool)));
+    QObject::connect(_checkbox_2, SIGNAL(toggled(bool)), this, SLOT(showNormalisationOpt(bool)));
     QObject::connect(_customButton, SIGNAL(toggled(bool)), this, SLOT(showCustom(bool)));
     QObject::connect(_number, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
     QObject::connect(_stdDevBox, SIGNAL(valueChanged(const QString&)), this, SLOT(dataChanged(const QString&)));
@@ -354,11 +359,20 @@ void FilterChoice::showCustom(bool a){
  *
  * @param int
  */
-void FilterChoice::currentBlurChanged(int)
+void FilterChoice::currentBlurChanged(int a)
 {
   updateDisplay();
+  if(a>=0){
+      this->showNormalisationOpt(false);
+      _checkbox_2->setEnabled(false);
+  }
+  else{
+      this->showNormalisationOpt(true);
+      _checkbox_2->setEnabled(true);
+  }
   if(_spinbox->isEnabled())
     updateNormValue();
+      
 }
 
 /**
@@ -422,6 +436,7 @@ void FilterChoice::validate()
         default:
           _filtering->setPolicy(Filtering::POLICY_BLACK);
       }
+      _filtering->setNormalisation(_spinbox->value());
       this->accept();
   }
 }
@@ -493,7 +508,7 @@ void FilterChoice::deleteFilter()
  *  Updates the options the user has depending on then filter used
  */
 void FilterChoice::updateDisplay()
-{
+{ 
       std::vector<Filter*> filters;
       _deleteButton->setEnabled(false);
       int num = _number->value();
@@ -568,7 +583,7 @@ void FilterChoice::updateDisplay()
         _filterView->setItem(j, i, item);
     }
   }
-  
+
   height = 0;
   char buffer[20];
   for(unsigned int i = 0; i < filters.size(); i++)
@@ -579,7 +594,7 @@ void FilterChoice::updateDisplay()
       {
         double value = filters[i]->getPixelAt(k, j);
         QTableWidgetItem* item;
-        if(_spinbox->isEnabled()){
+        if(_spinbox->isEnabled() && _spinbox->value()!=1 && value!=0){
             sprintf(buffer, "%g/%g", value, _spinbox->value());
             item = new QTableWidgetItem(QString(buffer));
         }else
@@ -661,5 +676,48 @@ void FilterChoice::displayNormalisation(double){
 }
 
 void FilterChoice::updateNormValue(){
-    _spinbox->setValue(/* met ta maudite valeur ici*/4);
+    double normValue = 0;
+    std::vector<Filter*> filters;
+    int num = _number->value();
+    if(!_customButton->isChecked()){
+      switch(_blurChoices->currentIndex())
+      {
+          case 0:
+              filters = Filter::uniform(num);
+      break;
+          case 1:
+              filters = Filter::gaussian(num, _stdDevBox->value());
+      break;
+          case 2:
+              filters = Filter::prewitt(num);
+      break;
+          default:
+              filters = _filters[_blurChoices->currentIndex()];
+      }
+    }
+    else{
+        filters = _filters[_blurChoices->currentIndex()];
+    }  
+
+
+    for(unsigned int i = 0; i < filters.size(); i++)
+    {
+      double sum_pos = 0;
+      double sum_neg = 0;
+      for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
+      {
+        for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
+        {
+          filters[i]->getPixelAt(k, j) > 0 ? sum_pos += (double) filters[i]->getPixelAt(k, j) :  sum_neg += (double) filters[i]->getPixelAt(k, j);
+        }
+      }
+      if(sum_pos + sum_neg != 0){
+        normValue = sum_pos + sum_neg;
+      }
+      else{
+        normValue = max(normValue, sum_pos);
+      }
+      if(normValue == 0) normValue = 1;
+    }
+      _spinbox->setValue(normValue);
 }
