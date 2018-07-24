@@ -557,14 +557,14 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/DCTOp.cpp" line="+57"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>DCT</source>
         <translation>DCT</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location/>
         <location line="+0"/>
+        <location/>
+        <location line="+1"/>
         <source>inverse DCT</source>
         <translation>DCT inverse</translation>
     </message>
@@ -626,7 +626,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location filename="Operations/DMMOp.cpp" line="+194"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>DMM error</source>
         <translation>DMM (erreur)</translation>
     </message>
@@ -691,7 +691,7 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DMMOp</name>
     <message>
-        <location filename="Operations/DMMOp.cpp" line="-138"/>
+        <location filename="Operations/DMMOp.cpp" line="-139"/>
         <location/>
         <location line="+0"/>
         <source>DMM (dilatation)</source>
@@ -721,7 +721,7 @@ Nombre de classes = %1 </translation>
     <message>
         <location line="+118"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>DMM component #%1</source>
         <translation>DMM (composante %1)</translation>
     </message>
@@ -745,35 +745,35 @@ Nombre de classes = %1 </translation>
     <message>
         <location line="+11"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Prediction error image</source>
         <translation>Image d&apos;erreur de prédiction</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location/>
         <location line="+0"/>
+        <location/>
+        <location line="+1"/>
         <source>Quantized prediction error image</source>
         <translation>Image d&apos;erreur de prédiction quantifiée</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+2"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Coding error image</source>
         <translation>Image d&apos;erreur de codage</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-3"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Prediction image</source>
         <translation>Image de prédiction</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <location/>
         <location line="+0"/>
+        <location/>
+        <location line="+1"/>
         <source>Reconstructed image</source>
         <translation>Image reconstruite</translation>
     </message>
@@ -937,6 +937,16 @@ Nombre de classes = %1 </translation>
         <location line="+0"/>
         <source>DFT (magnitude)</source>
         <translation>DFT (amplitude)</translation>
+    </message>
+</context>
+<context>
+    <name>Filtering</name>
+    <message>
+        <location filename="Services/FilteringService.cpp" line="+95"/>
+        <location/>
+        <location line="+0"/>
+        <source>Pas de conversion [min : 0, max : 255]</source>
+        <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
 </context>
 <context>
@@ -1415,7 +1425,7 @@ Nombre de classes = %1 </translation>
         <translation>Croissance</translation>
     </message>
     <message>
-        <location filename="Operations/DMMOp.cpp" line="-159"/>
+        <location filename="Operations/DMMOp.cpp" line="-160"/>
         <location/>
         <location line="+0"/>
         <source>DMM</source>
@@ -1656,7 +1666,7 @@ Canal %d :
         <translation>Retrournement %1</translation>
     </message>
     <message>
-        <location filename="Operations/DCTOp.cpp" line="-28"/>
+        <location filename="Operations/DCTOp.cpp" line="-29"/>
         <location/>
         <location line="+0"/>
         <source>Discrete cosinus transform</source>
@@ -1811,7 +1821,7 @@ Canal %d :
         <translation>Classification supervisée</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-36"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-37"/>
         <location/>
         <location line="+0"/>
         <source>DPCM Encoding</source>
@@ -1840,7 +1850,7 @@ Canal %d :
     <message>
         <location filename="Operations/Transforms.cpp" line="+466"/>
         <location/>
-        <location line="-90"/>
+        <location line="-91"/>
         <source>
 
 matrice de transformation utilisee : 
@@ -1965,12 +1975,12 @@ Le débit vaut : %5.2f
         <location line="+26"/>
         <location/>
         <location line="+0"/>
-        <location line="+38"/>
+        <location line="+41"/>
         <source>Cropped</source>
         <translation>Rognée</translation>
     </message>
     <message>
-        <location line="-30"/>
+        <location line="-33"/>
         <location/>
         <location line="+0"/>
         <source>Normalized</source>
@@ -1986,14 +1996,14 @@ Le débit vaut : %5.2f
     <message>
         <location line="+8"/>
         <location/>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>Offset and scaled</source>
         <translation>Décalage et échantillonnée</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <location/>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>Scaled</source>
         <translation>Echantillonnée</translation>
     </message>
@@ -2013,6 +2023,8 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location filename="Operations/DoubleEntropyOp.cpp" line="+7"/>
+        <location/>
+        <location line="+0"/>
         <source>Entropy of the image (sum of channels entropy) = %1
 </source>
         <translation>Entropie de l&apos;image (somme des entropies des canaux) = %1
@@ -2020,9 +2032,17 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+2"/>
+        <location/>
         <source>Pas d&apos;échantillonnage choisi : 1
 </source>
         <translation>Pas d&apos;échantillonnage choisi : 1
+</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>Pas de quantification utilisé : 1
+</source>
+        <translation>Pas de quantification utilisé : 1
 </translation>
     </message>
 </context>
@@ -3605,7 +3625,7 @@ Le débit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+1"/>
+        <location filename="Services/FilteringService.cpp" line="-94"/>
         <location/>
         <location line="+0"/>
         <source>&amp;Apply filter</source>
