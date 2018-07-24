@@ -81,6 +81,7 @@ namespace filtrme
     bool _a = true;
     void initUI();
     void updateDisplay();
+
     QStringList initFilters();
     
     std::vector< std::vector< imagein::algorithm::Filter* > > _filters;
@@ -112,6 +113,7 @@ namespace filtrme
 
     QDoubleSpinBox* _spinbox;
     QLabel* _label_3;
+    QCheckBox* _checkbox_2;
   };
 }
 
