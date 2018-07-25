@@ -79,6 +79,7 @@ namespace filtrme
 
   private:
     bool _a = true;
+    double _normvalue;
     void initUI();
     void updateDisplay();
 

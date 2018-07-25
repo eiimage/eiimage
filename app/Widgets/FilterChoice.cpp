@@ -75,6 +75,7 @@ FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
  */
 void FilterChoice::initUI()
 {
+    _normvalue=9;
 
     this->setWindowTitle(tr("FilterChoice"));
     QLayout* layout = new QVBoxLayout(this);
@@ -351,6 +352,19 @@ void FilterChoice::showCustom(bool a){
         _filterPathSelect->setVisible(false);
     }
     _a=false;
+    if(a){
+        if(!_blurChoices->currentIndex()>=0){
+            _checkbox_2->setChecked(false);
+            _checkbox_2->setEnabled(false);
+            _label_3->setEnabled(false);
+            _spinbox->setEnabled(false);
+            _spinbox->setValue(0);
+        }
+        else{
+            _checkbox_2->setChecked(false);
+            _checkbox_2->setEnabled(true);
+        }
+    }
 }
 
 /**
@@ -361,17 +375,10 @@ void FilterChoice::showCustom(bool a){
  */
 void FilterChoice::currentBlurChanged(int a)
 {
-  updateDisplay();
-  if(a>=0){
-      this->showNormalisationOpt(false);
-      _checkbox_2->setEnabled(false);
-  }
-  else{
-      this->showNormalisationOpt(true);
-      _checkbox_2->setEnabled(true);
-  }
-  if(_spinbox->isEnabled())
-    updateNormValue();
+    _checkbox_2->setEnabled(true);
+    updateDisplay();
+    if(_spinbox->isEnabled())
+        updateNormValue();
       
 }
 
@@ -676,48 +683,53 @@ void FilterChoice::displayNormalisation(double){
 }
 
 void FilterChoice::updateNormValue(){
-    double normValue = 0;
-    std::vector<Filter*> filters;
-    int num = _number->value();
-    if(!_customButton->isChecked()){
-      switch(_blurChoices->currentIndex())
-      {
-          case 0:
-              filters = Filter::uniform(num);
-      break;
-          case 1:
-              filters = Filter::gaussian(num, _stdDevBox->value());
-      break;
-          case 2:
-              filters = Filter::prewitt(num);
-      break;
-          default:
-              filters = _filters[_blurChoices->currentIndex()];
-      }
+    if(_blurChoices->currentIndex()>=0){
+        double normValue = 0;
+        std::vector<Filter*> filters;
+        int num = _number->value();
+        if(!_customButton->isChecked()){
+          switch(_blurChoices->currentIndex())
+          {
+              case 0:
+                  filters = Filter::uniform(num);
+          break;
+              case 1:
+                  filters = Filter::gaussian(num, _stdDevBox->value());
+          break;
+              case 2:
+                  filters = Filter::prewitt(num);
+          break;
+              default:
+                  filters = _filters[_blurChoices->currentIndex()];
+          }
+        }
+        else{
+            filters = _filters[_blurChoices->currentIndex()];
+        }
+
+
+        for(unsigned int i = 0; i < filters.size(); i++)
+        {
+          double sum_pos = 0;
+          double sum_neg = 0;
+          for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
+          {
+            for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
+            {
+              filters[i]->getPixelAt(k, j) > 0 ? sum_pos += (double) filters[i]->getPixelAt(k, j) :  sum_neg += (double) filters[i]->getPixelAt(k, j);
+            }
+          }
+          if(sum_pos + sum_neg != 0){
+            normValue = sum_pos + sum_neg;
+          }
+          else{
+            normValue = max(normValue, sum_pos);
+          }
+          if(normValue == 0) normValue = 1;
+        }
+          _spinbox->setValue(normValue);
     }
     else{
-        filters = _filters[_blurChoices->currentIndex()];
-    }  
-
-
-    for(unsigned int i = 0; i < filters.size(); i++)
-    {
-      double sum_pos = 0;
-      double sum_neg = 0;
-      for(unsigned int j = 0; j < filters[i]->getHeight(); j++)
-      {
-        for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
-        {
-          filters[i]->getPixelAt(k, j) > 0 ? sum_pos += (double) filters[i]->getPixelAt(k, j) :  sum_neg += (double) filters[i]->getPixelAt(k, j);
-        }
-      }
-      if(sum_pos + sum_neg != 0){
-        normValue = sum_pos + sum_neg;
-      }
-      else{
-        normValue = max(normValue, sum_pos);
-      }
-      if(normValue == 0) normValue = 1;
+        _checkbox_2->setChecked(false);
     }
-      _spinbox->setValue(normValue);
 }
