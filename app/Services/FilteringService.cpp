@@ -20,6 +20,7 @@
 #include "FilteringService.h"
 
 #include <QMdiArea>
+#include <Qstring>
 
 #include <GenericInterface.h>
 #include <Converter.h>
@@ -100,44 +101,50 @@ void FilteringService::applyAlgorithm(Filtering* algo)
         }
         
         Image_t<double>* dblResImg = (*algo)(image);
+        unsigned char i = 0;
         ImageWindow* riw;
         if(_siw->isStandard()) {
             delete image;
         }
-        
-        if(_dblResult) {
-            DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
-            if(diw != NULL) {
-                riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+        do{
+            if(_dblResult) {
+                DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
+                if(diw != NULL) {
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+                }
+                else {
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
+                }
             }
             else {
-                riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
-            }
-        }
-        else {
-            std::string outputMessage = "";
-            Image* resImg;
-            Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
-            if(_scaling && _offset ){
+                std::string outputMessage = "";
+                Image* resImg;
+                Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
+                if(_scaling && _offset ){
 
-                resImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
-            }
-            else if(_scaling){
-                resImg  =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
-            }
-            else if(_offset){
-                resImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
-            }
-            else{
-                resImg = Converter<Image>::convertAndRound(*dblResImg);
-                outputMessage = "Pas de conversion [min : 0, max : 255]";
+                    resImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
+                }
+                else if(_scaling){
+                    resImg  =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
+                }
+                else if(_offset){
+                    resImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
+                }
+                else{
+                    resImg = Converter<Image>::convertAndRound(*dblResImg);
+                    outputMessage = "Pas de conversion [min : 0, max : 255]";
 
+                }
+                riw = new StandardImageWindow(resImg, _siw->getPath());
+                _ws->addText(outputMessage);
             }
-            delete dblResImg;
-            riw = new StandardImageWindow(resImg, _siw->getPath());
-            _ws->addText(outputMessage);
-        }
-        riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName());
-        emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
+
+            if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
+            else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " " + i);
+            
+            emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
+            i++;
+            dblResImg = algo->getInterImg();
+        }while(dblResImg != NULL);
     }
 }
