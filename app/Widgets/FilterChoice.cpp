@@ -353,7 +353,7 @@ void FilterChoice::showCustom(bool a){
     }
     _a=false;
     if(a){
-        if(!_blurChoices->currentIndex()>=0){
+        if(_filterPath->text().toStdString().compare("/")==0){
             _checkbox_2->setChecked(false);
             _checkbox_2->setEnabled(false);
             _label_3->setEnabled(false);
@@ -379,7 +379,7 @@ void FilterChoice::currentBlurChanged(int a)
     updateDisplay();
     if(_spinbox->isEnabled())
         updateNormValue();
-      
+
 }
 
 /**
@@ -720,7 +720,7 @@ void FilterChoice::updateNormValue(){
             }
           }
           if(sum_pos + sum_neg != 0){
-            normValue = sum_pos + sum_neg;
+            normValue = max(normValue, abs(sum_pos + sum_neg));
           }
           else{
             normValue = max(normValue, sum_pos);
