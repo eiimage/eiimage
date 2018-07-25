@@ -146,7 +146,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             }
             else{
                 resImg = Converter<Image>::convertAndRound(*dblResImg);
-                outputMessage = "Pas de conversion [min : 0, max : 255]";
+                outputMessage = qApp->translate("Filtering","Pas de conversion [min : 0, max : 255]").toStdString();
 
             if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
             else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " " + i);
