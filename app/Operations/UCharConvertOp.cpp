@@ -81,6 +81,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             delete tempIntImg;
             windowName = qApp->translate("Operations","Offset").toStdString();
             outText(LogMessage);
+            outText("-------------------------------------------");
             break;
 
         case 4 :
@@ -89,6 +90,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             delete tempIntImg;
             windowName = qApp->translate("Operations","Offset and scaled").toStdString();
             outText(LogMessage);
+            outText("-------------------------------------------");
             break; 
 
         case 3 :
@@ -97,6 +99,7 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             delete tempIntImg;
             windowName = qApp->translate("Operations","Scaled").toStdString();
             outText(LogMessage);
+            outText("-------------------------------------------");
             break;
 
         default:

@@ -180,6 +180,7 @@ void DMMOp::dmm(const Image* image, vector<StructElem::Dir> basicElems, vector<u
 
     for(vector<unsigned int>::reverse_iterator it = levels.rbegin(); it < levels.rend(); ++it) {
         outText(QString("%1").arg(*it).toStdString());
+        outText("-------------------------------------------");
         while(basicElems.size() > *it) basicElems.pop_back();
         component = opening(resImg, basicElems);
         components.push_back(component);

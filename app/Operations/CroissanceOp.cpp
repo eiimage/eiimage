@@ -112,7 +112,7 @@ void CroissanceOp::operator()(const imagein::Image* img, const std::map<const im
     outImage(color, qApp->translate("CroissanceOp", "Color").toStdString());
     outText(qApp->translate("CroissanceOp", "Total number of area : %1").arg(nbRegion).toStdString());
     outText(qApp->translate("CroissanceOp", "Mean number of point per area : %1").arg((double)image->getWidth()*image->getHeight()/nbRegion).toStdString());
-    
+    outText("-------------------------------------------");
     
     delete image;
 }

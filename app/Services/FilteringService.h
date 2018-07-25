@@ -26,6 +26,7 @@
 
 #include "../Widgets/FilterChoice.h"
 #include "../Widgets/FilterEditor.h"
+#include "../Tools.h"
 
 #include <QStringList>
 #ifdef __linux__

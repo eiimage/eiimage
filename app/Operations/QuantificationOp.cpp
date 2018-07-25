@@ -148,19 +148,16 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
 void QuantificationOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
     string quantType;
     string output_msg = "";
-    string optiQuant;
-
-    bool checkOptiQuant;
 
     QuantificationDialog* dialog;
 
-    if(image != NULL) {
-        QString imgName = QString::fromStdString(imgList.find(image)->second);
-        dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
-    }
-    else {
-        dialog = new QuantificationDialog(QApplication::activeWindow());
-    }
+  //  if(image != NULL) {
+ //       QString imgName = QString::fromStdString(imgList.find(image)->second);
+        dialog = new QuantificationDialog(QApplication::activeWindow(), "bob");
+  //  }
+  //  else {
+  //      dialog = new QuantificationDialog(QApplication::activeWindow());
+  //  }
 
     if(_test){
       dialog->setQuantif(_quantif);
@@ -171,13 +168,13 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
     }
 
 
-    if(image != NULL) {
+  //  if(image != NULL) {
 
         Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
 
 
-            Quantification quantification = dialog->getQuantif(image, c, quantType, &checkOptiQuant);
+            Quantification quantification = dialog->getQuantif(image, c, quantType, true);
 
             //Generate the text to print in the information window
             output_msg += quantificationOpLog(c, &quantification);
@@ -190,18 +187,13 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
                     resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
             }
-            if(checkOptiQuant)
-                optiQuant += checkOptimumQuantizier(image, &quantification, c);
         }
 
 
 
         outText(quantType);
         outText(output_msg);
-        if(checkOptiQuant){
-            outText(QString(qApp->translate("Operations","Respect des proprietes du quantificateur optimal : ")).toStdString());
-            outText(optiQuant);
-        }
+        outText("-------------------------------------------");
 
         QString imgName;
 
@@ -213,10 +205,8 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         else{
             imgName = QString("");
         }
-
-
-        outImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
-    }
+        outImage(resImg, "frank"/*imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length())*/);
+   // }
 
 }
 

@@ -123,5 +123,6 @@ void HadamardOp::operator()(const imagein::Image* img, const std::map<const imag
         outImage(invImg, qApp->translate("Transforms", "cosinus reconstruction").toStdString());
     }
     outText(s);
+    outText("-------------------------------------------");
 }
 

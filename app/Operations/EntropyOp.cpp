@@ -40,6 +40,7 @@ void EntropyOp::operator()(const Image* image, const std::map<const imagein::Ima
 
     double entropy = image->getEntropy();
     outText(qApp->translate("Operations", "Entropy of the image (sum of channels entropy) = %1").arg(entropy).toStdString());
+    outText("-------------------------------------------");
 }
 
 bool EntropyOp::needCurrentImg() const {

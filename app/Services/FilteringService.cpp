@@ -138,6 +138,15 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 riw = new StandardImageWindow(resImg, _siw->getPath());
                 _ws->addText(outputMessage);
             }
+            else if(_scaling){
+                resImg  =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
+            }
+            else if(_offset){
+                resImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
+            }
+            else{
+                resImg = Converter<Image>::convertAndRound(*dblResImg);
+                outputMessage = "Pas de conversion [min : 0, max : 255]";
 
             if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
             else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " " + i);

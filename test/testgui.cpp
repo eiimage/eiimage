@@ -68,6 +68,7 @@ private:
     GenericInterface* gi;
     StandardImageWindow* _img;
     BuiltinOpSet* _image;
+    BuiltinOpSet* _analyse;
 
 private slots:
     void testGenericInterfaceSetup();
@@ -79,7 +80,7 @@ private slots:
     void testThresholdOpOtsu();
     void testThresholdOp127();
     void testThresholdOpDouble();
-
+/*
     void testQuantifOpLinearCentered2();
     void testQuantifOpLinearCentered3();
     void testQuantifOpLinearCentered5();
@@ -99,7 +100,7 @@ private slots:
     void testQuantifOpNonLinearMean3();
     void testQuantifOpNonLinearMean5();
     void testQuantifOpNonLinearMean16();
-
+*/
     void testTranslateOpPos();
     void testTranslateOpNeg();
 
@@ -111,6 +112,13 @@ private slots:
 
     void testScalingOpBilinear();
     void testScalingOpNearest();
+
+    void testCombineRGB();
+
+    void testPyramidOpGaussianGaussian();
+    void testPseudocolor();
+
+    void testTEST();
 
 
     void testCompQuant();
@@ -172,14 +180,14 @@ void TestGui::testGenericInterfaceSetup(){
       transfo->addOperation(new HoughOp());
       transfo->addOperation(new InverseHoughOp());
 
-      BuiltinOpSet* analyse = new BuiltinOpSet(qApp->translate("", "Analysis").toStdString());
-      analyse->addOperation(new CroissanceOp());
-      analyse->addOperation(new ZeroCrossingOp());
-      analyse->addOperation(new PyramidOp());
-      analyse->addOperation(new InversePyramidOp());
-      analyse->addOperation(new ClassAnalysisOp());
-      analyse->addOperation(new ClassResultOp());
-      analyse->addOperation(new PseudoColorOp());
+      _analyse = new BuiltinOpSet(qApp->translate("", "Analysis").toStdString());
+      _analyse->addOperation(new CroissanceOp());
+      _analyse->addOperation(new ZeroCrossingOp());
+      _analyse->addOperation(new PyramidOp());
+      _analyse->addOperation(new InversePyramidOp());
+      _analyse->addOperation(new ClassAnalysisOp());
+      _analyse->addOperation(new ClassResultOp());
+      _analyse->addOperation(new PseudoColorOp());
 
       BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
       filter->addOperation(new BFlitOp());
@@ -188,7 +196,7 @@ void TestGui::testGenericInterfaceSetup(){
       mainService->addOpSet(_image);
       mainService->addOpSet(encode);
       mainService->addOpSet(morpho);
-      mainService->addOpSet(analyse);
+      mainService->addOpSet(_analyse);
       mainService->addOpSet(transfo);
       mainService->addOpSet(filter);
       mainService->addOpSet(tools);
@@ -307,7 +315,7 @@ void TestGui::testThresholdOpDouble(){
   FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
   fs->save("res/test_thresholding_imao5_30_200.vff");
 }
-
+/*
 void TestGui::testQuantifOpLinearCentered2(){
   WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
   ws->addFile(QString("src/test_quantization_barba.bmp"));
@@ -666,7 +674,7 @@ void TestGui::testQuantifOpNonLinearMean16(){
   FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
   fs->save("res/test_quantization_nonLinearMean_Value_monarch_16.bmp");
 }
-
+*/
 void TestGui::testTranslateOpPos(){
   WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
   ws->addFile(QString("src/test_imageop_cdm.bmp"));
@@ -828,13 +836,111 @@ void TestGui::testScalingOpNearest(){
       (*it)->operator()(ws);
     }
   }
-  //cout << "ouagzeruvhe _________________________________________##################\n";
   _img = dynamic_cast<StandardImageWindow*>(ws->getCurrentImageWindow());
-//  cout << "ouagzeruvhe _________________________________________333333333333333333\n";
+
   FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
   fs->save("res/test_scaling_result_toinou_x0.2_y0.2_nearest.bmp");
 }
 
+void TestGui::testCombineRGB(){
+  WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
+  ws->addFile(QString("src/test_combineRGB_Parrots_R.bmp"));
+  ws->addFile(QString("src/test_combineRGB_Parrots_V.bmp"));
+  ws->addFile(QString("src/test_combineRGB_Parrots_B.bmp"));
+
+  std::vector<GenericOperation*> opvect = _image->getOperations();
+  std::vector<GenericOperation*>::iterator it;
+
+  for (it = opvect.begin() ; it != opvect.end(); ++it){
+    if((*it)->getName()=="Combine color planes"){
+      (dynamic_cast<CombineColorOp*>(*it))->setTest(true);
+      (dynamic_cast<CombineColorOp*>(*it))->setImg1("test_combineRGB_Parrots_R.bmp");
+      (dynamic_cast<CombineColorOp*>(*it))->setImg2("test_combineRGB_Parrots_V.bmp");
+      (dynamic_cast<CombineColorOp*>(*it))->setImg3("test_combineRGB_Parrots_B.bmp");
+      (*it)->operator()(ws);
+    }
+  }
+  _img = dynamic_cast<StandardImageWindow*>(ws->getCurrentImageWindow());
+
+  FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
+  fs->save("res/test_combineRGB_result_Parrots.bmp");
+}
+
+void TestGui::testPyramidOpGaussianGaussian(){
+  WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
+  ws->addFile(QString("src/test_pyramid_barba.bmp"));
+
+  std::vector<GenericOperation*> opvect = _analyse->getOperations();
+  std::vector<GenericOperation*>::iterator it;
+
+  for (it = opvect.begin() ; it != opvect.end(); ++it){
+    if((*it)->getName()=="Pyramidal decomposition"){
+      (dynamic_cast<PyramidOp*>(*it))->setTest(true);
+      (dynamic_cast<PyramidOp*>(*it))->setOneStep(2);
+      (dynamic_cast<PyramidOp*>(*it))->setFilter(1);
+      (*it)->operator()(ws);
+    }
+  }
+  _img = dynamic_cast<StandardImageWindow*>(ws->getCurrentImageWindow());
+/*
+  std::vector<const ImageWindow*> imgvect = ws->getImageWindows();
+  std::vector<const ImageWindow*>::iterator it2;
+
+  for(it2 = imgvect.begin() ; it2 != imgvect.end() ; ++it2){
+    cout << (*it2)->windowTitle().toStdString() << "\n";
+  }
+*/
+  FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
+  fs->save("res/test_gaussian_pyramid_result_gaussian_level_2_barba.vff ");
+}
+
+void TestGui::testPseudocolor(){
+  WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
+  ws->addFile(QString("src/test.png"));
+
+  std::vector<GenericOperation*> opvect = _analyse->getOperations();
+  std::vector<GenericOperation*>::iterator it;
+
+  for (it = opvect.begin() ; it != opvect.end(); ++it){
+    if((*it)->getName()=="Pseudo color"){
+      (dynamic_cast<PseudoColorOp*>(*it))->setTest(true);
+      (dynamic_cast<PseudoColorOp*>(*it))->setHue(100);
+      (*it)->operator()(ws);
+    }
+  }
+//  _img = dynamic_cast<StandardImageWindow*>(ws->getCurrentImageWindow());
+
+std::vector<const ImageWindow*> imgvect = ws->getImageWindows();
+std::vector<const ImageWindow*>::iterator it2;
+
+for(it2 = imgvect.begin() ; it2 != imgvect.end() ; ++it2){
+  cout << (*it2)->windowTitle().toStdString() << "\n";
+}
+
+  FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
+  fs->save("res/test_pseudocolor.bmp ");
+}
+
+void TestGui::testTEST(){
+  WindowService* ws = dynamic_cast<WindowService*>(gi->getService(GenericInterface::WINDOW_SERVICE));
+  ws->addFile(QString("src/test_combineRGB_Parrots_R.bmp"));
+  ws->addFile(QString("src/test_combineRGB_Parrots_V.bmp"));
+  ws->addFile(QString("src/test_combineRGB_Parrots_B.bmp"));
+
+  std::vector<GenericOperation*> opvect = _image->getOperations();
+  std::vector<GenericOperation*>::iterator it;
+
+  for (it = opvect.begin() ; it != opvect.end(); ++it){
+    if((*it)->getName()=="Thresholding"){
+      (dynamic_cast<ThresholdOp*>(*it))->setTest(true);
+      (dynamic_cast<ThresholdOp*>(*it))->setTestOtsu(true);
+      (*it)->operator()(ws);
+    }
+  }
+
+  FileService* fs = dynamic_cast<FileService*>(gi->getService(GenericInterface::FILE_SERVICE));
+  fs->save("res/TEEEEEEEEEEEEST.");
+}
 
 
 void TestGui::testCompThreshold(){
@@ -893,7 +999,17 @@ void TestGui::testMenuActions(){
         std::cout << (imagemenu->actions())[i]->text().toStdString() << "\n";
     }
 
+    QMenu* imagemenu2 = gi->menu("Analysis");
+
+    std::cout << _img->getPath().toStdString() << "\n";
+    imagemenu2->menuAction()->trigger();
+    for( int i=0; i<imagemenu2->actions().count(); ++i )
+    {
+        std::cout << (imagemenu2  ->actions())[i]->text().toStdString() << "\n";
+    }
+
 }
+
 
 QTEST_MAIN(TestGui)
 #include "testgui.moc"

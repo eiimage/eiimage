@@ -28,6 +28,7 @@ using namespace imagein;
 
 PseudoColorOp::PseudoColorOp() : Operation(qApp->translate("Operations", "Pseudo color").toStdString())
 {
+  _test=false, _testHue=255;
 }
 
 bool PseudoColorOp::needCurrentImg() const {
@@ -41,9 +42,14 @@ static int getLinearHue(int value, int nhue){
 void PseudoColorOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
 
     PseudoColorDialog* dialog = new PseudoColorDialog(QApplication::activeWindow());
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-    if(code!=QDialog::Accepted) return;
 
+    if(_test){
+        dialog->setHue(_testHue);
+    }
+    else{
+        QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+        if(code!=QDialog::Accepted) return;
+    }
 
     GrayscaleImage* tmpImg = Converter<GrayscaleImage>::convert(*image);
     Image* resImg = new Image(tmpImg->getWidth(), tmpImg->getHeight(), 3);
@@ -57,7 +63,7 @@ void PseudoColorOp::operator()(const imagein::Image* image, const std::map<const
     for(unsigned int j = 0; j < tmpImg->getHeight(); ++j) {
         for(unsigned int i = 0; i < tmpImg->getWidth(); ++i) {
             Image::depth_t value = tmpImg->getPixel(i, j);
-            
+
             const int ngrad = ceil(255. / (double)nhue);
             const int hue =  getHue(value, nhue); /* € [0, nhue[ */
             const int grad = value - ceil((double)hue * 255 / (double)nhue); /* € [0, ngrad[ */
@@ -72,3 +78,10 @@ void PseudoColorOp::operator()(const imagein::Image* image, const std::map<const
 
 }
 
+void PseudoColorOp::setTest(bool a){
+  _test =a;
+}
+
+void PseudoColorOp::setHue(int a){
+  _testHue=a;
+}

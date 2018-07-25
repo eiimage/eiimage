@@ -65,6 +65,7 @@ class EntropyOp : public PlugOperation {
         sprintf( buffer, "Entropy of the image = %.2f bpp", entropy );
         string s = buffer ;
         outText(s);
+        outText("-------------------------------------------");
     }
   private:
     Image img;

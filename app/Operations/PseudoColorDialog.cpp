@@ -63,5 +63,6 @@ int PseudoColorDialog::getHue(){
     return _spinBox->value();
 }
 
-
-
+void PseudoColorDialog::setHue(int a){
+    _spinBox->setValue(a);
+}

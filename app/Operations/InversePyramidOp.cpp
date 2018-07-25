@@ -66,5 +66,6 @@ void InversePyramidOp::operator()(const imagein::Image* img, const std::map<cons
     }
     outImage(resImg, "Pyramid");
     outText(s);
+    outText("-------------------------------------------");
 
 }

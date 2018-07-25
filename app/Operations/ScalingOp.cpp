@@ -85,7 +85,6 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
       xScaleBox->setValue(_xfactor);
       yScaleBox->setValue(_yfactor);
       algoBox->setCurrentIndex(_interp);
-            QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     }
     else{
       QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());

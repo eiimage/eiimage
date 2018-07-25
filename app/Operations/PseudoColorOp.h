@@ -32,6 +32,14 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    void setTest(bool);
+
+    void setHue(int);
+
+private:
+    bool _test;
+    int _testHue;
 };
 
 #endif // PSEUDOCOLOROP_H

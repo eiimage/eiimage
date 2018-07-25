@@ -91,5 +91,6 @@ void SignalToNoiseOp::operator()(const imagein::Image* image, const std::map<con
     }
 
     this->outText(text.toStdString());
+    this->outText("-------------------------------------------");
 }
 

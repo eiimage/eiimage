@@ -32,7 +32,7 @@ class PyramidDialog;
 class PyramidDialog : public QDialog
 {
     Q_OBJECT
-    
+
 public:
     explicit PyramidDialog(QWidget *parent = 0);
     ~PyramidDialog();
@@ -41,7 +41,11 @@ public:
     bool isGaussian() const;
     bool onlyOneStep() const;
     int onlyStep() const;
-    
+
+    void setFilter(int);
+    void setOneStep(int);
+    void setOneStepChecked(bool);
+
 private:
     Ui::PyramidDialog *ui;
 };

@@ -31,6 +31,7 @@ using namespace imagein;
 
 PyramidOp::PyramidOp() : Operation(qApp->translate("Operations", "Pyramidal decomposition").toStdString())
 {
+  _test=false, _oneStep=1, _filter=0;
 }
 
 bool PyramidOp::needCurrentImg() const {
@@ -51,9 +52,17 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     }
 
     PyramidDialog* dialog = new PyramidDialog(QApplication::activeWindow());
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
-    if(code!=QDialog::Accepted) return;
+    if(_test){
+        dialog->setFilter(_filter);
+        dialog->setOneStepChecked(true);
+        dialog->setOneStep(_oneStep);
+        QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    }
+    else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
 
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image* resImg = NULL;
@@ -93,4 +102,17 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     outImage(resImg, titleFilter.toStdString() + " - " + winTitle.erase(e.length()-3, e.length()));
     outText(e);
     outText(s);
+    outText("-------------------------------------------");
+}
+
+void PyramidOp::setTest(bool a){
+  _test=a;
+}
+
+void PyramidOp::setOneStep(int a){
+  _oneStep=a;
+}
+
+void PyramidOp::setFilter(int a){
+  _filter=a;
 }

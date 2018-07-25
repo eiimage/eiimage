@@ -80,6 +80,7 @@ class Dithering : public PlugOperation {
         Image* result = dithering(&img);
         this->outImage(result);
         this->outText("test");
+        outText("-------------------------------------------");
     }
   private:
     Image img;

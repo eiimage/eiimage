@@ -15,6 +15,7 @@ class PseudoColorDialog : public QDialog
 public:
     explicit PseudoColorDialog(QWidget *parent = 0);
     int getHue();
+    void setHue(int);
 
 public slots:
 

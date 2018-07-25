@@ -37,19 +37,19 @@ Pyramid::Filtre PyramidDialog::getFilter(std::string &to_print) const {
     Pyramid::Filtre filter;
     bool notFoundError = false;
     switch(ui->filterBox->currentIndex()) {
-        case 1: notFoundError = !filters.getFromName("gaussien", filter); 
+        case 1: notFoundError = !filters.getFromName("gaussien", filter);
                 to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre gaussien :\n")).toStdString();
                 break;
-        case 2: notFoundError = !filters.getFromName("trimodal", filter); 
+        case 2: notFoundError = !filters.getFromName("trimodal", filter);
                 to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre trimodal :\n")).toStdString();
                 break;
-        case 3: notFoundError = !filters.getFromName("rectangulaire", filter); 
+        case 3: notFoundError = !filters.getFromName("rectangulaire", filter);
                 to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre rectangulaire :\n")).toStdString();
                 break;
-        case 4: notFoundError = !filters.getFromName("qmf", filter); 
+        case 4: notFoundError = !filters.getFromName("qmf", filter);
                 to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre qmf :\n")).toStdString();
                 break;
-        default: notFoundError = !filters.getFromName("triangulaire", filter); 
+        default: notFoundError = !filters.getFromName("triangulaire", filter);
                 to_print = QString(qApp->translate("PyramidDialog","Decomposition pyramidale avec filtre triangulaire :\n")).toStdString();
                 break;
     }
@@ -73,4 +73,16 @@ bool PyramidDialog::onlyOneStep() const {
 
 int PyramidDialog::onlyStep() const {
     return ui->onlyStepBox->value();
+}
+
+void PyramidDialog::setFilter(int a){
+    ui->filterBox->setCurrentIndex(a);
+}
+
+void PyramidDialog::setOneStepChecked(bool a){
+    ui->oneStepBox->setChecked(a);
+}
+
+void PyramidDialog::setOneStep(int a){
+    ui->onlyStepBox->setValue(a);
 }

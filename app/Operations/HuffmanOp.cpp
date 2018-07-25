@@ -39,5 +39,6 @@ void HuffmanOp::operator()(const imagein::Image* image, const std::map<const ima
     GrayscaleImage* grayImg = Converter<GrayscaleImage>::convert(*image);
     string res = huff.execute(grayImg);
     outText(res);
+    outText("-------------------------------------------");
     delete grayImg;
 }

@@ -94,6 +94,7 @@ void ClassAnalysisOp::operator()(const imagein::Image* img, const std::map<const
         try {
             string s = ClassAnalysis::print_file_info(f);
             outText(s);
+            outText("-------------------------------------------");
         }
         catch(const char*e) {
             QMessageBox::critical(NULL, "Error", e);

@@ -37,6 +37,7 @@ using namespace imagein;
 
 CombineColorOp::CombineColorOp() : Operation(qApp->translate("Operations", "Combine color planes").toStdString())
 {
+  _test=false, _img1="", _img2="", _img3="";
 }
 
 bool CombineColorOp::needCurrentImg() const {
@@ -44,7 +45,6 @@ bool CombineColorOp::needCurrentImg() const {
 }
 
 void CombineColorOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>& imgList) {
-
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
@@ -66,11 +66,16 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-
-    if(code!=QDialog::Accepted) {
-        return;
+    if(_test){
+      imageBoxes[0]->setCurrentImage(_img1);
+      imageBoxes[1]->setCurrentImage(_img2);
+      imageBoxes[2]->setCurrentImage(_img3);
     }
+    else{
+      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+      if(code!=QDialog::Accepted) return;
+    }
+
 
     GrayscaleImage* channels[nChannel];
     unsigned int maxWidth = numeric_limits<unsigned int>::max();
@@ -93,4 +98,20 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
         }
     }
     this->outImage(resImg, qApp->translate("CombineColorOp", "Reconstructed Color image").toStdString());
+}
+
+void CombineColorOp::setTest(bool a){
+  _test = a;
+}
+
+void CombineColorOp::setImg1(std::string a){
+  _img1 = a;
+}
+
+void CombineColorOp::setImg2(std::string a){
+  _img2 = a;
+}
+
+void CombineColorOp::setImg3(std::string a){
+  _img3 = a;
 }

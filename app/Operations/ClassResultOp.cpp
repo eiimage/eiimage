@@ -134,6 +134,6 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
 
     outText(qApp->translate("ClassResult", "Le taux de bon classement en zone intérieure globale vaut: %1\%").arg(tauxGI, 0, 'f', 2).toStdString());
     outText(qApp->translate("ClassResult", "Le taux de bon classement en zone frontière globale vaut: %1\%").arg(tauxGF, 0, 'f', 2).toStdString());
-
     outText(returnval);
+    outText("-------------------------------------------");
 }

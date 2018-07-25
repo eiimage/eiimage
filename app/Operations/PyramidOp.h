@@ -30,6 +30,18 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    void setTest(bool);
+
+    void setFilter(int);
+
+    void setOneStep(int);
+
+private:
+    bool _test;
+    int _filter;
+    int _oneStep;
+
 };
 
 #endif // PYRAMIDOP_H

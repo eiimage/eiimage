@@ -30,6 +30,20 @@ public:
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
+
+    void setTest(bool);
+
+    void setImg1(std::string);
+
+    void setImg2(std::string);
+
+    void setImg3(std::string);
+
+private:
+    bool _test;
+    std::string _img1, _img2, _img3;
+
 };
+
 
 #endif // COMBINECOLOR_H

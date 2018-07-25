@@ -86,5 +86,6 @@ void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<
     text = text.arg(me, 0, 'f', 2);
 
     this->outText(text.toStdString());
+    outText("-------------------------------------------");
 
 }
