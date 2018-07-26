@@ -137,6 +137,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 }
                 riw = new StandardImageWindow(resImg, _siw->getPath());
                 _ws->addText(outputMessage);
+                _ws->addText("-------------------------------------------");
             }
 
             if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
