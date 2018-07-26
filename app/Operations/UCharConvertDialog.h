@@ -47,6 +47,7 @@ public slots:
 
 protected:
     QLabel* _label2;
+    QLabel* _label3;
     QSpinBox* _spinBox;
     QComboBox* _comboBox;
 

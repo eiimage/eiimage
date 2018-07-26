@@ -84,15 +84,6 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             outText("-------------------------------------------");
             break;
 
-        case 4 :
-            tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
-            resImg = Converter<Image>::convertScaleAndOffset(*tempIntImg, &LogMessage);
-            delete tempIntImg;
-            windowName = qApp->translate("Operations","Offset and scaled").toStdString();
-            outText(LogMessage);
-            outText("-------------------------------------------");
-            break; 
-
         case 3 :
             tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
             resImg = Converter<Image>::convertAndScale(*tempIntImg, &LogMessage);
@@ -101,6 +92,15 @@ void UCharConvertOp::operator()(const imagein::Image_t<double>* from, const std:
             outText(LogMessage);
             outText("-------------------------------------------");
             break;
+            
+        case 4 :
+            tempIntImg = Converter<Image_t<double>>::convertToInt(*from);
+            resImg = Converter<Image>::convertScaleAndOffset(*tempIntImg, &LogMessage);
+            delete tempIntImg;
+            windowName = qApp->translate("Operations","Offset and scaled").toStdString();
+            outText(LogMessage);
+            outText("-------------------------------------------");
+            break; 
 
         default:
             resImg = Converter<Image>::convertAndRound(*from);
