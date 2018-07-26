@@ -117,6 +117,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 }
             }
             else {
+<<<<<<< Updated upstream
                 std::string outputMessage = "";
                 Image* resImg;
                 Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
@@ -137,6 +138,17 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 }
                 riw = new StandardImageWindow(resImg, _siw->getPath());
                 _ws->addText(outputMessage);
+=======
+                riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
+            }
+        }
+        else {
+            std::string outputMessage = "";
+            Image* resImg;
+            Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
+            if(_scaling && _offset ){
+                resImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
+>>>>>>> Stashed changes
             }
             else if(_scaling){
                 resImg  =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
@@ -146,8 +158,9 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             }
             else{
                 resImg = Converter<Image>::convertAndRound(*dblResImg);
-                outputMessage = "Pas de conversion [min : 0, max : 255]";
+                outputMessage = qApp->translate("Filtering","Pas de conversion [min : 0, max : 255]").toStdString();
 
+<<<<<<< Updated upstream
             if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
             else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " " + i);
             
@@ -155,5 +168,15 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             i++;
             dblResImg = algo->getInterImg();
         }while(dblResImg != NULL);
+=======
+            }
+            delete dblResImg;
+            riw = new StandardImageWindow(resImg, _siw->getPath());
+            _ws->addText(outputMessage);
+            _ws->addText("-------------------------------------------");
+        }
+        riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName());
+        emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
+>>>>>>> Stashed changes
     }
 }
