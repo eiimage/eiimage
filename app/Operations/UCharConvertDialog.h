@@ -43,6 +43,7 @@ public:
 
 public slots:
     void enableOffset(int);
+    void changeDescription(int);
 
 protected:
     QLabel* _label2;

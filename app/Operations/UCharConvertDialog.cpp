@@ -55,6 +55,8 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
     _spinBox->setVisible(false);
     _label2->setVisible(false);
 
+    _label3 = new QLabel("");
+
     layout->addRow(label1, _comboBox);
     layout->addRow(_label2, _spinBox);
 
@@ -64,10 +66,16 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
 
 
     QObject::connect(_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(enableOffset(int)));
+    QObject::connect(_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeDescription(int)));
     QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+
+    changeDescription(0);
 }
 
+void UCharConvertDialog::changeDescription(int a){
+    _label2->setText("ton text");
+}
 
 void UCharConvertDialog::enableOffset(int n){
     if(n==2){
