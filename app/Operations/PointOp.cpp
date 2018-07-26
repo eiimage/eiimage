@@ -119,27 +119,55 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     dialog->setLayout(layout);
 
     QGroupBox* radioGroup = new QGroupBox(qApp->translate("PointOp", "Second operand"), dialog);
+    QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
+    QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
+
+    QGroupBox* radioGroup2 = new QGroupBox(qApp->translate("PointOp", "Output image"), dialog);
     QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
     QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
+
+
+
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
     radioLayout->addWidget(valueButton);
     radioLayout->addWidget(imageButton);
+
+    QHBoxLayout* radioLayout2 = new QHBoxLayout(radioGroup2);
+    radioLayout2->addWidget(uCharButton);
+    radioLayout2->addWidget(doubleButton);
+
     layout->addWidget(radioGroup);
+    layout->addWidget(radioGroup2);
     valueButton->setChecked(true);
-
-    QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"), dialog);
-    layout->addWidget(colorBox);
+    uCharButton->setChecked(true);
 
 
-    //Ajout d'une checkbox permettant d'avoir le résultat en format Double
-    QCheckBox* DoubleRes = new QCheckBox(qApp->translate("PointOp", "Double Result"), dialog);
     //Si l'image est une image double le bouton est obligatoirement coché
     if(currentWnd->isDouble()){
-        DoubleRes->setChecked(true);
-        DoubleRes->setEnabled(false);
+        doubleButton->setChecked(true);
+        doubleButton->setEnabled(false);
+        uCharButton->setEnabled(false);
     }
-    layout->addWidget(DoubleRes);
 
+    QGroupBox* checkbox = new QGroupBox(qApp->translate("PointOp","Options"));
+    QHBoxLayout* optLayout = new QHBoxLayout();
+    QGridLayout* gridLayout = new QGridLayout();
+    QCheckBox* offsetBox = new QCheckBox(qApp->translate("PointOp","Offset"));
+    QCheckBox* scalingBox = new QCheckBox(qApp->translate("PointOp","Scaling"));
+    QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"));
+    offsetBox->setAutoExclusive(false);
+    scalingBox->setAutoExclusive(false);
+    offsetBox->setEnabled(doubleButton->isChecked());
+    scalingBox->setEnabled(doubleButton->isChecked());
+    colorBox->setAutoExclusive(false);
+    optLayout->addWidget(offsetBox);
+    optLayout->addWidget(scalingBox);
+
+    gridLayout->addLayout(optLayout,1,1);
+    gridLayout->addWidget(colorBox,2,1);
+
+    checkbox->setLayout(gridLayout);
+    layout->addWidget(checkbox);
 
     int nChannel = currentWnd->getDisplayImage()->getNbChannels();
 
@@ -199,6 +227,8 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     }
     QObject::connect(colorBox, SIGNAL(toggled(bool)), pixelWidget, SLOT(setHidden(bool)));
     QObject::connect(colorBox, SIGNAL(toggled(bool)), colorWidget, SLOT(setVisible(bool)));
+    QObject::connect(doubleButton, SIGNAL(toggled(bool)), offsetBox, SLOT(setEnabled(bool)));
+    QObject::connect(doubleButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setEnabled(bool)));
     
     layout->setSizeConstraint(QLayout::SetFixedSize);
     
@@ -213,7 +243,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         return;
     }
 
-    bool dblResult = currentWnd->isDouble() || DoubleRes->isChecked();
+    bool dblResult = currentWnd->isDouble() || doubleButton->isChecked();
     if(!valueButton->isChecked()) {
         if(!colorBox->isChecked()) {
             dblResult = dblResult || (imageBoxes[0]->currentType() == MixImageListBox::DBLIMG);
