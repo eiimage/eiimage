@@ -36,9 +36,11 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
     QDialog(parent)
 {
     this->setWindowTitle(qApp->translate("Operations","Convert to UChar"));
-    this->setMinimumWidth(180);
+    this->setMinimumHeight(180);
 
-    QFormLayout* layout = new QFormLayout(this);
+    QGridLayout* gridLayout = new QGridLayout(this);
+
+    QFormLayout* layout = new QFormLayout();
 
     QStringList text = (QStringList() << qApp->translate("Operations","Crop") << qApp->translate("Operations","Normalize") << qApp->translate("Operations","Add Offset") << qApp->translate("Operations","Scale") << qApp->translate("Operations","Add offset and scale"));
     QLabel* label1 = new QLabel(qApp->translate("Operations","Operation"));
@@ -56,16 +58,17 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
     _label2->setVisible(false);
 
     _label3 = new QLabel("");
+    _label3->setWordWrap(true);
 
     layout->addRow(label1, _comboBox);
     layout->addRow(_label2, _spinBox);
 
-    QHBoxLayout* layout2 = new QHBoxLayout(this);
-    layout2->addWidget(_label3);
-
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this);
-    layout->insertRow(3, buttonBox);
-   // layout->setSizeConstraint(QLayout::SetFixedSize);
+    layout->setSizeConstraint(QLayout::SetFixedSize);
+
+    gridLayout->addLayout(layout,1,1);
+    gridLayout->addWidget(_label3,2,1);
+    gridLayout->addWidget(buttonBox,3,1);
 
 
     QObject::connect(_comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(enableOffset(int)));
@@ -83,16 +86,16 @@ void UCharConvertDialog::changeDescription(int a){
             _label3->setText(qApp->translate("Operations","<i>Rogner : Ne garde que les valeurs comprises entre 0 et 255</i>"));
             break;
         case 1:
-            _label3->setText(qApp->translate("Operations","<i>Normaliser : Mise à l'echelle des valeurs entre 0 et 255 (Opération utilisée pour la visualisation des images doubles)</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Normaliser : Mise à l'echelle des valeurs entre 0 et 255 \n(Opération utilisée pour la visualisation des images doubles)</i>"));
             break;
         case 2: 
-            _label3->setText(qApp->translate("Operations","<i>Ajouter un décalage : décale tous les pixels de l'image de la valeur séléctionnée ci-dessus</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Ajouter un décalage : décale tous les pixels de l'image de\n la valeur séléctionnée ci-dessus</i>"));
             break;
         case 3:
-            _label3->setText(qApp->translate("Operations","<i>Mettre à l'echelle : Ne garde que les valeurs positives et effectue une mise à l'échelle entre 0 et 255</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Mettre à l'echelle : Ne garde que les valeurs positives et\n effectue une mise à l'échelle entre 0 et 255</i>"));
             break;
         case 4:
-            _label3->setText(qApp->translate("Operations","<i>Décaler et mettre à l'echelle : Ajoute un décalge de 127 et effectue une mise à l'echelle</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Décaler et mettre à l'echelle : Ajoute un décalge de 127 et\n effectue une mise à l'echelle</i>"));
             break;
         default:
             _label3->setText(qApp->translate("Operations","<i>Rogner : Ne garde que les valeurs comprises entre 0 et 255</i>"));
