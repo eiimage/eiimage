@@ -156,13 +156,9 @@ void FilterChoice::initUI()
     _stdDevLabel->setVisible(false);
     _stdDevBox->setVisible(false);
 
-   _checkbox_2 = new QCheckBox(tr("Normalisation des coefficients"));
-    QHBoxLayout* hboxlayout = new QHBoxLayout();
+    _checkbox_2 = new QCheckBox(tr("Normalisation des coefficients"));
     _spinbox = new QDoubleSpinBox();
-    _spinbox->setValue(0);
-    _spinbox->setEnabled(false);
-    _spinbox->setMaximum(10000);
-    //_spinbox->setMinimum(0);
+    _spinbox->setMaximum(2147483647);
     _label_3 = new QLabel(tr("Facteur de normalisation :"));
     confLayout->addRow(_checkbox_2);
     confLayout->addRow(_label_3, _spinbox);
@@ -202,6 +198,8 @@ void FilterChoice::initUI()
     QObject::connect(_filterPathSelect, SIGNAL(clicked()), this, SLOT(openFile()));
     QObject::connect(_stdResButton, SIGNAL(toggled(bool)), this, SLOT(updateOptions(bool)));
     QObject::connect(_spinbox, SIGNAL(valueChanged(double)), this, SLOT(displayNormalisation(double)));
+    QObject::connect(_stdDevBox, SIGNAL(valueChanged(double)), this, SLOT(displayNormalisation(double)));
+    QObject::connect(_number, SIGNAL(valueChanged(double)), this, SLOT(displayNormalisation(double)));
 
     QWidget* rightWidget = new QWidget();
     QVBoxLayout* rightLayout = new QVBoxLayout(rightWidget);
@@ -241,6 +239,9 @@ void FilterChoice::initUI()
 
     mainLayout->addWidget(rightWidget);
     layout->addWidget(buttonBox);
+
+    _checkbox_2->setChecked(true);
+    updateOptions(_stdResButton->isChecked());
 
 }
 
@@ -358,7 +359,7 @@ void FilterChoice::showCustom(bool a){
             _checkbox_2->setEnabled(false);
             _label_3->setEnabled(false);
             _spinbox->setEnabled(false);
-            _spinbox->setValue(0);
+            _spinbox->setValue(1);
         }
         else{
             _checkbox_2->setChecked(false);
@@ -389,7 +390,9 @@ void FilterChoice::currentBlurChanged(int a)
  */
 void FilterChoice::dataChanged(const QString&)
 {
-  updateDisplay();
+    if(_checkbox_2->isChecked())
+        updateNormValue();
+    updateDisplay();
 }
 
 /**
@@ -674,7 +677,7 @@ void FilterChoice::showNormalisationOpt(bool a){
     if(a){
         this->updateNormValue();
     }else{
-        _spinbox->setValue(0);
+        _spinbox->setValue(1);
     }
 }
 

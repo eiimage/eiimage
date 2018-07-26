@@ -121,7 +121,6 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 Image* resImg;
                 Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*dblResImg);
                 if(_scaling && _offset ){
-
                     resImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
                 }
                 else if(_scaling){
@@ -132,11 +131,12 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 }
                 else{
                     resImg = Converter<Image>::convertAndRound(*dblResImg);
-                    outputMessage = qApp->translate("FilterinService","Pas de conversion [min : 0, max : 255]").toStdString();
+                    outputMessage = qApp->translate("FilteringService","Pas de conversion [min : 0, max : 255]").toStdString();
 
                 }
                 riw = new StandardImageWindow(resImg, _siw->getPath());
                 _ws->addText(outputMessage);
+                _ws->addText("-------------------------------------------");
             }
 
             if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
@@ -146,7 +146,9 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             i++;
             dblResImg = algo->getInterImg();
         }while(dblResImg != NULL);
-        if(i >1) _ws->addText("L'image résultat la racine des sommes des carrés");
-        _ws->addText("-------------------------------------------");
+        if(i >1){
+            _ws->addText("L'image résultat la racine des sommes des carrés");
+            _ws->addText("-------------------------------------------");
+        }
     }
 }
