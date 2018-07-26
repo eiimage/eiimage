@@ -174,7 +174,7 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
 
 
-            Quantification quantification = dialog->getQuantif(image, c, quantType, true);
+            Quantification quantification = dialog->getQuantif(image, c, quantType);
 
             //Generate the text to print in the information window
             output_msg += quantificationOpLog(c, &quantification);

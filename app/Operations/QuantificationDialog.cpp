@@ -98,8 +98,7 @@ void QuantificationDialog::methodChanged(int method) {
     this->adjustSize();
 }
 
-Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c, std::string &to_print, bool * checkOptiQuant) {
-    *checkOptiQuant = false;
+Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c, std::string &to_print) {
     int size = _sizeBox->value();
     if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
@@ -117,7 +116,6 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
                 break;
         case 4:
                 to_print = QString(tr("Quantification LloydMax :")).toStdString();
-                //*checkOptiQuant = true;
                 return Quantification::lloydMaxQuant(size, image, c);
                 break;
 
