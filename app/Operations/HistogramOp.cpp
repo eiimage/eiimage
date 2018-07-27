@@ -77,8 +77,8 @@ Image* HistogramOp::equalize( const Image *img ) {
         
         CumulatedHistogram hist_sum  = CumulatedHistogram(*img, c);
         double Dm = 255; // number of levels in output image
-        for(unsigned int j = 0; j < img->getHeight(); ++j) {
-            for(unsigned int i = 0; i < img->getWidth(); ++i) {
+        for(unsigned int j = 0; j < img->getHeight(); j++) {
+            for(unsigned int i = 0; i < img->getWidth(); i++) {
                 double K = img->getPixel(i, j, c);
                 K = Dm * hist_sum[(int)K];
                 if( K < 0 ) K = 0;
