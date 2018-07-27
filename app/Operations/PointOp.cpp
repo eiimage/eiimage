@@ -259,50 +259,72 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         }
     }
 
-    if(dblResult) {
-        const DoubleImageWindow* currentDblWnd = dynamic_cast<const DoubleImageWindow*>(currentWnd);
-        const Image_t<double>* image = currentDblWnd ? Converter<Image_t<double> >::convert(*currentDblWnd->getImage()) : Converter<Image_t<double> >::convert(*currentWnd->getDisplayImage());
-        unsigned int maxWidth = image->getWidth();
-        unsigned int maxHeight = image->getHeight();
+    const DoubleImageWindow* currentDblWnd = dynamic_cast<const DoubleImageWindow*>(currentWnd);
+    const Image_t<double>* image = currentDblWnd ? Converter<Image_t<double> >::convert(*currentDblWnd->getImage()) : Converter<Image_t<double> >::convert(*currentWnd->getDisplayImage());
+    unsigned int maxWidth = image->getWidth();
+    unsigned int maxHeight = image->getHeight();
 
 
-        Image_t<double>* resImg;
+    Image_t<double>* resImg;
 
-        if(valueButton->isChecked()) {
-            DoublePixelOp** pixelOps = new DoublePixelOp*[nChannel];
-            if(!colorBox->isChecked()) {
-                QString expr = exprEdits[0]->text();
-                DoublePixelOp* pixelOp = DoublePixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
-                for(int i=0; i<nChannel; ++i) pixelOps[i] = pixelOp;
+    if(valueButton->isChecked()) {
+        DoublePixelOp** pixelOps = new DoublePixelOp*[nChannel];
+        if(!colorBox->isChecked()) {
+            QString expr = exprEdits[0]->text();
+            DoublePixelOp* pixelOp = DoublePixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
+            for(int i=0; i<nChannel; ++i) pixelOps[i] = pixelOp;
+        }
+        else {
+            for(int i=0; i<nChannel; ++i) {
+                QString expr = exprEdits[i+1]->text();
+                pixelOps[i] = DoublePixelOp::fromString(pixOperatorBoxes[i+1]->currentText(), expr);
             }
-            else {
-                for(int i=0; i<nChannel; ++i) {
-                    QString expr = exprEdits[i+1]->text();
-                    pixelOps[i] = DoublePixelOp::fromString(pixOperatorBoxes[i+1]->currentText(), expr);
-                }
-            }
+        }
 
-            resImg = new Image_t<double>(image->getWidth(), image->getHeight(), nChannel);
-            for(int c = 0; c < nChannel; ++c) {
-                for(unsigned int j = 0; j < image->getHeight(); ++j) {
-                    for(unsigned int i = 0; i < image->getWidth(); ++i) {
-                        double value = image->getPixel(i, j, c);
-                        value = pixelOps[c]->operator()(value);
-                        resImg->setPixel(i, j, c, value);
-                    }
+        resImg = new Image_t<double>(image->getWidth(), image->getHeight(), nChannel);
+        for(int c = 0; c < nChannel; ++c) {
+            for(unsigned int j = 0; j < image->getHeight(); ++j) {
+                for(unsigned int i = 0; i < image->getWidth(); ++i) {
+                    double value = image->getPixel(i, j, c);
+                    value = pixelOps[c]->operator()(value);
+                    resImg->setPixel(i, j, c, value);
                 }
             }
         }
+    }
+    else {
+        DoubleImageOp** imageOps = new DoubleImageOp*[nChannel];
+        bool isDblImg[nChannel];
+        const Image_t<double>* dblImageImgs[nChannel];
+        const Image* stdImageImgs[nChannel];
+        if(!colorBox->isChecked()) {
+            DoubleImageOp* imageOp = DoubleImageOp::fromString(imgOperatorBoxes[0]->currentText());
+            for(int i=0; i<nChannel; ++i) imageOps[i] = imageOp;
+            if(imageBoxes[0]->currentType() == MixImageListBox::DBLIMG) {
+                const Image_t<double>* imageImg = imageBoxes[0]->getDblImage(imageBoxes[0]->currentText().toStdString());
+                for(int i=0; i<nChannel; ++i) {
+                    dblImageImgs[i] = imageImg;
+                    isDblImg[i] = true;
+                }
+                maxWidth = min(maxWidth, imageImg->getWidth());
+                maxHeight = min(maxHeight, imageImg->getHeight());
+            }
+            else {
+                const Image* imageImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
+                for(int i=0; i<nChannel; ++i) {
+                    stdImageImgs[i] = imageImg;
+                    isDblImg[i] = false;
+                }
+                maxWidth = min(maxWidth, imageImg->getWidth());
+                maxHeight = min(maxHeight, imageImg->getHeight());
+            }
+
+        }
         else {
-            DoubleImageOp** imageOps = new DoubleImageOp*[nChannel];
-            bool isDblImg[nChannel];
-            const Image_t<double>* dblImageImgs[nChannel];
-            const Image* stdImageImgs[nChannel];
-            if(!colorBox->isChecked()) {
-                DoubleImageOp* imageOp = DoubleImageOp::fromString(imgOperatorBoxes[0]->currentText());
-                for(int i=0; i<nChannel; ++i) imageOps[i] = imageOp;
-                if(imageBoxes[0]->currentType() == MixImageListBox::DBLIMG) {
-                    const Image_t<double>* imageImg = imageBoxes[0]->getDblImage(imageBoxes[0]->currentText().toStdString());
+            for(int i=0; i<nChannel; ++i) {
+                imageOps[i] = DoubleImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
+                if(imageBoxes[i+1]->currentType() == MixImageListBox::DBLIMG) {
+                    const Image_t<double>* imageImg = imageBoxes[i+1]->getDblImage(imageBoxes[i+1]->currentText().toStdString());
                     for(int i=0; i<nChannel; ++i) {
                         dblImageImgs[i] = imageImg;
                         isDblImg[i] = true;
@@ -311,7 +333,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                     maxHeight = min(maxHeight, imageImg->getHeight());
                 }
                 else {
-                    const Image* imageImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
+                    const Image* imageImg = imageBoxes[i+1]->getStdImage(imageBoxes[i+1]->currentText().toStdString());
                     for(int i=0; i<nChannel; ++i) {
                         stdImageImgs[i] = imageImg;
                         isDblImg[i] = false;
@@ -319,53 +341,30 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                     maxWidth = min(maxWidth, imageImg->getWidth());
                     maxHeight = min(maxHeight, imageImg->getHeight());
                 }
-
             }
-            else {
-                for(int i=0; i<nChannel; ++i) {
-                    imageOps[i] = DoubleImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
-                    if(imageBoxes[i+1]->currentType() == MixImageListBox::DBLIMG) {
-                        const Image_t<double>* imageImg = imageBoxes[i+1]->getDblImage(imageBoxes[i+1]->currentText().toStdString());
-                        for(int i=0; i<nChannel; ++i) {
-                            dblImageImgs[i] = imageImg;
-                            isDblImg[i] = true;
-                        }
-                        maxWidth = min(maxWidth, imageImg->getWidth());
-                        maxHeight = min(maxHeight, imageImg->getHeight());
+        }
+        resImg = new Image_t<double>(maxWidth, maxHeight, nChannel);
+        for(int c = 0; c < resImg->getNbChannels(); ++c) {
+            for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
+                for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
+                    double value1 = image->getPixel(i, j, c);
+                    double value2;
+                    if(isDblImg[c]) {
+                        const unsigned int channel = (c < dblImageImgs[c]->getNbChannels() ? c : 0);
+                        value2 = dblImageImgs[c]->getPixel(i, j, channel);
                     }
                     else {
-                        const Image* imageImg = imageBoxes[i+1]->getStdImage(imageBoxes[i+1]->currentText().toStdString());
-                        for(int i=0; i<nChannel; ++i) {
-                            stdImageImgs[i] = imageImg;
-                            isDblImg[i] = false;
-                        }
-                        maxWidth = min(maxWidth, imageImg->getWidth());
-                        maxHeight = min(maxHeight, imageImg->getHeight());
+                        const unsigned int channel = (c < stdImageImgs[c]->getNbChannels() ? c : 0);
+                        value2 = stdImageImgs[c]->getPixel(i, j, channel);
                     }
-                }
-            }
-            resImg = new Image_t<double>(maxWidth, maxHeight, nChannel);
-            for(int c = 0; c < resImg->getNbChannels(); ++c) {
-                for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
-                    for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
-                        double value1 = image->getPixel(i, j, c);
-                        double value2;
-                        if(isDblImg[c]) {
-                            const unsigned int channel = (c < dblImageImgs[c]->getNbChannels() ? c : 0);
-                            value2 = dblImageImgs[c]->getPixel(i, j, channel);
-                        }
-                        else {
-                            const unsigned int channel = (c < stdImageImgs[c]->getNbChannels() ? c : 0);
-                            value2 = stdImageImgs[c]->getPixel(i, j, channel);
-                        }
-                        value1 = imageOps[c]->operator()(value1, value2);
-                        resImg->setPixel(i, j, c, value1);
-                    }
+                    value1 = imageOps[c]->operator()(value1, value2);
+                    resImg->setPixel(i, j, c, value1);
                 }
             }
         }
+    }
 
-
+    if(dblResult) {
         if(currentDblWnd) {
             this->outDoubleImage(resImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
         }
@@ -375,74 +374,29 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         delete image;
     }
     else {
-        const Image* image = dynamic_cast<const StandardImageWindow*>(currentWnd)->getImage();
-        unsigned int maxWidth = image->getWidth();
-        unsigned int maxHeight = image->getHeight();
-
-
-        Image* resImg;
-
-        if(valueButton->isChecked()) {
-            PixelOp** pixelOps = new PixelOp*[nChannel];
-            if(!colorBox->isChecked()) {
-                QString expr = exprEdits[0]->text();
-                PixelOp* pixelOp = PixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
-                for(int i=0; i<nChannel; ++i) pixelOps[i] = pixelOp;
-            }
-            else {
-                for(int i=0; i<nChannel; ++i) {
-                    QString expr = exprEdits[i+1]->text();
-                    pixelOps[i] = PixelOp::fromString(pixOperatorBoxes[i+1]->currentText(), expr);
-                }
-            }
-
-            resImg = new Image(image->getWidth(), image->getHeight(), nChannel);
-            for(int c = 0; c < nChannel; ++c) {
-                for(unsigned int j = 0; j < image->getHeight(); ++j) {
-                    for(unsigned int i = 0; i < image->getWidth(); ++i) {
-                        Image::depth_t value = image->getPixel(i, j, c);
-                        value = pixelOps[c]->operator()(value);
-                        resImg->setPixel(i, j, c, value);
-                    }
-                }
-            }
+        Image * charResImg;
+        bool _scaling = scalingBox->isChecked();
+        bool _offset = offsetBox->isChecked();
+        std::string outputMessage = "";
+        Image_t<int>* intResImg = Converter<Image_t<int> >::convert(*resImg);
+        if(_scaling && _offset ){
+            charResImg  =  Converter<Image>::convertScaleAndOffset(*intResImg, &outputMessage);
         }
-        else {
-            ImageOp** imageOps = new ImageOp*[nChannel];
-            const Image**  imageImgs = new const Image*[nChannel];
-            if(!colorBox->isChecked()) {
-                ImageOp* imageOp = ImageOp::fromString(imgOperatorBoxes[0]->currentText());
-                const Image* imageImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
-                maxWidth = min(maxWidth, imageImg->getWidth());
-                maxHeight = min(maxHeight, imageImg->getHeight());
-                for(int i=0; i<nChannel; ++i) {
-                    imageOps[i] = imageOp;
-                    imageImgs[i] = imageImg;
-                }
-            }
-            else {
-                for(int i=0; i<nChannel; ++i) {
-                    imageOps[i] = ImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
-                    imageImgs[i] = imageBoxes[i+1]->getStdImage(imageBoxes[i+1]->currentText().toStdString());
-                    maxWidth = min(maxWidth, imageImgs[i]->getWidth());
-                    maxHeight = min(maxHeight, imageImgs[i]->getHeight());
-                }
-            }
-            resImg = new Image(maxWidth, maxHeight, nChannel);
-            for(int c = 0; c < resImg->getNbChannels(); ++c) {
-                for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
-                    for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
-                        Image::depth_t value1 = image->getPixel(i, j, c);
-                        const unsigned int channel = (c < imageImgs[c]->getNbChannels() ? c : 0);
-                        Image::depth_t value2 = imageImgs[c]->getPixel(i, j, channel);
-                        value1 = imageOps[c]->operator()(value1, value2);
-                        resImg->setPixel(i, j, c, value1);
-                    }
-                }
-            }
+        else if(_scaling){
+            charResImg =  Converter<Image>::convertAndScale(*intResImg, &outputMessage);
         }
+        else if(_offset){
+            charResImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
+        }
+        else{
+            charResImg = Converter<Image>::convertAndRound(*resImg);
+            outputMessage = qApp->translate("Operations","Pas de conversion [min : 0, max : 255]").toStdString();
 
-        this->outImage(resImg);
+        }
+        this->outText(outputMessage);
+        this->outText("-------------------------------------------");
+
+        this->outImage(charResImg);
     }
 }
 
