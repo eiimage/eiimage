@@ -157,8 +157,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"));
     offsetBox->setAutoExclusive(false);
     scalingBox->setAutoExclusive(false);
-    offsetBox->setEnabled(doubleButton->isChecked());
-    scalingBox->setEnabled(doubleButton->isChecked());
+    offsetBox->setEnabled(!doubleButton->isChecked());
+    scalingBox->setEnabled(!doubleButton->isChecked());
+    offsetBox->setChecked(doubleButton->isChecked());
+    scalingBox->setChecked(doubleButton->isChecked());
     colorBox->setAutoExclusive(false);
     optLayout->addWidget(offsetBox);
     optLayout->addWidget(scalingBox);
@@ -227,8 +229,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     }
     QObject::connect(colorBox, SIGNAL(toggled(bool)), pixelWidget, SLOT(setHidden(bool)));
     QObject::connect(colorBox, SIGNAL(toggled(bool)), colorWidget, SLOT(setVisible(bool)));
-    QObject::connect(doubleButton, SIGNAL(toggled(bool)), offsetBox, SLOT(setEnabled(bool)));
-    QObject::connect(doubleButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setEnabled(bool)));
+    QObject::connect(uCharButton, SIGNAL(toggled(bool)), offsetBox, SLOT(setEnabled(bool)));
+    QObject::connect(uCharButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setEnabled(bool)));
+    QObject::connect(doubleButton, SIGNAL(toggled(bool)), offsetBox, SLOT(setChecked(bool)));
+    QObject::connect(doubleButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setChecked(bool)));
     
     layout->setSizeConstraint(QLayout::SetFixedSize);
     
