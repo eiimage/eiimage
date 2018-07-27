@@ -21,6 +21,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
+#include "../Tools.h"
 
 using namespace std;
 using namespace imagein;
@@ -176,11 +177,11 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
     
     double pred_err_entrop = predction_error_image->getEntropy();
-    sprintf(buffer, "\nL'entropie de l'image d'erreur de prediction vaut : %f\n", pred_err_entrop);
+    sprintf(buffer, qApp->translate("DPCM","\nL'entropie de l'image d'erreur de prediction vaut : %f\n").toUtf8(), pred_err_entrop);
 
 
     double quant_pred_err_entrop = quantized_prediction_error_image->getEntropy();
-    sprintf(buffer2, "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n", quant_pred_err_entrop);
+    sprintf(buffer2, qApp->translate("DPCM", "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n").toUtf8(), quant_pred_err_entrop);
 
 
     returnval = returnval + buffer;
@@ -245,7 +246,7 @@ void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
     if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d", quantdef->nbThresholds() );
+        sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
     }
     int counter;
@@ -260,7 +261,7 @@ void DPCM::set_levels() {
 
 string DPCM::print_iloiqu() {
     string returnval;
-    returnval = "seuils de decision --------------- niveaux de reconstruction\n";
+    returnval = qApp->translate("DPCM","seuils de decision --------------- niveaux de reconstruction\n").toStdString();
     int counter;
     char buffer[100];
     for( counter=1; counter<= iloiqu[0]*2-1; counter++ ) {
@@ -283,7 +284,7 @@ void DPCM::setQuantification( Quantification *tquantdef ) {
     }
     if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
         char buffer[255];
-        sprintf( buffer, "Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d", tquantdef->nbThresholds() );
+        sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;
     }
     quantdef = tquantdef;

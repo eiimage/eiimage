@@ -147,7 +147,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             dblResImg = algo->getInterImg();
         }while(dblResImg != NULL);
         if(i >1){
-            _ws->addText("L'image résultat la racine des sommes des carrés");
+            _ws->addText(tr("L'image résultat la racine des sommes des carrés").toStdString());
             _ws->addText("-------------------------------------------");
         }
     }

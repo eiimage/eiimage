@@ -23,6 +23,7 @@
 #include <string>
 #include <GrayscaleImage.h>
 #include "Quantification.h"
+#include "../Tools.h"
 
 class DPCM
 {

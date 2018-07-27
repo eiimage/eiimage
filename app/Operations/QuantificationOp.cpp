@@ -151,13 +151,13 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
 
     QuantificationDialog* dialog;
 
-  //  if(image != NULL) {
- //       QString imgName = QString::fromStdString(imgList.find(image)->second);
-        dialog = new QuantificationDialog(QApplication::activeWindow(), "bob");
-  //  }
-  //  else {
-  //      dialog = new QuantificationDialog(QApplication::activeWindow());
-  //  }
+    if(image != NULL) {
+        QString imgName = QString::fromStdString(imgList.find(image)->second);
+        dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
+    }
+    else {
+        dialog = new QuantificationDialog(QApplication::activeWindow());
+    }
 
     if(_test){
       dialog->setQuantif(_quantif);
@@ -168,7 +168,7 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
     }
 
 
-  //  if(image != NULL) {
+    if(image != NULL) {
 
         Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
@@ -205,8 +205,8 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         else{
             imgName = QString("");
         }
-        outImage(resImg, "frank"/*imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length())*/);
-   // }
+        outImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
+    }
 
 }
 

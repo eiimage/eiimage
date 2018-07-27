@@ -79,6 +79,7 @@ UCharConvertDialog::UCharConvertDialog(QWidget *parent) :
     changeDescription(0);
 }
 
+
 void UCharConvertDialog::changeDescription(int a){
     switch(a)
     {
@@ -86,16 +87,16 @@ void UCharConvertDialog::changeDescription(int a){
             _label3->setText(qApp->translate("Operations","<i>Rogner : Ne garde que les valeurs comprises entre 0 et 255</i>"));
             break;
         case 1:
-            _label3->setText(qApp->translate("Operations","<i>Normaliser : Mise à l'echelle des valeurs entre 0 et 255 \n(Opération utilisée pour la visualisation des images doubles)</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Normaliser : Mise à l'echelle des valeurs entre 0 et 255 (Opération utilisée pour la visualisation des images doubles)</i>"));
             break;
         case 2: 
-            _label3->setText(qApp->translate("Operations","<i>Ajouter un décalage : décale tous les pixels de l'image de\n la valeur séléctionnée ci-dessus</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Ajouter un décalage : décale tous les pixels de l'image de la valeur séléctionnée ci-dessus</i>"));
             break;
         case 3:
-            _label3->setText(qApp->translate("Operations","<i>Mettre à l'echelle : Ne garde que les valeurs positives et\n effectue une mise à l'échelle entre 0 et 255</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Mettre à l'echelle : Ne garde que les valeurs positives et effectue une mise à l'échelle entre 0 et 255</i>"));
             break;
         case 4:
-            _label3->setText(qApp->translate("Operations","<i>Décaler et mettre à l'echelle : Ajoute un décalge de 127 et\n effectue une mise à l'echelle</i>"));
+            _label3->setText(qApp->translate("Operations","<i>Décaler et mettre à l'echelle : Ajoute un décalge de 127 et effectue une mise à l'echelle</i>"));
             break;
         default:
             _label3->setText(qApp->translate("Operations","<i>Rogner : Ne garde que les valeurs comprises entre 0 et 255</i>"));
