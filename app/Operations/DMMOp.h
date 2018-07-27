@@ -39,6 +39,9 @@ protected:
     imagein::Image* opening(const imagein::Image*, std::vector<imagein::MorphoMat::StructElem::Dir>);
     imagein::Image* closing(const imagein::Image*, std::vector<imagein::MorphoMat::StructElem::Dir>);
     void dmm(const imagein::Image*, std::vector<imagein::MorphoMat::StructElem::Dir>, std::vector<unsigned int>);
+
+private:
+    std::vector<imagein::MorphoMat::StructElem::Dir> transposeElement(std::vector<imagein::MorphoMat::StructElem::Dir>);
 };
 
 #endif // DMMOP_H

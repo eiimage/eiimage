@@ -159,14 +159,14 @@ Image* DMMOp::erosion(const imagein::Image* image, std::vector<imagein::MorphoMa
 Image* DMMOp::opening(const imagein::Image* image, std::vector<imagein::MorphoMat::StructElem::Dir> basicElems) {
 //    outText(QString("Opening with %1 basic elements").arg(basicElems.size()).toStdString());
     Image* tmpImg = erosion(image, basicElems);
-    Image* resImg = dilatation(tmpImg, basicElems);
+    Image* resImg = dilatation(tmpImg, transposeElement(basicElems));
     delete tmpImg;
     return resImg;
 }
 
 Image* DMMOp::closing(const imagein::Image* image, std::vector<imagein::MorphoMat::StructElem::Dir> basicElems) {
     Image* tmpImg = dilatation(image, basicElems);
-    Image* resImg = erosion(tmpImg, basicElems);
+    Image* resImg = erosion(tmpImg, transposeElement(basicElems));
     delete tmpImg;
     return resImg;
 }
@@ -193,4 +193,37 @@ void DMMOp::dmm(const Image* image, vector<StructElem::Dir> basicElems, vector<u
         outImage(components.at(i), qApp->translate("DMMOp", "DMM component #%1").arg(i).toStdString());
     }
     outImage(resImg, qApp->translate("DMM", "DMM error").toStdString());
+}
+
+std::vector<imagein::MorphoMat::StructElem::Dir> DMMOp::transposeElement(std::vector<imagein::MorphoMat::StructElem::Dir> basicElems){
+    std::vector<imagein::MorphoMat::StructElem::Dir> TElem;
+    for(vector<StructElem::Dir>::iterator dir = basicElems.begin(); dir < basicElems.end(); ++dir) {
+        switch(*dir) {
+            case StructElem::Left:
+                TElem.push_back(StructElem::Right);
+                break;
+            case StructElem::TopLeft:
+                TElem.push_back(StructElem::BottomRight);
+                break;
+            case StructElem::Top:
+                TElem.push_back(StructElem::Bottom);
+                break;
+            case StructElem::TopRight:
+                TElem.push_back(StructElem::BottomLeft);
+                break;
+            case StructElem::Right:
+                TElem.push_back(StructElem::Left);
+                break;
+            case StructElem::BottomRight:
+                TElem.push_back(StructElem::TopLeft);
+                break;
+            case StructElem::Bottom:
+                TElem.push_back(StructElem::Top);
+                break;
+            case StructElem::BottomLeft:
+                TElem.push_back(StructElem::TopRight);
+                break;
+        }   
+    }
+    return TElem;
 }
