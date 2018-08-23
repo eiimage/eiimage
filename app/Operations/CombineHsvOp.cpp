@@ -73,9 +73,11 @@ void CombineHSVOp::operator()(const imagein::Image_t<double>*, const map<const i
 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
-    if(code!=QDialog::Accepted) {
-        return;
+    for(int i=0; i<3; i++){
+        if(imageBoxes[i]->currentIndex()==-1) return;
     }
+    if(code!=QDialog::Accepted) return;
+
 
     QColor color;
     int width = imageBoxes[0]->currentImage()->getWidth();

@@ -101,7 +101,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
         }
 
         Image_t<double>* dblResImg = (*algo)(image);
-        unsigned char i = 0;
+        unsigned int i = 0;
         ImageWindow* riw;
         if(_siw->isStandard()) {
             delete image;
@@ -139,8 +139,8 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 _ws->addText("-------------------------------------------");
             }
 
-            if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " Result ");
-            else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " " + i);
+            if(i == 0) riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + qApp->translate("FilteringService"," Result ").toUtf8());
+            else riw->setWindowTitle(_siw->windowTitle() + " - " + _filterChoice->getFilterName() + " - " + QString::number(i).toUtf8() );
 
             emit newImageWindowCreated(_ws->getNodeId(_siw), riw);
             i++;

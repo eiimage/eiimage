@@ -73,7 +73,10 @@ void CombineColorOp::operator()(const imagein::Image*, const std::map<const imag
     }
     else{
       QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-      if(code!=QDialog::Accepted) return;
+      for(int i = 0; i<3; i++){
+          if(imageBoxes[i]->currentIndex()==-1) return;
+      }
+      if(code!=QDialog::Accepted ) return;
     }
 
 
