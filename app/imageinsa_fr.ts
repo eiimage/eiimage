@@ -11,30 +11,34 @@
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+24"/>
         <location filename="../test/testgui.cpp" line="+20"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+15"/>
         <location filename="../test/testgui.cpp" line="+13"/>
         <source>&amp;Encoding</source>
         <oldsource>Encoding</oldsource>
         <translation>&amp;Encodage</translation>
     </message>
     <message>
-        <location line="+8"/>
         <location filename="../test/testgui.cpp" line="+8"/>
         <source>Transforms</source>
         <translation>Transformées</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location filename="main.cpp" line="+13"/>
         <location filename="../test/testgui.cpp" line="+8"/>
         <source>Analysis</source>
         <translation>Analyse</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Colors</source>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -62,14 +66,14 @@
         <translation>Principaux auteurs:</translation>
     </message>
     <message>
-        <location line="+10"/>
+        <location line="+11"/>
         <source>Contributors:</source>
         <translation>Contributeurs:</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+12"/>
         <source>Compiled on %1 at %2</source>
-        <translation>Compilé sur %1 à %2</translation>
+        <translation>Compilé le %1 à %2</translation>
     </message>
 </context>
 <context>
@@ -367,7 +371,7 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">Image couleur reconstituée</translation>
     </message>
     <message>
-        <location filename="Operations/CombineColorOp.cpp" line="+100"/>
+        <location filename="Operations/CombineColorOp.cpp" line="+103"/>
         <source>Reconstructed Color image</source>
         <translation>Image couleur reconstituée</translation>
     </message>
@@ -379,7 +383,7 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">Image reconstituée</translation>
     </message>
     <message>
-        <location filename="Operations/CombineHsvOp.cpp" line="+101"/>
+        <location filename="Operations/CombineHsvOp.cpp" line="+103"/>
         <source>Reconstructed  image</source>
         <translation>Image reconstituée</translation>
     </message>
@@ -808,6 +812,11 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
+    <message>
+        <location line="+8"/>
+        <source> Result </source>
+        <translation> Résultat </translation>
+    </message>
 </context>
 <context>
     <name>FlipOp</name>
@@ -815,18 +824,18 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <location filename="Operations/FlipOp.cpp" line="+30"/>
         <location line="+32"/>
         <source>horizontal</source>
-        <translation>horizontale</translation>
+        <translation>horizontal</translation>
     </message>
     <message>
         <location line="-32"/>
         <location line="+32"/>
         <source>vertical</source>
-        <translation>verticale</translation>
+        <translation>vertical</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>flipped %1</source>
-        <translation>Retournée %1</translation>
+        <translation>Retournement %1</translation>
     </message>
 </context>
 <context>
@@ -1154,8 +1163,8 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="Operations/CombineColorOp.cpp" line="-51"/>
-        <location filename="Operations/CombineHsvOp.cpp" line="-52"/>
+        <location filename="Operations/CombineColorOp.cpp" line="-54"/>
+        <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
         <location filename="Operations/IFFTOp.cpp" line="-150"/>
         <location filename="Operations/NoiseOp.cpp" line="-112"/>
         <location filename="Operations/PointOp.cpp" line="+116"/>
@@ -1364,7 +1373,7 @@ Canal %d :
     <message>
         <location filename="Operations/FlipOp.cpp" line="-32"/>
         <source>Flip %1</source>
-        <translation>Retrournement %1</translation>
+        <translation>Retournement %1</translation>
     </message>
     <message>
         <location filename="Operations/DCTOp.cpp" line="-29"/>
@@ -1621,12 +1630,12 @@ Le débit vaut : %5.2f
     <message>
         <location line="+18"/>
         <source>Offset and scaled</source>
-        <translation>Décalage et échantillonnée</translation>
+        <translation>Décalage et mise à l&apos;échelle</translation>
     </message>
     <message>
         <location line="-9"/>
         <source>Scaled</source>
-        <translation>Echantillonnée</translation>
+        <translation>Échantillonnée</translation>
     </message>
     <message>
         <location filename="Operations/PseudoColorDialog.cpp" line="+36"/>
@@ -2548,7 +2557,7 @@ Le débit vaut : %5.2f
         <location line="+3"/>
         <location line="+6"/>
         <source>Crop</source>
-        <translation>Rogner</translation>
+        <translation>Tronquer</translation>
     </message>
     <message>
         <location line="-5"/>
@@ -2563,12 +2572,12 @@ Le débit vaut : %5.2f
     <message>
         <location line="+1"/>
         <source>Scale</source>
-        <translation>Echantillonner</translation>
+        <translation>Mettre à l&apos;échelle</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Add offset and scale</source>
-        <translation>Décaler et échantillonner</translation>
+        <translation>Décaler et mettre à l&apos;échelle</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2664,7 +2673,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="+6"/>
         <source>Standard deviation : </source>
-        <translation>Ecrt type : </translation>
+        <translation>Ecart type : </translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2945,7 +2954,7 @@ Le débit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-95"/>
+        <location filename="Services/FilteringService.cpp" line="-103"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Appliquer un filtre</translation>
     </message>
@@ -3588,37 +3597,17 @@ Le débit vaut : %5.2f
         <translation type="unfinished">Rogner</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Copy &amp; crop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Convert to grayscale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Convert to binary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>Cumulated histogram</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Column Profile</source>
+        <location line="-2"/>
+        <source>Copy and crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Line Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+28"/>
+        <location line="+30"/>
         <source>Selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3688,6 +3677,11 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+1"/>
+        <source>Cumulated Histogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Horizontal projection histogram</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3697,8 +3691,33 @@ Le débit vaut : %5.2f
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location line="+2"/>
+        <source>Line Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+1"/>
+        <source>Column Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>Pixels grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Colors</source>
+        <translation type="unfinished">Couleurs</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Convert to Binary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Convert to Grayscale</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
