@@ -127,78 +127,102 @@ int main(int argc, char** argv)
     QObject::connect(pluginManager, SIGNAL(removePlugin(OpSet*)), mainService, SLOT(removeOpSet(OpSet*)));
 
     BuiltinOpSet* image = new BuiltinOpSet(qApp->translate("", "&Image").toStdString());
-    image->addOperation(new PointOp());
+
     image->addOperation(new TranslateOp());
     image->addOperation(new RotateOp());
     image->addOperation(new CenterOp());
     image->addOperation(new FlipOp(FlipOp::Horizontal));
     image->addOperation(new FlipOp(FlipOp::Vertical));
     image->addOperation(new SeparatorOp());
-    image->addOperation(new SplitColorOp());
-    image->addOperation(new SplitHsvOp());
-    image->addOperation(new CombineColorOp());
-    image->addOperation(new CombineHSVOp());
+    //Mask and crops here
+    image->addOperation(new SeparatorOp());
+    image->addOperation(new UCharConvertOp());
     image->addOperation(new SeparatorOp());
     image->addOperation(new ScalingOp());
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
-    image->addOperation(new HistogramOp());
     image->addOperation(new SeparatorOp());
-    image->addOperation(new UCharConvertOp());
+    image->addOperation(new HistogramOp());
+    image->addOperation(new PointOp());
+    image->addOperation(new SeparatorOp());
+    image->addOperation(new NoiseOp());
 
+    //à mettre dans oclors
+  /*
+    */
     BuiltinOpSet* tools = new BuiltinOpSet(qApp->translate("", "&Tools").toStdString());
 
-    tools->addOperation(new SignalToNoiseOp());
-    tools->addOperation(new MeanSquaredErrorOp());
-    tools->addOperation(new DoubleEntropyOp());
-    tools->addOperation(new EntropyOp());
-    tools->addOperation(new NoiseOp());
-    tools->addOperation(new SeparatorOp());
     tools->addOperation(new RandomImgOp());
     tools->addOperation(new ColorimetryOp());
     tools->addOperation(new RejectionRingOp());
     tools->addOperation(new SinusSynthesisOp());
+    tools->addOperation(new SeparatorOp());
+    tools->addOperation(new SignalToNoiseOp());
+    tools->addOperation(new MeanSquaredErrorOp());
+    tools->addOperation(new SeparatorOp());
+    tools->addOperation(new EntropyOp());
+    tools->addOperation(new DoubleEntropyOp());
+
+
 
     BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
+
     encode->addOperation(new HuffmanOp());
     encode->addOperation(new DPCMEncodingOp());
+    encode->addOperation(new SeparatorOp());
+    encode->addOperation(new HadamardOp());
+    encode->addOperation(new DCTOp());
 
     BuiltinOpSet* morpho = new BuiltinOpSet("&Morpho. math.");
     morpho->addOperation(new DMMOp());
     morpho->addOperation(new SeparatorOp());
 
-    BuiltinOpSet* transfo = new BuiltinOpSet(qApp->translate("", "Transforms").toStdString());
-    transfo->addOperation(new FFTOp());
-    transfo->addOperation(new IFFTOp());
-    transfo->addOperation(new HadamardOp());
-    transfo->addOperation(new DCTOp());
-    transfo->addOperation(new HoughOp());
-    transfo->addOperation(new InverseHoughOp());
 
     BuiltinOpSet* analyse = new BuiltinOpSet(qApp->translate("", "Analysis").toStdString());
-    analyse->addOperation(new CroissanceOp());
-    analyse->addOperation(new ZeroCrossingOp());
+
+    analyse->addOperation(new FFTOp());
+    analyse->addOperation(new IFFTOp());
+    analyse->addOperation(new SeparatorOp());
+    analyse->addOperation(new HoughOp());
+    analyse->addOperation(new InverseHoughOp());
+    analyse->addOperation(new SeparatorOp());
     analyse->addOperation(new PyramidOp());
     analyse->addOperation(new InversePyramidOp());
+    analyse->addOperation(new SeparatorOp());
+    analyse->addOperation(new CroissanceOp());
+    analyse->addOperation(new SeparatorOp());
+    analyse->addOperation(new ZeroCrossingOp());
+    analyse->addOperation(new SeparatorOp());
     analyse->addOperation(new ClassAnalysisOp());
     analyse->addOperation(new ClassResultOp());
-    analyse->addOperation(new PseudoColorOp());
+
+    BuiltinOpSet* colors = new BuiltinOpSet(qApp->translate("", "Colors").toStdString());
+    colors->addOperation(new SeparatorOp());
+    colors->addOperation(new SplitColorOp());
+    colors->addOperation(new SplitHsvOp());
+    colors->addOperation(new CombineColorOp());
+    colors->addOperation(new CombineHSVOp());
+    colors->addOperation(new SeparatorOp());
+    colors->addOperation(new PseudoColorOp());
 
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
     filter->addOperation(new MedianOp());
 
+
+
     mainService->addOpSet(image);
+    mainService->addOpSet(colors);
     mainService->addOpSet(encode);
     mainService->addOpSet(morpho);
     mainService->addOpSet(analyse);
-    mainService->addOpSet(transfo);
     gi.addService(new MorphoMatService);
     gi.addService(new filtrme::FilteringService);
     mainService->addOpSet(filter);
     mainService->addOpSet(tools);
 
     gi.addService(pluginManager);
+
 
     gi.run();
 
