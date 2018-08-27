@@ -1944,7 +1944,7 @@ Le débit vaut : %5.2f
         <location line="+3"/>
         <source>Decomposition pyramidale avec filtre triangulaire :
 </source>
-        <translation>Décomposition pyramidale avec filtre rectangulaire :
+        <translation>Décomposition pyramidale avec filtre triangulaire :
 </translation>
     </message>
     <message>
