@@ -213,12 +213,14 @@ int main(int argc, char** argv)
 
     mainService->addOpSet(image);
     mainService->addOpSet(colors);
-    mainService->addOpSet(encode);
     mainService->addOpSet(morpho);
-    mainService->addOpSet(analyse);
-    gi.addService(new MorphoMatService);
     gi.addService(new filtrme::FilteringService);
     mainService->addOpSet(filter);
+    mainService->addOpSet(analyse);
+    mainService->addOpSet(encode);
+    gi.addService(new MorphoMatService);
+
+
     mainService->addOpSet(tools);
 
     gi.addService(pluginManager);
