@@ -18,7 +18,6 @@
 */
 
 #include "UCharConvertDialog.h"
-#include "ui_ucharconvertdialog.h"
 #include <Converter.h>
 #include <QDialog>
 #include <QDialogButtonBox>
