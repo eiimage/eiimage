@@ -102,7 +102,7 @@ Open Qt terminal :
 	cd {path}\eiimage //(where you cloned eiimage repository)
 	mkdir build
 	cd build
-	cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Program Files/GnuWin32";C:\Qwt-6.1.3 ..
+	cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Program Files (x86)/GnuWin32";C:\Qwt-6.1.3 ..
 If cmake command does not work, run `set PATH=%PATH%;C:\Qt\5.9.1\mingw53_32\bin` before it.
 
 ### GNU/Linux users
