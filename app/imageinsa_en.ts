@@ -71,7 +71,7 @@
         <translation>Contributors:</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>Compiled on %1 at %2</source>
         <translation>Compiled on %1 at %2</translation>
     </message>
@@ -1571,7 +1571,7 @@ Le debit vaut : %5.2f
         <translation>The image is not in color.</translation>
     </message>
     <message>
-        <location filename="Operations/UCharConvertDialog.cpp" line="+38"/>
+        <location filename="Operations/UCharConvertDialog.cpp" line="+37"/>
         <source>Convert to UChar</source>
         <translation>Convert to UChar</translation>
     </message>
@@ -2543,45 +2543,36 @@ Le debit vaut : %5.2f
 <context>
     <name>UCharConvertDialog</name>
     <message>
-        <location filename="../build/app/ui_ucharconvertdialog.h" line="+114"/>
         <source>Dialog</source>
-        <translation>Dialog</translation>
+        <translation type="vanished">Dialog</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Operation</source>
-        <translation>Operation</translation>
+        <translation type="vanished">Operation</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+6"/>
         <source>Crop</source>
-        <translation>Crop</translation>
+        <translation type="vanished">Crop</translation>
     </message>
     <message>
-        <location line="-5"/>
         <source>Normalize</source>
-        <translation>Normalize</translation>
+        <translation type="vanished">Normalize</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Add Offset</source>
-        <translation>Add offset</translation>
+        <translation type="vanished">Add offset</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Scale</source>
-        <translation>Scale</translation>
+        <translation type="vanished">Scale</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Add offset and scale</source>
-        <translation>Add offset and scale</translation>
+        <translation type="vanished">Add offset and scale</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Offset</source>
-        <translation>Offset</translation>
+        <translation type="vanished">Offset</translation>
     </message>
 </context>
 <context>
@@ -3596,17 +3587,12 @@ Le debit vaut : %5.2f
         <translation type="unfinished">Crop</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Cumulated histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-2"/>
+        <location line="+1"/>
         <source>Copy and crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+29"/>
         <source>Selected</source>
         <translation type="unfinished"></translation>
     </message>
