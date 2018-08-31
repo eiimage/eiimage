@@ -71,7 +71,7 @@
         <translation>Contributeurs:</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+13"/>
         <source>Compiled on %1 at %2</source>
         <translation>Compilé le %1 à %2</translation>
     </message>
@@ -1572,7 +1572,7 @@ Le débit vaut : %5.2f
         <translation>L&apos;image n&apos;est pas en couleur.</translation>
     </message>
     <message>
-        <location filename="Operations/UCharConvertDialog.cpp" line="+38"/>
+        <location filename="Operations/UCharConvertDialog.cpp" line="+37"/>
         <source>Convert to UChar</source>
         <translation>Convertir en UChar</translation>
     </message>
@@ -1594,12 +1594,12 @@ Le débit vaut : %5.2f
     <message>
         <location line="+0"/>
         <source>Scale</source>
-        <translation>Echantillonner</translation>
+        <translation>Mettre à l&apos;échelle</translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Add offset and scale</source>
-        <translation>Décaler et échantillonner</translation>
+        <translation>Décaler et mettre à l&apos;échelle</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1635,7 +1635,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="-9"/>
         <source>Scaled</source>
-        <translation>Échantillonnée</translation>
+        <translation>Mis à l&apos;échelle</translation>
     </message>
     <message>
         <location filename="Operations/PseudoColorDialog.cpp" line="+36"/>
@@ -2544,45 +2544,32 @@ Le débit vaut : %5.2f
 <context>
     <name>UCharConvertDialog</name>
     <message>
-        <location filename="../build/app/ui_ucharconvertdialog.h" line="+114"/>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+1"/>
         <source>Operation</source>
-        <translation>Opération</translation>
+        <translation type="vanished">Opération</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+6"/>
         <source>Crop</source>
-        <translation>Tronquer</translation>
+        <translation type="vanished">Tronquer</translation>
     </message>
     <message>
-        <location line="-5"/>
         <source>Normalize</source>
-        <translation>Normaliser</translation>
+        <translation type="vanished">Normaliser</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Add Offset</source>
-        <translation>Ajouter un décalage</translation>
+        <translation type="vanished">Ajouter un décalage</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Scale</source>
-        <translation>Mettre à l&apos;échelle</translation>
+        <translation type="vanished">Mettre à l&apos;échelle</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>Add offset and scale</source>
-        <translation>Décaler et mettre à l&apos;échelle</translation>
+        <translation type="vanished">Décaler et mettre à l&apos;échelle</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Offset</source>
-        <translation>Décalage</translation>
+        <translation type="vanished">Décalage</translation>
     </message>
 </context>
 <context>
@@ -3597,17 +3584,12 @@ Le débit vaut : %5.2f
         <translation type="unfinished">Rogner</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Cumulated histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-2"/>
+        <location line="+1"/>
         <source>Copy and crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+29"/>
         <source>Selected</source>
         <translation type="unfinished"></translation>
     </message>
