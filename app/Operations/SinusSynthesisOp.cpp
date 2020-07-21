@@ -88,6 +88,18 @@ void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const im
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) return;
+    
+    if(dialog->getWidth()==0 || dialog->getHeight()==0){
+        QMessageBox *msgBox;
+        msgBox = new QMessageBox(QObject::tr("Warning"),
+            QObject::tr(" Empty image creation is not allowed "),
+            QMessageBox::Warning,
+            QMessageBox::Ok | QMessageBox::Default,
+            QMessageBox::NoRole | QMessageBox::Escape,
+            0);
+        msgBox->show();
+        return;
+    }
 
     GrayscaleImage* resImg = new GrayscaleImage(sizeBox->value(), sizeBox->value());
 
