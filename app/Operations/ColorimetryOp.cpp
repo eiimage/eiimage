@@ -47,6 +47,19 @@ void ColorimetryOp::operator()(const imagein::Image*, const std::map<const image
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     QColor color = dialog->getColor();
     if(code!=QDialog::Accepted) return;
+    
+    if(dialog->getWidth()==0 || dialog->getHeight()==0){
+        QMessageBox *msgBox;
+        msgBox = new QMessageBox(QObject::tr("Warning"),
+            QObject::tr(" Empty image creation is not allowed "),
+            QMessageBox::Warning,
+            QMessageBox::Ok | QMessageBox::Default,
+            QMessageBox::NoRole | QMessageBox::Escape,
+            0);
+        msgBox->show();
+        return;
+    }
+    
     Image* resImg = new Image(dialog->getWidth(), dialog->getHeight(), 3);
     for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
         for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
