@@ -112,6 +112,18 @@ void RandomImgOp::operator()(const imagein::Image*, const std::map<const imagein
     if(code!=QDialog::Accepted) {
         return;
     }
+    
+    if(dialog->getWidth()==0 || dialog->getHeight()==0){
+        QMessageBox *msgBox;
+        msgBox = new QMessageBox(QObject::tr("Warning"),
+            QObject::tr(" Empty image creation is not allowed "),
+            QMessageBox::Warning,
+            QMessageBox::Ok | QMessageBox::Default,
+            QMessageBox::NoRole | QMessageBox::Escape,
+            0);
+        msgBox->show();
+        return;
+    }
 
     if(intButton->isChecked()) {
 
