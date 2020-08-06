@@ -22,6 +22,7 @@
 #include <QDialog>
 #include <QFormLayout>
 #include <QComboBox>
+#include <QMessageBox>
 #include <QDoubleSpinBox>
 #include <QDialogButtonBox>
 #include <QApplication>
@@ -47,6 +48,20 @@ void ColorimetryOp::operator()(const imagein::Image*, const std::map<const image
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     QColor color = dialog->getColor();
     if(code!=QDialog::Accepted) return;
+
+    /*Pop-up a warning window if the input value of width or height equals to 0*/
+    if( dialog->getWidth()==0 || dialog->getHeight()==0 ){
+            QMessageBox *msgBox;
+            msgBox = new QMessageBox(QString(qApp->translate("ColorimetryOp","Warning")),
+                QString(qApp->translate("ColorimetryOp", "Empty image generation is not allowed")),
+                QMessageBox::Warning,
+                QMessageBox::Ok | QMessageBox::Default,
+                QMessageBox::NoRole | QMessageBox::Escape,
+                0);
+            msgBox->show();
+            return;
+    }
+
     Image* resImg = new Image(dialog->getWidth(), dialog->getHeight(), 3);
     for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
         for(unsigned int i = 0; i < resImg->getWidth(); ++i) {

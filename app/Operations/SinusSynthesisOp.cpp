@@ -20,6 +20,7 @@
 #include "SinusSynthesisOp.h"
 #include "../Tools.h"
 #include <QDialog>
+#include <QMessageBox>
 #include <QFormLayout>
 #include <QComboBox>
 #include <QSpinBox>
@@ -89,6 +90,18 @@ void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const im
 
     if(code!=QDialog::Accepted) return;
 
+    /*Pop-up a warning window if the required image size equals to 0*/
+    if( sizeBox->value()==0 ){
+            QMessageBox *msgBox;
+            msgBox = new QMessageBox(QString(qApp->translate("SinusSynthesisOp","Warning")),
+                QString(qApp->translate("SinusSynthesisOp", "Image size can not be zero")),
+                QMessageBox::Warning,
+                QMessageBox::Ok | QMessageBox::Default,
+                QMessageBox::NoRole | QMessageBox::Escape,
+                0);
+            msgBox->show();
+            return;
+    }
     GrayscaleImage* resImg = new GrayscaleImage(sizeBox->value(), sizeBox->value());
 
     double angle = angleBox->value();

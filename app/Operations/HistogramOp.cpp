@@ -74,8 +74,8 @@ Image* HistogramOp::equalize( const Image *img ) {
     Image* resImg = new Image(img->getWidth(), img->getHeight(), img->getNbChannels());
 
     for(unsigned int c = 0; c < img->getNbChannels(); ++c) {
-        
-        CumulatedHistogram hist_sum  = CumulatedHistogram(*img, c);
+        imagein::Rectangle rect;
+        CumulatedHistogram hist_sum  = CumulatedHistogram(*img, c, rect);
         double Dm = 255; // number of levels in output image
         for(unsigned int j = 0; j < img->getHeight(); j++) {
             for(unsigned int i = 0; i < img->getWidth(); i++) {
