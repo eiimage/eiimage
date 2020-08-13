@@ -64,6 +64,9 @@ PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString e
     if(op=="-") return new DoublePixAdd(-expr.toDouble());
     if(op=="*") return new DoublePixMul(expr.toDouble());
     if(op=="/") return new DoublePixMul(1/expr.toDouble());
+    if(op=="&") return new DoublePixAnd(expr.toDouble());
+    if(op=="|") return new DoublePixOr(expr.toDouble());
+    if(op=="^") return new DoublePixXor(expr.toDouble());
     if(op=="") return new DoublePixIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new DoublePixIdent();
@@ -81,11 +84,15 @@ PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new ImgIdent();
 }
+
 PointOp::DoubleImageOp* PointOp::DoubleImageOp::fromString(QString op) {
     if(op=="+") return new DoubleImgAdd();
     if(op=="-") return new DoubleImgSub();
     if(op=="*") return new DoubleImgMul();
     if(op=="/") return new DoubleImgDiv();
+    if(op=="&") return new DoubleImgAnd();
+    if(op=="|") return new DoubleImgOr();
+    if(op=="^") return new DoubleImgXor();
     if(op=="") return new DoubleImgIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new DoubleImgIdent();
@@ -118,14 +125,18 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QVBoxLayout* layout = new QVBoxLayout();
     dialog->setLayout(layout);
 
+    /*The generation order of the widgets does not match the layout, exchange their positions*/
     QGroupBox* radioGroup = new QGroupBox(qApp->translate("PointOp", "Second operand"), dialog);
-    QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
-    QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
-
-    QGroupBox* radioGroup2 = new QGroupBox(qApp->translate("PointOp", "Output image"), dialog);
+//    QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
+//    QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
     QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
     QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
 
+    QGroupBox* radioGroup2 = new QGroupBox(qApp->translate("PointOp", "Output image"), dialog);
+//    QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
+//    QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
+    QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
+    QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
 
 
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
@@ -294,6 +305,8 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     }
     else {
         DoubleImageOp** imageOps = new DoubleImageOp*[nChannel];
+        /*The double image process exist already, but cases of standard images is ignored*/
+        ImageOp** imageOpsStd = new ImageOp*[nChannel];
         bool isDblImg[nChannel];
         const Image_t<double>* dblImageImgs[nChannel];
         const Image* stdImageImgs[nChannel];
@@ -311,7 +324,9 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             }
             else {
                 const Image* imageImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
+                ImageOp* imageOpStd = ImageOp::fromString(imgOperatorBoxes[0]->currentText());
                 for(int i=0; i<nChannel; ++i) {
+                    imageOpsStd[i] = imageOpStd;
                     stdImageImgs[i] = imageImg;
                     isDblImg[i] = false;
                 }
@@ -357,7 +372,11 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                         const unsigned int channel = (c < stdImageImgs[c]->getNbChannels() ? c : 0);
                         value2 = stdImageImgs[c]->getPixel(i, j, channel);
                     }
-                    value1 = imageOps[c]->operator()(value1, value2);
+                    if(isDblImg[c]){
+                        value1 = imageOps[c]->operator()(value1, value2);
+                    }else{
+                        value1 = imageOpsStd[c]->operator()(value1, value2);
+                    }
                     resImg->setPixel(i, j, c, value1);
                 }
             }

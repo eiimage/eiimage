@@ -106,14 +106,32 @@ class PointOp : public GenericOperation {
         intmax_t op(depth_t pixel) { return pixel & value; }
     };
 
+    /*Return zero if the operands have zero*/
+    struct DoublePixAnd : DoublePixelOp {
+        DoublePixAnd(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return (pixel==0 or value==0) ? 0 : pixel; }
+    };
+
     struct PixOr : PixOp_t<depth_t> {
         PixOr(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel | value; }
     };
 
+    /*Return zero only if the operands are both zero*/
+    struct DoublePixOr : DoublePixelOp {
+        DoublePixOr(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return (pixel==0 and value==0) ? 0 : pixel; }
+    };
+
     struct PixXor : PixOp_t<depth_t> {
         PixXor(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel ^ value; }
+    };
+
+    /*Return zero only if the operands have the same value*/
+    struct DoublePixXor : DoublePixelOp {
+        DoublePixXor(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return (pixel==value) ? 0 : pixel; }
     };
 
     struct PixLshift : PixOp_t<unsigned int> {
@@ -181,16 +199,26 @@ class PointOp : public GenericOperation {
     struct ImgAnd : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 & pix2; } 
     };
+
+    struct DoubleImgAnd : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1==0 or pix2==0) ? 0 : pix1;}
+    };
     
     struct ImgOr : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 | pix2; } 
     };
     
+    struct DoubleImgOr : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1==0 and pix2==0) ? 0 : pix1;}
+    };
+
     struct ImgXor : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 ^ pix2; } 
     };
 
-
+    struct DoubleImgXor : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1 == pix2) ? 0 : pix1; }
+    };
 
 };
 
