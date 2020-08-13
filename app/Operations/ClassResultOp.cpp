@@ -55,8 +55,10 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
     borderBox->setSuffix(" px");
     innerBox->setValue(8);
     borderBox->setValue(2);
-    formLayout->insertRow(0, qApp->translate("ClassResult", "Critère de zone intérieure : "), innerBox);
-    formLayout->insertRow(1, qApp->translate("ClassResult", "Critère de zone frontière : "), borderBox);
+//    formLayout->insertRow(0, qApp->translate("ClassResult", "Critère de zone intérieure : "), innerBox);
+//    formLayout->insertRow(1, qApp->translate("ClassResult", "Critère de zone frontière : "), borderBox);
+    formLayout->insertRow(0, qApp->translate("ClassResult", "Largeur de couronne pour conserver la zone centrale : "), innerBox);
+    formLayout->insertRow(1, qApp->translate("ClassResult", "Largeur de couronne pour conserver la zone extérieure : "), borderBox);
     layout->addWidget(new QLabel(qApp->translate("ClassResult", "<b>Critère de zones (relatifs aux zones totales) : </b>")));
     layout->addLayout(formLayout);
     layout->addWidget(new QLabel(qApp->translate("ClassResult", "<b>Select the image's classes zones : </b>")));
@@ -72,8 +74,11 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
 
     string returnval;
 
-    int param1 = 2;
-    int param2 = 8;
+//    int param1 = 2;
+//    int param2 = 8;
+    /*The input parameters are not used*/
+    int param1 = borderBox->value();
+    int param2 = innerBox->value();
     vector<Rectangle> selection = zoneSelector->getSelections();
     int K = selection.size();
     int* classes = new int[K];
