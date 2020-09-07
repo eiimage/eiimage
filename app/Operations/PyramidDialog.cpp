@@ -86,3 +86,9 @@ void PyramidDialog::setOneStepChecked(bool a){
 void PyramidDialog::setOneStep(int a){
     ui->onlyStepBox->setValue(a);
 }
+
+/*Update the maximum decomposition level according to the size of the input image*/
+void PyramidDialog::updateMaxLevel(int max)
+{
+    ui->stepBox->setMaximum(max);
+}

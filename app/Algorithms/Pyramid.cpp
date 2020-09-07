@@ -24,6 +24,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
+#include <Converter.h>
 using namespace std;
 using namespace imagein;
 using namespace Pyramid;
@@ -133,7 +134,7 @@ void Filters::getDefault( Filtre &to_fill ) {
 }
 
 /*---------------------------------------------------------------------------
-    Cration de l'tage suivant de la pyramide Gaussienne
+    Creation de l'étage suivant de la pyramide Gaussienne
 ---------------------------------------------------------------------------*/
 void Pyramid::etage_suiv_g(const uint8_t *srcTab, uint8_t *dstTab, int srcWidth, int srcHeight, Filtre &utile)
 {
@@ -157,11 +158,12 @@ void Pyramid::etage_suiv_g(const uint8_t *srcTab, uint8_t *dstTab, int srcWidth,
 //            dstTab[i + j * dstWidth] = intermed[i + 2 * j * dstWidth];
         }
     }
-    delete intermed;
+//    delete intermed;
+    delete[] intermed;
 }
 
 /*---------------------------------------------------------------------------
-    Cration d'une pyramide Gaussienne jusqu'au nime tage
+    Creation d'une pyramide Gaussienne jusqu'au n-ième étage
 ---------------------------------------------------------------------------*/
 void Pyramid::pyram_g_n(uint8_t *rep, int nStage, long nbc, long nbl, const uint8_t *itab, Filtre &utile)
 {
@@ -185,7 +187,7 @@ void Pyramid::pyram_g_n(uint8_t *rep, int nStage, long nbc, long nbl, const uint
 }
 
 /*---------------------------------------------------------------------------
-    Creation d'une pyramide Laplacienne jusqu'au nime tage
+    Creation d'une pyramide Laplacienne jusqu'au n-ième étage
 ---------------------------------------------------------------------------*/
 void Pyramid::pyram_l_n (uint8_t *rep,int n, long nbc, long nbl, const uint8_t *itab, Filtre &utile)
 {
@@ -228,19 +230,19 @@ void Pyramid::pyram_l_n (uint8_t *rep,int n, long nbc, long nbl, const uint8_t *
 
 
 /*---------------------------------------------------------------------------
-    Cration d'une pyramide Gaussienne avec entre en conversationnel
-    des diffrentes proprits de cette pyramide
+    Creation d'une pyramide Gaussienne avec entrée en conversationnel
+    des diffrentes propriétés de cette pyramide
 ---------------------------------------------------------------------------*/
 Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, Filtre &utile, string &to_print)
 {
     if(!( im != NULL )) {
-        throw "Error in Pyramid::pyram_g:\nim = NULL";
+        throw "Error : Image is NULL";
     }
     if(!( im->getWidth() == im->getHeight() )) {
-        throw  "Error in Pyramid::pyram_g:\nim->getWidth() != im->getHeight()";
+        throw  "Error : Image has different width and height";
     }
     if( !isPowerOf2(im->getWidth()) ) {
-        throw  "Error in Pyramid::pyram_g:\nimage dimensions not a power of 2";
+        throw  "Error : Image dimension is not a power of 2";
     }
     long nbl = im->getHeight();
     long nbc = im->getWidth();
@@ -263,7 +265,7 @@ Image *Pyramid::pyram_g(const GrayscaleImage *im, int etage_f, Filtre &utile, st
     return resImg;
 }
 /*---------------------------------------------------------------------------
-    Cration d'un tage de la  pyramide Gaussienne
+    Creation d'un étage de la  pyramide Gaussienne
 ---------------------------------------------------------------------------*/
 Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile, std::string &to_print)
 {
@@ -309,8 +311,8 @@ Image *Pyramid::n_pyram_g(const Image *im, int etage_f, Filtre &utile, std::stri
     return resImg;
 }
 /*---------------------------------------------------------------------------
-    Cration d'une pyramide Laplacienne avec entre en conversationnel
-    des diffrentes proprits de cette pyramide
+    Creation d'une pyramide Laplacienne avec entrée en conversationnel
+    des diffrentes propriétés de cette pyramide
 ---------------------------------------------------------------------------*/
 Image *Pyramid::pyram_l (const Image *im, int etage_f, Filtre &utile, string &to_print)
 {
@@ -342,7 +344,7 @@ Image *Pyramid::pyram_l (const Image *im, int etage_f, Filtre &utile, string &to
 
 }
 /*---------------------------------------------------------------------------
-    Cration d'un tage de la  pyramide Laplacienne
+    Creation d'un étage de la  pyramide Laplacienne
 ---------------------------------------------------------------------------*/
 Image *Pyramid::n_pyram_l(const Image *im, int etage_f, Filtre &utile, std::string &to_print)
 {
@@ -666,85 +668,87 @@ Image *Pyramid::rebuild_interface( const Image *pyramid, int etage_f, int pyrami
     // etage_f = stage that the original image was built to
     char buffer[255];
     if(!pyramid) {
-        throw "Error in TP6Pyramid::rebuild_interface:\npyramid = NULL";
+        throw "Error : Pyramid = NULL";
     }
     if(pyramid->getWidth() * 2 != pyramid->getHeight()) {
-        sprintf( buffer, "Error in TP6Pyramid::rebuild_interface:\npyramid->getWidth = %d, pyramid->getHeight = %d", pyramid->getWidth(), pyramid->getHeight() );
+        sprintf( buffer, "Error : Unsuitable size - pyramid->getWidth = %d, pyramid->getHeight = %d", pyramid->getWidth(), pyramid->getHeight());
         throw buffer;
     }
     if(!(isPowerOf2(pyramid->getWidth()))) {
-        throw "Error in TP6Pyramid::rebuild_interface:\npyramid->getWidth not a power of 2";
+        throw "Error : Height and width are not multiples of 2";
     }
     if( etage_f <= 0 || (1 << etage_f) > pyramid->getWidth() ) {
-        throw "Error in TP6Pyramid::rebuild_interface:\nInvalid etage_f specified";
+        throw "Error : Invalid etage_f specified";
     }
     if(pyramid_to < 0 || pyramid_to >= etage_f) {
-        throw "Error in TP6Pyramid::rebuild_interface:\nInvalid pyramid_to specified";
+        throw "Error : Rebuild pyramid should at a higher level";
     }
+
+    /*The reconstructed image has the same length and width*/
     long nbc = pyramid->getWidth();
-    long nbl = pyramid->getWidth();
-    int i;
-    int j=0;
-    int taille_c=nbc;
-    int taille_l=nbl;
-    Image *returnval = NULL;
-    int taille;
-    int q=0;
-    int etage_rec;
-    const uint8_t *pyra1 = pyramid->begin();
-    uint8_t* intermed = new uint8_t[nbc * nbc / 2 * 3];
-    uint8_t* rep = new uint8_t[nbc * nbc / 2 * 3];
+       long nbl = pyramid->getWidth();
+       int i;
+       int j=0;
+       int taille_c=nbc;
+       int taille_l=nbl;
+       Image *returnval = NULL;
+       int taille;
+       int q=0;
+       int etage_rec;
+       const uint8_t *pyra1 = pyramid->begin();
+       uint8_t* intermed = new uint8_t[nbc * nbc / 2 * 3];
+       uint8_t* rep = new uint8_t[nbc * nbc / 2 * 3];
 
-    // Copy info into rep in a packed format
-    long current_offset = 0;
-    long current_rep_offset = 0;
-    for(int n = 0; n <= etage_f; ++n) {
-        for(int j=0; j< taille_l; j++ ) {
-            for(int i=0; i< taille_c; i++ ) {
-                rep[current_rep_offset + j * taille_c + i] = pyra1[current_offset + j * pyramid->getWidth() + i];
-            }
-        }
-        current_offset = current_offset + taille_l * nbc;
-        current_rep_offset = current_rep_offset + taille_l * taille_c;
-        taille_l = taille_l / 2;
-        taille_c = taille_c / 2;
-    }
+       // Copy info into rep in a packed format
+       long current_offset = 0;
+       long current_rep_offset = 0;
+       for(int n = 0; n <= etage_f; ++n) {
+           for(int j=0; j< taille_l; j++ ) {
+               for(int i=0; i< taille_c; i++ ) {
+                   rep[current_rep_offset + j * taille_c + i] = pyra1[current_offset + j * pyramid->getWidth() + i];
+               }
+           }
+           current_offset = current_offset + taille_l * nbc;
+           current_rep_offset = current_rep_offset + taille_l * taille_c;
+           taille_l = taille_l / 2;
+           taille_c = taille_c / 2;
+       }
 
-/* reconstruction de l'image  partir de sa pyramide laplacienne en s'arretant
-     un niveau etage_rec choisi par l'utilisateur
-    La pyramide est contenue dans la zone mmoire pointe par rep */
-    etage_rec = pyramid_to;
-    taille=nbc;
+   /* reconstruction de l'image  partir de sa pyramide laplacienne en s'arretant
+        un niveau etage_rec choisi par l'utilisateur
+       La pyramide est contenue dans la zone mmoire pointe par rep */
+       etage_rec = pyramid_to;
+       taille=nbc;
 
-    for(i=0;i<etage_f;i++)
-    {
-        q=q+taille*taille;
-        taille=taille/2;
-    }
-    for(i=q;i<q+taille*taille;i++)
-    {
-        *(intermed+i)=*(rep+i);
-    }
-    for(i=etage_f;i>etage_rec;i--)
-    {
-        agrandir((intermed+q),(intermed+q-taille*taille*4),taille,taille,utile);
-        taille=taille*2;
-        q=q-taille*taille;
-        for(j=q;j<q+taille*taille;j++)
-        {
-            int value = rep[j];
-            if(value > 128) value = value - 256;
-            value = value + intermed[j];
-            if(value < 0) value = 0;
-            if(value > 255) value = 255;
-            intermed[j] = value;
-        }
-    }
-    //printf("Entrez le nom du fichier de l'image reconstruite :");
-    //scanf("%s",nom);
-    //ecrire_image((intermed+q),nom,taille,taille);
-    returnval = new GrayscaleImage(taille, taille, intermed+q);
-    free(intermed);
-    free(rep);
-    return returnval;
-}
+       for(i=0;i<etage_f;i++)
+       {
+           q=q+taille*taille;
+           taille=taille/2;
+       }
+       for(i=q;i<q+taille*taille;i++)
+       {
+           *(intermed+i)=*(rep+i);
+       }
+       for(i=etage_f;i>etage_rec;i--)
+       {
+           agrandir((intermed+q),(intermed+q-taille*taille*4),taille,taille,utile);
+           taille=taille*2;
+           q=q-taille*taille;
+           for(j=q;j<q+taille*taille;j++)
+           {
+               int value = rep[j];
+               if(value > 128) value = value - 256;
+               value = value + intermed[j];
+               if(value < 0) value = 0;
+               if(value > 255) value = 255;
+               intermed[j] = value;
+           }
+       }
+       //printf("Entrez le nom du fichier de l'image reconstruite :");
+       //scanf("%s",nom);
+       //ecrire_image((intermed+q),nom,taille,taille);
+       returnval = new GrayscaleImage(taille, taille, intermed+q);
+       free(intermed);
+       free(rep);
+       return returnval;
+   }

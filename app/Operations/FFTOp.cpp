@@ -93,8 +93,9 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
                 }
             }
         }
-        this->outDoubleImage(phaseImg, qApp->translate("FFTOp", "DFT (phase)").toStdString(), true, false);
-        this->outDoubleImage(magnitudeImg, qApp->translate("FFTOp", "DFT (magnitude)").toStdString(), true, true);
+        /*(imagein::ImageDouble* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false)*/
+        this->outDoubleImage(phaseImg, qApp->translate("FFTOp", "DFT (Phase)").toStdString(), false, true);
+        this->outDoubleImage(magnitudeImg, qApp->translate("FFTOp", "DFT (Magnitude)").toStdString(), false, true);
     }
     else {
         Image_t<double>* realImg = new Image_t<double>(width, height, image->getNbChannels());
@@ -138,8 +139,11 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
                 }
             }
         }
-        this->outDoubleImage(realImg, "FFT (real)", true, true);
-        this->outDoubleImage(imagImg, "FFT (imag)", true, true);
+//        this->outDoubleImage(realImg, "FFT (real)", true, true);
+//        this->outDoubleImage(imagImg, "FFT (imag)", true, true);
+        /*Offset disabled by default*/
+        this->outDoubleImage(realImg, "FFT (Real part)", false, true);
+        this->outDoubleImage(imagImg, "FFT (Imaginary part)", false, true);
     }
 
 

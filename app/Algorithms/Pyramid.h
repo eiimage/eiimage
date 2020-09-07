@@ -52,8 +52,8 @@ namespace Pyramid
     *   Size is the maximum index to search for coefficient in the coeff_f[] 
     */
     struct Filtre {
-                char nom_f[30];         //!< Name of the filter 
-                float coeff_f[10];      //!< Coefficient of the filter 
+          char nom_f[30];         //!< Name of the filter
+          float coeff_f[10];      //!< Coefficient of the filter
           int taille_f;                 //!< Size of the filter
     };
 
@@ -61,7 +61,7 @@ namespace Pyramid
     * \Class Filters
     * \Brief A class used for pyramid operation
     *   
-    * This class regroup all all the filters possible in a tab 
+    * This class regroup all the filters possible in a tab
     */
     class Filters
     {
@@ -290,6 +290,16 @@ namespace Pyramid
      */
     std::string n_entropie_p(const uint8_t *pyra, int etage_f,int nbc,int nbl);
 
+    /**
+     * @brief Return the image reconstructed from a single layer in pyramide
+     *
+     * @param to_rebuild pyramid layer to rebuild
+     * @param etage_f number of level in the pyramid
+     * @param to_rebuild_to level to reconstruct
+     * @param utile filter to use
+     * @return imagein::Image* the output reconstructed image
+     */
+    imagein::Image* rebuild_basic(const imagein::Image *layer, int etage_f, int to_rebuild_to, Filtre &utile );
 
     /**
      * @brief Return the image reconstructed from a pyramide

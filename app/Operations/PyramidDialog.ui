@@ -81,7 +81,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="nbStepLabel">
        <property name="text">
-        <string>Number of steps : </string>
+        <string>Number of levels : </string>
        </property>
       </widget>
      </item>
@@ -102,7 +102,7 @@
      <item>
       <widget class="QCheckBox" name="oneStepBox">
        <property name="text">
-        <string>Create only one step :</string>
+        <string>Create only one level :</string>
        </property>
       </widget>
      </item>

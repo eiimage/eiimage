@@ -50,11 +50,12 @@ PointOp::PixelOp* PointOp::PixelOp::fromString(QString op, QString expr) {
     if(op=="-") return new PixAdd(-expr.toInt(0,0));
     if(op=="*") return new PixMul(expr.toDouble());
     if(op=="/") return new PixMul(1/expr.toDouble());
-    if(op=="&") return new PixAnd(expr.toUInt(0,0));
-    if(op=="|") return new PixOr(expr.toUInt(0,0));
-    if(op=="^") return new PixXor(expr.toUInt(0,0));
-    if(op=="<<") return new PixLshift(expr.toUInt(0,0));
-    if(op==">>") return new PixRshift(expr.toUInt(0,0));
+    if(op=="&& (logical AND)") return new PixLogicalAnd(expr.toUInt(0,0));
+    if(op=="|| (logical OR)") return new PixLogicalOr(expr.toUInt(0,0));
+    if(op=="^^ (logical XOR)") return new PixLogicalXor(expr.toUInt(0,0));
+    /*The operator of shift operations is considered as a double to simplify the structure*/
+//    if(op=="<<") return new PixLshift(expr.toUInt(0,0));
+//    if(op==">>") return new PixRshift(expr.toUInt(0,0));
     if(op=="") return new PixIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new PixIdent();
@@ -64,9 +65,11 @@ PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString e
     if(op=="-") return new DoublePixAdd(-expr.toDouble());
     if(op=="*") return new DoublePixMul(expr.toDouble());
     if(op=="/") return new DoublePixMul(1/expr.toDouble());
-    if(op=="&") return new DoublePixAnd(expr.toDouble());
-    if(op=="|") return new DoublePixOr(expr.toDouble());
-    if(op=="^") return new DoublePixXor(expr.toDouble());
+    if(op=="&& (logical AND)") return new DoublePixLogicalAnd(expr.toDouble());
+    if(op=="|| (logical OR)") return new DoublePixLogicalOr(expr.toDouble());
+    if(op=="^^ (logical XOR)") return new DoublePixLogicalXor(expr.toDouble());
+    if(op=="<<") return new PixLshift(expr.toDouble());
+    if(op==">>") return new PixRshift(expr.toDouble());
     if(op=="") return new DoublePixIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new DoublePixIdent();
@@ -75,11 +78,12 @@ PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString e
 PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     if(op=="+") return new ImgAdd();
     if(op=="-") return new ImgSub();
-    if(op=="&") return new ImgAnd();
     if(op=="*") return new ImgMul();
     if(op=="/") return new ImgDiv();
-    if(op=="|") return new ImgOr();
-    if(op=="^") return new ImgXor();
+    if(op=="& (bit-wise AND)") return new ImgBitAnd();
+    if(op=="! (bit-wise NOT)") return new ImgBitNot();
+    if(op=="| (bit-wise OR)") return new ImgBitOr();
+    if(op=="^ (bit-wise XOR)") return new ImgBitXor();
     if(op=="") return new ImgIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new ImgIdent();
@@ -90,9 +94,7 @@ PointOp::DoubleImageOp* PointOp::DoubleImageOp::fromString(QString op) {
     if(op=="-") return new DoubleImgSub();
     if(op=="*") return new DoubleImgMul();
     if(op=="/") return new DoubleImgDiv();
-    if(op=="&") return new DoubleImgAnd();
-    if(op=="|") return new DoubleImgOr();
-    if(op=="^") return new DoubleImgXor();
+    if(op=="! (bit-wise NOT)") return new DoubleImgBitNot();
     if(op=="") return new DoubleImgIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
     return new DoubleImgIdent();
@@ -100,10 +102,12 @@ PointOp::DoubleImageOp* PointOp::DoubleImageOp::fromString(QString op) {
 
 void PointOp::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
 
-    QStringList pixOperators, imgOperators;
+    QStringList pixOperators, imgOperators, pixDoubleOperators;
 
-    pixOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^" << "<<" << ">>";
-    imgOperators << "" << "+" << "-" << "*" << "/" << "&" << "|" << "^";
+    pixOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "|| (logical OR)" << "^^ (logical XOR)" << "<<" << ">>";
+    pixDoubleOperators << "" << "+" << "-" << "*" << "/";
+    imgOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "! (bit-wise NOT)" << "| (bit-wise OR)" << "^ (bit-wise XOR)";
+
     QString currentImgName = currentWnd->windowTitle();
     map<const Image*,string> stdImgList;
     map<const Image_t<double>*,string> dblImgList;
@@ -125,19 +129,17 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QVBoxLayout* layout = new QVBoxLayout();
     dialog->setLayout(layout);
 
-    /*The generation order of the widgets does not match the layout, exchange their positions*/
     QGroupBox* radioGroup = new QGroupBox(qApp->translate("PointOp", "Second operand"), dialog);
-//    QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
-//    QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
     QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
+    valueButton->setWhatsThis(qApp->translate("PointOp", "Enter a real number in the blank space below as the second operand"));
     QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
+    imageButton->setWhatsThis(qApp->translate("PointOp", "Select an image as the second operand"));
 
     QGroupBox* radioGroup2 = new QGroupBox(qApp->translate("PointOp", "Output image"), dialog);
-//    QRadioButton* valueButton = new QRadioButton(qApp->translate("PointOp", "Value"));
-//    QRadioButton* imageButton = new QRadioButton(qApp->translate("PointOp", "Image"));
     QRadioButton* uCharButton = new QRadioButton(qApp->translate("PointOp", "UChar"));
+    uCharButton->setWhatsThis(qApp->translate("PointOp", "Output the result image in uchar format"));
     QRadioButton* doubleButton = new QRadioButton(qApp->translate("PointOp", "Double"));
-
+    doubleButton->setWhatsThis(qApp->translate("PointOp", "Output the result image in double format"));
 
     QHBoxLayout* radioLayout = new QHBoxLayout(radioGroup);
     radioLayout->addWidget(valueButton);
@@ -152,7 +154,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     valueButton->setChecked(true);
     uCharButton->setChecked(true);
 
-
     //Si l'image est une image double le bouton est obligatoirement coché
     if(currentWnd->isDouble()){
         doubleButton->setChecked(true);
@@ -164,8 +165,11 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QHBoxLayout* optLayout = new QHBoxLayout();
     QGridLayout* gridLayout = new QGridLayout();
     QCheckBox* offsetBox = new QCheckBox(qApp->translate("PointOp","Offset"));
+    offsetBox->setWhatsThis(qApp->translate("PointOp", "Add an offset of 127 to fit negative values"));
     QCheckBox* scalingBox = new QCheckBox(qApp->translate("PointOp","Scaling"));
+    scalingBox->setWhatsThis(qApp->translate("PointOp", "Map the value of each pixel to the range of 0-255 proportionally"));
     QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"));
+    colorBox->setWhatsThis(qApp->translate("PointOp", "Check this option to execute the manipulation by channel"));
     offsetBox->setAutoExclusive(false);
     scalingBox->setAutoExclusive(false);
     offsetBox->setEnabled(!doubleButton->isChecked());
@@ -193,8 +197,15 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QWidget* pixelWidget = new QWidget(dialog);
     valueLayouts[0] = new QHBoxLayout();
     pixOperatorBoxes[0] = new QComboBox(pixelWidget);
+    pixOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list which takes a value as operand: \n The input operand will be rounded down for shift operations"));
     imgOperatorBoxes[0] = new QComboBox(pixelWidget);
-    pixOperatorBoxes[0]->addItems(pixOperators);
+    imgOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list whick takes an image as operand: \n The bit-wise NOT operation will automatically ignore the second image"));
+    if(currentWnd->isStandard()){
+        pixOperatorBoxes[0]->addItems(pixOperators);
+    }
+    if(currentWnd->isDouble()){
+        pixOperatorBoxes[0]->addItems(pixDoubleOperators);
+    }
     imgOperatorBoxes[0]->addItems(imgOperators);
     exprEdits[0] = new QLineEdit(pixelWidget);
     exprEdits[0]->setFixedWidth(64);
@@ -215,7 +226,13 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         valueLayouts[i] = new QHBoxLayout();
         pixOperatorBoxes[i] = new QComboBox(colorWidget);
         imgOperatorBoxes[i] = new QComboBox(colorWidget);
-        pixOperatorBoxes[i]->addItems(pixOperators);
+        if(currentWnd->isStandard()){
+            pixOperatorBoxes[i]->addItems(pixOperators);
+        }
+        if(currentWnd->isDouble()){
+            pixOperatorBoxes[i]->addItems(pixDoubleOperators);
+        }
+
         imgOperatorBoxes[i]->addItems(imgOperators);
         exprEdits[i] = new QLineEdit(colorWidget);
         exprEdits[i]->setFixedWidth(64);
@@ -244,7 +261,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QObject::connect(uCharButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setEnabled(bool)));
     QObject::connect(doubleButton, SIGNAL(toggled(bool)), offsetBox, SLOT(setChecked(bool)));
     QObject::connect(doubleButton, SIGNAL(toggled(bool)), scalingBox, SLOT(setChecked(bool)));
-    
+
     layout->setSizeConstraint(QLayout::SetFixedSize);
     
     QPushButton *okButton = new QPushButton(qApp->translate("Operations", "Validate"), dialog);
