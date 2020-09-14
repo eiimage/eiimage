@@ -17,6 +17,8 @@ set(imageinsa_SOURCES
 	Algorithms/Pyramid.cpp
 	Algorithms/Pyramid.cpp
 	Algorithms/Pyramid.h
+        Operations/AbsoluteConvertOp.cpp
+        Operations/AbsoluteConvertOp.h
 	Operations/BFlitOp.cpp
 	Operations/BFlitOp.h
 	Operations/CenterOp.cpp
@@ -97,6 +99,7 @@ set(imageinsa_SOURCES
 	Operations/NoiseOp.h
 	Operations/PointOp.cpp
 	Operations/PointOp.h
+        Operations/MyQLineEdit.h
 	Operations/PseudoColorDialog.cpp
 	Operations/PseudoColorDialog.h
 	Operations/PseudoColorOp.cpp

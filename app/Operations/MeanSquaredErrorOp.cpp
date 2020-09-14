@@ -81,7 +81,9 @@ void MeanSquaredErrorOp::operator()(const imagein::Image* image, const std::map<
 
     mse = mse / static_cast<double>(maxChannel * maxWidth * maxHeight);
     me = me / static_cast<double>(maxChannel * maxWidth * maxHeight);
-    QString text = qApp->translate("MeanSquareErrorOp", "Mean squarred error : %1 (mean error : %2)");
+//    QString text = qApp->translate("MeanSquareErrorOp", "Mean squarred error : %1 (mean error : %2)");
+    /*Change the name to match the calculation performed*/
+    QString text = qApp->translate("MeanSquareErrorOp", "Mean squarred error : %1 (mean absolute error : %2)");
     text = text.arg(mse, 0, 'f', 2);
     text = text.arg(me, 0, 'f', 2);
 

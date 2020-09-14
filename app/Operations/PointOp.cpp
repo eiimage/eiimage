@@ -28,13 +28,14 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QGroupBox>
+#include <QDebug>
 
 #include "PointOp.h"
 #include <Widgets/ImageListBox.h>
 #include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <Widgets/ImageWidgets/DoubleImageWindow.h>
 #include <Converter.h>
-
+#include "MyQLineEdit.h"
 #include "../Tools.h"
 
 using namespace std;
@@ -42,7 +43,7 @@ using namespace imagein;
 using namespace genericinterface;
 
 PointOp::PointOp() : GenericOperation(qApp->translate("Operations", "Pixel operations").toStdString()) {
-    
+
 }
 
 PointOp::PixelOp* PointOp::PixelOp::fromString(QString op, QString expr) {
@@ -50,14 +51,17 @@ PointOp::PixelOp* PointOp::PixelOp::fromString(QString op, QString expr) {
     if(op=="-") return new PixAdd(-expr.toInt(0,0));
     if(op=="*") return new PixMul(expr.toDouble());
     if(op=="/") return new PixMul(1/expr.toDouble());
+    if(op=="& (bit-wise AND)") return new PixBitwiseAnd(expr.toUInt(0,0));
     if(op=="&& (logical AND)") return new PixLogicalAnd(expr.toUInt(0,0));
+    if(op=="! (logical NOT)") return new PixLogicalNot(expr.toUInt(0,0));
+    if(op=="| (bit-wise OR)") return new PixBitwiseOr(expr.toUInt(0,0));
     if(op=="|| (logical OR)") return new PixLogicalOr(expr.toUInt(0,0));
+    if(op=="^ (bit-wise XOR)") return new PixBitwiseXor(expr.toUInt(0,0));
     if(op=="^^ (logical XOR)") return new PixLogicalXor(expr.toUInt(0,0));
-    /*The operator of shift operations is considered as a double to simplify the structure*/
-//    if(op=="<<") return new PixLshift(expr.toUInt(0,0));
-//    if(op==">>") return new PixRshift(expr.toUInt(0,0));
+    if(op=="<<") return new PixLshift(expr.toUInt(0,0));
+    if(op==">>") return new PixRshift(expr.toUInt(0,0));
     if(op=="") return new PixIdent();
-    std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
+    std::cout << "Unknown operator '" << op.toStdString() << "' ! PixelOp" << std::endl;
     return new PixIdent();
 }
 PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString expr) {
@@ -65,13 +69,12 @@ PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString e
     if(op=="-") return new DoublePixAdd(-expr.toDouble());
     if(op=="*") return new DoublePixMul(expr.toDouble());
     if(op=="/") return new DoublePixMul(1/expr.toDouble());
-    if(op=="&& (logical AND)") return new DoublePixLogicalAnd(expr.toDouble());
-    if(op=="|| (logical OR)") return new DoublePixLogicalOr(expr.toDouble());
-    if(op=="^^ (logical XOR)") return new DoublePixLogicalXor(expr.toDouble());
-    if(op=="<<") return new PixLshift(expr.toDouble());
-    if(op==">>") return new PixRshift(expr.toDouble());
+    if(op=="&& (logical AND)") return new DoublePixLogicalAnd(expr.toUInt());
+    if(op=="! (logical NOT)") return new DoublePixLogicalNot(expr.toUInt());
+    if(op=="|| (logical OR)") return new DoublePixLogicalOr(expr.toUInt());
+    if(op=="^^ (logical XOR)") return new DoublePixLogicalXor(expr.toUInt());
     if(op=="") return new DoublePixIdent();
-    std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
+    std::cout << "Unknown operator '" << op.toStdString() << "' ! DoublePixelOp" << std::endl;
     return new DoublePixIdent();
 }
 
@@ -80,12 +83,14 @@ PointOp::ImageOp* PointOp::ImageOp::fromString(QString op) {
     if(op=="-") return new ImgSub();
     if(op=="*") return new ImgMul();
     if(op=="/") return new ImgDiv();
-    if(op=="& (bit-wise AND)") return new ImgBitAnd();
-    if(op=="! (bit-wise NOT)") return new ImgBitNot();
-    if(op=="| (bit-wise OR)") return new ImgBitOr();
-    if(op=="^ (bit-wise XOR)") return new ImgBitXor();
+    if(op=="& (bit-wise AND)") return new ImgBitwiseAnd();
+    if(op=="&& (logical AND)") return new ImgLogicalAnd();
+    if(op=="| (bit-wise OR)") return new ImgBitwiseOr();
+    if(op=="|| (logical OR)") return new ImgLogicalOr();
+    if(op=="^ (bit-wise XOR)") return new ImgBitwiseXor();
+    if(op=="^^ (logical XOR)") return new ImgLogicalXor();
     if(op=="") return new ImgIdent();
-    std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
+    std::cout << "Unknown operator '" << op.toStdString() << "' ! ImageOp" << std::endl;
     return new ImgIdent();
 }
 
@@ -94,19 +99,22 @@ PointOp::DoubleImageOp* PointOp::DoubleImageOp::fromString(QString op) {
     if(op=="-") return new DoubleImgSub();
     if(op=="*") return new DoubleImgMul();
     if(op=="/") return new DoubleImgDiv();
-    if(op=="! (bit-wise NOT)") return new DoubleImgBitNot();
+    if(op=="&& (logical AND)") return new DoubleImgLogicalAnd();
+    if(op=="|| (logical OR)") return new DoubleImgLogicalOr();
+    if(op=="^^ (logical XOR)") return new DoubleImgLogicalXor();
     if(op=="") return new DoubleImgIdent();
-    std::cout << "Unknown operator '" << op.toStdString() << "' !" << std::endl;
+    std::cout << "Unknown operator '" << op.toStdString() << "' ! DoubleImageOp" << std::endl;
     return new DoubleImgIdent();
 }
 
 void PointOp::operator()(const ImageWindow* currentWnd, const vector<const ImageWindow*>& wndList) {
 
-    QStringList pixOperators, imgOperators, pixDoubleOperators;
+    QStringList pixOperators, pixDoubleOperators, imgOperators, imgDoubleOperators;
 
-    pixOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "|| (logical OR)" << "^^ (logical XOR)" << "<<" << ">>";
-    pixDoubleOperators << "" << "+" << "-" << "*" << "/";
-    imgOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "! (bit-wise NOT)" << "| (bit-wise OR)" << "^ (bit-wise XOR)";
+    pixOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "&& (logical AND)" << "! (logical NOT)" << "| (bit-wise OR)" << "|| (logical OR)" << "^ (bit-wise XOR)" << "^^ (logical XOR)" << "<<" << ">>";
+    pixDoubleOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "! (logical NOT)" << "|| (logical OR)" << "^^ (logical XOR)";
+    imgOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "&& (logical AND)" << "| (bit-wise OR)" << "|| (logical OR)" << "^ (bit-wise XOR)" << "^^ (logical XOR)";
+    imgDoubleOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "|| (logical OR)" << "^^ (logical XOR)";
 
     QString currentImgName = currentWnd->windowTitle();
     map<const Image*,string> stdImgList;
@@ -122,7 +130,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         }
     }
 
-    
     QDialog* dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Parameters"));
     dialog->setMinimumWidth(180);
@@ -191,24 +198,32 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QHBoxLayout** valueLayouts = new QHBoxLayout*[nChannel+1];
     QComboBox** pixOperatorBoxes = new QComboBox*[nChannel+1];
     QComboBox** imgOperatorBoxes = new QComboBox*[nChannel+1];
-    QLineEdit** exprEdits = new QLineEdit*[nChannel+1];
+    MyQLineEdit** exprEdits = new MyQLineEdit*[nChannel+1];
     MixImageListBox** imageBoxes = new MixImageListBox*[nChannel+1];
 
     QWidget* pixelWidget = new QWidget(dialog);
+    QWidget* imgWidget = new QWidget(dialog);
     valueLayouts[0] = new QHBoxLayout();
     pixOperatorBoxes[0] = new QComboBox(pixelWidget);
     pixOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list which takes a value as operand: \n The input operand will be rounded down for shift operations"));
-    imgOperatorBoxes[0] = new QComboBox(pixelWidget);
+    imgOperatorBoxes[0] = new QComboBox(imgWidget);
     imgOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list whick takes an image as operand: \n The bit-wise NOT operation will automatically ignore the second image"));
+
     if(currentWnd->isStandard()){
         pixOperatorBoxes[0]->addItems(pixOperators);
-    }
-    if(currentWnd->isDouble()){
+        imgOperatorBoxes[0]->addItems(imgOperators);
+    }else{
         pixOperatorBoxes[0]->addItems(pixDoubleOperators);
+        imgOperatorBoxes[0]->addItems(imgDoubleOperators);
     }
-    imgOperatorBoxes[0]->addItems(imgOperators);
-    exprEdits[0] = new QLineEdit(pixelWidget);
+
+    exprEdits[0] = new MyQLineEdit(pixelWidget);
     exprEdits[0]->setFixedWidth(64);
+/*************************************************************/
+/*Overwrite QLineEdit class, send signals according to the change of combobox content to determine the corresponding supported input data type*/
+    QObject::connect(pixOperatorBoxes[0], SIGNAL(currentTextChanged(QString)), exprEdits[0], SLOT(updateValidator(QString)));
+    QObject::connect(imgOperatorBoxes[0], SIGNAL(currentTextChanged(QString)), exprEdits[0], SLOT(updateValidator(QString)));
+/*************************************************************/
     imageBoxes[0] = new MixImageListBox(pixelWidget, currentImgName.toStdString(), stdImgList, dblImgList);
     valueLayouts[0]->addWidget(new QLabel(currentImgName, pixelWidget));
     valueLayouts[0]->addWidget(pixOperatorBoxes[0]);
@@ -228,14 +243,15 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         imgOperatorBoxes[i] = new QComboBox(colorWidget);
         if(currentWnd->isStandard()){
             pixOperatorBoxes[i]->addItems(pixOperators);
-        }
-        if(currentWnd->isDouble()){
+            imgOperatorBoxes[i]->addItems(imgOperators);
+        }else{
             pixOperatorBoxes[i]->addItems(pixDoubleOperators);
+            imgOperatorBoxes[i]->addItems(imgDoubleOperators);
         }
-
-        imgOperatorBoxes[i]->addItems(imgOperators);
-        exprEdits[i] = new QLineEdit(colorWidget);
+        exprEdits[i] = new MyQLineEdit(colorWidget);
         exprEdits[i]->setFixedWidth(64);
+        QObject::connect(pixOperatorBoxes[i], SIGNAL(currentTextChanged(QString)), exprEdits[i], SLOT(updateValidator(QString)));
+        QObject::connect(imgOperatorBoxes[i], SIGNAL(currentTextChanged(QString)), exprEdits[i], SLOT(updateValidator(QString)));
         imageBoxes[i] = new MixImageListBox(colorWidget, currentImgName.toStdString(), stdImgList, dblImgList);
         valueLayouts[i]->addWidget(new QLabel(currentImgName+"::"+Tools::colorName(i-1, nChannel), colorWidget));
         valueLayouts[i]->addWidget(pixOperatorBoxes[i]);
@@ -292,109 +308,125 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     unsigned int maxWidth = image->getWidth();
     unsigned int maxHeight = image->getHeight();
 
-
-    Image_t<double>* resImg;
+    Image_t<double>* resDoubleImg;
+    Image* resImg;
 
     if(valueButton->isChecked()) {
-        DoublePixelOp** pixelOps = new DoublePixelOp*[nChannel];
+        PixelOp** pixelOps = new PixelOp*[nChannel];
+        DoublePixelOp** doublePixelOps = new DoublePixelOp*[nChannel];
         if(!colorBox->isChecked()) {
             QString expr = exprEdits[0]->text();
-            DoublePixelOp* pixelOp = DoublePixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
-            for(int i=0; i<nChannel; ++i) pixelOps[i] = pixelOp;
+            PixelOp* pixelOp = PixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
+            DoublePixelOp* doublePixelOp = DoublePixelOp::fromString(pixOperatorBoxes[0]->currentText(), expr);
+            for(int i=0; i<nChannel; ++i){
+                pixelOps[i] = pixelOp;
+                doublePixelOps[i] = doublePixelOp;
+            }
         }
         else {
             for(int i=0; i<nChannel; ++i) {
                 QString expr = exprEdits[i+1]->text();
-                pixelOps[i] = DoublePixelOp::fromString(pixOperatorBoxes[i+1]->currentText(), expr);
+                pixelOps[i] = PixelOp::fromString(imgOperatorBoxes[i+1]->currentText(), expr);
+                doublePixelOps[i] = DoublePixelOp::fromString(imgOperatorBoxes[i+1]->currentText(), expr);
             }
         }
 
-        resImg = new Image_t<double>(image->getWidth(), image->getHeight(), nChannel);
+        resImg = new Image(image->getWidth(), image->getHeight(), nChannel);
+        resDoubleImg = new Image_t<double>(image->getWidth(), image->getHeight(), nChannel);
         for(int c = 0; c < nChannel; ++c) {
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
-                    double value = image->getPixel(i, j, c);
-                    value = pixelOps[c]->operator()(value);
-                    resImg->setPixel(i, j, c, value);
+                    if(dblResult){
+                        double value1 = image->getPixel(i, j, c);
+                        double value2 = doublePixelOps[c]->operator()(value1);
+                        resDoubleImg->setPixel(i, j, c, value2);
+                    }else{
+                        int value1 = image->getPixel(i, j, c);
+                        int value2 = pixelOps[c]->operator()(value1);
+                        resImg->setPixel(i, j, c, value2);
+                    }
                 }
             }
         }
     }
     else {
-        DoubleImageOp** imageOps = new DoubleImageOp*[nChannel];
         /*The double image process exist already, but cases of standard images is ignored*/
-        ImageOp** imageOpsStd = new ImageOp*[nChannel];
+        ImageOp** stdImageOps = new ImageOp*[nChannel];
+        DoubleImageOp** dblImageOps = new DoubleImageOp*[nChannel];
+
         bool isDblImg[nChannel];
         const Image_t<double>* dblImageImgs[nChannel];
         const Image* stdImageImgs[nChannel];
         if(!colorBox->isChecked()) {
-            DoubleImageOp* imageOp = DoubleImageOp::fromString(imgOperatorBoxes[0]->currentText());
-            for(int i=0; i<nChannel; ++i) imageOps[i] = imageOp;
+            DoubleImageOp* dblImageOp = DoubleImageOp::fromString(imgOperatorBoxes[0]->currentText());
+            ImageOp* stdImageOp = ImageOp::fromString(imgOperatorBoxes[0]->currentText());
+            for(int i=0; i<nChannel; ++i){
+                stdImageOps[i] = stdImageOp;
+                dblImageOps[i] = dblImageOp;
+            }
             if(imageBoxes[0]->currentType() == MixImageListBox::DBLIMG) {
-                const Image_t<double>* imageImg = imageBoxes[0]->getDblImage(imageBoxes[0]->currentText().toStdString());
+                const Image_t<double>* dblImg = imageBoxes[0]->getDblImage(imageBoxes[0]->currentText().toStdString());
                 for(int i=0; i<nChannel; ++i) {
-                    dblImageImgs[i] = imageImg;
+                    dblImageImgs[i] = dblImg;
                     isDblImg[i] = true;
                 }
-                maxWidth = min(maxWidth, imageImg->getWidth());
-                maxHeight = min(maxHeight, imageImg->getHeight());
+                maxWidth = min(maxWidth, dblImg->getWidth());
+                maxHeight = min(maxHeight, dblImg->getHeight());
             }
             else {
-                const Image* imageImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
-                ImageOp* imageOpStd = ImageOp::fromString(imgOperatorBoxes[0]->currentText());
+                const Image* stdImg = imageBoxes[0]->getStdImage(imageBoxes[0]->currentText().toStdString());
                 for(int i=0; i<nChannel; ++i) {
-                    imageOpsStd[i] = imageOpStd;
-                    stdImageImgs[i] = imageImg;
+                    stdImageImgs[i] = stdImg;
                     isDblImg[i] = false;
                 }
-                maxWidth = min(maxWidth, imageImg->getWidth());
-                maxHeight = min(maxHeight, imageImg->getHeight());
+                maxWidth = min(maxWidth, stdImg->getWidth());
+                maxHeight = min(maxHeight, stdImg->getHeight());
             }
-
         }
         else {
             for(int i=0; i<nChannel; ++i) {
-                imageOps[i] = DoubleImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
+                stdImageOps[i] = ImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
+                dblImageOps[i] = DoubleImageOp::fromString(imgOperatorBoxes[i+1]->currentText());
                 if(imageBoxes[i+1]->currentType() == MixImageListBox::DBLIMG) {
-                    const Image_t<double>* imageImg = imageBoxes[i+1]->getDblImage(imageBoxes[i+1]->currentText().toStdString());
+                    const Image_t<double>* dblImg = imageBoxes[i+1]->getDblImage(imageBoxes[i+1]->currentText().toStdString());
                     for(int i=0; i<nChannel; ++i) {
-                        dblImageImgs[i] = imageImg;
+                        dblImageImgs[i] = dblImg;
                         isDblImg[i] = true;
                     }
-                    maxWidth = min(maxWidth, imageImg->getWidth());
-                    maxHeight = min(maxHeight, imageImg->getHeight());
+                    maxWidth = min(maxWidth, dblImg->getWidth());
+                    maxHeight = min(maxHeight, dblImg->getHeight());
                 }
                 else {
-                    const Image* imageImg = imageBoxes[i+1]->getStdImage(imageBoxes[i+1]->currentText().toStdString());
+                    const Image* stdImg = imageBoxes[i+1]->getStdImage(imageBoxes[i+1]->currentText().toStdString());
                     for(int i=0; i<nChannel; ++i) {
-                        stdImageImgs[i] = imageImg;
+                        stdImageImgs[i] = stdImg;
                         isDblImg[i] = false;
                     }
-                    maxWidth = min(maxWidth, imageImg->getWidth());
-                    maxHeight = min(maxHeight, imageImg->getHeight());
+                    maxWidth = min(maxWidth, stdImg->getWidth());
+                    maxHeight = min(maxHeight, stdImg->getHeight());
                 }
             }
         }
-        resImg = new Image_t<double>(maxWidth, maxHeight, nChannel);
+
+        resImg = new Image(maxWidth, maxHeight, nChannel);
+        resDoubleImg = new Image_t<double>(maxWidth, maxHeight, nChannel);
         for(int c = 0; c < resImg->getNbChannels(); ++c) {
             for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
                 for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
-                    double value1 = image->getPixel(i, j, c);
-                    double value2;
                     if(isDblImg[c]) {
+                        double value1 = image->getPixel(i, j, c);
                         const unsigned int channel = (c < dblImageImgs[c]->getNbChannels() ? c : 0);
-                        value2 = dblImageImgs[c]->getPixel(i, j, channel);
+                        double value2 = dblImageImgs[c]->getPixel(i, j, channel);
+                        double resVal = dblImageOps[c]->operator()(value1, value2);
+                        resDoubleImg->setPixel(i, j, c, resVal);
                     }
                     else {
+                        int value1 = image->getPixel(i, j, c);
                         const unsigned int channel = (c < stdImageImgs[c]->getNbChannels() ? c : 0);
-                        value2 = stdImageImgs[c]->getPixel(i, j, channel);
+                        int value2 = stdImageImgs[c]->getPixel(i, j, channel);
+                        int resVal = stdImageOps[c]->operator()(value1, value2);
+                        resImg->setPixel(i, j, c, resVal);
                     }
-                    if(isDblImg[c]){
-                        value1 = imageOps[c]->operator()(value1, value2);
-                    }else{
-                        value1 = imageOpsStd[c]->operator()(value1, value2);
-                    }
-                    resImg->setPixel(i, j, c, value1);
                 }
             }
         }
@@ -402,15 +434,15 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
 
     if(dblResult) {
         if(currentDblWnd) {
-            this->outDoubleImage(resImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
+            this->outDoubleImage(resDoubleImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
         }
         else {
-            this->outDoubleImage(resImg, "", false, false);
+            this->outDoubleImage(resDoubleImg, "", false, false);
         }
         delete image;
     }
     else {
-        Image * charResImg;
+        Image* charResImg;
         bool _scaling = scalingBox->isChecked();
         bool _offset = offsetBox->isChecked();
         std::string outputMessage = "";
@@ -425,9 +457,8 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             charResImg = Converter<Image>::convertAndOffset(*intResImg, &outputMessage);
         }
         else{
-            charResImg = Converter<Image>::convertAndRound(*resImg);
+            charResImg = Converter<Image>::convert(*resImg);
             outputMessage = qApp->translate("Operations","Pas de conversion [min : 0, max : 255]").toStdString();
-
         }
         this->outText(outputMessage);
         this->outText("-------------------------------------------");

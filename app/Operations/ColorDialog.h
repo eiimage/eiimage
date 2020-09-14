@@ -21,6 +21,8 @@
 #define COLORDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QPixmap>
 
 namespace Ui {
 class ColorDialog;
@@ -36,6 +38,9 @@ public:
     QColor getColor() const;
     unsigned int getWidth() const;
     unsigned int getHeight() const;
+
+public slots:
+    void getHint();
 
 private:
     Ui::ColorDialog *ui;

@@ -126,7 +126,7 @@ void outDoubleImage(imagein::ImageDouble* img, std::string title = "", bool norm
 
 
 /**
- * @brief %Output some text to th user interface.
+ * @brief %Output some text to the user interface.
  *
  * @param std::string The text to output, may contain multiple lines.
  */

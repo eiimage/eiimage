@@ -73,6 +73,8 @@ void SinusSynthesisOp::operator()(const imagein::Image*, const std::map<const im
     colorBox->addItem(qApp->translate("SinusSynthesisOp", "2 (Black and white)"));
     layout->insertRow(0, radioGroup);
     layout->insertRow(1, qApp->translate("SinusSynthesisOp", "Image size (width=height) : "), sizeBox);
+    /*Set the default initial size to 512*512 */
+    sizeBox->setValue(512);
     layout->insertRow(2, qApp->translate("SinusSynthesisOp", "Signal period (pixel) : "), periodBox);
     QLabel* orientationLabel = new QLabel(qApp->translate("SinusSynthesisOp", "Orientation (°): "));
     layout->insertRow(3, orientationLabel, angleBox);

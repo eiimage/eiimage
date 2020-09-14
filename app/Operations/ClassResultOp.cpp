@@ -79,7 +79,6 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
 //    int param2 = 8;
     /*The input parameters are not used*/
     int param1 = borderBox->value();
-    /*int paramBorderBox = borderBox->value();*/
     int param2 = innerBox->value();
     vector<Rectangle> selection = zoneSelector->getSelections();
     int K = selection.size();

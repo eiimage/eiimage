@@ -56,13 +56,11 @@ void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const i
                 resImgH->setPixelAt(i,j,color.hue());
                 resImgS->setPixelAt(i,j,color.saturation());
                 resImgV->setPixelAt(i,j,color.value());
-
             }
         }
         this->outDoubleImage(resImgH, "Hue",false,false);
         this->outDoubleImage(resImgS, "Saturation",false,false);
         this->outDoubleImage(resImgV, "Value",false,false);
-
 
 }
 

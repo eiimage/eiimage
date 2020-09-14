@@ -27,6 +27,7 @@ ColorDialog::ColorDialog(QWidget *parent) :
     ui->setupUi(this);
     ui->hsvWidget->setVisible(false);
     this->adjustSize();
+    connect(ui->hintButton,SIGNAL(clicked()),this,SLOT(getHint()));
 }
 
 ColorDialog::~ColorDialog()
@@ -56,4 +57,15 @@ unsigned int ColorDialog::getWidth() const {
 
 unsigned int ColorDialog::getHeight() const {
     return ui->heightBox->value();
+}
+
+void ColorDialog::getHint() {
+    QDialog* hint = new QDialog(QApplication::activeWindow());
+    hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip for Qt HSV Color Model")));
+    hint->setLayout(new QVBoxLayout);
+    QLabel* pic = new QLabel(hint);
+    pic->setPixmap(QPixmap(":/images/qcolor-hsv.png"));
+    hint->resize(1180,360);
+    pic->resize(hint->size());
+    hint->show();
 }

@@ -24,6 +24,7 @@
 #include <map>
 #include <limits>
 #include <QCoreApplication>
+
 #include "Operation.h"
 #include "Image.h"
 
@@ -50,6 +51,9 @@ class PointOp : public GenericOperation {
         return static_cast<depth_t>(value);
     }
 
+/*----------------------------------------------------------------------
+                        Pixel Operation Templates
+----------------------------------------------------------------------*/
     struct PixelOp {
         virtual depth_t operator()(depth_t pixel) {
             return normalize(this->op(pixel));
@@ -66,7 +70,9 @@ class PointOp : public GenericOperation {
         static DoublePixelOp* fromString(QString op, QString expr);
         double value;
     };
-
+/*----------------------------------------------------------------------
+                       Pixel Identical Operation
+----------------------------------------------------------------------*/
     struct PixIdent : PixelOp {
         intmax_t op(depth_t pixel) { return pixel; }
     };
@@ -81,8 +87,12 @@ class PointOp : public GenericOperation {
         T value;
     };
 
-    struct PixAdd : PixOp_t<int> {
-        PixAdd(int value_) : PixOp_t<int>(value_) {}
+/*----------------------------------------------------------------------
+                      Pixel Arithmetic Operations
+----------------------------------------------------------------------*/
+    /*Subtraction and division are based on addition and multiplication, by processing the operand.*/
+    struct PixAdd : PixOp_t<depth_t> {
+        PixAdd(double value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel + value; }
     };
 
@@ -91,9 +101,11 @@ class PointOp : public GenericOperation {
         double op(double pixel) { return pixel + value; }
     };
 
-    struct PixMul : PixOp_t<double> {
-        PixMul(double value_) : PixOp_t<double>(value_) {}
-        intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
+    /*WHY + 0.5 ????? */
+    struct PixMul : PixOp_t<depth_t> {
+        PixMul(double value_) : PixOp_t<depth_t>(value_) {}
+//        intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
+        intmax_t op(depth_t pixel) { return pixel * value ; }
     };
 
     struct DoublePixMul : DoublePixelOp {
@@ -101,66 +113,81 @@ class PointOp : public GenericOperation {
         double op(double pixel) { return pixel * value; }
     };
 
-    struct PixLogicalAnd : PixOp_t<depth_t> {
-        PixLogicalAnd(depth_t value_) : PixOp_t<depth_t>(value_) {}
-        intmax_t op(depth_t pixel) { return pixel && value; }
+/*----------------------------------------------------------------------
+                            Pixel    AND
+----------------------------------------------------------------------*/
+    struct PixBitwiseAnd : PixOp_t<depth_t> {
+        PixBitwiseAnd(depth_t value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return pixel & value; }
     };
 
-    /*Return zero if the operands have zero*/
+    /*Return zero only if any of operands is zero*/
+    struct PixLogicalAnd : PixOp_t<depth_t> {
+        PixLogicalAnd(int value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return (pixel==0 or value==0) ? 0 : pixel; }
+    };
     struct DoublePixLogicalAnd : DoublePixelOp {
-        DoublePixLogicalAnd(double value_) : DoublePixelOp(value_) {}
+        DoublePixLogicalAnd(int value_) : DoublePixelOp(value_) {}
         double op(double pixel) { return (pixel==0 or value==0) ? 0 : pixel; }
     };
-
-    /*There's no not logic for double value*/
-    struct PixNot : PixOp_t<depth_t> {
-        PixNot(depth_t value_) : PixOp_t<depth_t>(value_) {}
+/*----------------------------------------------------------------------
+                           Pixel    NOT
+----------------------------------------------------------------------*/
+    /*Logical flipping takes the complementary value to 255*/
+    struct PixLogicalNot : PixOp_t<depth_t> {
+        PixLogicalNot(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return 255 - pixel; }
     };
-
+    struct DoublePixLogicalNot : DoublePixelOp {
+        DoublePixLogicalNot(double value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return 255. - pixel; }
+    };
+/*----------------------------------------------------------------------
+                             Pixel    OR
+----------------------------------------------------------------------*/
+    struct PixBitwiseOr : PixOp_t<depth_t> {
+        PixBitwiseOr(depth_t value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return pixel | value; }
+    };
+    /*Return zero only if the operands are both zero*/
     struct PixLogicalOr : PixOp_t<depth_t> {
         PixLogicalOr(depth_t value_) : PixOp_t<depth_t>(value_) {}
-        intmax_t op(depth_t pixel) { return pixel || value; }
+        intmax_t op(depth_t pixel) { return (pixel==0 and value==0) ? 0 : pixel; }
     };
-
-    /*Return zero only if the operands are both zero*/
     struct DoublePixLogicalOr : DoublePixelOp {
-        DoublePixLogicalOr(double value_) : DoublePixelOp(value_) {}
+        DoublePixLogicalOr(int value_) : DoublePixelOp(value_) {}
         double op(double pixel) { return (pixel==0 and value==0) ? 0 : pixel; }
     };
-
+/*----------------------------------------------------------------------
+                             Pixel    XOR
+----------------------------------------------------------------------*/
+    struct PixBitwiseXor : PixOp_t<depth_t> {
+        PixBitwiseXor(depth_t value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return pixel ^ value; }
+    };
+    /*Return zero only if the operands have the same value*/
     struct PixLogicalXor : PixOp_t<depth_t> {
         PixLogicalXor(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return (pixel==value) ? 0 : pixel; }
     };
-
-    /*Return zero only if the operands have the same value*/
     struct DoublePixLogicalXor : DoublePixelOp {
-        DoublePixLogicalXor(double value_) : DoublePixelOp(value_) {}
+        DoublePixLogicalXor(int value_) : DoublePixelOp(value_) {}
         double op(double pixel) { return (pixel==value) ? 0 : pixel; }
     };
-
-//    struct PixLshift : PixOp_t<depth_t> {
-//        PixLshift(depth_t value_) : PixOp_t<depth_t>(value_) {}
-//        intmax_t op(depth_t pixel) { return pixel << value; }
-//    };
-    
-//    struct PixRshift : PixOp_t<depth_t> {
-//        PixRshift(depth_t value_) : PixOp_t<depth_t>(value_) {}
-//        intmax_t op(depth_t pixel) { return (int)pixel >> (int)value; }
-//    };
-
-    struct PixLshift : DoublePixelOp {
-        PixLshift(depth_t value_) : DoublePixelOp(value_) {}
-        double op(double pixel) { return (int)pixel << (int)value; }
+/*----------------------------------------------------------------------
+                           Pixel    Shifting
+----------------------------------------------------------------------*/
+    struct PixLshift : PixOp_t<depth_t> {
+        PixLshift(depth_t value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return pixel << value; }
     };
-
-    struct PixRshift : DoublePixelOp {
-        PixRshift(depth_t value_) : DoublePixelOp(value_) {}
-        double op(double pixel) { return (int)pixel >> (int)value; }
+    struct PixRshift : PixOp_t<depth_t> {
+        PixRshift(depth_t value_) : PixOp_t<depth_t>(value_) {}
+        intmax_t op(depth_t pixel) { return pixel >> value; }
     };
-
-
+/*----------------------------------------------------------------------
+                       Image Operation Templates
+----------------------------------------------------------------------*/
     struct ImageOp {
         virtual depth_t operator()(depth_t pixel1, depth_t pixel2) {
             return normalize(this->op(pixel1, pixel2));
@@ -176,14 +203,18 @@ class PointOp : public GenericOperation {
         virtual double op(double pixel1, double pixel2) = 0;
         static DoubleImageOp* fromString(QString op);
     };
-
+/*----------------------------------------------------------------------
+                      Image Identical Operations
+----------------------------------------------------------------------*/
     struct ImgIdent : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1; } 
     };
     struct DoubleImgIdent : DoubleImageOp {
         double op(double pix1, double pix2) { return pix1; }
     };
-
+/*----------------------------------------------------------------------
+                       Image Arithmetic Operations
+----------------------------------------------------------------------*/
     struct ImgAdd : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 + pix2; } 
     };
@@ -212,42 +243,48 @@ class PointOp : public GenericOperation {
     struct DoubleImgDiv : DoubleImageOp {
         double op(double pix1, double pix2) { return pix1 / pix2; }
     };
-
-    struct ImgBitAnd : ImageOp {
+/*----------------------------------------------------------------------
+                           Image    AND
+----------------------------------------------------------------------*/
+    struct ImgBitwiseAnd : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 & pix2; } 
     };
 
-    struct DoubleImgBitAnd : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1==0 or pix2==0) ? 0 : pix1;}
+    struct ImgLogicalAnd : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==0 || pix2==0) ? 255 : pix1; }
     };
 
-    /*To keep the symmetry of the interface, BitNot was categorized as an image operation
-      But for the negation operation, the second operand is unnecessary*/
-    struct ImgBitNot : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return 255 - pix1; }
+    struct DoubleImgLogicalAnd : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1==0 || pix2==0) ? 255 : pix1; }
     };
-
-    /*DoubleImgBitNot is defined to reconcile two operators in different types*/
-    struct DoubleImgBitNot : DoubleImageOp {
-        double op(double pix1, double pix2) { return 255 - pix1; }
-    };
-
-    struct ImgBitOr : ImageOp {
+/*----------------------------------------------------------------------
+                           Image    OR
+----------------------------------------------------------------------*/
+    struct ImgBitwiseOr : ImageOp {
         intmax_t op(depth_t pix1, depth_t pix2) { return pix1 | pix2; } 
     };
-    
-    struct DoubleImgBitOr : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1==0 and pix2==0) ? 0 : pix1;}
+
+    struct ImgLogicalOr : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==0 && pix2==0) ? 255 : pix1; }
     };
 
-    struct ImgBitXor : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 ^ pix2; } 
+    struct DoubleImgLogicalOr : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1==0 && pix2==0) ? 255 : pix1; }
+    };
+/*----------------------------------------------------------------------
+                            Image   XOR
+----------------------------------------------------------------------*/
+    struct ImgBitwiseXor : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 ^ pix2; }
     };
 
-    struct DoubleImgBitXor : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1 == pix2) ? 0 : pix1; }
+    struct ImgLogicalXor : ImageOp {
+        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==pix2) ? 255 : pix1; }
     };
 
+    struct DoubleImgLogicalXor : DoubleImageOp {
+        double op(double pix1, double pix2) { return (pix1==pix2) ? 255 : pix1; }
+    };
 };
 
 #endif //!PointOp_H

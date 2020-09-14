@@ -403,24 +403,26 @@ string ClassAnalysis::print_file_info( FILE *f ) {
         }
         else {
             for( counter=0; counter< num_classes; counter++ ) {
-              r = fscanf( f, "%lf", &moy1 );
-              checkFscanfResult(r);
+                r = fscanf( f, "%lf", &moy1 );
+                checkFscanfResult(r);
                 r = fscanf( f, "%lf", &var1 );
+                checkFscanfResult(r);
                 checkFscanfResult(r);
                 r = fscanf( f, "%lf", &moy2 );
                 checkFscanfResult(r);
                 r = fscanf( f, "%lf", &var2 );
                 checkFscanfResult(r);
-              sprintf( buffer, "---- Class %d:\n", (counter+1) );
+                sprintf( buffer, "---- Class %d:\n", (counter+1) );
                 returnval = returnval + buffer;
                 sprintf( buffer, "     Mean of means: %f\n", moy1 );
                 returnval = returnval + buffer;
-                //sprintf( buffer, "     Stdev of means: %f\n", var1 );
-                //returnval = returnval + buffer;
+                sprintf( buffer, "     Variance of means: %f\n", var1 );
+                returnval = returnval + buffer;
                 sprintf( buffer, "     Mean of stdevs: %f\n", moy2 );
                 returnval = returnval + buffer;
-                //sprintf( buffer, "     Stdev of stdevs: %f\n", var2 );
-                //returnval = returnval + buffer;
+                sprintf( buffer, "     Variance of stdevs: %f\n", var2 );
+                returnval = returnval + buffer;
+
                 returnval = returnval + "\n";
             }
         }
