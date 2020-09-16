@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 
 
 
-    BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
+    BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Coding").toStdString());
 
     encode->addOperation(new HuffmanOp());
     encode->addOperation(new DPCMEncodingOp());

@@ -73,6 +73,8 @@ PointOp::DoublePixelOp* PointOp::DoublePixelOp::fromString(QString op, QString e
     if(op=="! (logical NOT)") return new DoublePixLogicalNot(expr.toUInt());
     if(op=="|| (logical OR)") return new DoublePixLogicalOr(expr.toUInt());
     if(op=="^^ (logical XOR)") return new DoublePixLogicalXor(expr.toUInt());
+    if(op=="<<") return new DoublePixLshift(expr.toUInt());
+    if(op==">>") return new DoublePixRshift(expr.toUInt());
     if(op=="") return new DoublePixIdent();
     std::cout << "Unknown operator '" << op.toStdString() << "' ! DoublePixelOp" << std::endl;
     return new DoublePixIdent();
@@ -111,10 +113,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
 
     QStringList pixOperators, pixDoubleOperators, imgOperators, imgDoubleOperators;
 
-    pixOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "&& (logical AND)" << "! (logical NOT)" << "| (bit-wise OR)" << "|| (logical OR)" << "^ (bit-wise XOR)" << "^^ (logical XOR)" << "<<" << ">>";
-    pixDoubleOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "! (logical NOT)" << "|| (logical OR)" << "^^ (logical XOR)";
-    imgOperators << "" << "+" << "-" << "*" << "/" << "& (bit-wise AND)" << "&& (logical AND)" << "| (bit-wise OR)" << "|| (logical OR)" << "^ (bit-wise XOR)" << "^^ (logical XOR)";
-    imgDoubleOperators << "" << "+" << "-" << "*" << "/" << "&& (logical AND)" << "|| (logical OR)" << "^^ (logical XOR)";
+    pixOperators << "" << "+" << "-" << "*" << "/" << qApp->translate("PointOp","! (bit-wise NOT)") << qApp->translate("PointOp","& (bit-wise AND)") << qApp->translate("PointOp","| (bit-wise OR)") << qApp->translate("PointOp","^ (bit-wise XOR)") << ">>" << "<<" << qApp->translate("PointOp","&& (logical AND)") << qApp->translate("PointOp","|| (logical OR)") << qApp->translate("PointOp","^^ (logical XOR)");
+    pixDoubleOperators << "" << "+" << "-" << "*" << "/" << qApp->translate("PointOp","!! (logical NOT)") << qApp->translate("PointOp","&& (logical AND)") << qApp->translate("PointOp","|| (logical OR)") << qApp->translate("PointOp","^^ (logical XOR)");
+    imgOperators << "" << "+" << "-" << "*" << "/" << qApp->translate("PointOp","& (bit-wise AND)") << qApp->translate("PointOp","| (bit-wise OR)") << qApp->translate("PointOp","^ (bit-wise XOR)") << qApp->translate("PointOp","&& (logical AND)") << qApp->translate("PointOp","|| (logical OR)") << qApp->translate("PointOp","^^ (logical XOR)");
+    imgDoubleOperators << "" << "+" << "-" << "*" << "/" << qApp->translate("PointOp","&& (logical AND)") << qApp->translate("PointOp","|| (logical OR)") << qApp->translate("PointOp","^^ (logical XOR)");
 
     QString currentImgName = currentWnd->windowTitle();
     map<const Image*,string> stdImgList;

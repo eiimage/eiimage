@@ -200,9 +200,9 @@ qt5_add_resources(RCC_FILES "imageinsa_app_res.qrc")
 set(TS_FILES imageinsa_en.ts imageinsa_fr.ts)
 # Uncomment only 1 of the 2 folowing commands, depending on your needs
 # -1- Use current translations files
-qt5_add_translation(QM_FILES ${TS_FILES})
+#qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
-#qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES})
+qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES})
 # -3- Update translations files with changes from c++ sources AND drop useless translations
 #qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES} OPTIONS -no-obsolete)
 

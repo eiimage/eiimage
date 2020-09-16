@@ -67,7 +67,7 @@
         <item>
          <widget class="QSpinBox" name="truncLimitBox">
           <property name="maximum">
-           <number>16</number>
+           <number>15</number>
           </property>
          </widget>
         </item>

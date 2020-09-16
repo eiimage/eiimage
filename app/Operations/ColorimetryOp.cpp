@@ -32,7 +32,7 @@
 #include "ColorDialog.h"
 using namespace imagein;
 
-ColorimetryOp::ColorimetryOp() : Operation(qApp->translate("Operations", "Generate RGB image").toStdString())
+ColorimetryOp::ColorimetryOp() : Operation(qApp->translate("Operations", "Generate RGB/HSV image").toStdString())
 {
 }
 
@@ -43,7 +43,7 @@ bool ColorimetryOp::needCurrentImg() const {
 void ColorimetryOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
 
     ColorDialog* dialog = new ColorDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(qApp->translate("Operations", "RGB image generator")));
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "RGB/HSV image generator")));
 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
     QColor color = dialog->getColor();

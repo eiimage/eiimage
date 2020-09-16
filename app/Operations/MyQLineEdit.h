@@ -36,8 +36,10 @@ class MyQLineEdit : public QLineEdit {
 
   public slots:
     void updateValidator(const QString &text){
+        /*Allow only 0 and 1 as input*/
         QRegExp regLogicalExp("^[1]d*|0$");
-        QRegExp regShiftExp("^[1-7]d*|0$");
+        /*Allow positive integer as input*/
+        QRegExp regShiftExp("^\\d+$");
         QRegExpValidator* logicalValidator = new QRegExpValidator(regLogicalExp,0);
         QRegExpValidator* shiftValidator = new QRegExpValidator(regShiftExp,0);
         QIntValidator* intValidator = new QIntValidator();

@@ -47,7 +47,7 @@ void HistogramOp::operator()(const imagein::Image* img, const std::map<const ima
 
     QComboBox* opBox = new QComboBox();
     opBox->addItem(qApp->translate("HistogramOp", "Equalize"));
-    opBox->addItem(qApp->translate("HistogramOp", "Normalize"));
+    opBox->addItem(qApp->translate("HistogramOp", "Linear stretching"));
     layout->insertRow(0, qApp->translate("HistogramOp", "Operation : "), opBox);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
@@ -61,11 +61,11 @@ void HistogramOp::operator()(const imagein::Image* img, const std::map<const ima
 
     if(opBox->currentIndex()==0) {
         Image* resImg = equalize(img);
-        outImage(resImg, qApp->translate("HistogramOp", "equalized").toStdString());
+        outImage(resImg, qApp->translate("HistogramOp", "Equalized").toStdString());
     }
     else if(opBox->currentIndex()==1) {
-        Image* resImg = normalize(img);
-        outImage(resImg, qApp->translate("HistogramOp", "normalized").toStdString());
+        Image* resImg = linearStretching(img);
+        outImage(resImg, qApp->translate("HistogramOp", "Linear stretched").toStdString());
     }
 }
 
@@ -93,7 +93,7 @@ Image* HistogramOp::equalize( const Image *img ) {
 
 
 
-Image *HistogramOp::normalize( const Image *img ) {
+Image *HistogramOp::linearStretching( const Image *img ) {
 
     Image* resImg = new Image(*img);
     for(unsigned int c = 0; c < img->getNbChannels(); ++c) {

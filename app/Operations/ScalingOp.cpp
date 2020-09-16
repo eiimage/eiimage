@@ -40,7 +40,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-ScalingOp::ScalingOp() : GenericOperation(qApp->translate("Operations", "Scaling").toStdString())
+ScalingOp::ScalingOp() : GenericOperation(qApp->translate("Operations", "Scaling (Enlarge/Reduce)").toStdString())
 {
   _test=false, _interp=0, _xfactor=1., _yfactor=1.;
 }
@@ -56,7 +56,7 @@ bool ScalingOp::isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const
 void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, const vector<const ImageWindow*>&) {
 
     QDialog* dialog = new QDialog(QApplication::activeWindow());
-    dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling")));
+    dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling (Enlarge/Reduce)")));
     dialog->setMinimumWidth(180);
     QFormLayout* layout = new QFormLayout();
     dialog->setLayout(layout);

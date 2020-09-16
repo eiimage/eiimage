@@ -101,11 +101,9 @@ class PointOp : public GenericOperation {
         double op(double pixel) { return pixel + value; }
     };
 
-    /*WHY + 0.5 ????? */
     struct PixMul : PixOp_t<depth_t> {
         PixMul(double value_) : PixOp_t<depth_t>(value_) {}
-//        intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
-        intmax_t op(depth_t pixel) { return pixel * value ; }
+        intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
     };
 
     struct DoublePixMul : DoublePixelOp {
@@ -185,6 +183,16 @@ class PointOp : public GenericOperation {
         PixRshift(depth_t value_) : PixOp_t<depth_t>(value_) {}
         intmax_t op(depth_t pixel) { return pixel >> value; }
     };
+    /*Used to handle the case where the input image is on uchar but the expected output is double
+     * When the input image is already on double, the option of pixel shifting will not appear*/
+    struct DoublePixLshift : DoublePixelOp {
+        DoublePixLshift(int value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return (int)pixel << (int)value; }
+    };
+    struct DoublePixRshift : DoublePixelOp {
+        DoublePixRshift(int value_) : DoublePixelOp(value_) {}
+        double op(double pixel) { return (int)pixel >> (int)value; }
+    };
 /*----------------------------------------------------------------------
                        Image Operation Templates
 ----------------------------------------------------------------------*/
@@ -237,7 +245,8 @@ class PointOp : public GenericOperation {
     };
 
     struct ImgDiv : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { if(pix2 != 0) {return pix1/pix2*255;} else {return 255;}}
+        /*Si division par 0, renvoie 255*/
+        intmax_t op(depth_t pix1, depth_t pix2) { if(pix2 != 0) {return pix1/pix2;} else {return 255;}}
     };
 
     struct DoubleImgDiv : DoubleImageOp {
@@ -251,11 +260,11 @@ class PointOp : public GenericOperation {
     };
 
     struct ImgLogicalAnd : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==0 || pix2==0) ? 255 : pix1; }
+        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 && pix2; }
     };
 
     struct DoubleImgLogicalAnd : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1==0 || pix2==0) ? 255 : pix1; }
+        double op(double pix1, double pix2) { return pix1 && pix2; }
     };
 /*----------------------------------------------------------------------
                            Image    OR
@@ -265,11 +274,11 @@ class PointOp : public GenericOperation {
     };
 
     struct ImgLogicalOr : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==0 && pix2==0) ? 255 : pix1; }
+        intmax_t op(depth_t pix1, depth_t pix2) { return pix1 || pix2; }
     };
 
     struct DoubleImgLogicalOr : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1==0 && pix2==0) ? 255 : pix1; }
+        double op(double pix1, double pix2) { return pix1 || pix2; }
     };
 /*----------------------------------------------------------------------
                             Image   XOR
@@ -279,11 +288,11 @@ class PointOp : public GenericOperation {
     };
 
     struct ImgLogicalXor : ImageOp {
-        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1==pix2) ? 255 : pix1; }
+        intmax_t op(depth_t pix1, depth_t pix2) { return (pix1&&(!pix2)) || ((!pix1)&&pix2); }
     };
 
     struct DoubleImgLogicalXor : DoubleImageOp {
-        double op(double pix1, double pix2) { return (pix1==pix2) ? 255 : pix1; }
+        double op(double pix1, double pix2) { return (pix1&&(!pix2)) || ((!pix1)&&pix2); }
     };
 };
 

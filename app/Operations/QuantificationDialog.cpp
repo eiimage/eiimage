@@ -55,8 +55,8 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
         _quantBox->addItem(tr("Non linear with centered value"));
         _quantBox->addItem(tr("Non linear with mean value"));
     }
-    _quantBox->addItem(tr("Custom"));
     _quantBox->addItem(tr("LloydMax"));
+    _quantBox->addItem(tr("Custom"));
 
     layout->insertRow(0, tr("Quantification : "), _quantBox);
     layout->insertRow(1, tr("Number of values : "), _sizeBox);
