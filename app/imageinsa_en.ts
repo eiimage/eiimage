@@ -229,7 +229,7 @@ Number of classes = %1 </translation>
     <message>
         <location line="+2"/>
         <source>Nombre de classes = %1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Number of classes =% 1</translation>
     </message>
     <message>
         <location line="+40"/>
@@ -372,12 +372,12 @@ Number of classes = %1 </translation>
     <message>
         <location filename="Operations/ColorimetryOp.cpp" line="+55"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Empty image generation is not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Empty image generation is not allowed</translation>
     </message>
 </context>
 <context>
@@ -666,7 +666,8 @@ The entropy of the quantized prediction errror image is : %f
         <location line="+65"/>
         <source>Error in DPCM::set_levels:
 quantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Error in DPCM::set_levels:
+quantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -679,7 +680,8 @@ quantdef-&gt;GetNumThresholds() = %d</source>
         <location line="+23"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Error in DPCM::setQuantDef:
+tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
 </context>
 <context>
@@ -788,12 +790,12 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <location filename="Operations/FFTOp.cpp" line="+97"/>
         <source>DFT (Phase)</source>
         <oldsource>DFT (magnitude)</oldsource>
-        <translation type="unfinished">DFT (magnitude)</translation>
+        <translation>DFT (Phase)</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>DFT (Magnitude)</source>
-        <translation type="unfinished"></translation>
+        <translation>DFT (Magnitude)</translation>
     </message>
 </context>
 <context>
@@ -1807,7 +1809,7 @@ Le debit vaut : %5.2f
     <message>
         <location line="+1"/>
         <source>Enter a real number in the blank space below as the second operand</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter a real number in the blank space below as the second operand</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1817,27 +1819,27 @@ Le debit vaut : %5.2f
     <message>
         <location line="+1"/>
         <source>Select an image as the second operand</source>
-        <translation type="unfinished"></translation>
+        <translation>Select an image as the second operand</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Output the result image in uchar format</source>
-        <translation type="unfinished"></translation>
+        <translation>Output the result image in uchar format</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Output the result image in double format</source>
-        <translation type="unfinished"></translation>
+        <translation>Output the result image in double format</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>Add an offset of 127 to fit negative values</source>
-        <translation type="unfinished"></translation>
+        <translation>Add an offset of 127</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Map the value of each pixel to the range of 0-255 proportionally</source>
-        <translation type="unfinished"></translation>
+        <translation>Map the value of each pixel to the range of 0-255 proportionally</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1847,19 +1849,19 @@ Le debit vaut : %5.2f
     <message>
         <location line="+1"/>
         <source>Check this option to execute the manipulation by channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Check this option to execute the manipulation by channel</translation>
     </message>
     <message>
         <location line="+29"/>
         <source>Supported operations list which takes a value as operand: 
  The input operand will be rounded down for shift operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Supported operations list which takes a value as operand</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Supported operations list whick takes an image as operand: 
  The bit-wise NOT operation will automatically ignore the second image</source>
-        <translation type="unfinished"></translation>
+        <translation>Supported operations list whick takes an image as operand</translation>
     </message>
     <message>
         <source>Double Result</source>
@@ -2008,13 +2010,13 @@ Le debit vaut : %5.2f
         <location line="+8"/>
         <source>Number of levels : </source>
         <oldsource>Number of steps : </oldsource>
-        <translation type="unfinished">Number of steps : </translation>
+        <translation>Number of steps : </translation>
     </message>
     <message>
         <location line="+21"/>
         <source>Create only one level :</source>
         <oldsource>Create only one step :</oldsource>
-        <translation type="unfinished">Create only one step :</translation>
+        <translation>Create only one step :</translation>
     </message>
     <message>
         <location filename="Operations/PyramidDialog.cpp" line="+41"/>
@@ -2254,12 +2256,12 @@ Le debit vaut : %5.2f
     <message>
         <location line="+24"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Empty image generation is not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Empty image generation is not allowed</translation>
     </message>
 </context>
 <context>
@@ -2439,12 +2441,12 @@ Le debit vaut : %5.2f
     <message>
         <location line="+17"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Image size can not be zero</source>
-        <translation type="unfinished"></translation>
+        <translation>Image size can not be zero</translation>
     </message>
 </context>
 <context>

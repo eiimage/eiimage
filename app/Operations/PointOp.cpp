@@ -174,7 +174,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QHBoxLayout* optLayout = new QHBoxLayout();
     QGridLayout* gridLayout = new QGridLayout();
     QCheckBox* offsetBox = new QCheckBox(qApp->translate("PointOp","Offset"));
-    offsetBox->setWhatsThis(qApp->translate("PointOp", "Add an offset of 127 to fit negative values"));
+    offsetBox->setWhatsThis(qApp->translate("PointOp", "Add an offset of 127"));
     QCheckBox* scalingBox = new QCheckBox(qApp->translate("PointOp","Scaling"));
     scalingBox->setWhatsThis(qApp->translate("PointOp", "Map the value of each pixel to the range of 0-255 proportionally"));
     QCheckBox* colorBox = new QCheckBox(qApp->translate("PointOp", "Explode colors"));
@@ -207,9 +207,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     QWidget* imgWidget = new QWidget(dialog);
     valueLayouts[0] = new QHBoxLayout();
     pixOperatorBoxes[0] = new QComboBox(pixelWidget);
-    pixOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list which takes a value as operand: \n The input operand will be rounded down for shift operations"));
     imgOperatorBoxes[0] = new QComboBox(imgWidget);
-    imgOperatorBoxes[0]->setWhatsThis(qApp->translate("PointOp", "Supported operations list whick takes an image as operand: \n The bit-wise NOT operation will automatically ignore the second image"));
 
     if(currentWnd->isStandard()){
         pixOperatorBoxes[0]->addItems(pixOperators);

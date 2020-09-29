@@ -666,7 +666,8 @@ L&apos;entropie de l&apos;image d&apos;erreur de prédiction quantifiée vaut : 
         <location line="+65"/>
         <source>Error in DPCM::set_levels:
 quantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans DPCM :: set_levels:
+quantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -679,7 +680,8 @@ quantdef-&gt;GetNumThresholds() = %d</source>
         <location line="+23"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans DPCM :: setQuantDef:
+tquantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
 </context>
 <context>
@@ -1823,7 +1825,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="+4"/>
         <source>Output the result image in uchar format</source>
-        <translation>Sortie de l&apos;image de résultat au format uchar</translation>
+        <translation>Sortie l&apos;image de résultat au format uchar</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1833,7 +1835,7 @@ Le débit vaut : %5.2f
     <message>
         <location line="+26"/>
         <source>Add an offset of 127 to fit negative values</source>
-        <translation>Ajoutez un décalage de 127 pour ajuster les valeurs négatives</translation>
+        <translation>Ajouter un décalage de 127</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1848,19 +1850,19 @@ Le débit vaut : %5.2f
     <message>
         <location line="+1"/>
         <source>Check this option to execute the manipulation by channel</source>
-        <translation>Cochez cette option pour exécuter la manipulation par canal</translation>
+        <translation>Cocher cette option pour exécuter la manipulation par canal</translation>
     </message>
     <message>
         <location line="+29"/>
         <source>Supported operations list which takes a value as operand: 
  The input operand will be rounded down for shift operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des opérations qui prend une valeur comme opérande</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Supported operations list whick takes an image as operand: 
  The bit-wise NOT operation will automatically ignore the second image</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des opérations qui prend une image comme opérande</translation>
     </message>
     <message>
         <source>Double Result</source>
@@ -2009,13 +2011,13 @@ Le débit vaut : %5.2f
         <location line="+8"/>
         <source>Number of levels : </source>
         <oldsource>Number of steps : </oldsource>
-        <translation type="unfinished">Nombre d&apos;étage : </translation>
+        <translation>Nombre d&apos;étage : </translation>
     </message>
     <message>
         <location line="+21"/>
         <source>Create only one level :</source>
         <oldsource>Create only one step :</oldsource>
-        <translation type="unfinished">Créer un étage unique: </translation>
+        <translation>Créer un étage unique: </translation>
     </message>
     <message>
         <location filename="Operations/PyramidDialog.cpp" line="+41"/>
@@ -2255,12 +2257,12 @@ Le débit vaut : %5.2f
     <message>
         <location line="+24"/>
         <source>Warning</source>
-        <translation type="unfinished">Alerte</translation>
+        <translation>Alerte</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Empty image generation is not allowed</source>
-        <translation type="unfinished">La génération d&apos;images vides n&apos;est pas autorisée</translation>
+        <translation>La génération d&apos;images vides n&apos;est pas autorisée</translation>
     </message>
 </context>
 <context>
@@ -2440,12 +2442,12 @@ Le débit vaut : %5.2f
     <message>
         <location line="+17"/>
         <source>Warning</source>
-        <translation type="unfinished">Alerte</translation>
+        <translation>Alerte</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Image size can not be zero</source>
-        <translation type="unfinished"></translation>
+        <translation>La taille de l&apos;image ne peut pas être nulle</translation>
     </message>
 </context>
 <context>

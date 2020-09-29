@@ -22,10 +22,12 @@
 
 #include <map>
 #include <string>
-
+#include <QObject>
 #include "Image.h"
 
 class QWidget;
+
+
 namespace genericinterface {
 class ImageWindow;
 class WindowService;
@@ -40,7 +42,9 @@ class WindowService;
  * This class is a generic class and should not be directly used except for creating a generic operation (ie an operation working on different type of Image).\n
  * For an exemple of a true generic operation class, see the PointOp implementation in imageinsa source code.
  */
-class GenericOperation {
+
+class GenericOperation : public QObject{
+
 public:
 /**
  * @brief Constructor
@@ -94,7 +98,6 @@ virtual bool needCurrentImg() const = 0;
  * \sa needCurrentImg()
  */
 virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const = 0;
-
 
 protected:
 

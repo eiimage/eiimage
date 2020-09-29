@@ -1,18 +1,18 @@
 /*
  * Copyright 2011-2012 Benoit Averty, Samuel Babin, Matthieu Bergere, Thomas Letan, Sacha Percot-Tétu, Florian Teyssier
- * 
+ *
  * This file is part of DETIQ-T.
- * 
+ *
  * DETIQ-T is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * DETIQ-T is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with DETIQ-T.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -56,7 +56,7 @@
 #include <QSpacerItem>
 #include <GenericInterface.h>
 
-#include <algorithm> 
+#include <algorithm>
 
 using namespace filtrme;
 using namespace genericinterface;
@@ -225,7 +225,7 @@ void FilterChoice::initUI()
     }
 
     rightLayout->addWidget(_filterView);
-  
+
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
     buttonBox->setOrientation(Qt::Horizontal);
     buttonBox->setStandardButtons(QDialogButtonBox::Cancel);
@@ -473,7 +473,7 @@ void FilterChoice::deleteFilter()
   msgBox.setInformativeText(tr("Do you want to continue?"));
   msgBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
   msgBox.setDefaultButton(QMessageBox::No);
-  
+
   if(msgBox.exec() == QMessageBox::Yes)
   {
     QString name = _blurChoices->itemText(_blurChoices->currentIndex());
@@ -486,7 +486,7 @@ void FilterChoice::deleteFilter()
       file.open(QIODevice::ReadOnly);
       doc.setContent(&file);
       file.close();
-      
+
       QDomElement root = doc.documentElement();
       QDomNode child = root.firstChild();
       while(!child.isNull())
@@ -500,7 +500,7 @@ void FilterChoice::deleteFilter()
         }
         child = child.nextSibling();
       }
-      
+
       if(file.open(QFile::WriteOnly))
       {
         QTextStream out(&file);
@@ -518,7 +518,7 @@ void FilterChoice::deleteFilter()
  *  Updates the options the user has depending on then filter used
  */
 void FilterChoice::updateDisplay()
-{ 
+{
       std::vector<Filter*> filters;
       _deleteButton->setEnabled(false);
       int num = _number->value();
@@ -571,9 +571,9 @@ void FilterChoice::updateDisplay()
     if(_customButton->isChecked()){
         _deleteButton->setEnabled(true);
     }
-  
+
   unsigned int height(0), width(0);
-  
+
   for(unsigned int i = 0; i < filters.size(); i++)
   {
     if(height > 0)
@@ -615,7 +615,7 @@ void FilterChoice::updateDisplay()
         _filterView->setColumnWidth(k, _filterView->rowHeight(0));
       }
     }
-    
+
     height += filters[i]->getHeight();
     for(unsigned int k = 0; k < filters[i]->getWidth(); k++)
     {
@@ -623,10 +623,10 @@ void FilterChoice::updateDisplay()
       item->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEnabled);
       _filterView->setItem(height, k, item);
     }
-    
+
     height++;
   }
-  
+
   _filterView->resizeColumnsToContents();
   _filterView->resizeRowsToContents();
 }
