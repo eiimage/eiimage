@@ -36,7 +36,7 @@
         <translation>Couleurs</translation>
     </message>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+38"/>
+        <location filename="Services/FilteringService.cpp" line="+39"/>
         <location filename="main.cpp" line="+9"/>
         <source>Filtering</source>
         <translation>Filtrage</translation>
@@ -852,18 +852,16 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+79"/>
-        <location line="+9"/>
         <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
 
 -------------------------------------------</source>
         <oldsource>Both Offset and Scaling applied : val_display = (val_image - minValue) * 127 / (maxValue - minValue) + 127 
 
 -------------------------------------------</oldsource>
-        <translation>Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
+        <translation type="vanished">Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location filename="Services/FilteringService.cpp" line="+112"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
@@ -2117,6 +2115,17 @@ Le débit vaut : %5.2f
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="Services/FilteringService.cpp" line="-41"/>
+        <location line="+11"/>
+        <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
+
+-------------------------------------------</source>
+        <translation type="unfinished">Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
+    </message>
+</context>
+<context>
     <name>QuantificationDialog</name>
     <message>
         <location filename="Operations/QuantificationDialog.cpp" line="+40"/>
@@ -3122,7 +3131,7 @@ Le débit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-115"/>
+        <location filename="Services/FilteringService.cpp" line="-89"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Appliquer un filtre</translation>
     </message>
@@ -3132,7 +3141,7 @@ Le débit vaut : %5.2f
         <translation>&amp;Editer un filtre</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+125"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>L&apos;image résultat est la racine des sommes des carrés</translation>
     </message>

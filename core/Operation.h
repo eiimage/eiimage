@@ -23,6 +23,7 @@
 #include <map>
 #include <string>
 #include <QObject>
+#include <QApplication>
 #include <QString>
 #include "Image.h"
 
