@@ -63,7 +63,7 @@ using namespace genericinterface;
 using namespace imagein;
 using namespace algorithm;
 using namespace std;
-
+/*ajouter option de calcule/affichage */
 FilterChoice::FilterChoice(QWidget* parent) : QDialog(parent)
 {
   initUI();
@@ -664,8 +664,8 @@ void FilterChoice::updateOptions(bool a){
         _offsetButton->setEnabled(true);
         _scalingButton->setEnabled(true);
     }else{
-        _offsetButton->setChecked(true);
-        _scalingButton->setChecked(true);
+        _offsetButton->setChecked(false);
+        _scalingButton->setChecked(false);
         _offsetButton->setEnabled(false);
         _scalingButton->setEnabled(false);
     }

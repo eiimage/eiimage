@@ -84,6 +84,10 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
                 //isHough=true ce qui change les coordonnées des pixels de l'image pour correspondre au domaine de Hough
         }
         this->outImgWnd(wnd, title);
+        if(img->min()<0){
+            std::string outputMessage = qApp->translate("Operation","Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
+            outText(outputMessage);
+        }
 }
 
 void GenericOperation::outText(std::string text) {

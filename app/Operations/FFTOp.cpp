@@ -142,8 +142,8 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
 //        this->outDoubleImage(realImg, "FFT (real)", true, true);
 //        this->outDoubleImage(imagImg, "FFT (imag)", true, true);
         /*Offset disabled by default*/
-        this->outDoubleImage(realImg, "FFT (Real part)", false, true);
-        this->outDoubleImage(imagImg, "FFT (Imaginary part)", false, true);
+        this->outDoubleImage(realImg, qApp->translate("FFTOp", "(Real part)").toStdString(), false, true);
+        this->outDoubleImage(imagImg, qApp->translate("FFTOp", "(Imaginary part)").toStdString(), false, true);
     }
 
 

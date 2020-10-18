@@ -362,15 +362,19 @@ Number of classes = %1 </translation>
         <translation>Hue : </translation>
     </message>
     <message>
-        <location filename="Operations/ColorDialog.cpp" line="+64"/>
         <source>A small tip for Qt HSV Color Model</source>
-        <translation>A small tip for Qt HSV Color Model</translation>
+        <translation type="vanished">A small tip for Qt HSV Color Model</translation>
+    </message>
+    <message>
+        <location filename="Operations/ColorimetryOp.cpp" line="+89"/>
+        <source>A small tip</source>
+        <translation>A small tip</translation>
     </message>
 </context>
 <context>
     <name>ColorimetryOp</name>
     <message>
-        <location filename="Operations/ColorimetryOp.cpp" line="+55"/>
+        <location line="-32"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
@@ -378,6 +382,36 @@ Number of classes = %1 </translation>
         <location line="+1"/>
         <source>Empty image generation is not allowed</source>
         <translation>Empty image generation is not allowed</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.
+
+</source>
+        <oldsource>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image
+
+</oldsource>
+        <translation>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.
+
+</source>
+        <oldsource>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is
+
+</oldsource>
+        <translation>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
+
+-------------------------------------------</source>
+        <oldsource>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
+
+</oldsource>
+        <translation>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.</translation>
     </message>
 </context>
 <context>
@@ -797,6 +831,16 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <source>DFT (Magnitude)</source>
         <translation>DFT (Magnitude)</translation>
     </message>
+    <message>
+        <location line="+47"/>
+        <source>(Real part)</source>
+        <translation>(Real part)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(Imaginary part)</source>
+        <translation>(Imaginary part)</translation>
+    </message>
 </context>
 <context>
     <name>Filtering</name>
@@ -808,7 +852,18 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+96"/>
+        <location filename="Services/FilteringService.cpp" line="+79"/>
+        <location line="+9"/>
+        <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
+
+-------------------------------------------</source>
+        <oldsource>Both Offset and Scaling applied : val_display = (val_image - minValue) * 127 / (maxValue - minValue) + 127 
+
+-------------------------------------------</oldsource>
+        <translation>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
+    </message>
+    <message>
+        <location line="+20"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1166,7 +1221,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location filename="Operations/RandomImgOp.cpp" line="+106"/>
-        <location filename="Operations/PointOp.cpp" line="+149"/>
+        <location filename="Operations/PointOp.cpp" line="+147"/>
         <location filename="Operations/NoiseOp.cpp" line="+41"/>
         <location filename="Operations/BFlitOp.cpp" line="+13"/>
         <source>Validate</source>
@@ -1213,7 +1268,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Entropy calculation (standard image)</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="-70"/>
+        <location filename="Operations/FFTOp.cpp" line="-118"/>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
         <translation>Fourier transform</translation>
@@ -1251,7 +1306,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Add noise</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-240"/>
+        <location filename="Operations/PointOp.cpp" line="-238"/>
         <source>Pixel operations</source>
         <translation>Pixel operations</translation>
     </message>
@@ -1475,7 +1530,7 @@ Channel %d :
         <translation>Classification results</translation>
     </message>
     <message>
-        <location filename="Operations/ColorimetryOp.cpp" line="-21"/>
+        <location filename="Operations/ColorimetryOp.cpp" line="-63"/>
         <source>Generate RGB/HSV image</source>
         <oldsource>Generate RGB image</oldsource>
         <translation>Generate RGB/HSV image</translation>
@@ -1728,7 +1783,7 @@ Le debit vaut : %5.2f
         <translation>&lt;i&gt;Offset and scale : Adds a 127 offset and scales&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+418"/>
+        <location filename="Operations/PointOp.cpp" line="+416"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1797,7 +1852,7 @@ Le debit vaut : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-322"/>
+        <location filename="Operations/PointOp.cpp" line="-320"/>
         <source>Second operand</source>
         <translation>Second operand</translation>
     </message>
@@ -1833,7 +1888,8 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+26"/>
-        <source>Add an offset of 127 to fit negative values</source>
+        <source>Add an offset of 127</source>
+        <oldsource>Add an offset of 127 to fit negative values</oldsource>
         <translation>Add an offset of 127</translation>
     </message>
     <message>
@@ -1852,23 +1908,21 @@ Le debit vaut : %5.2f
         <translation>Check this option to execute the manipulation by channel</translation>
     </message>
     <message>
-        <location line="+29"/>
         <source>Supported operations list which takes a value as operand: 
  The input operand will be rounded down for shift operations</source>
-        <translation>Supported operations list which takes a value as operand</translation>
+        <translation type="vanished">Supported operations list which takes a value as operand</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Supported operations list whick takes an image as operand: 
  The bit-wise NOT operation will automatically ignore the second image</source>
-        <translation>Supported operations list whick takes an image as operand</translation>
+        <translation type="vanished">Supported operations list whick takes an image as operand</translation>
     </message>
     <message>
         <source>Double Result</source>
         <translation type="vanished">Double Result</translation>
     </message>
     <message>
-        <location line="-64"/>
+        <location line="-33"/>
         <source>UChar</source>
         <translation>UChar</translation>
     </message>
@@ -3071,7 +3125,7 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-103"/>
+        <location filename="Services/FilteringService.cpp" line="-115"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Apply filter</translation>
     </message>
@@ -3081,7 +3135,7 @@ Le debit vaut : %5.2f
         <translation>&amp;Edit filters</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+121"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>The resulting image is the square root of the squared sums</translation>
     </message>

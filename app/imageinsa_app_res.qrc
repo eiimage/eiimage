@@ -1,13 +1,14 @@
 <RCC>
-  <qresource prefix="/">
-    <file>img/micd.png</file>
-    <file>img/arrow-bottom.png</file>
-    <file>img/arrow-bottom-left.png</file>
-    <file>img/arrow-bottom-right.png</file>
-    <file>img/arrow-left.png</file>
-    <file>img/arrow-right.png</file>
-    <file>img/arrow-top.png</file>
-    <file>img/arrow-top-left.png</file>
-    <file>img/arrow-top-right.png</file>
-  </qresource>
+    <qresource prefix="/">
+        <file>img/micd.png</file>
+        <file>img/arrow-bottom.png</file>
+        <file>img/arrow-bottom-left.png</file>
+        <file>img/arrow-bottom-right.png</file>
+        <file>img/arrow-left.png</file>
+        <file>img/arrow-right.png</file>
+        <file>img/arrow-top.png</file>
+        <file>img/arrow-top-left.png</file>
+        <file>img/arrow-top-right.png</file>
+        <file>img/qcolor_hsv.png</file>
+    </qresource>
 </RCC>

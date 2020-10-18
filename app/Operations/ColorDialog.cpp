@@ -60,12 +60,14 @@ unsigned int ColorDialog::getHeight() const {
 }
 
 void ColorDialog::getHint() {
-    QDialog* hint = new QDialog(QApplication::activeWindow());
-    hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip for Qt HSV Color Model")));
-    hint->setLayout(new QVBoxLayout);
-    QLabel* pic = new QLabel(hint);
-    pic->setPixmap(QPixmap(":/images/qcolor-hsv.png"));
-    hint->resize(1180,360);
-    pic->resize(hint->size());
-    hint->show();
+//    QDialog* hint = new QDialog(QApplication::activeWindow());
+//    hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip for Qt HSV Color Model")));
+//    hint->setLayout(new QVBoxLayout);
+//    QLabel* pic = new QLabel(hint);
+//    pic->setPixmap(QPixmap(":/images/qcolor-hsv.png"));
+
+//    hint->resize(500,500);
+//    pic->resize(hint->size());
+//    hint->show();
+    emit needHint();
 }

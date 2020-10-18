@@ -111,9 +111,21 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                 DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
                 if(diw != NULL) {
                     riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+                    /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
+                    QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
+                    if(dblResImg->min()<0){
+                        std::string outputMessage = qApp->translate("FilteringService","Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
+                        _ws->addText(outputMessage);
+                    }
                 }
                 else {
                     riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
+                    /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
+                    QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
+                    if(dblResImg->min()<0){
+                        std::string outputMessage = qApp->translate("FilteringService","Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
+                        _ws->addText(outputMessage);
+                    }
                 }
             }
             else {

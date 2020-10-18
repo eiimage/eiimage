@@ -38,9 +38,10 @@ public:
     QColor getColor() const;
     unsigned int getWidth() const;
     unsigned int getHeight() const;
-
 public slots:
     void getHint();
+signals:
+    void needHint();
 
 private:
     Ui::ColorDialog *ui;

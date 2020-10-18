@@ -23,6 +23,7 @@
 #include <map>
 #include <string>
 #include <QObject>
+#include <QString>
 #include "Image.h"
 
 class QWidget;
