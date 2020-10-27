@@ -58,32 +58,80 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
     QDialog* dialog = new QDialog(QApplication::activeWindow());
     dialog->setWindowTitle(QString(qApp->translate("Operations", "Scaling (Enlarge/Reduce)")));
     dialog->setMinimumWidth(180);
-    QFormLayout* layout = new QFormLayout();
+    QGridLayout* layout = new QGridLayout();
     dialog->setLayout(layout);
 
-    QDoubleSpinBox* xScaleBox = new QDoubleSpinBox();
-    QDoubleSpinBox* yScaleBox = new QDoubleSpinBox();
+//    QDoubleSpinBox* xScaleBox = new QDoubleSpinBox();
+//    QDoubleSpinBox* yScaleBox = new QDoubleSpinBox();
 
-    xScaleBox->setValue(1.0);
-    yScaleBox->setValue(1.0);
+//    QDoubleSpinBox* xScaleBoxN = new QDoubleSpinBox();
+//    QDoubleSpinBox* xScaleBoxD = new QDoubleSpinBox();
+    QLineEdit* xScaleBoxN = new QLineEdit();
+    xScaleBoxN->setText("1");
+    xScaleBoxN->setValidator(new QIntValidator(0, 100, this));
+    QLineEdit* xScaleBoxD = new QLineEdit();
+    xScaleBoxD->setText("1");
+    xScaleBoxD->setValidator(new QIntValidator(0, 100, this));
+
+//    QDoubleSpinBox* yScaleBoxN = new QDoubleSpinBox();
+//    QDoubleSpinBox* yScaleBoxD = new QDoubleSpinBox();
+    QLineEdit* yScaleBoxN = new QLineEdit();
+    yScaleBoxN->setText("1");
+    yScaleBoxN->setValidator(new QIntValidator(0, 100, this));
+    QLineEdit* yScaleBoxD = new QLineEdit();
+    yScaleBoxD->setText("1");
+    yScaleBoxD->setValidator(new QIntValidator(0, 100, this));
+
+//    xScaleBox->setValue(1.0);
+//    yScaleBox->setValue(1.0);
 
     QComboBox* algoBox = new QComboBox();
     algoBox->addItem(qApp->translate("ScalingOp", "Nearest neighboor (standard)"));
     algoBox->addItem(qApp->translate("ScalingOp", "Bi-linear"));
     algoBox->addItem(qApp->translate("ScalingOp", "Parabolic"));
     algoBox->addItem(qApp->translate("ScalingOp", "Spline"));
-    layout->insertRow(0, qApp->translate("ScalingOp", "Interpolation : "), algoBox);
-    layout->insertRow(1, qApp->translate("ScalingOp", "X scale factor : "), xScaleBox);
-    layout->insertRow(2, qApp->translate("ScalingOp", "Y scale factor : "), yScaleBox);
+
+//    layout->insertRow(0, qApp->translate("ScalingOp", "Interpolation : "), algoBox);
+//    layout->insertRow(1, qApp->translate("ScalingOp", "X scale factor : "), xScaleBoxN);
+//    layout->insertRow(1, qApp->translate("ScalingOp", " / "), xScaleBoxD);
+//    layout->insertRow(2, qApp->translate("ScalingOp", "Y scale factor : "), yScaleBoxN);
+//    layout->insertRow(2, qApp->translate("ScalingOp", " / "), yScaleBoxD);
+
+    QLabel* interpolation = new QLabel();
+    interpolation->setText(qApp->translate("ScalingOp", "Interpolation : "));
+    QLabel* xscaleRow = new QLabel();
+    xscaleRow->setText(qApp->translate("ScalingOp", "X scale factor : "));
+    QLabel* yscaleRow = new QLabel();
+    yscaleRow->setText(qApp->translate("ScalingOp", "Y scale factor : "));
+    QLabel* xDivision = new QLabel();
+    xDivision->setText("   /   ");
+    QLabel* yDivision = new QLabel();
+    yDivision->setText("   /   ");
+
+    layout->addWidget(interpolation, 0, 0, 1, 1);
+    layout->addWidget(algoBox, 0, 1, 1, 3);
+    layout->addWidget(xscaleRow, 1, 0, 1, 1);
+    layout->addWidget(xScaleBoxN, 1, 1, 1, 1);
+    layout->addWidget(xDivision, 1, 2, 1, 1);
+    layout->addWidget(xScaleBoxD, 1, 3, 1, 1);
+    layout->addWidget(yscaleRow, 2, 0, 1, 1);
+    layout->addWidget(yScaleBoxN, 2, 1, 1, 1);
+    layout->addWidget(yDivision, 2, 2, 1, 1);
+    layout->addWidget(yScaleBoxD, 2, 3, 1, 1);
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
-    layout->insertRow(3, buttonBox);
+    layout->addWidget(buttonBox, 3, 0, 1, 4);
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
     if(_test){
-      xScaleBox->setValue(_xfactor);
-      yScaleBox->setValue(_yfactor);
+//      xScaleBox->setValue(_xfactor);
+//      yScaleBox->setValue(_yfactor);
+
+      xScaleBoxN->setText(QString::number(_xfactor));
+      xScaleBoxD->setText(QString::number(_yfactor));
+      yScaleBoxN->setText(QString::number(_xfactor));
+      yScaleBoxD->setText(QString::number(_yfactor));
       algoBox->setCurrentIndex(_interp);
     }
     else{
@@ -99,21 +147,41 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
         default: inter = NearestInterpolation; break;
     }
 
+//    /*Process input text to get usable data*/
+//    QString xScale = xScaleBox->text();
+//    QString yScale = yScaleBox->text();
+//    if(xScale.contains('/')){
+//        QString numerator, denominator;
+//        for (QChar *it = xScale.begin(); it!=xScale.end(); ++it) {
+//           if(it!=Qchar('/')) numerator+=it;
+//        }
+//    }else if(xScale.toDouble()){
+//        double xValue = xScale.toDouble();
+//    }else{
+
+//    }
+
+
+
     if(currentWnd->isStandard()) {
         const Image* image = static_cast<const StandardImageWindow*>(currentWnd)->getImage();
         Image* resImg = NULL;
         switch(inter) {
             case NearestInterpolation:
-                resImg = scale<Image::depth_t, Nearest>(image, xScaleBox->value(), yScaleBox->value());
+//                resImg = scale<Image::depth_t, Nearest>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Nearest>(image, xScaleBoxN->text().toDouble()/xScaleBoxD->text().toDouble(), yScaleBoxN->text().toDouble()/yScaleBoxD->text().toDouble());
                 break;
             case BilinearInterpolation:
-                resImg = scale<Image::depth_t, Bilinear>(image, xScaleBox->value(), yScaleBox->value());
+//                resImg = scale<Image::depth_t, Bilinear>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Bilinear>(image, xScaleBoxN->text().toDouble()/xScaleBoxD->text().toDouble(), yScaleBoxN->text().toDouble()/yScaleBoxD->text().toDouble());
                 break;
             case ParabolicInterpolation:
-                resImg = scale<Image::depth_t, Parabolic>(image, xScaleBox->value(), yScaleBox->value());
+//                resImg = scale<Image::depth_t, Parabolic>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Parabolic>(image, xScaleBoxN->text().toDouble()/xScaleBoxD->text().toDouble(), yScaleBoxN->text().toDouble()/yScaleBoxD->text().toDouble());
                 break;
             case SplineInterpolation:
-                resImg = scale<Image::depth_t, Spline>(image, xScaleBox->value(), yScaleBox->value());
+//                resImg = scale<Image::depth_t, Spline>(image, xScaleBox->value(), yScaleBox->value());
+                resImg = scale<Image::depth_t, Spline>(image, xScaleBoxN->text().toDouble()/xScaleBoxD->text().toDouble(), yScaleBoxN->text().toDouble()/yScaleBoxD->text().toDouble());
                 break;
         }
         if(resImg != NULL) {
@@ -127,7 +195,8 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
     }
     else if(currentWnd->isDouble()) {
         const Image_t<double>* image = static_cast<const DoubleImageWindow*>(currentWnd)->getImage();
-        Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBox->value(), yScaleBox->value());
+//        Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBox->value(), yScaleBox->value());
+        Image_t<double>* resImg = scale<double, Nearest>(image, xScaleBoxN->text().toDouble()/xScaleBoxD->text().toDouble(), yScaleBoxN->text().toDouble()/yScaleBoxD->text().toDouble());
         outDoubleImage(resImg, qApp->translate("ScalingOp", "scaled").toStdString());
     }
 }

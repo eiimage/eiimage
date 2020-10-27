@@ -4,13 +4,13 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+130"/>
+        <location filename="main.cpp" line="+131"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
@@ -1555,7 +1555,7 @@ Canal %d :
         <translation>Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/Huffman.cpp" line="+97"/>
+        <location filename="Operations/Huffman.cpp" line="+126"/>
         <source>
  debit(huffman) = %.4f
 </source>
@@ -1788,8 +1788,14 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location filename="Operations/AbsoluteConvertOp.cpp" line="+33"/>
-        <source>Convert to Absolute</source>
-        <translation>Convertir en Absolu</translation>
+        <source>Absolute value</source>
+        <oldsource>Convert to Absolute</oldsource>
+        <translation>Valeur absolue</translation>
+    </message>
+    <message>
+        <location filename="Operations/DoubleConvertOp.cpp" line="+33"/>
+        <source>Convert to Double</source>
+        <translation>Convertir en Double</translation>
     </message>
 </context>
 <context>
@@ -2122,7 +2128,9 @@ Le débit vaut : %5.2f
         <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
 
 -------------------------------------------</source>
-        <translation type="unfinished">Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
+        <translation>Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
+
+-------------------------------------------</translation>
     </message>
 </context>
 <context>
@@ -2382,7 +2390,7 @@ Le débit vaut : %5.2f
 <context>
     <name>ScalingOp</name>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+12"/>
+        <location filename="Operations/ScalingOp.cpp" line="+30"/>
         <source>Nearest neighboor (standard)</source>
         <translation>Standard (plus proche voisin)</translation>
     </message>
@@ -2402,22 +2410,22 @@ Le débit vaut : %5.2f
         <translation>Spline</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+9"/>
         <source>Interpolation : </source>
         <translation>Interpolation : </translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>X scale factor : </source>
         <translation>Facteur d&apos;échelle en X : </translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Y scale factor : </source>
         <translation>Facteur d&apos;echelle en Y : </translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+84"/>
         <source>Bilinear Interpolation</source>
         <translation>Interpolation bilinéaire</translation>
     </message>
@@ -2442,7 +2450,7 @@ Le débit vaut : %5.2f
         <translation>Echantillonné</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>scaled</source>
         <translation>échantillonée</translation>
     </message>

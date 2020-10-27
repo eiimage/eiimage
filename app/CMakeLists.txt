@@ -43,6 +43,8 @@ set(imageinsa_SOURCES
 	Operations/DCTDialog.h
 	Operations/DCTOp.cpp
 	Operations/DCTOp.h
+        Operations/DoubleConvertOp.cpp
+        Operations/DoubleConvertOp.h
 	Operations/DMMDialog.cpp
 	Operations/DMMDialog.h
 	Operations/DMMOp.cpp

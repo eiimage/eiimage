@@ -31,6 +31,7 @@
 #include "Services/ImageINSAService.h"
 
 #include "Operations/AbsoluteConvertOp.h"
+#include "Operations/DoubleConvertOp.h"
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
 #include "Operations/TranslateOp.h"
@@ -139,6 +140,7 @@ int main(int argc, char** argv)
     image->addOperation(new SeparatorOp());
     image->addOperation(new AbsoluteConvertOp());
     image->addOperation(new UCharConvertOp());
+    image->addOperation(new DoubleConvertOp());
     image->addOperation(new SeparatorOp());
     image->addOperation(new ScalingOp());
     image->addOperation(new QuantificationOp());

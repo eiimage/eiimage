@@ -18,7 +18,7 @@
 */
 
 
-#include "AbsoluteConvertOp.h"
+#include "DoubleConvertOp.h"
 #include "../Tools.h"
 #include <QApplication>
 #include <QObject>
@@ -30,25 +30,25 @@
 
 using namespace imagein;
 
-AbsoluteConvertOp::AbsoluteConvertOp() : DoubleOperation(qApp->translate("Operations", "Absolute value").toStdString())
+DoubleConvertOp::DoubleConvertOp() : Operation(qApp->translate("Operations", "Convert to Double").toStdString())
 {
 }
 
-bool AbsoluteConvertOp::needCurrentImg() const{
+bool DoubleConvertOp::needCurrentImg() const{
     return true;
 }
 
-void AbsoluteConvertOp::operator()(const imagein::Image_t<double>* from, const std::map<const imagein::Image_t<double>*, std::string>&){
+void DoubleConvertOp::operator()(const imagein::Image* from, const std::map<const imagein::Image*, std::string>&){
 
     ImageDouble* resImg = new ImageDouble(from->getWidth(), from->getHeight(), from->getNbChannels());
 
     for(unsigned int i = 0; i < from->getWidth(); i++){
         for(unsigned int j = 0; j < from->getHeight(); j++){
             for(unsigned int k = 0; k < from->getNbChannels(); k++){
-                double newPixel = fabs(from->getPixel(i, j, k));
+                double newPixel = from->getPixel(i, j, k);
                 resImg->setPixel(i, j, k, newPixel );
             }
         }
     }
-    outDoubleImage(resImg, "Absolute", false, false, false, false);
+    outDoubleImage(resImg, "Double", false, false, false, false);
 }
