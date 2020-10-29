@@ -40,6 +40,7 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include <QPushButton>
+#include <QDebug>
 
 class StructElemWindow : public QDialog
 {

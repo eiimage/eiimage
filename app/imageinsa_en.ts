@@ -503,7 +503,7 @@ Number of classes = %1 </translation>
 <context>
     <name>DCT</name>
     <message>
-        <location filename="Operations/DCTOp.cpp" line="+58"/>
+        <location filename="Operations/DCTOp.cpp" line="+64"/>
         <source>DCT</source>
         <translation>DCT</translation>
     </message>
@@ -549,6 +549,14 @@ Number of classes = %1 </translation>
         <location line="+37"/>
         <source>Slope value : </source>
         <translation>Slope value : </translation>
+    </message>
+</context>
+<context>
+    <name>DCTOp</name>
+    <message>
+        <source> bpp with 8 bits per non null coefficient </source>
+        <oldsource> bpp with 8 bits per non null coefficient</oldsource>
+        <translation type="vanished"> bpp with 8 bits per non null coefficient </translation>
     </message>
 </context>
 <context>
@@ -633,7 +641,7 @@ Number of classes = %1 </translation>
 <context>
     <name>DPCM</name>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="+53"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="+54"/>
         <source>Error while loading quantification file</source>
         <translation>Error while loading quantization file</translation>
     </message>
@@ -721,7 +729,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+39"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+40"/>
         <source>Open file</source>
         <translation>Open file</translation>
     </message>
@@ -784,6 +792,11 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <location line="+28"/>
         <source>Open quantification editor</source>
         <translation>Open quantization editor</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>No quantification</source>
+        <translation>No quantization</translation>
     </message>
 </context>
 <context>
@@ -1427,9 +1440,14 @@ Channel %d :
         <translation>Flip %1</translation>
     </message>
     <message>
-        <location filename="Operations/DCTOp.cpp" line="-29"/>
+        <location filename="Operations/DCTOp.cpp" line="-34"/>
         <source>Discrete cosinus transform</source>
         <translation>DCT 16x16 with coef. reduction</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source> avec 8 bits par coefficients non nul</source>
+        <translation> with 8 bits per non null coefficient</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="-16"/>
@@ -1550,7 +1568,7 @@ Channel %d :
         <translation>Supervised classification</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-37"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-38"/>
         <source>DPCM Encoding</source>
         <translation>DPCM Encoding</translation>
     </message>
@@ -2161,13 +2179,19 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+3"/>
+        <location line="+103"/>
         <source>Custom</source>
         <translation>Custom</translation>
     </message>
     <message>
-        <location line="-1"/>
+        <location line="-104"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Identical</source>
+        <translation>Identical</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2190,7 +2214,7 @@ Le debit vaut : %5.2f
         <translation>Apply</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+19"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Non-linear quantization with centered values :</translation>
@@ -2202,28 +2226,33 @@ Le debit vaut : %5.2f
         <translation>Non-linear quantization with mean values :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+8"/>
         <source>Quantification personnalisee :</source>
         <translation>Custom quantization :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-4"/>
         <source>Quantification LloydMax :</source>
         <translation>LloydMax quantization :</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+9"/>
+        <source>Quantification identical :</source>
+        <translation>Quantification identical :</translation>
+    </message>
+    <message>
+        <location line="+6"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Linear quantization with centered values :</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+21"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>Loi de quantification (*.loi)</source>
         <translation>Quantization file (*.loi)</translation>
     </message>
@@ -2551,11 +2580,13 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="-117"/>
+        <location line="+184"/>
+        <location line="+12"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-189"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
@@ -2565,7 +2596,7 @@ Le debit vaut : %5.2f
         <translation>Scale :</translation>
     </message>
     <message>
-        <location line="+172"/>
+        <location line="+194"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
     </message>
@@ -3208,7 +3239,7 @@ Le debit vaut : %5.2f
 <context>
     <name>genericinterface::MorphoMatService</name>
     <message>
-        <location filename="Services/MorphoMatService.cpp" line="+58"/>
+        <location filename="Services/MorphoMatService.cpp" line="+59"/>
         <source>&amp;Erosion</source>
         <translation>&amp;Erosion</translation>
     </message>

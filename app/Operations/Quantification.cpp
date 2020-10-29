@@ -56,6 +56,22 @@ Quantification::Quantification(std::string filename) {
     }
 }
 
+Quantification::Quantification() {
+
+    int size=256;
+    this->size = size;
+    _threshold = new int[this->size - 1];
+    _values = new int[this->size];
+
+    for(int i = 0; i < 255; ++i) {
+        _threshold[i] = i+1;
+    }
+    for(int i = 0; i < 256; ++i) {
+        _values[i] = i;
+    }
+}
+
+
 void Quantification::saveAs(std::string filename) {
     ofstream file(filename.c_str(), fstream::out);
     file << "Quant_Level_File" << endl;
@@ -78,11 +94,6 @@ int Quantification::valueOf(int value) const {
         }
         return _values[nbThresholds()];
     }
-
-
-
-
-
 
 Quantification Quantification::linearQuant(int size) {
 

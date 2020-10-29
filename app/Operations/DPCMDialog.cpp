@@ -21,6 +21,7 @@
 #include "ui_DPCMDialog.h"
 #include <QFileDialog>
 #include "QuantificationDialog.h"
+#include <QDebug>
 
 DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),
@@ -48,12 +49,17 @@ void DPCMDialog::on_quantEditorButton_clicked()
 }
 
 Quantification* DPCMDialog::getQuantification() const {
-    try {
-        Quantification* quantif = new Quantification(ui->quantFileEdit->text().toStdString());
+    if(ui->noQuantization->isChecked()) {
+        Quantification* quantif = new Quantification();
         return quantif;
-    }
-    catch(std::exception&) {
-        return NULL;
+    }else{
+        try {
+            Quantification* quantif = new Quantification(ui->quantFileEdit->text().toStdString());
+            return quantif;
+        }
+        catch(std::exception&) {
+            return NULL;
+        }
     }
 }
 

@@ -26,6 +26,7 @@
 #include <typeinfo>
 
 #include <QMessageBox>
+#include <QDebug>
 
 using namespace genericinterface;
 using namespace imagein::algorithm;

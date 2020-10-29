@@ -46,6 +46,7 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     if(code != QDialog::Accepted) return;
 
     DPCM micd;
+
     try {
         micd.setQuantification(dialog->getQuantification());
     }

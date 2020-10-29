@@ -236,7 +236,29 @@ void StructElemWindow::resize(int size) {
 
 void StructElemWindow::changeStructElem(imagein::MorphoMat::StructElem* elem) {
     _structElem = elem;
+    /*-------------------------------mark the center---------------------------------*/
+    if(_structElem->getWidth()%2==0){
+        if(_shapeToGen->currentText()!=tr("Empty")){
+            _structElem->setPixel(_structElem->getWidth()/2-1, _structElem->getHeight()/2-1, 0);
+            _structElem->setPixel(_structElem->getWidth()/2-1, _structElem->getHeight()/2, 0);
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2-1, 0);
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2, 0);
+        }else{
+            _structElem->setPixel(_structElem->getWidth()/2-1, _structElem->getHeight()/2-1, 1);
+            _structElem->setPixel(_structElem->getWidth()/2-1, _structElem->getHeight()/2, 1);
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2-1, 1);
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2, 1);
+        }
+    }else{
+        if(_shapeToGen->currentText()!=tr("Empty")){
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2, 0);
+        }else{
+            _structElem->setPixel(_structElem->getWidth()/2, _structElem->getHeight()/2, 1);
+        }
+    }
+    /*-------------------------------------------------------------------------------*/
     StructElemViewer* newViewer = new StructElemViewer(_structElem);
+
     _view->setScene(newViewer);
     delete _viewer;
     _viewer = newViewer;
