@@ -116,8 +116,6 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
-                        /*When there is the same content in the existing translation file, the sentence will be replaced according to the original, but the line break will not work*/
-                        outputMessage += "\n\n-------------------------------------------";
                         _ws->addText(outputMessage);
                     }
                 }
@@ -127,8 +125,6 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
-                        /*When there is the same content in the existing translation file, the sentence will be replaced according to the original, but the line break will not work*/
-                        outputMessage += "\n\n-------------------------------------------";
                         _ws->addText(outputMessage);
                     }
                 }

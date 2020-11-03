@@ -44,6 +44,8 @@ private slots:
 
     void on_quantEditorButton_clicked();
 
+    void on_noQuantization_clicked();
+
 private:
     Ui::DPCMDialog *ui;
 };

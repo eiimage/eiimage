@@ -57,9 +57,6 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     }
     _quantBox->addItem(tr("LloydMax"));
     _quantBox->addItem(tr("Custom"));
-    /*--------------------------------------*/
-    _quantBox->addItem(tr("Identical"));
-    /*--------------------------------------*/
 
     layout->insertRow(0, tr("Quantification : "), _quantBox);
     layout->insertRow(1, tr("Number of values : "), _sizeBox);
@@ -97,10 +94,7 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
 
 void QuantificationDialog::methodChanged(int method) {
     _editorWidget->setVisible((_editorOnly && method == 2) || (!_editorOnly && method == 4));
-    _saveButton->setEnabled(_editorOnly || method==4);
-    /*--------------------------------------*/
-    _sizeBox->setDisabled((_editorOnly || method==3) || (!_editorOnly && method == 5));
-    /*--------------------------------------*/
+    _saveButton->setEnabled(_quantBox->currentText()==tr("Linear with centered value") || _quantBox->currentText()==tr("Custom"));
     this->adjustSize();
 }
 
@@ -125,12 +119,6 @@ Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int
                 to_print = QString(tr("Quantification personnalisee :")).toStdString();
                 return _quantWidget->getQuantif();
                 break;
-        /*--------------------------------------*/
-        case 5:
-                to_print = QString(tr("Quantification identical :")).toStdString();
-                return Quantification();
-                break;
-        /*--------------------------------------*/
 
         default:
                 to_print = QString(tr("Quantification lineaire a valeurs centrees :")).toStdString();

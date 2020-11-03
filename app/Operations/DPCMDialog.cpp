@@ -48,6 +48,19 @@ void DPCMDialog::on_quantEditorButton_clicked()
     dialog->exec();
 }
 
+void DPCMDialog::on_noQuantization_clicked()
+{
+    if(ui->noQuantization->isChecked()){
+        ui->quantBrowseButton->setEnabled(false);
+        ui->quantFileEdit->setEnabled(false);
+        ui->quantEditorButton->setEnabled(false);
+    }else{
+        ui->quantBrowseButton->setEnabled(true);
+        ui->quantFileEdit->setEnabled(true);
+        ui->quantEditorButton->setEnabled(true);
+    }
+}
+
 Quantification* DPCMDialog::getQuantification() const {
     if(ui->noQuantization->isChecked()) {
         Quantification* quantif = new Quantification();

@@ -719,7 +719,7 @@ quantdef-&gt;GetNumThresholds() = %d</translation>
 </translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+26"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Error in DPCM::setQuantDef:
@@ -874,7 +874,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation type="vanished">Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
     </message>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+112"/>
+        <location filename="Services/FilteringService.cpp" line="+108"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1446,7 +1446,8 @@ Channel %d :
     </message>
     <message>
         <location line="+22"/>
-        <source> avec 8 bits par coefficients non nul</source>
+        <source> avec 8 bits par coefficient non nul</source>
+        <oldsource> avec 8 bits par coefficients non nul</oldsource>
         <translation> with 8 bits per non null coefficient</translation>
     </message>
     <message>
@@ -1606,7 +1607,8 @@ Used transformation matrix :
 Le debit vaut : %5.2f
 
 </source>
-        <translation>The throughput is : %5.2f
+        <translation>
+The bitrate is : %5.2f
 </translation>
     </message>
     <message>
@@ -1804,7 +1806,7 @@ Le debit vaut : %5.2f
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
     <message>
-        <location filename="Operations/AbsoluteConvertOp.cpp" line="+33"/>
+        <location filename="Operations/AbsoluteConvertOp.cpp" line="+35"/>
         <source>Absolute value</source>
         <oldsource>Convert to Absolute</oldsource>
         <translation>Absolute value</translation>
@@ -2140,8 +2142,8 @@ Le debit vaut : %5.2f
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-41"/>
-        <location line="+11"/>
+        <location filename="Services/FilteringService.cpp" line="-37"/>
+        <location line="+9"/>
         <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
 
 -------------------------------------------</source>
@@ -2164,11 +2166,12 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+10"/>
+        <location line="+44"/>
         <source>Linear with centered value</source>
         <translation>Linear with centered value</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-42"/>
         <source>Non linear with centered value</source>
         <translation>Non linear with centered value</translation>
     </message>
@@ -2179,19 +2182,19 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="+3"/>
-        <location line="+103"/>
+        <location line="+38"/>
+        <location line="+53"/>
         <source>Custom</source>
         <translation>Custom</translation>
     </message>
     <message>
-        <location line="-104"/>
+        <location line="-92"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Identical</source>
-        <translation>Identical</translation>
+        <translation type="vanished">Identical</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2214,7 +2217,7 @@ Le debit vaut : %5.2f
         <translation>Apply</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+16"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Non-linear quantization with centered values :</translation>
@@ -2236,12 +2239,11 @@ Le debit vaut : %5.2f
         <translation>LloydMax quantization :</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Quantification identical :</source>
-        <translation>Quantification identical :</translation>
+        <translation type="vanished">Quantification identical :</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+9"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Linear quantization with centered values :</translation>
     </message>
@@ -2580,13 +2582,11 @@ Le debit vaut : %5.2f
     </message>
     <message>
         <location line="-117"/>
-        <location line="+184"/>
-        <location line="+12"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location line="-189"/>
+        <location line="+7"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
@@ -2596,7 +2596,7 @@ Le debit vaut : %5.2f
         <translation>Scale :</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+172"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
     </message>
@@ -3173,7 +3173,7 @@ Le debit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-89"/>
+        <location filename="Services/FilteringService.cpp" line="-87"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Apply filter</translation>
     </message>
@@ -3183,7 +3183,7 @@ Le debit vaut : %5.2f
         <translation>&amp;Edit filters</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+121"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>The resulting image is the square root of the squared sums</translation>
     </message>

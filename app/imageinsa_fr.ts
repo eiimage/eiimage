@@ -719,7 +719,7 @@ quantdef-&gt; GetNumThresholds () =% d</translation>
 </translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+26"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Erreur dans DPCM :: setQuantDef:
@@ -874,7 +874,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation type="vanished">Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
     </message>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+112"/>
+        <location filename="Services/FilteringService.cpp" line="+108"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
@@ -1446,8 +1446,9 @@ Canal %d :
     </message>
     <message>
         <location line="+22"/>
-        <source> avec 8 bits par coefficients non nul</source>
-        <translation> avec 8 bits par coefficients non nul</translation>
+        <source> avec 8 bits par coefficient non nul</source>
+        <oldsource> avec 8 bits par coefficients non nul</oldsource>
+        <translation> avec 8 bits par coefficient non nul</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="-16"/>
@@ -1805,7 +1806,7 @@ Le débit vaut : %5.2f
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
     <message>
-        <location filename="Operations/AbsoluteConvertOp.cpp" line="+33"/>
+        <location filename="Operations/AbsoluteConvertOp.cpp" line="+35"/>
         <source>Absolute value</source>
         <oldsource>Convert to Absolute</oldsource>
         <translation>Valeur absolue</translation>
@@ -2141,8 +2142,8 @@ Le débit vaut : %5.2f
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-41"/>
-        <location line="+11"/>
+        <location filename="Services/FilteringService.cpp" line="-37"/>
+        <location line="+9"/>
         <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
 
 -------------------------------------------</source>
@@ -2165,11 +2166,12 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+10"/>
+        <location line="+44"/>
         <source>Linear with centered value</source>
         <translation>Linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-42"/>
         <source>Non linear with centered value</source>
         <translation>Non linéaire à valeurs centrées</translation>
     </message>
@@ -2180,19 +2182,19 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+3"/>
-        <location line="+103"/>
+        <location line="+38"/>
+        <location line="+53"/>
         <source>Custom</source>
         <translation>Personnalisée</translation>
     </message>
     <message>
-        <location line="-104"/>
+        <location line="-92"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Identical</source>
-        <translation>Identique</translation>
+        <translation type="vanished">Identique</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2215,7 +2217,7 @@ Le débit vaut : %5.2f
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+16"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Quantification non linéaire à valeurs centrées :</translation>
@@ -2237,12 +2239,11 @@ Le débit vaut : %5.2f
         <translation>Quantification LloydMax :</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Quantification identical :</source>
-        <translation>Quantification identique :</translation>
+        <translation type="vanished">Quantification identique :</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+9"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Quantification linéaire à valeurs centrées :</translation>
     </message>
@@ -2581,13 +2582,11 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="-117"/>
-        <location line="+184"/>
-        <location line="+12"/>
         <source>Empty</source>
         <translation>Vide</translation>
     </message>
     <message>
-        <location line="-189"/>
+        <location line="+7"/>
         <source>Generate</source>
         <translation>Génerer</translation>
     </message>
@@ -2597,7 +2596,7 @@ Le débit vaut : %5.2f
         <translation>Echelle :</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+172"/>
         <source>Open a file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
@@ -3170,7 +3169,7 @@ Le débit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-89"/>
+        <location filename="Services/FilteringService.cpp" line="-87"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Appliquer un filtre</translation>
     </message>
@@ -3180,7 +3179,7 @@ Le débit vaut : %5.2f
         <translation>&amp;Editer un filtre</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+121"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>L&apos;image résultat est la racine des sommes des carrés</translation>
     </message>

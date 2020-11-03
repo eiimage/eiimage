@@ -65,7 +65,15 @@ Open Qt terminal :
 	mingw32-make
 	mingw32-make install
 
-Note: GNU/Linux users can install the package provided by their distribution, if it exists, but this can be problematic if the library binary has been compiled with an incompatble verion of Qt. In that specific case, the library have to be compiled manually.
+Note: 
+
+1. GNU/Linux users can install the package provided by their distribution, if it exists, but this can be problematic if the library binary has been compiled with an incompatible version of Qt. In that specific case, the library have to be compiled manually. 
+
+2. If the OPENGL library is missing (fatal error: GL / gl.h: No such file or directory), the installation of build-essential libgl1-mesa-dev will solve this problem.
+3. If you choose to install Qwt directly by make without using qmake, you will need to manually copy some files from Qwt directory to your Qt directory (required on both Linux and Windows systems): 
+   1. Copy qwt-6.1.5/designer/plugins/designer/libqwt_designer_plugin.so (or .dll) to Qt/5.15.1/gcc_64 /plugins/designer.
+   2. Copy all files in qwt-6.1.5/lib to Qt/5.15.1/gcc_64/lib.
+   3. Create a new folder in Qt/5.15.1/gcc_64 /include and name it qwt, copy all the header files under qwt-6.1.5/src to the new created qwt folder.
 
 ### Zlib, Jpeg, Png
 #### Windows
@@ -77,7 +85,7 @@ You can get these libraries from http://gnuwin32.sourceforge.net/. Download and 
 Note: If you don't have the right to install packages on your machine, you can download both 'Binaries' and 'Developer files' zip packages for each library. Then, uncompress it to a folder (example: C:\GnuWin32). This will automatically copy libraries into 'bin', 'lib' and 'include' sub-folders.
 
 #### GNU/Linux
-Developer packages from your distribution may be available. This is the easiest way to install these dependencies. CMake will probably detect dependencies more easily if you install them with the package manager.
+It's easier to install these dependencies on Linux, developer packages from your distribution may be available, try zlib1g, libjpeg-dev and libpng-dev for example. CMake will probably detect dependencies more easily if you install them with the package manager.
 
 ## CMake Generation
 This is the most important part. Once the generation is done, the compilation shouldn't cause any trouble.

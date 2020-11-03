@@ -48,7 +48,7 @@ DPCM::~DPCM()
 }
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
-    char buffer[255], buffer2[255];
+    char buffer[256], buffer2[256];
     if( quantdef == NULL ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
@@ -245,7 +245,7 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
     if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
-        char buffer[255];
+        char buffer[256];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
     }
@@ -255,7 +255,7 @@ void DPCM::set_levels() {
         iloiqu[ counter * 2 + 1 ] = quantdef->threshold(counter);
         iloiqu[ counter * 2 + 2 ] = quantdef->value(counter);
     }
-    iloiqu[quantdef->nbThresholds() * 2 + 1 ] = iloiqu[quantdef->nbThresholds() * 2 - 1 ] + 1;
+    iloiqu[quantdef->nbThresholds() * 2 + 1 ] = iloiqu[quantdef->nbThresholds() * 2 - 1 ];
     iloiqu[quantdef->nbThresholds() * 2 + 2 ] = quantdef->value(quantdef->nbThresholds());
 }
 
@@ -263,8 +263,8 @@ string DPCM::print_iloiqu() {
     string returnval;
     returnval = qApp->translate("DPCM","seuils de decision --------------- niveaux de reconstruction\n").toStdString();
     int counter;
-    char buffer[100];
-    for( counter=1; counter<= iloiqu[0]*2-1; counter++ ) {
+    char buffer[512];
+    for( counter=1; counter<= iloiqu[0]*2-1; ++counter ) {
         if( !(counter & 1 == 1) ) {
             sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
             returnval = returnval + buffer;
@@ -272,9 +272,12 @@ string DPCM::print_iloiqu() {
             returnval = returnval + buffer;
         }
     }
-    sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
+    if(quantdef->nbValues()<255){
+        sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
+    }else{
+        sprintf( buffer, "                                                 %3d     \n", iloiqu[quantdef->nbThresholds() * 2 + 1] );
+    }
     returnval = returnval + buffer;
-
     return returnval;
 }
 
@@ -283,7 +286,7 @@ void DPCM::setQuantification( Quantification *tquantdef ) {
         throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
     }
     if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
-        char buffer[255];
+        char buffer[256];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;
     }

@@ -61,7 +61,7 @@ Quantification::Quantification() {
     int size=256;
     this->size = size;
     _threshold = new int[this->size - 1];
-    _values = new int[this->size];
+    _values = new int[this->size +1];
 
     for(int i = 0; i < 255; ++i) {
         _threshold[i] = i+1;

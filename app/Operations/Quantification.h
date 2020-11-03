@@ -46,7 +46,6 @@ public:
     inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
-    static Quantification identicalQuant();
     static Quantification linearQuant(int size);
     static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
     static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);

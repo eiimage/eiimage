@@ -26,7 +26,9 @@
 #include "Image.h"
 #include <Converter.h>
 #include <QLabel>
+#include <QDebug>
 #include <QStringList>
+#include <ProjectionHistogram.h>
 
 using namespace imagein;
 
@@ -50,5 +52,7 @@ void AbsoluteConvertOp::operator()(const imagein::Image_t<double>* from, const s
             }
         }
     }
+
     outDoubleImage(resImg, "Absolute", false, false, false, false);
+
 }
