@@ -50,7 +50,7 @@ void DCTOp::operator()(const imagein::Image* image, const std::map<const imagein
     if(dialog->isTruncMode()) {
         s = dct16x16(image, &resImg, &invImg, true, dialog->getTruncLimit());
         s.pop_back();
-        string str = QString(qApp->translate("Operations", " avec 8 bits par coefficient non nul")).toStdString();
+        string str = QString(qApp->translate("Operations", " bpp avec 8 bits par coefficient non nul")).toStdString();
         s += str;
     }
     else {

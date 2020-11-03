@@ -1446,9 +1446,9 @@ Channel %d :
     </message>
     <message>
         <location line="+22"/>
-        <source> avec 8 bits par coefficient non nul</source>
-        <oldsource> avec 8 bits par coefficients non nul</oldsource>
-        <translation> with 8 bits per non null coefficient</translation>
+        <source> bpp avec 8 bits par coefficient non nul</source>
+        <oldsource> avec 8 bits par coefficient non nul</oldsource>
+        <translation> bpp with 8 bits per non null coefficient</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="-16"/>
