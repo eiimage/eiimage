@@ -1574,7 +1574,7 @@ Channel %d :
         <translation>DPCM Encoding</translation>
     </message>
     <message>
-        <location filename="Operations/Huffman.cpp" line="+126"/>
+        <location filename="Operations/Huffman.cpp" line="+123"/>
         <source>
  debit(huffman) = %.4f
 </source>

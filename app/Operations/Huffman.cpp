@@ -31,13 +31,10 @@ using namespace imagein;
 /*------------------prepare for sorting---------------------*/
 typedef pair<string, double> PAIR;
 
-struct cmp
+bool cmp(const PAIR& P1, const PAIR& P2)
 {
-    bool operator() (const PAIR& P1, const PAIR& P2)
-    {
-        return P1.second <= P2.second;
-    }
-};
+    return P1.second < P2.second;
+}
 /*----------------------------------------------------------*/
 
 Huffman::Huffman() {
@@ -118,8 +115,8 @@ string Huffman::execute( const GrayscaleImage *im ) {
     for(iter=mapStrPb.begin(); iter!=mapStrPb.end();iter++){
         resVector.push_back(*iter);
     }
-    sort(resVector.begin(), resVector.end(), cmp());
-    for(int i=0; i<=resVector.size(); i++){
+    sort(resVector.begin(), resVector.end(), cmp);
+    for(unsigned int i=0; i<resVector.size(); ++i){
         returnval = returnval + resVector[i].first;
     }
     /*---------------------------------------------------------------------------*/
