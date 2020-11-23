@@ -21,7 +21,6 @@
 #include "ui_DPCMDialog.h"
 #include <QFileDialog>
 #include "QuantificationDialog.h"
-#include <QDebug>
 
 DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),

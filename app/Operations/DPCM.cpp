@@ -48,7 +48,7 @@ DPCM::~DPCM()
 }
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
-    char buffer[256], buffer2[256];
+    char buffer[512], buffer2[512];
     if( quantdef == NULL ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
@@ -159,9 +159,6 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             quant_pred_err = quantdef->valueOf(pred_err);
             quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
-
-            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
-
             // valeur reconstruite
             int tempvalue = pred + quant_pred_err;
             // Crop the value in [0,255]
@@ -245,7 +242,7 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
     if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
-        char buffer[256];
+        char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
     }
@@ -286,7 +283,7 @@ void DPCM::setQuantification( Quantification *tquantdef ) {
         throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
     }
     if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
-        char buffer[256];
+        char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;
     }

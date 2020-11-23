@@ -22,7 +22,7 @@
 
 #include <Image.h>
 
-#define N_MAX_THRESHOLD 256
+#define N_MAX_THRESHOLD 512
 
 class Quantification {
 public:

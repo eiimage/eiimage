@@ -57,17 +57,17 @@ Quantification::Quantification(std::string filename) {
 }
 
 Quantification::Quantification() {
+//  Quantification identique
 
-    int size=256;
-    this->size = size;
-    _threshold = new int[this->size - 1];
-    _values = new int[this->size +1];
+    this->size = 511;
+    _threshold = new int[this->size-1];
+    _values = new int[this->size];
 
-    for(int i = 0; i < 255; ++i) {
-        _threshold[i] = i+1;
+    for(int i = 0; i < size-1; ++i) {
+        _threshold[i] = i-254;
     }
-    for(int i = 0; i < 256; ++i) {
-        _values[i] = i;
+    for(int i = 0; i < size; ++i) {
+        _values[i] = i-255;
     }
 }
 

@@ -39,7 +39,7 @@ private:
     void codlq(int m);
     void codec(int nlq,int ier,int *icode,int *ireco);
     void set_levels();
-    int iloiqu[512];
+    int iloiqu[1024];
     int itcod[2048][20],itrco[2048][20],ktab[2][20];
 };
 

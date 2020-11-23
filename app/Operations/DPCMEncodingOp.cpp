@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <GrayscaleImage.h>
 #include <Converter.h>
+#include <QDebug>
 
 using namespace std;
 using namespace imagein;

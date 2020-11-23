@@ -641,7 +641,7 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DPCM</name>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="+54"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="+55"/>
         <source>Error while loading quantification file</source>
         <translation>Erreur lors du chargement du fichier de quantification</translation>
     </message>
@@ -688,7 +688,7 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">seuils de decision --------------- niveaux de reconstruction\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+180"/>
+        <location filename="Operations/DPCM.cpp" line="+177"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -729,7 +729,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+40"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+39"/>
         <source>Open file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
