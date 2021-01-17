@@ -33,6 +33,7 @@ public:
     virtual ~DPCM();
     std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **new_err_image, imagein::Image **recons_image, imagein::Image **pred_image, imagein::ImageDouble **coding_err_image, double Q = 0 );
     void setQuantification( Quantification* tquantdef );
+
 private:
     std::string print_iloiqu();
     Quantification* quantdef;

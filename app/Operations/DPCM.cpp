@@ -21,6 +21,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
+#include <Converter.h>
 #include "../Tools.h"
 
 using namespace std;
@@ -53,24 +54,19 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
-    int imgHeight,imgWidth;
-    int pred;
+    int imgHeight = im->getHeight();
+    int imgWidth = im->getWidth();
+    int pred[imgHeight][imgWidth];
     int pred_err;   // prediction error
     int quant_pred_err;  // quantized prediction error
-    int reco; // reconstructed value
-    int code; // code
     int coding_err; // erreur de codage
-
-    double pi[512],piq[512],nbpt = 0;
-    double h = 0.;
-    double hq = 0.;
-
-    imgHeight = im->getHeight();
-    imgWidth = im->getWidth();
 
     /* initialisation de la loi de quantification */
     set_levels();
     codlq(0);
+
+//    /* prepare a quantificator for lloydMax, il will be replaced after if lloydMax selected */
+//    Quantification* quantLloydMax = quantdef;
 
     /* allocation mmoire pour l'image d'erreur de prdiction */
     ImageDouble *quantized_prediction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer quantized_prediction_error_image
@@ -97,14 +93,14 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             float A,B,C;
 
             case PX_EQ_A:
-                pred = reconstructed_image->getPixelAt(j-1, i);
+                pred[i][j] = reconstructed_image->getPixelAt(j-1, i);
                 break;
             case PX_EQ_B:
-                pred = reconstructed_image->getPixelAt(j, i-1);
+                pred[i][j] = reconstructed_image->getPixelAt(j, i-1);
                 break;
             case PX_EQ_APC:
                 AplusC = reconstructed_image->getPixelAt(j-1, i) + reconstructed_image->getPixelAt(j, i-1);
-                pred = AplusC / 2;
+                pred[i][j] = AplusC / 2;
                 break;
             case PX_EQ_Q:
                 /*
@@ -129,12 +125,12 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
                 if( ((fabs(B-C) - Q) <= fabs(B-A)) &&
                         (fabs(B-A) <= (fabs(B-C) + Q)) ) {
-                    pred = (uint8_t)((A + C) / 2);
+                    pred[i][j] = (uint8_t)((A + C) / 2);
                 } else {
                     if( fabs(B-A) > fabs(B-C) ) {
-                        pred = (uint8_t)A;
+                        pred[i][j] = (uint8_t)A;
                     } else {
-                        pred = (uint8_t)C;
+                        pred[i][j] = (uint8_t)C;
                     }
                 }
                 break;
@@ -143,24 +139,36 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             }
 
             //image de prediction pour affichage
-            prediction_image->setPixelAt(j,i,pred);
+            prediction_image->setPixelAt(j,i,pred[i][j]);
             depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
             //erreur de prediction
-            pred_err = thePixel - pred;
+            pred_err = thePixel - pred[i][j];
             predction_error_image->setPixelAt(j, i, pred_err);
+            }
+        }
 
+//     //break to reset the quantificator according to the error image of prediction
+//    if(this->isLloydMax){
+//        Image* img = Converter<Image>::convert(*predction_error_image);
+//        *quantLloydMax= Quantification::lloydMaxQuant_DPCM(sizeLloydMax, img);
+//        setQuantification(quantLloydMax);
+//        set_levels();
+//        codlq(0);
+//        delete img;
+//    }
+//    //continue
+
+    for(int i=1; i<imgHeight ; i++)
+    {
+        for(int j=1; j<imgWidth ; j++)
+        {
             depth_default_t pixImg = im->getPixelAt(j, i);
 
-            //code obsolete
-            //codec(0, quant_pred_err, &code, &reco);//action : voir code Vero 1988 calcul : reco = quant_pred_err (erreur de prediction quantifiee)
-            //int tempvalue = pred + reco;
-
-            //quantification erreur de prediction
             quant_pred_err = quantdef->valueOf(pred_err);
             quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
             // valeur reconstruite
-            int tempvalue = pred + quant_pred_err;
+            int tempvalue = pred[i][j] + quant_pred_err;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
             depth_default_t reconstructedPix = reconstructed_image->getPixelAt(j, i);
@@ -172,7 +180,6 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
         }
     }
 
-    
     double pred_err_entrop = predction_error_image->getEntropy();
     sprintf(buffer, qApp->translate("DPCM","\nL'entropie de l'image d'erreur de prediction vaut : %f\n").toUtf8(), pred_err_entrop);
 
@@ -241,7 +248,7 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 
 void DPCM::set_levels() {
     // Fills in iloiqu with the specified values
-    if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
+    if( quantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || quantdef->nbThresholds() < 1 ) {
         char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
@@ -260,7 +267,7 @@ string DPCM::print_iloiqu() {
     string returnval;
     returnval = qApp->translate("DPCM","seuils de decision --------------- niveaux de reconstruction\n").toStdString();
     int counter;
-    char buffer[512];
+    char buffer[100];
     for( counter=1; counter<= iloiqu[0]*2-1; ++counter ) {
         if( !(counter & 1 == 1) ) {
             sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
@@ -282,7 +289,7 @@ void DPCM::setQuantification( Quantification *tquantdef ) {
     if( tquantdef == NULL ) {
         throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
     }
-    if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
+    if( tquantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || tquantdef->nbThresholds() < 1 ) {
         char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;

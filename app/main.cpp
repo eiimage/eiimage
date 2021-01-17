@@ -224,11 +224,9 @@ int main(int argc, char** argv)
     mainService->addOpSet(encode);
     gi.addService(new MorphoMatService);
 
-
     mainService->addOpSet(tools);
 
     gi.addService(pluginManager);
-
 
     gi.run();
 

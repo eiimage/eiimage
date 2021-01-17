@@ -688,7 +688,7 @@ Number of classes = %1 </translation>
         <translation type="vanished">decision thresholds --------- reconstruction levels\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+177"/>
+        <location filename="Operations/DPCM.cpp" line="+184"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -784,17 +784,21 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Quantization file :</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+45"/>
         <source>Browse</source>
         <translation>Browse</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+18"/>
         <source>Open quantification editor</source>
         <translation>Open quantization editor</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <source>LloydMax</source>
+        <translation type="obsolete">LloydMax</translation>
+    </message>
+    <message>
+        <location line="-56"/>
         <source>No quantification</source>
         <translation>No quantization</translation>
     </message>
@@ -2188,7 +2192,7 @@ The bitrate is : %5.2f
         <translation>Custom</translation>
     </message>
     <message>
-        <location line="-92"/>
+        <location line="-93"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
@@ -2197,7 +2201,7 @@ The bitrate is : %5.2f
         <translation type="vanished">Identical</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Quantification : </source>
         <translation>Quantization : </translation>
     </message>

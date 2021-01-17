@@ -54,8 +54,8 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     if(!_editorOnly) {
         _quantBox->addItem(tr("Non linear with centered value"));
         _quantBox->addItem(tr("Non linear with mean value"));
+        _quantBox->addItem(tr("LloydMax"));
     }
-    _quantBox->addItem(tr("LloydMax"));
     _quantBox->addItem(tr("Custom"));
 
     layout->insertRow(0, tr("Quantification : "), _quantBox);
@@ -93,7 +93,7 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
 }
 
 void QuantificationDialog::methodChanged(int method) {
-    _editorWidget->setVisible((_editorOnly && method == 2) || (!_editorOnly && method == 4));
+    _editorWidget->setVisible((_editorOnly && method == 1) || (!_editorOnly && method == 4));
     _saveButton->setEnabled(_quantBox->currentText()==tr("Linear with centered value") || _quantBox->currentText()==tr("Custom"));
     this->adjustSize();
 }
@@ -157,7 +157,7 @@ void QuantificationDialog::save() {
     if(_quantBox->currentIndex() == 0) {
         Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString());
     }
-    else if((_editorOnly && _quantBox->currentIndex() == 2) || (!_editorWidget && _quantBox->currentIndex() == 4)) {
+    else if((_editorOnly && _quantBox->currentIndex() == 1) || (!_editorOnly && _quantBox->currentIndex() == 4)) {
         _quantWidget->getQuantif().saveAs(filename.toStdString());
     }
 }

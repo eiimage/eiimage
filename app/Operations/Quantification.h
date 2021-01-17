@@ -22,7 +22,8 @@
 
 #include <Image.h>
 
-#define N_MAX_THRESHOLD 512
+#define N_MAX_THRESHOLD 256
+#define N_MAX_THRESHOLD_FULL 512
 
 class Quantification {
 public:
@@ -50,6 +51,9 @@ public:
     static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
     static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
     static Quantification lloydMaxQuant(int size, const imagein::Image* image, unsigned int c);
+
+    /*linear quantificator for dpcm(including negatif values)*/
+    static Quantification linearQuant_DPCM(int size);
 
 private:
     int size;

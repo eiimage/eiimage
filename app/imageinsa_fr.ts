@@ -688,7 +688,7 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">seuils de decision --------------- niveaux de reconstruction\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+177"/>
+        <location filename="Operations/DPCM.cpp" line="+184"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -784,17 +784,21 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>Fichier de quantification : </translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+45"/>
         <source>Browse</source>
         <translation>Parcourir</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+18"/>
         <source>Open quantification editor</source>
         <translation>Ouvrir l&apos;éditeur de quantification</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <source>LloydMax</source>
+        <translation type="obsolete">LloydMax</translation>
+    </message>
+    <message>
+        <location line="-56"/>
         <source>No quantification</source>
         <translation>Sans quantification</translation>
     </message>
@@ -2188,7 +2192,7 @@ Le débit vaut : %5.2f
         <translation>Personnalisée</translation>
     </message>
     <message>
-        <location line="-92"/>
+        <location line="-93"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
@@ -2197,7 +2201,7 @@ Le débit vaut : %5.2f
         <translation type="vanished">Identique</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>Quantification : </source>
         <translation>Quantification : </translation>
     </message>

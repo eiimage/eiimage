@@ -211,7 +211,6 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
     int diff_mean = 100;
     // initialisation : repartion lineaire des niveaux de quantification
     Quantification quant = linearQuant(size);
-
     
     while(cpt > 0 && diff_mean >=1 ){
         // calcul des nouveaux seuils de quantification
@@ -223,9 +222,6 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
             
             diff[i] = abs(diff[i] - quant._threshold[i]);
         }
-        
-        
-        
         
         // Calcul des nouveaux niveaux de quantification
         // Premier niveau baricentre entre 0 et le premier seuil
@@ -264,21 +260,42 @@ Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsig
         if(nb_points > 0) quant._values[size -1] = (som_lum/nb_points);
         else quant._values[size-1] = (quant._threshold[size-2] +  N_MAX_THRESHOLD)/2 ;
         
-
-
-
-
-
-
-        
         //calcul de la condition d'arret (moyenne des écarts < 1 )
         for(int i = 0; i<size-1 ; i++){
             diff_mean += diff[i];
         }
         diff_mean = diff_mean / (size-1);
         cpt--;
-   
-   
+    }
+    return quant;
+}
+
+Quantification Quantification::linearQuant_DPCM(int size) {
+
+    Quantification quant(size);
+
+    int newsize=size;
+    if(size%2==0){
+        newsize/=2;
+        for(int i = 0; i < newsize ; ++i) {
+            quant._threshold[i+newsize] = floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5 );
+            quant._threshold[i] = - floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5 );
+        }
+    }else{
+        newsize=(size-1)/2;
+        for(int i = 0; i < newsize ; ++i) {
+            quant._threshold[i+1+newsize] = floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5 );
+            quant._threshold[i] = - floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5 );
+        }
+        quant._threshold[newsize]=0.;
+    }
+
+    if(size > 0) {
+        quant._values[0] = floor( quant._threshold[0] / 2. + 0.5 );
+        quant._values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant._threshold[size - 2]) / 2. + 0.5 );
+    }
+    for(int i = 0; i < size - 1; ++i) {
+        quant._values[i] = floor( (double)(quant._threshold[i] + quant._threshold[i-1]) / 2. + 0.5 );
     }
     return quant;
 }

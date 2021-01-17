@@ -53,6 +53,6 @@ void AbsoluteConvertOp::operator()(const imagein::Image_t<double>* from, const s
         }
     }
 
-    outDoubleImage(resImg, "Absolute", false, false, false, false);
+    outDoubleImage(resImg, "Absolute", false, true, 1.0, false);
 
 }
