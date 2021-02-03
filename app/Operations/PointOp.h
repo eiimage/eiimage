@@ -91,8 +91,8 @@ class PointOp : public GenericOperation {
                       Pixel Arithmetic Operations
 ----------------------------------------------------------------------*/
     /*Subtraction and division are based on addition and multiplication, by processing the operand.*/
-    struct PixAdd : PixOp_t<depth_t> {
-        PixAdd(double value_) : PixOp_t<depth_t>(value_) {}
+    struct PixAdd : PixOp_t<int> {
+        PixAdd(int value_) : PixOp_t<int>(value_) {}
         intmax_t op(depth_t pixel) { return pixel + value; }
     };
 
@@ -102,7 +102,7 @@ class PointOp : public GenericOperation {
     };
 
     struct PixMul : PixOp_t<depth_t> {
-        PixMul(double value_) : PixOp_t<depth_t>(value_) {}
+        PixMul(double value_) : PixOp_t<double>(value_) {}
         intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
     };
 
