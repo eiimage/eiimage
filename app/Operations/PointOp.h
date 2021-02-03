@@ -101,7 +101,7 @@ class PointOp : public GenericOperation {
         double op(double pixel) { return pixel + value; }
     };
 
-    struct PixMul : PixOp_t<depth_t> {
+    struct PixMul : PixOp_t<double> {
         PixMul(double value_) : PixOp_t<double>(value_) {}
         intmax_t op(depth_t pixel) { return pixel * value + 0.5; }
     };
