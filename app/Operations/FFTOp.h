@@ -27,9 +27,9 @@ class FFTOp : public Operation
 public:
     FFTOp();
 
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void operator() (const imagein::Image*, const std::map<const imagein::Image*, std::string>&) override;
 
-    bool needCurrentImg() const;
+    bool needCurrentImg() const override;
 };
 
 #endif // FFTOP_H

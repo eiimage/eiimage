@@ -34,22 +34,22 @@ bool FFTOp::needCurrentImg() const {
 }
 
 void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Image*, string>&) {
-    FFTDialog* dialog = new FFTDialog(QApplication::activeWindow());
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    auto* dialog = new FFTDialog(QApplication::activeWindow());
+    auto code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code!=QDialog::Accepted) return;
 
-    unsigned int width = nearestUpPower2(image->getWidth());
-    unsigned int height = nearestUpPower2(image->getHeight());
+    int width = nearestUpPower2((int)image->getWidth());
+    int height = nearestUpPower2((int)image->getHeight());
 
 
-    complex<double>** data = new complex<double>*[width];
+    auto** data = new complex<double>*[width];
     for(unsigned int i = 0; i < width; ++i) data[i] = new complex<double>[height];
 
     if(dialog->isMagPhase()) {
-        Image_t<double>* magnitudeImg = new Image_t<double>(width, height, image->getNbChannels());
-        Image_t<double>* phaseImg = new Image_t<double>(width, height, image->getNbChannels());
+        auto* magnitudeImg = new Image_t<double>(width, height, image->getNbChannels());
+        auto* phaseImg = new Image_t<double>(width, height, image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
@@ -94,12 +94,12 @@ void FFTOp::operator()(const imagein::Image* image, const map<const imagein::Ima
             }
         }
         /*(imagein::ImageDouble* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false)*/
-        this->outDoubleImage(phaseImg, qApp->translate("FFTOp", "DFT (Phase)").toStdString(), false, true);
+        this->outDoubleImage(phaseImg, qApp->translate("FFTOp", "DFT (Phase)").toStdString(), false, false);
         this->outDoubleImage(magnitudeImg, qApp->translate("FFTOp", "DFT (Magnitude)").toStdString(), false, true);
     }
     else {
-        Image_t<double>* realImg = new Image_t<double>(width, height, image->getNbChannels());
-        Image_t<double>* imagImg = new Image_t<double>(width, height, image->getNbChannels());
+        auto* realImg = new Image_t<double>(width, height, image->getNbChannels());
+        auto* imagImg = new Image_t<double>(width, height, image->getNbChannels());
         for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
             for(unsigned int j = 0; j < image->getHeight(); ++j) {
                 for(unsigned int i = 0; i < image->getWidth(); ++i) {
