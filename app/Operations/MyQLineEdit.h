@@ -55,15 +55,11 @@ class MyQLineEdit : public QLineEdit {
 
         if(text.contains("logical")){
             this->setValidator(logicalValidator);
-            printf("111111111111");
         }else if(text.contains("<<") || text.contains(">>")){
             this->setValidator(shiftValidator);
-            printf("2222222222");
         }else if(text.contains("bit-wise")){
             this->setValidator(intValidator);
-            printf("33333333333");
         }else{
-            printf("444444444444");
             this->setValidator(doubleValidator);
         }
     }
