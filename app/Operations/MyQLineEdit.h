@@ -25,14 +25,16 @@
 #include <QRegExpValidator>
 #include <QIntValidator>
 #include <QDoubleValidator>
+#include "Widgets/ImageWidgets/MyDoubleValidator.h"
 
 class MyQLineEdit : public QLineEdit {
 
   Q_OBJECT
 
   public:
-    MyQLineEdit(QWidget *parent = nullptr) : QLineEdit(parent){};
-    MyQLineEdit(const QString &contents, QWidget *parent = nullptr) : QLineEdit(contents, parent){};
+
+    explicit MyQLineEdit(QWidget *parent = nullptr) : QLineEdit(parent){};
+    explicit MyQLineEdit(const QString &contents, QWidget *parent = nullptr) : QLineEdit(contents, parent){};
 
   public slots:
     void updateValidator(const QString &text){
@@ -40,10 +42,10 @@ class MyQLineEdit : public QLineEdit {
         QRegExp regLogicalExp("^[1]d*|0$");
         /*Allow positive integer as input*/
         QRegExp regShiftExp("^\\d+$");
-        QRegExpValidator* logicalValidator = new QRegExpValidator(regLogicalExp,0);
-        QRegExpValidator* shiftValidator = new QRegExpValidator(regShiftExp,0);
-        QIntValidator* intValidator = new QIntValidator();
-        QDoubleValidator* doubleValidator = new QDoubleValidator();
+        auto* logicalValidator = new QRegExpValidator(regLogicalExp, nullptr);
+        auto* shiftValidator = new QRegExpValidator(regShiftExp,nullptr);
+        auto* intValidator = new QIntValidator();
+        auto* doubleValidator = new genericinterface::MyDoubleValidator();
 
         if(text.contains("NOT")){
             this->setEnabled(false);
@@ -53,11 +55,15 @@ class MyQLineEdit : public QLineEdit {
 
         if(text.contains("logical")){
             this->setValidator(logicalValidator);
+            printf("111111111111");
         }else if(text.contains("<<") || text.contains(">>")){
             this->setValidator(shiftValidator);
+            printf("2222222222");
         }else if(text.contains("bit-wise")){
             this->setValidator(intValidator);
+            printf("33333333333");
         }else{
+            printf("444444444444");
             this->setValidator(doubleValidator);
         }
     }
