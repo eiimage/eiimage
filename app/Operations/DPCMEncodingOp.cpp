@@ -40,8 +40,8 @@ bool DPCMEncodingOp::needCurrentImg() const {
 
 void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
 
-    DPCMDialog* dialog = new DPCMDialog(QApplication::activeWindow());
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    auto* dialog = new DPCMDialog(QApplication::activeWindow());
+    auto code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code != QDialog::Accepted) return;
@@ -52,7 +52,7 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
         micd.setQuantification(dialog->getQuantification());
     }
     catch(const char* str) {
-        QMessageBox::critical(NULL, qApp->translate("DPCM", "Error while loading quantification file"),
+        QMessageBox::critical(nullptr, qApp->translate("DPCM", "Error while loading quantification file"),
                               qApp->translate("DPCM", "The specified quantification file could not be opened !"));
         return;
     }

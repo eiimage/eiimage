@@ -22,7 +22,6 @@
 #include <cstdio>
 #include <cmath>
 #include <Converter.h>
-#include "../Tools.h"
 
 using namespace std;
 using namespace imagein;
@@ -40,7 +39,7 @@ DPCM::DPCM()
     for( counter=0; counter< 40; counter++ ) {
         ((int*)ktab)[counter] = 0;
     }
-    quantdef = NULL;
+    quantdef = nullptr;
 }
 
 DPCM::~DPCM()
@@ -50,12 +49,12 @@ DPCM::~DPCM()
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
     char buffer[512], buffer2[512];
-    if( quantdef == NULL ) {
+    if( quantdef == nullptr ) {
         throw "Error in DPCM::execute:\nquantdef = NULL";
     }
     string returnval;
-    int imgHeight = im->getHeight();
-    int imgWidth = im->getWidth();
+    int imgHeight = (int)im->getHeight();
+    int imgWidth = (int)im->getWidth();
     int pred[imgHeight][imgWidth];
     int pred_err;   // prediction error
     int quant_pred_err;  // quantized prediction error
@@ -158,9 +157,9 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 //    }
 //    //continue
 
-    for(int i=1; i<imgHeight ; i++)
+    for(int i=0; i<imgHeight ; i++)
     {
-        for(int j=1; j<imgWidth ; j++)
+        for(int j=0; j<imgWidth ; j++)
         {
             depth_default_t pixImg = im->getPixelAt(j, i);
 
