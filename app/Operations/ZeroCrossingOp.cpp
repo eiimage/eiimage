@@ -61,30 +61,29 @@ void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::
 
     double threshold = thresholdBox->value(); //algorithm setting set by the user
 
-    //Creation of the result image of the same size than the input one
+    //Creation of the result image of the same size as the input one
     auto* result = new Image_t<double>(img->getWidth(), img->getHeight(), img->getNbChannels(), 0.); //image resultat
-    double currentPix;
-    double neighboorPix;
 
     //Processing algorithm
-    //Step 1 : navigate through every pixels
-    for(unsigned int c = 0; c < img->getNbChannels(); ++c) {
-        for(unsigned int j = 1; j < img->getHeight() - 1; ++j) {
-            for(unsigned int i = 1; i < img->getWidth() - 1; ++i) {
+    //Step 1 : navigate through every pixel
+    for(int c = 0; c < img->getNbChannels(); ++c) {
+        for(int j = 0; j < img->getHeight(); ++j) {
+            for(int i = 0; i < img->getWidth(); ++i) {
                 bool edge = false;
-                currentPix = img->getPixelAt(i, j, c);
+                double currentPix = img->getPixelAt(i, j, c);
 
     //Step 2 : Navigate through the neighborhood of the current pîxel
-                for(unsigned int k = i-1; k <= i+1; ++k) {
-                    for(unsigned int l = j-1; l <= j+1; ++l) {
-                        neighboorPix = img->getPixelAt(k, l, c);
-    //Step 3 : Is it an edge or not ?
-                        if(currentPix <= 0 && neighboorPix > 0 && std::abs(currentPix-neighboorPix)>threshold) {
-                            edge = true;
+                for(int k = i-1; k <= i+1; ++k) {
+                    for(int l = j-1; l <= j+1; ++l) {
+                        if (k >= 0 && k < img->getWidth() && l >= 0 && l < img->getHeight()) {
+                            double neighborPix = img->getPixelAt(k, l, c);
+                            //Step 3 : Is it an edge or not ?
+                            if (currentPix <= 0 && neighborPix > 0 && std::abs(currentPix - neighborPix) > threshold) {
+                                edge = true;
+                            }
                         }
                     }
                 }
-
                 if(edge) result->setPixel(i, j, c, 255.);
             }
         }
