@@ -26,7 +26,6 @@
 #include <cmath>
 
 #include "ZeroCrossingOp.h"
-#include "../Tools.h"
 
 using namespace imagein;
 
@@ -40,42 +39,48 @@ bool ZeroCrossingOp::needCurrentImg() const {
 
 void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::map<const imagein::Image_t<double>*, std::string>&) {
 
-    QDialog* dialog = new QDialog(QApplication::activeWindow());
+    auto* dialog = new QDialog(QApplication::activeWindow());
     dialog->setWindowTitle(QString(qApp->translate("ZeroCrossingOp", "Zero crossing")));
     dialog->setMinimumWidth(180);
-    QFormLayout* layout = new QFormLayout();
+    auto* layout = new QFormLayout();
     dialog->setLayout(layout);
 
-    QDoubleSpinBox* thresholdBox = new QDoubleSpinBox();
+    auto* thresholdBox = new QDoubleSpinBox();
     thresholdBox->setRange(0., 65536.);
 
     layout->insertRow(0, qApp->translate("ZeroCrossingOp", "Threshold : "), thresholdBox);
 
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
+    auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(3, buttonBox);
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    auto code = static_cast<QDialog::DialogCode>(dialog->exec());
 
     if(code!=QDialog::Accepted) return;
 
-    double threshold = thresholdBox->value(); //parametre de l'algorithme
+    double threshold = thresholdBox->value(); //algorithm setting set by the user
 
-    //Creation de l'image Résultat, de même taille que les images de départ
-    Image_t<double>* result = new Image_t<double>(img->getWidth(), img->getHeight(), img->getNbChannels(), 0.); //image resultat
+    //Creation of the result image of the same size than the input one
+    auto* result = new Image_t<double>(img->getWidth(), img->getHeight(), img->getNbChannels(), 0.); //image resultat
+    double currentPix;
+    double neighboorPix;
 
-    //Algorithme de traitement
+    //Processing algorithm
+    //Step 1 : navigate through every pixels
     for(unsigned int c = 0; c < img->getNbChannels(); ++c) {
-        for(unsigned int j = 2; j < img->getHeight() - 2; ++j) {
-            for(unsigned int i = 2; i < img->getWidth() - 2; ++i) {
+        for(unsigned int j = 1; j < img->getHeight() - 1; ++j) {
+            for(unsigned int i = 1; i < img->getWidth() - 1; ++i) {
                 bool edge = false;
+                currentPix = img->getPixelAt(i, j, c);
 
-                for(unsigned int k = i-1; k < i+1; ++k) {
-                    for(unsigned int l = j-1; l < j+1; ++l) {
-                        if(img->getPixelAt(i, j, c) <= 0 && img->getPixelAt(k, l, c) > 0) {
-                            double dist = std::abs(img->getPixelAt(i, j, c) - img->getPixelAt(k, l, c));
-                            if(dist > threshold) edge = true;
+    //Step 2 : Navigate through the neighborhood of the current pîxel
+                for(unsigned int k = i-1; k <= i+1; ++k) {
+                    for(unsigned int l = j-1; l <= j+1; ++l) {
+                        neighboorPix = img->getPixelAt(k, l, c);
+    //Step 3 : Is it an edge or not ?
+                        if(currentPix <= 0 && neighboorPix > 0 && std::abs(currentPix-neighboorPix)>threshold) {
+                            edge = true;
                         }
                     }
                 }
@@ -85,12 +90,13 @@ void ZeroCrossingOp::operator()(const imagein::Image_t<double>* img, const std::
         }
     }
 
-    // Maintenant, on élimine les contours isolés.
-    Image_t<double>* result2 = new Image_t<double>(*result); //image resultat
+
+    //Generation of a new image with a clean of isolated edges
+    auto* result2 = new Image_t<double>(*result); //image resultat
 
     for(unsigned int c = 0; c < result2->getNbChannels(); ++c) {
-        for(unsigned int j = 2; j < result2->getHeight() - 2; ++j) {
-            for(unsigned int i = 2; i < result2->getWidth() - 2; ++i) {
+        for(unsigned int j = 1; j < result2->getHeight() - 1; ++j) {
+            for(unsigned int i = 1; i < result2->getWidth() - 1; ++i) {
                 if(result2->getPixelAt(i, j, c) > 127) {
                     if(result2->getPixelAt(i-1, j, c) == 0
                         && result2->getPixelAt(i, j-1, c) == 0
