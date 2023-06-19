@@ -83,24 +83,56 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     }
 
     /* codage de l'image */
-    for(int i=1; i<imgHeight ; i++)
+    for(int i=0; i<imgHeight ; i++)
     {
-        for(int j=1; j<imgWidth ; j++)
+        for(int j=0; j<imgWidth ; j++)
         {
-            switch (prediction_alg) {
-            int AplusC;
-            float A,B,C;
+            depth_default_t pixImg = im->getPixelAt(j, i);
 
+            switch (prediction_alg) {
             case PX_EQ_A:
-                pred[i][j] = reconstructed_image->getPixelAt(j-1, i);
-                break;
+                if(j == 0) {
+                    pred[i][j] = im->getPixelAt(0,i);
+                    quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = reconstructed_image->getPixelAt(j - 1, i);
+                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
+                    break;
+
             case PX_EQ_B:
-                pred[i][j] = reconstructed_image->getPixelAt(j, i-1);
+                if(i == 0) {
+                    pred[i][j] = im->getPixelAt(j, 0);
+                    quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = reconstructed_image->getPixelAt(j, i - 1);
+                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
+
             case PX_EQ_APC:
-                AplusC = reconstructed_image->getPixelAt(j-1, i) + reconstructed_image->getPixelAt(j, i-1);
-                pred[i][j] = AplusC / 2;
+                if(i-1>=0 && j-1 >=0) {
+                    pred[i][j] = (reconstructed_image->getPixelAt(j - 1, i) + reconstructed_image->getPixelAt(j, i - 1)) / 2;
+                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                }
+                else if (i-1>=0) {
+                    pred[i][j] = (reconstructed_image->getPixelAt(j - 1, i) + reconstructed_image->getPixelAt(j, 0)) / 2;
+                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                }
+                else if (j-1>=0) {
+                    pred[i][j] = (reconstructed_image->getPixelAt(0, i) + reconstructed_image->getPixelAt(j, i - 1)) / 2;
+                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                }
+                else
+                    pred[i][j] = (im->getPixelAt(0,0));
+                    quant_pred_err = 0;
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
+
             case PX_EQ_Q:
                 /*
                 Modified Graham's Algorithm:
@@ -118,9 +150,25 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 */
 
                 //correction QB
-                A = reconstructed_image->getPixelAt(j-1, i);
-                B = reconstructed_image->getPixelAt(j-1, i-1);
-                C = reconstructed_image->getPixelAt(j,   i-1);
+                depth_default_t A,B,C;
+                if(j-1>=0)
+                    A = reconstructed_image->getPixelAt(j-1, i);
+                else
+                    A = im->getPixelAt(0,i);
+
+                if(j-1>=0 && i-1 >=0)
+                    B = reconstructed_image->getPixelAt(j-1, i-1);
+                else if (j-1 >=0)
+                    B = reconstructed_image->getPixelAt(j-1, 0);
+                else if (i-1 >=0)
+                    B = reconstructed_image->getPixelAt(0, i-1);
+                else
+                    B = im->getPixelAt(0,0);
+
+                if(i-1>=0)
+                    C = reconstructed_image->getPixelAt(j,   i-1);
+                else
+                    C = im->getPixelAt(j,   0);
 
                 if( ((fabs(B-C) - Q) <= fabs(B-A)) &&
                         (fabs(B-A) <= (fabs(B-C) + Q)) ) {
@@ -139,32 +187,9 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
             //image de prediction pour affichage
             prediction_image->setPixelAt(j,i,pred[i][j]);
-            depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
             //erreur de prediction
-            pred_err = thePixel - pred[i][j];
+            pred_err = im->getPixelAt(j,i) - pred[i][j];
             predction_error_image->setPixelAt(j, i, pred_err);
-            }
-        }
-
-//     //break to reset the quantificator according to the error image of prediction
-//    if(this->isLloydMax){
-//        Image* img = Converter<Image>::convert(*predction_error_image);
-//        *quantLloydMax= Quantification::lloydMaxQuant_DPCM(sizeLloydMax, img);
-//        setQuantification(quantLloydMax);
-//        set_levels();
-//        codlq(0);
-//        delete img;
-//    }
-//    //continue
-
-    for(int i=0; i<imgHeight ; i++)
-    {
-        for(int j=0; j<imgWidth ; j++)
-        {
-            depth_default_t pixImg = im->getPixelAt(j, i);
-
-            quant_pred_err = quantdef->valueOf(pred_err);
-            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
 
             // valeur reconstruite
             int tempvalue = pred[i][j] + quant_pred_err;
@@ -175,9 +200,9 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             coding_err = pixImg - reconstructedPix;
             //construction de l'image d'erreur de codage
             coding_error_image->setPixelAt(j,i,(coding_err));
-
+            }
         }
-    }
+
 
     double pred_err_entrop = predction_error_image->getEntropy();
     sprintf(buffer, qApp->translate("DPCM","\nL'entropie de l'image d'erreur de prediction vaut : %f\n").toUtf8(), pred_err_entrop);
