@@ -115,21 +115,14 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 break;
 
             case PX_EQ_APC:
-                if(i-1>=0 && j-1 >=0) {
-                    pred[i][j] = (reconstructed_image->getPixelAt(j - 1, i) + reconstructed_image->getPixelAt(j, i - 1)) / 2;
-                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
-                }
-                else if (i-1>=0) {
-                    pred[i][j] = (reconstructed_image->getPixelAt(j - 1, i) + reconstructed_image->getPixelAt(j, 0)) / 2;
-                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
-                }
-                else if (j-1>=0) {
-                    pred[i][j] = (reconstructed_image->getPixelAt(0, i) + reconstructed_image->getPixelAt(j, i - 1)) / 2;
-                    quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
-                }
-                else
-                    pred[i][j] = (im->getPixelAt(0,0));
+                if(i == 0 || j == 0) {
+                    pred[i][j] = (im->getPixelAt(j, i));
                     quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = (reconstructed_image->getPixelAt(j, i - 1) + reconstructed_image->getPixelAt(j-1, i))/2;
+                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
                 quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
 
@@ -170,16 +163,30 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 else
                     C = im->getPixelAt(j,   0);
 
-                if( ((fabs(B-C) - Q) <= fabs(B-A)) &&
-                        (fabs(B-A) <= (fabs(B-C) + Q)) ) {
+                if( ((fabs(B-C) - Q) <= fabs(B-A)) && (fabs(B-A) <= (fabs(B-C) + Q)) ) {
                     pred[i][j] = (uint8_t)((A + C) / 2);
-                } else {
+                    if(i == j == 0)
+                        quant_pred_err = 0;
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                }
+                else {
                     if( fabs(B-A) > fabs(B-C) ) {
                         pred[i][j] = (uint8_t)A;
+                        if(j == 0)
+                            quant_pred_err = 0;
+                        else
+                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+
                     } else {
                         pred[i][j] = (uint8_t)C;
+                        if(i == 0)
+                            quant_pred_err = 0;
+                        else
+                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
                     }
                 }
+                //quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
             default:
                 break;
