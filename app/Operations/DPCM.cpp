@@ -144,49 +144,54 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
 
                 //correction QB
                 depth_default_t A,B,C;
-                if(j-1>=0)
-                    A = reconstructed_image->getPixelAt(j-1, i);
-                else
+                if(j==0)
                     A = im->getPixelAt(0,i);
-
-                if(j-1>=0 && i-1 >=0)
-                    B = reconstructed_image->getPixelAt(j-1, i-1);
-                else if (j-1 >=0)
-                    B = reconstructed_image->getPixelAt(j-1, 0);
-                else if (i-1 >=0)
-                    B = reconstructed_image->getPixelAt(0, i-1);
                 else
+                    A = reconstructed_image->getPixelAt(j - 1, i);
+
+                if(j == 0 || i == 0)
                     B = im->getPixelAt(0,0);
-
-                if(i-1>=0)
-                    C = reconstructed_image->getPixelAt(j,   i-1);
                 else
-                    C = im->getPixelAt(j,   0);
+                    B = reconstructed_image->getPixelAt(j-1, i-1);
 
-                if( ((fabs(B-C) - Q) <= fabs(B-A)) && (fabs(B-A) <= (fabs(B-C) + Q)) ) {
-                    pred[i][j] = (uint8_t)((A + C) / 2);
-                    if(i == j == 0)
+                if(i==0)
+                    C = im->getPixelAt(j,   0);
+                else
+                    C = reconstructed_image->getPixelAt(j,   i-1);
+
+                if(((fabs(B-C) - Q) <= fabs(B-A)) && (fabs(B-A) <= (fabs(B-C) + Q))) {
+                    if(i == 0 || j == 0) {
+                        pred[i][j] = (im->getPixelAt(j, i));
                         quant_pred_err = 0;
-                    else
+                    }
+                    else {
+                        pred[i][j] = (uint8_t)((A + C) / 2);
                         quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                    }
                 }
                 else {
                     if( fabs(B-A) > fabs(B-C) ) {
-                        pred[i][j] = (uint8_t)A;
-                        if(j == 0)
+                        if(j == 0) {
+                            pred[i][j] = (im->getPixelAt(j, i));
                             quant_pred_err = 0;
-                        else
+                        }
+                        else {
+                            pred[i][j] = (uint8_t)A;
                             quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                        }
 
                     } else {
-                        pred[i][j] = (uint8_t)C;
-                        if(i == 0)
+                        if(i == 0) {
+                            pred[i][j] = (im->getPixelAt(j, i));
                             quant_pred_err = 0;
-                        else
+                        }
+                        else {
+                            pred[i][j] = (uint8_t) C;
                             quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                        }
                     }
                 }
-                //quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
             default:
                 break;
