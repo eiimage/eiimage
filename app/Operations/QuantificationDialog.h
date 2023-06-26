@@ -25,6 +25,7 @@
 #include <QComboBox>
 #include "Quantification.h"
 #include "QuantificationWidget.h"
+#include "Widgets/ImageWidgets/ImageWindow.h"
 #include <QPushButton>
 
 class QuantificationDialog : public QDialog
@@ -33,7 +34,7 @@ class QuantificationDialog : public QDialog
 public:
     enum QuantMethod {LinearQuant, NonLinearQuant, NonLinearQuantOptimized};
     explicit QuantificationDialog(QWidget *parent = 0, QString imgName = QString());
-    Quantification getQuantif(const imagein::Image *image, unsigned int c, std::string &);
+    Quantification getQuantif(const genericinterface::ImageWindow *currentWnd, unsigned int c, std::string &);
     Quantification getQuantif();
     void setValues(int);
     void setQuantif(int);

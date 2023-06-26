@@ -18,6 +18,7 @@
 */
 
 #include "QuantificationDialog.h"
+#include "Widgets/ImageWidgets/ImageWindow.h"
 #include <QDialog>
 #include <QFormLayout>
 #include <QComboBox>
@@ -31,6 +32,8 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QFileDialog>
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
 
 using namespace imagein;
 QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
@@ -98,23 +101,21 @@ void QuantificationDialog::methodChanged(int method) {
     this->adjustSize();
 }
 
-Quantification QuantificationDialog::getQuantif(const Image* image, unsigned int c, std::string &to_print) {
+Quantification QuantificationDialog::getQuantif(const genericinterface::ImageWindow *currentWnd, unsigned int c, std::string &to_print) {
 
     int size = _sizeBox->value();
     if(_editorOnly) return Quantification::linearQuant(size);
     switch(_quantBox->currentIndex()) {
         case 1:
                 to_print = QString(tr("Quantification non lineaire a valeurs centrees :")).toStdString();
-                return Quantification::nonLinearQuant(size, image, c);
-                break;
+                return Quantification::nonLinearQuant(size, currentWnd, c);
         case 2:
                 to_print = QString(tr("Quantification non lineaire a valeurs moyennes :")).toStdString();
-                return Quantification::nonLinearQuantOptimized(size, image, c);
-                break;
+                return Quantification::nonLinearQuantOptimized(size, currentWnd, c);
+
         case 3:
                 to_print = QString(tr("Quantification LloydMax :")).toStdString();
-                return Quantification::lloydMaxQuant(size, image, c);
-                break;
+                return Quantification::lloydMaxQuant(size, currentWnd, c);
         case 4:
                 to_print = QString(tr("Quantification personnalisee :")).toStdString();
                 return _quantWidget->getQuantif();

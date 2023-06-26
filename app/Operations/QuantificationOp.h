@@ -23,24 +23,26 @@
 #include <Operation.h>
 #include "Quantification.h"
 #include "QuantificationDialog.h"
-class QuantificationOp : public Operation
+class QuantificationOp : public GenericOperation
 {
 public:
 
 
     QuantificationOp();
 
-    std::string quantificationOpLog(unsigned int channel, Quantification * quant);
+    static std::string quantificationOpLog(unsigned int channel, Quantification * quant);
 
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>& imgWndList) override;
 
-    bool needCurrentImg() const;
+    bool needCurrentImg() const override;
 
     void setTest(bool);
 
     void setQuantif(int);
 
     void setValues(int);
+
+    bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const override;
 
 private:
     bool _test;

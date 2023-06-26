@@ -21,6 +21,7 @@
 #define QUANTIFICATION_H
 
 #include <Image.h>
+#include "Widgets/ImageWidgets/ImageWindow.h"
 
 #define N_MAX_THRESHOLD 256
 #define N_MAX_THRESHOLD_FULL 512
@@ -48,9 +49,9 @@ public:
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
     static Quantification linearQuant(int size);
-    static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
-    static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
-    static Quantification lloydMaxQuant(int size, const imagein::Image* image, unsigned int c);
+    static Quantification nonLinearQuant(int size,const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification nonLinearQuantOptimized(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification lloydMaxQuant(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c);
 
     /*linear quantificator for dpcm(including negatif values)*/
     static Quantification linearQuant_DPCM(int size);

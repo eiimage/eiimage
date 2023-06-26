@@ -18,6 +18,8 @@
 */
 
 #include "Quantification.h"
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
 #include <fstream>
 #include <iostream>
 #include <cmath>
@@ -113,24 +115,45 @@ Quantification Quantification::linearQuant(int size) {
     return quant;
 }
 
-Quantification Quantification::nonLinearQuant(int size, const Image* image, unsigned int c) {
+Quantification Quantification::nonLinearQuant(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
     Quantification quant(size);
-    Histogram histogram = image->getHistogram(c);
 
-    double imageSize = image->getWidth() * image->getHeight();
 
-    double histogramSum = 0;
-    Image::depth_t value = 0;
-    Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
-    for(int i = 0; i < size - 1; ++i) {
-        double percent = (i + 1.) / size;
-        while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
-            histogramSum += histogram[value];
-            ++value;
+    if(currentWnd->isStandard()) {
+        const auto *wnd = dynamic_cast<const genericinterface::StandardImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
+        double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
+
+        double histogramSum = 0;
+        Image::depth_t value = 0;
+        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        for(int i = 0; i < size - 1; ++i) {
+            double percent = (i + 1.) / size;
+            while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
+                histogramSum += histogram[value];
+                ++value;
+            }
+            quant._threshold[i] = value - 1;
         }
-        quant._threshold[i] = value - 1;
-        
+    }
+
+    else if(currentWnd->isDouble()){
+        const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
+        double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
+
+        double histogramSum = 0;
+        Image::depth_t value = 0;
+        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        for(int i = 0; i < size - 1; ++i) {
+            double percent = (i + 1.) / size;
+            while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
+                histogramSum += histogram[value];
+                ++value;
+            }
+            quant._threshold[i] = value - 1;
+        }
     }
 
     if(size > 0) {
@@ -143,131 +166,259 @@ Quantification Quantification::nonLinearQuant(int size, const Image* image, unsi
     return quant;
 }
 
-Quantification Quantification::nonLinearQuantOptimized(int size, const Image* image, unsigned int c) {
+Quantification Quantification::nonLinearQuantOptimized(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
     Quantification quant(size);
-    Histogram histogram = image->getHistogram(c);
 
-    double imageSize = image->getWidth() * image->getHeight();
+    if(currentWnd->isStandard()) {
+        const auto *wnd = dynamic_cast<const genericinterface::StandardImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
 
-    double histogramSum = 0;
-    Image::depth_t value = 0;
-    Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
-    for(int i = 0; i < size - 1; ++i) {
-        double percent = (i + 1.) / size;
-        while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
-            histogramSum += histogram[value];
-            ++value;
+        double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
+
+        double histogramSum = 0;
+        Image::depth_t value = 0;
+        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        for (int i = 0; i < size - 1; ++i) {
+            double percent = (i + 1.) / size;
+            while ((percent * imageSize > histogramSum) && (value < Maxvalue)) {
+                histogramSum += histogram[value];
+                ++value;
+            }
+            quant._threshold[i] = value - 1;
         }
-        quant._threshold[i] = value - 1;
-    }
-    
-    
 
-    double som_lum = 0;
-    int nb_points = 0;
-    for(int j = 0; j < quant._threshold[0]; j++){
-        som_lum += histogram[j] * j;
-        nb_points += histogram[j];
-    }
-    if(nb_points > 0) quant._values[0]= (int) (som_lum/nb_points);
-    else quant._values[0] =  quant._threshold[0] / 2;
 
-    for(int j=1; j<size-1;j++){
+        double som_lum = 0;
+        int nb_points = 0;
+        for (int j = 0; j < quant._threshold[0]; j++) {
+            som_lum += histogram[j] * j;
+            nb_points += histogram[j];
+        }
+        if (nb_points > 0) quant._values[0] = (int) (som_lum / nb_points);
+        else quant._values[0] = quant._threshold[0] / 2;
+
+        for (int j = 1; j < size - 1; j++) {
+            som_lum = 0;
+            nb_points = 0;
+            //Calcul des baricentres entre deux seuils
+            for (int i = ((quant._threshold)[j - 1]); i <= ((quant._threshold)[j]); i++) {
+                som_lum += histogram[i] * i;
+                nb_points += histogram[i];
+            }
+            //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
+            if (nb_points > 0) quant._values[j] = (int) (som_lum / nb_points);
+            else quant._values[j] = (quant._threshold[j] + quant._threshold[j + 1]) / 2;
+
+        }
+
         som_lum = 0;
         nb_points = 0;
-        //Calcul des baricentres entre deux seuils  
-        for(int i= ((quant._threshold)[j-1]); i <= ((quant._threshold)[j]); i++){
-            som_lum += histogram[i]*i;          
-            nb_points += histogram[i];
+        for (int j = quant._threshold[size - 2]; j < N_MAX_THRESHOLD; ++j) {
+            som_lum += histogram[j] * j;
+            nb_points += histogram[j];
         }
-        //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
-        if(nb_points > 0) quant._values[j]= (int) (som_lum/nb_points);
-        else quant._values[j] = (quant._threshold[j]+quant._threshold[j+1])/2;
-
+        if (nb_points > 0) quant._values[size - 1] = (som_lum / nb_points);
+        else quant._values[size - 1] = (quant._threshold[size - 2] + N_MAX_THRESHOLD) / 2;
     }
 
-    som_lum = 0;
-    nb_points = 0;
-    for(int j = quant._threshold[size-2]; j < N_MAX_THRESHOLD; ++j) {
-        som_lum += histogram[j] * j;
-        nb_points += histogram[j];
+    else if(currentWnd->isDouble()){
+        const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
+
+        double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
+
+        double histogramSum = 0;
+        Image::depth_t value = 0;
+        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        for (int i = 0; i < size - 1; ++i) {
+            double percent = (i + 1.) / size;
+            while ((percent * imageSize > histogramSum) && (value < Maxvalue)) {
+                histogramSum += histogram[value];
+                ++value;
+            }
+            quant._threshold[i] = value - 1;
+        }
+
+
+        double som_lum = 0;
+        int nb_points = 0;
+        for (int j = 0; j < quant._threshold[0]; j++) {
+            som_lum += histogram[j] * j;
+            nb_points += histogram[j];
+        }
+        if (nb_points > 0) quant._values[0] = (int) (som_lum / nb_points);
+        else quant._values[0] = quant._threshold[0] / 2;
+
+        for (int j = 1; j < size - 1; j++) {
+            som_lum = 0;
+            nb_points = 0;
+            //Calcul des baricentres entre deux seuils
+            for (int i = ((quant._threshold)[j - 1]); i <= ((quant._threshold)[j]); i++) {
+                som_lum += histogram[i] * i;
+                nb_points += histogram[i];
+            }
+            //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
+            if (nb_points > 0) quant._values[j] = (int) (som_lum / nb_points);
+            else quant._values[j] = (quant._threshold[j] + quant._threshold[j + 1]) / 2;
+
+        }
+
+        som_lum = 0;
+        nb_points = 0;
+        for (int j = quant._threshold[size - 2]; j < N_MAX_THRESHOLD; ++j) {
+            som_lum += histogram[j] * j;
+            nb_points += histogram[j];
+        }
+        if (nb_points > 0) quant._values[size - 1] = (som_lum / nb_points);
+        else quant._values[size - 1] = (quant._threshold[size - 2] + N_MAX_THRESHOLD) / 2;
     }
-    if(nb_points > 0) quant._values[size -1] = (som_lum/nb_points );
-    else quant._values[size-1] = (quant._threshold[size-2] +  N_MAX_THRESHOLD)/2;
-    
     
     
     return quant;
 }
 
-Quantification Quantification::lloydMaxQuant(int size, const Image* image, unsigned int c) {
+Quantification Quantification::lloydMaxQuant(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
-    Histogram histogram = image->getHistogram(c);
-    int som_lum = 0;
-    int nb_points = 0;
-    int cpt = 50;  // Securite pour limiter le nombre de boucle si on ne converge pas 
-    int diff[size-1];
-    int diff_mean = 100;
-    // initialisation : repartion lineaire des niveaux de quantification
-    Quantification quant = linearQuant(size);
-    
-    while(cpt > 0 && diff_mean >=1 ){
-        // calcul des nouveaux seuils de quantification
-        for (int i=0; i<size-1;i++){
-            diff[i] = quant._threshold[i];
-            
-            //centrage des seuils de décision entre chaque niveaux de quantification
-            quant._threshold[i] = (quant._values[i]+quant._values[i+1])/2;
-            
-            diff[i] = abs(diff[i] - quant._threshold[i]);
-        }
-        
-        // Calcul des nouveaux niveaux de quantification
-        // Premier niveau baricentre entre 0 et le premier seuil
-        som_lum = 0;
-        nb_points = 0;
-        for(int j = 0; j < quant._threshold[0]; j++){
-            som_lum += histogram[j] * j;
-            nb_points += histogram[j];
-        }
+    if(currentWnd->isStandard()) {
+        const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
 
-        if(nb_points > 0) quant._values[0]= (int) (som_lum/nb_points);
-        else quant._values[0] =  quant._threshold[0] / 2;
-        
-        for (int j=1; j<size-1; j++){
+        int som_lum = 0;
+        int nb_points = 0;
+        int cpt = 50;  // Securite pour limiter le nombre de boucle si on ne converge pas
+        int diff[size - 1];
+        int diff_mean = 100;
+        // initialisation : repartion lineaire des niveaux de quantification
+        Quantification quant = linearQuant(size);
+
+        while (cpt > 0 && diff_mean >= 1) {
+            // calcul des nouveaux seuils de quantification
+            for (int i = 0; i < size - 1; i++) {
+                diff[i] = quant._threshold[i];
+
+                //centrage des seuils de décision entre chaque niveaux de quantification
+                quant._threshold[i] = (quant._values[i] + quant._values[i + 1]) / 2;
+
+                diff[i] = abs(diff[i] - quant._threshold[i]);
+            }
+
+            // Calcul des nouveaux niveaux de quantification
+            // Premier niveau baricentre entre 0 et le premier seuil
             som_lum = 0;
             nb_points = 0;
-            //Calcul des baricentres entre deux seuils  
-            for(int i= ((quant._threshold)[j-1]); i <= ((quant._threshold)[j]); i++){
-                som_lum += histogram[i]*i;          
-                nb_points += histogram[i];
+            for (int j = 0; j < quant._threshold[0]; j++) {
+                som_lum += histogram[j] * j;
+                nb_points += histogram[j];
             }
-            //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
-            if(nb_points > 0) quant._values[j]= (int) (som_lum/nb_points);
-            else quant._values[j] = (quant._threshold[j]+quant._threshold[j+1])/2;
-        }
-        
-        
-        // Dernier niveau baricentre entre le max et le dernier seuil
-        som_lum = 0;
-        nb_points = 0; 
-        for(int j = quant._threshold[size-2]; j < N_MAX_THRESHOLD; j++) {
-            som_lum += histogram[j] * j;
-            nb_points += histogram[j];
-        }
 
-        if(nb_points > 0) quant._values[size -1] = (som_lum/nb_points);
-        else quant._values[size-1] = (quant._threshold[size-2] +  N_MAX_THRESHOLD)/2 ;
-        
-        //calcul de la condition d'arret (moyenne des écarts < 1 )
-        for(int i = 0; i<size-1 ; i++){
-            diff_mean += diff[i];
+            if (nb_points > 0) quant._values[0] = (int) (som_lum / nb_points);
+            else quant._values[0] = quant._threshold[0] / 2;
+
+            for (int j = 1; j < size - 1; j++) {
+                som_lum = 0;
+                nb_points = 0;
+                //Calcul des baricentres entre deux seuils
+                for (int i = ((quant._threshold)[j - 1]); i <= ((quant._threshold)[j]); i++) {
+                    som_lum += histogram[i] * i;
+                    nb_points += histogram[i];
+                }
+                //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
+                if (nb_points > 0) quant._values[j] = (int) (som_lum / nb_points);
+                else quant._values[j] = (quant._threshold[j] + quant._threshold[j + 1]) / 2;
+            }
+
+
+            // Dernier niveau baricentre entre le max et le dernier seuil
+            som_lum = 0;
+            nb_points = 0;
+            for (int j = quant._threshold[size - 2]; j < N_MAX_THRESHOLD; j++) {
+                som_lum += histogram[j] * j;
+                nb_points += histogram[j];
+            }
+
+            if (nb_points > 0) quant._values[size - 1] = (som_lum / nb_points);
+            else quant._values[size - 1] = (quant._threshold[size - 2] + N_MAX_THRESHOLD) / 2;
+
+            //calcul de la condition d'arret (moyenne des écarts < 1 )
+            for (int i = 0; i < size - 1; i++) {
+                diff_mean += diff[i];
+            }
+            diff_mean = diff_mean / (size - 1);
+            cpt--;
         }
-        diff_mean = diff_mean / (size-1);
-        cpt--;
+        return quant;
     }
-    return quant;
+
+    else if(currentWnd->isDouble()) {
+        const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
+        Histogram histogram = wnd->getImage()->getHistogram(c);
+
+        int som_lum = 0;
+        int nb_points = 0;
+        int cpt = 50;  // Securite pour limiter le nombre de boucle si on ne converge pas
+        int diff[size - 1];
+        int diff_mean = 100;
+        // initialisation : repartion lineaire des niveaux de quantification
+        Quantification quant = linearQuant(size);
+
+        while (cpt > 0 && diff_mean >= 1) {
+            // calcul des nouveaux seuils de quantification
+            for (int i = 0; i < size - 1; i++) {
+                diff[i] = quant._threshold[i];
+
+                //centrage des seuils de décision entre chaque niveaux de quantification
+                quant._threshold[i] = (quant._values[i] + quant._values[i + 1]) / 2;
+
+                diff[i] = abs(diff[i] - quant._threshold[i]);
+            }
+
+            // Calcul des nouveaux niveaux de quantification
+            // Premier niveau baricentre entre 0 et le premier seuil
+            som_lum = 0;
+            nb_points = 0;
+            for (int j = 0; j < quant._threshold[0]; j++) {
+                som_lum += histogram[j] * j;
+                nb_points += histogram[j];
+            }
+
+            if (nb_points > 0) quant._values[0] = (int) (som_lum / nb_points);
+            else quant._values[0] = quant._threshold[0] / 2;
+
+            for (int j = 1; j < size - 1; j++) {
+                som_lum = 0;
+                nb_points = 0;
+                //Calcul des baricentres entre deux seuils
+                for (int i = ((quant._threshold)[j - 1]); i <= ((quant._threshold)[j]); i++) {
+                    som_lum += histogram[i] * i;
+                    nb_points += histogram[i];
+                }
+                //Evite les divisions par 0. On estime que s'il n'y a pas d'élements le baricentre est le milieu du segment
+                if (nb_points > 0) quant._values[j] = (int) (som_lum / nb_points);
+                else quant._values[j] = (quant._threshold[j] + quant._threshold[j + 1]) / 2;
+            }
+
+
+            // Dernier niveau baricentre entre le max et le dernier seuil
+            som_lum = 0;
+            nb_points = 0;
+            for (int j = quant._threshold[size - 2]; j < N_MAX_THRESHOLD; j++) {
+                som_lum += histogram[j] * j;
+                nb_points += histogram[j];
+            }
+
+            if (nb_points > 0) quant._values[size - 1] = (som_lum / nb_points);
+            else quant._values[size - 1] = (quant._threshold[size - 2] + N_MAX_THRESHOLD) / 2;
+
+            //calcul de la condition d'arret (moyenne des écarts < 1 )
+            for (int i = 0; i < size - 1; i++) {
+                diff_mean += diff[i];
+            }
+            diff_mean = diff_mean / (size - 1);
+            cpt--;
+        }
+        return quant;
+    }
 }
 
 Quantification Quantification::linearQuant_DPCM(int size) {
