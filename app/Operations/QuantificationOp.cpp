@@ -34,7 +34,7 @@ QuantificationOp::QuantificationOp() : GenericOperation(qApp->translate("Operati
 
 
 bool QuantificationOp::needCurrentImg() const {
-    return false;
+    return true;
 }
 
 string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * quant){
@@ -152,7 +152,6 @@ void QuantificationOp::operator()(const genericinterface::ImageWindow *currentWn
 
 
     if(currentWnd->isStandard()) {
-
         QuantificationDialog* dialog;
 
         QString imgName = dynamic_cast<const StandardImageWindow *>(currentWnd)->windowTitle();
@@ -191,17 +190,7 @@ void QuantificationOp::operator()(const genericinterface::ImageWindow *currentWn
         outText(output_msg);
         outText("-------------------------------------------");
 
-
-        QString separator = " - ";
-        QStringList sections = imgName.split(separator);
-        if (!sections.empty()) {
-            imgName = sections[0];
-        }
-
-        imgName.append(" - ");
-
-
-        this->outImage(resImg,imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
+        this->outImage(resImg, quantType.erase(quantType.length()-2, quantType.length()));
     }
 
     else if(currentWnd->isDouble()) {
@@ -232,26 +221,17 @@ void QuantificationOp::operator()(const genericinterface::ImageWindow *currentWn
 
             for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
                 for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
-                    const auto value = (Image::depth_t)resImg->getPixelAt(i, j, c);
+                    const auto value = (int)resImg->getPixelAt(i, j, c);    //On utilise le type d'image double pour faire du signed int
                     resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
             }
         }
 
 
+
         outText(quantType);
         outText(output_msg);
         outText("-------------------------------------------");
-
-
-
-        QString separator = " - ";
-        QStringList sections = imgName.split(separator);
-        if (!sections.empty()) {
-            imgName = sections[0];
-        }
-
-        imgName.append(" - ");
 
         this->outDoubleImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
     }

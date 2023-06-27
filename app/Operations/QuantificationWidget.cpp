@@ -45,25 +45,25 @@ QuantificationWidget::CentralWidget::CentralWidget(QWidget *parent) :
     QLabel* valueLabel = new QLabel(tr("Values"), this);
     valueLabel->setAlignment(Qt::AlignCenter);
 
-
     _firstWidth = 96;
     _secondWidth = 96;
     _yOffset = 48;
     thresholdLabel->setGeometry(0, 0, _firstWidth, 48);
     valueLabel->setGeometry(_firstWidth + 32, 0, _secondWidth, 48);
 
+
     for(int i = 0; i < N_MAX_THRESHOLD; ++i) {
         _thresholdBoxes[i] = new QSpinBox(this);
         _thresholdBoxes[i]->setFixedSize(64, 28);
         _thresholdBoxes[i]->move(QPoint((_firstWidth-64)/2, i * 32 + 16 + _yOffset));
-        _thresholdBoxes[i]->setRange(-254, 255);
+        _thresholdBoxes[i]->setRange(-N_MAX_THRESHOLD, +N_MAX_THRESHOLD);
         if(i >= _nThreshold) _thresholdBoxes[i]->setVisible(false);
     }
     for(int i = 0; i < N_MAX_THRESHOLD + 1; ++i) {
         _valueBoxes[i] = new QSpinBox(this);
         _valueBoxes[i]->setFixedSize(64, 28);
         _valueBoxes[i]->move(QPoint(_firstWidth + 32 + (_secondWidth-64)/2, i * 32 + _yOffset));
-        _valueBoxes[i]->setRange(-254, 255);
+        _valueBoxes[i]->setRange(-N_MAX_THRESHOLD, N_MAX_THRESHOLD);
         if(i > _nThreshold) _valueBoxes[i]->setVisible(false);
     }
 //    editorLayout->addWidget(_valueBoxes[32], 32, 1);
@@ -140,13 +140,23 @@ Quantification QuantificationWidget::getQuantif() const {
     return _centralWidget->getQuantif();
 }
 
+void QuantificationWidget::setLimitQuantifmin(int value) {
+    _centralWidget->setLimitQuantifmin(value);
+}
+
+void QuantificationWidget::setLimitQuantifmax(int value) {
+    _centralWidget->setLimitQuantifmax(value);
+}
+
 Quantification QuantificationWidget::CentralWidget::getQuantif() const {
-    Quantification q(_nThreshold + 1);
+    Quantification q(_nThreshold + 1, _limitQuantif_a, _limitQuantif_b);
     for(int i = 0; i < q.nbThresholds(); ++i) {
         q.setThreshold(i, _thresholdBoxes[i]->value());
+        q.setQuantificationInterval(_limitQuantif_a,_limitQuantif_b);
     }
     for(int i = 0; i < q.nbValues(); ++i) {
         q.setValue(i, _valueBoxes[i]->value());
     }
     return q;
 }
+

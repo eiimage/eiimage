@@ -27,6 +27,7 @@
 #include "QuantificationWidget.h"
 #include "Widgets/ImageWidgets/ImageWindow.h"
 #include <QPushButton>
+#include <QCheckBox>
 
 class QuantificationDialog : public QDialog
 {
@@ -47,6 +48,8 @@ public slots:
 protected:
         QSpinBox* _sizeBox;
         QComboBox* _quantBox;
+        QSpinBox* _limitQuantifBox1;
+        QSpinBox* _limitQuantifBox2;
         QuantificationWidget* _quantWidget;
         QWidget* _editorWidget;
         QPushButton* _saveButton;

@@ -27,8 +27,9 @@
 using namespace std;
 using namespace imagein;
 
-Quantification::Quantification(int size) {
+Quantification::Quantification(int size, int threshold_a, int threshold_b) {
     this->size = size;
+    this->setQuantificationInterval(threshold_a,threshold_b);
     _threshold = new int[this->size - 1];
     _values = new int[this->size];
 }
@@ -89,24 +90,24 @@ void Quantification::saveAs(std::string filename) {
 }
 
 int Quantification::valueOf(int value) const {
-        for(int i = 0; i < nbThresholds(); ++i) {
+    for(int i = 0; i < nbThresholds(); ++i) {
             if(value < _threshold[i]) {
                 return _values[i];
             }
         }
         return _values[nbThresholds()];
-    }
+}
 
-Quantification Quantification::linearQuant(int size) {
+Quantification Quantification::linearQuant(int size, int threshold_a, int threshold_b) {
 
-    Quantification quant(size);
+    Quantification quant(size, threshold_a, threshold_b);
 
     for(int i = 0; i < size - 1; ++i) {
-        quant._threshold[i] = floor( (i + 1) * (float)N_MAX_THRESHOLD / size + 0.5);
+        quant._threshold[i] = (int) round((float)((threshold_b-threshold_a)*(i+1))/(float)size)+threshold_a;
     }
     if(size > 0) {
-        quant._values[0] = floor( quant._threshold[0] / 2.);
-        quant._values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant._threshold[size - 2]) / 2. );
+        quant._values[0] = floor( (threshold_a + quant._threshold[0])/ 2.);
+        quant._values[size - 1] = floor( ((float)threshold_b + (float)quant._threshold[size - 2]) / 2. );
     }
     for(int i = 1; i < size - 1; ++i) {
         quant._values[i] = floor( (double)(quant._threshold[i] + quant._threshold[i-1]) / 2.);
@@ -115,9 +116,9 @@ Quantification Quantification::linearQuant(int size) {
     return quant;
 }
 
-Quantification Quantification::nonLinearQuant(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
+Quantification Quantification::nonLinearQuant(int size, int threshold_a, int threshold_b, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
-    Quantification quant(size);
+    Quantification quant(size, threshold_a, threshold_b);
 
 
     if(currentWnd->isStandard()) {
@@ -126,8 +127,8 @@ Quantification Quantification::nonLinearQuant(int size, const genericinterface::
         double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
 
         double histogramSum = 0;
-        Image::depth_t value = 0;
-        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        int value = 0;
+        int Maxvalue = threshold_b;
         for(int i = 0; i < size - 1; ++i) {
             double percent = (i + 1.) / size;
             while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
@@ -141,11 +142,12 @@ Quantification Quantification::nonLinearQuant(int size, const genericinterface::
     else if(currentWnd->isDouble()){
         const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
         Histogram histogram = wnd->getImage()->getHistogram(c);
+
         double imageSize = wnd->getImage()->getWidth() * wnd->getImage()->getHeight();
 
         double histogramSum = 0;
-        Image::depth_t value = 0;
-        Image::depth_t Maxvalue = std::numeric_limits<Image::depth_t>::max();
+        int value = threshold_a;
+        int Maxvalue = threshold_b;
         for(int i = 0; i < size - 1; ++i) {
             double percent = (i + 1.) / size;
             while(( percent * imageSize > histogramSum ) && ( value < Maxvalue)) {
@@ -157,8 +159,8 @@ Quantification Quantification::nonLinearQuant(int size, const genericinterface::
     }
 
     if(size > 0) {
-        quant._values[0] = floor( quant._threshold[0] / 2. + 0.5 );
-        quant._values[size - 1] = floor( ((float)N_MAX_THRESHOLD + quant._threshold[size - 2]) / 2. );
+        quant._values[0] = floor((threshold_a + quant._threshold[0]) / 2.);
+        quant._values[size - 1] = floor(((float) threshold_b + (float) quant._threshold[size - 2]) / 2.);
     }
     for(int i = 1; i < size - 1; ++i) {
         quant._values[i] = floor( (double)(quant._threshold[i] + quant._threshold[i-1]) / 2.);
@@ -166,9 +168,9 @@ Quantification Quantification::nonLinearQuant(int size, const genericinterface::
     return quant;
 }
 
-Quantification Quantification::nonLinearQuantOptimized(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
+Quantification Quantification::nonLinearQuantOptimized(int size, int threshold_a, int threshold_b, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
-    Quantification quant(size);
+    Quantification quant(size, threshold_a, threshold_b);
 
     if(currentWnd->isStandard()) {
         const auto *wnd = dynamic_cast<const genericinterface::StandardImageWindow *>(currentWnd);
@@ -273,12 +275,12 @@ Quantification Quantification::nonLinearQuantOptimized(int size, const genericin
         if (nb_points > 0) quant._values[size - 1] = (som_lum / nb_points);
         else quant._values[size - 1] = (quant._threshold[size - 2] + N_MAX_THRESHOLD) / 2;
     }
-    
+
     
     return quant;
 }
 
-Quantification Quantification::lloydMaxQuant(int size, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
+Quantification Quantification::lloydMaxQuant(int size, int threshold_a, int threshold_b, const genericinterface::ImageWindow *currentWnd, unsigned int c) {
 
     if(currentWnd->isStandard()) {
         const auto *wnd = dynamic_cast<const genericinterface::DoubleImageWindow *>(currentWnd);
@@ -290,7 +292,7 @@ Quantification Quantification::lloydMaxQuant(int size, const genericinterface::I
         int diff[size - 1];
         int diff_mean = 100;
         // initialisation : repartion lineaire des niveaux de quantification
-        Quantification quant = linearQuant(size);
+        Quantification quant = linearQuant(size, threshold_a, threshold_b);
 
         while (cpt > 0 && diff_mean >= 1) {
             // calcul des nouveaux seuils de quantification
@@ -360,7 +362,7 @@ Quantification Quantification::lloydMaxQuant(int size, const genericinterface::I
         int diff[size - 1];
         int diff_mean = 100;
         // initialisation : repartion lineaire des niveaux de quantification
-        Quantification quant = linearQuant(size);
+        Quantification quant = linearQuant(size, threshold_a, threshold_b);
 
         while (cpt > 0 && diff_mean >= 1) {
             // calcul des nouveaux seuils de quantification
@@ -421,6 +423,7 @@ Quantification Quantification::lloydMaxQuant(int size, const genericinterface::I
     }
 }
 
+/*
 Quantification Quantification::linearQuant_DPCM(int size) {
 
     Quantification quant(size);
@@ -450,3 +453,4 @@ Quantification Quantification::linearQuant_DPCM(int size) {
     }
     return quant;
 }
+*/

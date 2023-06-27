@@ -18,22 +18,16 @@
 */
 
 #include "QuantificationDialog.h"
-#include "Widgets/ImageWidgets/ImageWindow.h"
 #include <QDialog>
 #include <QFormLayout>
 #include <QComboBox>
 #include <QSpinBox>
 #include <QDialogButtonBox>
 #include <GrayscaleImage.h>
-#include <QGroupBox>
-#include <QRadioButton>
 #include <QHBoxLayout>
-#include <QLabel>
-#include <QLineEdit>
-#include <QPushButton>
 #include <QFileDialog>
-#include <Widgets/ImageWidgets/DoubleImageWindow.h>
-#include <Widgets/ImageWidgets/StandardImageWindow.h>
+#include <QMessageBox>
+
 
 using namespace imagein;
 QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
@@ -49,7 +43,7 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     QFormLayout* layout = new QFormLayout(this);
     setLayout(layout);
     _sizeBox = new QSpinBox();
-    _sizeBox->setRange(2, 256);
+    _sizeBox->setRange(2,999);
     _sizeBox->setValue(2);
 
     _quantBox = new QComboBox();
@@ -74,8 +68,31 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     layout->insertRow(2, _editorWidget);
     _editorWidget->setVisible(false);
 
+/*SpinBox pour demander à l'utilisateur de renseigner l'interval sur lequel sera réalisé la quantification*/
+    auto *spinBoxLayout = new QHBoxLayout();
+    _limitQuantifBox1 = new QSpinBox();
+    _limitQuantifBox2 = new QSpinBox();
+
+// Par défaut, on quantifie entre 0 et 255 et on impose pas de valeur max pour les bornes
+    _limitQuantifBox1->setRange(-999, 999);
+    _limitQuantifBox2->setRange(-999, 999);
+    _limitQuantifBox1->setValue(0);
+    _limitQuantifBox2->setValue(255);
+
+// Réduction de la taille des spinBox
+    _limitQuantifBox1->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+    _limitQuantifBox2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+
+    spinBoxLayout->addWidget(_limitQuantifBox1);
+    spinBoxLayout->addWidget(_limitQuantifBox2);
+
+    layout->addRow(tr("Quantification limits:"), spinBoxLayout);
+
+
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Open|QDialogButtonBox::Save, Qt::Horizontal, this);
-    layout->insertRow(3, buttonBox);
+    layout->insertRow(4, buttonBox);
+
+
 //    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
     QObject::connect(buttonBox->button(QDialogButtonBox::Ok), SIGNAL(pressed()), this, SLOT(accept()));
@@ -85,6 +102,10 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
 //    _saveButton->setEnabled(false);
     QObject::connect(_sizeBox, SIGNAL(valueChanged(int)), _quantWidget, SLOT(setNbThreshold(int)));
     QObject::connect(_quantBox, SIGNAL(currentIndexChanged(int)), this, SLOT(methodChanged(int)));
+    QObject::connect(_limitQuantifBox1, SIGNAL(valueChanged(int)), _quantWidget, SLOT(setLimitQuantifmin(int)));
+    QObject::connect(_limitQuantifBox2, SIGNAL(valueChanged(int)), _quantWidget, SLOT(setLimitQuantifmax(int)));
+
+
 
     if(_editorOnly) {
         buttonBox->button(QDialogButtonBox::Cancel)->setVisible(false);
@@ -98,46 +119,60 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
 void QuantificationDialog::methodChanged(int method) {
     _editorWidget->setVisible((_editorOnly && method == 1) || (!_editorOnly && method == 4));
     _saveButton->setEnabled(_quantBox->currentText()==tr("Linear with centered value") || _quantBox->currentText()==tr("Custom"));
+
+    /*Si l'on est en mode personnalisé, on désactive les boxes pour renseigner les bornes de la quantification*/
+    if(_quantBox->currentIndex() == 4) {
+        _limitQuantifBox1->setEnabled(false);
+        _limitQuantifBox2->setEnabled(false);
+    }
     this->adjustSize();
 }
 
 Quantification QuantificationDialog::getQuantif(const genericinterface::ImageWindow *currentWnd, unsigned int c, std::string &to_print) {
 
     int size = _sizeBox->value();
-    if(_editorOnly) return Quantification::linearQuant(size);
+    int threshold_a = _limitQuantifBox1->value();
+    int threshold_b = _limitQuantifBox2->value();
+
+    if(size>(threshold_b-threshold_a+1)){
+        QMessageBox messageBox;
+        messageBox.information(nullptr,"Information : ","Be carefull, the range of quantification is higher than the range of color value in the input image");
+        messageBox.setFixedSize(500,200);
+    }
+
+    if(_editorOnly) return Quantification::linearQuant(size,threshold_a,threshold_b);
     switch(_quantBox->currentIndex()) {
         case 1:
                 to_print = QString(tr("Quantification non lineaire a valeurs centrees :")).toStdString();
-                return Quantification::nonLinearQuant(size, currentWnd, c);
+                return Quantification::nonLinearQuant(size,threshold_a,threshold_b, currentWnd, c);
         case 2:
                 to_print = QString(tr("Quantification non lineaire a valeurs moyennes :")).toStdString();
-                return Quantification::nonLinearQuantOptimized(size, currentWnd, c);
+                return Quantification::nonLinearQuantOptimized(size,threshold_a,threshold_b, currentWnd, c);
 
         case 3:
                 to_print = QString(tr("Quantification LloydMax :")).toStdString();
-                return Quantification::lloydMaxQuant(size, currentWnd, c);
+                return Quantification::lloydMaxQuant(size,threshold_a,threshold_b, currentWnd, c);
         case 4:
                 to_print = QString(tr("Quantification personnalisee :")).toStdString();
                 return _quantWidget->getQuantif();
-                break;
 
         default:
-                to_print = QString(tr("Quantification lineaire a valeurs centrees :")).toStdString();
-                return Quantification::linearQuant(size);
-                break;
+                to_print += QString(tr("Quantification lineaire a valeurs centrees :")).toStdString();
+                return Quantification::linearQuant(size,threshold_a,threshold_b);
     }
 }
 
 Quantification QuantificationDialog::getQuantif() {
 
     int size = _sizeBox->value();
-    if(_editorOnly) return Quantification::linearQuant(size);
+    int threshold_a = _limitQuantifBox1->value();
+    int threshold_b = _limitQuantifBox1->value();
+    if(_editorOnly) return Quantification::linearQuant(size,threshold_a,threshold_b);
     switch(_quantBox->currentIndex()) {
         case 4:
                 return _quantWidget->getQuantif();
-                break;
         default:
-                return Quantification::linearQuant(size); break;
+                return Quantification::linearQuant(size,threshold_a,threshold_b);
     }
 }
 
@@ -154,9 +189,16 @@ void QuantificationDialog::open() {
 void QuantificationDialog::save() {
 
     QString filename = QFileDialog::getSaveFileName(this, tr("Save to file"), "", tr("Loi de quantification (*.loi)"));
+
+    /*Sur linux, l'extension ne se met pas toute seule comme sur windows*/
+    QString extension = ".loi";
+    if (!filename.endsWith(extension, Qt::CaseInsensitive)) {
+        filename += extension;
+    }
+
     if(filename.isEmpty()) return;
     if(_quantBox->currentIndex() == 0) {
-        Quantification::linearQuant(this->_sizeBox->value()).saveAs(filename.toStdString());
+        Quantification::linearQuant(this->_sizeBox->value(),this->_limitQuantifBox1->value(),this->_limitQuantifBox2->value()).saveAs(filename.toStdString());
     }
     else if((_editorOnly && _quantBox->currentIndex() == 1) || (!_editorOnly && _quantBox->currentIndex() == 4)) {
         _quantWidget->getQuantif().saveAs(filename.toStdString());
