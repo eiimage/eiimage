@@ -47,6 +47,7 @@ public:
 
     inline void setQuantificationInterval(int a, int b){threshold_a = a; threshold_b = b;}
     inline int QuantificationIntervalThreshold_a() const {return threshold_a;}
+    inline int QuantificationIntervalThreshold_b() const {return threshold_b;}
 
     inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
