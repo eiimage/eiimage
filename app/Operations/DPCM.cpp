@@ -102,7 +102,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                     break;
 
-            case PX_EQ_B:
+            case PX_EQ_C:
                 if(i == 0) {
                     pred[i][j] = im->getPixelAt(j, 0);
                     quant_pred_err = 0;
