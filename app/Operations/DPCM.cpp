@@ -23,6 +23,9 @@
 #include <cmath>
 #include <Converter.h>
 
+/*In DPCM NULL is used to represent no-quantization choice */
+#define NO_QUANTDEF NULL
+
 using namespace std;
 using namespace imagein;
 
@@ -49,9 +52,7 @@ DPCM::~DPCM()
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
     char buffer[512], buffer2[512];
-    if( quantdef == nullptr ) {
-        throw "Error in DPCM::execute:\nquantdef = NULL";
-    }
+
     string returnval;
     int imgHeight = (int)im->getHeight();
     int imgWidth = (int)im->getWidth();
@@ -97,7 +98,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = reconstructed_image->getPixelAt(j - 1, i);
-                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                    if(quantdef == NO_QUANTDEF)
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
                 }
                 quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                     break;
@@ -109,7 +113,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = reconstructed_image->getPixelAt(j, i - 1);
-                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                    if(quantdef == NO_QUANTDEF)
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
                 }
                 quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
@@ -121,7 +128,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = (reconstructed_image->getPixelAt(j, i - 1) + reconstructed_image->getPixelAt(j-1, i))/2;
-                    quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                    if(quantdef == NO_QUANTDEF)
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
                 }
                 quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
@@ -166,7 +176,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                     }
                     else {
                         pred[i][j] = (uint8_t)((A + C) / 2);
-                        quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                        if(quantdef == NO_QUANTDEF)
+                            quant_pred_err = pixImg-pred[i][j];
+                        else
+                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
                     }
                 }
                 else {
@@ -177,7 +190,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                         }
                         else {
                             pred[i][j] = (uint8_t)A;
-                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                            if(quantdef == NO_QUANTDEF)
+                                quant_pred_err = pixImg-pred[i][j];
+                            else
+                                quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
                         }
 
                     } else {
@@ -187,7 +203,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                         }
                         else {
                             pred[i][j] = (uint8_t) C;
-                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                            if(quantdef == NO_QUANTDEF)
+                                quant_pred_err = pixImg-pred[i][j];
+                            else
+                                quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
                         }
                     }
                 }
@@ -223,12 +242,13 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     double quant_pred_err_entrop = quantized_prediction_error_image->getEntropy();
     sprintf(buffer2, qApp->translate("DPCM", "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n").toUtf8(), quant_pred_err_entrop);
 
-
-    returnval = returnval + buffer;
-    returnval = returnval + "\n";
-    returnval = returnval + buffer2;
-    returnval = returnval + "\n";
-    returnval = returnval + print_iloiqu();
+    if (quantdef != NO_QUANTDEF) {
+        returnval = returnval + buffer;
+        returnval = returnval + "\n";
+        returnval = returnval + buffer2;
+        returnval = returnval + "\n";
+        returnval = returnval + print_iloiqu();
+    }
 
     /* libration de la mmoire alloue */
     *quant_err_image = quantized_prediction_error_image;
@@ -283,8 +303,11 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 }
 
 void DPCM::set_levels() {
+    //No_Quantification checked
+    if(quantdef == NO_QUANTDEF)
+        return;
     // Fills in iloiqu with the specified values
-    if( quantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || quantdef->nbThresholds() < 1 ) {
+    else if( quantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || quantdef->nbThresholds() < 1 ) {
         char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
@@ -322,8 +345,9 @@ string DPCM::print_iloiqu() {
 }
 
 void DPCM::setQuantification( Quantification *tquantdef ) {
-    if( tquantdef == NULL ) {
-        throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
+    if(tquantdef == NO_QUANTDEF) {
+        quantdef = NO_QUANTDEF;
+        return;
     }
     if( tquantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || tquantdef->nbThresholds() < 1 ) {
         char buffer[512];

@@ -19,7 +19,6 @@
 
 #ifndef DPCM_H
 #define DPCM_H
-
 #include <string>
 #include <GrayscaleImage.h>
 #include "Quantification.h"

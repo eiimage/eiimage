@@ -51,10 +51,21 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     try {
         micd.setQuantification(dialog->getQuantification());
     }
-    catch(const char* str) {
+    catch (const std::runtime_error& e) {
+    // Traiter spécifiquement l'erreur liée au chemin de fichier vide
+        QMessageBox::critical(nullptr, qApp->translate("DPCM", "Error while loading quantification file"),
+                              qApp->translate("DPCM", "The path to the quantification file is empty"));
+        return;
+    }
+    catch (const std::exception& e) {
+    // ON traite toutes les autres exceptions
         QMessageBox::critical(nullptr, qApp->translate("DPCM", "Error while loading quantification file"),
                               qApp->translate("DPCM", "The specified quantification file could not be opened !"));
         return;
+    }
+
+    catch(const char* str) {
+
     }
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image *reconstructedImage;

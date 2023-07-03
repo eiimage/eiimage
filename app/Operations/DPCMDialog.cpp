@@ -22,6 +22,9 @@
 #include <QFileDialog>
 #include "QuantificationDialog.h"
 
+/*In DPCM NULL is used to represent no-quantization choice */
+#define NO_QUANTDEF NULL
+
 DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DPCMDialog)
@@ -61,16 +64,22 @@ void DPCMDialog::on_noQuantization_clicked()
 }
 
 Quantification* DPCMDialog::getQuantification() const {
-    if(ui->noQuantization->isChecked()) {
-        Quantification* quantif = new Quantification();
-        return quantif;
-    }else{
-        try {
-            Quantification* quantif = new Quantification(ui->quantFileEdit->text().toStdString());
-            return quantif;
+    if (ui->noQuantization->isChecked()) {
+        //return new Quantification();
+        return NO_QUANTDEF;
+    } else {
+        std::string quantFilePath = ui->quantFileEdit->text().toStdString();
+
+        if (quantFilePath.empty()) {
+            throw std::runtime_error("Quantification file path is empty.");
         }
-        catch(std::exception&) {
-            return NULL;
+
+        try {
+            return new Quantification(quantFilePath);
+        } catch (const std::exception& e) {
+            // Si une exception est lancée dans le constructeur de Quantification, la propager plus loin
+            // Va se produire si le filename est incorrect
+            throw;
         }
     }
 }
