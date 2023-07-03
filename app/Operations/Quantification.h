@@ -29,7 +29,7 @@
 class Quantification {
 public:
 
-    explicit Quantification(int size, int threshold_a, int threshold_b);
+    explicit Quantification(int size, int value_inf, int value_sup);
     explicit Quantification(std::string filename);
     /*identical quantification*/
     explicit Quantification();
@@ -45,27 +45,26 @@ public:
     inline int value(int i) const {return _values[i];}
     inline void setValue(int i, int v) {_values[i] = v;}
 
-    inline void setQuantificationInterval(int a, int b){threshold_a = a; threshold_b = b;}
-    inline int QuantificationIntervalThreshold_a() const {return threshold_a;}
-    inline int QuantificationIntervalThreshold_b() const {return threshold_b;}
+    inline void setQuantificationInterval(int a, int b){ _value_inf = a; _value_sup = b;}
+    inline int getValueInf() const {return _value_inf;}
+    inline int getValueSup() const {return _value_sup;}
 
     inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
-    static Quantification linearQuant(int size, int threshold_a, int threshold_b);
-    static Quantification nonLinearQuant(int size, int threshold_a, int threshold_b,const genericinterface::ImageWindow *currentWnd, unsigned int c);
-    static Quantification nonLinearQuantOptimized(int size, int threshold_a, int threshold_b, const genericinterface::ImageWindow *currentWnd, unsigned int c);
-    static Quantification lloydMaxQuant(int size, int threshold_a, int threshold_b, const genericinterface::ImageWindow *currentWnd, unsigned int c);
-
+    static Quantification linearQuant(int size, int value_inf, int value_sup);
+    static Quantification nonLinearQuant(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification nonLinearQuantOptimized(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification lloydMaxQuant(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
     /*linear quantificator for dpcm(including negatif values)*/
     /*static Quantification linearQuant_DPCM(int size);*/
 
 private:
     int size;
+    int _value_inf,_value_sup;
     int* _threshold;
     int* _values;
     int* _test;
-    int threshold_a,threshold_b;
 };
 
 #endif // QUANTIFICATION_H

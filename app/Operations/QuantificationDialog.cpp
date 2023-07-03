@@ -86,7 +86,7 @@ QuantificationDialog::QuantificationDialog(QWidget *parent, QString imgName) :
     spinBoxLayout->addWidget(_limitQuantifBox1);
     spinBoxLayout->addWidget(_limitQuantifBox2);
 
-    layout->addRow(tr("Quantification limits:"), spinBoxLayout);
+    layout->addRow(tr("range of values : "), spinBoxLayout);
 
 
     QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Open|QDialogButtonBox::Save, Qt::Horizontal, this);
@@ -131,48 +131,48 @@ void QuantificationDialog::methodChanged(int method) {
 Quantification QuantificationDialog::getQuantif(const genericinterface::ImageWindow *currentWnd, unsigned int c, std::string &to_print) {
 
     int size = _sizeBox->value();
-    int threshold_a = _limitQuantifBox1->value();
-    int threshold_b = _limitQuantifBox2->value();
+    int value_inf = _limitQuantifBox1->value();
+    int value_sup = _limitQuantifBox2->value();
 
-    if(size>(threshold_b-threshold_a+1)){
+    if(size>(value_sup - value_inf + 1)){
         QMessageBox messageBox;
-        messageBox.information(nullptr,"Information : ","Be carefull, the range of quantification is higher than the range of color value in the input image");
+        messageBox.information(nullptr,"Information : ","Note that the range of values is higher than the range of color values of the input image");
         messageBox.setFixedSize(500,200);
     }
 
-    if(_editorOnly) return Quantification::linearQuant(size,threshold_a,threshold_b);
+    if(_editorOnly) return Quantification::linearQuant(size, value_inf, value_sup);
     switch(_quantBox->currentIndex()) {
         case 1:
                 to_print = QString(tr("Quantification non lineaire a valeurs centrees :")).toStdString();
-                return Quantification::nonLinearQuant(size,threshold_a,threshold_b, currentWnd, c);
+                return Quantification::nonLinearQuant(size, value_inf, value_sup, currentWnd, c);
         case 2:
                 to_print = QString(tr("Quantification non lineaire a valeurs moyennes :")).toStdString();
-                return Quantification::nonLinearQuantOptimized(size,threshold_a,threshold_b, currentWnd, c);
+                return Quantification::nonLinearQuantOptimized(size, value_inf, value_sup, currentWnd, c);
 
         case 3:
                 to_print = QString(tr("Quantification LloydMax :")).toStdString();
-                return Quantification::lloydMaxQuant(size,threshold_a,threshold_b, currentWnd, c);
+                return Quantification::lloydMaxQuant(size, value_inf, value_sup, currentWnd, c);
         case 4:
                 to_print = QString(tr("Quantification personnalisee :")).toStdString();
                 return _quantWidget->getQuantif();
 
         default:
                 to_print += QString(tr("Quantification lineaire a valeurs centrees :")).toStdString();
-                return Quantification::linearQuant(size,threshold_a,threshold_b);
+                return Quantification::linearQuant(size, value_inf, value_sup);
     }
 }
 
 Quantification QuantificationDialog::getQuantif() {
 
     int size = _sizeBox->value();
-    int threshold_a = _limitQuantifBox1->value();
-    int threshold_b = _limitQuantifBox1->value();
-    if(_editorOnly) return Quantification::linearQuant(size,threshold_a,threshold_b);
+    int value_inf = _limitQuantifBox1->value();
+    int value_sup = _limitQuantifBox1->value();
+    if(_editorOnly) return Quantification::linearQuant(size, value_inf, value_sup);
     switch(_quantBox->currentIndex()) {
         case 4:
                 return _quantWidget->getQuantif();
         default:
-                return Quantification::linearQuant(size,threshold_a,threshold_b);
+                return Quantification::linearQuant(size, value_inf, value_sup);
     }
 }
 

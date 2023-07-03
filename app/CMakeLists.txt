@@ -215,6 +215,9 @@ if(WIN32)
 endif()
 
 add_executable(imageinsa ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
+
+set_target_properties(imageinsa PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "$ORIGIN/lib")
+
 target_link_libraries(imageinsa
 	core
 	Qt5::Core
