@@ -87,6 +87,8 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     app.setOrganizationName("INSA");
     app.setApplicationName("ImageINSA");
+    //QMainWindow mainWindow;
+    //mainWindow.setWindowIcon(QIcon("/home/trauffle/Documents/Work/GitLabINSA/imageinsa_tanguy/app/img/Logo_INSA.ico"));
 
     Log::configure(true, false, 0);
 
@@ -226,8 +228,8 @@ int main(int argc, char** argv)
 
     mainService->addOpSet(tools);
 
+    gi.setWindowIcon(QIcon("../../app/img/Logo_INSA.ico"));
     gi.addService(pluginManager);
-
     gi.run();
 
     return app.exec();
