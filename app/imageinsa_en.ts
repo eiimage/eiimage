@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+131"/>
+        <location filename="main.cpp" line="+133"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>Image</translation>
@@ -641,7 +641,8 @@ Number of classes = %1 </translation>
 <context>
     <name>DPCM</name>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="+55"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="+56"/>
+        <location line="+6"/>
         <source>Error while loading quantification file</source>
         <translation>Error while loading quantization file</translation>
     </message>
@@ -651,7 +652,7 @@ Number of classes = %1 </translation>
         <translation>The specified quantization file could not be opened!</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+16"/>
         <source>Prediction error image</source>
         <translation>Prediction error image</translation>
     </message>
@@ -671,7 +672,12 @@ Number of classes = %1 </translation>
         <translation>Prediction image</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-24"/>
+        <source>The path to the quantification file is empty</source>
+        <translation>The path to the quantification file is empty</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>Reconstructed image</source>
         <translation>Reconstructed image</translation>
     </message>
@@ -688,7 +694,7 @@ Number of classes = %1 </translation>
         <translation type="vanished">decision thresholds --------- reconstruction levels\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+184"/>
+        <location filename="Operations/DPCM.cpp" line="+239"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -705,7 +711,7 @@ The entropy of the quantized prediction errror image is : %f
 </translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+69"/>
         <source>Error in DPCM::set_levels:
 quantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Error in DPCM::set_levels:
@@ -719,7 +725,7 @@ quantdef-&gt;GetNumThresholds() = %d</translation>
 </translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Error in DPCM::setQuantDef:
@@ -729,7 +735,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+39"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+42"/>
         <source>Open file</source>
         <translation>Open file</translation>
     </message>
@@ -1221,7 +1227,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>BFilt</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+136"/>
+        <location filename="Operations/PointOp.cpp" line="+135"/>
         <location filename="Operations/NoiseOp.cpp" line="-112"/>
         <location filename="Operations/IFFTOp.cpp" line="-150"/>
         <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
@@ -1331,7 +1337,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Pseudo color</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="+29"/>
+        <location filename="Operations/QuantificationOp.cpp" line="+30"/>
         <source>Quantification</source>
         <translation>Quantization</translation>
     </message>
@@ -1424,7 +1430,7 @@ Channel %d :
         <translation>Translation</translation>
     </message>
     <message>
-        <location filename="Operations/ZeroCrossingOp.cpp" line="+33"/>
+        <location filename="Operations/ZeroCrossingOp.cpp" line="+32"/>
         <source>Zero crossing</source>
         <translation>Zero crossing</translation>
     </message>
@@ -1573,17 +1579,32 @@ Channel %d :
         <translation>Supervised classification</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-38"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-49"/>
         <source>DPCM Encoding</source>
         <translation>DPCM Encoding</translation>
     </message>
     <message>
-        <location filename="Operations/Huffman.cpp" line="+123"/>
+        <location filename="Operations/Huffman.cpp" line="+95"/>
         <source>
- debit(huffman) = %.4f
+Entropy = %.4f bbp
+
 </source>
         <translation>
- Throughput(Huffman) = %.4f</translation>
+Entropy = %.4f bbp
+
+</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>
+ debit(huffman) = %.4f bpp
+</source>
+        <oldsource>
+ debit(huffman) = %.4f
+</oldsource>
+        <translation>
+ Throughput(Huffman) = %.4f bbp
+</translation>
     </message>
     <message>
         <location filename="Algorithms/Pyramid.cpp" line="+641"/>
@@ -1805,7 +1826,7 @@ The bitrate is : %5.2f
         <translation>&lt;i&gt;Offset and scale : Adds a 127 offset and scales&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+416"/>
+        <location filename="Operations/PointOp.cpp" line="+417"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1880,7 +1901,7 @@ The bitrate is : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-320"/>
+        <location filename="Operations/PointOp.cpp" line="-321"/>
         <source>Second operand</source>
         <translation>Second operand</translation>
     </message>
@@ -2159,7 +2180,7 @@ The bitrate is : %5.2f
 <context>
     <name>QuantificationDialog</name>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="+40"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="+37"/>
         <source>Quantification file editor</source>
         <translation>Quantization file editor</translation>
     </message>
@@ -2170,12 +2191,12 @@ The bitrate is : %5.2f
     </message>
     <message>
         <location line="+10"/>
-        <location line="+44"/>
+        <location line="+71"/>
         <source>Linear with centered value</source>
         <translation>Linear with centered value</translation>
     </message>
     <message>
-        <location line="-42"/>
+        <location line="-69"/>
         <source>Non linear with centered value</source>
         <translation>Non linear with centered value</translation>
     </message>
@@ -2186,13 +2207,13 @@ The bitrate is : %5.2f
     </message>
     <message>
         <location line="+3"/>
-        <location line="+38"/>
-        <location line="+53"/>
+        <location line="+65"/>
+        <location line="+65"/>
         <source>Custom</source>
         <translation>Custom</translation>
     </message>
     <message>
-        <location line="-93"/>
+        <location line="-132"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
@@ -2211,7 +2232,12 @@ The bitrate is : %5.2f
         <translation>Number of values : </translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+30"/>
+        <source>range of values : </source>
+        <translation>range of values : </translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>Exit</source>
         <translation>Exit</translation>
     </message>
@@ -2221,24 +2247,29 @@ The bitrate is : %5.2f
         <translation>Apply</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+24"/>
+        <source>Note that the range of values is higher than the range of color values of the input image</source>
+        <translation>Note that the range of values is higher than the range of color values of the input image</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Non-linear quantization with centered values :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Quantification non lineaire a valeurs moyennes :</source>
         <oldsource>Quantification non lineaire a valeurs moyennes : </oldsource>
         <translation>Non-linear quantization with mean values :</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <source>Quantification personnalisee :</source>
         <translation>Custom quantization :</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="-3"/>
         <source>Quantification LloydMax :</source>
         <translation>LloydMax quantization :</translation>
     </message>
@@ -2247,7 +2278,7 @@ The bitrate is : %5.2f
         <translation type="vanished">Quantification identical :</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+7"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Linear quantization with centered values :</translation>
     </message>
@@ -2821,7 +2852,7 @@ The bitrate is : %5.2f
         <translation>Threshold : </translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+64"/>
         <source>contours bruts</source>
         <translation>Raw edges</translation>
     </message>

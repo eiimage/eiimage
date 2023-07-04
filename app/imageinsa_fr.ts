@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+131"/>
+        <location filename="main.cpp" line="+133"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
@@ -641,7 +641,8 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DPCM</name>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="+55"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="+56"/>
+        <location line="+6"/>
         <source>Error while loading quantification file</source>
         <translation>Erreur lors du chargement du fichier de quantification</translation>
     </message>
@@ -651,7 +652,7 @@ Nombre de classes = %1 </translation>
         <translation>Le fichier de quantification spécifié n&apos;a pas pu être ouvert !</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+16"/>
         <source>Prediction error image</source>
         <translation>Image d&apos;erreur de prédiction</translation>
     </message>
@@ -671,7 +672,12 @@ Nombre de classes = %1 </translation>
         <translation>Image de prédiction</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-24"/>
+        <source>The path to the quantification file is empty</source>
+        <translation>Le chemin vers le fichier de quantification est vide</translation>
+    </message>
+    <message>
+        <location line="+25"/>
         <source>Reconstructed image</source>
         <translation>Image reconstruite</translation>
     </message>
@@ -688,12 +694,13 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">seuils de decision --------------- niveaux de reconstruction\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+184"/>
+        <location filename="Operations/DPCM.cpp" line="+239"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
         <translation>
-L&apos;entropie de l&apos;image d&apos;erreur de prédiction vaut : %f</translation>
+L&apos;entropie de l&apos;image d&apos;erreur de prédiction vaut : %f
+</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -705,7 +712,7 @@ L&apos;entropie de l&apos;image d&apos;erreur de prédiction quantifiée vaut : 
 </translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+69"/>
         <source>Error in DPCM::set_levels:
 quantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Erreur dans DPCM :: set_levels:
@@ -719,7 +726,7 @@ quantdef-&gt; GetNumThresholds () =% d</translation>
 </translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+27"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Erreur dans DPCM :: setQuantDef:
@@ -729,7 +736,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+39"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+42"/>
         <source>Open file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
@@ -1221,7 +1228,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>BFilt</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+136"/>
+        <location filename="Operations/PointOp.cpp" line="+135"/>
         <location filename="Operations/NoiseOp.cpp" line="-112"/>
         <location filename="Operations/IFFTOp.cpp" line="-150"/>
         <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
@@ -1326,7 +1333,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>Pseudo-couleur</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="+29"/>
+        <location filename="Operations/QuantificationOp.cpp" line="+30"/>
         <source>Quantification</source>
         <translation>Quantification</translation>
     </message>
@@ -1419,7 +1426,7 @@ Canal %d :
         <translation>Translation</translation>
     </message>
     <message>
-        <location filename="Operations/ZeroCrossingOp.cpp" line="+33"/>
+        <location filename="Operations/ZeroCrossingOp.cpp" line="+32"/>
         <source>Zero crossing</source>
         <translation>Passages par zéro</translation>
     </message>
@@ -1436,7 +1443,7 @@ Canal %d :
     <message>
         <location filename="Operations/SplitHsvOp.cpp" line="+34"/>
         <source>Split HSV planes</source>
-        <translation>Séparer les plans TSV </translation>
+        <translation>Séparer les plans TSV</translation>
     </message>
     <message>
         <location filename="Operations/FlipOp.cpp" line="-32"/>
@@ -1573,17 +1580,32 @@ Canal %d :
         <translation>Classification supervisée</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-38"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-49"/>
         <source>DPCM Encoding</source>
         <translation>Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/Huffman.cpp" line="+123"/>
+        <location filename="Operations/Huffman.cpp" line="+95"/>
         <source>
- debit(huffman) = %.4f
+Entropy = %.4f bbp
+
 </source>
         <translation>
- Débit(Huffman) = %.4f</translation>
+Entropie = %.4f bpp
+
+</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>
+ debit(huffman) = %.4f bpp
+</source>
+        <oldsource>
+ debit(huffman) = %.4f
+</oldsource>
+        <translation>
+ Débit(Huffman) = %.4f bpp
+</translation>
     </message>
     <message>
         <location filename="Algorithms/Pyramid.cpp" line="+641"/>
@@ -1613,6 +1635,7 @@ Le debit vaut : %5.2f
 </source>
         <translation>
 Le débit vaut : %5.2f
+
 </translation>
     </message>
     <message>
@@ -1805,7 +1828,7 @@ Le débit vaut : %5.2f
         <translation>&lt;i&gt;Décaler et mettre à l&apos;echelle : Ajoute un décalge de 127 et effectue une mise à l&apos;echelle&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+416"/>
+        <location filename="Operations/PointOp.cpp" line="+417"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
@@ -1880,7 +1903,7 @@ Le débit vaut : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-320"/>
+        <location filename="Operations/PointOp.cpp" line="-321"/>
         <source>Second operand</source>
         <translation>Second opérande</translation>
     </message>
@@ -2159,7 +2182,7 @@ Le débit vaut : %5.2f
 <context>
     <name>QuantificationDialog</name>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="+40"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="+37"/>
         <source>Quantification file editor</source>
         <translation>Éditeur de fichiers de quantification</translation>
     </message>
@@ -2170,12 +2193,12 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+10"/>
-        <location line="+44"/>
+        <location line="+71"/>
         <source>Linear with centered value</source>
         <translation>Linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location line="-42"/>
+        <location line="-69"/>
         <source>Non linear with centered value</source>
         <translation>Non linéaire à valeurs centrées</translation>
     </message>
@@ -2186,13 +2209,13 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+3"/>
-        <location line="+38"/>
-        <location line="+53"/>
+        <location line="+65"/>
+        <location line="+65"/>
         <source>Custom</source>
         <translation>Personnalisée</translation>
     </message>
     <message>
-        <location line="-93"/>
+        <location line="-132"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
@@ -2211,7 +2234,12 @@ Le débit vaut : %5.2f
         <translation>Nombre de valeurs : </translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+30"/>
+        <source>range of values : </source>
+        <translation>plage des valeurs : </translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
@@ -2221,24 +2249,24 @@ Le débit vaut : %5.2f
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+31"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Quantification non linéaire à valeurs centrées :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Quantification non lineaire a valeurs moyennes :</source>
         <oldsource>Quantification non lineaire a valeurs moyennes : </oldsource>
         <translation>Quantification non linéaire à valeurs moyennes :</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+7"/>
         <source>Quantification personnalisee :</source>
         <translation>Quantification personnalisée :</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location line="-3"/>
         <source>Quantification LloydMax :</source>
         <translation>Quantification LloydMax :</translation>
     </message>
@@ -2247,7 +2275,7 @@ Le débit vaut : %5.2f
         <translation type="vanished">Quantification identique :</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+7"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Quantification linéaire à valeurs centrées :</translation>
     </message>
@@ -2817,7 +2845,7 @@ Le débit vaut : %5.2f
         <translation>Seuil : </translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+64"/>
         <source>contours bruts</source>
         <translation>Contours bruts</translation>
     </message>

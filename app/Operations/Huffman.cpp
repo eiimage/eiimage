@@ -92,7 +92,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
         }
     }
     returnval = prob_Pi( im ,nbpt);
-    sprintf(buffer, "\nH (theo.) = %.4f\n\n",H);
+    sprintf(buffer, QString(qApp->translate("Operations","\nEntropy = %.4f bbp\n\n")).toUtf8(),H);
     returnval = returnval + buffer;
 
     codhuffman();
@@ -120,7 +120,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
         returnval = returnval + resVector[i].first;
     }
     /*---------------------------------------------------------------------------*/
-    sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f\n")).toUtf8(),nbbit);
+    sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f bpp\n")).toUtf8(),nbbit);
     returnval = returnval + buffer;
 
     return returnval;

@@ -136,7 +136,7 @@ Quantification QuantificationDialog::getQuantif(const genericinterface::ImageWin
 
     if(size>(value_sup - value_inf + 1)){
         QMessageBox messageBox;
-        messageBox.information(nullptr,"Information : ","Note that the range of values is higher than the range of color values of the input image");
+        messageBox.information(nullptr,"Information : ",tr("Note that the range of values is higher than the range of color values of the input image"));
         messageBox.setFixedSize(500,200);
     }
 
