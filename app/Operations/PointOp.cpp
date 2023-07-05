@@ -405,8 +405,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             }
         }
 
-        resImg = new Image(maxWidth, maxHeight, nChannel);
-
         if(nChannel < stdImageImgs[0]->getNbChannels())
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                   qApp->translate("PointOp", "You have performed an operation between a grayscale image (dimension 1) to a color image (dimension 3)"));
