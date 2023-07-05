@@ -409,6 +409,15 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         }
 
         resImg = new Image(maxWidth, maxHeight, nChannel);
+
+        if(nChannel < stdImageImgs[0]->getNbChannels())
+            QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
+                                  qApp->translate("PointOp", "You have performed an operation between a grayscale image (dimension 1) to a color image (dimension 3)"));
+
+        if (maxWidth != image->getWidth() || maxHeight != image->getHeight())
+            QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
+                                 qApp->translate("PointOp", "You have performed an operation on 2 images of different dimensions"));
+
         resDoubleImg = new Image_t<double>(maxWidth, maxHeight, nChannel);
         for(int c = 0; c < resImg->getNbChannels(); ++c) {
             for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
