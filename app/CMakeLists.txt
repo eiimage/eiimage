@@ -19,6 +19,8 @@ set(imageinsa_SOURCES
 	Algorithms/Pyramid.h
         Operations/AbsoluteConvertOp.cpp
         Operations/AbsoluteConvertOp.h
+	Operations/BinaryMaskOp.cpp
+	Operations/BinaryMaskOp.h
 	Operations/BFlitOp.cpp
 	Operations/BFlitOp.h
 	Operations/CenterOp.cpp

@@ -31,6 +31,7 @@
 #include "Services/ImageINSAService.h"
 
 #include "Operations/AbsoluteConvertOp.h"
+#include "Operations/BinaryMaskOp.h"
 #include "Operations/DoubleConvertOp.h"
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
@@ -148,10 +149,13 @@ int main(int argc, char** argv)
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
     image->addOperation(new SeparatorOp());
+    image->addOperation(new BinaryMaskOp());
+    image->addOperation(new SeparatorOp());
     image->addOperation(new HistogramOp());
     image->addOperation(new PointOp());
     image->addOperation(new SeparatorOp());
     image->addOperation(new NoiseOp());
+
 
     //à mettre dans oclors
   /*
