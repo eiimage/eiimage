@@ -22,8 +22,6 @@
 #include <QFileDialog>
 #include "QuantificationDialog.h"
 
-/*In DPCM NULL is used to represent no-quantization choice */
-#define NO_QUANTDEF NULL
 
 DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),
@@ -65,8 +63,8 @@ void DPCMDialog::on_noQuantization_clicked()
 
 Quantification* DPCMDialog::getQuantification() const {
     if (ui->noQuantization->isChecked()) {
-        //return new Quantification();
-        return NO_QUANTDEF;
+        /*Quantification constructor that enable the boolean variable noQuantif*/
+        return new Quantification();
     } else {
         std::string quantFilePath = ui->quantFileEdit->text().toStdString();
 

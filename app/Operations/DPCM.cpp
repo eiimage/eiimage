@@ -23,9 +23,6 @@
 #include <cmath>
 #include <Converter.h>
 
-/*In DPCM NULL is used to represent no-quantization choice */
-#define NO_QUANTDEF NULL
-
 using namespace std;
 using namespace imagein;
 
@@ -98,7 +95,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = reconstructed_image->getPixelAt(j - 1, i);
-                    if(quantdef == NO_QUANTDEF)
+                    if(quantdef->noQuantifEnable())
                         quant_pred_err = pixImg-pred[i][j];
                     else
                         quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
@@ -113,7 +110,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = reconstructed_image->getPixelAt(j, i - 1);
-                    if(quantdef == NO_QUANTDEF)
+                    if(quantdef->noQuantifEnable())
                         quant_pred_err = pixImg-pred[i][j];
                     else
                         quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
@@ -128,7 +125,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 }
                 else {
                     pred[i][j] = (reconstructed_image->getPixelAt(j, i - 1) + reconstructed_image->getPixelAt(j-1, i))/2;
-                    if(quantdef == NO_QUANTDEF)
+                    if(quantdef->noQuantifEnable())
                         quant_pred_err = pixImg-pred[i][j];
                     else
                         quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
@@ -176,7 +173,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                     }
                     else {
                         pred[i][j] = (uint8_t)((A + C) / 2);
-                        if(quantdef == NO_QUANTDEF)
+                        if(quantdef->noQuantifEnable())
                             quant_pred_err = pixImg-pred[i][j];
                         else
                             quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
@@ -190,7 +187,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                         }
                         else {
                             pred[i][j] = (uint8_t)A;
-                            if(quantdef == NO_QUANTDEF)
+                            if(quantdef->noQuantifEnable())
                                 quant_pred_err = pixImg-pred[i][j];
                             else
                                 quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
@@ -203,7 +200,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                         }
                         else {
                             pred[i][j] = (uint8_t) C;
-                            if(quantdef == NO_QUANTDEF)
+                            if(quantdef->noQuantifEnable())
                                 quant_pred_err = pixImg-pred[i][j];
                             else
                                 quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
@@ -242,7 +239,7 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     double quant_pred_err_entrop = quantized_prediction_error_image->getEntropy();
     sprintf(buffer2, qApp->translate("DPCM", "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n").toUtf8(), quant_pred_err_entrop);
 
-    if (quantdef != NO_QUANTDEF) {
+    if (!quantdef->noQuantifEnable()) {
         returnval = returnval + buffer;
         returnval = returnval + "\n";
         returnval = returnval + buffer2;
@@ -304,7 +301,7 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 
 void DPCM::set_levels() {
     //No_Quantification checked
-    if(quantdef == NO_QUANTDEF)
+    if(quantdef->noQuantifEnable())
         return;
     // Fills in iloiqu with the specified values
     else if( quantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || quantdef->nbThresholds() < 1 ) {
@@ -345,11 +342,11 @@ string DPCM::print_iloiqu() {
 }
 
 void DPCM::setQuantification( Quantification *tquantdef ) {
-    if(tquantdef == NO_QUANTDEF) {
-        quantdef = NO_QUANTDEF;
+    if (tquantdef->noQuantifEnable()){
+        quantdef = tquantdef;
         return;
     }
-    if( tquantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || tquantdef->nbThresholds() < 1 ) {
+    else if( tquantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || (tquantdef->nbThresholds() < 1 )) {
         char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;

@@ -31,7 +31,6 @@ public:
 
     explicit Quantification(int size, int value_inf, int value_sup);
     explicit Quantification(std::string filename);
-    /*identical quantification*/
     explicit Quantification();
 
     void saveAs(std::string filename);
@@ -44,10 +43,12 @@ public:
 
     inline int value(int i) const {return _values[i];}
     inline void setValue(int i, int v) {_values[i] = v;}
+    inline void setNoQuantifEnable (bool enable) {_noQuantifFlag = enable;}
 
     inline void setQuantificationInterval(int a, int b){ _value_inf = a; _value_sup = b;}
     inline int getValueInf() const {return _value_inf;}
     inline int getValueSup() const {return _value_sup;}
+    inline bool noQuantifEnable () const {return _noQuantifFlag;}
 
     inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
@@ -65,6 +66,7 @@ private:
     int* _threshold;
     int* _values;
     int* _test;
+    bool _noQuantifFlag;
 };
 
 #endif // QUANTIFICATION_H

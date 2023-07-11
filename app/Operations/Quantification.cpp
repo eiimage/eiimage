@@ -27,14 +27,14 @@
 using namespace std;
 using namespace imagein;
 
-Quantification::Quantification(int size, int value_inf, int value_sup) {
+Quantification::Quantification(int size, int value_inf, int value_sup):_noQuantifFlag(false) {
     this->size = size;
     this->setQuantificationInterval(value_inf, value_sup);
     _threshold = new int[this->size - 1];
     _values = new int[this->size];
 }
 
-Quantification::Quantification(std::string filename) {
+Quantification::Quantification(std::string filename):_noQuantifFlag(false) {
     ifstream file(filename.c_str(), fstream::in);
 //    string s = file.getline();
     string s;
@@ -59,19 +59,8 @@ Quantification::Quantification(std::string filename) {
     }
 }
 
-Quantification::Quantification() {
-//  Quantification identique
-
-    this->size = 511;
-    _threshold = new int[this->size - 1];
-    _values = new int[this->size];
-
-    for(int i = 0; i < size - 1; ++i) {
-        _threshold[i] = i-254;
-    }
-    for(int i = 0; i < size; ++i) {
-        _values[i] = i-255;
-    }
+/* No quantif used in DPCM feature*/
+Quantification::Quantification():_noQuantifFlag(true) {
 }
 
 
