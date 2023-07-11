@@ -25,6 +25,8 @@ You will need to run this command (without `--init`) each time you want to updat
 ## Libraries
 ImageINSA is compiled against some dependencies, you have to check all these dependencies have been installed on your environment.
 
+Since the Zlib, Jpeg and Png libraries are already compiled in 32-bit, install the 32-bit versions of the dependencies, otherwise there will be linkage problems.
+
 ### Qt 5
 #### Windows
 You should install Qt5 from the opensource package available on Qt website (http://www.qt.io/download-open-source/ or http://qt-project.org/downloads)  
@@ -74,6 +76,8 @@ Note:
    1. Copy qwt-6.1.5/designer/plugins/designer/libqwt_designer_plugin.so (or .dll) to Qt/5.15.1/gcc_64 /plugins/designer.
    2. Copy all files in qwt-6.1.5/lib to Qt/5.15.1/gcc_64/lib.
    3. Create a new folder in Qt/5.15.1/gcc_64 /include and name it qwt, copy all the header files under qwt-6.1.5/src to the new created qwt folder.
+4. If you fail to compile Qwt 6.2.0 because of SplineTest, you have to replace `int main()` by `int main(int argc, char *argv[])`
+
 
 ### Zlib, Jpeg, Png
 #### Windows
