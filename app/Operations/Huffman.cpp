@@ -92,7 +92,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
         }
     }
     returnval = prob_Pi( im ,nbpt);
-    sprintf(buffer, QString(qApp->translate("Operations","\nEntropy = %.4f bbp\n\n")).toUtf8(),H);
+    sprintf(buffer, QString(qApp->translate("Operations","\nEntropy H = %.4f bbp\n\n")).toUtf8(),H);
     returnval = returnval + buffer;
 
     codhuffman();
