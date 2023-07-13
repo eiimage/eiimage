@@ -476,7 +476,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                 for (unsigned int i = 0; i < maxWidth; ++i) {
                     double tmpValue = 0;
                     for(int c = 0; c < dblImageImgs[0]->getNbChannels(); ++c) {
-                        tmpValue += dblImageImgs[c]->getPixel(j,i,c);
+                        tmpValue += dblImageImgs[0]->getPixel(j,i,c);
                     }
                     imageToLevelOfGrey2->setPixel(j,i,0,tmpValue/3);
                 }

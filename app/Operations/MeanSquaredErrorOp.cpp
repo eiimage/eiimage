@@ -133,7 +133,7 @@ void MeanSquaredErrorOp::operator()(const genericinterface::ImageWindow* current
     }
 
     if (isWidthMismatch || isWidthMismatch2 || isHeightMismatch || isHeightMismatch2 ){
-        string channelMismatchMessage = qApp->translate("MeanSquaredErrorOp", "Mean square error with larger image cropped from top left corner \n").toStdString();
+        string channelMismatchMessage = qApp->translate("MeanSquaredErrorOp", "MSE with larger image cropped from top left corner \n").toStdString();
         this->outText(channelMismatchMessage);
     }
 
@@ -184,7 +184,7 @@ void MeanSquaredErrorOp::operator()(const genericinterface::ImageWindow* current
     double deviation = 0;
     if (isChannelMismatch || isChannelMismatch2) {
         string channelMismatchMessage = qApp->translate("MeanSquaredErrorOp",
-                                                        "Mean square error with color image transformed to grayscale \n").toStdString();
+                                                        "MSE with color image transformed to grayscale \n").toStdString();
         this->outText(channelMismatchMessage);
     }
 
