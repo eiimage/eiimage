@@ -420,6 +420,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                      qApp->translate("PointOp",
                                                      "You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)"));
+
+            char buffer[255];
+            string channelMismatchMessage = qApp->translate("PointOp", "The color image has been transformed to grayscale \n").toStdString();
+            this->outText(channelMismatchMessage);
         }
 
         /*On est obligé de vérifier entre image1/image2 ET image2/image1 pour les deux types (double et Uchar)*/
@@ -433,6 +437,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         if (isHeightMismatch || isWidthMismatch || isHeightMismatchUchar || isHeightMismatchDouble || isWidthMismatchUchar || isWidthMismatchDouble) {
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                      qApp->translate("PointOp", "You have performed an operation on 2 images of different dimensions"));
+
+            char buffer[255];
+            string sizeMismatchMessage = qApp->translate("PointOp", "Larger image cropped from top left corner \n").toStdString();
+            this->outText(sizeMismatchMessage);
         }
 
         auto* imageToLevelOfGrey = new Image_t<double>(maxWidth, maxHeight, maxChannel);
