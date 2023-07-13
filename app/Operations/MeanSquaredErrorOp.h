@@ -22,13 +22,14 @@
 
 #include "Operation.h"
 
-class MeanSquaredErrorOp : public Operation
+class MeanSquaredErrorOp : public GenericOperation
 {
 public:
     MeanSquaredErrorOp();
-    void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
+    void operator()(const genericinterface::ImageWindow* currentWnd, const std::vector<const genericinterface::ImageWindow*>& imgWndList);
 
-    bool needCurrentImg() const;
+    bool needCurrentImg() const override;
+    bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const override;
 };
 
 #endif // MEANSQUAREDERROROP_H

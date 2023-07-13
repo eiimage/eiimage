@@ -421,7 +421,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                                      qApp->translate("PointOp",
                                                      "You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)"));
 
-            char buffer[255];
             string channelMismatchMessage = qApp->translate("PointOp", "The color image has been transformed to grayscale \n").toStdString();
             this->outText(channelMismatchMessage);
         }
@@ -438,7 +437,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                      qApp->translate("PointOp", "You have performed an operation on 2 images of different dimensions"));
 
-            char buffer[255];
             string sizeMismatchMessage = qApp->translate("PointOp", "Larger image cropped from top left corner \n").toStdString();
             this->outText(sizeMismatchMessage);
         }
@@ -495,7 +493,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
 
                         /*Si image est en NDG et dblImageImgs est en couleur, on utilise la conversion de cette dernière en NDG*/
                         double value2;
-                        if (maxChannel!=dblImageImgs[0]->getNbChannels() && isDblImg[0])
+                        if (isChannelMismatchDouble)
                             value2 = imageToLevelOfGrey2->getPixel(i, j, 0);
                         else
                             value2 = dblImageImgs[c]->getPixel(i, j, c);
@@ -507,7 +505,7 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                         int value1 = (int)((nChannel==maxChannel) ? image->getPixel(i, j, c):imageToLevelOfGrey->getPixel(i, j, 0));
 
                         int value2;
-                        if (maxChannel!=stdImageImgs[0]->getNbChannels() && !isDblImg[0])
+                        if (isChannelMismatchUchar)
                             value2 = (int)imageToLevelOfGrey2->getPixel(i, j, 0);
                         else
                             value2 = stdImageImgs[c]->getPixel(i, j, c);
