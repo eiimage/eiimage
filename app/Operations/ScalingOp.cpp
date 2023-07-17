@@ -33,7 +33,6 @@
 #include <QRadioButton>
 #include <QHBoxLayout>
 #include <QLabel>
-#include <QtScript/QScriptEngine>
 #include <QDoubleSpinBox>
 
 using namespace std;

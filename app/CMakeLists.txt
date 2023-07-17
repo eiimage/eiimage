@@ -225,7 +225,6 @@ target_link_libraries(imageinsa
 	Qt5::Core
 	Qt5::Widgets
 	Qt5::Gui
-	Qt5::Script
 	Qt5::Xml
 	${RandomLib_LIBRARIES}
 )
@@ -236,7 +235,6 @@ if(UNIX)
     Qt5::Core
     Qt5::Widgets
     Qt5::Gui
-    Qt5::Script
     Qt5::Xml
     ${RandomLib_LIBRARIES}
   )
