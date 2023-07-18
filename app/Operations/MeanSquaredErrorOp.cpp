@@ -133,6 +133,9 @@ void MeanSquaredErrorOp::operator()(const genericinterface::ImageWindow* current
     }
 
     if (isWidthMismatch || isWidthMismatch2 || isHeightMismatch || isHeightMismatch2 ){
+        QMessageBox::information(nullptr, qApp->translate("MeanSquaredErrorOp", "warning MSE"),
+                                 qApp->translate("MeanSquaredErrorOp", "You have performed an MSE between 2 images of different dimensions"));
+
         string channelMismatchMessage = qApp->translate("MeanSquaredErrorOp", "MSE with larger image cropped from top left corner \n").toStdString();
         this->outText(channelMismatchMessage);
     }
@@ -183,6 +186,10 @@ void MeanSquaredErrorOp::operator()(const genericinterface::ImageWindow* current
     double mse = 0, me = 0;
     double deviation = 0;
     if (isChannelMismatch || isChannelMismatch2) {
+        QMessageBox::information(nullptr, qApp->translate("MeanSquaredErrorOp", "warning MSE"),
+                                 qApp->translate("MeanSquaredErrorOp",
+                                                 "You have performed an MSE between a grayscale image (dimension 1) and a color image (dimension 3)"));
+
         string channelMismatchMessage = qApp->translate("MeanSquaredErrorOp",
                                                         "MSE with color image transformed to grayscale \n").toStdString();
         this->outText(channelMismatchMessage);
