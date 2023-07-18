@@ -411,12 +411,27 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
         }
 
 
-        /*On est obligé de vérifier entre image1/image2 ET image2/image1 pour les deux types (double et Uchar)*/
-        bool isChannelMismatch = nChannel!=maxChannel;
-        bool isChannelMismatchUchar = maxChannel!=stdImageImgs[0]->getNbChannels() && !isDblImg[0];
-        bool isChannelMismatchDouble = maxChannel!=dblImageImgs[0]->getNbChannels() && isDblImg[0];
+        bool isChannelMismatch = image->getNbChannels()!=maxChannel;
+        bool isChannelMismatch2;
 
-        if(isChannelMismatch || isChannelMismatchUchar || isChannelMismatchDouble) {
+        bool isHeightMismatch = image->getHeight() != maxHeight;
+        bool isHeightMismatch2;
+
+        bool isWidthMismatch = image->getWidth() != maxWidth;
+        bool isWidthMismatch2;
+
+        if (isDblImg[0]) {
+            isChannelMismatch2 = maxChannel != dblImageImgs[0]->getNbChannels();
+            isHeightMismatch2 = maxHeight != dblImageImgs[0]->getHeight();
+            isWidthMismatch2 =  maxWidth != dblImageImgs[0]->getWidth();
+        }
+        else {
+            isChannelMismatch2 = maxChannel != stdImageImgs[0]->getNbChannels();
+            isHeightMismatch2 = maxHeight != stdImageImgs[0]->getHeight();
+            isWidthMismatch2 = maxWidth != stdImageImgs[0]->getWidth();
+        }
+
+        if(isChannelMismatch || isChannelMismatch2) {
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                      qApp->translate("PointOp",
                                                      "You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)"));
@@ -425,15 +440,8 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             this->outText(channelMismatchMessage);
         }
 
-        /*On est obligé de vérifier entre image1/image2 ET image2/image1 pour les deux types (double et Uchar)*/
-        bool isHeightMismatch = image->getHeight() != maxHeight;
-        bool isWidthMismatch = image->getWidth() != maxWidth;
-        bool isHeightMismatchUchar = maxHeight != stdImageImgs[0]->getHeight() && !isDblImg[0];
-        bool isHeightMismatchDouble = maxHeight != dblImageImgs[0]->getHeight() && isDblImg[0];
-        bool isWidthMismatchUchar = maxWidth != stdImageImgs[0]->getWidth() && !isDblImg[0];
-        bool isWidthMismatchDouble = maxWidth != stdImageImgs[0]->getWidth() && !isDblImg[0];
 
-        if (isHeightMismatch || isWidthMismatch || isHeightMismatchUchar || isHeightMismatchDouble || isWidthMismatchUchar || isWidthMismatchDouble) {
+        if (isHeightMismatch || isWidthMismatch || isWidthMismatch2 || isHeightMismatch2) {
             QMessageBox::information(nullptr, qApp->translate("PointOp", "warning pixel operation on images"),
                                      qApp->translate("PointOp", "You have performed an operation on 2 images of different dimensions"));
 
@@ -443,76 +451,56 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
 
         auto* imageToLevelOfGrey = new Image_t<double>(maxWidth, maxHeight, maxChannel);
         auto* imageToLevelOfGrey2 = new Image_t<double>(maxWidth, maxHeight, maxChannel);
+
         /*L'image opérande de gauche est en couleur et celle de droite est en niveau de gris*/
         /*On fait une conversion de l'opérande de gauche en niveau de gris*/
-        if(isChannelMismatch){
-                for(unsigned int j = 0; j < maxHeight; ++j) {
-                    for (unsigned int i = 0; i < maxWidth; ++i) {
-                        double tmpValue = 0;
-                        for(int c = 0; c < nChannel; ++c) {
-                            tmpValue += image->getPixel(j,i,c);
-                        }
-                        imageToLevelOfGrey->setPixel(j,i,0,tmpValue/3);
-                    }
-            }
+        if(isChannelMismatch)
+            imageToLevelOfGrey = Converter<GrayscaleImage_t<double>>::convert(*image);
+
+            /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type uchar*/
+            /*On fait une conversion de l'opérande de droite en niveau de gris*/
+        else if (isChannelMismatch2 && !isDblImg[0]) {
+            auto* temp = new Image_t<double>(maxWidth, maxHeight,maxChannel);
+            temp = Converter<Image_t<double>>::convert(*stdImageImgs[0]);   //Conversion de Uchar en double
+            imageToLevelOfGrey2 = Converter<GrayscaleImage_t<double>>::convert(*temp);
         }
-        /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type uchar*/
-        /*On fait une conversion de l'opérande de droite en niveau de gris*/
-        else if (isChannelMismatchUchar){
-            for(unsigned int j = 0; j < maxHeight; ++j) {
-                for (unsigned int i = 0; i < maxWidth; ++i) {
-                    double tmpValue = 0;
-                    for(int c = 0; c < stdImageImgs[0]->getNbChannels(); ++c) {
-                        tmpValue += stdImageImgs[0]->getPixel(j,i,c);
-                    }
-                    imageToLevelOfGrey2->setPixel(j,i,0,tmpValue/3);
-                }
-            }
-        }
-        /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type double*/
-        /*On fait une conversion de l'opérande de droite en niveau de gris*/
-        else if (isChannelMismatchDouble){
-            for(unsigned int j = 0; j < maxHeight; ++j) {
-                for (unsigned int i = 0; i < maxWidth; ++i) {
-                    double tmpValue = 0;
-                    for(int c = 0; c < dblImageImgs[0]->getNbChannels(); ++c) {
-                        tmpValue += dblImageImgs[0]->getPixel(j,i,c);
-                    }
-                    imageToLevelOfGrey2->setPixel(j,i,0,tmpValue/3);
-                }
-            }
-        }
+
+            /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type double*/
+            /*On fait une conversion de l'opérande de droite en niveau de gris*/
+        else if (isChannelMismatch2 && isDblImg[0])
+            imageToLevelOfGrey2 = Converter<GrayscaleImage_t<double>>::convert(*dblImageImgs[0]);
+
 
         resDoubleImg = new Image_t<double>(maxWidth, maxHeight, maxChannel);
         for(int c = 0; c < resDoubleImg->getNbChannels(); ++c) {
             for(unsigned int j = 0; j < resDoubleImg->getHeight(); ++j) {
                 for(unsigned int i = 0; i < resDoubleImg->getWidth(); ++i) {
-                    if(isDblImg[c]) {
-                        /*Si image est en couleur et dblImageImgs est en NDG, on utilise la conversion de cette première en NDG*/
-                        double value1 = (nChannel==maxChannel) ? image->getPixel(i, j, c):imageToLevelOfGrey->getPixel(i, j, 0);
 
+                    /*Si image est en couleur et dblImageImgs est en NDG, on utilise la conversion de cette première en NDG*/
+                    double value1 = (nChannel==maxChannel) ? image->getPixel(i, j, c):imageToLevelOfGrey->getPixel(i, j, 0);
+                    double value2,resValue;
+
+                    if(isDblImg[c]) {
                         /*Si image est en NDG et dblImageImgs est en couleur, on utilise la conversion de cette dernière en NDG*/
-                        double value2;
-                        if (isChannelMismatchDouble)
+                        if (isChannelMismatch2)
                             value2 = imageToLevelOfGrey2->getPixel(i, j, 0);
                         else
                             value2 = dblImageImgs[c]->getPixel(i, j, c);
-
-                        double resVal = dblImageOps[c]->operator()(value1, value2);
-                        resDoubleImg->setPixel(i, j, c, resVal);
+                        resValue = dblImageOps[c]->operator()(value1, value2);
                     }
-                    else {
-                        int value1 = (int)((nChannel==maxChannel) ? image->getPixel(i, j, c):imageToLevelOfGrey->getPixel(i, j, 0));
-
-                        int value2;
-                        if (isChannelMismatchUchar)
-                            value2 = (int)imageToLevelOfGrey2->getPixel(i, j, 0);
+                    else {  //Ici, les deux images sont de type uchar
+                        if (isChannelMismatch2)
+                            value2 = imageToLevelOfGrey2->getPixel(i, j, 0);
                         else
                             value2 = stdImageImgs[c]->getPixel(i, j, c);
-
-                        int resVal = stdImageOps[c]->operator()(value1, value2);
-                        resDoubleImg->setPixel(i, j, c, (double)resVal);
                     }
+//                L'utilisateur choisit si la sortie est de type Uchar ou double via un bouton
+                    if(doubleButton->isChecked())
+                        resValue = dblImageOps[c]->operator()(value1, value2);
+                    else
+                        resValue = stdImageOps[c]->operator()((int)value1, (int)value2);
+
+                    resDoubleImg->setPixel(i, j, c, resValue);
                 }
             }
         }

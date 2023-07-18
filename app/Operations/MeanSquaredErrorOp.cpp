@@ -144,43 +144,19 @@ void MeanSquaredErrorOp::operator()(const genericinterface::ImageWindow* current
     auto* imageToLevelOfGrey2 = new Image_t<double>(maxWidth, maxHeight, maxChannel);
     /*L'image opérande de gauche est en couleur et celle de droite est en niveau de gris*/
     /*On fait une conversion de l'opérande de gauche en niveau de gris*/
-    if(isChannelMismatch){
-        for(unsigned int j = 0; j < maxHeight; ++j) {
-            for (unsigned int i = 0; i < maxWidth; ++i) {
-                double tmpValue = 0;
-                for(int c = 0; c < image->getNbChannels(); ++c) {
-                    tmpValue += image->getPixel(i,j,c);
-                }
-                imageToLevelOfGrey->setPixel(i,j,0,tmpValue/3);
-            }
-        }
-    }
+    if(isChannelMismatch)
+        imageToLevelOfGrey = Converter<GrayscaleImage_t<double>>::convert(*image);
+
         /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type uchar*/
         /*On fait une conversion de l'opérande de droite en niveau de gris*/
     else if (isChannelMismatch2 && !isDblImg){
-        for(unsigned int j = 0; j < maxHeight; ++j) {
-            for (unsigned int i = 0; i < maxWidth ; ++i) {
-                double tmpValue = 0;
-                for(int c = 0; c < stdImageImgs->getNbChannels(); ++c) {
-                    tmpValue += stdImageImgs->getPixel(i,j,c);
-                }
-                imageToLevelOfGrey2->setPixel(i,j,0,tmpValue/3);
-            }
-        }
+        auto* temp = new Image_t<double>(maxWidth, maxHeight,maxChannel);
+        temp = Converter<Image_t<double>>::convert(*stdImageImgs);   //Conversion de Uchar en double
+        imageToLevelOfGrey2 = Converter<GrayscaleImage_t<double>>::convert(*temp);
     }
         /*L'image opérande de droite est en couleur et celle de gauche est en niveau de gris et l'image est de type double*/
         /*On fait une conversion de l'opérande de droite en niveau de gris*/
-    else if (isChannelMismatch2 && isDblImg){
-        for(unsigned int j = 0; j < maxHeight; ++j) {
-            for (unsigned int i = 0; i < maxWidth; ++i) {
-                double tmpValue = 0;
-                for(int c = 0; c < dblImageImgs->getNbChannels(); ++c) {
-                    tmpValue += dblImageImgs->getPixel(i,j,c);
-                }
-                imageToLevelOfGrey2->setPixel(i,j,0,tmpValue/3);
-            }
-        }
-    }
+    else if (isChannelMismatch2 && isDblImg)imageToLevelOfGrey2 = Converter<GrayscaleImage_t<double>>::convert(*dblImageImgs);
 
 
     double mse = 0, me = 0;
