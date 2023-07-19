@@ -58,10 +58,9 @@ void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const i
                 resImgV->setPixelAt(i,j,color.value());
             }
         }
-        this->outDoubleImage(resImgH, qApp->translate("Operations", "Hue").toStdString(),false,false);
-        this->outDoubleImage(resImgS, qApp->translate("Operations", "Saturation").toStdString(),false,false);
-        this->outDoubleImage(resImgV, qApp->translate("Operations", "Value").toStdString(),false,false);
-
+        this->outDoubleImage(resImgH, qApp->translate("Operations", "Hue").toStdString(),DISABLE, DISABLE,false);
+        this->outDoubleImage(resImgS, qApp->translate("Operations", "Saturation").toStdString(),DISABLE, DISABLE,false);
+        this->outDoubleImage(resImgV, qApp->translate("Operations", "Value").toStdString(),DISABLE, DISABLE,false);
 }
 
 

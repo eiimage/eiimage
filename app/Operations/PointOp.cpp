@@ -508,10 +508,10 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
 
     if(dblResult) {
         if(currentDblWnd) {
-            this->outDoubleImage(resDoubleImg, "", currentDblWnd->isNormalized(), currentDblWnd->isLogScaled());
+            this->outDoubleImage(resDoubleImg, "", AUTO, AUTO, currentDblWnd->isLogScaled());
         }
         else {
-            this->outDoubleImage(resDoubleImg, "", false, false);
+            this->outDoubleImage(resDoubleImg, "", AUTO, AUTO, false);
         }
         delete image;
     }

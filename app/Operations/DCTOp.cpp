@@ -61,7 +61,7 @@ void DCTOp::operator()(const imagein::Image* image, const std::map<const imagein
 
     outText(s);
     outText("-------------------------------------------");
-    outDoubleImage(resImg, qApp->translate("DCT", "DCT").toStdString(), true, true, 128., true);
+    outDoubleImage(resImg, qApp->translate("DCT", "DCT").toStdString(), ENABLE,DISABLE, true, 128., true);
     outImage(invImg, qApp->translate("DCT", "inverse DCT").toStdString());
 }
 

@@ -76,9 +76,9 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     string s = micd.execute(image, dialog->getPrediction(), &quant_errorImage, &errorImage,&reconstructedImage, &predictionImage, &coding_error_image, dialog->getQ());
     outText(s);
     outText("-------------------------------------------");
-    outDoubleImage(errorImage, qApp->translate("DPCM", "Prediction error image").toStdString(), true, true, 0.1, false);
-    outDoubleImage(quant_errorImage, qApp->translate("DPCM", "Quantized prediction error image").toStdString(), true, true, 0.1, false);
+    outDoubleImage(errorImage, qApp->translate("DPCM", "Prediction error image").toStdString(), DISABLE, DISABLE, true, 0.1, false);
+    outDoubleImage(quant_errorImage, qApp->translate("DPCM", "Quantized prediction error image").toStdString(), DISABLE, DISABLE, true, 0.1, false);
     outImage(predictionImage, qApp->translate("DPCM", "Prediction image").toStdString());
     outImage(reconstructedImage, qApp->translate("DPCM", "Reconstructed image").toStdString());
-    outDoubleImage(coding_error_image, qApp->translate("DPCM", "Coding error image").toStdString(), true, true, 0.1, false);
+    outDoubleImage(coding_error_image, qApp->translate("DPCM", "Coding error image").toStdString(), ENABLE, ENABLE, true, 0.1, false);
 }

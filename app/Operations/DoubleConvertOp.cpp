@@ -50,5 +50,5 @@ void DoubleConvertOp::operator()(const imagein::Image* from, const std::map<cons
             }
         }
     }
-    outDoubleImage(resImg, "Double", false, false, false, false);
+    outDoubleImage(resImg, "Double", AUTO, AUTO, false, false, false);
 }

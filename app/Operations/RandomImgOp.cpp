@@ -160,7 +160,7 @@ void RandomImgOp::operator()(const imagein::Image*, const std::map<const imagein
                 }
             }
         }
-        this->outDoubleImage(resImg, qApp->translate("Operations", "Random image").toStdString(), true);
+        this->outDoubleImage(resImg, qApp->translate("Operations", "Random image").toStdString(), AUTO, AUTO);
 
     }
 }

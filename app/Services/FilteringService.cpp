@@ -111,7 +111,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             if(_dblResult) {
                 DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
                 if(diw != NULL) {
-                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), AUTO,AUTO , diw->isLogScaled());
                     /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
@@ -120,7 +120,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     }
                 }
                 else {
-                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), AUTO,AUTO);
                     /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
