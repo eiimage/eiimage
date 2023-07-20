@@ -53,7 +53,10 @@ void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const i
         for(unsigned int i = 0; i < width; i++) {
             for(unsigned int j = 0; j < height; j++) {
                 QColor color = QColor(image->getPixel(i, j, 0), image->getPixel(i, j, 1), image->getPixel(i, j, 2));
-                resImgH->setPixelAt(i,j,color.hue());
+                if(color.hue()<0)   //Qt returns a hue value of -1 for achromatic colors
+                    resImgH->setPixelAt(i,j,0);
+                else
+                    resImgH->setPixelAt(i,j,color.hue());
                 resImgS->setPixelAt(i,j,color.saturation());
                 resImgV->setPixelAt(i,j,color.value());
             }
