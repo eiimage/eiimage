@@ -4,13 +4,13 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+133"/>
+        <location filename="main.cpp" line="+134"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+29"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
@@ -76,6 +76,14 @@
         <location line="+1"/>
         <source>Number of iteration : </source>
         <translation>Nombre d&apos;itérations : </translation>
+    </message>
+</context>
+<context>
+    <name>BinaryMaskOp</name>
+    <message>
+        <location filename="Operations/BinaryMaskOp.cpp" line="+63"/>
+        <source>Mask to apply : </source>
+        <translation>Masque à appliquer : </translation>
     </message>
 </context>
 <context>
@@ -694,7 +702,7 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">seuils de decision --------------- niveaux de reconstruction\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+239"/>
+        <location filename="Operations/DPCM.cpp" line="+236"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -736,7 +744,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+42"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+40"/>
         <source>Open file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
@@ -845,7 +853,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation type="vanished">DFT (phase)</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="+97"/>
+        <location filename="Operations/FFTOp.cpp" line="+98"/>
         <source>DFT (Phase)</source>
         <oldsource>DFT (magnitude)</oldsource>
         <translation>DFT (Phase)</translation>
@@ -856,7 +864,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>DFT (Magnitude)</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+44"/>
         <source>(Real part)</source>
         <translation>(Partie réelle)</translation>
     </message>
@@ -968,7 +976,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>Hough</name>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="+57"/>
+        <location filename="Operations/HoughOp.cpp" line="+58"/>
         <source>Hough transform</source>
         <translation>Transformé de Hough</translation>
     </message>
@@ -1014,7 +1022,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
 <context>
     <name>IFFTOp</name>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="+55"/>
+        <location filename="Operations/IFFTOp.cpp" line="+56"/>
         <source>Magnitude/Phase</source>
         <translation>Amplitude/Phase</translation>
     </message>
@@ -1049,7 +1057,23 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>La source est centrée</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+25"/>
+        <location line="+57"/>
+        <source>Error : inverse FFT</source>
+        <translation>Erreur : Transformée de Fourier inverse</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <source>Magnitude and phase images have different size</source>
+        <translation>Les images d&apos;amplitude et de phase ont des dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Real and imaginary images have different size</source>
+        <translation>Les images réelles et imaginaires ont des dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+47"/>
         <source>DFT-reconstructed image</source>
         <translation>Image DFT reconstruite</translation>
     </message>
@@ -1146,9 +1170,42 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation type="vanished">Erreur quadratique moyenne : %1 (erreur moyenne : %2)</translation>
     </message>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+86"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+218"/>
         <source>Mean squarred error : %1 (mean absolute error : %2)</source>
         <translation>Erreur quadratique moyenne:%1 (erreur absolue moyenne:%2)</translation>
+    </message>
+</context>
+<context>
+    <name>MeanSquaredErrorOp</name>
+    <message>
+        <location line="-82"/>
+        <location line="+29"/>
+        <source>warning MSE</source>
+        <translation>warning MSE</translation>
+    </message>
+    <message>
+        <location line="-28"/>
+        <source>You have performed an MSE between 2 images of different dimensions</source>
+        <translation>Vous avez calculé une EQM entre 2 images de dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MSE with larger image cropped from top left corner 
+</source>
+        <translation>MSE calculée avec la plus grande image rognée depuis le coin en haut à gauche 
+</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>You have performed an MSE between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>Vous avez calculé une EQM entre une image en niveaux de gris (dimension 1) et une image en couleurs (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MSE with color image transformed to grayscale 
+</source>
+        <translation>MSE calculée avec l&apos;image couleur transformée en niveaux de gris 
+</translation>
     </message>
 </context>
 <context>
@@ -1208,7 +1265,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>impulse noise</source>
         <translation>bruit impulsionnel</translation>
     </message>
@@ -1229,8 +1286,8 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
     <message>
         <location filename="Operations/PointOp.cpp" line="+135"/>
-        <location filename="Operations/NoiseOp.cpp" line="-112"/>
-        <location filename="Operations/IFFTOp.cpp" line="-150"/>
+        <location filename="Operations/NoiseOp.cpp" line="-113"/>
+        <location filename="Operations/IFFTOp.cpp" line="-160"/>
         <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
         <location filename="Operations/CombineColorOp.cpp" line="-54"/>
         <location filename="Operations/BFlitOp.cpp" line="+12"/>
@@ -1285,7 +1342,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation type="vanished">Entropie de l&apos;image = %1</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="-118"/>
+        <location filename="Operations/FFTOp.cpp" line="-116"/>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
         <translation>Transformée de Fourrier</translation>
@@ -1301,7 +1358,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
         <translation>Huffman</translation>
     </message>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-52"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-133"/>
         <source>Mean squared error</source>
         <translation>Erreur quadratique moyenne</translation>
     </message>
@@ -1313,7 +1370,7 @@ tquantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+8"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+22"/>
         <source>Compare %1 to : </source>
         <translation>Comparer %1 à : </translation>
     </message>
@@ -1394,7 +1451,7 @@ Canal %d :
         <translation>Rotation</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+43"/>
+        <location filename="Operations/ScalingOp.cpp" line="+42"/>
         <location line="+16"/>
         <source>Scaling (Enlarge/Reduce)</source>
         <oldsource>Scaling (enlarge/reduce)</oldsource>
@@ -1468,7 +1525,7 @@ Canal %d :
         <translation>Transformées 8x8 (Haar, Hadamard, DCT)</translation>
     </message>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="-27"/>
+        <location filename="Operations/HoughOp.cpp" line="-28"/>
         <source>Hough transform</source>
         <translation>Transformée de Hough</translation>
     </message>
@@ -1587,11 +1644,15 @@ Canal %d :
     <message>
         <location filename="Operations/Huffman.cpp" line="+95"/>
         <source>
-Entropy = %.4f bbp
+Entropy H = %.4f bbp
 
 </source>
+        <oldsource>
+Entropy = %.4f bbp
+
+</oldsource>
         <translation>
-Entropie = %.4f bpp
+Entropie H = %.4f bpp
 
 </translation>
     </message>
@@ -1828,7 +1889,7 @@ Le débit vaut : %5.2f
         <translation>&lt;i&gt;Décaler et mettre à l&apos;echelle : Ajoute un décalge de 127 et effectue une mise à l&apos;echelle&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+417"/>
+        <location filename="Operations/PointOp.cpp" line="+494"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
@@ -1842,6 +1903,11 @@ Le débit vaut : %5.2f
         <location filename="Operations/DoubleConvertOp.cpp" line="+33"/>
         <source>Convert to Double</source>
         <translation>Convertir en Double</translation>
+    </message>
+    <message>
+        <location filename="Operations/BinaryMaskOp.cpp" line="-33"/>
+        <source>Apply mask</source>
+        <translation>Appliquer le masque</translation>
     </message>
 </context>
 <context>
@@ -1903,7 +1969,7 @@ Le débit vaut : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-321"/>
+        <location filename="Operations/PointOp.cpp" line="-398"/>
         <source>Second operand</source>
         <translation>Second opérande</translation>
     </message>
@@ -2053,6 +2119,36 @@ Le débit vaut : %5.2f
         <location line="+2"/>
         <source>Scaling</source>
         <translation>Mise à l&apos;échelle</translation>
+    </message>
+    <message>
+        <location line="+258"/>
+        <location line="+10"/>
+        <source>warning pixel operation on images</source>
+        <translation>warning : opération sur les pixels entre deux images</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>Vous avez effectué une opération entre une image en niveaux de gris (dimension 1) et une image en couleurs (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The color image has been transformed to grayscale 
+</source>
+        <translation>L&apos;image couleur a été transformée en niveaux de gris 
+</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>You have performed an operation on 2 images of different dimensions</source>
+        <translation>Vous avez effectué une opération entre 2 images de dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Larger image cropped from top left corner 
+</source>
+        <translation>Image la plus grande rognée à partir du coin supérieur gauche 
+</translation>
     </message>
 </context>
 <context>
@@ -2249,7 +2345,12 @@ Le débit vaut : %5.2f
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+24"/>
+        <source>Note that the range of values is higher than the range of color values of the input image</source>
+        <translation>Notez que le nombre de valeurs de la quantification dépasse le nombre de couleurs de l&apos;image d&apos;entrée</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Quantification non linéaire à valeurs centrées :</translation>
@@ -2416,7 +2517,7 @@ Le débit vaut : %5.2f
         <translation>Epaisseur (au delà du rayon) : </translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+44"/>
         <source>Rejection ring (%1 %2 %3)</source>
         <translation>Anneau de réjection (%1 %2 %3)</translation>
     </message>

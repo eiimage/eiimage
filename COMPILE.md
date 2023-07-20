@@ -117,6 +117,15 @@ Open Qt terminal :
 	cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Program Files (x86)/GnuWin32";C:\Qwt-6.1.3 ..
 If cmake command does not work, run `set PATH=%PATH%;C:\Qt\5.9.1\mingw53_32\bin` before it.
 
+Solution using Clion :
+
+- Set up the toolchain with the one used for your Qt installation `Exemple : C:\Qt\Tools\mingw810_32)`
+- (Optional) Set the cmake option to : `-G "MinGW Makefiles"`
+- Choose the directory where you want to build the project
+- (Optional) Set the build option to : `-j 8`
+- Add the following line to the main CMakeList (and modify it according to your installation): `set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/mingw81_32/lib/cmake" "C:/Program Files (x86)/GnuWin32";C:/Qwt-6.2.0)`
+
+
 ### GNU/Linux users
 It should be easier to configure compilation for Linux users, since most of the tools are already available from the $PATH environment variable.
 If you had to compile manually a dependency, don't forget to run `make install` after the compilation. By default, the command installs libraries and headers under the `/usr/local` prefix, which is usually already in the $PATH.

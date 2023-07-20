@@ -4,13 +4,13 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+133"/>
+        <location filename="main.cpp" line="+134"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>Image</translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+29"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>&amp;Tools</translation>
@@ -76,6 +76,14 @@
         <location line="+1"/>
         <source>Number of iteration : </source>
         <translation>Number of iteration : </translation>
+    </message>
+</context>
+<context>
+    <name>BinaryMaskOp</name>
+    <message>
+        <location filename="Operations/BinaryMaskOp.cpp" line="+63"/>
+        <source>Mask to apply : </source>
+        <translation>Mask to apply : </translation>
     </message>
 </context>
 <context>
@@ -694,7 +702,7 @@ Number of classes = %1 </translation>
         <translation type="vanished">decision thresholds --------- reconstruction levels\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+239"/>
+        <location filename="Operations/DPCM.cpp" line="+236"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
@@ -735,7 +743,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+42"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+40"/>
         <source>Open file</source>
         <translation>Open file</translation>
     </message>
@@ -844,7 +852,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation type="vanished">DFT (phase)</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="+97"/>
+        <location filename="Operations/FFTOp.cpp" line="+98"/>
         <source>DFT (Phase)</source>
         <oldsource>DFT (magnitude)</oldsource>
         <translation>DFT (Phase)</translation>
@@ -855,7 +863,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>DFT (Magnitude)</translation>
     </message>
     <message>
-        <location line="+47"/>
+        <location line="+44"/>
         <source>(Real part)</source>
         <translation>(Real part)</translation>
     </message>
@@ -967,7 +975,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>Hough</name>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="+57"/>
+        <location filename="Operations/HoughOp.cpp" line="+58"/>
         <source>Hough transform</source>
         <translation>Hough transform</translation>
     </message>
@@ -1013,7 +1021,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
 <context>
     <name>IFFTOp</name>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="+55"/>
+        <location filename="Operations/IFFTOp.cpp" line="+56"/>
         <source>Magnitude/Phase</source>
         <translation>Magnitude/Phase</translation>
     </message>
@@ -1048,7 +1056,23 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Source is centered</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+25"/>
+        <location line="+57"/>
+        <source>Error : inverse FFT</source>
+        <translation>Error : inverse FFT</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <source>Magnitude and phase images have different size</source>
+        <translation>Magnitude and phase images have different size</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Real and imaginary images have different size</source>
+        <translation>Real and imaginary images have different size</translation>
+    </message>
+    <message>
+        <location line="+47"/>
         <source>DFT-reconstructed image</source>
         <translation>DFT-reconstructed image</translation>
     </message>
@@ -1145,9 +1169,42 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation type="vanished">Mean squarred error : %1 (mean error : %2)</translation>
     </message>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+86"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+218"/>
         <source>Mean squarred error : %1 (mean absolute error : %2)</source>
         <translation>Mean squarred error : %1 (mean absolute error : %2)</translation>
+    </message>
+</context>
+<context>
+    <name>MeanSquaredErrorOp</name>
+    <message>
+        <location line="-82"/>
+        <location line="+29"/>
+        <source>warning MSE</source>
+        <translation>warning MSE</translation>
+    </message>
+    <message>
+        <location line="-28"/>
+        <source>You have performed an MSE between 2 images of different dimensions</source>
+        <translation>You have performed an MSE between 2 images of different dimensions</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MSE with larger image cropped from top left corner 
+</source>
+        <translation>MSE with larger image cropped from top left corner 
+</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>You have performed an MSE between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>You have performed an MSE between a grayscale image (dimension 1) and a color image (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MSE with color image transformed to grayscale 
+</source>
+        <translation>MSE with color image transformed to grayscale 
+</translation>
     </message>
 </context>
 <context>
@@ -1207,7 +1264,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>impulse noise</source>
         <translation>impulse noise</translation>
     </message>
@@ -1228,8 +1285,8 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location filename="Operations/PointOp.cpp" line="+135"/>
-        <location filename="Operations/NoiseOp.cpp" line="-112"/>
-        <location filename="Operations/IFFTOp.cpp" line="-150"/>
+        <location filename="Operations/NoiseOp.cpp" line="-113"/>
+        <location filename="Operations/IFFTOp.cpp" line="-160"/>
         <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
         <location filename="Operations/CombineColorOp.cpp" line="-54"/>
         <location filename="Operations/BFlitOp.cpp" line="+12"/>
@@ -1289,7 +1346,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Entropy calculation (standard image)</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="-118"/>
+        <location filename="Operations/FFTOp.cpp" line="-116"/>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
         <translation>Fourier transform</translation>
@@ -1305,7 +1362,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Huffman</translation>
     </message>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-52"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-133"/>
         <source>Mean squared error</source>
         <translation>Mean squared error</translation>
     </message>
@@ -1317,7 +1374,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+8"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+22"/>
         <source>Compare %1 to : </source>
         <translation>Compare %1 to : </translation>
     </message>
@@ -1398,7 +1455,7 @@ Channel %d :
         <translation>Rotation</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+43"/>
+        <location filename="Operations/ScalingOp.cpp" line="+42"/>
         <location line="+16"/>
         <source>Scaling (Enlarge/Reduce)</source>
         <oldsource>Scaling (enlarge/reduce)</oldsource>
@@ -1467,7 +1524,7 @@ Channel %d :
         <translation>8x8 transforms (Haar, Hadamard, DCT)</translation>
     </message>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="-27"/>
+        <location filename="Operations/HoughOp.cpp" line="-28"/>
         <source>Hough transform</source>
         <translation>Hough transform</translation>
     </message>
@@ -1586,11 +1643,15 @@ Channel %d :
     <message>
         <location filename="Operations/Huffman.cpp" line="+95"/>
         <source>
-Entropy = %.4f bbp
+Entropy H = %.4f bbp
 
 </source>
-        <translation>
+        <oldsource>
 Entropy = %.4f bbp
+
+</oldsource>
+        <translation>
+Entropy H = %.4f bbp
 
 </translation>
     </message>
@@ -1826,7 +1887,7 @@ The bitrate is : %5.2f
         <translation>&lt;i&gt;Offset and scale : Adds a 127 offset and scales&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+417"/>
+        <location filename="Operations/PointOp.cpp" line="+494"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1840,6 +1901,11 @@ The bitrate is : %5.2f
         <location filename="Operations/DoubleConvertOp.cpp" line="+33"/>
         <source>Convert to Double</source>
         <translation>Convert to Double</translation>
+    </message>
+    <message>
+        <location filename="Operations/BinaryMaskOp.cpp" line="-33"/>
+        <source>Apply mask</source>
+        <translation>Apply mask</translation>
     </message>
 </context>
 <context>
@@ -1901,7 +1967,7 @@ The bitrate is : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-321"/>
+        <location filename="Operations/PointOp.cpp" line="-398"/>
         <source>Second operand</source>
         <translation>Second operand</translation>
     </message>
@@ -2051,6 +2117,36 @@ The bitrate is : %5.2f
         <location line="+2"/>
         <source>Scaling</source>
         <translation>Scaling</translation>
+    </message>
+    <message>
+        <location line="+258"/>
+        <location line="+10"/>
+        <source>warning pixel operation on images</source>
+        <translation>warning pixel operation on images</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The color image has been transformed to grayscale 
+</source>
+        <translation>The color image has been transformed to grayscale 
+</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>You have performed an operation on 2 images of different dimensions</source>
+        <translation>You have performed an operation on 2 images of different dimensions</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Larger image cropped from top left corner 
+</source>
+        <translation>Larger image cropped from top left corner 
+</translation>
     </message>
 </context>
 <context>
@@ -2419,7 +2515,7 @@ The bitrate is : %5.2f
         <translation>Thickness (beyond radius) : </translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+44"/>
         <source>Rejection ring (%1 %2 %3)</source>
         <translation>Rejection ring (%1 %2 %3)</translation>
     </message>
