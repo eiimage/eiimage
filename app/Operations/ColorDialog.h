@@ -40,8 +40,6 @@ public:
     unsigned int getHeight() const;
 public slots:
     void getHint();
-signals:
-    void needHint();
 
 private:
     Ui::ColorDialog *ui;

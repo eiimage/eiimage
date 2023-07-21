@@ -60,14 +60,35 @@ unsigned int ColorDialog::getHeight() const {
 }
 
 void ColorDialog::getHint() {
-//    QDialog* hint = new QDialog(QApplication::activeWindow());
-//    hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip for Qt HSV Color Model")));
-//    hint->setLayout(new QVBoxLayout);
-//    QLabel* pic = new QLabel(hint);
-//    pic->setPixmap(QPixmap(":/images/qcolor-hsv.png"));
+    auto* hint = new QDialog(QApplication::activeWindow());
+    hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip")));
 
-//    hint->resize(500,500);
-//    pic->resize(hint->size());
-//    hint->show();
-    emit needHint();
+    // Créer une disposition verticale pour le QDialog
+    auto* mainLayout = new QVBoxLayout(hint);
+
+    auto* huePic = new QLabel(hint);
+    huePic->setPixmap(QPixmap(":/img/qcolor_hsv.png"));
+
+    auto* hueLabel = new QLabel("<b>Hue</b> is the dominant color from 0 to 359 degrees on the color wheel bellow <br>", hint);
+
+    auto* satuPic = new QLabel(hint);
+    satuPic->setPixmap(QPixmap(":/img/qcolor-saturation.png"));
+
+    auto* satuLabel = new QLabel("<b>Saturation</b> is in the range 0 to 255 and refers to the vividness of the color <br>", hint);
+
+    auto* valuePic = new QLabel(hint);
+    valuePic->setPixmap(QPixmap(":/img/qcolor-value.png"));
+
+    auto* valueLabel = new QLabel("<b>Value</b> is in the range 0 to 255 and represents the brightness of the color <br>", hint);
+
+    // Ajouter les QLabel à la disposition principale
+    mainLayout->addWidget(hueLabel);
+    mainLayout->addWidget(huePic);
+    mainLayout->addWidget(satuLabel);
+    mainLayout->addWidget(satuPic);
+    mainLayout->addWidget(valueLabel);
+    mainLayout->addWidget(valuePic);
+
+    // Afficher le QDialog
+    hint->show();
 }

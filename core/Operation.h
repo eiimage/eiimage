@@ -22,12 +22,7 @@
 
 #include <map>
 #include <string>
-#include <QObject>
-#include <QApplication>
-#include <QString>
 #include "Image.h"
-
-class QWidget;
 
 
 namespace genericinterface {
@@ -45,7 +40,7 @@ class WindowService;
  * For an exemple of a true generic operation class, see the PointOp implementation in imageinsa source code.
  */
 
-class GenericOperation : public QObject{
+class GenericOperation{
 
 public:
 /**

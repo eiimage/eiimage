@@ -65,21 +65,22 @@ void ScalingOp::operator()(const genericinterface::ImageWindow* currentWnd, cons
 
 //    QDoubleSpinBox* xScaleBoxN = new QDoubleSpinBox();
 //    QDoubleSpinBox* xScaleBoxD = new QDoubleSpinBox();
+
     QLineEdit* xScaleBoxN = new QLineEdit();
     xScaleBoxN->setText("1");
-    xScaleBoxN->setValidator(new QIntValidator(0, 100, this));
+    xScaleBoxN->setValidator(new QIntValidator(0, 100));
     QLineEdit* xScaleBoxD = new QLineEdit();
     xScaleBoxD->setText("1");
-    xScaleBoxD->setValidator(new QIntValidator(0, 100, this));
+    xScaleBoxD->setValidator(new QIntValidator(0, 100));
 
 //    QDoubleSpinBox* yScaleBoxN = new QDoubleSpinBox();
 //    QDoubleSpinBox* yScaleBoxD = new QDoubleSpinBox();
     QLineEdit* yScaleBoxN = new QLineEdit();
     yScaleBoxN->setText("1");
-    yScaleBoxN->setValidator(new QIntValidator(0, 100, this));
+    yScaleBoxN->setValidator(new QIntValidator(0, 100));
     QLineEdit* yScaleBoxD = new QLineEdit();
     yScaleBoxD->setText("1");
-    yScaleBoxD->setValidator(new QIntValidator(0, 100, this));
+    yScaleBoxD->setValidator(new QIntValidator(0, 100));
 
 //    xScaleBox->setValue(1.0);
 //    yScaleBox->setValue(1.0);

@@ -24,17 +24,12 @@
 
 class ColorimetryOp : public Operation
 {
-    Q_OBJECT
 public:
     ColorimetryOp();
 
     void operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&);
 
     bool needCurrentImg() const;
-
-public slots:
-    void giveHint();
-
 };
 
 #endif // COLORIMETRYOP_H

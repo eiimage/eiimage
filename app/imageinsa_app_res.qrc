@@ -10,5 +10,7 @@
         <file>img/arrow-top-left.png</file>
         <file>img/arrow-top-right.png</file>
         <file>img/qcolor_hsv.png</file>
+        <file>img/qcolor-saturation.png</file>
+        <file>img/qcolor-value.png</file>
     </qresource>
 </RCC>

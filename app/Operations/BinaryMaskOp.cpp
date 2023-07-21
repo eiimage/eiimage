@@ -27,7 +27,7 @@ using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-BinaryMaskOp::BinaryMaskOp() : GenericOperation(qApp->translate("Operations", "Apply mask").toStdString())
+BinaryMaskOp::BinaryMaskOp() : GenericOperation(qApp->translate("BinaryMaskOp", "Apply mask").toStdString())
 {
 }
 
@@ -60,7 +60,7 @@ void BinaryMaskOp::operator()(const ImageWindow *currentWnd,
     dialog->setWindowTitle(currentImgName);
     auto* layout = new QFormLayout(dialog);
     auto* imgBox = new MixImageListBox(dialog, currentImgName.toStdString(), stdImgList, dblImgList);
-    layout->insertRow(0, tr("Mask to apply : "), imgBox);
+    layout->insertRow(0, qApp->translate("BinaryMaskOp","Mask to apply : "), imgBox);
     auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
     layout->insertRow(1, buttonBox);
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));

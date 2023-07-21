@@ -53,15 +53,22 @@ void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const i
         for(unsigned int i = 0; i < width; i++) {
             for(unsigned int j = 0; j < height; j++) {
                 QColor color = QColor(image->getPixel(i, j, 0), image->getPixel(i, j, 1), image->getPixel(i, j, 2));
-                if(color.hue()<0)   //Qt returns a hue value of -1 for achromatic colors
-                    resImgH->setPixelAt(i,j,0);
-                else
-                    resImgH->setPixelAt(i,j,color.hue());
+
+                /* Hue = -1 <-- R = G = B
+                 * Hue = (360°+60*(G-B)/(Max-Min))%360 <-- R = Max
+                 * Hue = 120°+60°*(B-R)/(Max-Min) <-- G = Max
+                 * Hue = 2400°+60°*(R-G)/(Max-Min) <-- B = Max */
+                resImgH->setPixelAt(i,j,color.hue());
+
+                /* Saturation = 0 <-- Max = 0
+                 * Saturation = 255*(Max-Min)/Max <-- Max != 0 */
                 resImgS->setPixelAt(i,j,color.saturation());
+
+                /* Value = max */
                 resImgV->setPixelAt(i,j,color.value());
             }
         }
-        this->outDoubleImage(resImgH, qApp->translate("Operations", "Hue").toStdString(),DISABLE, DISABLE,false);
+        this->outDoubleImage(resImgH, qApp->translate("Operations", "Hue").toStdString(),ENABLE, DISABLE,false,0,true);
         this->outDoubleImage(resImgS, qApp->translate("Operations", "Saturation").toStdString(),DISABLE, DISABLE,false);
         this->outDoubleImage(resImgV, qApp->translate("Operations", "Value").toStdString(),DISABLE, DISABLE,false);
 }
