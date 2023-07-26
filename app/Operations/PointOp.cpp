@@ -486,7 +486,6 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                             value2 = imageToLevelOfGrey2->getPixel(i, j, 0);
                         else
                             value2 = dblImageImgs[c]->getPixel(i, j, c);
-                        resValue = dblImageOps[c]->operator()(value1, value2);
                     }
                     else {  //Ici, les deux images sont de type uchar
                         if (isChannelMismatch2)
