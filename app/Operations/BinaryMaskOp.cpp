@@ -80,6 +80,10 @@ void BinaryMaskOp::operator()(const ImageWindow *currentWnd,
         const Image_t<double>* dblImg = imgBox->getDblImage(imgBox->currentText().toStdString());
         if(dblImg == nullptr) return;
         mask = new Image_t<double>(*dblImg);
+        if(mask->getHeight() != dblImg->getHeight() || mask->getWidth() != dblImg->getWidth())
+            QMessageBox::information(nullptr, qApp->translate("BinaryMaskOp", "warning Apply Mask"),
+                                     qApp->translate("BinaryMaskOp",
+                                                     "you have performed a mask operation between two images of different sizes"));
     }
     else return;
 
@@ -99,6 +103,11 @@ void BinaryMaskOp::operator()(const ImageWindow *currentWnd,
 //        *it = (*it < mean) ? 0. : 1.;
         *it = *it / max;
     }
+
+    if(mask->getHeight() != img->getHeight() || mask->getWidth() != img->getWidth())
+        QMessageBox::information(nullptr, qApp->translate("BinaryMaskOp", "warning Apply Mask"),
+                                 qApp->translate("BinaryMaskOp",
+                                                 "you have performed a mask operation between two images of different sizes"));
 
     const unsigned int width = min(mask->getWidth(), img->getWidth());
     const unsigned int height = min(mask->getHeight(), img->getHeight());

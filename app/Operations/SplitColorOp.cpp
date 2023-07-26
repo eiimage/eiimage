@@ -17,6 +17,7 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <GrayscaleImage.h>
+#include <QMessageBox>
 
 #include "SplitColorOp.h"
 #include "../Tools.h"
@@ -33,9 +34,14 @@ SplitColorOp::SplitColorOp() : Operation(qApp->translate("Operations", "Split co
 }
 
 void SplitColorOp:: operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>&) {
+    if(image->getNbChannels()==1){
+        QMessageBox::warning(nullptr, qApp->translate("Operations", "The operation cannot be applied on this image"),
+                             qApp->translate("Operations", "The image is not in color."));
+        return;
+    }
 
     for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
-        GrayscaleImage* resImg = new GrayscaleImage(image->getWidth(), image->getHeight());
+        auto* resImg = new GrayscaleImage(image->getWidth(), image->getHeight());
         for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
             for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
                 resImg->setPixel(i, j, image->getPixel(i, j, c));
