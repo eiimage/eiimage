@@ -64,7 +64,7 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     _genButton = new QPushButton(tr("Generate"));
     layout2->addWidget(_genButton);
     
-    _viewer = new StructElemViewer(_structElem);
+    _viewer = new StructElemViewer(_structElem, true);
     _view = new QGraphicsView;
     _view->setScene(_viewer);
     layout->addWidget(_view);
@@ -236,7 +236,7 @@ void StructElemWindow::resize(int size) {
 
 void StructElemWindow::changeStructElem(imagein::MorphoMat::StructElem* elem) {
     _structElem = elem;
-    StructElemViewer* newViewer = new StructElemViewer(_structElem);
+    StructElemViewer* newViewer = new StructElemViewer(_structElem,true);
     _view->setScene(newViewer);
     delete _viewer;
     _viewer = newViewer;

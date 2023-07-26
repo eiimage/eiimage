@@ -20,8 +20,8 @@
 #include "StructElemViewer.h"
 
 #include <QGraphicsRectItem>
-#include <QGraphicsTextItem>
 #include <QBrush>
+#include <QPainter>
 #include <sstream>
 
 using namespace std;
@@ -32,12 +32,12 @@ StructElemViewer::StructElemViewer(MorphoMat::StructElem* elem, bool editable)
   _scale(elem->getScale()), _row(elem->getWidth()*elem->getScale()), _col(elem->getHeight()*elem->getScale()),
   _editable(editable) {
   _views.push_back(ElemView(elem, 0, 0));
+  _rectItem = nullptr;
   allocRects();
 }
 
 void StructElemViewer::allocRects() {
     this->clear();
-//    _row = _col = 0;
     for(vector<ElemView>::iterator it = _views.begin(); it < _views.end(); ++it) {
         _row = max((it->x + it->elem->getWidth()), _row);
         _col = max((it->y + it->elem->getHeight()), _col);
@@ -56,6 +56,7 @@ void StructElemViewer::allocRects() {
 }
 StructElemViewer::~StructElemViewer() {
     delete[] _rects;
+    delete _rectItem;
 }
 
 void StructElemViewer::addStructElem(imagein::MorphoMat::StructElem* elem, int dx, int dy) {
@@ -90,59 +91,56 @@ void StructElemViewer::mousePressEvent (QGraphicsSceneMouseEvent* event)
             view.elem->setCenter(px - view.x, py - view.y);
         }
     }
-    //std::cout << px << ":" << py << std::endl;
     this->draw(0,0);
 }
-                    
 
-void StructElemViewer::draw(int x, int y)
-{
+
+void StructElemViewer::draw(int x, int y) {
+    QColor high(255, 255, 255, 0);
+    QColor red(255, 0, 0);
     for(int i = _views.size()-1; i >= 0; --i) {
-      QColor high(255, 255, 255, 0);
-      QColor low = i == 0 ? QColor(0,0,0) : QColor::fromHsv((i-1)*60%360, 255, 255);
+        QColor low = i <= 1 ? QColor(50,50,50) : QColor::fromHsv(((i-2)*60)%360, 255, 230);
 
-      ElemView view = _views.at(i);
+        ElemView view = _views.at(i);
 
-      for(unsigned int j = 0; j < _col; j++) {
-        for(unsigned int i = 0; i < _row; i++) {
+        for(unsigned int j = 0; j < _col; j++) {
+            for(unsigned int i = 0; i < _row; i++) {
+                QGraphicsRectItem& r = at(i, j);
 
-            QGraphicsRectItem& r = at(i, j);
+                int px = (i + x - view.x)/(view.elem->getScale());
+                int py = (j + y - view.y)/view.elem->getScale();
 
-            int px = (i + x - view.x)/view.elem->getScale();
-            int py = (j + y - view.y)/view.elem->getScale();
-
-
-            if(px >= 0 && py >= 0 && px < static_cast<int>(view.elem->getWidth()) && py < static_cast<int>(view.elem->getHeight())) {
-            /* We are in the image */
-
-
-//              if(px == view.elem->getWidth()/2 || (view.elem->getWidth()%2==0 && (px == view.elem->getWidth()/2-1))
-//              || py == view.elem->getHeight()/2 || (view.elem->getHeight()%2==0 && (py == view.elem->getHeight()/2-1))) {
-//                high = QColor(232, 232, 232, 0);
-//                low = QColor(24, 24, 24);
-//              }
-//              else {
-//                high = QColor(224, 224, 224, 0);
-//                low = QColor(32, 32, 32);
-//              }
-//              if(px == view.elem->getCenterX() && py == view.elem->getCenterY()) {
-//                high = QColor(200, 192, 192, 0);
-//                low = QColor(8, 0, 0);
-//              }
-
-
-//              QColor color = view.elem->getPixel(px, py) ? low : high;
-              if(view.elem->getPixel(px, py)) {
-                  r.setBrush(QBrush(low, Qt::SolidPattern));
-              }
-              else if(!view.elem->getPixel(px,py)){
-                  r.setBrush(QBrush(high, Qt::SolidPattern));
-              }
-          }
+                if(px >= 0 && py >= 0 && px < static_cast<int>(view.elem->getWidth()) && py < static_cast<int>(view.elem->getHeight())) {
+                    if(view.elem->getPixel(px, py)){
+                        r.setBrush(QBrush(low, Qt::SolidPattern));
+                    }
+                    else if(!view.elem->getPixel(px,py)){
+                        r.setBrush(QBrush(high, Qt::SolidPattern));
+                    }
+                }
+            }
         }
-      }
+//! On retire l'ancien marqueur du centre de l'élément structurant
+        if (_rectItem != nullptr) {
+            this->removeItem(_rectItem);
+        }
+//! On place le nouveau marqueur du centre de l'élément structurant
+        _rectItem = new QGraphicsRectItem(0, 0, (double) PIXEL_S / 2, (double) PIXEL_S / 2);
+        _rectItem->setBrush(QBrush(red, Qt::SolidPattern));
+        //! Dans le menu "Element structurant", on peut sélectionner le centre de l'ES
+        if(_editable) {
+            _rectItem->setPos(view.elem->getCenterX() * PIXEL_S + (PIXEL_S - (double) PIXEL_S / 2) / 2,
+                              view.elem->getCenterY() * PIXEL_S + (PIXEL_S - (double) PIXEL_S / 2) / 2);
+        }
+        //! Dans le menu DMM, le centre de l'ES est fixe
+        else{
+            _rectItem->setPos((double(view.x)/(view.elem->getScale())) * PIXEL_S + (PIXEL_S - (double) PIXEL_S / 2) / 2,
+                              (double(view.y)/view.elem->getScale()) * PIXEL_S + (PIXEL_S - (double) PIXEL_S / 2) / 2);
+        }
+        this->addItem(_rectItem);
     }
 }
+
 
 QGraphicsRectItem& StructElemViewer::at(int i, int j)
 {

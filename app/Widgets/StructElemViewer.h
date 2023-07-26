@@ -82,6 +82,8 @@ class StructElemViewer : public QGraphicsScene
     unsigned int _col;
     QGraphicsRectItem* _rects;
     bool _editable;
+public:
+    QGraphicsRectItem* _rectItem;
 };
 
 #endif
