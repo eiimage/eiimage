@@ -70,6 +70,7 @@ void ColorDialog::getHint() {
     huePic->setPixmap(QPixmap(":/img/qcolor_hsv.png"));
 
     auto* hueLabel = new QLabel("<b>Hue</b> is the dominant color from 0 to 359 degrees on the color wheel bellow <br>", hint);
+    auto* hueNote = new QLabel("note : Qt's HSV model uses a hue of -1 for achromatic colors <br>", hint);
 
     auto* satuPic = new QLabel(hint);
     satuPic->setPixmap(QPixmap(":/img/qcolor-saturation.png"));
@@ -84,6 +85,7 @@ void ColorDialog::getHint() {
     // Ajouter les QLabel à la disposition principale
     mainLayout->addWidget(hueLabel);
     mainLayout->addWidget(huePic);
+    mainLayout->addWidget(hueNote);
     mainLayout->addWidget(satuLabel);
     mainLayout->addWidget(satuPic);
     mainLayout->addWidget(valueLabel);

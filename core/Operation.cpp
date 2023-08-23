@@ -105,7 +105,14 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
     }
     this->outImgWnd(wnd, title);
     if(img->min()<0){
-        std::string outputMessage = QObject::tr("Both Offset and Scaling applied : val_display = (127-minValue) > (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127\n\n-------------------------------------------").toStdString();
+        std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
+                                                "<br><br> <b>case 1</b> : -minValue > maxValue"
+                                                "<br> pixel displayed = pixel image * 127 / (- minValue) + 127 "
+                                                "<br> <b>case 2</b> : -minValue > maxValue "
+                                                "<br> pixel displayed = pixel image * 128 / maxValue + 127"
+                                                "<br> <b>case 3</b> : -minValue = maxValue"
+                                                "<br> pixel displayed = 127"
+                                                "<br><br> -------------------------------------------").toStdString();
         outText(outputMessage);
     }
 }
