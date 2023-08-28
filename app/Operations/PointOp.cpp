@@ -217,6 +217,14 @@ void PointOp::operator()(const ImageWindow* currentWnd, const vector<const Image
     }
 
     exprEdits[0] = new MyQLineEdit(pixelWidget);
+    //! On désactive exprEdits[0] car si écrit dans la zone de texte avant de séclectionner l'opérateur souhaité,
+    //! on peut écrire du texte au lieu d'un nombre
+    exprEdits[0]->setDisabled(true);
+    //! On grise la cellule exprEdits[0]
+    QPalette pal = exprEdits[0]->palette();
+    pal.setColor(QPalette::Disabled, QPalette::Base, pal.color(QPalette::Dark));
+    exprEdits[0]->setPalette(pal);
+
     exprEdits[0]->setFixedWidth(64);
 /*************************************************************/
 /*Overwrite QLineEdit class, send signals according to the change of combobox content to determine the corresponding supported input data type*/

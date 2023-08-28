@@ -45,7 +45,10 @@ class MyQLineEdit : public QLineEdit {
         auto* logicalValidator = new QRegExpValidator(regLogicalExp, nullptr);
         auto* shiftValidator = new QRegExpValidator(regShiftExp,nullptr);
         auto* intValidator = new QIntValidator();
-        auto* doubleValidator = new genericinterface::MyDoubleValidator();
+//        auto* doubleValidator = new genericinterface::MyDoubleValidator();
+        auto* doubleValidator = new QDoubleValidator(-999.0,999.0,5, nullptr);
+        //! Permet d'utilier le point comme séparateur décimal
+        doubleValidator->setLocale(QLocale("C"));
 
         if(text.contains("NOT")){
             this->setEnabled(false);
