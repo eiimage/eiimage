@@ -116,12 +116,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                                "<br><br> <b>case 1</b> : -minValue > maxValue"
-                                                                "<br> pixel displayed = pixel image * 127 / (- minValue) + 127 "
-                                                                "<br> <b>case 2</b> : -minValue > maxValue "
-                                                                "<br> pixel displayed = pixel image * 128 / maxValue + 127"
-                                                                "<br> <b>case 3</b> : -minValue = maxValue"
-                                                                "<br> pixel displayed = 127"
+                                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
                                                                 "<br><br> -------------------------------------------").toStdString();
                         _ws->addText(outputMessage);
                     }
@@ -132,12 +127,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                                "<br><br> <b>case 1</b> : -minValue > maxValue"
-                                                                "<br> pixel displayed = pixel image * 127 / (- minValue) + 127 "
-                                                                "<br> <b>case 2</b> : -minValue > maxValue "
-                                                                "<br> pixel displayed = pixel image * 128 / maxValue + 127"
-                                                                "<br> <b>case 3</b> : -minValue = maxValue"
-                                                                "<br> pixel displayed = 127"
+                                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
                                                                 "<br><br> -------------------------------------------").toStdString();
                         _ws->addText(outputMessage);
                     }

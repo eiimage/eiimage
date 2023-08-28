@@ -109,17 +109,17 @@ void HadamardOp::operator()(const imagein::Image* img, const std::map<const imag
     Image* invImg;
     if(transformBox->currentIndex() == 0) {
         s = Transforms::Hadamard(img, &resImg, &invImg, selection);
-        outDoubleImage(resImg, qApp->translate("Transforms", "Hadamard transform").toStdString(), AUTO, DISABLE, true, 256., true);
+        outDoubleImage(resImg, qApp->translate("Transforms", "Hadamard transform").toStdString(), DISABLE, DISABLE, true, 256., true);
         outImage(invImg, qApp->translate("Transforms", "Hadamard reconstruction").toStdString());
     }
     else if(transformBox->currentIndex() == 1) {
         s = Transforms::Haar(img, &resImg, &invImg, selection);
-        outDoubleImage(resImg, qApp->translate("Transforms", "Haar transform").toStdString(), AUTO, DISABLE, true, 256., true);
+        outDoubleImage(resImg, qApp->translate("Transforms", "Haar transform").toStdString(), DISABLE, DISABLE, true, 256., true);
         outImage(invImg, qApp->translate("Transforms", "Haar reconstruction").toStdString());
     }
     else if(transformBox->currentIndex() == 2) {
         s = Transforms::cosinus(img, &resImg, &invImg, selection);
-        outDoubleImage(resImg, qApp->translate("Transforms", "cosinus transform").toStdString(), AUTO, DISABLE, true, 256., true);
+        outDoubleImage(resImg, qApp->translate("Transforms", "cosinus transform").toStdString(), DISABLE, DISABLE, true, 256., true);
         outImage(invImg, qApp->translate("Transforms", "cosinus reconstruction").toStdString());
     }
     outText(s);

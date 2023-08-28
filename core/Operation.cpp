@@ -89,6 +89,10 @@ void GenericOperation::outImage(imagein::Image* img, string title) {
 //        }
 //}
 
+
+//! boxSetting scaled, boxSetting offset permettent de configurer l'affichage de l'image.
+//! AUTO : on laisse le programme décider (ie val. min. image < 0 implique l'activation de l'offset et du scaling
+//! ENABLE et DISABLE permet de forcer les deux options quand nécessaire
 void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, boxSetting scaled, boxSetting offset, bool log, double logScale, bool abs) {
     auto* wnd = new DoubleImageWindow(img, QString(),scaled, offset, log, logScale, abs);
 
@@ -104,14 +108,9 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
         //isHough=true ce qui change les coordonnées des pixels de l'image pour correspondre au domaine de Hough
     }
     this->outImgWnd(wnd, title);
-    if(img->min()<0){
+    if(img->min()<0 && !(scaled==DISABLE || offset == DISABLE)){
         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                "<br><br> <b>case 1</b> : -minValue > maxValue"
-                                                "<br> pixel displayed = pixel image * 127 / (- minValue) + 127 "
-                                                "<br> <b>case 2</b> : -minValue > maxValue "
-                                                "<br> pixel displayed = pixel image * 128 / maxValue + 127"
-                                                "<br> <b>case 3</b> : -minValue = maxValue"
-                                                "<br> pixel displayed = 127"
+                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
                                                 "<br><br> -------------------------------------------").toStdString();
         outText(outputMessage);
     }
