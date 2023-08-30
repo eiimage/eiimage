@@ -75,10 +75,12 @@
 #include "Operations/SeparatorOp.h"
 #include "Operations/MedianOp.h"
 #include "Operations/UCharConvertOp.h"
-
+#include "Operations/GetHintOp.h"
 
 #include "Services/MorphoMatService.h"
 #include "Services/FilteringService.h"
+
+
 
 using namespace genericinterface;
 using namespace std;
@@ -212,6 +214,8 @@ int main(int argc, char** argv)
     colors->addOperation(new CombineHSVOp());
     colors->addOperation(new SeparatorOp());
     colors->addOperation(new PseudoColorOp());
+    colors->addOperation(new SeparatorOp());
+    colors->addOperation(new GetHintOp());
 
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());

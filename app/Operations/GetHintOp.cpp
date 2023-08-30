@@ -17,49 +17,21 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "ColorDialog.h"
-#include "ui_ColorDialog.h"
+#include <QVBoxLayout>
+#include <QLabel>
+#include "GetHintOp.h"
 
-ColorDialog::ColorDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::ColorDialog)
+
+GetHintOp::GetHintOp() : Operation(qApp->translate("Operations", "About HSV").toStdString())
 {
-    ui->setupUi(this);
-    ui->hsvWidget->setVisible(false);
-    this->adjustSize();
-    connect(ui->hintButton,SIGNAL(clicked()),this,SLOT(getHint()));
 }
 
-ColorDialog::~ColorDialog()
-{
-    delete ui;
+
+bool GetHintOp::needCurrentImg() const {
+    return false;
 }
 
-QColor ColorDialog::getColor() const {
-
-    if(ui->rgbButton->isChecked()) {
-        int r = ui->redBox->value();
-        int g = ui->greenBox->value();
-        int b = ui->blueBox->value();
-        return QColor::fromRgb(r, g, b);
-    }
-    else {
-        int h = ui->hueBox->value();
-        int s = ui->satBox->value();
-        int v = ui->valBox->value();
-        return QColor::fromHsv(h, s, v);
-    }
-}
-
-unsigned int ColorDialog::getWidth() const {
-    return ui->widthBox->value();
-}
-
-unsigned int ColorDialog::getHeight() const {
-    return ui->heightBox->value();
-}
-
-void ColorDialog::getHint() {
+void GetHintOp::operator()(const imagein::Image *, const std::map<const imagein::Image *, std::string> &) {
     auto* hint = new QDialog(QApplication::activeWindow());
     hint->setWindowTitle(QString(qApp->translate("ColorDialog", "A small tip")));
 

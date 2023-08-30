@@ -182,6 +182,8 @@ set(imageinsa_SOURCES
 	Widgets/StructElemViewer.h
 	Widgets/StructElemWindow.cpp
 	Widgets/StructElemWindow.h
+        Operations/GetHintOp.cpp
+        Operations/GetHintOp.h
 )
 
 set(UIS
