@@ -24,6 +24,7 @@
 
 #include <iostream>
 #include <QLibraryInfo>
+#include <QStyleFactory>
 
 #include "BuiltinOpSet.h"
 
@@ -88,8 +89,9 @@ using namespace std;
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    app.setOrganizationName("INSA");
-    app.setApplicationName("ImageINSA");
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    QApplication::setOrganizationName("INSA");
+    QApplication::setApplicationName("ImageINSA");
 
     Log::configure(true, false, 0);
 
