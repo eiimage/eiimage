@@ -22,7 +22,7 @@ ATENTION! Le nom des différents dossiers est important et doit être respecté,
 Dans chacun des 5 dossiers de plugins, il y a un fichier CMakeLists.txt.
 - ouvrir ce fichier dans CLion et lancer la compilation. 
 - les DLL ainsi compilées seront crées dans les dossiers DPCM/cmake-build-release ou cmake-build-debug de chacun des projets, suivant le type de compilation choisi
-Au besoin vérifier que CLion est bien configuré pour utiliser le compilateur MinGW version 32 bits.
+Au besoin vérifier que CLion est bien configuré pour utiliser le compilateur MinGW version 32 bits (C:\mingw32).
 (menu Files/Settings/Build/Toolchains/)
 Si vous ne disposez pas de compilateur 32 bits, vous pouvez télécharger "MinGW-W64 GCC-8.1.0 - i686-win32-sjlj"
 
