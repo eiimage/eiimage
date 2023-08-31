@@ -91,17 +91,17 @@ void StructElemViewer::mousePressEvent (QGraphicsSceneMouseEvent* event)
             view.elem->setCenter(px - view.x, py - view.y);
         }
     }
-    this->draw(0,0);
+        this->draw(0,0);
 }
 
 
 void StructElemViewer::draw(int x, int y) {
     QColor high(255, 255, 255, 0);
     QColor red(255, 0, 0);
-    for(int i = _views.size()-1; i >= 0; --i) {
-        QColor low = i <= 1 ? QColor(50,50,50) : QColor::fromHsv(((i-2)*60)%360, 255, 230);
+    for(int k = _views.size()-1; k >= 0; --k) {
+        QColor low = k <= 1 ? QColor(50,50,50) : QColor::fromHsv(((k-2)*60)%360, 255, 230);
 
-        ElemView view = _views.at(i);
+        ElemView view = _views.at(k);
 
         for(unsigned int j = 0; j < _col; j++) {
             for(unsigned int i = 0; i < _row; i++) {

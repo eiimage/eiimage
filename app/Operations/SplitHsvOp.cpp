@@ -18,8 +18,6 @@
 */
 #include <GrayscaleImage.h>
 
-#include <QColor>
-
 #include "SplitHsvOp.h"
 #include "../Tools.h"
 #include <QMessageBox>

@@ -49,6 +49,7 @@ namespace genericinterface
 	    void applyWhiteTopHat();
 	    void applyBlackTopHat();
         void checkActionsValid(const QWidget* activeWidget);
+        void applyOpMorph(OpMorpho);
 
       private:
         imagein::MorphoMat::StructElem* _structElem;
