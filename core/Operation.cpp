@@ -114,6 +114,11 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
                                                 "<br><br> -------------------------------------------").toStdString();
         outText(outputMessage);
     }
+    if(abs && img->min()<0){
+        std::string outputMessage = title;
+        outputMessage += " : " + QObject::tr("The image displayed represents the absolute value of the input image\n\n-------------------------------------------").toStdString();
+        outText(outputMessage);
+    }
 }
 
 
