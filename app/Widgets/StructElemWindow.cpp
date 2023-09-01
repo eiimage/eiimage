@@ -327,6 +327,13 @@ void StructElemWindow::generate() {
 void StructElemWindow::resize(int size) {
     //! On propage avec le plus proche voisin (imparfait pour les nombres pairs)
     GrayscaleImage_t<bool> elem(_structElem->getWidth()/_previousScale * size, _structElem->getHeight()/_previousScale * size);
+    if(elem.getWidth()>64 || elem.getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        _scale->setValue(_previousScale);
+        return;
+    }
     _previousScale=size;
     for(unsigned int j = 0; j < elem.getHeight(); ++j) {
         for(unsigned int i = 0; i < elem.getWidth(); ++i) {
@@ -380,10 +387,17 @@ void StructElemWindow::saveFile() {
 
 
 void StructElemWindow::dilateLeft() {
+
     StructElem::Dir dir;
     dir = StructElem::Left;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 
@@ -392,6 +406,12 @@ void StructElemWindow::dilateTopLeft() {
     dir = StructElem::BottomRight;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 
@@ -400,6 +420,12 @@ void StructElemWindow::dilateTop() {
     dir = StructElem::Bottom;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 
@@ -408,6 +434,12 @@ void StructElemWindow::dilateTopRight() {
     dir = StructElem::BottomLeft;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 
@@ -416,6 +448,12 @@ void StructElemWindow::dilateRight() {
     dir = StructElem::Left;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 
@@ -424,6 +462,12 @@ void StructElemWindow::dilateBottomRight() {
     dir = StructElem::TopLeft;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 void StructElemWindow::dilateBottom() {
@@ -431,6 +475,12 @@ void StructElemWindow::dilateBottom() {
     dir = StructElem::Top;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
 void StructElemWindow::dilateBottomLeft() {
@@ -438,5 +488,11 @@ void StructElemWindow::dilateBottomLeft() {
     dir = StructElem::TopRight;
 
     _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
     changeStructElem(_structElem);
 }
