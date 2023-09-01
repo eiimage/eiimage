@@ -100,6 +100,7 @@ public slots:
     QSpinBox* _shapeSize;
     QSpinBox* _scale;
     int _shapeToGenvalue; //! Equivalent de _shapeToGen.value mais mis à jour uniquement à l'appuis sur le bouton "generate"
+    int _previousScale;
 };
 
 #endif

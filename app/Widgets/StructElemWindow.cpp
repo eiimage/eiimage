@@ -86,15 +86,13 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     _view->setScene(_viewer);
     _viewer->draw(0,0);
 
-// Création des outils de modification de l'ES (boutons fléchés)
+    //! Création des outils de modification de l'ES (boutons fléchés)
     auto* rightPanelLayout = new QVBoxLayout();
     rightPanelLayout->setAlignment(Qt::AlignTop);  // Alignement en haut
 
     auto* dilatButtonWidget = new QWidget();
     dilatButtonWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     auto* dilatButtonLayout = new QGridLayout(dilatButtonWidget);
-
-    rightPanelLayout->setAlignment(Qt::AlignTop);  // Alignement en haut
 
     dilatButtonWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     auto* dilatLeftButton = new QPushButton(QIcon(":/img/arrow-left.png"), "");
@@ -105,7 +103,7 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     auto* dilatBottomRightButton = new QPushButton(QIcon(":/img/arrow-bottom-right.png"), "");
     auto* dilatBottomButton = new QPushButton(QIcon(":/img/arrow-bottom.png"), "");
     auto* dilatBottomLeftButton = new QPushButton(QIcon(":/img/arrow-bottom-left.png"), "");
-    auto* dilatCenterButton = new QPushButton("");
+
     dilatLeftButton->setFixedSize(32, 32);
     dilatTopLeftButton->setFixedSize(32, 32);
     dilatTopButton->setFixedSize(32, 32);
@@ -114,12 +112,7 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     dilatBottomRightButton->setFixedSize(32, 32);
     dilatBottomButton->setFixedSize(32, 32);
     dilatBottomLeftButton->setFixedSize(32, 32);
-    dilatCenterButton->setFixedSize(32, 32);
-    dilatRightButton->setEnabled(false);
-    dilatBottomRightButton->setEnabled(false);
-    dilatBottomButton->setEnabled(false);
-    dilatBottomLeftButton->setEnabled(false);
-    dilatCenterButton->setEnabled(false);
+
     dilatButtonLayout->addWidget(dilatLeftButton, 1, 0);
     dilatButtonLayout->addWidget(dilatTopLeftButton, 0, 0);
     dilatButtonLayout->addWidget(dilatTopButton, 0, 1);
@@ -128,12 +121,11 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     dilatButtonLayout->addWidget(dilatBottomRightButton, 2, 2);
     dilatButtonLayout->addWidget(dilatBottomButton, 2, 1);
     dilatButtonLayout->addWidget(dilatBottomLeftButton, 2, 0);
-    dilatButtonLayout->addWidget(dilatCenterButton, 1, 1);
     rightPanelLayout->addWidget(dilatButtonWidget);
 
     rightPanelLayout->addWidget(dilatButtonWidget);
 
-// Ajoutez _view et le widget contenant les boutons à la vue structElemBox
+    //! Ajout de _view et du widget contenant les boutons à la vue structElemBox
     auto* structElemBox = new QGroupBox(tr("Structuring element"));
     auto* hLayout = new QHBoxLayout();
     hLayout->addWidget(_view);
@@ -141,25 +133,25 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     structElemBox->setLayout(hLayout);
 
     layout->addWidget(structElemBox);
-//////
-//!bouton ouverture d'un ES sauvegardé
+
+    //!bouton ouverture d'un ES sauvegardé
     _openFileButton = new QToolButton();
     _openFileButton->setToolTip(tr("Open file"));
     _openFileButton->setIcon(this->style()->standardIcon(QStyle::SP_DialogOpenButton));
     _openFileButton->setCheckable(true);
     _openFileButton->setIconSize (QSize(18, 18));
 
-//!bouton sauvegarde d'un ES
+    //!bouton sauvegarde d'un ES
     _saveFileButton = new QToolButton();
     _saveFileButton->setToolTip(tr("Save as..."));
     _saveFileButton->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     _saveFileButton->setCheckable(true);
     _saveFileButton->setIconSize (QSize(18, 18));
 
-    //! Création layout horizontaux pour les boutons
+    //! Création layout horizontaux pour les boutons (sauvegarde et ouverture)
     auto* layout3 = new QHBoxLayout();
     auto* hlayout = new QHBoxLayout();
-    layout3->addStretch(); // Ajouter un espace flexible pour pousser les boutons vers la droite
+    layout3->addStretch(); // Ajout d'un espace flexible pour pousser les boutons vers la droite
     layout3->addWidget(_openFileButton);
     layout3->addWidget(_saveFileButton);
 
@@ -179,20 +171,21 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     _scale->setSingleStep(1);
     _scale->setSuffix("");
     _scale->setValue(_structElem->getScaleMemory());
+    _previousScale = _structElem->getScaleMemory();
     layout4->addWidget(_scale);
 
     auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this);
     layout->addWidget(buttonBox);
+
     QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(ok()));
     QObject::connect(buttonBox, SIGNAL(rejected()),     this, SLOT(reject()));
-
 
     QObject::connect(_openFileButton, SIGNAL(clicked()), this, SLOT(openFile()));
     QObject::connect(_saveFileButton, SIGNAL(clicked()), this, SLOT(saveFile()));
     QObject::connect(_scale, SIGNAL(valueChanged(int)), this, SLOT(resize(int)));
     QObject::connect(_genButton, SIGNAL(clicked(bool)), this, SLOT(generate()));
 
-    //! Connections Qt pour la modification de l'ES
+    //! Connections Qt pour la modification de l'ES avec les flèches
     connect(dilatLeftButton, SIGNAL(clicked()), this, SLOT(dilateLeft()));
     connect(dilatTopLeftButton, SIGNAL(clicked()), this, SLOT(dilateTopLeft()));
     connect(dilatTopButton, SIGNAL(clicked()), this, SLOT(dilateTop()));
@@ -201,13 +194,6 @@ StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _stru
     connect(dilatBottomRightButton, SIGNAL(clicked()), this, SLOT(dilateBottomRight()));
     connect(dilatBottomButton, SIGNAL(clicked()), this, SLOT(dilateBottom()));
     connect(dilatBottomLeftButton, SIGNAL(clicked()), this, SLOT(dilateBottomLeft()));
-
-/*    //! Connections Qt pour désactiver des directions de dilatation de l'ES
-    connect(centerBox, SIGNAL(toggled(bool)), this, SLOT(setCenter(bool)));
-    connect(centerBox, SIGNAL(toggled(bool)), dilatRightButton, SLOT(setDisabled(bool)));
-    connect(centerBox, SIGNAL(toggled(bool)), dilatBottomRightButton, SLOT(setDisabled(bool)));
-    connect(centerBox, SIGNAL(toggled(bool)), dilatBottomButton, SLOT(setDisabled(bool)));
-    connect(centerBox, SIGNAL(toggled(bool)), dilatBottomLeftButton, SLOT(setDisabled(bool)));*/
 }
 
 void StructElemWindow::ok() {
@@ -340,7 +326,8 @@ void StructElemWindow::generate() {
 
 void StructElemWindow::resize(int size) {
     //! On propage avec le plus proche voisin (imparfait pour les nombres pairs)
-    GrayscaleImage_t<bool> elem(_shapeToGenvalue * size, _shapeToGenvalue * size);
+    GrayscaleImage_t<bool> elem(_structElem->getWidth()/_previousScale * size, _structElem->getHeight()/_previousScale * size);
+    _previousScale=size;
     for(unsigned int j = 0; j < elem.getHeight(); ++j) {
         for(unsigned int i = 0; i < elem.getWidth(); ++i) {
             //! Calcul des coordonnées correspondantes dans l'image source
