@@ -593,26 +593,22 @@ Number of classes = %1 </translation>
 <context>
     <name>DMMDialog</name>
     <message>
-        <location filename="Operations/DMMDialog.cpp" line="+42"/>
-        <location line="+258"/>
+        <location filename="Operations/DMMDialog.cpp" line="+301"/>
         <source>Erosion</source>
         <translation>Erosion</translation>
     </message>
     <message>
-        <location line="-258"/>
-        <location line="+255"/>
+        <location line="-3"/>
         <source>Dilatation</source>
         <translation>Dilatation</translation>
     </message>
     <message>
-        <location line="-255"/>
-        <location line="+261"/>
+        <location line="+6"/>
         <source>Opening</source>
         <translation>Opening</translation>
     </message>
     <message>
-        <location line="-261"/>
-        <location line="+264"/>
+        <location line="+3"/>
         <source>Closing</source>
         <translation>Closing</translation>
     </message>

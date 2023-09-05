@@ -32,7 +32,7 @@ class DMMDialog : public QDialog
 {
     Q_OBJECT
 public:
-    enum Op { Erosion, Dilatation, Opening, Closing, Dmm};
+    enum Op { Dmm, Erosion, Dilatation, Opening, Closing};
     explicit DMMDialog(QWidget *parent = 0);
     virtual ~DMMDialog();
     inline std::vector<imagein::MorphoMat::StructElem::Dir> getBasicElements() { return _basicElements; }

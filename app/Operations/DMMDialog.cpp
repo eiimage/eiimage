@@ -39,7 +39,8 @@ DMMDialog::DMMDialog(QWidget *parent) :
     QDialog(parent), _centerX(0), _centerY(0)
 {
     QStringList opList;
-    opList << tr("Erosion") << tr("Dilatation") << tr("Opening") << tr("Closing") << tr("DMM");
+    //opList << tr("Erosion") << tr("Dilatation") << tr("Opening") << tr("Closing") << tr("DMM");
+    opList << tr("DMM");
 
     //! Création de la fenêtre générée lors de la sélection de la fontionnalité "DMM"
     this->setWindowTitle(tr("DMM"));
