@@ -4,7 +4,7 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+134"/>
+        <location filename="main.cpp" line="+136"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>Image</translation>
@@ -37,7 +37,7 @@
     </message>
     <message>
         <location filename="Services/FilteringService.cpp" line="+39"/>
-        <location filename="main.cpp" line="+9"/>
+        <location filename="main.cpp" line="+11"/>
         <source>Filtering</source>
         <translation>Filtering</translation>
     </message>
@@ -81,9 +81,26 @@
 <context>
     <name>BinaryMaskOp</name>
     <message>
-        <location filename="Operations/BinaryMaskOp.cpp" line="+63"/>
+        <location filename="Operations/BinaryMaskOp.cpp" line="+30"/>
+        <source>Apply mask</source>
+        <translation>Apply mask</translation>
+    </message>
+    <message>
+        <location line="+33"/>
         <source>Mask to apply : </source>
         <translation>Mask to apply : </translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <location line="+24"/>
+        <source>warning Apply Mask</source>
+        <translation>warning Apply Mask</translation>
+    </message>
+    <message>
+        <location line="-23"/>
+        <location line="+24"/>
+        <source>you have performed a mask operation between two images of different sizes</source>
+        <translation>you have performed a mask operation between two images of different sizes</translation>
     </message>
 </context>
 <context>
@@ -374,7 +391,8 @@ Number of classes = %1 </translation>
         <translation type="vanished">A small tip for Qt HSV Color Model</translation>
     </message>
     <message>
-        <location filename="Operations/ColorimetryOp.cpp" line="+89"/>
+        <location filename="Operations/GetHintOp.cpp" line="+36"/>
+        <location filename="Operations/ColorDialog.cpp" line="+64"/>
         <source>A small tip</source>
         <translation>A small tip</translation>
     </message>
@@ -382,7 +400,7 @@ Number of classes = %1 </translation>
 <context>
     <name>ColorimetryOp</name>
     <message>
-        <location line="-32"/>
+        <location filename="Operations/ColorimetryOp.cpp" line="+56"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
@@ -392,34 +410,31 @@ Number of classes = %1 </translation>
         <translation>Empty image generation is not allowed</translation>
     </message>
     <message>
-        <location line="+38"/>
         <source>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.
 
 </source>
         <oldsource>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image
 
 </oldsource>
-        <translation>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.</translation>
+        <translation type="vanished">H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.
 
 </source>
         <oldsource>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is
 
 </oldsource>
-        <translation>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.</translation>
+        <translation type="vanished">S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
 
 -------------------------------------------</source>
         <oldsource>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
 
 </oldsource>
-        <translation>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.</translation>
+        <translation type="vanished">V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.</translation>
     </message>
 </context>
 <context>
@@ -578,42 +593,42 @@ Number of classes = %1 </translation>
 <context>
     <name>DMMDialog</name>
     <message>
-        <location filename="Operations/DMMDialog.cpp" line="+44"/>
-        <location line="+235"/>
+        <location filename="Operations/DMMDialog.cpp" line="+42"/>
+        <location line="+258"/>
         <source>Erosion</source>
         <translation>Erosion</translation>
     </message>
     <message>
-        <location line="-235"/>
-        <location line="+232"/>
+        <location line="-258"/>
+        <location line="+255"/>
         <source>Dilatation</source>
         <translation>Dilatation</translation>
     </message>
     <message>
-        <location line="-232"/>
-        <location line="+238"/>
+        <location line="-255"/>
+        <location line="+261"/>
         <source>Opening</source>
         <translation>Opening</translation>
     </message>
     <message>
-        <location line="-238"/>
-        <location line="+241"/>
+        <location line="-261"/>
+        <location line="+264"/>
         <source>Closing</source>
         <translation>Closing</translation>
     </message>
     <message>
-        <location line="-241"/>
-        <location line="+2"/>
+        <location line="-264"/>
+        <location line="+3"/>
         <source>DMM</source>
         <translation>DMM</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Structuring element</source>
         <translation>Structuring element</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+68"/>
         <source>Validate</source>
         <translation>Validate</translation>
     </message>
@@ -660,7 +675,7 @@ Number of classes = %1 </translation>
         <translation>The specified quantization file could not be opened!</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>Prediction error image</source>
         <translation>Prediction error image</translation>
     </message>
@@ -680,12 +695,12 @@ Number of classes = %1 </translation>
         <translation>Prediction image</translation>
     </message>
     <message>
-        <location line="-24"/>
+        <location line="-25"/>
         <source>The path to the quantification file is empty</source>
         <translation>The path to the quantification file is empty</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <source>Reconstructed image</source>
         <translation>Reconstructed image</translation>
     </message>
@@ -892,7 +907,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation type="vanished">Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
     </message>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+108"/>
+        <location filename="Services/FilteringService.cpp" line="+112"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1299,7 +1314,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
     </message>
     <message>
         <location filename="Operations/RandomImgOp.cpp" line="+106"/>
-        <location filename="Operations/PointOp.cpp" line="+147"/>
+        <location filename="Operations/PointOp.cpp" line="+155"/>
         <location filename="Operations/NoiseOp.cpp" line="+41"/>
         <location filename="Operations/BFlitOp.cpp" line="+13"/>
         <source>Validate</source>
@@ -1384,7 +1399,7 @@ tquantdef-&gt;GetNumThresholds() = %d</translation>
         <translation>Add noise</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-238"/>
+        <location filename="Operations/PointOp.cpp" line="-246"/>
         <source>Pixel operations</source>
         <translation>Pixel operations</translation>
     </message>
@@ -1497,7 +1512,7 @@ Channel %d :
         <translation>Center</translation>
     </message>
     <message>
-        <location filename="Operations/SplitColorOp.cpp" line="+31"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+32"/>
         <source>Split color planes</source>
         <translation>Split RGB planes</translation>
     </message>
@@ -1614,7 +1629,7 @@ Channel %d :
         <translation>Classification results</translation>
     </message>
     <message>
-        <location filename="Operations/ColorimetryOp.cpp" line="-63"/>
+        <location filename="Operations/ColorimetryOp.cpp" line="-22"/>
         <source>Generate RGB/HSV image</source>
         <oldsource>Generate RGB image</oldsource>
         <translation>Generate RGB/HSV image</translation>
@@ -1636,7 +1651,7 @@ Channel %d :
         <translation>Supervised classification</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-49"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-50"/>
         <source>DPCM Encoding</source>
         <translation>DPCM Encoding</translation>
     </message>
@@ -1715,22 +1730,24 @@ The bitrate is : %5.2f
         <translation>Median Filter</translation>
     </message>
     <message>
-        <location filename="Operations/SplitHsvOp.cpp" line="+34"/>
+        <location filename="Operations/SplitHsvOp.cpp" line="+32"/>
         <source>Split HSV planes</source>
         <translation>Split HSV planes</translation>
     </message>
     <message>
         <location line="+7"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+6"/>
         <source>The operation cannot be applied on this image</source>
         <translation>The operation cannot be applied on this image</translation>
     </message>
     <message>
         <location line="+1"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+1"/>
         <source>The image is not in color.</source>
         <translation>The image is not in color.</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+29"/>
         <source>Hue</source>
         <translation>Hue</translation>
     </message>
@@ -1887,7 +1904,7 @@ The bitrate is : %5.2f
         <translation>&lt;i&gt;Offset and scale : Adds a 127 offset and scales&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+494"/>
+        <location filename="Operations/PointOp.cpp" line="+501"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Conversion step [min : 0, max : 255]</translation>
     </message>
@@ -1903,9 +1920,13 @@ The bitrate is : %5.2f
         <translation>Convert to Double</translation>
     </message>
     <message>
-        <location filename="Operations/BinaryMaskOp.cpp" line="-33"/>
         <source>Apply mask</source>
-        <translation>Apply mask</translation>
+        <translation type="vanished">Apply mask</translation>
+    </message>
+    <message>
+        <location filename="Operations/GetHintOp.cpp" line="-11"/>
+        <source>About HSV</source>
+        <translation>About HSV</translation>
     </message>
 </context>
 <context>
@@ -1967,7 +1988,7 @@ The bitrate is : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-398"/>
+        <location filename="Operations/PointOp.cpp" line="-405"/>
         <source>Second operand</source>
         <translation>Second operand</translation>
     </message>
@@ -2119,7 +2140,7 @@ The bitrate is : %5.2f
         <translation>Scaling</translation>
     </message>
     <message>
-        <location line="+258"/>
+        <location line="+266"/>
         <location line="+10"/>
         <source>warning pixel operation on images</source>
         <translation>warning pixel operation on images</translation>
@@ -2263,14 +2284,37 @@ The bitrate is : %5.2f
 <context>
     <name>QObject</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-37"/>
-        <location line="+9"/>
-        <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
+        <location filename="Services/FilteringService.cpp" line="-41"/>
+        <location line="+11"/>
+        <source>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</source>
+        <oldsource>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
 
--------------------------------------------</source>
-        <translation>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
-
--------------------------------------------</translation>
+-------------------------------------------</oldsource>
+        <translation>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</translation>
+    </message>
+    <message>
+        <location filename="Operations/GetHintOp.cpp" line="+19"/>
+        <location filename="Operations/ColorDialog.cpp" line="+8"/>
+        <source>&lt;b&gt;Hue&lt;/b&gt; is the dominant color from 0 to 359 degrees on the color wheel below &lt;br&gt;</source>
+        <translation>&lt;b&gt;Hue&lt;/b&gt; is the dominant color from 0 to 359 degrees on the color wheel below &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location filename="Operations/ColorDialog.cpp" line="+1"/>
+        <source>note : Qt&apos;s HSV model uses a hue of -1 for achromatic colors &lt;br&gt;</source>
+        <translation>note : Qt&apos;s HSV model uses a hue of -1 for achromatic colors &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="Operations/ColorDialog.cpp" line="+5"/>
+        <source>&lt;b&gt;Saturation&lt;/b&gt; is in the range 0 to 255 and refers to the vividness of the color &lt;br&gt;</source>
+        <translation>&lt;b&gt;Saturation&lt;/b&gt; is in the range 0 to 255 and refers to the vividness of the color &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="Operations/ColorDialog.cpp" line="+5"/>
+        <source>&lt;b&gt;Value&lt;/b&gt; is in the range 0 to 255 and represents the brightness of the color &lt;br&gt;</source>
+        <translation>&lt;b&gt;Value&lt;/b&gt; is in the range 0 to 255 and represents the brightness of the color &lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -2551,7 +2595,7 @@ The bitrate is : %5.2f
 <context>
     <name>ScalingOp</name>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+30"/>
+        <location filename="Operations/ScalingOp.cpp" line="+31"/>
         <source>Nearest neighboor (standard)</source>
         <translation>Nearest neighbor (standard)</translation>
     </message>
@@ -2683,57 +2727,144 @@ The bitrate is : %5.2f
     </message>
 </context>
 <context>
+    <name>StructElem</name>
+    <message>
+        <location filename="Widgets/StructElemWindow.cpp" line="+331"/>
+        <location line="+65"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+13"/>
+        <location line="+13"/>
+        <source>warning size limit</source>
+        <translation>warning size limit</translation>
+    </message>
+    <message>
+        <location line="-160"/>
+        <location line="+65"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+13"/>
+        <location line="+13"/>
+        <source>you have reached the maximum size of the structuring element</source>
+        <translation>you have reached the maximum size of the structuring element</translation>
+    </message>
+</context>
+<context>
     <name>StructElemWindow</name>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="+38"/>
         <source>&amp;Open file</source>
-        <translation>&amp;Open file</translation>
+        <translation type="vanished">&amp;Open file</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>&amp;Save as...</source>
-        <translation>&amp;Save as...</translation>
+        <translation type="vanished">&amp;Save as...</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-448"/>
         <source>Basic shapes :</source>
         <translation>Basic shapes :</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+139"/>
+        <location line="+244"/>
         <source>Diamond</source>
         <translation>Diamond</translation>
     </message>
     <message>
-        <location line="-138"/>
-        <location line="+118"/>
+        <location line="-243"/>
+        <location line="+223"/>
         <source>Disc</source>
         <translation>Disc</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-222"/>
         <source>Empty</source>
         <translation>Empty</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
+        <source>Opération :</source>
+        <translation>Operation :</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Edit structuring element</source>
+        <translation>Edit structuring element</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Erosion</source>
+        <translation>Erosion</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Dilatation</source>
+        <translation>Dilatation</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Opening</source>
+        <translation>Opening</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Closing</source>
+        <translation>Closing</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Gradient</source>
+        <translation>Gradient</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>White top hat</source>
+        <translation>White top hat</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Black top hat</source>
+        <translation>Black top hat</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Generate</source>
         <translation>Generate</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+51"/>
+        <source>Structuring element</source>
+        <translation>Structuring element</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Open file</source>
+        <translation>Open file</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Save as...</source>
+        <translation>Save as...</translation>
+    </message>
+    <message>
+        <location line="+22"/>
         <source>Scale :</source>
         <translation>Scale :</translation>
     </message>
     <message>
-        <location line="+172"/>
+        <location line="+197"/>
         <source>Open a file</source>
         <translation>Open a file</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+21"/>
+        <location line="+11"/>
         <source>Images (*.png *.bmp *.jpg *.jpeg)</source>
         <translation>Images (*.png *.bmp *.jpg *.jpeg)</translation>
     </message>
@@ -3304,7 +3435,7 @@ The bitrate is : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-87"/>
+        <location filename="Services/FilteringService.cpp" line="-89"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Apply filter</translation>
     </message>
@@ -3314,7 +3445,7 @@ The bitrate is : %5.2f
         <translation>&amp;Edit filters</translation>
     </message>
     <message>
-        <location line="+121"/>
+        <location line="+125"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>The resulting image is the square root of the squared sums</translation>
     </message>
@@ -3370,7 +3501,7 @@ The bitrate is : %5.2f
 <context>
     <name>genericinterface::MorphoMatService</name>
     <message>
-        <location filename="Services/MorphoMatService.cpp" line="+59"/>
+        <location filename="Services/MorphoMatService.cpp" line="+56"/>
         <source>&amp;Erosion</source>
         <translation>&amp;Erosion</translation>
     </message>

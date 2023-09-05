@@ -69,18 +69,18 @@ void ColorDialog::getHint() {
     auto* huePic = new QLabel(hint);
     huePic->setPixmap(QPixmap(":/img/qcolor_hsv.png"));
 
-    auto* hueLabel = new QLabel("<b>Hue</b> is the dominant color from 0 to 359 degrees on the color wheel below <br>", hint);
-    auto* hueNote = new QLabel("note : Qt's HSV model uses a hue of -1 for achromatic colors <br>", hint);
+    auto* hueLabel = new QLabel(QObject::tr("<b>Hue</b> is the dominant color from 0 to 359 degrees on the color wheel below <br>"), hint);
+    auto* hueNote = new QLabel(QObject::tr("note : Qt's HSV model uses a hue of -1 for achromatic colors <br>"), hint);
 
     auto* satuPic = new QLabel(hint);
     satuPic->setPixmap(QPixmap(":/img/qcolor-saturation.png"));
 
-    auto* satuLabel = new QLabel("<b>Saturation</b> is in the range 0 to 255 and refers to the vividness of the color <br>", hint);
+    auto* satuLabel = new QLabel(QObject::tr("<b>Saturation</b> is in the range 0 to 255 and refers to the vividness of the color <br>"), hint);
 
     auto* valuePic = new QLabel(hint);
     valuePic->setPixmap(QPixmap(":/img/qcolor-value.png"));
 
-    auto* valueLabel = new QLabel("<b>Value</b> is in the range 0 to 255 and represents the brightness of the color <br>", hint);
+    auto* valueLabel = new QLabel(QObject::tr("<b>Value</b> is in the range 0 to 255 and represents the brightness of the color <br>"), hint);
 
     // Ajouter les QLabel à la disposition principale
     mainLayout->addWidget(hueLabel);
