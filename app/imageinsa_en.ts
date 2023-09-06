@@ -2282,11 +2282,9 @@ The bitrate is : %5.2f
     <message>
         <location filename="Services/FilteringService.cpp" line="-41"/>
         <location line="+11"/>
-        <source>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</source>
-        <oldsource>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
-
--------------------------------------------</oldsource>
-        <translation>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</translation>
+        <source>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</source>
+        <oldsource>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</oldsource>
+        <translation>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel displayed = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</translation>
     </message>
     <message>
         <location filename="Operations/GetHintOp.cpp" line="+19"/>

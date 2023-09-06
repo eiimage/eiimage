@@ -110,7 +110,7 @@ void GenericOperation::outDoubleImage(imagein::ImageDouble* img, string title, b
     this->outImgWnd(wnd, title);
     if(img->min()<0 && !(scaled==DISABLE || offset == DISABLE)){
         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
+                                                "<br><br> pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)"
                                                 "<br><br> -------------------------------------------").toStdString();
         outText(outputMessage);
     }

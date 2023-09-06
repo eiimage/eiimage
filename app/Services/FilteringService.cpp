@@ -116,7 +116,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
+                                                                "<br><br> pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)"
                                                                 "<br><br> -------------------------------------------").toStdString();
                         _ws->addText(outputMessage);
                     }
@@ -127,7 +127,7 @@ void FilteringService::applyAlgorithm(Filtering* algo)
                     QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
                     if(dblResImg->min()<0){
                         std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
-                                                                "<br><br> pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)"
+                                                                "<br><br> pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)"
                                                                 "<br><br> -------------------------------------------").toStdString();
                         _ws->addText(outputMessage);
                     }
