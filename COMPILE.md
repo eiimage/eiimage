@@ -140,3 +140,40 @@ Open Qt terminal :
 	cd {path}\eiimage //({path} is where you cloned eiimage repository)
 	cd build
 	mingw32-make -j4
+
+## Linux deployment
+As we compile ImageINSA dynamically, we need to provide all dependencies with the binary file. To do this, we recommend to use the deployment tool called linuxdeplqt.
+This is a project developed by the community but widely used.
+https://github.com/probonopd/linuxdeployqt/blob/master/README.md
+
+#### Usage : 
+
+Create the architecture below
+```
+└── usr
+    ├── bin
+    │   └── imageinsa
+    ├── lib
+    └── share
+        ├── applications
+        │   └── imageinsa.desktop
+        └── icons
+```
+
+create the file imageinsa.desktop with the content below :
+````
+[Desktop Entry]
+Type=Application
+Name=ImageINSAapp
+Exec=imageinsa
+Icon=imageinsa
+Categories=Office;
+````
+
+run
+
+````
+linuxdeployqt-continuous-x86_64.AppImage path/to/AppDir/usr/share/applications/imageinsa.desktop -appimage
+````
+
+add the translations to the bin folder.
