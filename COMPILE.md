@@ -142,8 +142,8 @@ Open Qt terminal :
 	mingw32-make -j4
 
 ## Linux deployment
-As we compile ImageINSA dynamically, we need to provide all dependencies with the binary file. To do this, we recommend to use the deployment tool called linuxdeplqt.
-This is a project developed by the community but widely used.
+As we're compiling ImageINSA dynamically, we need to provide all dependencies with the binary file. To do this, we recommend using the deployment tool linuxdeplqt.
+This is a community-developed but widely-used project.
 https://github.com/probonopd/linuxdeployqt/blob/master/README.md
 
 #### Usage : 
