@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <GrayscaleImage.h>
 #include <Converter.h>
+#include <QDebug>
 
 using namespace std;
 using namespace imagein;
@@ -39,20 +40,32 @@ bool DPCMEncodingOp::needCurrentImg() const {
 
 void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
 
-    DPCMDialog* dialog = new DPCMDialog(QApplication::activeWindow());
-    QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
+    auto* dialog = new DPCMDialog(QApplication::activeWindow());
+    auto code = static_cast<QDialog::DialogCode>(dialog->exec());
 
 
     if(code != QDialog::Accepted) return;
 
     DPCM micd;
+
     try {
         micd.setQuantification(dialog->getQuantification());
     }
-    catch(const char* str) {
-        QMessageBox::critical(NULL, qApp->translate("DPCM", "Error while loading quantification file"),
+    catch (const std::runtime_error& e) {
+    // Traiter spécifiquement l'erreur liée au chemin de fichier vide
+        QMessageBox::critical(nullptr, qApp->translate("DPCM", "Error while loading quantification file"),
+                              qApp->translate("DPCM", "The path to the quantification file is empty"));
+        return;
+    }
+    catch (const std::exception& e) {
+    // ON traite toutes les autres exceptions
+        QMessageBox::critical(nullptr, qApp->translate("DPCM", "Error while loading quantification file"),
                               qApp->translate("DPCM", "The specified quantification file could not be opened !"));
         return;
+    }
+
+    catch(const char* str) {
+
     }
     GrayscaleImage* image = Converter<GrayscaleImage>::convert(*img);
     Image *reconstructedImage;
@@ -63,9 +76,10 @@ void DPCMEncodingOp::operator()(const imagein::Image* img, const std::map<const 
     string s = micd.execute(image, dialog->getPrediction(), &quant_errorImage, &errorImage,&reconstructedImage, &predictionImage, &coding_error_image, dialog->getQ());
     outText(s);
     outText("-------------------------------------------");
-    outDoubleImage(errorImage, qApp->translate("DPCM", "Prediction error image").toStdString(), true, true, 0.1, false);
-    outDoubleImage(quant_errorImage, qApp->translate("DPCM", "Quantized prediction error image").toStdString(), true, true, 0.1, false);
+
+    outDoubleImage(errorImage, qApp->translate("DPCM", "Prediction error image").toStdString(), DISABLE, ENABLE);
+    outDoubleImage(quant_errorImage, qApp->translate("DPCM", "Quantized prediction error image").toStdString(), DISABLE, ENABLE);
     outImage(predictionImage, qApp->translate("DPCM", "Prediction image").toStdString());
     outImage(reconstructedImage, qApp->translate("DPCM", "Reconstructed image").toStdString());
-    outDoubleImage(coding_error_image, qApp->translate("DPCM", "Coding error image").toStdString(), true, true, 0.1, false);
+    outDoubleImage(coding_error_image, qApp->translate("DPCM", "Coding error image").toStdString(), DISABLE, ENABLE);
 }

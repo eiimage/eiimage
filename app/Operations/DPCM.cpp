@@ -21,7 +21,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cmath>
-#include "../Tools.h"
+#include <Converter.h>
 
 using namespace std;
 using namespace imagein;
@@ -39,7 +39,7 @@ DPCM::DPCM()
     for( counter=0; counter< 40; counter++ ) {
         ((int*)ktab)[counter] = 0;
     }
-    quantdef = NULL;
+    quantdef = nullptr;
 }
 
 DPCM::~DPCM()
@@ -48,29 +48,22 @@ DPCM::~DPCM()
 }
 
 string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **err_image, Image **recons_image, Image **pred_image,ImageDouble **coding_err_image, double Q ) {
-    char buffer[255], buffer2[255];
-    if( quantdef == NULL ) {
-        throw "Error in DPCM::execute:\nquantdef = NULL";
-    }
+    char buffer[512], buffer2[512];
+
     string returnval;
-    int imgHeight,imgWidth;
-    int pred;
+    int imgHeight = (int)im->getHeight();
+    int imgWidth = (int)im->getWidth();
+    int pred[imgHeight][imgWidth];
     int pred_err;   // prediction error
     int quant_pred_err;  // quantized prediction error
-    int reco; // reconstructed value
-    int code; // code
     int coding_err; // erreur de codage
-
-    double pi[512],piq[512],nbpt = 0;
-    double h = 0.;
-    double hq = 0.;
-
-    imgHeight = im->getHeight();
-    imgWidth = im->getWidth();
 
     /* initialisation de la loi de quantification */
     set_levels();
     codlq(0);
+
+//    /* prepare a quantificator for lloydMax, il will be replaced after if lloydMax selected */
+//    Quantification* quantLloydMax = quantdef;
 
     /* allocation mmoire pour l'image d'erreur de prdiction */
     ImageDouble *quantized_prediction_error_image = new ImageDouble(imgWidth, imgHeight, 1);  // renommer quantized_prediction_error_image
@@ -88,24 +81,58 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     }
 
     /* codage de l'image */
-    for(int i=1; i<imgHeight ; i++)
+    for(int i=0; i<imgHeight ; i++)
     {
-        for(int j=1; j<imgWidth ; j++)
+        for(int j=0; j<imgWidth ; j++)
         {
-            switch (prediction_alg) {
-            int AplusC;
-            float A,B,C;
+            depth_default_t pixImg = im->getPixelAt(j, i);
 
+            switch (prediction_alg) {
             case PX_EQ_A:
-                pred = reconstructed_image->getPixelAt(j-1, i);
+                if(j == 0) {
+                    pred[i][j] = im->getPixelAt(0,i);
+                    quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = reconstructed_image->getPixelAt(j - 1, i);
+                    if(quantdef->noQuantifEnable())
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
+                    break;
+
+            case PX_EQ_C:
+                if(i == 0) {
+                    pred[i][j] = im->getPixelAt(j, 0);
+                    quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = reconstructed_image->getPixelAt(j, i - 1);
+                    if(quantdef->noQuantifEnable())
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
-            case PX_EQ_B:
-                pred = reconstructed_image->getPixelAt(j, i-1);
-                break;
+
             case PX_EQ_APC:
-                AplusC = reconstructed_image->getPixelAt(j-1, i) + reconstructed_image->getPixelAt(j, i-1);
-                pred = AplusC / 2;
+                if(i == 0 || j == 0) {
+                    pred[i][j] = (im->getPixelAt(j, i));
+                    quant_pred_err = 0;
+                }
+                else {
+                    pred[i][j] = (reconstructed_image->getPixelAt(j, i - 1) + reconstructed_image->getPixelAt(j-1, i))/2;
+                    if(quantdef->noQuantifEnable())
+                        quant_pred_err = pixImg-pred[i][j];
+                    else
+                        quant_pred_err = quantdef->valueOf(pixImg-pred[i][j]);
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
+
             case PX_EQ_Q:
                 /*
                 Modified Graham's Algorithm:
@@ -123,47 +150,77 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
                 */
 
                 //correction QB
-                A = reconstructed_image->getPixelAt(j-1, i);
-                B = reconstructed_image->getPixelAt(j-1, i-1);
-                C = reconstructed_image->getPixelAt(j,   i-1);
+                depth_default_t A,B,C;
+                if(j==0)
+                    A = im->getPixelAt(0,i);
+                else
+                    A = reconstructed_image->getPixelAt(j - 1, i);
 
-                if( ((fabs(B-C) - Q) <= fabs(B-A)) &&
-                        (fabs(B-A) <= (fabs(B-C) + Q)) ) {
-                    pred = (uint8_t)((A + C) / 2);
-                } else {
-                    if( fabs(B-A) > fabs(B-C) ) {
-                        pred = (uint8_t)A;
-                    } else {
-                        pred = (uint8_t)C;
+                if(j == 0 || i == 0)
+                    B = im->getPixelAt(0,0);
+                else
+                    B = reconstructed_image->getPixelAt(j-1, i-1);
+
+                if(i==0)
+                    C = im->getPixelAt(j,   0);
+                else
+                    C = reconstructed_image->getPixelAt(j,   i-1);
+
+                if(((fabs(B-C) - Q) <= fabs(B-A)) && (fabs(B-A) <= (fabs(B-C) + Q))) {
+                    if(i == 0 || j == 0) {
+                        pred[i][j] = (im->getPixelAt(j, i));
+                        quant_pred_err = 0;
+                    }
+                    else {
+                        pred[i][j] = (uint8_t)((A + C) / 2);
+                        if(quantdef->noQuantifEnable())
+                            quant_pred_err = pixImg-pred[i][j];
+                        else
+                            quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
                     }
                 }
+                else {
+                    if( fabs(B-A) > fabs(B-C) ) {
+                        if(j == 0) {
+                            pred[i][j] = (im->getPixelAt(j, i));
+                            quant_pred_err = 0;
+                        }
+                        else {
+                            pred[i][j] = (uint8_t)A;
+                            if(quantdef->noQuantifEnable())
+                                quant_pred_err = pixImg-pred[i][j];
+                            else
+                                quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                        }
+
+                    } else {
+                        if(i == 0) {
+                            pred[i][j] = (im->getPixelAt(j, i));
+                            quant_pred_err = 0;
+                        }
+                        else {
+                            pred[i][j] = (uint8_t) C;
+                            if(quantdef->noQuantifEnable())
+                                quant_pred_err = pixImg-pred[i][j];
+                            else
+                                quant_pred_err = quantdef->valueOf(pixImg - pred[i][j]);
+                        }
+                    }
+                }
+                quantized_prediction_error_image->setPixelAt(j, i,quant_pred_err);
                 break;
             default:
                 break;
             }
 
             //image de prediction pour affichage
-            prediction_image->setPixelAt(j,i,pred);
-            depth_default_t thePixel = reconstructed_image->getPixelAt(j, i);
+            prediction_image->setPixelAt(j,i,pred[i][j]);
             //erreur de prediction
-            pred_err = thePixel - pred;
+            pred_err = im->getPixelAt(j,i) - pred[i][j];
             predction_error_image->setPixelAt(j, i, pred_err);
 
-            depth_default_t pixImg = im->getPixelAt(j, i);
-
-            //code obsolete
-            //codec(0, quant_pred_err, &code, &reco);//action : voir code Vero 1988 calcul : reco = quant_pred_err (erreur de prediction quantifiee)
-            //int tempvalue = pred + reco;
-
-            //quantification erreur de prediction
-            quant_pred_err = quantdef->valueOf(pred_err);
-            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
-
-
-            quantized_prediction_error_image->setPixelAt(j, i, quant_pred_err);
-
             // valeur reconstruite
-            int tempvalue = pred + quant_pred_err;
+            int tempvalue = pred[i][j] + quant_pred_err;
             // Crop the value in [0,255]
             reconstructed_image->setPixelAt(j, i, tempvalue > 255 ? 255 : tempvalue < 0 ? 0 : tempvalue);
             depth_default_t reconstructedPix = reconstructed_image->getPixelAt(j, i);
@@ -171,11 +228,10 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
             coding_err = pixImg - reconstructedPix;
             //construction de l'image d'erreur de codage
             coding_error_image->setPixelAt(j,i,(coding_err));
-
+            }
         }
-    }
 
-    
+
     double pred_err_entrop = predction_error_image->getEntropy();
     sprintf(buffer, qApp->translate("DPCM","\nL'entropie de l'image d'erreur de prediction vaut : %f\n").toUtf8(), pred_err_entrop);
 
@@ -183,12 +239,13 @@ string DPCM::execute( const GrayscaleImage *im, Prediction prediction_alg, image
     double quant_pred_err_entrop = quantized_prediction_error_image->getEntropy();
     sprintf(buffer2, qApp->translate("DPCM", "\nL'entropie de l'image d'erreur de prediction quantifiee vaut : %f\n").toUtf8(), quant_pred_err_entrop);
 
-
-    returnval = returnval + buffer;
-    returnval = returnval + "\n";
-    returnval = returnval + buffer2;
-    returnval = returnval + "\n";
-    returnval = returnval + print_iloiqu();
+    if (!quantdef->noQuantifEnable()) {
+        returnval = returnval + buffer;
+        returnval = returnval + "\n";
+        returnval = returnval + buffer2;
+        returnval = returnval + "\n";
+        returnval = returnval + print_iloiqu();
+    }
 
     /* libration de la mmoire alloue */
     *quant_err_image = quantized_prediction_error_image;
@@ -243,9 +300,12 @@ void DPCM::codec(int nlq,int ier,int *icode,int *ireco) {
 }
 
 void DPCM::set_levels() {
+    //No_Quantification checked
+    if(quantdef->noQuantifEnable())
+        return;
     // Fills in iloiqu with the specified values
-    if( quantdef->nbThresholds() > N_MAX_THRESHOLD || quantdef->nbThresholds() < 1 ) {
-        char buffer[255];
+    else if( quantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || quantdef->nbThresholds() < 1 ) {
+        char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::set_levels:\nquantdef->GetNumThresholds() = %d").toUtf8(), quantdef->nbThresholds() );
         throw buffer;
     }
@@ -255,7 +315,7 @@ void DPCM::set_levels() {
         iloiqu[ counter * 2 + 1 ] = quantdef->threshold(counter);
         iloiqu[ counter * 2 + 2 ] = quantdef->value(counter);
     }
-    iloiqu[quantdef->nbThresholds() * 2 + 1 ] = iloiqu[quantdef->nbThresholds() * 2 - 1 ] + 1;
+    iloiqu[quantdef->nbThresholds() * 2 + 1 ] = iloiqu[quantdef->nbThresholds() * 2 - 1 ];
     iloiqu[quantdef->nbThresholds() * 2 + 2 ] = quantdef->value(quantdef->nbThresholds());
 }
 
@@ -264,7 +324,7 @@ string DPCM::print_iloiqu() {
     returnval = qApp->translate("DPCM","seuils de decision --------------- niveaux de reconstruction\n").toStdString();
     int counter;
     char buffer[100];
-    for( counter=1; counter<= iloiqu[0]*2-1; counter++ ) {
+    for( counter=1; counter<= iloiqu[0]*2-1; ++counter ) {
         if( !(counter & 1 == 1) ) {
             sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
             returnval = returnval + buffer;
@@ -272,18 +332,22 @@ string DPCM::print_iloiqu() {
             returnval = returnval + buffer;
         }
     }
-    sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
+    if(quantdef->nbValues()<255){
+        sprintf( buffer, "                                                 %3d     \n", iloiqu[counter] );
+    }else{
+        sprintf( buffer, "                                                 %3d     \n", iloiqu[quantdef->nbThresholds() * 2 + 1] );
+    }
     returnval = returnval + buffer;
-
     return returnval;
 }
 
 void DPCM::setQuantification( Quantification *tquantdef ) {
-    if( tquantdef == NULL ) {
-        throw "Error in DPCM::setQuantDef:\ntquantdef = NULL";
+    if (tquantdef->noQuantifEnable()){
+        quantdef = tquantdef;
+        return;
     }
-    if( tquantdef->nbThresholds() > N_MAX_THRESHOLD || tquantdef->nbThresholds() < 1 ) {
-        char buffer[255];
+    else if( tquantdef->nbThresholds() > N_MAX_THRESHOLD_FULL || (tquantdef->nbThresholds() < 1 )) {
+        char buffer[512];
         sprintf( buffer, qApp->translate("DPCM","Error in DPCM::setQuantDef:\ntquantdef->GetNumThresholds() = %d").toUtf8(), tquantdef->nbThresholds() );
         throw buffer;
     }

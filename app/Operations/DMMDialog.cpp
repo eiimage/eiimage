@@ -21,12 +21,10 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QPushButton>
-#include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
 #include <QCheckBox>
 #include <QGroupBox>
-#include <QFormLayout>
 
 
 
@@ -41,49 +39,56 @@ DMMDialog::DMMDialog(QWidget *parent) :
     QDialog(parent), _centerX(0), _centerY(0)
 {
     QStringList opList;
-    opList << tr("Erosion") << tr("Dilatation") << tr("Opening") << tr("Closing") << tr("DMM");
+    //opList << tr("Erosion") << tr("Dilatation") << tr("Opening") << tr("Closing") << tr("DMM");
+    opList << tr("DMM");
 
+    //! Création de la fenêtre générée lors de la sélection de la fontionnalité "DMM"
     this->setWindowTitle(tr("DMM"));
     this->setMinimumWidth(512);
     this->setMinimumHeight(512);
-    QVBoxLayout* layout = new QVBoxLayout();
+    auto* layout = new QVBoxLayout();
     this->setLayout(layout);
 
-//    if(converted) {
-//        layout->addWidget(new QLabel("<font color=red><i>Information : The input image has been converted to grayscale.</i></font>"));
-//    }
-
-    QHBoxLayout* box1layout = new QHBoxLayout();
+    //! Création de la liste déroulante des opérations morphologiques disponibles
+    auto* box1layout = new QHBoxLayout();
     _operatorBox = new QComboBox();
     _operatorBox->insertItems(0, opList);
     box1layout->addWidget(_operatorBox);
+    _operatorBox->setCurrentIndex(Dmm);
     layout->addLayout(box1layout);
 
-    QGroupBox* structElemBox = new QGroupBox(tr("Structuring element"));
-    QHBoxLayout* structElemLayout = new QHBoxLayout();
+    //! Création du bouton DMM new level
+    _newLevelButton = new QPushButton("DMM new level");
+    _newLevelButton->setEnabled(false);
+    layout->addWidget(_newLevelButton);
 
+    auto* structElemBox = new QGroupBox(tr("Structuring element"));
+    auto* structElemLayout = new QHBoxLayout();
 
+    //! création d'un QGraphicsView : _structElemView, qui va contenir l'affichage de l'ES : _structElemViewer
     _views.push_back(StructElemViewer::ElemView(new StructElem(GrayscaleImage_t<bool>(1,1,new bool(true)), 0, 0), 0, 0));
-    _structElemViewer = new StructElemViewer(_views.back().elem);
+    _structElemViewer = new StructElemViewer(_views.back().elem,false);
     _views.push_back(StructElemViewer::ElemView(new StructElem(GrayscaleImage_t<bool>(1,1,new bool(true)), 0, 0), 0, 0));
-    _structElemViewer = new StructElemViewer(_views.back().elem);
+    _structElemViewer = new StructElemViewer(_views.back().elem, false);
     _structElemView = new QGraphicsView();
     _structElemView->setScene(_structElemViewer);
     structElemLayout->addWidget(_structElemView);
     _structElemViewer->draw(0, 0);
-    QVBoxLayout* rightPanelLayout = new QVBoxLayout();
-    QWidget* dilatButtonWidget = new QWidget();
+
+    //! Création des outils de modification de l'ES (boutons fléchés)
+    auto* rightPanelLayout = new QVBoxLayout();
+    auto* dilatButtonWidget = new QWidget();
     dilatButtonWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-    QGridLayout* dilatButtonLayout = new QGridLayout(dilatButtonWidget);
-    QPushButton* dilatLeftButton = new QPushButton(QIcon(":/img/arrow-left.png"), "");
-    QPushButton* dilatTopLeftButton = new QPushButton(QIcon(":/img/arrow-top-left.png"), "");
-    QPushButton* dilatTopButton = new QPushButton(QIcon(":/img/arrow-top.png"), "");
-    QPushButton* dilatTopRightButton = new QPushButton(QIcon(":/img/arrow-top-right.png"), "");
-    QPushButton* dilatRightButton = new QPushButton(QIcon(":/img/arrow-right.png"), "");
-    QPushButton* dilatBottomRightButton = new QPushButton(QIcon(":/img/arrow-bottom-right.png"), "");
-    QPushButton* dilatBottomButton = new QPushButton(QIcon(":/img/arrow-bottom.png"), "");
-    QPushButton* dilatBottomLeftButton = new QPushButton(QIcon(":/img/arrow-bottom-left.png"), "");
-    QPushButton* dilatCenterButton = new QPushButton("");
+    auto* dilatButtonLayout = new QGridLayout(dilatButtonWidget);
+    auto* dilatLeftButton = new QPushButton(QIcon(":/img/arrow-left.png"), "");
+    auto* dilatTopLeftButton = new QPushButton(QIcon(":/img/arrow-top-left.png"), "");
+    auto* dilatTopButton = new QPushButton(QIcon(":/img/arrow-top.png"), "");
+    auto* dilatTopRightButton = new QPushButton(QIcon(":/img/arrow-top-right.png"), "");
+    auto* dilatRightButton = new QPushButton(QIcon(":/img/arrow-right.png"), "");
+    auto* dilatBottomRightButton = new QPushButton(QIcon(":/img/arrow-bottom-right.png"), "");
+    auto* dilatBottomButton = new QPushButton(QIcon(":/img/arrow-bottom.png"), "");
+    auto* dilatBottomLeftButton = new QPushButton(QIcon(":/img/arrow-bottom-left.png"), "");
+    auto* dilatCenterButton = new QPushButton("");
     dilatLeftButton->setFixedSize(32, 32);
     dilatTopLeftButton->setFixedSize(32, 32);
     dilatTopButton->setFixedSize(32, 32);
@@ -98,8 +103,6 @@ DMMDialog::DMMDialog(QWidget *parent) :
     dilatBottomButton->setEnabled(false);
     dilatBottomLeftButton->setEnabled(false);
     dilatCenterButton->setEnabled(false);
-    _newLevelButton = new QPushButton("DMM new level");
-    _newLevelButton->setEnabled(false);
     dilatButtonLayout->addWidget(dilatLeftButton, 1, 0);
     dilatButtonLayout->addWidget(dilatTopLeftButton, 0, 0);
     dilatButtonLayout->addWidget(dilatTopButton, 0, 1);
@@ -111,25 +114,28 @@ DMMDialog::DMMDialog(QWidget *parent) :
     dilatButtonLayout->addWidget(dilatCenterButton, 1, 1);
     rightPanelLayout->addWidget(dilatButtonWidget);
 
-    QCheckBox* centerBox = new QCheckBox("Auto center");
+    //! Création du bouton auto center lié à la manière de modifier l'ES
+    auto* centerBox = new QCheckBox("Auto center");
     centerBox->setChecked(true);
     rightPanelLayout->addWidget(centerBox);
-    QWidget* fillWidget = new QWidget();
+
+    //! Pour un affichage plus cohérent du panel de droite
+    auto* fillWidget = new QWidget();
     fillWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
     rightPanelLayout->addWidget(fillWidget);
+
+    //! Ajout du panel de droite sur la fenêtre du DMM
     structElemLayout->addLayout(rightPanelLayout);
-
-    layout->addWidget(_newLevelButton);
-
-
     structElemBox->setLayout(structElemLayout);
     layout->addWidget(structElemBox);
 
-    QPushButton *okButton = new QPushButton(tr("Validate"), this);
+    //! Création du bouton de validation de l'opération à réaliser
+    auto *okButton = new QPushButton(tr("Validate"), this);
     okButton->setDefault(true);
     layout->addWidget(okButton);
     connect(okButton, SIGNAL(clicked()), this, SLOT(accept()));
 
+    //! Connections Qt pour la modification de l'ES
     connect(dilatLeftButton, SIGNAL(clicked()), this, SLOT(dilateLeft()));
     connect(dilatTopLeftButton, SIGNAL(clicked()), this, SLOT(dilateTopLeft()));
     connect(dilatTopButton, SIGNAL(clicked()), this, SLOT(dilateTop()));
@@ -138,13 +144,17 @@ DMMDialog::DMMDialog(QWidget *parent) :
     connect(dilatBottomRightButton, SIGNAL(clicked()), this, SLOT(dilateBottomRight()));
     connect(dilatBottomButton, SIGNAL(clicked()), this, SLOT(dilateBottom()));
     connect(dilatBottomLeftButton, SIGNAL(clicked()), this, SLOT(dilateBottomLeft()));
-    connect(_newLevelButton, SIGNAL(clicked()), this, SLOT(newLevel()));
-    connect(_operatorBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(opChanged(QString)));
+
+    //! Connections Qt pour désactiver des directions de dilatation de l'ES
     connect(centerBox, SIGNAL(toggled(bool)), this, SLOT(setCenter(bool)));
     connect(centerBox, SIGNAL(toggled(bool)), dilatRightButton, SLOT(setDisabled(bool)));
     connect(centerBox, SIGNAL(toggled(bool)), dilatBottomRightButton, SLOT(setDisabled(bool)));
     connect(centerBox, SIGNAL(toggled(bool)), dilatBottomButton, SLOT(setDisabled(bool)));
     connect(centerBox, SIGNAL(toggled(bool)), dilatBottomLeftButton, SLOT(setDisabled(bool)));
+
+    //! Connections Qt pour les boutons OK et DMM new level
+    connect(_newLevelButton, SIGNAL(clicked()), this, SLOT(newLevel()));
+    connect(_operatorBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(opChanged(QString)));
     _center = true;
 }
 
@@ -153,15 +163,27 @@ DMMDialog::~DMMDialog() {
 }
 
 void DMMDialog::refreshStructElemView() {
+    //! Stockage temporaire de l'ES actuel
     StructElemViewer* oldViewer = _structElemViewer;
-    _structElemViewer = new StructElemViewer(_views.front().elem);
-    for(vector<StructElemViewer::ElemView>::iterator it = _views.begin()+1; it < _views.end(); ++it) {
-        _structElemViewer->addStructElem(it->elem, it->x, it->y);
+
+    //! Création du nouvel ES avec ses dimensions modifiées
+    //! front() retourne une référence vers le premier élément du vecteur _views
+    _structElemViewer = new StructElemViewer(_views.front().elem, false);
+    for(auto it = _views.begin()+1; it < _views.end(); ++it) {
+        _structElemViewer->addStructElem(it->elem, (int)it->x, (int)it->y);
     }
+
+    //! _structElemView affiche le contenu du _structElemViewer
     _structElemView->setScene(_structElemViewer);
+
+    //! Coloriage du _structElemViewer pour faire apparaître l'ES
     _structElemViewer->draw(0, 0);
+
+    //! Libération de la mémoire du précédent affichage
     delete oldViewer;
-    _newLevelButton->setEnabled(getSelectedOp() == Dmm && _basicElements.size()>0);
+
+    //! Actiation du bouton DMM new level
+    _newLevelButton->setEnabled(getSelectedOp() == Dmm && !_basicElements.empty());
 }
 
 void DMMDialog::dilateLeft() {

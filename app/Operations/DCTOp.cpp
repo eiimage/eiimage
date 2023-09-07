@@ -19,6 +19,7 @@
 
 #include "DCTOp.h"
 #include <QApplication>
+#include <QString>
 #include "../Algorithms/DCT.h"
 #include <GrayscaleImage.h>
 #include <Converter.h>
@@ -48,14 +49,19 @@ void DCTOp::operator()(const imagein::Image* image, const std::map<const imagein
     string s;
     if(dialog->isTruncMode()) {
         s = dct16x16(image, &resImg, &invImg, true, dialog->getTruncLimit());
+        s.pop_back();
+        string str = QString(qApp->translate("Operations", " bpp avec 8 bits par coefficient non nul")).toStdString();
+        s += str;
     }
     else {
         s = dct16x16(image, &resImg, &invImg, false, 0, dialog->getNbBitInit(), dialog->getSlope());
+        s.pop_back();
+        s += " bpp";
     }
 
     outText(s);
     outText("-------------------------------------------");
-    outDoubleImage(resImg, qApp->translate("DCT", "DCT").toStdString(), true, true, 128., true);
+    outDoubleImage(resImg, qApp->translate("DCT", "DCT").toStdString(), ENABLE,DISABLE, false, 0., true);
     outImage(invImg, qApp->translate("DCT", "inverse DCT").toStdString());
 }
 

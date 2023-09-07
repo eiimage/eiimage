@@ -38,7 +38,6 @@ public:
     int getNbStep() const;
     int getStep() const;
 
-    
 private:
     Ui::InversePyramidDialog *ui;
 };

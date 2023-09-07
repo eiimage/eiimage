@@ -22,6 +22,7 @@
 #include <QFileDialog>
 #include "QuantificationDialog.h"
 
+
 DPCMDialog::DPCMDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DPCMDialog)
@@ -47,20 +48,44 @@ void DPCMDialog::on_quantEditorButton_clicked()
     dialog->exec();
 }
 
-Quantification* DPCMDialog::getQuantification() const {
-    try {
-        Quantification* quantif = new Quantification(ui->quantFileEdit->text().toStdString());
-        return quantif;
+void DPCMDialog::on_noQuantization_clicked()
+{
+    if(ui->noQuantization->isChecked()){
+        ui->quantBrowseButton->setEnabled(false);
+        ui->quantFileEdit->setEnabled(false);
+        ui->quantEditorButton->setEnabled(false);
+    }else{
+        ui->quantBrowseButton->setEnabled(true);
+        ui->quantFileEdit->setEnabled(true);
+        ui->quantEditorButton->setEnabled(true);
     }
-    catch(std::exception&) {
-        return NULL;
+}
+
+Quantification* DPCMDialog::getQuantification() const {
+    if (ui->noQuantization->isChecked()) {
+        /*Quantification constructor that enable the boolean variable noQuantif*/
+        return new Quantification();
+    } else {
+        std::string quantFilePath = ui->quantFileEdit->text().toStdString();
+
+        if (quantFilePath.empty()) {
+            throw std::runtime_error("Quantification file path is empty.");
+        }
+
+        try {
+            return new Quantification(quantFilePath);
+        } catch (const std::exception& e) {
+            // Si une exception est lancée dans le constructeur de Quantification, la propager plus loin
+            // Va se produire si le filename est incorrect
+            throw;
+        }
     }
 }
 
 DPCM::Prediction DPCMDialog::getPrediction() const {
     if(ui->predictRadioA->isChecked()) return DPCM::PX_EQ_A;
     else if(ui->predictRadioAC->isChecked()) return DPCM::PX_EQ_APC;
-    else if(ui->predictRadioC->isChecked()) return DPCM::PX_EQ_B;
+    else if(ui->predictRadioC->isChecked()) return DPCM::PX_EQ_C;
     else if(ui->predictRadioGraham->isChecked()) return DPCM::PX_EQ_Q;
     else return DPCM::PX_EQ_A;
 }

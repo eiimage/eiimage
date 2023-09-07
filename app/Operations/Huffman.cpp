@@ -23,9 +23,19 @@
 #include <cstdio>
 #include <cmath>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 using namespace imagein;
+
+/*------------------prepare for sorting---------------------*/
+typedef pair<string, double> PAIR;
+
+bool cmp(const PAIR& P1, const PAIR& P2)
+{
+    return P1.second < P2.second;
+}
+/*----------------------------------------------------------*/
 
 Huffman::Huffman() {
     size = 0;
@@ -65,6 +75,7 @@ string Huffman::execute( const GrayscaleImage *im ) {
     int nbpt;
     long wcounter, hcounter;
     char buffer[255];
+    char res[255];
     char c[255];
     std::string returnval;
     Image::depth_t p;
@@ -81,20 +92,35 @@ string Huffman::execute( const GrayscaleImage *im ) {
         }
     }
     returnval = prob_Pi( im ,nbpt);
-    sprintf(buffer, "\nH (theo.) = %.4f\n\n",H);
+    sprintf(buffer, QString(qApp->translate("Operations","\nEntropy H = %.4f bbp\n\n")).toUtf8(),H);
     returnval = returnval + buffer;
 
     codhuffman();
+    /*--------------------------Sort by increasing rate------------------------*/
+    map<string, double> mapStrPb;
     for(i=0 ; i<nbeff ; i++)
     {
         sprintf(c, "%s", chain+i*nbeff);
         reverse (c,c+strlen(c));
-        sprintf(buffer, "%s",c);
-        returnval = returnval + buffer;
+//        sprintf(buffer, "%s",c);
+        sprintf(res, "%s",c);
+//        returnval = returnval + buffer;
         sprintf(buffer, "--->%2d bits      Pi[%3d] = %7.5f\n",*(ilon+i),*(indicePi+i),*(Pi+i));
-        returnval = returnval + buffer;
+        strcat(res, buffer);
+        mapStrPb.insert(map<string, double>::value_type(res, *(Pi+i)));
+//        returnval = returnval + buffer;
     }
-    sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f\n")).toUtf8(),nbbit);
+    vector<PAIR> resVector;
+    map<string, double>::iterator iter;
+    for(iter=mapStrPb.begin(); iter!=mapStrPb.end();iter++){
+        resVector.push_back(*iter);
+    }
+    sort(resVector.begin(), resVector.end(), cmp);
+    for(unsigned int i=0; i<resVector.size(); ++i){
+        returnval = returnval + resVector[i].first;
+    }
+    /*---------------------------------------------------------------------------*/
+    sprintf(buffer, QString(qApp->translate("Operations","\n debit(huffman) = %.4f bpp\n")).toUtf8(),nbbit);
     returnval = returnval + buffer;
 
     return returnval;

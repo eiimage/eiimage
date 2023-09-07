@@ -38,67 +38,69 @@ RejectionRingOp::RejectionRingOp() : Operation(qApp->translate("Operations", "Re
 }
 
 void RejectionRingOp::operator()(const imagein::Image*, const std::map<const imagein::Image*, std::string>&) {
-    QDialog* dialog = new QDialog();
+    QDialog *dialog = new QDialog();
     dialog->setWindowTitle(qApp->translate("Operations", "Rejection ring"));
     dialog->setMinimumWidth(180);
-    QFormLayout* layout = new QFormLayout(dialog);
+    QFormLayout *layout = new QFormLayout(dialog);
 
-    QSpinBox* widthBox = new QSpinBox(dialog);
+    QSpinBox *widthBox = new QSpinBox(dialog);
     widthBox->setRange(0, 65536);
     widthBox->setValue(512);
     layout->insertRow(0, qApp->translate("RejectionRingOp", "Width=Height : "), widthBox);
 
-    QSpinBox* radiusBox = new QSpinBox(dialog);
+    QSpinBox *radiusBox = new QSpinBox(dialog);
     radiusBox->setRange(0, 65536);
     layout->insertRow(1, qApp->translate("RejectionRingOp", "Radius : "), radiusBox);
 
-    QSpinBox* thickBox = new QSpinBox(dialog);
+    QSpinBox *thickBox = new QSpinBox(dialog);
     thickBox->setRange(0, 65536);
     layout->insertRow(2, qApp->translate("RejectionRingOp", "Thickness (beyond radius) : "), thickBox);
 
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, dialog);
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal,
+                                                       dialog);
     layout->insertRow(3, buttonBox);
     QObject::connect(buttonBox, SIGNAL(accepted()), dialog, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), dialog, SLOT(reject()));
 
     QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
 
-    if(code!=QDialog::Accepted) return;
+    if (code != QDialog::Accepted) return;
 
     //On rcupre la taille de l'image a traiter
-    int nb_ligne,nb_colonne;
+    int nb_ligne, nb_colonne;
     int rayon, epaisseur;
 
-    nb_ligne= widthBox->value(); //1er parametre de l'algorithme
-    rayon=		radiusBox->value(); //2nd parametre de l'algorithme
-    epaisseur=	thickBox->value(); //3me parametre de l'algorithme
+    nb_ligne = widthBox->value(); //1er parametre de l'algorithme
+    rayon = radiusBox->value(); //2nd parametre de l'algorithme
+    epaisseur = thickBox->value(); //3me parametre de l'algorithme
 
-    nb_colonne=nb_ligne;
+    nb_colonne = nb_ligne;
 
-    Image_t<double>* result = new Image_t<double>(nb_ligne, nb_colonne, 1);//image resultat
+    Image_t<double> *result = new Image_t<double>(nb_ligne, nb_colonne, 1);//image resultat
 
-    int i,j;
+    int i, j;
     int icentre, jcentre;
 
-    icentre = (int)(nb_ligne/2.);
-    jcentre = (int)(nb_colonne/2.);
+    icentre = (int) (nb_ligne / 2.);
+    jcentre = (int) (nb_colonne / 2.);
 
-    for(i=0;i<nb_ligne;i++)
-        for(j=0;j<nb_colonne;j++){
+    for (i = 0; i < nb_ligne; i++)
+        for (j = 0; j < nb_colonne; j++) {
             result->setPixelAt(i, j, 1.);
         }
 
-    for(i=0;i<nb_ligne;i++)
-        for(j=0;j<nb_colonne;j++){
-            if( (i-icentre)*(i-icentre) + (j-jcentre)*(j-jcentre) >= rayon*rayon  &&  (i-icentre)*(i-icentre) + (j-jcentre)*(j-jcentre) <= (rayon+epaisseur)*(rayon+epaisseur) )
+    for (i = 0; i < nb_ligne; i++)
+        for (j = 0; j < nb_colonne; j++) {
+            if ((i - icentre) * (i - icentre) + (j - jcentre) * (j - jcentre) >= rayon * rayon &&
+                (i - icentre) * (i - icentre) + (j - jcentre) * (j - jcentre) <=
+                (rayon + epaisseur) * (rayon + epaisseur))
                 result->setPixelAt(i, j, 0.);
         }
 
 
-
     QString name(qApp->translate("RejectionRingOp", "Rejection ring (%1 %2 %3)"));
     name = name.arg(nb_ligne).arg(rayon).arg(epaisseur);
-    outDoubleImage(result, name.toStdString(), true, false);
+    outDoubleImage(result, name.toStdString(),ENABLE,DISABLE);
 }
 
 bool RejectionRingOp::needCurrentImg() const {

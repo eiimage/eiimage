@@ -20,7 +20,6 @@
 #ifndef DCT_H
 #define DCT_H
 
-#include "DCT.h"
 #include <Image.h>
 #include <string>
 

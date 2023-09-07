@@ -40,6 +40,9 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include <QPushButton>
+#include <QDebug>
+
+enum OpMorpho {EditES ,ErosionOp, DilatationOp, OpeningOp, ClosingOp, GradientOp, WtophatOp, BtophatOp};
 
 class StructElemWindow : public QDialog
 {
@@ -47,6 +50,7 @@ class StructElemWindow : public QDialog
   public:
     StructElemWindow(imagein::MorphoMat::StructElem*& elemi, QAction* button);
     void changeStructElem(imagein::MorphoMat::StructElem* elem);
+    inline int getShapeSizeGenerate() const{ return _shapeToGenvalue;};
 
   public slots:
     void openFile();
@@ -55,13 +59,32 @@ class StructElemWindow : public QDialog
     void resize(int size);
     void generate();
 
+public slots:
+    void dilateLeft();
+    void dilateTopLeft();
+    void dilateTop();
+    void dilateTopRight();
+    void dilateRight();
+    void dilateBottomRight();
+    void dilateBottom();
+    void dilateBottomLeft();
+
+
+
+    //! _shapeToGenvalue mis à jour avec le contenu de la box _shapeSize
+    inline void setShapeSizeScaling(){ _shapeToGenvalue = _shapeSize->value();};
+    inline void setShapeSizeScaling(int shapeToGenvalue){ _shapeToGenvalue = shapeToGenvalue;};
+
+    signals:
+    void sendOpMorph(OpMorpho);
+
   protected:
 //    void closeEvent ( QCloseEvent * event );
 
   private:
     QWidget* _widget;
-    QPushButton* _openFileButton;
-    QPushButton* _saveFileButton;
+    QToolButton* _openFileButton;
+    QToolButton* _saveFileButton;
     QAction* _ok;
     genericinterface::HistogramWindow* _histo;
     QLabel* _labelThreshold;
@@ -73,9 +96,11 @@ class StructElemWindow : public QDialog
     QAction* _tbButton;
     QPushButton* _genButton; 
     QComboBox* _shapeToGen;
+    QComboBox* _opMorphSelection;
     QSpinBox* _shapeSize;
     QSpinBox* _scale;
-
+    int _shapeToGenvalue; //! Equivalent de _shapeToGen.value mais mis à jour uniquement à l'appuis sur le bouton "generate"
+    int _previousScale;
 };
 
 #endif

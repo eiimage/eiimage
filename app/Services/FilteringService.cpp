@@ -1,18 +1,18 @@
 /*
  * Copyright 2011-2012 Benoit Averty, Samuel Babin, Matthieu Bergere, Thomas Letan, Sacha Percot-Tétu, Florian Teyssier
- * 
+ *
  * This file is part of DETIQ-T.
- * 
+ *
  * DETIQ-T is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * DETIQ-T is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with DETIQ-T.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -21,6 +21,7 @@
 
 #include <QMdiArea>
 #include <QString>
+#include <QObject>
 
 #include <GenericInterface.h>
 #include <Converter.h>
@@ -79,7 +80,7 @@ void FilteringService::applyFiltering()
 }
 
 void FilteringService::edition()
-{  
+{
     _filterEditor = new FilterEditor();
     _filterEditor->exec();
 }
@@ -110,10 +111,26 @@ void FilteringService::applyAlgorithm(Filtering* algo)
             if(_dblResult) {
                 DoubleImageWindow* diw = dynamic_cast<DoubleImageWindow*>(_siw);
                 if(diw != NULL) {
-                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), diw->isNormalized(), diw->isLogScaled());
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), AUTO,AUTO , diw->isLogScaled());
+                    /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
+                    QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
+                    if(dblResImg->min()<0){
+                        std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
+                                                                "<br><br> pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)"
+                                                                "<br><br> -------------------------------------------").toStdString();
+                        _ws->addText(outputMessage);
+                    }
                 }
                 else {
-                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), true);
+                    riw = new DoubleImageWindow(dblResImg, _siw->getPath(), AUTO,AUTO);
+                    /*Enable the output of description text concerning the display imgage processing options that the user can choose*/
+                    QObject::connect(riw, SIGNAL(textToShow(QString)), this->_ws, SLOT(outputText(QString)));
+                    if(dblResImg->min()<0){
+                        std::string outputMessage = QObject::tr("Both Offset and Scaling applied "
+                                                                "<br><br> pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)"
+                                                                "<br><br> -------------------------------------------").toStdString();
+                        _ws->addText(outputMessage);
+                    }
                 }
             }
             else {

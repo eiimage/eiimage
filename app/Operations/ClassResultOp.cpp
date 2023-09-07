@@ -57,6 +57,9 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
     borderBox->setValue(2);
     formLayout->insertRow(0, qApp->translate("ClassResult", "Critère de zone intérieure : "), innerBox);
     formLayout->insertRow(1, qApp->translate("ClassResult", "Critère de zone frontière : "), borderBox);
+    innerBox->setWhatsThis(qApp->translate("ClassResult", "Largeur de couronne pour conserver la zone intérieure"));
+    borderBox->setWhatsThis(qApp->translate("ClassResult", "Largeur de couronne pour conserver la zone frontière"));
+
     layout->addWidget(new QLabel(qApp->translate("ClassResult", "<b>Critère de zones (relatifs aux zones totales) : </b>")));
     layout->addLayout(formLayout);
     layout->addWidget(new QLabel(qApp->translate("ClassResult", "<b>Select the image's classes zones : </b>")));
@@ -72,13 +75,18 @@ void ClassResultOp::operator()(const imagein::Image* img, const std::map<const i
 
     string returnval;
 
-    int param1 = 2;
-    int param2 = 8;
+//    int param1 = 2;
+//    int param2 = 8;
+    /*The input parameters are not used*/
+    int param1 = borderBox->value();
+    int param2 = innerBox->value();
     vector<Rectangle> selection = zoneSelector->getSelections();
     int K = selection.size();
     int* classes = new int[K];
+    outText(qApp->translate("ClassResult", "------Largeur de couronne pour conserver la zone intérieure : %1 ------").arg(param1).toStdString());
+    outText(qApp->translate("ClassResult", "------Largeur de couronne pour conserver la zone frontière : %1 ------\n").arg(param2).toStdString());
     outText(qApp->translate("ClassResult", "Voici les résultats du classement : \n").toStdString());
-    outText(qApp->translate("ClassResult", "\nNombre de classes = %1 ").arg(K).toStdString());
+    outText(qApp->translate("ClassResult", "Nombre de classes = %1 ").arg(K).toStdString());
     for(int i = 0; i < K; ++i) {
         Histogram histo = img->getHistogram(0, selection.at(i));
         classes[i] = (uint8_t) (std::max_element(histo.begin(), histo.end()) - histo.begin());

@@ -45,6 +45,7 @@ public:
     void setFilter(int);
     void setOneStep(int);
     void setOneStepChecked(bool);
+    void updateMaxLevel(int);
 
 private:
     Ui::PyramidDialog *ui;

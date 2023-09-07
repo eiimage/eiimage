@@ -24,12 +24,16 @@
 
 #include <iostream>
 #include <QLibraryInfo>
+#include <QStyleFactory>
 
 #include "BuiltinOpSet.h"
 
 #include "Services/PluginManager.h"
 #include "Services/ImageINSAService.h"
 
+#include "Operations/AbsoluteConvertOp.h"
+#include "Operations/BinaryMaskOp.h"
+#include "Operations/DoubleConvertOp.h"
 #include "Operations/PointOp.h"
 #include "Operations/ThresholdOp.h"
 #include "Operations/TranslateOp.h"
@@ -72,10 +76,12 @@
 #include "Operations/SeparatorOp.h"
 #include "Operations/MedianOp.h"
 #include "Operations/UCharConvertOp.h"
-
+#include "Operations/GetHintOp.h"
 
 #include "Services/MorphoMatService.h"
 #include "Services/FilteringService.h"
+
+
 
 using namespace genericinterface;
 using namespace std;
@@ -83,8 +89,9 @@ using namespace std;
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    app.setOrganizationName("INSA");
-    app.setApplicationName("ImageINSA");
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    QApplication::setOrganizationName("INSA");
+    QApplication::setApplicationName("ImageINSA");
 
     Log::configure(true, false, 0);
 
@@ -136,16 +143,21 @@ int main(int argc, char** argv)
     image->addOperation(new SeparatorOp());
     //Mask and crops here
     image->addOperation(new SeparatorOp());
+    image->addOperation(new AbsoluteConvertOp());
     image->addOperation(new UCharConvertOp());
+    image->addOperation(new DoubleConvertOp());
     image->addOperation(new SeparatorOp());
     image->addOperation(new ScalingOp());
     image->addOperation(new QuantificationOp());
     image->addOperation(new ThresholdOp());
     image->addOperation(new SeparatorOp());
+    image->addOperation(new BinaryMaskOp());
+    image->addOperation(new SeparatorOp());
     image->addOperation(new HistogramOp());
     image->addOperation(new PointOp());
     image->addOperation(new SeparatorOp());
     image->addOperation(new NoiseOp());
+
 
     //à mettre dans oclors
   /*
@@ -165,7 +177,7 @@ int main(int argc, char** argv)
 
 
 
-    BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Encoding").toStdString());
+    BuiltinOpSet* encode = new BuiltinOpSet(qApp->translate("", "&Coding").toStdString());
 
     encode->addOperation(new HuffmanOp());
     encode->addOperation(new DPCMEncodingOp());
@@ -204,6 +216,8 @@ int main(int argc, char** argv)
     colors->addOperation(new CombineHSVOp());
     colors->addOperation(new SeparatorOp());
     colors->addOperation(new PseudoColorOp());
+    colors->addOperation(new SeparatorOp());
+    colors->addOperation(new GetHintOp());
 
     BuiltinOpSet* filter = new BuiltinOpSet(qApp->translate("", "Filtering").toStdString());
     filter->addOperation(new BFlitOp());
@@ -220,12 +234,10 @@ int main(int argc, char** argv)
     mainService->addOpSet(encode);
     gi.addService(new MorphoMatService);
 
-
     mainService->addOpSet(tools);
 
+    gi.setWindowIcon(QIcon(":/img/Logo_INSA.ico"));
     gi.addService(pluginManager);
-
-
     gi.run();
 
     return app.exec();

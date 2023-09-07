@@ -21,13 +21,17 @@
 #define QUANTIFICATION_H
 
 #include <Image.h>
+#include "Widgets/ImageWidgets/ImageWindow.h"
 
-#define N_MAX_THRESHOLD 256
+#define N_MAX_THRESHOLD 999
+#define N_MAX_THRESHOLD_FULL 512
 
 class Quantification {
 public:
-    explicit Quantification(int size);
+
+    explicit Quantification(int size, int value_inf, int value_sup);
     explicit Quantification(std::string filename);
+    explicit Quantification();
 
     void saveAs(std::string filename);
 
@@ -39,19 +43,30 @@ public:
 
     inline int value(int i) const {return _values[i];}
     inline void setValue(int i, int v) {_values[i] = v;}
+    inline void setNoQuantifEnable (bool enable) {_noQuantifFlag = enable;}
+
+    inline void setQuantificationInterval(int a, int b){ _value_inf = a; _value_sup = b;}
+    inline int getValueInf() const {return _value_inf;}
+    inline int getValueSup() const {return _value_sup;}
+    inline bool noQuantifEnable () const {return _noQuantifFlag;}
 
     inline int threshold(int i) const {return _threshold[i];}
     inline void setThreshold(int i, int v) {_threshold[i] = v;}
 
-    static Quantification linearQuant(int size);
-    static Quantification nonLinearQuant(int size, const imagein::Image *image, unsigned int c);
-    static Quantification nonLinearQuantOptimized(int size, const imagein::Image *image, unsigned int c);
-    static Quantification lloydMaxQuant(int size, const imagein::Image* image, unsigned int c);
+    static Quantification linearQuant(int size, int value_inf, int value_sup);
+    static Quantification nonLinearQuant(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification nonLinearQuantOptimized(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    static Quantification lloydMaxQuant(int size, int value_inf, int value_sup, const genericinterface::ImageWindow *currentWnd, unsigned int c);
+    /*linear quantificator for dpcm(including negatif values)*/
+    /*static Quantification linearQuant_DPCM(int size);*/
 
 private:
     int size;
+    int _value_inf,_value_sup;
     int* _threshold;
     int* _values;
+    int* _test;
+    bool _noQuantifFlag;
 };
 
 #endif // QUANTIFICATION_H

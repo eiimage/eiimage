@@ -19,10 +19,12 @@
 
 #include "StructElemWindow.h"
 #include "StructElemViewer.h"
+#include "Services/MorphoMatService.h"
 
 
 #include <Image.h>
 #include <QDialogButtonBox>
+#include <QGroupBox>
 
 using namespace genericinterface;
 using namespace imagein;
@@ -31,82 +33,177 @@ using namespace imagein::MorphoMat;
 
 StructElemWindow::StructElemWindow(StructElem*& elem, QAction* tbButton) : _structElem(elem), _serviceStructElem(elem), _tbButton(tbButton)
 {
+    //! Taille de la fenêtre d'édition de l'élément structurant
+    setMinimumSize(600,400);
     _realSize = *elem;
 
-    QVBoxLayout* layout = new QVBoxLayout();
-    QHBoxLayout* hlayout = new QHBoxLayout();
-    _openFileButton = new QPushButton(tr("&Open file"));
-    _saveFileButton = new QPushButton(tr("&Save as..."));
-    hlayout->addWidget(_openFileButton);
-    hlayout->addWidget(_saveFileButton);
-    layout->addLayout(hlayout);
-    this->setLayout(layout);
+    auto* layout = new QVBoxLayout();
 
-    std::cout << "checked :" << _openFileButton->isChecked() << "\n";
-    std::cout << "checked2 : " << _saveFileButton->isChecked() << "\n";
-    QFormLayout* formLayout = new QFormLayout();
-    layout->addLayout(formLayout);
-    
-    QHBoxLayout* layout2 = new QHBoxLayout();
-    layout->addLayout(layout2);
-    layout2->addWidget(new QLabel(tr("Basic shapes :")));
+    //! sélection de la forme de l'élément  à générer
+    auto* layout1 = new QHBoxLayout();
+    layout->addLayout(layout1);
+    layout1->addWidget(new QLabel(tr("Basic shapes :")));
     _shapeToGen = new QComboBox;
     _shapeToGen->setEditable(false);
     _shapeToGen->insertItem(0, tr("Diamond"));
     _shapeToGen->insertItem(1, tr("Disc"));
     _shapeToGen->insertItem(2, tr("Empty"));
-    layout2->addWidget(_shapeToGen);
+    layout1->addWidget(_shapeToGen);
+
+    //! menu déroulant sélection op. morph.
+    auto* layout2 = new QHBoxLayout();
+    layout->addLayout(layout2);
+    layout2->addWidget(new QLabel(tr("Opération :")));
+    _opMorphSelection = new QComboBox;
+    _opMorphSelection->setEditable(false);
+    _opMorphSelection->insertItem(EditES, tr("Edit structuring element"));
+    _opMorphSelection->insertItem(ErosionOp, tr("Erosion"));
+    _opMorphSelection->insertItem(DilatationOp, tr("Dilatation"));
+    _opMorphSelection->insertItem(OpeningOp, tr("Opening"));
+    _opMorphSelection->insertItem(ClosingOp, tr("Closing"));
+    _opMorphSelection->insertItem(GradientOp, tr("Gradient"));
+    _opMorphSelection->insertItem(WtophatOp, tr("White top hat"));
+    _opMorphSelection->insertItem(BtophatOp, tr("Black top hat"));
+    layout2->addWidget(_opMorphSelection);
+
+    //! sélection de la taille de l'élément structurant à générer
     _shapeSize = new QSpinBox();
     _shapeSize->setRange(1,64);
     _shapeSize->setSingleStep(1);
-    _shapeSize->setValue(3);
-    layout2->addWidget(_shapeSize);
+    _shapeSize->setValue(_structElem->getShapeSizeMemory());
+    layout1->addWidget(_shapeSize);
+    _shapeToGenvalue = _structElem->getShapeSizeMemory();
+
+    //! générer un nouvel élément structurant à partir de la forme et la taille sélectionnée
     _genButton = new QPushButton(tr("Generate"));
-    layout2->addWidget(_genButton);
-    
-    _viewer = new StructElemViewer(_structElem);
+    layout1->addWidget(_genButton);
+
+    auto* structElemLayout = new QHBoxLayout();
+
+    //! Affichage de l'élément structurant
+    _viewer = new StructElemViewer(_structElem, true);
     _view = new QGraphicsView;
     _view->setScene(_viewer);
-    layout->addWidget(_view);
     _viewer->draw(0,0);
 
-    QHBoxLayout* layout3 = new QHBoxLayout();
-    layout->addLayout(layout3);
-    layout3->addWidget(new QLabel(tr("Scale :")));
+    //! Création des outils de modification de l'ES (boutons fléchés)
+    auto* rightPanelLayout = new QVBoxLayout();
+    rightPanelLayout->setAlignment(Qt::AlignTop);  // Alignement en haut
+
+    auto* dilatButtonWidget = new QWidget();
+    dilatButtonWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    auto* dilatButtonLayout = new QGridLayout(dilatButtonWidget);
+
+    dilatButtonWidget->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    auto* dilatLeftButton = new QPushButton(QIcon(":/img/arrow-left.png"), "");
+    auto* dilatTopLeftButton = new QPushButton(QIcon(":/img/arrow-top-left.png"), "");
+    auto* dilatTopButton = new QPushButton(QIcon(":/img/arrow-top.png"), "");
+    auto* dilatTopRightButton = new QPushButton(QIcon(":/img/arrow-top-right.png"), "");
+    auto* dilatRightButton = new QPushButton(QIcon(":/img/arrow-right.png"), "");
+    auto* dilatBottomRightButton = new QPushButton(QIcon(":/img/arrow-bottom-right.png"), "");
+    auto* dilatBottomButton = new QPushButton(QIcon(":/img/arrow-bottom.png"), "");
+    auto* dilatBottomLeftButton = new QPushButton(QIcon(":/img/arrow-bottom-left.png"), "");
+
+    dilatLeftButton->setFixedSize(32, 32);
+    dilatTopLeftButton->setFixedSize(32, 32);
+    dilatTopButton->setFixedSize(32, 32);
+    dilatTopRightButton->setFixedSize(32, 32);
+    dilatRightButton->setFixedSize(32, 32);
+    dilatBottomRightButton->setFixedSize(32, 32);
+    dilatBottomButton->setFixedSize(32, 32);
+    dilatBottomLeftButton->setFixedSize(32, 32);
+
+    dilatButtonLayout->addWidget(dilatLeftButton, 1, 0);
+    dilatButtonLayout->addWidget(dilatTopLeftButton, 0, 0);
+    dilatButtonLayout->addWidget(dilatTopButton, 0, 1);
+    dilatButtonLayout->addWidget(dilatTopRightButton, 0, 2);
+    dilatButtonLayout->addWidget(dilatRightButton, 1, 2);
+    dilatButtonLayout->addWidget(dilatBottomRightButton, 2, 2);
+    dilatButtonLayout->addWidget(dilatBottomButton, 2, 1);
+    dilatButtonLayout->addWidget(dilatBottomLeftButton, 2, 0);
+    rightPanelLayout->addWidget(dilatButtonWidget);
+
+    rightPanelLayout->addWidget(dilatButtonWidget);
+
+    //! Ajout de _view et du widget contenant les boutons à la vue structElemBox
+    auto* structElemBox = new QGroupBox(tr("Structuring element"));
+    auto* hLayout = new QHBoxLayout();
+    hLayout->addWidget(_view);
+    hLayout->addLayout(rightPanelLayout);
+    structElemBox->setLayout(hLayout);
+
+    layout->addWidget(structElemBox);
+
+    //!bouton ouverture d'un ES sauvegardé
+    _openFileButton = new QToolButton();
+    _openFileButton->setToolTip(tr("Open file"));
+    _openFileButton->setIcon(this->style()->standardIcon(QStyle::SP_DialogOpenButton));
+    _openFileButton->setCheckable(true);
+    _openFileButton->setIconSize (QSize(18, 18));
+
+    //!bouton sauvegarde d'un ES
+    _saveFileButton = new QToolButton();
+    _saveFileButton->setToolTip(tr("Save as..."));
+    _saveFileButton->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
+    _saveFileButton->setCheckable(true);
+    _saveFileButton->setIconSize (QSize(18, 18));
+
+    //! Création layout horizontaux pour les boutons (sauvegarde et ouverture)
+    auto* layout3 = new QHBoxLayout();
+    auto* hlayout = new QHBoxLayout();
+    layout3->addStretch(); // Ajout d'un espace flexible pour pousser les boutons vers la droite
+    layout3->addWidget(_openFileButton);
+    layout3->addWidget(_saveFileButton);
+
+    hlayout->addLayout(layout3); // Ajouter le layout vertical au layout horizontal (ie en dessous de l'ES)
+    layout->addLayout(hlayout); //Ajouter le layout horizontal au layout principal
+    this->setLayout(layout);
+
+    auto* formLayout = new QFormLayout();
+    layout->addLayout(formLayout);
+
+    //! modification de l'échelle de l'élément structurant
+    auto* layout4 = new QHBoxLayout();
+    layout->addLayout(layout4);
+    layout4->addWidget(new QLabel(tr("Scale :")));
     _scale = new QSpinBox();
     _scale->setRange(1,32);
     _scale->setSingleStep(1);
     _scale->setSuffix("");
-    _scale->setValue(_structElem->getScale());
-    layout3->addWidget(_scale);
-    
-//    QPushButton* button = new QPushButton("OK");
-//    layout->addWidget(button);
-    QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this);
-    layout->addWidget(buttonBox);
-    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(ok()));
-    QObject::connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+    _scale->setValue(_structElem->getScaleMemory());
+    _previousScale = _structElem->getScaleMemory();
+    layout4->addWidget(_scale);
 
-    QObject::connect(_openFileButton, SIGNAL(clicked(bool)), this, SLOT(openFile()));
-    QObject::connect(_saveFileButton, SIGNAL(clicked(bool)), this, SLOT(saveFile()));
+    auto* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this);
+    layout->addWidget(buttonBox);
+
+    QObject::connect(buttonBox, SIGNAL(accepted()), this, SLOT(ok()));
+    QObject::connect(buttonBox, SIGNAL(rejected()),     this, SLOT(reject()));
+
+    QObject::connect(_openFileButton, SIGNAL(clicked()), this, SLOT(openFile()));
+    QObject::connect(_saveFileButton, SIGNAL(clicked()), this, SLOT(saveFile()));
     QObject::connect(_scale, SIGNAL(valueChanged(int)), this, SLOT(resize(int)));
     QObject::connect(_genButton, SIGNAL(clicked(bool)), this, SLOT(generate()));
+
+    //! Connections Qt pour la modification de l'ES avec les flèches
+    connect(dilatLeftButton, SIGNAL(clicked()), this, SLOT(dilateLeft()));
+    connect(dilatTopLeftButton, SIGNAL(clicked()), this, SLOT(dilateTopLeft()));
+    connect(dilatTopButton, SIGNAL(clicked()), this, SLOT(dilateTop()));
+    connect(dilatTopRightButton, SIGNAL(clicked()), this, SLOT(dilateTopRight()));
+    connect(dilatRightButton, SIGNAL(clicked()), this, SLOT(dilateRight()));
+    connect(dilatBottomRightButton, SIGNAL(clicked()), this, SLOT(dilateBottomRight()));
+    connect(dilatBottomButton, SIGNAL(clicked()), this, SLOT(dilateBottom()));
+    connect(dilatBottomLeftButton, SIGNAL(clicked()), this, SLOT(dilateBottomLeft()));
 }
 
 void StructElemWindow::ok() {
     _serviceStructElem = _structElem;
-//    _tbButton->setEnabled(true);
-    //this->close();
-//    this->hide();
+    //! Envoi du signal pour l'application de l'Op. Morpho. sur l'image
+    emit sendOpMorph(OpMorpho(_opMorphSelection->currentIndex()));
+    _structElem->setScaleMemory(_scale->value());
+    _structElem->setShapeSizeMemory(_shapeToGenvalue);
     this->accept();
 }
-
-//void StructElemWindow::closeEvent ( QCloseEvent * event) {
-//    _tbButton->setEnabled(true);
-//    event->ignore();
-//    this->hide();
-
-//}
 
 void rasterCircle(GrayscaleImage_t<bool>& img, int x0, int y0, int radius)
 {
@@ -160,11 +257,12 @@ void closing(GrayscaleImage_t<bool>& img) {
 }
 
 void StructElemWindow::generate() {
+    //! Récupération de la taille de la forme à générer (choix de l'utilisateur)
     unsigned int size = _shapeSize->value();
-    _scale->setValue(1);
+    //! Création d'une nouvelle image en niveau de gris avec les nouvelles dimensions de l'ES
     GrayscaleImage_t<bool> elem(size, size);
-    //if(size%2==0) --size;
 
+    //! Initialisation de l'image de l'ES avec des 0 partout
     for(unsigned int j = 0; j < elem.getHeight(); ++j) {
         for(unsigned int i = 0; i < elem.getWidth(); ++i) {
             elem.setPixel(i, j, false);
@@ -212,31 +310,51 @@ void StructElemWindow::generate() {
         
     }
 
-
-    //closing(elem);
-    
+    //! Création de l'ES à partir de l'image de celui-ci et de la position de son centre
     StructElem* structElem = new StructElem(elem, elem.getWidth()/2, elem.getHeight()/2);
+    //! Reset du facteur d'échelle
+    structElem->setScale(1);
+    _scale->setValue(1);
+    //! Sauvegarde du facteur d'échelle et de la taille de l'ES demandée
+    _structElem->setScaleMemory(1);
+    _structElem->setShapeSizeMemory(_shapeSize->value());
+    //! Remplacement de l'ES par celui que l'on vient de générer
     changeStructElem(structElem);
+    //! _shapeToGenvalue mis à jour avec le contenu de la box _shapeSize
+    _shapeToGenvalue = _shapeSize->value();
 }
 
 void StructElemWindow::resize(int size) {
-    /*unsigned int size = std::abs(size_);
-    GrayscaleImage_t<bool> elem(_realSize.getWidth()*size, _realSize.getHeight()*size);
+    //! On propage avec le plus proche voisin (imparfait pour les nombres pairs)
+    GrayscaleImage_t<bool> elem(_structElem->getWidth()/_previousScale * size, _structElem->getHeight()/_previousScale * size);
+    if(elem.getWidth()>64 || elem.getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        _scale->setValue(_previousScale);
+        return;
+    }
+    _previousScale=size;
     for(unsigned int j = 0; j < elem.getHeight(); ++j) {
         for(unsigned int i = 0; i < elem.getWidth(); ++i) {
-            elem.setPixel(i, j, _realSize.getPixel(i/size, j/size));
+            //! Calcul des coordonnées correspondantes dans l'image source
+            int srcX = floor(i / (double)elem.getWidth() * _structElem->getWidth());
+            int srcY = floor(j / (double)elem.getHeight() * _structElem->getHeight());
+
+            //! Récupération de la valeur du pixel de l'image source (plus proche voisin)
+            bool pixelValue = _structElem->getPixel(srcX, srcY);
+            elem.setPixel(i, j, pixelValue);
+
         }
-    }*/
-
-    //StructElem<depth_default_t>* structElem = new StructElem<depth_default_t>(elem, elem.getWidth()/2, elem.getHeight()/2);
-    _structElem->setScale(std::abs(size));
-
-    changeStructElem(_structElem);
+    }
+    auto* structElem = new StructElem(elem, elem.getWidth() / 2, elem.getHeight() / 2);
+    changeStructElem(structElem);
 }
 
 void StructElemWindow::changeStructElem(imagein::MorphoMat::StructElem* elem) {
+    //! changement d'ES
     _structElem = elem;
-    StructElemViewer* newViewer = new StructElemViewer(_structElem);
+    StructElemViewer* newViewer = new StructElemViewer(_structElem,true);
     _view->setScene(newViewer);
     delete _viewer;
     _viewer = newViewer;
@@ -246,36 +364,135 @@ void StructElemWindow::changeStructElem(imagein::MorphoMat::StructElem* elem) {
 void StructElemWindow::openFile() {
     QString file = QFileDialog::getOpenFileName(this, tr("Open a file"), QString(), tr("Images (*.png *.bmp *.jpg *.jpeg)"));
     if(file.size()==0) return;
-    //Image image(file.toStdString());
-    //Otsu algo;
-    //GrayscaleImage* im_tmp = Converter<GrayscaleImage>::convert(image);
-    //GrayscaleImage* im_res = algo(im_tmp);
-    //GrayscaleImage_t<bool> elem(im_res->getWidth(), im_res->getHeight());
-    //for(unsigned int j = 0; j < elem.getHeight(); ++j) {
-        //for(unsigned int i = 0; i < elem.getWidth(); ++i) {
-            //elem.setPixel(i, j, (im_res->getPixel(i, j) <= 0));
-        //}
-    //}
 
-    //StructElem<depth_default_t>* structElem = new StructElem<depth_default_t>(elem, elem.getWidth()/2, elem.getHeight()/2);
-    StructElem* structElem = new StructElem(file.toStdString());
+    auto* structElem = new StructElem(file.toStdString());
     changeStructElem(structElem);
     _realSize = *structElem;
     _scale->setValue(1);
+    setShapeSizeScaling(structElem->getWidth());
 }
 
 void StructElemWindow::saveFile() {
     QString file = QFileDialog::getSaveFileName(this, tr("Save file"), QString(), tr("Images (*.png *.bmp *.jpg *.jpeg)"));
 
     if(file.size()==0) return;
-    //GrayscaleImage img(_structElem->getWidth(), _structElem->getHeight());
-    //for(unsigned int j = 0; j < img.getHeight(); ++j) {
-        //for(unsigned int i = 0; i < img.getWidth(); ++i) {
-            //img.setPixel(i, j, _structElem->getPixel(i, j) ? 0 : 255);
-        //}
-    //}
-    //img.save(file.toStdString());
-    _structElem->save(file.toStdString());
 
-    
+    /*Sur linux, l'extension ne se met pas toute seule comme sur windows*/
+    QString extension = ".bmp";
+    if (!file.endsWith(extension, Qt::CaseInsensitive)) {
+        file += extension;
+    }
+    _structElem->save(file.toStdString());
+}
+
+
+void StructElemWindow::dilateLeft() {
+
+    StructElem::Dir dir;
+    dir = StructElem::Left;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+
+void StructElemWindow::dilateTopLeft() {
+    StructElem::Dir dir;
+    dir = StructElem::BottomRight;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+
+void StructElemWindow::dilateTop() {
+    StructElem::Dir dir;
+    dir = StructElem::Bottom;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+
+void StructElemWindow::dilateTopRight() {
+    StructElem::Dir dir;
+    dir = StructElem::BottomLeft;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+
+void StructElemWindow::dilateRight() {
+    StructElem::Dir dir;
+    dir = StructElem::Left;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+
+void StructElemWindow::dilateBottomRight() {
+    StructElem::Dir dir;
+    dir = StructElem::TopLeft;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+void StructElemWindow::dilateBottom() {
+    StructElem::Dir dir;
+    dir = StructElem::Top;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
+}
+void StructElemWindow::dilateBottomLeft() {
+    StructElem::Dir dir;
+    dir = StructElem::TopRight;
+
+    _structElem->dilate(dir);
+    if(_structElem->getWidth()>64 || _structElem->getHeight()>64){
+        QMessageBox::information(nullptr, qApp->translate("StructElem", "warning size limit"),
+                                 qApp->translate("StructElem",
+                                                 "you have reached the maximum size of the structuring element"));
+        return;
+    }
+    changeStructElem(_structElem);
 }

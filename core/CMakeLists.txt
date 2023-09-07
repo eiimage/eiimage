@@ -16,7 +16,7 @@ set(SRCS
 	Plugin.cpp
 	Plugin.h
 	PlugOperation.cpp
-	PlugOperation.h
+        PlugOperation.h
 )
 add_library(core SHARED ${SRCS} $<TARGET_OBJECTS:GenericInterface> $<TARGET_OBJECTS:ImageIn>)
 target_link_libraries(core

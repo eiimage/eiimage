@@ -18,8 +18,6 @@
 */
 #include <GrayscaleImage.h>
 
-#include <QColor>
-
 #include "SplitHsvOp.h"
 #include "../Tools.h"
 #include <QMessageBox>
@@ -53,17 +51,24 @@ void SplitHsvOp:: operator()(const imagein::Image* image, const std::map<const i
         for(unsigned int i = 0; i < width; i++) {
             for(unsigned int j = 0; j < height; j++) {
                 QColor color = QColor(image->getPixel(i, j, 0), image->getPixel(i, j, 1), image->getPixel(i, j, 2));
-                resImgH->setPixelAt(i,j,color.hue());
-                resImgS->setPixelAt(i,j,color.saturation());
-                resImgV->setPixelAt(i,j,color.value());
 
+                /* Hue = -1 <-- R = G = B
+                 * Hue = (360°+60*(G-B)/(Max-Min))%360 <-- R = Max
+                 * Hue = 120°+60°*(B-R)/(Max-Min) <-- G = Max
+                 * Hue = 2400°+60°*(R-G)/(Max-Min) <-- B = Max */
+                resImgH->setPixelAt(i,j,color.hue());
+
+                /* Saturation = 0 <-- Max = 0
+                 * Saturation = 255*(Max-Min)/Max <-- Max != 0 */
+                resImgS->setPixelAt(i,j,color.saturation());
+
+                /* Value = max */
+                resImgV->setPixelAt(i,j,color.value());
             }
         }
-        this->outDoubleImage(resImgH, "Hue",false,false);
-        this->outDoubleImage(resImgS, "Saturation",false,false);
-        this->outDoubleImage(resImgV, "Value",false,false);
-
-
+        this->outDoubleImage(resImgH, qApp->translate("Operations", "Hue").toStdString(),DISABLE, DISABLE,false,0,true);
+        this->outDoubleImage(resImgS, qApp->translate("Operations", "Saturation").toStdString(),DISABLE, DISABLE,false);
+        this->outDoubleImage(resImgV, qApp->translate("Operations", "Value").toStdString(),DISABLE, DISABLE,false);
 }
 
 

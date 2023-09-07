@@ -84,7 +84,6 @@ void ImageINSAService::outputText(QString text) {
     _statusEdit->append(text);
     _statusEdit->show();
     if(_statusEdit->minimumHeight() < 92) _statusEdit->setMinimumHeight(_statusEdit->minimumHeight()+24);
-//    _statusEdit->setMinimumHeight(32);
 }
 
 void ImageINSAService::addText(std::string s) {

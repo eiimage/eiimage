@@ -22,10 +22,9 @@
 
 #include <map>
 #include <string>
-
 #include "Image.h"
 
-class QWidget;
+
 namespace genericinterface {
 class ImageWindow;
 class WindowService;
@@ -40,7 +39,9 @@ class WindowService;
  * This class is a generic class and should not be directly used except for creating a generic operation (ie an operation working on different type of Image).\n
  * For an exemple of a true generic operation class, see the PointOp implementation in imageinsa source code.
  */
-class GenericOperation {
+
+class GenericOperation{
+
 public:
 /**
  * @brief Constructor
@@ -95,10 +96,7 @@ virtual bool needCurrentImg() const = 0;
  */
 virtual bool isValidImgWnd(const genericinterface::ImageWindow* imgWnd) const = 0;
 
-
 protected:
-
-
 /**
  * @brief %Output a standard Image to the user interface.
 
@@ -122,11 +120,11 @@ void outImage(imagein::Image* img, std::string title = "");
  * @param logScale The logarithm scale constant to apply if the Image is displayed using log. scale (value from 8^-3 to 8^3, see genericinterface::DoubleImageWindow for more details).
  * @param abs wether to display an absolute value version of the Image (doesn't affect the data contained in the image, compatible with any other options).
  */
-void outDoubleImage(imagein::ImageDouble* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false);
+//void outDoubleImage(imagein::ImageDouble* img, std::string title = "", bool norm=false, bool log=false, double logScale = 1., bool abs = false);
 
-
+void outDoubleImage(imagein::ImageDouble* img, std::string title = "", boxSetting scaled = AUTO, boxSetting offset = AUTO, bool log = false, double logScale = 1., bool abs = false);
 /**
- * @brief %Output some text to th user interface.
+ * @brief %Output some text to the user interface.
  *
  * @param std::string The text to output, may contain multiple lines.
  */

@@ -27,9 +27,9 @@ class ZeroCrossingOp : public DoubleOperation
 public:
     ZeroCrossingOp();
 
-    void operator()(const imagein::Image_t<double>*, const std::map<const imagein::Image_t<double>*, std::string>&);
+    void operator()(const imagein::Image_t<double>*, const std::map<const imagein::Image_t<double>*, std::string>&) override;
 
-    bool needCurrentImg() const;
+    bool needCurrentImg() const override;
 };
 
 #endif // ZEROCROSSINGOP_H

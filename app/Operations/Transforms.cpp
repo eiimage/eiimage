@@ -567,10 +567,10 @@ for(unsigned int c = 0; c < tmpImg->getNbChannels(); c++) {
 //    size = nbc * nbl;
 //    GrayscaleImage* tabout = new GrayscaleImage(im->getWidth(), im->getHeight());
 //    Image_t<double>* tmpImg = Converter<Image_t<double> >::convert(*image);
-////    tabin = new double[ size ];
-////    for(i=0 ; i<nbl ; i++)
-////        for(j=0 ; j<nbc ; j++)
-////            tabin[i*nbc+j] = (double)im->getPixel( j, i );
+//    tabin = new double[ size ];
+//    for(i=0 ; i<nbl ; i++)
+//        for(j=0 ; j<nbc ; j++)
+//            tabin[i*nbc+j] = (double)im->getPixel( j, i );
 
 ///*---------------------------------------------------------------------
 //*

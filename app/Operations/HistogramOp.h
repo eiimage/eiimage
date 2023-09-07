@@ -33,7 +33,7 @@ public:
 
 protected:
     static imagein::Image* equalize( const imagein::Image *to_equalize );
-    static imagein::Image* normalize( const imagein::Image *to_normalize );
+    static imagein::Image* linearStretching( const imagein::Image *to_normalize );
 };
 
 #endif // HISTOGRAMOP_H

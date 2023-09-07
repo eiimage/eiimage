@@ -17,6 +17,10 @@ set(imageinsa_SOURCES
 	Algorithms/Pyramid.cpp
 	Algorithms/Pyramid.cpp
 	Algorithms/Pyramid.h
+        Operations/AbsoluteConvertOp.cpp
+        Operations/AbsoluteConvertOp.h
+	Operations/BinaryMaskOp.cpp
+	Operations/BinaryMaskOp.h
 	Operations/BFlitOp.cpp
 	Operations/BFlitOp.h
 	Operations/CenterOp.cpp
@@ -41,6 +45,8 @@ set(imageinsa_SOURCES
 	Operations/DCTDialog.h
 	Operations/DCTOp.cpp
 	Operations/DCTOp.h
+        Operations/DoubleConvertOp.cpp
+        Operations/DoubleConvertOp.h
 	Operations/DMMDialog.cpp
 	Operations/DMMDialog.h
 	Operations/DMMOp.cpp
@@ -97,6 +103,7 @@ set(imageinsa_SOURCES
 	Operations/NoiseOp.h
 	Operations/PointOp.cpp
 	Operations/PointOp.h
+        Operations/MyQLineEdit.h
 	Operations/PseudoColorDialog.cpp
 	Operations/PseudoColorDialog.h
 	Operations/PseudoColorOp.cpp
@@ -175,6 +182,8 @@ set(imageinsa_SOURCES
 	Widgets/StructElemViewer.h
 	Widgets/StructElemWindow.cpp
 	Widgets/StructElemWindow.h
+        Operations/GetHintOp.cpp
+        Operations/GetHintOp.h
 )
 
 set(UIS
@@ -197,9 +206,9 @@ qt5_add_resources(RCC_FILES "imageinsa_app_res.qrc")
 set(TS_FILES imageinsa_en.ts imageinsa_fr.ts)
 # Uncomment only 1 of the 2 folowing commands, depending on your needs
 # -1- Use current translations files
-qt5_add_translation(QM_FILES ${TS_FILES})
+#qt5_add_translation(QM_FILES ${TS_FILES})
 # -2- Update translations files with changes from c++ sources
-#qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES})
+qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES})
 # -3- Update translations files with changes from c++ sources AND drop useless translations
 #qt5_create_translation(QM_FILES ${imageinsa_SOURCES} ${UIS} ${TS_FILES} OPTIONS -no-obsolete)
 
@@ -210,12 +219,14 @@ if(WIN32)
 endif()
 
 add_executable(imageinsa ${EXTRA_FLAGS} ${imageinsa_SOURCES} ${WRAPPED_UIS} ${UIS} ${QM_FILES} ${TS_FILES} ${RCC_FILES})
+
+set_target_properties(imageinsa PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE INSTALL_RPATH "$ORIGIN/lib")
+
 target_link_libraries(imageinsa
 	core
 	Qt5::Core
 	Qt5::Widgets
 	Qt5::Gui
-	Qt5::Script
 	Qt5::Xml
 	${RandomLib_LIBRARIES}
 )
@@ -226,7 +237,6 @@ if(UNIX)
     Qt5::Core
     Qt5::Widgets
     Qt5::Gui
-    Qt5::Script
     Qt5::Xml
     ${RandomLib_LIBRARIES}
   )

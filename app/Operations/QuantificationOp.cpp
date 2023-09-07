@@ -18,22 +18,23 @@
 */
 
 #include "QuantificationOp.h"
-#include "../Tools.h"
 #include <Converter.h>
 #include <QApplication>
+#include <Widgets/ImageWidgets/DoubleImageWindow.h>
+#include <Widgets/ImageWidgets/StandardImageWindow.h>
 
 using namespace std;
 using namespace imagein;
 using namespace genericinterface;
 
-QuantificationOp::QuantificationOp() : Operation(qApp->translate("Operations", "Quantification").toStdString())
+QuantificationOp::QuantificationOp() : GenericOperation(qApp->translate("Operations", "Quantification").toStdString())
 {
   _test=false, _quantif=0, _values=2;
 }
 
 
 bool QuantificationOp::needCurrentImg() const {
-    return false;
+    return true;
 }
 
 string QuantificationOp::quantificationOpLog(unsigned int c, Quantification * quant){
@@ -143,47 +144,84 @@ string checkOptimumQuantizier(const imagein::Image* image, Quantification * quan
 
 
 
+void QuantificationOp::operator()(const genericinterface::ImageWindow *currentWnd,
+                                  const vector<const genericinterface::ImageWindow *> &imgWndList) {
 
-
-void QuantificationOp::operator()(const imagein::Image* image, const std::map<const imagein::Image*, std::string>& imgList) {
     string quantType;
-    string output_msg = "";
+    string output_msg;
 
-    QuantificationDialog* dialog;
 
-    if(image != NULL) {
-        QString imgName = QString::fromStdString(imgList.find(image)->second);
+    if(currentWnd->isStandard()) {
+        QuantificationDialog* dialog;
+
+        QString imgName = dynamic_cast<const StandardImageWindow *>(currentWnd)->windowTitle();
         dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
+
+
+        if(_test){
+            dialog->setQuantif(_quantif);
+            dialog->setValues(_values);
+        }else{
+            auto code = static_cast<QDialog::DialogCode>(dialog->exec());
+            if(code!=QDialog::Accepted) return;
+        }
+
+
+        const auto *wnd = dynamic_cast<const StandardImageWindow *>(currentWnd);
+        auto* resImg = new Image(*wnd->getImage());
+
+        for(unsigned int c = 0; c < resImg->getNbChannels(); ++c) {
+            Quantification quantification = dialog->getQuantif(currentWnd, c, quantType);
+
+            //Generate the text to print in the information window
+            output_msg += quantificationOpLog(c, &quantification);
+
+            for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
+                for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
+
+                    const Image::depth_t value = resImg->getPixelAt(i, j, c);
+                    resImg->setPixelAt(i, j, c, quantification.valueOf(value));
+                }
+            }
+        }
+
+
+        outText(quantType);
+        outText(output_msg);
+        outText("-------------------------------------------");
+
+        this->outImage(resImg, quantType.erase(quantType.length()-2, quantType.length()));
     }
-    else {
-        dialog = new QuantificationDialog(QApplication::activeWindow());
-    }
 
-    if(_test){
-      dialog->setQuantif(_quantif);
-      dialog->setValues(_values);
-    }else{
-      QDialog::DialogCode code = static_cast<QDialog::DialogCode>(dialog->exec());
-      if(code!=QDialog::Accepted) return;
-    }
+    else if(currentWnd->isDouble()) {
+        QuantificationDialog* dialog;
+
+        QString imgName = dynamic_cast<const DoubleImageWindow *>(currentWnd)->windowTitle();
+        dialog = new QuantificationDialog(QApplication::activeWindow(), imgName);
 
 
-    if(image != NULL) {
+        if(_test){
+            dialog->setQuantif(_quantif);
+            dialog->setValues(_values);
+        }else{
+            auto code = static_cast<QDialog::DialogCode>(dialog->exec());
+            if(code!=QDialog::Accepted) return;
+        }
 
-        Image* resImg = new Image(image->getWidth(), image->getHeight(), image->getNbChannels());
-        for(unsigned int c = 0; c < image->getNbChannels(); ++c) {
 
+        const auto *wnd = dynamic_cast<const DoubleImageWindow *>(currentWnd);
+        auto* resImg = new Image_t<double>(*wnd->getImage());
 
-            Quantification quantification = dialog->getQuantif(image, c, quantType);
+        for(unsigned int c = 0; c < resImg->getNbChannels(); ++c) {
+            Quantification quantification = dialog->getQuantif(currentWnd, c, quantType);
 
             //Generate the text to print in the information window
             output_msg += quantificationOpLog(c, &quantification);
 
 
-            for(unsigned int j = 0; j < image->getHeight(); ++j) {
-                for(unsigned int i = 0; i < image->getWidth(); ++i) {
-
-                    const Image::depth_t value = image->getPixelAt(i, j, c);
+            for(unsigned int j = 0; j < resImg->getHeight(); ++j) {
+                for(unsigned int i = 0; i < resImg->getWidth(); ++i) {
+                    const auto value = (int)resImg->getPixelAt(i, j, c);    //On utilise le type d'image double pour faire du signed int
                     resImg->setPixelAt(i, j, c, quantification.valueOf(value));
                 }
             }
@@ -195,19 +233,8 @@ void QuantificationOp::operator()(const imagein::Image* image, const std::map<co
         outText(output_msg);
         outText("-------------------------------------------");
 
-        QString imgName;
-
-
-        if(image!=NULL){
-            imgName = QString::fromStdString(imgList.find(image)->second);
-            imgName.append(" - ");
-        }
-        else{
-            imgName = QString("");
-        }
-        outImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
+        this->outDoubleImage(resImg, imgName.toStdString() + quantType.erase(quantType.length()-2, quantType.length()));
     }
-
 }
 
 void QuantificationOp::setTest(bool a){
@@ -221,3 +248,9 @@ void QuantificationOp::setQuantif(int a){
 void QuantificationOp::setValues(int a ){
   _values = a;
 }
+
+bool QuantificationOp::isValidImgWnd(const genericinterface::ImageWindow *imgWnd) const{
+    return (imgWnd && (imgWnd->isStandard() || imgWnd->isDouble()));
+}
+
+

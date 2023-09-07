@@ -38,6 +38,7 @@ CMakeLists.txt.user*
 
 ##Build dir
 build
+.idea
 
 ##working files 
 .vscode

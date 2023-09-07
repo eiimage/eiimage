@@ -52,6 +52,8 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
     }
 
     PyramidDialog* dialog = new PyramidDialog(QApplication::activeWindow());
+    /*Update the maximum decomposition level according to the size of the input image*/
+    dialog->updateMaxLevel(Pyramid::etage_max(img));
 
     if(_test){
         dialog->setFilter(_filter);
@@ -94,7 +96,7 @@ void PyramidOp::operator()(const imagein::Image* img, const std::map<const image
         }
     }
     catch(const char*e) {
-        QMessageBox::critical(NULL, "Error", QString(e));
+        QMessageBox::critical(NULL, "Error", QString("wtf"));
         return;
     }
 

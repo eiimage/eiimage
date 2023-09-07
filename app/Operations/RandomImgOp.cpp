@@ -17,6 +17,7 @@
  * along with ImageINSA.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <QDialog>
+#include <QMessageBox>
 #include <QFormLayout>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -113,6 +114,19 @@ void RandomImgOp::operator()(const imagein::Image*, const std::map<const imagein
         return;
     }
 
+    /*Pop-up a warning window if the required value of width or height equals to 0*/
+    if( widthBox->value()==0 || heightBox->value()==0 ){
+            QMessageBox *msgBox;
+            msgBox = new QMessageBox(QString(qApp->translate("RandomImgOp","Warning")),
+                QString(qApp->translate("RandomImgOp", "Empty image generation is not allowed")),
+                QMessageBox::Warning,
+                QMessageBox::Ok | QMessageBox::Default,
+                QMessageBox::NoRole | QMessageBox::Escape,
+                0);
+            msgBox->show();
+            return;
+    }
+
     if(intButton->isChecked()) {
 
         Image* resImg = new Image(widthBox->value(), heightBox->value(), channelBox->value());
@@ -146,7 +160,7 @@ void RandomImgOp::operator()(const imagein::Image*, const std::map<const imagein
                 }
             }
         }
-        this->outDoubleImage(resImg, qApp->translate("Operations", "Random image").toStdString(), true);
+        this->outDoubleImage(resImg, qApp->translate("Operations", "Random image").toStdString(), AUTO, AUTO);
 
     }
 }

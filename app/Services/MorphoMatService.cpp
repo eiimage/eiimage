@@ -26,6 +26,7 @@
 #include <typeinfo>
 
 #include <QMessageBox>
+#include <QDebug>
 
 using namespace genericinterface;
 using namespace imagein::algorithm;
@@ -34,12 +35,13 @@ using namespace imagein::MorphoMat;
 
 MorphoMatService::MorphoMatService() {
 
+    //!Création de l'élément structurant de base (= une croix)
     bool elem[] = {
         false, true, false,
         true,  true, true,
         false, true, false
     };
-
+    //! L'ES initial est une image binaire de taille 3*3 avec le motif dessiné ci-dessus et son centre en (1,1)
     _structElem = new StructElem(GrayscaleImage_t<bool>(3, 3, elem), 1, 1);
     
 }
@@ -47,12 +49,8 @@ MorphoMatService::MorphoMatService() {
 void MorphoMatService::display(GenericInterface* gi)
 {
   AlgorithmService::display(gi);
-    
 
-//  _editStructElem = _toolBar->addAction("&Structuring element");
-//  _erosion = _toolBar->addAction("&Erosion");
-//  _dilatation = _toolBar->addAction("&Dilatation");
-  
+  //! Ajout des différentes opérateurs dans le menu Morpho. math.
   QMenu* menu = gi->menu("&Morpho. math.");
 
   _erosion2 = menu->addAction(tr("&Erosion"));
@@ -65,9 +63,7 @@ void MorphoMatService::display(GenericInterface* gi)
   menu->addSeparator();
   _editStructElem = menu->addAction(tr("&Structuring element"));
 
-  
-//  _erosion->setEnabled(false);
-//  _dilatation->setEnabled(false);
+  //!Les opérateurs sont désactivés car il faut s'assurer qu'une image uchar est sélectionnée
   _gradient->setEnabled(false);
   _erosion2->setEnabled(false);
   _dilatation2->setEnabled(false);
@@ -76,37 +72,29 @@ void MorphoMatService::display(GenericInterface* gi)
   _gradient->setEnabled(false);
   _wtophat->setEnabled(false);
   _btophat->setEnabled(false);
-    
-//    QMdiArea* area = (QMdiArea*)gi->centralWidget();
-//    _structElemWindow = new StructElemWindow(_structElem, _editStructElem);
-//    area->addSubWindow(_structElemWindow);
-//    _structElemWindow->setWindowTitle(tr("Editing structuring element"));
-//    _structElemWindow->hide();
 }
 
 void MorphoMatService::connect(GenericInterface* gi)
 {
     AlgorithmService::connect(gi);
 
+    //! Réalisation des connections sur chacun des éléments du menu Morpho. Math.
     QObject::connect(_editStructElem, SIGNAL(triggered()), this, SLOT(editStructElem()));
-//    QObject::connect(_erosion, SIGNAL(triggered()), this, SLOT(applyErosion()));
     QObject::connect(_erosion2, SIGNAL(triggered()), this, SLOT(applyErosion()));
-//    QObject::connect(_dilatation, SIGNAL(triggered()), this, SLOT(applyDilatation()));
     QObject::connect(_dilatation2, SIGNAL(triggered()), this, SLOT(applyDilatation()));
     QObject::connect(_opening, SIGNAL(triggered()), this, SLOT(applyOpening()));
     QObject::connect(_closing, SIGNAL(triggered()), this, SLOT(applyClosing()));
     QObject::connect(_gradient, SIGNAL(triggered()), this, SLOT(applyGradient()));
     QObject::connect(_wtophat, SIGNAL(triggered()), this, SLOT(applyWhiteTopHat()));
     QObject::connect(_btophat, SIGNAL(triggered()), this, SLOT(applyBlackTopHat()));
-	//connexion des changements d'images
+	//!connexion des changements d'images
     QObject::connect(_ws, SIGNAL(activeWidgetChanged(const QWidget*)), this, SLOT(checkActionsValid(const QWidget*)));
 }
 
 void MorphoMatService::checkActionsValid(const QWidget* activeWidget) {
     const StandardImageWindow* window = (activeWidget) ? dynamic_cast<const StandardImageWindow*>(activeWidget) : NULL;
+    //! On active les boutons du menu Morpho. Math. ssi l'image sélectionnée est de type uchar
 	if(window) {
-//      _erosion->setEnabled(true);
-//      _dilatation->setEnabled(true);
       _gradient->setEnabled(true);
       _erosion2->setEnabled(true);
       _dilatation2->setEnabled(true);
@@ -117,8 +105,6 @@ void MorphoMatService::checkActionsValid(const QWidget* activeWidget) {
       _btophat->setEnabled(true);
     }
     else {
-//      _erosion->setEnabled(false);
-//      _dilatation->setEnabled(false);
       _gradient->setEnabled(false);
       _erosion2->setEnabled(false);
       _dilatation2->setEnabled(false);
@@ -133,15 +119,12 @@ void MorphoMatService::checkActionsValid(const QWidget* activeWidget) {
 
 void MorphoMatService::editStructElem()
 {
-//    _editStructElem->setEnabled(false);
+    //! Création de la fenêtre d'édition de l'élément structurant
     QDialog* structElemWindow = new StructElemWindow(_structElem, _editStructElem);
+    //! Connection Qt pour appliquer l'Op. Morph. sélectionné dans le sous menu "Structuring Element" lorsque l'on clique sur "OK"
+    QObject::connect(structElemWindow, SIGNAL(sendOpMorph(OpMorpho)),this,SLOT(applyOpMorph(OpMorpho)));
+    //! Affichage de la fenêtre liée au menu "Structuring Element"
     structElemWindow->exec();
-
-    //WindowService* ws = dynamic_cast<WindowService*>(_gi->getService(GenericInterface::WINDOW_SERVICE));
-    
-    //StandardImageWindow* current_siw = dynamic_cast<StandardImageWindow*>(ws->getCurrentImageWindow());
-    //ws->addWidget(ws->getWidgetId(current_siw), structElemWindow);
-//    _structElemWindow->show();
 }
 
 void MorphoMatService::applyOperator(MorphoMat::Operator<depth_default_t>& op)
@@ -183,4 +166,47 @@ void MorphoMatService::applyWhiteTopHat() {
 void MorphoMatService::applyBlackTopHat() {
     MorphoMat::BlackTopHat<depth8_t> op(*_structElem);
     this->applyOperator(op);
+}
+
+void MorphoMatService::applyOpMorph(OpMorpho op){
+    //! Switch case qui permet d'identifier quel opérateur a été sélectionné par l'utilisateur dans le menu déroulant
+    switch(op){
+        case ErosionOp:
+        {
+            applyErosion();
+            break;
+        }
+        case DilatationOp:
+        {
+            applyDilatation();
+            break;
+        }
+        case OpeningOp:
+        {
+            applyOpening();
+            break;
+        }
+        case ClosingOp:
+        {
+            applyClosing();
+            break;
+        }
+        case GradientOp:
+        {
+            applyGradient();
+            break;
+        }
+        case WtophatOp:
+        {
+            applyWhiteTopHat();
+            break;
+        }
+        case BtophatOp:
+        {
+            applyBlackTopHat();
+            break;
+        }
+        default:
+            break;
+    }
 }

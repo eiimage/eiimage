@@ -25,7 +25,9 @@
 #include <QComboBox>
 #include "Quantification.h"
 #include "QuantificationWidget.h"
+#include "Widgets/ImageWidgets/ImageWindow.h"
 #include <QPushButton>
+#include <QCheckBox>
 
 class QuantificationDialog : public QDialog
 {
@@ -33,7 +35,7 @@ class QuantificationDialog : public QDialog
 public:
     enum QuantMethod {LinearQuant, NonLinearQuant, NonLinearQuantOptimized};
     explicit QuantificationDialog(QWidget *parent = 0, QString imgName = QString());
-    Quantification getQuantif(const imagein::Image *image, unsigned int c, std::string &);
+    Quantification getQuantif(const genericinterface::ImageWindow *currentWnd, unsigned int c, std::string &);
     Quantification getQuantif();
     void setValues(int);
     void setQuantif(int);
@@ -46,6 +48,8 @@ public slots:
 protected:
         QSpinBox* _sizeBox;
         QComboBox* _quantBox;
+        QSpinBox* _limitQuantifBox1;
+        QSpinBox* _limitQuantifBox2;
         QuantificationWidget* _quantWidget;
         QWidget* _editorWidget;
         QPushButton* _saveButton;

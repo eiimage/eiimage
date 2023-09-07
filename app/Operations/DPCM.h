@@ -19,7 +19,6 @@
 
 #ifndef DPCM_H
 #define DPCM_H
-
 #include <string>
 #include <GrayscaleImage.h>
 #include "Quantification.h"
@@ -29,17 +28,18 @@ class DPCM
 {
 public:
     DPCM();
-    enum Prediction {PX_EQ_A, PX_EQ_B, PX_EQ_APC, PX_EQ_Q};
+    enum Prediction {PX_EQ_A, PX_EQ_C, PX_EQ_APC, PX_EQ_Q};
     virtual ~DPCM();
     std::string execute(const imagein::GrayscaleImage *im, Prediction prediction_alg, imagein::ImageDouble **quant_err_image, imagein::ImageDouble **new_err_image, imagein::Image **recons_image, imagein::Image **pred_image, imagein::ImageDouble **coding_err_image, double Q = 0 );
     void setQuantification( Quantification* tquantdef );
+
 private:
     std::string print_iloiqu();
     Quantification* quantdef;
     void codlq(int m);
     void codec(int nlq,int ier,int *icode,int *ireco);
     void set_levels();
-    int iloiqu[128];
+    int iloiqu[1024];
     int itcod[2048][20],itrco[2048][20],ktab[2][20];
 };
 

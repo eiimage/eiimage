@@ -131,7 +131,8 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, const vector<const Image
                 double value = random.Boolean() ? min : max;
                 image->setPixel(x, y, c, value);
             }
-            this->outDoubleImage(image, qApp->translate("NoiseOp", "impulse noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
+
+            this->outDoubleImage(image, qApp->translate("NoiseOp", "impulse noise").toStdString(), AUTO, AUTO, wnd->isLogScaled());
 
         }
     }
@@ -158,11 +159,9 @@ void NoiseOp::operator()(const ImageWindow* currentWnd, const vector<const Image
             for(Image_t<double>::iterator it = image->begin(); it < image->end(); ++it) {
                 *it += normdist.operator()(random, mean, deviation);
             }
-            this->outDoubleImage(image, qApp->translate("NoiseOp", "gaussian noise").toStdString(), wnd->isNormalized(), wnd->isLogScaled());
-
+            this->outDoubleImage(image, qApp->translate("NoiseOp", "gaussian noise").toStdString(), AUTO, AUTO, wnd->isLogScaled());
         }
     }
-
 }
 
 bool NoiseOp::isValidImgWnd(const ImageWindow* imgWnd) const {

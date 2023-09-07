@@ -49,7 +49,8 @@ void ClassAnalysisOp::operator()(const imagein::Image* img, const std::map<const
 
 
     if(dialog->isLearningStep()) {
-        FILE* f = fopen(dialog->getFileName().toLatin1(), "wt" );
+//        FILE* f = fopen(dialog->getFileName().toLatin1(), "wt" );
+        FILE* f = fopen(dialog->getFileName().toLocal8Bit(), "wt" );
         if(f == NULL) {
             QMessageBox::critical(NULL, "Error", "Could not open file for write access");
             return;

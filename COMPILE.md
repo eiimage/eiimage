@@ -25,6 +25,8 @@ You will need to run this command (without `--init`) each time you want to updat
 ## Libraries
 ImageINSA is compiled against some dependencies, you have to check all these dependencies have been installed on your environment.
 
+Since the Zlib, Jpeg and Png libraries are already compiled in 32-bit, install the 32-bit versions of the dependencies, otherwise there will be linkage problems.
+
 ### Qt 5
 #### Windows
 You should install Qt5 from the opensource package available on Qt website (http://www.qt.io/download-open-source/ or http://qt-project.org/downloads)  
@@ -65,7 +67,17 @@ Open Qt terminal :
 	mingw32-make
 	mingw32-make install
 
-Note: GNU/Linux users can install the package provided by their distribution, if it exists, but this can be problematic if the library binary has been compiled with an incompatble verion of Qt. In that specific case, the library have to be compiled manually.
+Note: 
+
+1. GNU/Linux users can install the package provided by their distribution, if it exists, but this can be problematic if the library binary has been compiled with an incompatible version of Qt. In that specific case, the library have to be compiled manually. 
+
+2. If the OPENGL library is missing (fatal error: GL / gl.h: No such file or directory), the installation of build-essential libgl1-mesa-dev will solve this problem.
+3. If you choose to install Qwt directly by make without using qmake, you will need to manually copy some files from Qwt directory to your Qt directory (required on both Linux and Windows systems): 
+   1. Copy qwt-6.1.5/designer/plugins/designer/libqwt_designer_plugin.so (or .dll) to Qt/5.15.1/gcc_64 /plugins/designer.
+   2. Copy all files in qwt-6.1.5/lib to Qt/5.15.1/gcc_64/lib.
+   3. Create a new folder in Qt/5.15.1/gcc_64 /include and name it qwt, copy all the header files under qwt-6.1.5/src to the new created qwt folder.
+4. If you fail to compile Qwt 6.2.0 because of SplineTest, you have to replace `int main()` by `int main(int argc, char *argv[])`
+
 
 ### Zlib, Jpeg, Png
 #### Windows
@@ -77,7 +89,7 @@ You can get these libraries from http://gnuwin32.sourceforge.net/. Download and 
 Note: If you don't have the right to install packages on your machine, you can download both 'Binaries' and 'Developer files' zip packages for each library. Then, uncompress it to a folder (example: C:\GnuWin32). This will automatically copy libraries into 'bin', 'lib' and 'include' sub-folders.
 
 #### GNU/Linux
-Developer packages from your distribution may be available. This is the easiest way to install these dependencies. CMake will probably detect dependencies more easily if you install them with the package manager.
+It's easier to install these dependencies on Linux, developer packages from your distribution may be available, try zlib1g, libjpeg-dev and libpng-dev for example. CMake will probably detect dependencies more easily if you install them with the package manager.
 
 ## CMake Generation
 This is the most important part. Once the generation is done, the compilation shouldn't cause any trouble.
@@ -105,6 +117,15 @@ Open Qt terminal :
 	cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:/Program Files (x86)/GnuWin32";C:\Qwt-6.1.3 ..
 If cmake command does not work, run `set PATH=%PATH%;C:\Qt\5.9.1\mingw53_32\bin` before it.
 
+Solution using Clion :
+
+- Set up the toolchain with the one used for your Qt installation `Exemple : C:\Qt\Tools\mingw810_32)`
+- (Optional) Set the cmake option to : `-G "MinGW Makefiles"`
+- Choose the directory where you want to build the project
+- (Optional) Set the build option to : `-j 8`
+- Add the following line to the main CMakeList (and modify it according to your installation): `set(CMAKE_PREFIX_PATH "C:/Qt/5.15.2/mingw81_32/lib/cmake" "C:/Program Files (x86)/GnuWin32";C:/Qwt-6.2.0)`
+
+
 ### GNU/Linux users
 It should be easier to configure compilation for Linux users, since most of the tools are already available from the $PATH environment variable.
 If you had to compile manually a dependency, don't forget to run `make install` after the compilation. By default, the command installs libraries and headers under the `/usr/local` prefix, which is usually already in the $PATH.
@@ -119,3 +140,40 @@ Open Qt terminal :
 	cd {path}\eiimage //({path} is where you cloned eiimage repository)
 	cd build
 	mingw32-make -j4
+
+## Linux deployment
+As we're compiling ImageINSA dynamically, we need to provide all dependencies with the binary file. To do this, we recommend using the deployment tool linuxdeplqt.
+This is a community-developed but widely-used project.
+https://github.com/probonopd/linuxdeployqt/blob/master/README.md
+
+#### Usage : 
+
+Create the architecture below
+```
+└── usr
+    ├── bin
+    │   └── imageinsa
+    ├── lib
+    └── share
+        ├── applications
+        │   └── imageinsa.desktop
+        └── icons
+```
+
+create the file imageinsa.desktop with the content below :
+````
+[Desktop Entry]
+Type=Application
+Name=ImageINSAapp
+Exec=imageinsa
+Icon=imageinsa
+Categories=Office;
+````
+
+run
+
+````
+linuxdeployqt-continuous-x86_64.AppImage path/to/AppDir/usr/share/applications/imageinsa.desktop -appimage
+````
+
+add the translations to the bin folder.

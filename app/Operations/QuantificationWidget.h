@@ -39,7 +39,10 @@ signals:
 public slots:
     void setNbThreshold(int n);
     void setQuantif(Quantification q);
+    void setLimitQuantifmin(int value);
+    void setLimitQuantifmax(int value);
     Quantification getQuantif() const;
+
 
 protected:
     class CentralWidget : public QWidget {
@@ -49,10 +52,13 @@ protected:
             void setNbThreshold(int n);
             void setQuantif(Quantification q);
             Quantification getQuantif() const;
+            inline void setLimitQuantifmin(int value){this->_limitQuantif_a = value;};
+            inline void setLimitQuantifmax(int value){this->_limitQuantif_b = value;};
         protected:
             virtual void paintEvent (QPaintEvent *e);
             int _nThreshold;
             int _firstWidth, _secondWidth, _yOffset;
+            int _limitQuantif_a, _limitQuantif_b;
             QSpinBox* _thresholdBoxes[N_MAX_THRESHOLD];
             QSpinBox* _valueBoxes[N_MAX_THRESHOLD + 1];
     };

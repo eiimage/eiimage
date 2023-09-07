@@ -4,34 +4,29 @@
 <context>
     <name></name>
     <message>
-        <location filename="main.cpp" line="+129"/>
-        <location filename="../test/testgui.cpp" line="+134"/>
+        <location filename="main.cpp" line="+136"/>
         <source>&amp;Image</source>
         <oldsource>Image</oldsource>
         <translation>&amp;Image</translation>
     </message>
     <message>
-        <location line="+24"/>
-        <location filename="../test/testgui.cpp" line="+20"/>
+        <location line="+29"/>
         <source>&amp;Tools</source>
         <oldsource>Tools</oldsource>
         <translation>Ou&amp;tils</translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../test/testgui.cpp" line="+13"/>
-        <source>&amp;Encoding</source>
-        <oldsource>Encoding</oldsource>
-        <translation>&amp;Encodage</translation>
+        <source>&amp;Coding</source>
+        <oldsource>&amp;Encoding</oldsource>
+        <translation>&amp;Codage</translation>
     </message>
     <message>
-        <location filename="../test/testgui.cpp" line="+8"/>
         <source>Transforms</source>
-        <translation>Transformées</translation>
+        <translation type="vanished">Transformées</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="+13"/>
-        <location filename="../test/testgui.cpp" line="+8"/>
+        <location line="+13"/>
         <source>Analysis</source>
         <translation>Analyse</translation>
     </message>
@@ -41,9 +36,8 @@
         <translation>Couleurs</translation>
     </message>
     <message>
-        <location line="+9"/>
-        <location filename="Services/FilteringService.cpp" line="+38"/>
-        <location filename="../test/testgui.cpp" line="+9"/>
+        <location filename="Services/FilteringService.cpp" line="+39"/>
+        <location filename="main.cpp" line="+11"/>
         <source>Filtering</source>
         <translation>Filtrage</translation>
     </message>
@@ -51,29 +45,24 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/AboutDialog.cpp" line="+27"/>
         <source>About</source>
-        <translation>A propos</translation>
+        <translation type="vanished">A propos</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>This software has been developed at Insa.</source>
-        <translation>Ce logiciel a été développé à l&apos;INSA Rennes.</translation>
+        <translation type="vanished">Ce logiciel a été développé à l&apos;INSA Rennes.</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>Main authors:</source>
-        <translation>Principaux auteurs:</translation>
+        <translation type="vanished">Principaux auteurs:</translation>
     </message>
     <message>
-        <location line="+11"/>
         <source>Contributors:</source>
-        <translation>Contributeurs:</translation>
+        <translation type="vanished">Contributeurs:</translation>
     </message>
     <message>
-        <location line="+13"/>
         <source>Compiled on %1 at %2</source>
-        <translation>Compilé le %1 à %2</translation>
+        <translation type="vanished">Compilé le %1 à %2</translation>
     </message>
 </context>
 <context>
@@ -90,6 +79,31 @@
     </message>
 </context>
 <context>
+    <name>BinaryMaskOp</name>
+    <message>
+        <location filename="Operations/BinaryMaskOp.cpp" line="+30"/>
+        <source>Apply mask</source>
+        <translation>Appliquer le masque</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Mask to apply : </source>
+        <translation>Masque à appliquer : </translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <location line="+24"/>
+        <source>warning Apply Mask</source>
+        <translation>Alerte appliquer un masque</translation>
+    </message>
+    <message>
+        <location line="-23"/>
+        <location line="+24"/>
+        <source>you have performed a mask operation between two images of different sizes</source>
+        <translation>Vous avez réalisé une opération de masquage entre deux images de tailles différentes</translation>
+    </message>
+</context>
+<context>
     <name>CenterOp</name>
     <message>
         <location filename="Operations/CenterOp.cpp" line="+72"/>
@@ -101,7 +115,7 @@
 <context>
     <name>ClassAnalysis</name>
     <message>
-        <location filename="Operations/ClassAnalysisOp.cpp" line="+60"/>
+        <location filename="Operations/ClassAnalysisOp.cpp" line="+61"/>
         <location line="+19"/>
         <source>mean</source>
         <translation>moyenne</translation>
@@ -122,49 +136,41 @@
     <name>ClassAnalysisDialog</name>
     <message>
         <location filename="Operations/ClassAnalysisDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+118"/>
         <source>Class analysis</source>
         <translation>Classification</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+1"/>
         <source>Step : </source>
         <translation>Étape : </translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+4"/>
         <source>Classification step</source>
         <translation>Étape de classification</translation>
     </message>
     <message>
         <location line="-5"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="-1"/>
         <source>Learning step</source>
         <translation>Étape d&apos;apprentissage</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+2"/>
         <source>Print file info</source>
         <translation>Afficher les info. du fichier</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+2"/>
         <source>Window size : </source>
         <translation>Taille de la fenêtre : </translation>
     </message>
     <message>
         <location line="+23"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+1"/>
         <source>File : </source>
         <translation>Fichier : </translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../build/app/ui_ClassAnalysisDialog.h" line="+1"/>
         <source>browse</source>
         <translation>parcourir</translation>
     </message>
@@ -177,17 +183,16 @@
 <context>
     <name>ClassResult</name>
     <message>
-        <location filename="Operations/ClassResultOp.cpp" line="+81"/>
         <source>
 Nombre de classes = %1 </source>
         <oldsource>
 Nombre de classes = %1 
 </oldsource>
-        <translation>
+        <translation type="vanished">
 Nombre de classes = %1 </translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location filename="Operations/ClassResultOp.cpp" line="+93"/>
         <source>Valeur de la classe %1 = %2</source>
         <oldsource>Valeur de la classe %1 = %2
 </oldsource>
@@ -203,7 +208,7 @@ Nombre de classes = %1 </translation>
 </translation>
     </message>
     <message>
-        <location line="-22"/>
+        <location line="-30"/>
         <source>Critère de zone intérieure : </source>
         <oldsource>CritÃ¨re de zone intÃ©rieure : </oldsource>
         <translation>Critère de zone intérieure : </translation>
@@ -216,6 +221,16 @@ Nombre de classes = %1 </translation>
     </message>
     <message>
         <location line="+1"/>
+        <source>Largeur de couronne pour conserver la zone intérieure</source>
+        <translation>Largeur de couronne pour conserver la zone intérieure</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Largeur de couronne pour conserver la zone frontière</source>
+        <translation>Largeur de couronne pour conserver la zone frontière</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>&lt;b&gt;Critère de zones (relatifs aux zones totales) : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;CritÃ¨re de zones (relatifs aux zones totales) : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Critère de zones (relatifs aux zones totales) : &lt;/b&gt;</translation>
@@ -226,7 +241,23 @@ Nombre de classes = %1 </translation>
         <translation>&lt;b&gt;Sélectionner les zones des classes de l&apos;image : &lt;/b&gt;</translation>
     </message>
     <message>
-        <location line="+59"/>
+        <location line="+21"/>
+        <source>------Largeur de couronne pour conserver la zone intérieure : %1 ------</source>
+        <translation>------Largeur de couronne pour conserver la zone intérieure : %1 ------</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>------Largeur de couronne pour conserver la zone frontière : %1 ------
+</source>
+        <translation>------Largeur de couronne pour conserver la zone frontière : %1 ------</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Nombre de classes = %1 </source>
+        <translation>Nombre de classes = %1 </translation>
+    </message>
+    <message>
+        <location line="+40"/>
         <source>Le taux de bon classement en zone intérieure %1 vaut: %2%</source>
         <oldsource>Le taux de bon classement en zone intÃ©rieure %1 vaut: %2%</oldsource>
         <translation>Le taux de bon classement en zone intérieure %1 vaut : %2%</translation>
@@ -287,81 +318,123 @@ Nombre de classes = %1 </translation>
     <name>ColorDialog</name>
     <message>
         <location filename="Operations/ColorDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+222"/>
         <source>RGB image generator</source>
         <translation>Générateur d&apos;image RVB</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Image size</source>
         <translation>Taille de l&apos;image</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Width : </source>
         <translation>Largeur : </translation>
     </message>
     <message>
-        <location line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
+        <location line="+17"/>
         <source>Height : </source>
         <translation>Hauteur : </translation>
     </message>
     <message>
-        <location line="+17"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
+        <location line="+20"/>
         <source>Mode</source>
         <translation>Mode</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>RGB</source>
         <translation>RVB</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>HSV</source>
         <translation>TSV</translation>
     </message>
     <message>
         <location line="+13"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Red : </source>
         <translation>Rouge : </translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Green : </source>
         <translation>Vert : </translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Blue : </source>
         <translation>Bleu : </translation>
     </message>
     <message>
         <location line="+33"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
         <source>Saturation : </source>
         <translation>Saturation : </translation>
     </message>
     <message>
-        <location line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
+        <location line="+21"/>
         <source>Value : </source>
         <translation>Valeur :  </translation>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../build/app/ui_ColorDialog.h" line="+1"/>
+        <source>Get a hint</source>
+        <translation>Une idée</translation>
+    </message>
+    <message>
+        <location line="-21"/>
         <source>Hue : </source>
         <translation>Teinte : </translation>
+    </message>
+    <message>
+        <source>A small tip for Qt HSV Color Model</source>
+        <translation type="vanished">Une petite astuce pour le modèle de couleur Qt TSV</translation>
+    </message>
+    <message>
+        <location filename="Operations/GetHintOp.cpp" line="+36"/>
+        <location filename="Operations/ColorDialog.cpp" line="+64"/>
+        <source>A small tip</source>
+        <translation>Une petite astuce</translation>
+    </message>
+</context>
+<context>
+    <name>ColorimetryOp</name>
+    <message>
+        <location filename="Operations/ColorimetryOp.cpp" line="+56"/>
+        <source>Warning</source>
+        <translation>Alerte</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Empty image generation is not allowed</source>
+        <translation>La génération d&apos;images vides n&apos;est pas autorisée</translation>
+    </message>
+    <message>
+        <source>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image.
+
+</source>
+        <oldsource>H, for hue, is in the range 0 to 359. Red is 0 (degrees), green is 120, and blue is 240 as shown by the pop-up image
+
+</oldsource>
+        <translation type="vanished">H, pour la teinte, est compris entre 0 et 359. Le rouge correspond à 0 (degrés), le vert à 120 et le bleu à 240, comme indiqué par l&apos;image contextuelle.</translation>
+    </message>
+    <message>
+        <source>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is.
+
+</source>
+        <oldsource>S, for saturation, is in the range 0 to 255, and the bigger it is, the stronger the color is
+
+</oldsource>
+        <translation type="vanished">S, pour la saturation, est compris entre 0 et 255, et plus elle est grand, plus la couleur est forte.</translation>
+    </message>
+    <message>
+        <source>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
+
+-------------------------------------------</source>
+        <oldsource>V, for value, is in the range 0 to 255 and represents lightness or brightness of the color, 0 represents for black.
+
+</oldsource>
+        <translation type="vanished">V, pour valeur, est compris entre 0 et 255 et représente la clarté ou la luminosité de la couleur, 0 représente le noir.</translation>
     </message>
 </context>
 <context>
@@ -453,7 +526,7 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DCT</name>
     <message>
-        <location filename="Operations/DCTOp.cpp" line="+58"/>
+        <location filename="Operations/DCTOp.cpp" line="+64"/>
         <source>DCT</source>
         <translation>DCT</translation>
     </message>
@@ -467,45 +540,46 @@ Nombre de classes = %1 </translation>
     <name>DCTDialog</name>
     <message>
         <location filename="Operations/DCTDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+172"/>
         <source>DCT encoding</source>
         <translation>DCT avec encodage</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Encoding mode &amp;&amp; associated parameters</source>
         <translation>Mode d&apos;encodage &amp;&amp; paramètres associés</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Coefficients truncation</source>
         <translation>Troncature des coefficients</translation>
     </message>
     <message>
         <location line="+34"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Truncation limit : </source>
         <translation>Limite de troncature : </translation>
     </message>
     <message>
         <location line="+19"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Bit allocation matrice</source>
         <translation>Matrice d&apos;allocation de bits</translation>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Initial number of bits : </source>
         <translation>Nombre de bits initial : </translation>
     </message>
     <message>
         <location line="+37"/>
-        <location filename="../build/app/ui_DCTDialog.h" line="+1"/>
         <source>Slope value : </source>
         <translation>Valeur de la pente : </translation>
+    </message>
+</context>
+<context>
+    <name>DCTOp</name>
+    <message>
+        <source> bpp with 8 bits per non null coefficient </source>
+        <oldsource> bpp with 8 bits per non null coefficient</oldsource>
+        <translation type="vanished"> bpp avec 8 bits par coefficients non nul </translation>
     </message>
 </context>
 <context>
@@ -519,42 +593,38 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DMMDialog</name>
     <message>
-        <location filename="Operations/DMMDialog.cpp" line="+44"/>
-        <location line="+235"/>
+        <location filename="Operations/DMMDialog.cpp" line="+301"/>
         <source>Erosion</source>
         <translation>Erosion</translation>
     </message>
     <message>
-        <location line="-235"/>
-        <location line="+232"/>
+        <location line="-3"/>
         <source>Dilatation</source>
         <translation>Dilatation</translation>
     </message>
     <message>
-        <location line="-232"/>
-        <location line="+238"/>
+        <location line="+6"/>
         <source>Opening</source>
         <translation>Ouverture</translation>
     </message>
     <message>
-        <location line="-238"/>
-        <location line="+241"/>
+        <location line="+3"/>
         <source>Closing</source>
         <translation>Fermeture</translation>
     </message>
     <message>
-        <location line="-241"/>
-        <location line="+2"/>
+        <location line="-264"/>
+        <location line="+3"/>
         <source>DMM</source>
         <translation>DMM</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+19"/>
         <source>Structuring element</source>
         <translation>Elément structurant</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+68"/>
         <source>Validate</source>
         <translation>Valider</translation>
     </message>
@@ -590,7 +660,8 @@ Nombre de classes = %1 </translation>
 <context>
     <name>DPCM</name>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="+53"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="+56"/>
+        <location line="+6"/>
         <source>Error while loading quantification file</source>
         <translation>Erreur lors du chargement du fichier de quantification</translation>
     </message>
@@ -600,7 +671,7 @@ Nombre de classes = %1 </translation>
         <translation>Le fichier de quantification spécifié n&apos;a pas pu être ouvert !</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+17"/>
         <source>Prediction error image</source>
         <translation>Image d&apos;erreur de prédiction</translation>
     </message>
@@ -620,7 +691,12 @@ Nombre de classes = %1 </translation>
         <translation>Image de prédiction</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-25"/>
+        <source>The path to the quantification file is empty</source>
+        <translation>Le chemin vers le fichier de quantification est vide</translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>Reconstructed image</source>
         <translation>Image reconstruite</translation>
     </message>
@@ -637,12 +713,13 @@ Nombre de classes = %1 </translation>
         <translation type="vanished">seuils de decision --------------- niveaux de reconstruction\n</translation>
     </message>
     <message>
-        <location filename="Operations/DPCM.cpp" line="+180"/>
+        <location filename="Operations/DPCM.cpp" line="+236"/>
         <source>
 L&apos;entropie de l&apos;image d&apos;erreur de prediction vaut : %f
 </source>
         <translation>
-L&apos;entropie de l&apos;image d&apos;erreur de prédiction vaut : %f</translation>
+L&apos;entropie de l&apos;image d&apos;erreur de prédiction vaut : %f
+</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -654,10 +731,11 @@ L&apos;entropie de l&apos;image d&apos;erreur de prédiction quantifiée vaut : 
 </translation>
     </message>
     <message>
-        <location line="+65"/>
+        <location line="+69"/>
         <source>Error in DPCM::set_levels:
 quantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans DPCM :: set_levels:
+quantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -667,16 +745,17 @@ quantdef-&gt;GetNumThresholds() = %d</source>
 </translation>
     </message>
     <message>
-        <location line="+23"/>
+        <location line="+27"/>
         <source>Error in DPCM::setQuantDef:
 tquantdef-&gt;GetNumThresholds() = %d</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur dans DPCM :: setQuantDef:
+tquantdef-&gt; GetNumThresholds () =% d</translation>
     </message>
 </context>
 <context>
     <name>DPCMDialog</name>
     <message>
-        <location filename="Operations/DPCMDialog.cpp" line="+39"/>
+        <location filename="Operations/DPCMDialog.cpp" line="+40"/>
         <source>Open file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
@@ -687,100 +766,93 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     </message>
     <message>
         <location filename="Operations/DPCMDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+209"/>
         <source>DPCM encoding</source>
         <translation>Encodage MICD</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+2"/>
         <source>Predictor P(X)</source>
         <translation>Prédicteur P(X)</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>A</source>
         <translation>A</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>C</source>
         <translation>C</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>( A + C ) / 2</source>
         <translation>( A + C ) / 2</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>Modified Graham&apos;s</source>
         <translation>Graham modifié</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>Q = </source>
         <translation>Q = </translation>
     </message>
     <message>
         <location line="+41"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>Quantifier</source>
         <translation>Quantifieur</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
         <source>Quantification file :</source>
         <translation>Fichier de quantification : </translation>
     </message>
     <message>
-        <location line="+20"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
+        <location line="+45"/>
         <source>Browse</source>
         <translation>Parcourir</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <location filename="../build/app/ui_DPCMDialog.h" line="+1"/>
+        <location line="+18"/>
         <source>Open quantification editor</source>
         <translation>Ouvrir l&apos;éditeur de quantification</translation>
+    </message>
+    <message>
+        <source>LloydMax</source>
+        <translation type="obsolete">LloydMax</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <source>No quantification</source>
+        <translation>Sans quantification</translation>
     </message>
 </context>
 <context>
     <name>FFTDialog</name>
     <message>
         <location filename="Operations/FFTDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_FFTDialog.h" line="+92"/>
         <source>Dialog</source>
         <translation>Dialog</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_FFTDialog.h" line="+1"/>
         <source>Résultat :</source>
         <translation>Résultat :</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_FFTDialog.h" line="+1"/>
         <source>Magnitude + Phase</source>
         <translation>Amplitude + Phase</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_FFTDialog.h" line="+1"/>
         <source>Real + Imaginary</source>
         <translation>Réel + Imaginaire</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../build/app/ui_FFTDialog.h" line="+1"/>
         <source>Centered transform</source>
         <translation>Transformée centrée</translation>
     </message>
@@ -788,14 +860,29 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
 <context>
     <name>FFTOp</name>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="+96"/>
         <source>DFT (phase)</source>
-        <translation>DFT (phase)</translation>
+        <translation type="vanished">DFT (phase)</translation>
+    </message>
+    <message>
+        <location filename="Operations/FFTOp.cpp" line="+98"/>
+        <source>DFT (Phase)</source>
+        <oldsource>DFT (magnitude)</oldsource>
+        <translation>DFT (Phase)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>DFT (magnitude)</source>
-        <translation>DFT (amplitude)</translation>
+        <source>DFT (Magnitude)</source>
+        <translation>DFT (Magnitude)</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <source>(Real part)</source>
+        <translation>(Partie réelle)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>(Imaginary part)</source>
+        <translation>(Partie imaginaire)</translation>
     </message>
 </context>
 <context>
@@ -808,7 +895,16 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
 <context>
     <name>FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="+96"/>
+        <source>Both Offset and Scaling applied : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127
+
+-------------------------------------------</source>
+        <oldsource>Both Offset and Scaling applied : val_display = (val_image - minValue) * 127 / (maxValue - minValue) + 127 
+
+-------------------------------------------</oldsource>
+        <translation type="vanished">Décalage et mise à l&apos;échelle appliqués : val_display = (127-minValue) &gt; (maxValue-127) ? val_image * 127 / (- minValue) + 127 : val_image * 128 / maxValue + 127</translation>
+    </message>
+    <message>
+        <location filename="Services/FilteringService.cpp" line="+112"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
     </message>
@@ -860,29 +956,38 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Normalize</source>
-        <translation>Normaliser</translation>
+        <source>Linear stretching</source>
+        <translation>Expansion linéaire</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+18"/>
+        <source>Linear stretched</source>
+        <translation>Expansion linéaire</translation>
+    </message>
+    <message>
+        <source>Normalize</source>
+        <translation type="vanished">Normaliser</translation>
+    </message>
+    <message>
+        <location line="-17"/>
         <source>Operation : </source>
         <translation>Opération : </translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>equalized</source>
-        <translation>égalisée</translation>
+        <source>Equalized</source>
+        <oldsource>equalized</oldsource>
+        <translation>Egalisée</translation>
     </message>
     <message>
-        <location line="+4"/>
         <source>normalized</source>
-        <translation>normalisée</translation>
+        <translation type="vanished">normalisée</translation>
     </message>
 </context>
 <context>
     <name>Hough</name>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="+57"/>
+        <location filename="Operations/HoughOp.cpp" line="+58"/>
         <source>Hough transform</source>
         <translation>Transformé de Hough</translation>
     </message>
@@ -896,37 +1001,31 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     <name>HoughDialog</name>
     <message>
         <location filename="Operations/HoughDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+145"/>
         <source>Hough transform</source>
         <translation>Transformé de Hough</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+1"/>
         <source>Method</source>
         <translation>Méthode</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+1"/>
         <source>Method #1</source>
         <translation>Méthode n°1</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+1"/>
         <source>Method #2</source>
         <translation>Méthode n°2</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+1"/>
         <source>Angle step : </source>
         <translation>Pas pour les angles : </translation>
     </message>
     <message>
         <location line="+39"/>
-        <location filename="../build/app/ui_HoughDialog.h" line="+1"/>
         <source>Distance step : </source>
         <translation>Pas pour les distances : </translation>
     </message>
@@ -934,7 +1033,7 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
 <context>
     <name>IFFTOp</name>
     <message>
-        <location filename="Operations/IFFTOp.cpp" line="+55"/>
+        <location filename="Operations/IFFTOp.cpp" line="+56"/>
         <source>Magnitude/Phase</source>
         <translation>Amplitude/Phase</translation>
     </message>
@@ -969,7 +1068,23 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>La source est centrée</translation>
     </message>
     <message>
-        <location line="+120"/>
+        <location line="+25"/>
+        <location line="+57"/>
+        <source>Error : inverse FFT</source>
+        <translation>Erreur : Transformée de Fourier inverse</translation>
+    </message>
+    <message>
+        <location line="-56"/>
+        <source>Magnitude and phase images have different size</source>
+        <translation>Les images d&apos;amplitude et de phase ont des dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Real and imaginary images have different size</source>
+        <translation>Les images réelles et imaginaires ont des dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+47"/>
         <source>DFT-reconstructed image</source>
         <translation>Image DFT reconstruite</translation>
     </message>
@@ -986,20 +1101,17 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     <name>InverseHoughDialog</name>
     <message>
         <location filename="Operations/InverseHoughDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_InverseHoughDialog.h" line="+105"/>
         <source>Inverse hough transform</source>
         <oldsource>Hough reconstruction</oldsource>
         <translation>Transformée de Hough inverse</translation>
     </message>
     <message>
         <location line="+15"/>
-        <location filename="../build/app/ui_InverseHoughDialog.h" line="+2"/>
         <source>Reconstructed image height : </source>
         <translation>Hauteur de l&apos;image reconstituée : </translation>
     </message>
     <message>
         <location line="-7"/>
-        <location filename="../build/app/ui_InverseHoughDialog.h" line="-1"/>
         <source>Reconstructed image width : </source>
         <translation>Largeur de l&apos;image reconstituée : </translation>
     </message>
@@ -1009,7 +1121,6 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     </message>
     <message>
         <location line="+14"/>
-        <location filename="../build/app/ui_InverseHoughDialog.h" line="+2"/>
         <source>Reconstruction threshold : </source>
         <translation>Seuil de reconstruction : </translation>
     </message>
@@ -1018,56 +1129,47 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     <name>InversePyramidDialog</name>
     <message>
         <location filename="Operations/InversePyramidDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+109"/>
         <source>Pyramidal reconstruction</source>
         <oldsource>Pyramid reconstruction</oldsource>
         <translation>Reconstruction pyramidale</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>Filter : </source>
         <translation>Filtre : </translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+3"/>
         <source>triangular</source>
         <translation>triangulaire</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>gaussian</source>
         <translation>gaussien</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>trimodal</source>
         <translation>trimodal</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>rectangular</source>
         <translation>rectangulaire</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>qmf</source>
         <translation>qmf</translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+2"/>
         <source>Number of steps in the pyramid : </source>
         <translation>Nombre d&apos;étages dans la pyramide : </translation>
     </message>
     <message>
         <location line="+33"/>
-        <location filename="../build/app/ui_InversePyramidDialog.h" line="+1"/>
         <source>Step to reconstruct :</source>
         <translation>Étage à reconstruire : </translation>
     </message>
@@ -1075,40 +1177,72 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
 <context>
     <name>MeanSquareErrorOp</name>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+84"/>
         <source>Mean squarred error : %1 (mean error : %2)</source>
-        <translation>Erreur quadratique moyenne : %1 (erreur moyenne : %2)</translation>
+        <translation type="vanished">Erreur quadratique moyenne : %1 (erreur moyenne : %2)</translation>
+    </message>
+    <message>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+218"/>
+        <source>Mean squarred error : %1 (mean absolute error : %2)</source>
+        <translation>Erreur quadratique moyenne:%1 (erreur absolue moyenne:%2)</translation>
+    </message>
+</context>
+<context>
+    <name>MeanSquaredErrorOp</name>
+    <message>
+        <location line="-82"/>
+        <location line="+29"/>
+        <source>warning MSE</source>
+        <translation>warning MSE</translation>
+    </message>
+    <message>
+        <location line="-28"/>
+        <source>You have performed an MSE between 2 images of different dimensions</source>
+        <translation>Vous avez calculé une EQM entre 2 images de dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>MSE with larger image cropped from top left corner 
+</source>
+        <translation>MSE calculée avec la plus grande image rognée depuis le coin en haut à gauche 
+</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>You have performed an MSE between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>Vous avez calculé une EQM entre une image en niveaux de gris (dimension 1) et une image en couleurs (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>MSE with color image transformed to grayscale 
+</source>
+        <translation>MSE calculée avec l&apos;image couleur transformée en niveaux de gris 
+</translation>
     </message>
 </context>
 <context>
     <name>MedianDialog</name>
     <message>
         <location filename="Operations/MedianDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_MedianDialog.h" line="+79"/>
         <source>Dialog</source>
         <translation>Fenêtre de dialogue</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../build/app/ui_MedianDialog.h" line="+1"/>
         <source>Forme</source>
         <translation>Forme</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../build/app/ui_MedianDialog.h" line="+1"/>
         <source>Croix</source>
         <translation>Croix</translation>
     </message>
     <message>
         <location line="+16"/>
-        <location filename="../build/app/ui_MedianDialog.h" line="+1"/>
         <source>Carré</source>
         <translation>Carré</translation>
     </message>
     <message>
         <location line="+42"/>
-        <location filename="../build/app/ui_MedianDialog.h" line="+1"/>
         <source>Taille</source>
         <translation>Taille</translation>
     </message>
@@ -1133,7 +1267,7 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     <message>
         <location line="+1"/>
         <source>Standard deviation : </source>
-        <translation>Equart type : </translation>
+        <translation>Ecart type : </translation>
     </message>
     <message>
         <location line="+8"/>
@@ -1142,7 +1276,7 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
     </message>
     <message>
         <location line="+42"/>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>impulse noise</source>
         <translation>bruit impulsionnel</translation>
     </message>
@@ -1162,12 +1296,12 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>BFilt</translation>
     </message>
     <message>
-        <location line="+12"/>
-        <location filename="Operations/CombineColorOp.cpp" line="-54"/>
+        <location filename="Operations/PointOp.cpp" line="+135"/>
+        <location filename="Operations/NoiseOp.cpp" line="-113"/>
+        <location filename="Operations/IFFTOp.cpp" line="-160"/>
         <location filename="Operations/CombineHsvOp.cpp" line="-54"/>
-        <location filename="Operations/IFFTOp.cpp" line="-150"/>
-        <location filename="Operations/NoiseOp.cpp" line="-112"/>
-        <location filename="Operations/PointOp.cpp" line="+116"/>
+        <location filename="Operations/CombineColorOp.cpp" line="-54"/>
+        <location filename="Operations/BFlitOp.cpp" line="+12"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
     </message>
@@ -1176,10 +1310,10 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation type="vanished">Amplitude/phase</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location filename="Operations/RandomImgOp.cpp" line="+106"/>
+        <location filename="Operations/PointOp.cpp" line="+155"/>
         <location filename="Operations/NoiseOp.cpp" line="+41"/>
-        <location filename="Operations/PointOp.cpp" line="+123"/>
-        <location filename="Operations/RandomImgOp.cpp" line="+105"/>
+        <location filename="Operations/BFlitOp.cpp" line="+13"/>
         <source>Validate</source>
         <translation>Valider</translation>
     </message>
@@ -1219,13 +1353,13 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation type="vanished">Entropie de l&apos;image = %1</translation>
     </message>
     <message>
-        <location filename="Operations/FFTOp.cpp" line="-69"/>
+        <location filename="Operations/FFTOp.cpp" line="-116"/>
         <source>Fourier transform</source>
         <oldsource>Discrete Fourier transform</oldsource>
         <translation>Transformée de Fourrier</translation>
     </message>
     <message>
-        <location filename="Operations/HistogramOp.cpp" line="-35"/>
+        <location filename="Operations/HistogramOp.cpp" line="-31"/>
         <source>Histogram operations</source>
         <translation>Opérations sur histogramme</translation>
     </message>
@@ -1235,19 +1369,19 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Huffman</translation>
     </message>
     <message>
-        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-50"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="-133"/>
         <source>Mean squared error</source>
         <translation>Erreur quadratique moyenne</translation>
     </message>
     <message>
-        <location line="+11"/>
         <location filename="Operations/SignalToNoiseOp.cpp" line="+46"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+11"/>
         <source>Compare to...</source>
         <translation>Comparer à...</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="Operations/SignalToNoiseOp.cpp" line="+8"/>
+        <location filename="Operations/MeanSquaredErrorOp.cpp" line="+22"/>
         <source>Compare %1 to : </source>
         <translation>Comparer %1 à : </translation>
     </message>
@@ -1257,7 +1391,7 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Ajouter du bruit</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-195"/>
+        <location filename="Operations/PointOp.cpp" line="-246"/>
         <source>Pixel operations</source>
         <translation>Opération sur les pixels</translation>
     </message>
@@ -1267,9 +1401,13 @@ tquantdef-&gt;GetNumThresholds() = %d</source>
         <translation>Pseudo-couleur</translation>
     </message>
     <message>
-        <location filename="Operations/QuantificationOp.cpp" line="+29"/>
+        <location filename="Operations/QuantificationOp.cpp" line="+30"/>
         <source>Quantification</source>
         <translation>Quantification</translation>
+    </message>
+    <message>
+        <source>Resampling (Enlarge/Reduce)</source>
+        <translation type="vanished">Re-échantillonage (Agrandir/Réduire)</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -1307,7 +1445,7 @@ Canal %d :
         <translation>Générer une image aléatoire</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+105"/>
         <location line="+20"/>
         <source>Random image</source>
         <translation>Image aléatoire</translation>
@@ -1324,10 +1462,15 @@ Canal %d :
         <translation>Rotation</translation>
     </message>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+43"/>
+        <location filename="Operations/ScalingOp.cpp" line="+42"/>
         <location line="+16"/>
+        <source>Scaling (Enlarge/Reduce)</source>
+        <oldsource>Scaling (enlarge/reduce)</oldsource>
+        <translation>Re-échantillonage (Agrandir/Réduire)</translation>
+    </message>
+    <message>
         <source>Scaling</source>
-        <translation>Echantillonnage</translation>
+        <translation type="vanished">Re-échantillonage (agrandir/réduire)</translation>
     </message>
     <message>
         <location filename="Operations/SignalToNoiseOp.cpp" line="-20"/>
@@ -1335,8 +1478,8 @@ Canal %d :
         <translation>Rapport signal-bruit</translation>
     </message>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="+39"/>
-        <location line="+106"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="+40"/>
+        <location line="+120"/>
         <source>Sinus synthesis</source>
         <translation>Synthèse image sinus</translation>
     </message>
@@ -1351,7 +1494,7 @@ Canal %d :
         <translation>Translation</translation>
     </message>
     <message>
-        <location filename="Operations/ZeroCrossingOp.cpp" line="+33"/>
+        <location filename="Operations/ZeroCrossingOp.cpp" line="+32"/>
         <source>Zero crossing</source>
         <translation>Passages par zéro</translation>
     </message>
@@ -1361,14 +1504,14 @@ Canal %d :
         <translation>Centrer</translation>
     </message>
     <message>
-        <location filename="Operations/SplitColorOp.cpp" line="+31"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+32"/>
         <source>Split color planes</source>
         <translation>Séparer les plans RVB</translation>
     </message>
     <message>
-        <location filename="Operations/SplitHsvOp.cpp" line="+34"/>
+        <location filename="Operations/SplitHsvOp.cpp" line="+32"/>
         <source>Split HSV planes</source>
-        <translation>Séparer les plans TSV </translation>
+        <translation>Séparer les plans TSV</translation>
     </message>
     <message>
         <location filename="Operations/FlipOp.cpp" line="-32"/>
@@ -1376,9 +1519,15 @@ Canal %d :
         <translation>Retournement %1</translation>
     </message>
     <message>
-        <location filename="Operations/DCTOp.cpp" line="-29"/>
+        <location filename="Operations/DCTOp.cpp" line="-34"/>
         <source>Discrete cosinus transform</source>
         <translation>DCT 16x16 avec réduction des coefficients</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source> bpp avec 8 bits par coefficient non nul</source>
+        <oldsource> avec 8 bits par coefficient non nul</oldsource>
+        <translation> bpp avec 8 bits par coefficient non nul</translation>
     </message>
     <message>
         <location filename="Operations/HadamardOp.cpp" line="-16"/>
@@ -1387,7 +1536,7 @@ Canal %d :
         <translation>Transformées 8x8 (Haar, Hadamard, DCT)</translation>
     </message>
     <message>
-        <location filename="Operations/HoughOp.cpp" line="-27"/>
+        <location filename="Operations/HoughOp.cpp" line="-28"/>
         <source>Hough transform</source>
         <translation>Transformée de Hough</translation>
     </message>
@@ -1398,31 +1547,31 @@ Canal %d :
     </message>
     <message>
         <location filename="Operations/InversePyramidOp.cpp" line="+31"/>
-        <source>Pyramidal reconstruction</source>
-        <oldsource>Reconstruct pyramid</oldsource>
-        <translation>Reconstruction pyramidale</translation>
+        <source>Laplacian pyramidal reconstruction</source>
+        <oldsource>Pyramidal reconstruction</oldsource>
+        <translation>Reconstruction pyramidale laplacienne</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <location line="+5"/>
         <location filename="Operations/PyramidOp.cpp" line="+44"/>
+        <location line="+5"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="+11"/>
         <location line="+5"/>
         <source>The operation can&apos;t be applied on this image</source>
         <translation>L&apos;opération ne peut pas être appliquée sur cette image</translation>
     </message>
     <message>
-        <location line="-4"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="-4"/>
         <source>The image width must be twice the image height.</source>
         <translation>La largeur de l&apos;image doit être deux fois la hauteur de l&apos;image.</translation>
     </message>
     <message>
-        <location line="+5"/>
         <location filename="Operations/PyramidOp.cpp" line="+1"/>
+        <location filename="Operations/InversePyramidOp.cpp" line="+5"/>
         <source>The image dimensions must be power of 2.</source>
         <translation>Les dimensions de l&apos;images doivent être puissances de 2.</translation>
     </message>
     <message>
-        <location filename="Operations/PyramidOp.cpp" line="-18"/>
+        <location line="-18"/>
         <source>Pyramidal decomposition</source>
         <translation>Décomposition pyramidale</translation>
     </message>
@@ -1432,7 +1581,7 @@ Canal %d :
         <translation>La largeur de l&apos;image doit être égale à sa hauteur.</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+35"/>
         <location line="+10"/>
         <source>Gaussian</source>
         <translation>Gaussien</translation>
@@ -1472,19 +1621,21 @@ Canal %d :
         <translation type="vanished">Décomposition pyamidale laplacienne</translation>
     </message>
     <message>
-        <location filename="Operations/ClassResultOp.cpp" line="-99"/>
+        <location filename="Operations/ClassResultOp.cpp" line="-107"/>
         <source>Classification results</source>
         <translation>Résultats de classification</translation>
     </message>
     <message>
-        <location filename="Operations/ColorimetryOp.cpp" line="+34"/>
-        <source>Generate RGB image</source>
-        <translation>Générer une image RVB</translation>
+        <location filename="Operations/ColorimetryOp.cpp" line="-22"/>
+        <source>Generate RGB/HSV image</source>
+        <oldsource>Generate RGB image</oldsource>
+        <translation>Générer une image RVB/TSV</translation>
     </message>
     <message>
         <location line="+11"/>
-        <source>RGB image generator</source>
-        <translation>Générateur d&apos;image RVB</translation>
+        <source>RGB/HSV image generator</source>
+        <oldsource>RGB image generator</oldsource>
+        <translation>Générateur d&apos;image RVB/TSV</translation>
     </message>
     <message>
         <location filename="Operations/IFFTOp.cpp" line="-11"/>
@@ -1492,25 +1643,44 @@ Canal %d :
         <translation>Transformée de Fourier inverse</translation>
     </message>
     <message>
-        <location filename="Operations/ClassAnalysisOp.cpp" line="-45"/>
+        <location filename="Operations/ClassAnalysisOp.cpp" line="-46"/>
         <source>Supervised classification</source>
         <translation>Classification supervisée</translation>
     </message>
     <message>
-        <location filename="Operations/DPCMEncodingOp.cpp" line="-37"/>
+        <location filename="Operations/DPCMEncodingOp.cpp" line="-50"/>
         <source>DPCM Encoding</source>
         <translation>Encodage MICD</translation>
     </message>
     <message>
-        <location filename="Operations/Huffman.cpp" line="+97"/>
+        <location filename="Operations/Huffman.cpp" line="+95"/>
         <source>
- debit(huffman) = %.4f
+Entropy H = %.4f bbp
+
 </source>
+        <oldsource>
+Entropy = %.4f bbp
+
+</oldsource>
         <translation>
- Débit(Huffman) = %.4f</translation>
+Entropie H = %.4f bpp
+
+</translation>
     </message>
     <message>
-        <location filename="Algorithms/Pyramid.cpp" line="+639"/>
+        <location line="+28"/>
+        <source>
+ debit(huffman) = %.4f bpp
+</source>
+        <oldsource>
+ debit(huffman) = %.4f
+</oldsource>
+        <translation>
+ Débit(Huffman) = %.4f bpp
+</translation>
+    </message>
+    <message>
+        <location filename="Algorithms/Pyramid.cpp" line="+641"/>
         <location line="+20"/>
         <source>L&apos;entropie de l&apos;etage %d est %1f
 </source>
@@ -1537,6 +1707,7 @@ Le debit vaut : %5.2f
 </source>
         <translation>
 Le débit vaut : %5.2f
+
 </translation>
     </message>
     <message>
@@ -1563,13 +1734,30 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location filename="Operations/SplitHsvOp.cpp" line="+7"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+6"/>
         <source>The operation cannot be applied on this image</source>
         <translation>L&apos;opération ne peut pas être appliquée sur cette image</translation>
     </message>
     <message>
         <location line="+1"/>
+        <location filename="Operations/SplitColorOp.cpp" line="+1"/>
         <source>The image is not in color.</source>
         <translation>L&apos;image n&apos;est pas en couleur.</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Hue</source>
+        <translation>Teinte</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Saturation</source>
+        <translation>Saturation</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Value</source>
+        <translation>Valeur</translation>
     </message>
     <message>
         <location filename="Operations/UCharConvertDialog.cpp" line="+37"/>
@@ -1714,22 +1902,40 @@ Le débit vaut : %5.2f
         <translation>&lt;i&gt;Décaler et mettre à l&apos;echelle : Ajoute un décalge de 127 et effectue une mise à l&apos;echelle&lt;/i&gt;</translation>
     </message>
     <message>
-        <location filename="Operations/PointOp.cpp" line="+349"/>
+        <location filename="Operations/PointOp.cpp" line="+501"/>
         <source>Pas de conversion [min : 0, max : 255]</source>
         <translation>Pas de conversion [min : 0, max : 255]</translation>
+    </message>
+    <message>
+        <location filename="Operations/AbsoluteConvertOp.cpp" line="+35"/>
+        <source>Absolute value</source>
+        <oldsource>Convert to Absolute</oldsource>
+        <translation>Valeur absolue</translation>
+    </message>
+    <message>
+        <location filename="Operations/DoubleConvertOp.cpp" line="+33"/>
+        <source>Convert to Double</source>
+        <translation>Convertir en Double</translation>
+    </message>
+    <message>
+        <source>Apply mask</source>
+        <translation type="vanished">Appliquer le masque</translation>
+    </message>
+    <message>
+        <location filename="Operations/GetHintOp.cpp" line="-11"/>
+        <source>About HSV</source>
+        <translation>À propos TSV</translation>
     </message>
 </context>
 <context>
     <name>PlugOperation</name>
     <message>
-        <location filename="../core/PlugOperation.cpp" line="+77"/>
         <source>Parameters</source>
-        <translation>Paramètres</translation>
+        <translation type="vanished">Paramètres</translation>
     </message>
     <message>
-        <location line="+9"/>
         <source>Validate</source>
-        <translation>Valider</translation>
+        <translation type="vanished">Valider</translation>
     </message>
 </context>
 <context>
@@ -1780,14 +1986,19 @@ Le débit vaut : %5.2f
 <context>
     <name>PointOp</name>
     <message>
-        <location filename="Operations/PointOp.cpp" line="-272"/>
+        <location filename="Operations/PointOp.cpp" line="-405"/>
         <source>Second operand</source>
         <translation>Second opérande</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+1"/>
         <source>Value</source>
         <translation>Valeur</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Enter a real number in the blank space below as the second operand</source>
+        <translation>Entrez un nombre réel dans l&apos;espace vide ci-dessous comme le second opérande</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1795,31 +2006,124 @@ Le débit vaut : %5.2f
         <translation>Image</translation>
     </message>
     <message>
-        <location line="+30"/>
+        <location line="+1"/>
+        <source>Select an image as the second operand</source>
+        <translation>Sélectionnez une image comme deuxième opérande</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Output the result image in uchar format</source>
+        <translation>Sortie l&apos;image de résultat au format uchar</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Output the result image in double format</source>
+        <translation>Sortie l&apos;image de résultat au format double</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Add an offset of 127</source>
+        <oldsource>Add an offset of 127 to fit negative values</oldsource>
+        <translation>Ajouter un décalage de 127</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Map the value of each pixel to the range of 0-255 proportionally</source>
+        <translation>Mettre à l&apos;échelle la valeur de chaque pixel dans la plage de 0 à 255</translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Explode colors</source>
         <translation>Eclater les couleurs</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Check this option to execute the manipulation by channel</source>
+        <translation>Cocher cette option pour exécuter la manipulation par canal</translation>
+    </message>
+    <message>
+        <source>Supported operations list which takes a value as operand: 
+ The input operand will be rounded down for shift operations</source>
+        <translation type="vanished">Liste des opérations qui prend une valeur comme opérande</translation>
+    </message>
+    <message>
+        <source>Supported operations list whick takes an image as operand: 
+ The bit-wise NOT operation will automatically ignore the second image</source>
+        <translation type="vanished">Liste des opérations qui prend une image comme opérande</translation>
     </message>
     <message>
         <source>Double Result</source>
         <translation type="vanished">Résultat Double</translation>
     </message>
     <message>
-        <location line="-35"/>
+        <location line="-33"/>
         <source>UChar</source>
         <translation>UChar</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Double</source>
         <translation>Double</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-3"/>
         <source>Output image</source>
         <translation>Image en sortie</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="-31"/>
+        <source>! (bit-wise NOT)</source>
+        <translation>! (NON bit-à-bit)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <location line="+2"/>
+        <source>&amp; (bit-wise AND)</source>
+        <translation>&amp; (ET bit-à-bit)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location line="+2"/>
+        <source>| (bit-wise OR)</source>
+        <translation>| (OU bit-à-bit)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location line="+2"/>
+        <source>^ (bit-wise XOR)</source>
+        <translation>^ (XOR bit-à-bit)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>&amp;&amp; (logical AND)</source>
+        <translation>&amp;&amp; (ET logique)</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>|| (logical OR)</source>
+        <translation>|| (OU logique)</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <location line="+1"/>
+        <source>^^ (logical XOR)</source>
+        <translation>^^ (XOR logique)</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>!! (logical NOT)</source>
+        <translation>!! (NON logique)</translation>
+    </message>
+    <message>
+        <location line="+56"/>
         <source>Options</source>
         <translation>Options</translation>
     </message>
@@ -1829,9 +2133,39 @@ Le débit vaut : %5.2f
         <translation>Décalage</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Scaling</source>
         <translation>Mise à l&apos;échelle</translation>
+    </message>
+    <message>
+        <location line="+266"/>
+        <location line="+10"/>
+        <source>warning pixel operation on images</source>
+        <translation>warning : opération sur les pixels entre deux images</translation>
+    </message>
+    <message>
+        <location line="-9"/>
+        <source>You have performed an operation between a grayscale image (dimension 1) and a color image (dimension 3)</source>
+        <translation>Vous avez effectué une opération entre une image en niveaux de gris (dimension 1) et une image en couleurs (dimension 3)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>The color image has been transformed to grayscale 
+</source>
+        <translation>L&apos;image couleur a été transformée en niveaux de gris 
+</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>You have performed an operation on 2 images of different dimensions</source>
+        <translation>Vous avez effectué une opération entre 2 images de dimensions différentes</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Larger image cropped from top left corner 
+</source>
+        <translation>Image la plus grande rognée à partir du coin supérieur gauche 
+</translation>
     </message>
 </context>
 <context>
@@ -1846,70 +2180,60 @@ Le débit vaut : %5.2f
     <name>PyramidDialog</name>
     <message>
         <location filename="Operations/PyramidDialog.ui" line="+14"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+139"/>
         <source>Pyramidal decomposition</source>
         <translation>Décomposition pyramidale</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
         <source>Type of pyramid</source>
         <translation>Type de pyramide</translation>
     </message>
     <message>
         <location line="+6"/>
         <location line="+35"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
-        <location line="+6"/>
         <source>gaussian</source>
         <translation>gaussien</translation>
     </message>
     <message>
         <location line="-25"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="-5"/>
         <source>laplacian</source>
         <translation>laplacien</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
         <source>Filter : </source>
         <translation>Filtre : </translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+3"/>
         <source>triangular</source>
         <translation>triangulaire</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+2"/>
         <source>trimodal</source>
         <translation>trimodal</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
         <source>rectangular</source>
         <translation>rectangulaire</translation>
     </message>
     <message>
         <location line="+5"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
         <source>qmf</source>
         <translation>qmf</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+2"/>
-        <source>Number of steps : </source>
+        <source>Number of levels : </source>
+        <oldsource>Number of steps : </oldsource>
         <translation>Nombre d&apos;étage : </translation>
     </message>
     <message>
         <location line="+21"/>
-        <location filename="../build/app/ui_PyramidDialog.h" line="+1"/>
-        <source>Create only one step :</source>
+        <source>Create only one level :</source>
+        <oldsource>Create only one step :</oldsource>
         <translation>Créer un étage unique: </translation>
     </message>
     <message>
@@ -1956,9 +2280,43 @@ Le débit vaut : %5.2f
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="Services/FilteringService.cpp" line="-41"/>
+        <location line="+11"/>
+        <source>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127 / Max(|minValue|, |minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</source>
+        <oldsource>Both Offset and Scaling applied &lt;br&gt;&lt;br&gt; pixel display = 127 +  pixel image * 127/Max(|minValue|,|minValue|)&lt;br&gt;&lt;br&gt; -------------------------------------------</oldsource>
+        <translation>Décalage et mise à l&apos;échelle appliqués &lt;br&gt;&lt;br&gt; pixel affiché = 127 +  pixel image * 127 / Max(|valeurMin|, |valeurMax|)&lt;br&gt;&lt;br&gt; -------------------------------------------</translation>
+    </message>
+    <message>
+        <location filename="Operations/GetHintOp.cpp" line="+19"/>
+        <location filename="Operations/ColorDialog.cpp" line="+8"/>
+        <source>&lt;b&gt;Hue&lt;/b&gt; is the dominant color from 0 to 359 degrees on the color wheel below &lt;br&gt;</source>
+        <translation>&lt;b&gt;Teinte&lt;/b&gt; Représente la couleur dominante sur le cercle chromatique ci-dessous &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <location filename="Operations/ColorDialog.cpp" line="+1"/>
+        <source>note : Qt&apos;s HSV model uses a hue of -1 for achromatic colors &lt;br&gt;</source>
+        <translation>note : Le modèle TSV de QT affecte la valeur -1 à la teinte des couleurs achromatiques &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="Operations/ColorDialog.cpp" line="+5"/>
+        <source>&lt;b&gt;Saturation&lt;/b&gt; is in the range 0 to 255 and refers to the vividness of the color &lt;br&gt;</source>
+        <translation>&lt;b&gt;Saturation&lt;/b&gt; Représente la vivacité de la couleur entre 0 et 255 &lt;br&gt;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="Operations/ColorDialog.cpp" line="+5"/>
+        <source>&lt;b&gt;Value&lt;/b&gt; is in the range 0 to 255 and represents the brightness of the color &lt;br&gt;</source>
+        <translation>&lt;b&gt;Valeur&lt;/b&gt; Représente la luminosité de la couleur entre 0 et 255 &lt;br&gt;</translation>
+    </message>
+</context>
+<context>
     <name>QuantificationDialog</name>
     <message>
-        <location filename="Operations/QuantificationDialog.cpp" line="+40"/>
+        <location filename="Operations/QuantificationDialog.cpp" line="+37"/>
         <source>Quantification file editor</source>
         <translation>Éditeur de fichiers de quantification</translation>
     </message>
@@ -1969,11 +2327,12 @@ Le débit vaut : %5.2f
     </message>
     <message>
         <location line="+10"/>
+        <location line="+71"/>
         <source>Linear with centered value</source>
         <translation>Linéaire à valeurs centrées</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="-69"/>
         <source>Non linear with centered value</source>
         <translation>Non linéaire à valeurs centrées</translation>
     </message>
@@ -1983,17 +2342,23 @@ Le débit vaut : %5.2f
         <translation>Non linéaire à valeurs moyennes</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
+        <location line="+65"/>
+        <location line="+65"/>
         <source>Custom</source>
         <translation>Personnalisée</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="-132"/>
         <source>LloydMax</source>
         <translation>LloydMax</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <source>Identical</source>
+        <translation type="vanished">Identique</translation>
+    </message>
+    <message>
+        <location line="+4"/>
         <source>Quantification : </source>
         <translation>Quantification : </translation>
     </message>
@@ -2003,7 +2368,12 @@ Le débit vaut : %5.2f
         <translation>Nombre de valeurs : </translation>
     </message>
     <message>
-        <location line="+26"/>
+        <location line="+30"/>
+        <source>range of values : </source>
+        <translation>plage des valeurs : </translation>
+    </message>
+    <message>
+        <location line="+23"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
@@ -2013,40 +2383,49 @@ Le débit vaut : %5.2f
         <translation>Appliquer</translation>
     </message>
     <message>
-        <location line="+15"/>
+        <location line="+24"/>
+        <source>Note that the range of values is higher than the range of color values of the input image</source>
+        <translation>Notez que le nombre de valeurs de la quantification dépasse le nombre de couleurs de l&apos;image d&apos;entrée</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Quantification non lineaire a valeurs centrees :</source>
         <oldsource>quantificiatQuantification non lineaire a valeurs centrees :</oldsource>
         <translation>Quantification non linéaire à valeurs centrées :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>Quantification non lineaire a valeurs moyennes :</source>
         <oldsource>Quantification non lineaire a valeurs moyennes : </oldsource>
         <translation>Quantification non linéaire à valeurs moyennes :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+7"/>
         <source>Quantification personnalisee :</source>
         <translation>Quantification personnalisée :</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="-3"/>
         <source>Quantification LloydMax :</source>
         <translation>Quantification LloydMax :</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <source>Quantification identical :</source>
+        <translation type="vanished">Quantification identique :</translation>
+    </message>
+    <message>
+        <location line="+7"/>
         <source>Quantification lineaire a valeurs centrees :</source>
         <translation>Quantification linéaire à valeurs centrées :</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+21"/>
         <source>Open a file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>Loi de quantification (*.loi)</source>
         <translation>Loi de quantification (*.loi)</translation>
     </message>
@@ -2101,7 +2480,7 @@ Le débit vaut : %5.2f
 <context>
     <name>RandomImgOp</name>
     <message>
-        <location filename="Operations/RandomImgOp.cpp" line="-106"/>
+        <location filename="Operations/RandomImgOp.cpp" line="-119"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
     </message>
@@ -2147,6 +2526,16 @@ Le débit vaut : %5.2f
         <source> to </source>
         <translation> à </translation>
     </message>
+    <message>
+        <location line="+24"/>
+        <source>Warning</source>
+        <translation>Alerte</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Empty image generation is not allowed</source>
+        <translation>La génération d&apos;images vides n&apos;est pas autorisée</translation>
+    </message>
 </context>
 <context>
     <name>RejectionRingOp</name>
@@ -2166,7 +2555,7 @@ Le débit vaut : %5.2f
         <translation>Epaisseur (au delà du rayon) : </translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+44"/>
         <source>Rejection ring (%1 %2 %3)</source>
         <translation>Anneau de réjection (%1 %2 %3)</translation>
     </message>
@@ -2202,7 +2591,7 @@ Le débit vaut : %5.2f
 <context>
     <name>ScalingOp</name>
     <message>
-        <location filename="Operations/ScalingOp.cpp" line="+12"/>
+        <location filename="Operations/ScalingOp.cpp" line="+31"/>
         <source>Nearest neighboor (standard)</source>
         <translation>Standard (plus proche voisin)</translation>
     </message>
@@ -2222,22 +2611,22 @@ Le débit vaut : %5.2f
         <translation>Spline</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+9"/>
         <source>Interpolation : </source>
         <translation>Interpolation : </translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>X scale factor : </source>
         <translation>Facteur d&apos;échelle en X : </translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Y scale factor : </source>
         <translation>Facteur d&apos;echelle en Y : </translation>
     </message>
     <message>
-        <location line="+44"/>
+        <location line="+84"/>
         <source>Bilinear Interpolation</source>
         <translation>Interpolation bilinéaire</translation>
     </message>
@@ -2262,7 +2651,7 @@ Le débit vaut : %5.2f
         <translation>Echantillonné</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>scaled</source>
         <translation>échantillonée</translation>
     </message>
@@ -2278,7 +2667,7 @@ Le débit vaut : %5.2f
 <context>
     <name>SinusSynthesisOp</name>
     <message>
-        <location filename="Operations/SinusSynthesisOp.cpp" line="-95"/>
+        <location filename="Operations/SinusSynthesisOp.cpp" line="-109"/>
         <source>Sinus synthesis</source>
         <translation>Synthèse sinus</translation>
     </message>
@@ -2308,7 +2697,7 @@ Le débit vaut : %5.2f
         <translation>Taille de l&apos;image (hauteur=largeur) : </translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Signal period (pixel) : </source>
         <translation>Période du signal (pixel) : </translation>
     </message>
@@ -2322,59 +2711,156 @@ Le débit vaut : %5.2f
         <source>Niveaux de gris : </source>
         <translation>Niveaux de gris : </translation>
     </message>
+    <message>
+        <location line="+17"/>
+        <source>Warning</source>
+        <translation>Alerte</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Image size can not be zero</source>
+        <translation>La taille de l&apos;image ne peut pas être nulle</translation>
+    </message>
+</context>
+<context>
+    <name>StructElem</name>
+    <message>
+        <location filename="Widgets/StructElemWindow.cpp" line="+331"/>
+        <location line="+65"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+13"/>
+        <location line="+13"/>
+        <source>warning size limit</source>
+        <translation>Alerte taille limite</translation>
+    </message>
+    <message>
+        <location line="-160"/>
+        <location line="+65"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+14"/>
+        <location line="+13"/>
+        <location line="+13"/>
+        <source>you have reached the maximum size of the structuring element</source>
+        <translation>Vous avez atteint la taille maximale de l&apos;élément structurant</translation>
+    </message>
 </context>
 <context>
     <name>StructElemWindow</name>
     <message>
-        <location filename="Widgets/StructElemWindow.cpp" line="+38"/>
         <source>&amp;Open file</source>
-        <translation>&amp;Ouvrir un fichier</translation>
+        <translation type="vanished">&amp;Ouvrir un fichier</translation>
     </message>
     <message>
-        <location line="+1"/>
         <source>&amp;Save as...</source>
-        <translation>&amp;Enregistrer-sous...</translation>
+        <translation type="vanished">&amp;Enregistrer-sous...</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-448"/>
         <source>Basic shapes :</source>
         <translation>Formes simples : </translation>
     </message>
     <message>
         <location line="+3"/>
-        <location line="+139"/>
+        <location line="+244"/>
         <source>Diamond</source>
         <translation>Diamant</translation>
     </message>
     <message>
-        <location line="-138"/>
-        <location line="+118"/>
+        <location line="-243"/>
+        <location line="+223"/>
         <source>Disc</source>
         <translation>Disque</translation>
     </message>
     <message>
-        <location line="-117"/>
+        <location line="-222"/>
         <source>Empty</source>
         <translation>Vide</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+6"/>
+        <source>Opération :</source>
+        <translation>Opération :</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Edit structuring element</source>
+        <translation>Éditer l&apos;élément structurant</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Erosion</source>
+        <translation>Érosion</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Dilatation</source>
+        <translation>Dilatation</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Opening</source>
+        <translation>Ouverture</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Closing</source>
+        <translation>Fermeture</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Gradient</source>
+        <translation>Gradient</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>White top hat</source>
+        <translation>White top hat</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Black top hat</source>
+        <translation>Black top hat</translation>
+    </message>
+    <message>
+        <location line="+12"/>
         <source>Generate</source>
         <translation>Génerer</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+51"/>
+        <source>Structuring element</source>
+        <translation>Élément structurant</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Open file</source>
+        <translation>Ouvrir un fichier</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Save as...</source>
+        <translation>Enregistrer sous...</translation>
+    </message>
+    <message>
+        <location line="+22"/>
         <source>Scale :</source>
         <translation>Echelle :</translation>
     </message>
     <message>
-        <location line="+172"/>
+        <location line="+197"/>
         <source>Open a file</source>
         <translation>Ouvrir un fichier</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location line="+21"/>
+        <location line="+11"/>
         <source>Images (*.png *.bmp *.jpg *.jpeg)</source>
         <translation>Images (*.png *.bmp *.jpg *.jpeg)</translation>
     </message>
@@ -2585,7 +3071,7 @@ Le débit vaut : %5.2f
         <translation>Seuil : </translation>
     </message>
     <message>
-        <location line="+58"/>
+        <location line="+64"/>
         <source>contours bruts</source>
         <translation>Contours bruts</translation>
     </message>
@@ -2941,7 +3427,7 @@ Le débit vaut : %5.2f
 <context>
     <name>filtrme::FilteringService</name>
     <message>
-        <location filename="Services/FilteringService.cpp" line="-103"/>
+        <location filename="Services/FilteringService.cpp" line="-89"/>
         <source>&amp;Apply filter</source>
         <translation>&amp;Appliquer un filtre</translation>
     </message>
@@ -2951,456 +3437,63 @@ Le débit vaut : %5.2f
         <translation>&amp;Editer un filtre</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+125"/>
         <source>L&apos;image résultat la racine des sommes des carrés</source>
         <translation>L&apos;image résultat est la racine des sommes des carrés</translation>
     </message>
 </context>
 <context>
-    <name>genericinterface::ColumnView</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ColumnView.cpp" line="+28"/>
-        <source>Column Profile for column number %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pixel Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Line number</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::ColumnWindow</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ColumnWindow.cpp" line="+28"/>
-        <source>Column profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>genericinterface::DoubleImageWindow</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/DoubleImageWindow.cpp" line="+77"/>
-        <source>Disable Offset</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Offset (127)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
         <source>Crop</source>
-        <translation type="unfinished">Rogner</translation>
+        <translation type="obsolete">Rogner</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Copy &amp; crop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+15"/>
-        <location line="+95"/>
-        <location line="+28"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
-    </message>
-    <message>
-        <location line="-132"/>
-        <source>Hovered</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+61"/>
-        <source>Pixels Grid</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Couleur</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::FileService</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Services/FileService.cpp" line="+43"/>
-        <location line="+50"/>
-        <location line="+5"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-54"/>
-        <location line="+31"/>
-        <source>&amp;Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-26"/>
-        <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+25"/>
-        <source>Language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+120"/>
-        <source>Save a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>PNG image (*.png);;BMP image (*.bmp);; JPEG image(*.jpg *.jpeg);; VFF image (*.vff)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+34"/>
-        <source>&amp;%1 %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+20"/>
         <source>Open a file</source>
-        <translation type="unfinished">Ouvrir un fichier</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Supported image (*.png *.bmp *.jpg *.jpeg *.vff);; PNG image (*.png);;BMP image (*.bmp);; JPEG image(*.jpg *.jpeg);; VFF image (*.vff)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Change current language</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>The current language will be modified at next startup. Would you like to restart now?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Ouvrir un fichier</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::GenericHistogramView</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/GenericHistogramView.cpp" line="+111"/>
-        <source>Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Number of specimen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pixel value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+60"/>
         <source>Black</source>
-        <translation type="unfinished">Noir</translation>
+        <translation type="obsolete">Noir</translation>
     </message>
     <message>
-        <location line="+2"/>
         <source>Red</source>
-        <translation type="unfinished">Rouge</translation>
+        <translation type="obsolete">Rouge</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <location line="+8"/>
         <source>Alpha</source>
-        <translation type="unfinished">Alpha</translation>
+        <translation type="obsolete">Alpha</translation>
     </message>
     <message>
-        <location line="-6"/>
         <source>Green</source>
-        <translation type="unfinished">Vert</translation>
+        <translation type="obsolete">Vert</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>Blue</source>
-        <translation type="unfinished">Bleu</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::GenericHistogramWindow</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/GenericHistogramWindow.cpp" line="+78"/>
-        <location line="+150"/>
-        <source>Hovered</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-145"/>
-        <location line="+150"/>
-        <source>Value 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-145"/>
-        <location line="+150"/>
-        <source>Value 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-144"/>
-        <source>Save As Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+67"/>
-        <source>Bad object type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Only images can be saved to a file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Unknown exception</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Save a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>PNG image (*.png);;BMP image (*.bmp);; JPEG image(*.jpg *.jpeg);; VFF image (*.vff)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+65"/>
-        <source>C: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>C: %1, A: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>R: %1, G: %2, B: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>R: %1, G: %2, B: %3, A: %4</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::GenericInterface</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/GenericInterface.cpp" line="+56"/>
-        <location line="+180"/>
-        <location line="+1"/>
-        <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-181"/>
-        <source>&amp;About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <location line="+100"/>
-        <source>Interface&apos;s integrity compromised</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-99"/>
-        <source>An error occurred in the addition of a new service. The interface may not offer all the expected features. See the log file for more informations.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+100"/>
-        <source>An error occurred in the addition of a service. The interface may not offer all the expected features. See the log file for more informations.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+44"/>
-        <location line="+1"/>
-        <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <location line="+1"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>&amp;Exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::HistogramView</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/HistogramView.cpp" line="+30"/>
-        <location line="+11"/>
-        <source>Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-8"/>
-        <location line="+11"/>
-        <source>Cumulated histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::HistogramWindow</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/HistogramWindow.cpp" line="+29"/>
-        <location line="+11"/>
-        <source>Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-8"/>
-        <location line="+11"/>
-        <source>Cumulated histogram</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Bleu</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::ImageWindow</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ImageWindow.cpp" line="+86"/>
-        <location line="+100"/>
-        <source>Save As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-97"/>
-        <source>Zoom + (Ctrl+Scroll Wheel)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Zoom - (Ctrl+Scroll Wheel)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Apply mask</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Copy image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+35"/>
         <source>Image</source>
-        <translation type="unfinished">Image</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <location line="+270"/>
-        <source>Zoom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-264"/>
-        <source>Selection mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Hand mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Select all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Zoom +</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Zoom -</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+149"/>
-        <source>Bad object type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Only images can be saved to a file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Unknown exception</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+14"/>
-        <source>Save a file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>PNG image (*.png);;BMP image (*.bmp);; JPEG image(*.jpg *.jpeg);; VFF image (*.vff)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+95"/>
-        <source>Rename image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>New name:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Image</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::MorphoMatService</name>
     <message>
-        <location filename="Services/MorphoMatService.cpp" line="+58"/>
+        <location filename="Services/MorphoMatService.cpp" line="+56"/>
         <source>&amp;Erosion</source>
         <translation>&amp;Erosion</translation>
     </message>
@@ -3441,316 +3534,21 @@ Le débit vaut : %5.2f
     </message>
 </context>
 <context>
-    <name>genericinterface::NavigationDock</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/NavBar/NavigationDock.cpp" line="+45"/>
-        <source>Close all image from the selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::ProjectionHistogramView</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ProjectionHistogramView.cpp" line="+29"/>
-        <source>Horizontal Projection Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Line number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Vertical Projection Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Column number</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Number of pixels &gt;= %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::ProjectionHistogramWindow</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ProjectionHistogramWindow.cpp" line="+29"/>
-        <source>Horizontal Projection Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Vertical Projection Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::RadioPanel</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/GridView.cpp" line="+60"/>
-        <source>R</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::RowView</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/RowView.cpp" line="+28"/>
-        <source>Line Profile for line number %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Pixel Value</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Column number</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::RowWindow</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/RowWindow.cpp" line="+28"/>
-        <source>Row profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::SelectionWidget</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/ImageWindow.cpp" line="-400"/>
-        <source>Selection : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>x:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>y:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>width:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>height:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>genericinterface::StandardImageWindow</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Widgets/ImageWidgets/StandardImageWindow.cpp" line="+47"/>
-        <source>Unknown file format !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Unknown exception</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Error while opening file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+39"/>
         <source>Crop</source>
-        <translation type="unfinished">Rogner</translation>
+        <translation type="obsolete">Rogner</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Copy and crop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>Selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location line="+15"/>
-        <location line="+125"/>
-        <location line="+15"/>
         <source>Color</source>
-        <translation type="unfinished">Couleur</translation>
-    </message>
-    <message>
-        <location line="-149"/>
-        <source>Hovered</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+47"/>
-        <location line="+12"/>
-        <source>Threshold selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-12"/>
-        <location line="+12"/>
-        <source>Enter the threshold value
-(only pixels superior or equal to this value will be counted)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Line selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Select the line to project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Column selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>Select the column to project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>Pixels Grid</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Couleur</translation>
     </message>
 </context>
 <context>
     <name>genericinterface::UtilityService</name>
     <message>
-        <location filename="../lib/detiq-t/GenericInterface/Services/UtilityService.cpp" line="+30"/>
-        <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Cumulated Histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Horizontal projection histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Vertical projection histogram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Line Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Column Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Pixels grid</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
         <source>Colors</source>
-        <translation type="unfinished">Couleurs</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Convert to Binary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Convert to Grayscale</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>genericinterface::WindowService</name>
-    <message>
-        <location filename="../lib/detiq-t/GenericInterface/Services/WindowService.cpp" line="+43"/>
-        <source>Images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <location line="+6"/>
-        <location line="+6"/>
-        <source>&amp;Window</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-12"/>
-        <source>&amp;Tile windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>&amp;Cascade windows</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>Hide/Show Image dock</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+295"/>
-        <source>Attention</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>You&apos;re going to close all the relative windows, are you sure you want to continue ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+152"/>
-        <source>Mask to apply : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+64"/>
-        <source> - masked</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Couleurs</translation>
     </message>
 </context>
 </TS>

@@ -28,7 +28,7 @@
 using namespace std;
 using namespace imagein;
 
-InversePyramidOp::InversePyramidOp() : Operation(qApp->translate("Operations", "Pyramidal reconstruction").toStdString())
+InversePyramidOp::InversePyramidOp() : Operation(qApp->translate("Operations", "Laplacian pyramidal reconstruction").toStdString())
 {
 }
 
@@ -37,6 +37,7 @@ bool InversePyramidOp::needCurrentImg() const {
 }
 
 void InversePyramidOp::operator()(const imagein::Image* img, const std::map<const imagein::Image*, std::string>&) {
+
     if(2 * img->getWidth() != img->getHeight()) {
         QMessageBox::warning(NULL, qApp->translate("Operations", "The operation can't be applied on this image"),
                              qApp->translate("Operations", "The image width must be twice the image height."));
